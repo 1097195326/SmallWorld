@@ -19,7 +19,7 @@ public class EncryptAndDecrypt : ModuleRules
         
 		PublicIncludePaths.AddRange(
 			new string[] {
-                "EncryptAndDecrypt/Public"
+                //"EncryptAndDecrypt/Public"
 				
 				// ... add public include paths required here ...
 			}
@@ -28,7 +28,7 @@ public class EncryptAndDecrypt : ModuleRules
 		
 		PrivateIncludePaths.AddRange(
 			new string[] {
-                "EncryptAndDecrypt/Private",
+                //"EncryptAndDecrypt/Private",
 				
 				// ... add other private include paths required here ...
 			}

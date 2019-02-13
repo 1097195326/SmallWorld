@@ -19,8 +19,8 @@ public class MsgCore : ModuleRules
         
 		PublicIncludePaths.AddRange(
 			new string[] {
-                "MsgCore/Public",
-                "MsgCore/Public/SubClass"
+                //"MsgCore/Public",
+                //"MsgCore/Public/SubClass"
 				
 				// ... add public include paths required here ...
 			}
@@ -29,8 +29,8 @@ public class MsgCore : ModuleRules
 		
 		PrivateIncludePaths.AddRange(
 			new string[] {
-                "MsgCore/Private",
-                 "MsgCore/Private/SubClass"
+                //"MsgCore/Private",
+                // "MsgCore/Private/SubClass"
 				// ... add other private include paths required here ...
 			}
 			);

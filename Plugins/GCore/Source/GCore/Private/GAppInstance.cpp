@@ -6,7 +6,7 @@
 //  Copyright © 2018年 Epic Games, Inc. All rights reserved.
 //
 
-#include "GCore.h"
+//#include "GCore.h"
 #include "GAppInstance.h"
 #include "Reachability.h"
 #include "Internationalization/Regex.h"

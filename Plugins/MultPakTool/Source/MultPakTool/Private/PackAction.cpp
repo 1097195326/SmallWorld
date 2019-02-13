@@ -186,7 +186,7 @@ void FPackAction::DoPackage()
 	}
 	else
 	{
-		UE_LOG(LogPakTool, Error, TEXT("GENEREATE TARGET FILE FAILED"));
+		UE_LOG(LogTemp, Error, TEXT("GENEREATE TARGET FILE FAILED"));
 	}
 }
 
@@ -262,7 +262,7 @@ void FPackAction::CookContent()
 
 	OptionalParams += GetCookingOptionalParams();
 
-	if (FApp::IsRunningDebug())
+	//if (FApp::IsRunningDebug())
 	{
 		OptionalParams += TEXT(" -UseDebugParamForEditorExe");
 	}
@@ -324,7 +324,7 @@ bool FPackAction::GenerateCookTargetFile()
 		}
 		else
 		{
-			UE_LOG(LogPakTool, Error, TEXT("CANNOT PARSE Pak File Name!! %s"), *helper.SourceFolder.Path);
+			UE_LOG(LogTemp, Error, TEXT("CANNOT PARSE Pak File Name!! %s"), *helper.SourceFolder.Path);
 		}
 	}
 	
@@ -341,12 +341,12 @@ bool FPackAction::GenerateCookTargetFile()
 			FString txtFile = FPaths::Combine(FolderConfigure->PakSaveTo.Path, elm.pakName).Append(".txt");
 			FFileHelper::SaveStringToFile(tmpFileList, *txtFile);
 			PakTargetInfo.Add(elm.pakName, txtFile);
-			UE_LOG(LogPakTool, Log, TEXT("generate pak ...\n file number :%d, target file :%s"), elm.fileNames.Num(), *txtFile);
+			UE_LOG(LogTemp, Log, TEXT("generate pak ...\n file number :%d, target file :%s"), elm.fileNames.Num(), *txtFile);
 			ret = true;
 		}
 		else
 		{
-			UE_LOG(LogPakTool, Warning, TEXT("generate pak ...\n pak file :%s, no file!"), *elm.pakName);
+			UE_LOG(LogTemp, Warning, TEXT("generate pak ...\n pak file :%s, no file!"), *elm.pakName);
 		}
 	}
 
@@ -372,12 +372,12 @@ bool FPackAction::GeneratePakFiles()
 			FProcHandle handle = FPlatformProcess::CreateProc(*pakExePath, *elem, false, false, true, nullptr, 0, nullptr, nullptr);
 			if (handle.IsValid())
 			{
-				UE_LOG(LogPakTool, Log, TEXT("execute script : %s"), *elem);
+				UE_LOG(LogTemp, Log, TEXT("execute script : %s"), *elem);
 				FPlatformProcess::WaitForProc(handle);
 			}
 			else
 			{
-				UE_LOG(LogPakTool, Error, TEXT("Create Progress failed : %s"), *elem);
+				UE_LOG(LogTemp, Error, TEXT("Create Progress failed : %s"), *elem);
 			}
 		}
 	}

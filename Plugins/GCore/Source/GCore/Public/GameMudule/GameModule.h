@@ -2,7 +2,6 @@
 
 #include "GObject.h"
 #include "UIController.h"
-#include "MsgCenter.h"
 
 class GameModule : public GObject
 {

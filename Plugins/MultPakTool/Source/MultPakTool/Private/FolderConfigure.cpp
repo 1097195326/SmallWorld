@@ -25,7 +25,7 @@ void _LoadJsonArrayFileToUStructArray(const FString inPath, TArray<InStructType>
 {
 	if (!FPaths::FileExists(inPath))
 	{
-		UE_LOG(LogPakTool, Warning, TEXT("file descriptor is not exists: %s"), *inPath);
+		UE_LOG(LogTemp, Warning, TEXT("file descriptor is not exists: %s"), *inPath);
 		return;
 	}
 
@@ -37,10 +37,10 @@ void _LoadJsonArrayFileToUStructArray(const FString inPath, TArray<InStructType>
 
 	if (!FJsonObjectConverter::JsonArrayStringToUStruct(jsonArrayString, &outUStruct, 0, 0))
 	{
-		UE_LOG(LogPakTool, Warning, TEXT("properties matched but failed to deserialize."));
+		UE_LOG(LogTemp, Warning, TEXT("properties matched but failed to deserialize."));
 		return;
 	}
-	UE_LOG(LogPakTool, Log, TEXT("has read %d records from %s"), outUStruct.Num(), *inPath);
+	UE_LOG(LogTemp, Log, TEXT("has read %d records from %s"), outUStruct.Num(), *inPath);
 }
 
 
@@ -59,7 +59,7 @@ bool _LoadJsonFileToUStruct(const FString &inFolder, InStructType& outStruct)
 {
 	if (!FPaths::FileExists(inFolder))
 	{
-		UE_LOG(LogPakTool, Warning, TEXT("file is not exists: %s"), *inFolder);
+		UE_LOG(LogTemp, Warning, TEXT("file is not exists: %s"), *inFolder);
 		return false;
 	}
 
@@ -68,10 +68,10 @@ bool _LoadJsonFileToUStruct(const FString &inFolder, InStructType& outStruct)
 
 	if (!FJsonObjectConverter::JsonObjectStringToUStruct(jsonObjectString, &outStruct, 0, 0))
 	{
-		UE_LOG(LogPakTool, Warning, TEXT("properties matched but failed to deserialize."));
+		UE_LOG(LogTemp, Warning, TEXT("properties matched but failed to deserialize."));
 		return false;
 	}
-	UE_LOG(LogPakTool, Log, TEXT("load json file %s"), *inFolder);
+	UE_LOG(LogTemp, Log, TEXT("load json file %s"), *inFolder);
 
 	return true;
 }
@@ -90,7 +90,7 @@ void UFolderConfigure::SaveConfigure()
 void UFolderConfigure::LoadConfigure()
 {
 	FSaveConfigHelper helper;
-	_LoadJsonFileToUStruct(FPaths::Combine(FPaths::GameConfigDir(), TEXT("pakConfig.ini")), helper);
+	_LoadJsonFileToUStruct(FPaths::Combine(FPaths::ProjectConfigDir(), TEXT("pakConfig.ini")), helper);
 	PakList = helper.PakList;
 	PakSaveTo = helper.PakSaveTo;
 	PakRootDir = helper.PakRootDir;

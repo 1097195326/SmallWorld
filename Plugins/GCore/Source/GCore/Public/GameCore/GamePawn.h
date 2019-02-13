@@ -11,10 +11,10 @@
 #include "GObject.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
-#include "GPawn.generated.h"
+#include "GamePawn.generated.h"
 
 UCLASS()
-class GCORE_API AGPawn : public APawn, public GObject
+class GCORE_API AGamePawn : public APawn, public GObject
 {
     GENERATED_BODY()
     

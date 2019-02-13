@@ -8,14 +8,13 @@
 
 #pragma once
 
-#include "IObject.h"
 #include "CoreMinimal.h"
 #include "ClassReflect.h"
 
-class GCORE_API GObject //: public I_Object
+class GCORE_API GObject  : public TSharedFromThis<GObject>
 {
 private:
-    int     m_ObjectIndex;
+	FGuid	m_ID;
 public:
     GObject();
     virtual ~GObject();
@@ -27,7 +26,7 @@ public:
 	virtual void On_Delete();
 public:
 
-    int GetGObjectIndex();
+    FGuid GetID();
     
 };
 

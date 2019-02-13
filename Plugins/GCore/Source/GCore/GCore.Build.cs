@@ -7,19 +7,20 @@ public class GCore : ModuleRules
     public GCore(ReadOnlyTargetRules Target) : base(Target)
     {
         //PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;
-        
+        PrivatePCHHeaderFile = "GCore/Public/GCore.h";
+
         PublicIncludePaths.AddRange(
             new string[] {
-                "GCore/Public",
-                "GCore/Public/BaseCore",
-                "GCore/Public/GameCore",
-                "GCore/Public/Interface",
-                "GCore/Public/UI",
-                "GCore/Public/Data",
-                "GCore/Public/Manager",
-                "GCore/Public/UIController",
-                "GCore/Public/GameModule",
-                "GCore/Public/IOSCore"
+                //"GCore/Public",
+                //"GCore/Public/BaseCore",
+                //"GCore/Public/GameCore",
+                //"GCore/Public/Interface",
+                //"GCore/Public/UI",
+                //"GCore/Public/Data",
+                //"GCore/Public/Manager",
+                //"GCore/Public/UIController",
+                //"GCore/Public/GameModule",
+                //"GCore/Public/IOSCore"
                 // ... add public include paths required here ...
             }
             );
@@ -27,16 +28,14 @@ public class GCore : ModuleRules
         
         PrivateIncludePaths.AddRange(
             new string[] {
-                "GCore/Private",
-                "GCore/Private/BaseCore",
-                "GCore/Private/GameCore",
-                "GCore/Private/Interface",
-                "GCore/Private/UI",
-                "GCore/Private/Data",
-                "GCore/Private/Manager",
-                "GCore/Private/UIController",
-                "GCore/Private/GameModule",
-                "GCore/Private/IOSCore"
+                //"GCore/Private",
+                //"GCore/Private/BaseCore",
+                //"GCore/Private/GameCore",
+                //"GCore/Private/UI",
+                //"GCore/Private/Data",
+                //"GCore/Private/UIController",
+                //"GCore/Private/GameModule",
+                //"GCore/Private/IOSCore"
                 // ... add other private include paths required here ...
             }
             );
@@ -46,7 +45,7 @@ public class GCore : ModuleRules
             new string[]
             {
                 "Core",  "CoreUObject", "Engine","Slate", "SlateCore","UMG", "InputCore","JsonUtilities","Json","HTTP","Networking",
-                "GXmlPlugins", "MsgCore"
+                 "XmlParser"
                 // ... add other public dependencies that you statically link with here ...
             }
             );

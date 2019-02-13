@@ -13,7 +13,7 @@
 #include "PackAction.h"
 #include "Widgets/Layout/SScrollBox.h"
 #include "Settings/ProjectPackagingSettings.h"
-DEFINE_LOG_CATEGORY(LogPakTool)
+
 
 static const FName MultPakToolTabName(TEXT("SplitTool"));
 

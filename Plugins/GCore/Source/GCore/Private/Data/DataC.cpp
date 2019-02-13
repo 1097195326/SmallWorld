@@ -1,4 +1,4 @@
-#include "GCore.h"
+////#include "GCore.h"
 #include "DataC.h"
 
 int DataC::GetTid()

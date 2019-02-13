@@ -1,2 +1,2 @@
-#include "GCore.h"
+//#include "GCore.h"
 #include "UIController.h"

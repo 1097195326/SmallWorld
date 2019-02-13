@@ -10,7 +10,7 @@ public class MultPakTool : ModuleRules
 		
 		PublicIncludePaths.AddRange(
 			new string[] {
-				"MultPakTool/Public"
+                //"MultPakTool/Public"
 				// ... add public include paths required here ...
 			}
 			);
@@ -18,10 +18,10 @@ public class MultPakTool : ModuleRules
 		
 		PrivateIncludePaths.AddRange(
 			new string[] {
-				"MultPakTool/Private",
+                //"MultPakTool/Private",
 				// ... add other private include paths required here ...
 			}
-			);
+            );
 			
 		
 		PublicDependencyModuleNames.AddRange(

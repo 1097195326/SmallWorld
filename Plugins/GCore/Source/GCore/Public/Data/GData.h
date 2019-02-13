@@ -2,14 +2,13 @@
 
 
 #include "GObject.h"
-#include "Json/Public/Json.h"
-#include "tinyxml.h"
-#include "tinystr.h"
+#include "Json.h"
+#include "XmlParser.h"
 
 class GCORE_API GData : public GObject
 {
 
 public :
 	virtual void InitWithJson(const TSharedPtr<FJsonObject> &obj);
-	virtual void InitWithXML(TiXmlElement * elem);
+	virtual void InitWithXML(const FXmlFile * _file);
 };

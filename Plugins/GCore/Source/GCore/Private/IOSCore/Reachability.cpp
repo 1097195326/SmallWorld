@@ -5,7 +5,7 @@
  Abstract:
  Basic demonstration of how to use the SystemConfiguration Reachablity APIs.
  */
-#include "GCore.h"
+//#include "GCore.h"
 #include "Reachability.h"
 
 #if PLATFORM_IOS

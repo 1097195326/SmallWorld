@@ -6,28 +6,28 @@
 //  Copyright © 2018年 Epic Games, Inc. All rights reserved.
 //
 
-#include "GCore.h"
-#include "GPawn.h"
+//#include "GCore.h"
+#include "GamePawn.h"
 
-void AGPawn::PostInitializeComponents()
+void AGamePawn::PostInitializeComponents()
 {
 	Super::PostInitializeComponents();
 
 	On_Init();
 }
-void AGPawn::BeginPlay()
+void AGamePawn::BeginPlay()
 {
 	Super::BeginPlay();
 
 	On_Start();
 }
-void AGPawn::Tick(float DeltaSeconds)
+void AGamePawn::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
 
 	On_Tick(DeltaSeconds);
 }
-void AGPawn::EndPlay(const EEndPlayReason::Type EndPlayReason)
+void AGamePawn::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
 	Super::EndPlay(EndPlayReason);
 
