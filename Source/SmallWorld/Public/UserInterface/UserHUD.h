@@ -1,7 +1,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Engine/Classes/GameFramework/HUD.h"
+#include "GameFramework/HUD.h"
 #include "UserHUD.generated.h"
 
 

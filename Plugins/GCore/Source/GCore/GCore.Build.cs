@@ -44,7 +44,17 @@ public class GCore : ModuleRules
         PublicDependencyModuleNames.AddRange(
             new string[]
             {
-                "Core",  "CoreUObject", "Engine","Slate", "SlateCore","UMG", "InputCore","JsonUtilities","Json","HTTP","Networking",
+                "Core",
+                "CoreUObject",
+                "Engine",
+                "Slate",
+                "SlateCore",
+                "UMG",
+                "InputCore",
+                "JsonUtilities",
+                "Json",
+                "HTTP",
+                "Networking",
                  "XmlParser"
                 // ... add other public dependencies that you statically link with here ...
             }

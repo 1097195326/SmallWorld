@@ -13,6 +13,7 @@ public class SmallWorld : ModuleRules
             "CoreUObject",
             "Engine",
             "InputCore",
+            "AIModule",
             "GCore",
         });
 
