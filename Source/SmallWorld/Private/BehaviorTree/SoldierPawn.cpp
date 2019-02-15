@@ -9,10 +9,9 @@ ASoldierPawn::ASoldierPawn()
 
 	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("RootComponent"));
 
-	PawnMovement = CreateDefaultSubobject<UFloatingPawnMovement>(TEXT("PawnMovement"));
-	PawnMovement->SetUpdatedComponent(RootComponent);
-
-
+	SoldierMovement = CreateDefaultSubobject<USoldierPawnMovement>(TEXT("SoldierMovement"));
+	SoldierMovement->SetUpdatedComponent(RootComponent);
+	
 
 }
 void ASoldierPawn::On_Init()

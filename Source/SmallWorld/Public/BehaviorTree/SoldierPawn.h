@@ -2,7 +2,7 @@
 
 
 #include "GamePawn.h"
-#include "GameFramework/FloatingPawnMovement.h"
+#include "SoldierPawnMovement.h"
 #include "BehaviorTree/BehaviorTree.h"
 #include "SoldierPawn.generated.h"
 
@@ -22,6 +22,6 @@ public:
 	UPROPERTY(EditAnywhere)
 		UBehaviorTree * BehaviorTree;
 	UPROPERTY(VisibleAnywhere)
-		UFloatingPawnMovement * PawnMovement;
+		USoldierPawnMovement * SoldierMovement;
 
 };
