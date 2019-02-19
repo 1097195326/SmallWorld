@@ -20,7 +20,7 @@ AUserPawn::AUserPawn(const FObjectInitializer& ObjectInitializer)
 	armComponent->bAbsoluteRotation = true;
 	armComponent->TargetArmLength = 800.f;
 	armComponent->bEnableCameraLag = true;
-	armComponent->CameraLagSpeed = 3.f;
+	armComponent->CameraLagSpeed = 6.f;
 	armComponent->RelativeRotation = FRotator(-60.f, 0.f, 0.f);
 	armComponent->bDoCollisionTest = false;
 

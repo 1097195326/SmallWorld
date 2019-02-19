@@ -15,7 +15,15 @@ public:
 
 protected:
 
-private:
+public:
 	class ASoldierPawn * SoldierPawn;
 
+	void	AddSteeringForce(FVector Force);
+	FVector	SteeringForce();
+	void	SetCurrentLocation(FVector Location);
+	FVector	CurrentLocation();
+	
+private:
+	FVector vSteeringForce;
+	FVector	vCurrentLocation;
 };

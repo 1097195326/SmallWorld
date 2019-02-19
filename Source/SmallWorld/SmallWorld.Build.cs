@@ -14,6 +14,8 @@ public class SmallWorld : ModuleRules
             "Engine",
             "InputCore",
             "AIModule",
+            "GameplayTasks",
+            "NavigationSystem",
             "GCore",
         });
 

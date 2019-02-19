@@ -18,10 +18,16 @@ public:
 	virtual void On_Tick(float delta) override;
 	virtual void On_Delete() override;
 
+	UPROPERTY(EditAnywhere, Category = Soldier)
+		float	fMass;
+	UPROPERTY(EditAnywhere, Category = Soldier)
+		float	fFieldOfView;
+	UPROPERTY(EditAnywhere, Category = Soldier)
+		float	fMaxForce;
 public:
 	UPROPERTY(EditAnywhere)
 		UBehaviorTree * BehaviorTree;
 	UPROPERTY(VisibleAnywhere)
 		USoldierPawnMovement * SoldierMovement;
-
+	
 };
