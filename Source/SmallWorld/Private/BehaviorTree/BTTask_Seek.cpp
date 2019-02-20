@@ -11,27 +11,17 @@
 EBTNodeResult::Type UBTTask_Seek::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
 {
 	ASoldierPawnController * SoldierController = Cast<ASoldierPawnController>(OwnerComp.GetAIOwner());
-	if (SoldierController == nullptr)
-	{
-		return EBTNodeResult::Failed;
-	}
 	ASoldierPawn * SoldierPawn = SoldierController->SoldierPawn;
-	if (SoldierPawn == nullptr)
-	{
-		return EBTNodeResult::Failed;
-	}
 	
 	FVector TargetLocation = SoldierController->CurrentLocation();
-	/*if ((TargetLocation - SoldierPawn->GetActorLocation()).SizeSquared() > SoldierPawn->fFieldOfView * SoldierPawn->fFieldOfView)
+	if (TargetLocation.SizeSquared() > 0.f)
 	{
-		return EBTNodeResult::Failed;
-	}*/
-	FVector DesiredVelocity = (TargetLocation - SoldierPawn->GetActorLocation()).GetSafeNormal() * SoldierPawn->SoldierMovement->MaxSpeed;
+		FVector DesiredVelocity = (TargetLocation - SoldierPawn->GetActorLocation()).GetSafeNormal() * SoldierPawn->SoldierMovement->MaxSpeed;
+
+		SoldierController->AddSteeringForce(DesiredVelocity - SoldierPawn->GetVelocity());
+
+		return EBTNodeResult::Succeeded;
+	}
 	
-	SoldierController->AddSteeringForce(DesiredVelocity - SoldierPawn->GetVelocity());
-
-	FVector velocity = SoldierPawn->GetVelocity();
-	SoldierPawn->SetActorRotation(velocity.ToOrientationQuat());
-
-	return EBTNodeResult::Succeeded;
+	return EBTNodeResult::Failed;
 }

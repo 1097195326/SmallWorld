@@ -8,8 +8,7 @@ class USoldierPawnMovement :public UFloatingPawnMovement
 {
 	GENERATED_BODY()
 public:
-	
-	virtual void InitializeComponent() override;
+	virtual void BeginPlay() override;
 	virtual void ApplyControlInputToVelocity(float DeltaTime) override;
 
 protected:

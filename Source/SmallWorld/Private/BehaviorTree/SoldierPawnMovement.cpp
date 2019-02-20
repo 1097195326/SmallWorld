@@ -2,9 +2,9 @@
 #include "SoldierPawn.h"
 #include "SoldierPawnController.h"
 
-void USoldierPawnMovement::InitializeComponent()
+void USoldierPawnMovement::BeginPlay()
 {
-	Super::InitializeComponent();
+	Super::BeginPlay();
 	if (PawnOwner)
 	{
 		SoldierPawn = Cast<ASoldierPawn>(PawnOwner);
@@ -13,25 +13,17 @@ void USoldierPawnMovement::InitializeComponent()
 }
 void USoldierPawnMovement::ApplyControlInputToVelocity(float DeltaTime)
 {
-	if (SoldierController == nullptr)
-	{
-		if (SoldierPawn->GetController())
-		{
-			SoldierController = Cast<ASoldierPawnController>(PawnOwner->GetController());
-		}
-		return;
-	}
-	float PawnMass = SoldierPawn->fMass;
-	if (SoldierController)
-	{
-		FVector SteeringForce = SoldierController->SteeringForce();
-
-		FVector acceleration = SteeringForce / PawnMass;
-
-		Velocity += acceleration * DeltaTime;
-
-		Velocity = Velocity.GetClampedToMaxSize(MaxSpeed);
-	}
 	
+	float PawnMass = SoldierPawn->fMass;
+	
+	FVector SteeringForce = SoldierController->SteeringForce();
 
+	FVector acceleration = SteeringForce / PawnMass;
+
+	Velocity += acceleration * DeltaTime;
+
+	Velocity = Velocity.GetClampedToMaxSize(MaxSpeed);
+
+	SoldierPawn->SetActorRotation(Velocity.ToOrientationQuat());
+	
 }
