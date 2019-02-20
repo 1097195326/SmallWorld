@@ -16,19 +16,22 @@ EBTNodeResult::Type UBTTask_Seek::ExecuteTask(UBehaviorTreeComponent& OwnerComp,
 		return EBTNodeResult::Failed;
 	}
 	ASoldierPawn * SoldierPawn = SoldierController->SoldierPawn;
-	if (SoldierPawn)
+	if (SoldierPawn == nullptr)
 	{
 		return EBTNodeResult::Failed;
 	}
 	
 	FVector TargetLocation = SoldierController->CurrentLocation();
-	if ((TargetLocation - SoldierPawn->GetActorLocation()).SizeSquared() > SoldierPawn->fFieldOfView * SoldierPawn->fFieldOfView)
+	/*if ((TargetLocation - SoldierPawn->GetActorLocation()).SizeSquared() > SoldierPawn->fFieldOfView * SoldierPawn->fFieldOfView)
 	{
 		return EBTNodeResult::Failed;
-	}
+	}*/
 	FVector DesiredVelocity = (TargetLocation - SoldierPawn->GetActorLocation()).GetSafeNormal() * SoldierPawn->SoldierMovement->MaxSpeed;
 	
 	SoldierController->AddSteeringForce(DesiredVelocity - SoldierPawn->GetVelocity());
+
+	FVector velocity = SoldierPawn->GetVelocity();
+	SoldierPawn->SetActorRotation(velocity.ToOrientationQuat());
 
 	return EBTNodeResult::Succeeded;
 }

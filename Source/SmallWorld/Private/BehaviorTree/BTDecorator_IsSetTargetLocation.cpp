@@ -13,14 +13,14 @@ bool UBTDecorator_IsSetTargetLocation::CalculateRawConditionValue(UBehaviorTreeC
 		return false;
 	}
 	ASoldierPawn * SoldierPawn = SoldierController->SoldierPawn;
-	if (SoldierPawn)
+	if (SoldierPawn == nullptr)
 	{
 		return false;
 	}
-	if (SoldierController->CurrentLocation().SizeSquared() > 0.f)
+	if (SoldierController->CurrentLocation() != FVector::ZeroVector)
 	{
 		return true;
 	}
 
-	return true;
+	return false;
 }

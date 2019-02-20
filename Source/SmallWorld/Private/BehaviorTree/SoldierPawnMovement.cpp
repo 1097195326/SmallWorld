@@ -25,7 +25,6 @@ void USoldierPawnMovement::ApplyControlInputToVelocity(float DeltaTime)
 	if (SoldierController)
 	{
 		FVector SteeringForce = SoldierController->SteeringForce();
-		//SteeringForce = m_pSteering->Calculate();
 
 		FVector acceleration = SteeringForce / PawnMass;
 

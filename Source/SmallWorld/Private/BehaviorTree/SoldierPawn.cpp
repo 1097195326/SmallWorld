@@ -5,7 +5,7 @@
 ASoldierPawn::ASoldierPawn()
 {
 
-	AIControllerClass = ASoldierPawnController::StaticClass();
+	//AIControllerClass = ASoldierPawnController::StaticClass();
 
 	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("RootComponent"));
 
@@ -20,7 +20,8 @@ void ASoldierPawn::On_Init()
 }
 void ASoldierPawn::On_Start()
 {
-
+	GetVelocity();
+	
 }
 void ASoldierPawn::On_Tick(float delta)
 {

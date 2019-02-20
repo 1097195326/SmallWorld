@@ -14,17 +14,16 @@ void UBTService_SoldierUpdate::TickNode(UBehaviorTreeComponent& OwnerComp, uint8
 		return;
 	}
 	ASoldierPawn * SoldierPawn = SoldierController->SoldierPawn;
-	if (SoldierPawn)
+	if (SoldierPawn == nullptr)
 	{
 		return;
 	}
 
 	UE_LOG(LogTemp, Log, TEXT("zhx -- service update"));
 
-	static bool IsSet = false;
-	if (!IsSet)
+	
+	if (SoldierController->CurrentLocation() == FVector::ZeroVector)
 	{
-		IsSet = true;
 		TArray<AActor*> Points;
 		UGameplayStatics::GetAllActorsOfClass(SoldierPawn->GetWorld(), ATargetPoint::StaticClass(), Points);
 
