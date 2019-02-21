@@ -6,6 +6,8 @@
 #include "BehaviorTree/BehaviorTree.h"
 #include "SoldierPawn.generated.h"
 
+
+
 UCLASS()
 class ASoldierPawn : public AGamePawn
 {
@@ -18,16 +20,28 @@ public:
 	virtual void On_Tick(float delta) override;
 	virtual void On_Delete() override;
 
+	void SetOffsetToLeader(const FVector & offset);
+	void SetLeader(ASoldierPawn * leader);
+	
+public:
+	FVector vOffsetToLeader;
+	ASoldierPawn * cLeader;
+
 	UPROPERTY(EditAnywhere, Category = Soldier)
 		float	fMass;
 	UPROPERTY(EditAnywhere, Category = Soldier)
 		float	fFieldOfView;
 	UPROPERTY(EditAnywhere, Category = Soldier)
 		float	fMaxForce;
-public:
+
 	UPROPERTY(EditAnywhere)
 		UBehaviorTree * BehaviorTree;
 	UPROPERTY(VisibleAnywhere)
 		USoldierPawnMovement * SoldierMovement;
+protected:
+	
+
+	
+public:
 	
 };

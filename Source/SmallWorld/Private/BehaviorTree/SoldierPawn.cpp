@@ -20,7 +20,7 @@ void ASoldierPawn::On_Init()
 }
 void ASoldierPawn::On_Start()
 {
-	GetVelocity();
+	
 	
 }
 void ASoldierPawn::On_Tick(float delta)
@@ -30,4 +30,12 @@ void ASoldierPawn::On_Tick(float delta)
 void ASoldierPawn::On_Delete()
 {
 
+}
+void ASoldierPawn::SetOffsetToLeader(const FVector & offset)
+{
+	vOffsetToLeader = offset;
+}
+void ASoldierPawn::SetLeader(ASoldierPawn * leader)
+{
+	cLeader = leader;
 }

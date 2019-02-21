@@ -12,11 +12,6 @@ bool UBTDecorator_IsSetTargetLocation::CalculateRawConditionValue(UBehaviorTreeC
 	{
 		return false;
 	}
-	ASoldierPawn * SoldierPawn = SoldierController->SoldierPawn;
-	if (SoldierPawn == nullptr)
-	{
-		return false;
-	}
 	if (SoldierController->CurrentLocation() != FVector::ZeroVector)
 	{
 		return true;

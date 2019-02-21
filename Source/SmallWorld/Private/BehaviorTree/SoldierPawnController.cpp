@@ -1,5 +1,5 @@
 #include "SoldierPawnController.h"
-#include "SoldierPawn.h"
+
 #include "BehaviorTree/BlackboardComponent.h"
 #include "BehaviorTree/BehaviorTreeComponent.h"
 
@@ -34,6 +34,9 @@ void ASoldierPawnController::AddSteeringForce(FVector Force)
 }
 FVector ASoldierPawnController::SteeringForce()
 {
+	vSteeringForce = FVector::ZeroVector;
+
+
 	return vSteeringForce.GetClampedToMaxSize(SoldierPawn->fMaxForce);
 }
 void ASoldierPawnController::SetCurrentLocation(FVector Location)
@@ -43,4 +46,29 @@ void ASoldierPawnController::SetCurrentLocation(FVector Location)
 FVector ASoldierPawnController::CurrentLocation()
 {
 	return vCurrentLocation;
+}
+// ----------------------  behavior tree -------------------
+
+FVector ASoldierPawnController::Seek(FVector TargetLocation)
+{
+	FVector DesiredVelocity = (TargetLocation - SoldierPawn->GetActorLocation()).GetSafeNormal() * SoldierPawn->SoldierMovement->MaxSpeed;
+
+	return DesiredVelocity - SoldierPawn->GetVelocity();
+}
+FVector ASoldierPawnController::Arrive(FVector TargetLocation)
+{
+	FVector ToTarget = TargetLocation - SoldierPawn->GetActorLocation();
+	float speed = ToTarget.Size() / SoldierPawn->SoldierMovement->Deceleration;
+	speed = FMath::Min(speed, SoldierPawn->SoldierMovement->MaxSpeed);
+	FVector DesiredVelocity = ToTarget.GetSafeNormal() * speed;
+
+	return DesiredVelocity - SoldierPawn->GetVelocity();
+}
+FVector ASoldierPawnController::OffsetPursuit(ASoldierPawn * Leader)
+{
+	FVector ToOffset = SoldierPawn->vOffsetToLeader - SoldierPawn->GetActorLocation();
+
+	float LookAheadTime = ToOffset.Size() / (SoldierPawn->SoldierMovement->MaxSpeed + Leader->GetVelocity().Size());
+
+	return Arrive(SoldierPawn->vOffsetToLeader + Leader->GetVelocity() * LookAheadTime);
 }

@@ -13,17 +13,18 @@ void USoldierPawnMovement::BeginPlay()
 }
 void USoldierPawnMovement::ApplyControlInputToVelocity(float DeltaTime)
 {
-	
-	float PawnMass = SoldierPawn->fMass;
-	
-	FVector SteeringForce = SoldierController->SteeringForce();
+	//if (SoldierPawn->IsMove())
+	{
+		float PawnMass = SoldierPawn->fMass;
 
-	FVector acceleration = SteeringForce / PawnMass;
+		FVector SteeringForce = SoldierController->SteeringForce();
 
-	Velocity += acceleration * DeltaTime;
+		FVector acceleration = SteeringForce / PawnMass;
 
-	Velocity = Velocity.GetClampedToMaxSize(MaxSpeed);
+		Velocity += acceleration * DeltaTime;
 
-	SoldierPawn->SetActorRotation(Velocity.ToOrientationQuat());
-	
+		Velocity = Velocity.GetClampedToMaxSize(MaxSpeed);
+
+		SoldierPawn->SetActorRotation(Velocity.ToOrientationQuat());
+	}
 }
