@@ -1,6 +1,6 @@
 #pragma once
 
-#include "SoldierPawn.h"
+
 #include "BaseFormation.h"
 
 #include <list>
@@ -17,6 +17,7 @@ public:
 
 	void AddSoldierToGroup(ASoldierPawn * soldier);
 	void RemoveSoldierFromGroup(ASoldierPawn * soldier);
+	list<ASoldierPawn*> GetAllSoldier();
 
 
 	void ChangeFormation(BaseFormation * formation);

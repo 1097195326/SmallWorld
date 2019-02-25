@@ -3,6 +3,7 @@
 
 class HorizonalRectFormation : public BaseFormation
 {
+public:
 
 
 };
