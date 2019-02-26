@@ -2,6 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "SoldierPawn.h"
+#include "GameConfig.h"
 #include <list>
 
 enum FormationType

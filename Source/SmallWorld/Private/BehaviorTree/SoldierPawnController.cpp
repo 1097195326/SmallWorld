@@ -66,9 +66,9 @@ FVector ASoldierPawnController::Arrive(FVector TargetLocation)
 }
 FVector ASoldierPawnController::OffsetPursuit(ASoldierPawn * Leader)
 {
-	FVector ToOffset = SoldierPawn->vOffsetToLeader - SoldierPawn->GetActorLocation();
+	FVector ToOffset = SoldierPawn->mOffsetToLeader - SoldierPawn->GetActorLocation();
 
 	float LookAheadTime = ToOffset.Size() / (SoldierPawn->SoldierMovement->MaxSpeed + Leader->GetVelocity().Size());
 
-	return Arrive(SoldierPawn->vOffsetToLeader + Leader->GetVelocity() * LookAheadTime);
+	return Arrive(SoldierPawn->mOffsetToLeader + Leader->GetVelocity() * LookAheadTime);
 }

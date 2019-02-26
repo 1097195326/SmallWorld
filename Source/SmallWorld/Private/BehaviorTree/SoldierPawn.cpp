@@ -31,11 +31,15 @@ void ASoldierPawn::On_Delete()
 {
 
 }
+void ASoldierPawn::SetFormationPosition(const FVector & formationPosition)
+{
+	mFormationPosition = formationPosition;
+}
 void ASoldierPawn::SetOffsetToLeader(const FVector & offset)
 {
-	vOffsetToLeader = offset;
+	mOffsetToLeader = offset;
 }
 void ASoldierPawn::SetLeader(ASoldierPawn * leader)
 {
-	cLeader = leader;
+	mLeader = leader;
 }

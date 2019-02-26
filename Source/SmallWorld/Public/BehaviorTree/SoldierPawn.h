@@ -20,12 +20,15 @@ public:
 	virtual void On_Tick(float delta) override;
 	virtual void On_Delete() override;
 
+
+	void SetFormationPosition(const FVector & formationPosition);
 	void SetOffsetToLeader(const FVector & offset);
 	void SetLeader(ASoldierPawn * leader);
 	
 public:
-	FVector vOffsetToLeader;
-	ASoldierPawn * cLeader;
+	FVector mFormationPosition;
+	FVector mOffsetToLeader;
+	ASoldierPawn * mLeader;
 
 	UPROPERTY(EditAnywhere, Category = Soldier)
 		float	fMass;

@@ -1,20 +1,16 @@
 #pragma once
 
-namespace GameConfig
-{
-	// qi bing
-	int QiBingOffSet = 4;
-	// bu bing
-	int BuBintOffSet = 2;
-	// qiang bing
 
-	// dun bing
+// qi bing
+static int QiBingOffSet = 4;
+// bu bing
+static int BuBingOffSet = 2;
+// qiang bing
 
-	// gong bing
-	
-	// gongnv bing
+// dun bing
 
-	// 
+// gong bing
+
+// gongnv bing
 
 
-}
