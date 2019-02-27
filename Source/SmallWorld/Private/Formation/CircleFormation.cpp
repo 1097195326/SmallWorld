@@ -5,7 +5,7 @@ CircleFormation::CircleFormation()
 {
 	mFormationType = e_CircleFormation;
 }
-void CircleFormation::CalculateOffSet(const list<ASoldierPawn *> & soldiers)
+void CircleFormation::CalculateOffSet(list<ASoldierPawn *> & soldiers)
 {
 	list<ASoldierPawn*>::const_iterator iter = soldiers.begin();
 	FVector HeaderLocation = (*iter)->GetActorLocation();

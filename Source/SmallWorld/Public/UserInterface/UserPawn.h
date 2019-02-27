@@ -21,6 +21,9 @@ public:
 	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
 	virtual UPawnMovementComponent* GetMovementComponent() const override;
 
+	UFUNCTION(Exec)
+		void CreateGroup();
+
 private:
 	void	MoveLeftAndRight(float dle);
 	void	MoveUpAndDown(float dle);

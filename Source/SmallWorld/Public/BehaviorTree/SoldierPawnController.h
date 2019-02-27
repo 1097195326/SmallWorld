@@ -40,8 +40,8 @@ public:
 
 	void	AddSteeringForce(FVector Force);
 	FVector	SteeringForce();
-	void	SetCurrentLocation(FVector Location);
-	FVector	CurrentLocation();
+	void	SetMoveToLocation(FVector Location);
+	FVector	MoveToLocation();
 
 	UPROPERTY(VisibleAnywhere)
 		ASoldierPawn * SoldierPawn;
@@ -49,7 +49,7 @@ public:
 
 private:
 	FVector vSteeringForce;
-	FVector	vCurrentLocation;
+	FVector	vMoveToLocation;
 
 	int		iBehaviorType;
 	int		iMoveType;
@@ -59,7 +59,7 @@ private:
 	FVector Seek(FVector TargetLocation);
 	FVector Arrive(FVector TargetLocation);
 	FVector OffsetPursuit(ASoldierPawn * Leader);
-
+public:
 	// beavior func
 	FORCEINLINE bool IsIdle() { return (iBehaviorType & e_idle) == e_idle; }
 	FORCEINLINE bool IsMove() { return (iBehaviorType & e_move) == e_move; }

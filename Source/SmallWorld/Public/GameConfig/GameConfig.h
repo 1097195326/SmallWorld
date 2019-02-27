@@ -4,7 +4,7 @@
 // qi bing
 static int QiBingOffSet = 4;
 // bu bing
-static int BuBingOffSet = 2;
+static int BuBingOffSet = 40;
 // qiang bing
 
 // dun bing

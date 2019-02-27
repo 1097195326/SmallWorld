@@ -5,6 +5,16 @@
 
 EBTNodeResult::Type UBTTask_Seek::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
 {
-	
-	return EBTNodeResult::Failed;
+	ASoldierPawnController * SoldierController = Cast<ASoldierPawnController>(OwnerComp.GetAIOwner());
+	ASoldierPawn * SoldierPawn = SoldierController->SoldierPawn;
+
+	if (!SoldierController->IsArrive())
+	{
+		SoldierController->ArriveOn();
+	}
+	/*if (!SoldierController->IsSeek())
+	{
+		SoldierController->SeekOn();
+	}*/
+	return EBTNodeResult::Succeeded;
 }

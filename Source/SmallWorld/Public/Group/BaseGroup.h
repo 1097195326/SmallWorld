@@ -11,7 +11,7 @@ class BaseGroup
 {
 private:
 	std::list<ASoldierPawn*> AllSoldier;
-
+	BaseFormation * CurrrentFormation;
 public:
 	BaseGroup();
 

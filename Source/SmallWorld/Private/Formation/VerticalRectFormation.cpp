@@ -7,7 +7,7 @@ VerticalRectFormation::VerticalRectFormation()
 	mFormationType = e_VerticalRectFormation;
 
 }
-void VerticalRectFormation::CalculateOffSet(const list<ASoldierPawn*> & soldiers)
+void VerticalRectFormation::CalculateOffSet(list<ASoldierPawn*> & soldiers)
 {
 	list<ASoldierPawn*>::const_iterator iter = soldiers.begin();
 	FVector HeaderLocation = (*iter)->GetActorLocation();

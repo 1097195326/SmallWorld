@@ -19,7 +19,7 @@ class BaseFormation
 public:
 	BaseFormation();
 
-	virtual void CalculateOffSet(const list<ASoldierPawn*> & soldiers) {}
+	virtual void CalculateOffSet(list<ASoldierPawn*> & soldiers) {}
 
 	FormationType GetFormationType();
 protected:

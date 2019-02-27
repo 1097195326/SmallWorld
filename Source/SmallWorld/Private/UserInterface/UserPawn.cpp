@@ -3,6 +3,15 @@
 
 #include "Components/CapsuleComponent.h"
 
+#include "SoldierPawnController.h"
+#include "SoldierPawn.h"
+
+#include "Kismet/GameplayStatics.h"
+#include "BaseGroup.h"
+#include "HorizonalRectFormation.h"
+#include "ConeFormation.h"
+#include "CircleFormation.h"
+
 AUserPawn::AUserPawn(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
@@ -103,4 +112,24 @@ void AUserPawn::MoveLeftAndRight(float dle)
 void AUserPawn::MoveUpAndDown(float dle)
 {
 	AddMovementInput(GetActorForwardVector(), dle);
+}
+void AUserPawn::CreateGroup()
+{
+	TArray<AActor*> soldiers;
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ASoldierPawn::StaticClass(), soldiers);
+	BaseGroup * group = new BaseGroup();
+
+	for (int i = 0; i < soldiers.Num(); i++)
+	{
+		ASoldierPawn * Soldier = Cast<ASoldierPawn>(soldiers[i]);
+		group->AddSoldierToGroup(Soldier);
+	}
+	group->ChangeFormation(new HorizonalRectFormation());
+	
+	for (int i = 0; i < soldiers.Num(); i++)
+	{
+		ASoldierPawn * Soldier = Cast<ASoldierPawn>(soldiers[i]);
+		ASoldierPawnController * SoldierController = Cast<ASoldierPawnController>(Soldier->GetController());
+		SoldierController->SetMoveToLocation(Soldier->mFormationPosition);
+	}
 }

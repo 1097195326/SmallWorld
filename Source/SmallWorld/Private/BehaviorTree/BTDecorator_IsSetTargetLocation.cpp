@@ -12,7 +12,7 @@ bool UBTDecorator_IsSetTargetLocation::CalculateRawConditionValue(UBehaviorTreeC
 	{
 		return false;
 	}
-	if (SoldierController->CurrentLocation() != FVector::ZeroVector)
+	if (SoldierController->MoveToLocation() != FVector::ZeroVector)
 	{
 		return true;
 	}

@@ -5,7 +5,7 @@ ConeFormation::ConeFormation()
 {
 	mFormationType = e_ConeFormation;
 }
-void ConeFormation::CalculateOffSet(const list<ASoldierPawn *> & soldiers)
+void ConeFormation::CalculateOffSet(list<ASoldierPawn *> & soldiers)
 {
 	list<ASoldierPawn*>::const_iterator iter = soldiers.begin();
 	FVector HeaderLocation = (*iter)->GetActorLocation();

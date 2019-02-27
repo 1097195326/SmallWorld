@@ -7,6 +7,6 @@ public:
 	VerticalRectFormation();
 
 
-	virtual void CalculateOffSet(const list<ASoldierPawn*> & soldiers) override;
+	virtual void CalculateOffSet(list<ASoldierPawn*> & soldiers) override;
 
 };
