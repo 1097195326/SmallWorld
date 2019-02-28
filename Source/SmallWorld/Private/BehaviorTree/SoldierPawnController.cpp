@@ -34,13 +34,15 @@ void ASoldierPawnController::AddSteeringForce(FVector Force)
 }
 FVector ASoldierPawnController::SteeringForce()
 {
+	vSteeringForce = FVector::ZeroVector;
+
 	if (IsSeek())
 	{
 		vSteeringForce += Seek(vMoveToLocation);
 	}
 	if (IsArrive())
 	{
-		vSteeringForce = Arrive(vMoveToLocation);
+		vSteeringForce += Arrive(vMoveToLocation);
 	}
 	return vSteeringForce.GetClampedToMaxSize(SoldierPawn->fMaxForce);
 }
@@ -63,24 +65,16 @@ FVector ASoldierPawnController::Seek(FVector TargetLocation)
 FVector ASoldierPawnController::Arrive(FVector TargetLocation)
 {
 	FVector ToTarget = TargetLocation - SoldierPawn->GetActorLocation();
-	
-	/*static bool isArrive = false;
-	
-	if (!isArrive && ToTarget.Size() < 0.1f)
+	if (ToTarget.Size() > 0)
 	{
-		isArrive = true;
+		FVector vv = SoldierPawn->GetVelocity();
+		float speed = ToTarget.Size() / (SoldierPawn->SoldierMovement->Deceleration * 0.3f);
+		speed = FMath::Min(speed, SoldierPawn->SoldierMovement->MaxSpeed);
+		FVector DesiredVelocity = ToTarget.GetSafeNormal() * speed;
+
+		return DesiredVelocity - vv;
 	}
-	if (isArrive)
-	{
-		vSteeringForce = FVector::ZeroVector;
-		return vSteeringForce;
-	}*/
-	float speed = ToTarget.Size() / (SoldierPawn->SoldierMovement->Deceleration);
-	speed = FMath::Min(speed, SoldierPawn->SoldierMovement->MaxSpeed);
-	FVector DesiredVelocity = ToTarget.GetSafeNormal() * speed;
-	
-	FVector VV = SoldierPawn->GetVelocity();
-	return DesiredVelocity - VV;
+	return FVector::ZeroVector;
 }
 FVector ASoldierPawnController::OffsetPursuit(ASoldierPawn * Leader)
 {

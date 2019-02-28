@@ -21,10 +21,17 @@ void USoldierPawnMovement::ApplyControlInputToVelocity(float DeltaTime)
 
 		FVector acceleration = SteeringForce / PawnMass;
 
-		Velocity += acceleration * DeltaTime;
+		//Velocity += acceleration *DeltaTime;
+		Velocity += SteeringForce;
 
 		Velocity = Velocity.GetClampedToMaxSize(MaxSpeed);
-
-		SoldierPawn->SetActorRotation(Velocity.ToOrientationQuat());
+		
+		if (Velocity.SizeSquared() > 0.00000001f)
+		{
+			
+			//SoldierPawn->SetActorLocationAndRotation( SoldierPawn->GetActorLocation() + Velocity * DeltaTime, Velocity.ToOrientationQuat(), true);
+			SoldierPawn->SetActorRotation(Velocity.ToOrientationQuat());
+		}
+		
 	}
 }
