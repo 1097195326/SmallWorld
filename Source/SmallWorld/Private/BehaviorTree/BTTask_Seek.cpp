@@ -8,13 +8,13 @@ EBTNodeResult::Type UBTTask_Seek::ExecuteTask(UBehaviorTreeComponent& OwnerComp,
 	ASoldierPawnController * SoldierController = Cast<ASoldierPawnController>(OwnerComp.GetAIOwner());
 	ASoldierPawn * SoldierPawn = SoldierController->SoldierPawn;
 
-	if (!SoldierController->IsArrive())
+	/*if (!SoldierController->IsArrive())
 	{
 		SoldierController->ArriveOn();
-	}
-	/*if (!SoldierController->IsSeek())
+	}*/
+	if (!SoldierController->IsSeek())
 	{
 		SoldierController->SeekOn();
-	}*/
+	}
 	return EBTNodeResult::Succeeded;
 }
