@@ -1,0 +1,1 @@
+#include "CavalierSoldier.h"

@@ -1,5 +1,4 @@
 #include "SoldierPawnController.h"
-
 #include "BehaviorTree/BlackboardComponent.h"
 #include "BehaviorTree/BehaviorTreeComponent.h"
 
@@ -83,4 +82,64 @@ FVector ASoldierPawnController::OffsetPursuit(ASoldierPawn * Leader)
 	float LookAheadTime = ToOffset.Size() / (SoldierPawn->SoldierMovement->MaxSpeed + Leader->GetVelocity().Size());
 
 	return Arrive(SoldierPawn->mOffsetToLeader + Leader->GetVelocity() * LookAheadTime);
+}
+FVector ASoldierPawnController::Separation( BaseGroup * Group)
+{
+	FVector Steer = FVector::ZeroVector;
+	list<ASoldierPawn*> Soldiers = Group->GetAllSoldier();
+	list<ASoldierPawn*>::iterator iter = Soldiers.begin();
+	for (;iter != Soldiers.end();iter++)
+	{
+		ASoldierPawn * soldier = *iter;
+		if (soldier != SoldierPawn)
+		{
+			FVector ToTarget = SoldierPawn->GetActorLocation() - soldier->GetActorLocation();
+			Steer += ToTarget.GetSafeNormal() / ToTarget.Size();
+		}
+	}
+	return Steer;
+}
+FVector ASoldierPawnController::Alignment( BaseGroup * Group)
+{
+	FVector AverageHeading = FVector::ZeroVector;
+	int    NeighborCount = 0;
+
+	list<ASoldierPawn*> Soldiers = Group->GetAllSoldier();
+	list<ASoldierPawn*>::iterator iter = Soldiers.begin();
+	for (; iter != Soldiers.end(); iter++)
+	{
+		ASoldierPawn * soldier = *iter;
+		if (soldier != SoldierPawn)
+		{
+			AverageHeading += soldier->GetActorForwardVector();
+			++NeighborCount;
+		}
+	}
+	if (NeighborCount > 0)
+	{
+		AverageHeading /= NeighborCount;
+		AverageHeading -= SoldierPawn->GetActorForwardVector();
+	}
+	return AverageHeading;
+}
+FVector ASoldierPawnController::Cohesion( BaseGroup *  Group)
+{
+	FVector CenterOfMass, Steering;
+
+	int NeighborCount = 0;
+
+	list<ASoldierPawn*> Soldiers = Group->GetAllSoldier();
+	list<ASoldierPawn*>::iterator iter = Soldiers.begin();
+	for (; iter != Soldiers.end(); iter++)
+	{
+		ASoldierPawn * soldier = *iter;
+		CenterOfMass += soldier->GetActorLocation();
+		++NeighborCount;
+	}
+	if (NeighborCount > 0)
+	{
+		CenterOfMass /= NeighborCount;
+		Steering = Seek(CenterOfMass);
+	}
+	return Steering;
 }
