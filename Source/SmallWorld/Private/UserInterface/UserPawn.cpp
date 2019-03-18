@@ -1,16 +1,17 @@
 #include "UserPawn.h"
 #include "UserController.h"
+#include "Kismet/GameplayStatics.h"
 
-#include "Components/CapsuleComponent.h"
-
+// test exec
 #include "SoldierPawnController.h"
 #include "SoldierPawn.h"
-
-#include "Kismet/GameplayStatics.h"
 #include "BaseGroup.h"
 #include "HorizonalRectFormation.h"
 #include "ConeFormation.h"
 #include "CircleFormation.h"
+#include "Engine/TargetPoint.h"
+#include "Projectile.h"
+
 
 AUserPawn::AUserPawn(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
@@ -132,4 +133,23 @@ void AUserPawn::CreateGroup()
 		ASoldierPawnController * SoldierController = Cast<ASoldierPawnController>(Soldier->GetController());
 		SoldierController->SetMoveToLocation(Soldier->mFormationPosition);
 	}
+}
+void AUserPawn::Fire()
+{
+	FVector FireLoction;
+	FRotator FireDirection(45.f, 0.f, 0.f);
+
+	TArray<AActor*> Points;
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ATargetPoint::StaticClass(), Points);
+
+	for (int i = 0; i < Points.Num(); i++)
+	{
+		ATargetPoint * Point = Cast<ATargetPoint>(Points[i]);
+		FireLoction = Point->GetActorLocation();
+	}
+
+	FTransform transform(FireDirection,FireLoction);
+	UClass * ProjectileClass = LoadClass<AProjectile>(this, TEXT("/Game/Projectile/Projectile_BP.Projectile_BP_C"));
+	GetWorld()->SpawnActor(ProjectileClass, &transform);
+
 }

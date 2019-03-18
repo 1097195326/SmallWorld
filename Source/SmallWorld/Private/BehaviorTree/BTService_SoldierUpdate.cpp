@@ -22,7 +22,7 @@ void UBTService_SoldierUpdate::TickNode(UBehaviorTreeComponent& OwnerComp, uint8
 	UE_LOG(LogTemp, Log, TEXT("zhx -- service update"));
 
 	
-	if (SoldierController->MoveToLocation() == FVector::ZeroVector)
+	/*if (SoldierController->MoveToLocation() == FVector::ZeroVector)
 	{
 		TArray<AActor*> Points;
 		UGameplayStatics::GetAllActorsOfClass(SoldierPawn->GetWorld(), ATargetPoint::StaticClass(), Points);
@@ -33,6 +33,6 @@ void UBTService_SoldierUpdate::TickNode(UBehaviorTreeComponent& OwnerComp, uint8
 			SoldierController->SetMoveToLocation(Point->GetActorLocation());
 		}
 
-	}
+	}*/
 
 }

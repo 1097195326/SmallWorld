@@ -5,6 +5,7 @@
 #include "SoldierPawnMovement.h"
 #include "Kismet/GameplayStatics.h"
 #include "BehaviorTree/BehaviorTree.h"
+#include "Projectile.h"
 #include "SoldierPawn.generated.h"
 
 class ASoldierPawnController;

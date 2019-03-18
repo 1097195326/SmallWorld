@@ -23,6 +23,8 @@ public:
 
 	UFUNCTION(Exec)
 		void CreateGroup();
+	UFUNCTION(Exec)
+		void Fire();
 
 private:
 	void	MoveLeftAndRight(float dle);
