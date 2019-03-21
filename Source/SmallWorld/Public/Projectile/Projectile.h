@@ -25,5 +25,6 @@ public:
 	UPROPERTY(VisibleDefaultsOnly)
 		UStaticMeshComponent * MeshComponent;
 
+	void SetVelocity(const FVector & velocity);
 
 };

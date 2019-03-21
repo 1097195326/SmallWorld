@@ -136,20 +136,29 @@ void AUserPawn::CreateGroup()
 }
 void AUserPawn::Fire()
 {
-	FVector FireLoction;
-	FRotator FireDirection(45.f, 0.f, 0.f);
 
 	TArray<AActor*> Points;
 	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ATargetPoint::StaticClass(), Points);
 
-	for (int i = 0; i < Points.Num(); i++)
+	FVector FireLocation = Points[0]->GetActorLocation();
+	FVector TargetLocation = Points[1]->GetActorLocation();
+
+	FTransform transform(FireLocation);
+	UClass * ProjectileClass = LoadClass<AActor>(this, TEXT("/Game/Projectile/Projectile_BP.Projectile_BP_C"));
+	 
+	AProjectile * projectile =Cast<AProjectile>(UGameplayStatics::BeginDeferredActorSpawnFromClass(this, ProjectileClass, transform));
+	if (projectile != nullptr)
 	{
-		ATargetPoint * Point = Cast<ATargetPoint>(Points[i]);
-		FireLoction = Point->GetActorLocation();
+		float Gravity = projectile->MoveComponent->GetGravityZ();
+
+		FVector2D HorizontalDistance = FVector2D(TargetLocation.X - FireLocation.X, TargetLocation.Y - FireLocation.Y);
+		FVector2D HorizontalVelocity = FVector2D(TargetLocation.X - FireLocation.X, TargetLocation.Y - FireLocation.Y).GetSafeNormal() * 500;
+		float AllTime = HorizontalDistance.Size() / 500.f;
+		float VelocityZ = - (Gravity * AllTime * AllTime * 0.5f - TargetLocation.Z + FireLocation.Z)/AllTime;
+		projectile->SetVelocity(FVector(HorizontalVelocity.X, HorizontalVelocity.Y, VelocityZ));
+
+		UGameplayStatics::FinishSpawningActor(projectile, transform);
 	}
 
-	FTransform transform(FireDirection,FireLoction);
-	UClass * ProjectileClass = LoadClass<AProjectile>(this, TEXT("/Game/Projectile/Projectile_BP.Projectile_BP_C"));
-	GetWorld()->SpawnActor(ProjectileClass, &transform);
 
 }
