@@ -9,5 +9,23 @@
 			"Type": "Runtime",
 			"LoadingPhase": "Default"
 		}
+	],
+	"Plugins": [
+		{
+			"Name": "DownloadTool",
+			"Enabled": true
+		},
+		{
+			"Name": "EncryptAndDecrypt",
+			"Enabled": true
+		},
+		{
+			"Name": "GCore",
+			"Enabled": true
+		},
+		{
+			"Name": "MsgCore",
+			"Enabled": true
+		}
 	]
 }
