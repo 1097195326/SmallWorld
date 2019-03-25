@@ -9,15 +9,11 @@ void UBTService_SoldierUpdate::TickNode(UBehaviorTreeComponent& OwnerComp, uint8
 	Super::TickNode(OwnerComp, NodeMemory, DeltaSeconds);
 
 	ASoldierPawnController * SoldierController = Cast<ASoldierPawnController>(OwnerComp.GetAIOwner());
-	if (SoldierController == nullptr)
+	
+	/*if (SoldierPawn == nullptr)
 	{
 		return;
-	}
-	ASoldierPawn * SoldierPawn = SoldierController->SoldierPawn;
-	if (SoldierPawn == nullptr)
-	{
-		return;
-	}
+	}*/
 
 	UE_LOG(LogTemp, Log, TEXT("zhx -- service update"));
 

@@ -31,7 +31,7 @@ AUserPawn::AUserPawn(const FObjectInitializer& ObjectInitializer)
 	armComponent->TargetArmLength = 800.f;
 	armComponent->bEnableCameraLag = true;
 	armComponent->CameraLagSpeed = 6.f;
-	armComponent->RelativeRotation = FRotator(-60.f, 0.f, 0.f);
+	armComponent->RelativeRotation = FRotator(-45.f, 0.f, 0.f);
 	armComponent->bDoCollisionTest = false;
 
 	cameraComponent = CreateDefaultSubobject<UCameraComponent>(TEXT("CameraComponent"));
@@ -130,8 +130,7 @@ void AUserPawn::CreateGroup()
 	for (int i = 0; i < soldiers.Num(); i++)
 	{
 		ASoldierPawn * Soldier = Cast<ASoldierPawn>(soldiers[i]);
-		ASoldierPawnController * SoldierController = Cast<ASoldierPawnController>(Soldier->GetController());
-		SoldierController->SetMoveToLocation(Soldier->mFormationPosition);
+		Soldier->SetMoveToLocation(Soldier->mFormationPosition);
 	}
 }
 void AUserPawn::Fire()

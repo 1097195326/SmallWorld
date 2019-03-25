@@ -1,11 +1,11 @@
 #pragma once
 
 #include "SoldierPawn.h"
-#include "BowmanSoldier.generated.h"
+#include "Archer.generated.h"
 
 
 UCLASS()
-class ABowmanSoldier : public ASoldierPawn
+class AArcher : public ASoldierPawn
 {
 	GENERATED_BODY()
 
