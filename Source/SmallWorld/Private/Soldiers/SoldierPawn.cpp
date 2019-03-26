@@ -90,6 +90,23 @@ void ASoldierPawn::Attack()
 
 
 }
+// Anim Call End
+void ASoldierPawn::AnimAttack()
+{
+
+}
+void ASoldierPawn::AnimAttackEnd()
+{
+
+}
+void ASoldierPawn::AnimHitEnd()
+{
+
+}
+void ASoldierPawn::AnimDieingEnd()
+{
+
+}
 bool ASoldierPawn::IsHaveEnemy()
 {
 	if (mEnemy && mEnemy->IsAlive())

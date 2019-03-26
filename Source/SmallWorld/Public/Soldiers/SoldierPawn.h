@@ -11,26 +11,23 @@
 
 class BaseGroup;
 
-
+UENUM()
 enum BehaviorType
 {
 	e_normal = 0,
-
+	//state
 	e_idle = 1,
-	//attack
 	e_attack = 1 << 2,
-	// death
 	e_dieing = 1 << 3,
 	e_died = 1 << 4,
-	e_hit,
-	e_victory,
+	e_hit = 1 << 5,
+	e_victory = 1 << 6,
+	e_walk = 1 << 7,
+	e_run = 1 << 8,
 	// move
-	e_walk,
-	e_run,
-	e_seek = 1 << 5,
-	e_arrive = 1 << 6,
-	e_offsetpursuit = 1 << 7,
-
+	e_seek = 1 << 9,
+	e_arrive = 1 << 10,
+	e_offsetpursuit = 1 << 11,
 
 };
 
@@ -60,6 +57,14 @@ public:
 	bool	IsHaveEnemy();
 	bool	IsAlive();
 
+	UFUNCTION(BlueprintCallable)
+		void AnimAttack();
+	UFUNCTION(BlueprintCallable)
+		void AnimAttackEnd();
+	UFUNCTION(BlueprintCallable)
+		void AnimHitEnd();
+	UFUNCTION(BlueprintCallable)
+		void AnimDieingEnd();
 public:
 	FVector mFormationPosition;
 	FVector mOffsetToLeader;
@@ -112,54 +117,72 @@ private:
 
 public:
 	// beavior func
+
+	UFUNCTION(BlueprintCallable)
+		bool IsRun() { return (iBehaviorType & e_run) == e_run; }
+	UFUNCTION(BlueprintCallable)
+		void RunOn() { iBehaviorType |= e_run; }
+	UFUNCTION(BlueprintCallable)
+		void RunOff() { if (IsRun()) iBehaviorType ^= e_run; }
+	UFUNCTION(BlueprintCallable)
+		bool IsWalk() { return (iBehaviorType & e_walk) == e_walk; }
+	UFUNCTION(BlueprintCallable)
+		void WalkOn() { iBehaviorType |= e_walk; }
+	UFUNCTION(BlueprintCallable)
+		void WalkOff() { if (IsWalk()) iBehaviorType ^= e_walk; }
+	UFUNCTION(BlueprintCallable)
+		bool IsHit() { return (iBehaviorType & e_hit) == e_hit;}
+	UFUNCTION(BlueprintCallable)
+		void HitOn() { iBehaviorType |= e_hit; }
+	UFUNCTION(BlueprintCallable)
+		void HitOff() { if (IsHit()) iBehaviorType ^= e_hit; }
+	UFUNCTION(BlueprintCallable)
+		bool IsVictory() { return (iBehaviorType & e_victory) == e_victory; }
+	UFUNCTION(BlueprintCallable)
+		void VictoryOn() { iBehaviorType |= e_victory; }
+	UFUNCTION(BlueprintCallable)
+		void VictoryOff() { if (IsVictory()) iBehaviorType ^= e_victory; }
 	UFUNCTION(BlueprintCallable)
 		bool IsIdle() { return (iBehaviorType & e_idle) == e_idle; }
 	UFUNCTION(BlueprintCallable)
-		bool IsAttack() { return (iBehaviorType & e_attack) == e_attack; }
-
-	UFUNCTION(BlueprintCallable)
 		void IdleOn() { iBehaviorType |= e_idle; }
-	UFUNCTION(BlueprintCallable)
-		void AttackOn() { iBehaviorType |= e_attack; }
-
 	UFUNCTION(BlueprintCallable)
 		void IdleOff() { if (IsIdle()) iBehaviorType ^= e_idle; }
 	UFUNCTION(BlueprintCallable)
+		bool IsAttack() { return (iBehaviorType & e_attack) == e_attack; }
+	UFUNCTION(BlueprintCallable)
+		void AttackOn() { iBehaviorType |= e_attack; }
+	UFUNCTION(BlueprintCallable)
 		void AttackOff() { if (IsAttack()) iBehaviorType ^= e_attack; }
-	// death
 	UFUNCTION(BlueprintCallable)
 		bool IsDieing() { return (iBehaviorType & e_dieing) == e_dieing; }
 	UFUNCTION(BlueprintCallable)
-		bool IsDied() { return (iBehaviorType & e_died) == e_died; }
-
-	UFUNCTION(BlueprintCallable)
 		void DieingOn() { iBehaviorType |= e_dieing; }
 	UFUNCTION(BlueprintCallable)
-		void DiedOn() { iBehaviorType |= e_died; }
-
-	UFUNCTION(BlueprintCallable)
 		void DieingOff() { if (IsDieing()) iBehaviorType ^= e_dieing; }
+	UFUNCTION(BlueprintCallable)
+		bool IsDied() { return (iBehaviorType & e_died) == e_died; }
+	UFUNCTION(BlueprintCallable)
+		void DiedOn() { iBehaviorType |= e_died; }
 	UFUNCTION(BlueprintCallable)
 		void DiedOff() { if (IsDied()) iBehaviorType ^= e_died; }
 	// move func
 	UFUNCTION(BlueprintCallable)
 		bool IsSeek() { return (iBehaviorType & e_seek) == e_seek; }
 	UFUNCTION(BlueprintCallable)
-		bool IsArrive() { return (iBehaviorType & e_arrive) == e_arrive; }
-	UFUNCTION(BlueprintCallable)
-		bool IsOffsetPursuit() { return (iBehaviorType & e_offsetpursuit) == e_offsetpursuit; }
-
-	UFUNCTION(BlueprintCallable)
 		void SeekOn() { iBehaviorType |= e_seek; }
-	UFUNCTION(BlueprintCallable)
-		void ArriveOn() { iBehaviorType |= e_arrive; }
-	UFUNCTION(BlueprintCallable)
-		void OffsetPursuitOn() { iBehaviorType |= e_offsetpursuit; }
-
 	UFUNCTION(BlueprintCallable)
 		void SeekOff() { if (IsSeek()) iBehaviorType ^= e_seek; }
 	UFUNCTION(BlueprintCallable)
+		bool IsArrive() { return (iBehaviorType & e_arrive) == e_arrive; }
+	UFUNCTION(BlueprintCallable)
+		void ArriveOn() { iBehaviorType |= e_arrive; }
+	UFUNCTION(BlueprintCallable)
 		void ArriveOff() { if (IsArrive()) iBehaviorType ^= e_arrive; }
+	UFUNCTION(BlueprintCallable)
+		bool IsOffsetPursuit() { return (iBehaviorType & e_offsetpursuit) == e_offsetpursuit; }
+	UFUNCTION(BlueprintCallable)
+		void OffsetPursuitOn() { iBehaviorType |= e_offsetpursuit; }
 	UFUNCTION(BlueprintCallable)
 		void OffsetPursuitOff() { if (IsOffsetPursuit()) iBehaviorType ^= e_offsetpursuit; }
 };
