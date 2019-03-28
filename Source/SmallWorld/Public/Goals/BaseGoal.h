@@ -20,7 +20,7 @@ public:
 	BaseGoal();
 	virtual ~BaseGoal();
 	
-	virtual int  Evaluate();
+	virtual float  Evaluate();
 	void	ClearAllTask();
 
 	virtual void Enter();
