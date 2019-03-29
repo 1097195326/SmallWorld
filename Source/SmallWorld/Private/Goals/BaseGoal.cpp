@@ -4,12 +4,28 @@
 BaseGoal::BaseGoal()
 {
 	mState = e_UnActive;
+	mCanChooseGoals.reserve(4);
 }
 BaseGoal::~BaseGoal()
 {
-
+	ClearAllGoal();
 }
+BaseGoal * BaseGoal::GetBestGoal()
+{
+	BaseGoal * bestGoal = nullptr;
+	float EvaluateValue = 0.f;
 
+	for (auto goal : mCanChooseGoals)
+	{
+		float temValue = goal->Evaluate();
+		if (temValue > EvaluateValue)
+		{
+			EvaluateValue = temValue;
+			bestGoal = goal;
+		}
+	}
+	return bestGoal;
+}
 float BaseGoal::Evaluate()
 {
 	return 0.f;
@@ -65,6 +81,14 @@ void BaseGoal::ClearAllTask()
 		mTaskQueun.front()->End();
 		mTaskQueun.pop();
 	}
+}
+void BaseGoal::ClearAllGoal()
+{
+	for (auto goal : mCanChooseGoals)
+	{
+		delete goal;
+	}
+	mCanChooseGoals.clear();
 }
 GoalState BaseGoal::GetState()
 {

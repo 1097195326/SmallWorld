@@ -1,12 +1,9 @@
 #pragma once
 #include "BaseGoal.h"
 
-class Fig_Defense_ll : public BaseGoal
+class Fig_FootmanGroup_lll : public BaseGoal
 {
 public:
-	Fig_Defense_ll();
-	~Fig_Defense_ll();
-	
 	virtual float  Evaluate()override;
 	virtual void Enter()override;
 	virtual GoalState Process()override;

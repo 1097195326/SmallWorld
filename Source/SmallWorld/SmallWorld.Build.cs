@@ -16,7 +16,9 @@ public class SmallWorld : ModuleRules
             "AIModule",
             "GameplayTasks",
             "NavigationSystem",
+            "Json",
             "GCore",
+
         });
 
         //PrivateDependencyModuleNames.AddRange(new string[] {  });
