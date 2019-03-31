@@ -7,7 +7,7 @@ enum BuildingType
     e_CityWall,
     e_CommandCenter,
     e_House
-}
+};
 
 
 class BaseBuilding : public DataR
