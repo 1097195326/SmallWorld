@@ -18,7 +18,8 @@ public class SmallWorld : ModuleRules
             "NavigationSystem",
             "Json",
             "GCore",
-
+            "ProceduralMesh",
+            "SlateUI"
         });
 
         //PrivateDependencyModuleNames.AddRange(new string[] {  });
@@ -26,7 +27,10 @@ public class SmallWorld : ModuleRules
         // Uncomment if you are using Slate UI
         PrivateDependencyModuleNames.AddRange(new string[] {
             "Slate",
-            "SlateCore"
+            "SlateCore",
+            "RenderCore",
+            "ShaderCore",
+            "RHI",
         });
 
         // Uncomment if you are using online features

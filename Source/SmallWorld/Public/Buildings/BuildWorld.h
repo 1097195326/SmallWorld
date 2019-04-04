@@ -3,7 +3,7 @@
 #include "BaseBuilding.h"
 
 
-class World : public BaseBuilding
+class BuildWorld : public BaseBuilding
 {
     
 public:
