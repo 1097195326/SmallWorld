@@ -1,19 +1,19 @@
 #pragma once
-#include "BaseBuilding.h"
+#include "BaseBuildingData.h"
 
 
-class House : public BaseBuilding
+class BarrackData : public BaseBuildingData
 {
 protected:
     
 public:
-    House();
-    ~House();
+	BarrackData();
+    ~BarrackData();
     
     
     virtual void Serialization(TSharedRef<TJsonWriter<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>> Writer) override;
     virtual void Deserialization(TSharedPtr<FJsonObject>  JsonObject) override;
-    
+
     
     
     

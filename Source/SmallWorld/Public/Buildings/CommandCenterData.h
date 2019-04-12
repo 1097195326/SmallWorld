@@ -1,14 +1,14 @@
 #pragma once
-#include "BaseBuilding.h"
+#include "BaseBuildingData.h"
 
 
-class CommandCenter : public BaseBuilding
+class CommandCenterData : public BaseBuildingData
 {
 protected:
     
 public:
-    CommandCenter();
-    ~CommandCenter();
+	CommandCenterData();
+    ~CommandCenterData();
     
     
     virtual void Serialization(TSharedRef<TJsonWriter<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>> Writer) override;

@@ -1,18 +1,23 @@
 #pragma once
 
-#include "CoreMinimal.h"
-#include "GameFramework/Actor.h"
-#include "StaticPlaneMeshComponent.h"
+#include "BaseBuildingActor.h"
+#include "BlockActor.h"
+#include "CityData.h"
 #include "CityActor.generated.h"
 
 UCLASS()
-class ACityActor : public AActor
+class ACityActor : public ABaseBuildingActor
 {
 	GENERATED_BODY()
 
+private:
+	vector<vector<ABlockActor*>> BlockMap;
+	CityData * mData;
+	int		CitySize;
 public:
 	ACityActor();
 
-	UStaticPlaneMeshComponent * PlaneMeshComponent;
+	void InitData(CityData * _data);
+
 
 };

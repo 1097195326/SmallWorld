@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Components/MeshComponent.h"
+#include "PrimitiveSceneProxy.h"
 #include "StaticPlaneMeshComponent.generated.h"
 
 

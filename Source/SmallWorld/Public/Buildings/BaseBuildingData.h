@@ -10,7 +10,7 @@ enum BuildingType
 };
 
 
-class BaseBuilding : public DataR
+class BaseBuildingData : public DataR
 {
 
 protected:

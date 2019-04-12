@@ -1,6 +1,6 @@
-#include "BaseBuilding.h"
+#include "BaseBuildingData.h"
 
-void BaseBuilding::Serialization(TSharedRef<TJsonWriter<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>> Writer)
+void BaseBuildingData::Serialization(TSharedRef<TJsonWriter<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>> Writer)
 {
 	Writer->WriteObjectStart("BaseBuilding");
 	Writer->WriteValue("Health", Health);
@@ -8,7 +8,7 @@ void BaseBuilding::Serialization(TSharedRef<TJsonWriter<TCHAR, TCondensedJsonPri
 
 	Writer->WriteObjectEnd();//BaseBuilding
 }
-void BaseBuilding::Deserialization(TSharedPtr<FJsonObject> JsonObject)
+void BaseBuildingData::Deserialization(TSharedPtr<FJsonObject> JsonObject)
 {
 	Health = JsonObject->GetNumberField("Health");
 	Level = JsonObject->GetIntegerField("Level");
