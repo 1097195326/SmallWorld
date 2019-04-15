@@ -39,3 +39,11 @@ FVector ABaseBuildingActor::GetXYRightTopPoint()
 {
 	return GetBuildingBound().Min + FVector(GetBuildingLength(),GetBuidlingWidth(),0);
 }
+void ABaseBuildingActor::SetIndex(FBuildingIndex _index)
+{
+	Index = _index;
+}
+FBuildingIndex ABaseBuildingActor::GetIndex()
+{
+	return Index;
+}

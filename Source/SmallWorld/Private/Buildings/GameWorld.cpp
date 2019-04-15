@@ -3,7 +3,7 @@
 
 GameWorld::GameWorld()
 {
-
+	CitySize = 2;
 }
 GameWorld::~GameWorld()
 {
@@ -28,13 +28,29 @@ void GameWorld::InitWithGameInstance(USmallWorldInstance * _GameInstance)
 }
 void GameWorld::BuildWorld()
 {
-	FTransform trans;
+
+	for (int x = 0; x < WorldSize; x++)
+	{
+		for (int y = 0; y < 1; y++)
+		{
+			FTransform trans;
+			ACityActor * CityActor = Cast<ACityActor>(UGameplayStatics::BeginDeferredActorSpawnFromClass(mGameInstance, ACityActor::StaticClass(), trans));
+			if (CityActor)
+			{
+				CityActor->SetIndex(FBuildingIndex(x, y));
+				UGameplayStatics::FinishSpawningActor(CityActor, trans);
+
+				CityMap[x][y] = CityActor;
+			}
+		}
+	}
+	/*FTransform trans;
 	ABlockActor * BlockActor = Cast<ABlockActor>(UGameplayStatics::BeginDeferredActorSpawnFromClass(mGameInstance, ABlockActor::StaticClass(), trans));
 	if (BlockActor)
 	{
 
 		UGameplayStatics::FinishSpawningActor(BlockActor, trans);
-		BlockActor->SetMesh();
-	}
+		
+	}*/
 
 }

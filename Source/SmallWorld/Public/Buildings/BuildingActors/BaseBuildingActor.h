@@ -14,10 +14,29 @@
 
 using namespace std;
 
+//USTRUCT()
+struct FBuildingIndex
+{
+	//GENERATED_BODY()
+	int X;
+	int Y;
+	FBuildingIndex() {}
+	FBuildingIndex(int _x, int _y) :X(_x), Y(_y)
+	{
+
+	}
+};
+static float TitleSize = 2500.f;
+static int	CitySize = 11;
+static int  WorldSize = 2;
+
+
 UCLASS()
 class ABaseBuildingActor : public AActor
 {
 	GENERATED_BODY()
+protected:
+	FBuildingIndex Index;
 
 public:
 	ABaseBuildingActor();
@@ -26,6 +45,9 @@ public:
 		UStaticMeshComponent * BaseMeshComponent;
 	UPROPERTY(VisibleDefaultsOnly, Category = BaseBuilding)
 		USkeletalMeshComponent * BaseSkeletalMeshComponent;
+
+	void SetIndex(FBuildingIndex _index);
+	FBuildingIndex GetIndex();
 
 	virtual FBox GetBuildingBound();
 	virtual float GetBuidlingWidth();

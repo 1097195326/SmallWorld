@@ -15,6 +15,7 @@ private:
 	vector<vector<ACityActor *>> CityMap;
 
 	USmallWorldInstance * mGameInstance;
+	
 public:
 	~GameWorld();
 

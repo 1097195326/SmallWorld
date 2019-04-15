@@ -13,7 +13,7 @@ class ACityActor : public ABaseBuildingActor
 private:
 	vector<vector<ABlockActor*>> BlockMap;
 	CityData * mData;
-	int		CitySize;
+
 public:
 	ACityActor();
 
