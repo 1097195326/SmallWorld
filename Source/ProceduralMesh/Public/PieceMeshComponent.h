@@ -2,24 +2,24 @@
 
 #include "Components/MeshComponent.h"
 #include "PrimitiveSceneProxy.h"
-#include "StaticPlaneMeshComponent.generated.h"
+#include "PieceMeshComponent.generated.h"
 
 
 UCLASS()
-class PROCEDURALMESH_API UStaticPlaneMeshComponent : public UMeshComponent
+class PROCEDURALMESH_API UPieceMeshComponent : public UMeshComponent
 {
 	GENERATED_BODY()
 
 public:
-	UStaticPlaneMeshComponent();
+	UPieceMeshComponent();
 
 	virtual FPrimitiveSceneProxy* CreateSceneProxy() override;
 };
 
-class FPlaneMeshComponentScenProxy : public FPrimitiveSceneProxy
+class FPieceMeshComponentScenProxy : public FPrimitiveSceneProxy
 {
 public:
-	FPlaneMeshComponentScenProxy(UPrimitiveComponent * Component);
+	FPieceMeshComponentScenProxy(UPrimitiveComponent * Component);
 
 	virtual uint32 GetMemoryFootprint() const override;
 	virtual void GetDynamicMeshElements(const TArray<const FSceneView *>& Views, const FSceneViewFamily& ViewFamily, uint32 VisibilityMap, class FMeshElementCollector& Collector) const override;

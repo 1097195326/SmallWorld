@@ -34,6 +34,8 @@ void UGAppInstance::PostInitProperties()
     
     FCoreDelegates::ApplicationWillEnterBackgroundDelegate.AddUObject(this, &UGAppInstance::ApplicationWillEnterBackground_Hander);
     FCoreDelegates::ApplicationHasEnteredForegroundDelegate.AddUObject(this, &UGAppInstance::ApplicationHasEnteredForeground_Hander);
+
+	On_Start();
 }
 void UGAppInstance::BeginDestroy()
 {

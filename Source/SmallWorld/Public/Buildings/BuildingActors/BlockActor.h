@@ -12,6 +12,7 @@ class ABlockActor : public ABaseBuildingActor
 public:
 	ABlockActor();
 	void InitData(BlockData * Data);
+	void SetMesh();
 
 private:
 	BlockData * mData;

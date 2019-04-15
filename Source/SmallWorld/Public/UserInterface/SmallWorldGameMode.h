@@ -8,6 +8,9 @@ class ASmallWorldGameMode : public AGameModeBase
 {
 	GENERATED_BODY()
 public:
+	ASmallWorldGameMode();
+
+	virtual void StartPlay() override;
 	
 };
 
