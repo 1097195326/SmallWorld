@@ -3,7 +3,7 @@
 
 GameWorld::GameWorld()
 {
-	CitySize = 2;
+	
 }
 GameWorld::~GameWorld()
 {
@@ -63,6 +63,7 @@ ACityActor *  GameWorld::BuildCity(int _x, int _y)
 	{
 		CityActor->SetIndex(FBuildingIndex(_x, _y));
 		UGameplayStatics::FinishSpawningActor(CityActor, trans);
+		
 		return CityActor;
 	}
 	return nullptr;

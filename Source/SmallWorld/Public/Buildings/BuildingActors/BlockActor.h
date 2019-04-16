@@ -13,6 +13,8 @@ class ABlockActor : public ABaseBuildingActor
 
 public:
 	ABlockActor();
+	virtual void On_Init() override;
+
 	void InitData(BlockData * Data);
 
 	void SetCity(ACityActor * _City);

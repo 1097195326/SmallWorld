@@ -17,9 +17,23 @@ ABlockActor::ABlockActor()
 	
 //#ifdef ZHX_BUG
 	
-	static ConstructorHelpers::FObjectFinder<UStaticMesh> BlockMesh(*GrassCentreDirtTile);
-	BaseMeshComponent->SetStaticMesh(BlockMesh.Object);
+	
 //#endif // ZHX_BUG
+
+}
+void ABlockActor::On_Init()
+{
+	FString TitlePath;
+	if (mCity->IsInWorld())
+	{
+		TitlePath = GrassCentreDirtTile;
+	}
+	else
+	{
+		TitlePath = GrassTile;
+	}
+	UStaticMesh * mesh = LoadObject<UStaticMesh>(this, *TitlePath);
+	BaseMeshComponent->SetStaticMesh(mesh);
 
 }
 void ABlockActor::SetCity(ACityActor * _City)
