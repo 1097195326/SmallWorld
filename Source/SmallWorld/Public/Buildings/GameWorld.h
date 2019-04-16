@@ -14,15 +14,14 @@ private:
 	// 
 	vector<vector<ACityActor *>> CityMap;
 
-	USmallWorldInstance * mGameInstance;
-	
 public:
 	~GameWorld();
 
 	static GameWorld * GetInstance();
-	void InitWithGameInstance(USmallWorldInstance * _GameInstance);
 	void BuildWorld();
 
 
-
+private:
+	bool IsInWorld(int _index);
+	ACityActor *  BuildCity(int _x, int _y);
 };

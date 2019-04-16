@@ -4,6 +4,8 @@
 #include "BlockData.h"
 #include "BlockActor.generated.h"
 
+class ACityActor;
+
 UCLASS()
 class ABlockActor : public ABaseBuildingActor
 {
@@ -12,10 +14,17 @@ class ABlockActor : public ABaseBuildingActor
 public:
 	ABlockActor();
 	void InitData(BlockData * Data);
+
+	void SetCity(ACityActor * _City);
+	ACityActor * GetCity();
+
 	void SetMesh();
+
+	virtual bool IsInWorld() override;
 
 private:
 	BlockData * mData;
+	ACityActor * mCity;
 
 	FString GrassCentreDirtTile;
 	FString GrassFullDirtTiles;

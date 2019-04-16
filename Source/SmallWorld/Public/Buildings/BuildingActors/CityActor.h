@@ -17,6 +17,9 @@ private:
 public:
 	ACityActor();
 
+	virtual void On_Init() override;
+	virtual void On_Delete() override;
+
 	void InitData(CityData * _data);
 
 

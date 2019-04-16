@@ -1,5 +1,6 @@
 #include "BlockActor.h"
-#include "PieceMeshComponent.h"
+#include "CityActor.h"
+
 
 ABlockActor::ABlockActor()
 {
@@ -10,14 +11,24 @@ ABlockActor::ABlockActor()
 	GrassToDirtTile = "/Game/CastlePack/Meshes/SM_GrassToDirtTile";
 	DirtTile = "/Game/CastlePack/Meshes/SM_DirtTile";
 
+	mCity = nullptr;
+
 	RootComponent = BaseMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("BlockMeshComponent"));
 	
 //#ifdef ZHX_BUG
 	
-	static ConstructorHelpers::FObjectFinder<UStaticMesh> BlockMesh(TEXT("/Game/CastlePack/Meshes/SM_GrassTile"));
+	static ConstructorHelpers::FObjectFinder<UStaticMesh> BlockMesh(*GrassCentreDirtTile);
 	BaseMeshComponent->SetStaticMesh(BlockMesh.Object);
 //#endif // ZHX_BUG
 
+}
+void ABlockActor::SetCity(ACityActor * _City)
+{
+	mCity = _City;
+}
+ACityActor * ABlockActor::GetCity()
+{
+	return mCity;
 }
 void ABlockActor::SetMesh()
 {
@@ -30,4 +41,12 @@ void ABlockActor::InitData(BlockData * Data)
 
 	BaseMeshComponent->SetStaticMesh(BlockMesh.Object);
 
+}
+bool ABlockActor::IsInWorld()
+{
+	if (mCity)
+	{
+		mCity->IsInWorld();
+	}
+	return false;
 }

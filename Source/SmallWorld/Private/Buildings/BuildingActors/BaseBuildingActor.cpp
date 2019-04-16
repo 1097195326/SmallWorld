@@ -6,7 +6,24 @@ ABaseBuildingActor::ABaseBuildingActor()
 	BaseMeshComponent = nullptr;
 	BaseSkeletalMeshComponent = nullptr;
 }
+void ABaseBuildingActor::PostInitializeComponents()
+{
+	Super::PostInitializeComponents();
+	On_Init();
+}
+void ABaseBuildingActor::BeginDestroy()
+{
+	Super::BeginDestroy();
+	On_Delete();
+}
+void ABaseBuildingActor::On_Init()
+{
 
+}
+void ABaseBuildingActor::On_Delete()
+{
+
+}
 FBox ABaseBuildingActor::GetBuildingBound()
 {
 	return GetComponentsBoundingBox(true);
@@ -22,6 +39,12 @@ float ABaseBuildingActor::GetBuildingLength()
 float ABaseBuildingActor::GetBuildingHeight()
 {
 	return GetBuildingBound().GetSize().Z;
+}
+FVector ABaseBuildingActor::GetCenterPoint()
+{
+	FVector Center, Extent;
+	GetBuildingBound().GetCenterAndExtents(Center,Extent);
+	return Center;
 }
 FVector ABaseBuildingActor::GetXYLeftBottomPoint()
 {
@@ -41,9 +64,17 @@ FVector ABaseBuildingActor::GetXYRightTopPoint()
 }
 void ABaseBuildingActor::SetIndex(FBuildingIndex _index)
 {
-	Index = _index;
+	mIndex = _index;
 }
 FBuildingIndex ABaseBuildingActor::GetIndex()
 {
-	return Index;
+	return mIndex;
+}
+bool ABaseBuildingActor::IsInWorld()
+{
+	return IsInWorld(mIndex.X) && IsInWorld(mIndex.Y);
+}
+bool ABaseBuildingActor::IsInWorld(int _index)
+{
+	return _index >= BoundSize && _index <= WorldSize;
 }

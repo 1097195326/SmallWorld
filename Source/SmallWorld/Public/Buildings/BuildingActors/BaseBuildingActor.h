@@ -8,6 +8,7 @@
 #include "Components/SkeletalMeshComponent.h"
 #include "Components/MeshComponent.h"
 #include "Kismet/GameplayStatics.h"
+#include "SmallWorldInstance.h"
 #include <vector>
 
 #include "BaseBuildingActor.generated.h"
@@ -27,8 +28,10 @@ struct FBuildingIndex
 	}
 };
 static float TitleSize = 2500.f;
-static int	CitySize = 11;
+static int	CitySize = 3;
 static int  WorldSize = 2;
+
+static int  BoundSize = 1;
 
 
 UCLASS()
@@ -36,10 +39,15 @@ class ABaseBuildingActor : public AActor
 {
 	GENERATED_BODY()
 protected:
-	FBuildingIndex Index;
-
+	FBuildingIndex mIndex;
+	
 public:
 	ABaseBuildingActor();
+	virtual void PostInitializeComponents() override;
+	virtual void BeginDestroy() override;
+
+	virtual void On_Init();
+	virtual void On_Delete();
 
 	UPROPERTY(VisibleDefaultsOnly, Category = BaseBuilding)
 		UStaticMeshComponent * BaseMeshComponent;
@@ -48,12 +56,16 @@ public:
 
 	void SetIndex(FBuildingIndex _index);
 	FBuildingIndex GetIndex();
+	
+	virtual bool IsInWorld();
+ 	virtual bool IsInWorld(int _index);
 
 	virtual FBox GetBuildingBound();
 	virtual float GetBuidlingWidth();
 	virtual float GetBuildingHeight();
 	virtual float GetBuildingLength();
 
+	virtual FVector GetCenterPoint();
 	virtual FVector GetXYLeftBottomPoint();
 	virtual FVector GetXYLeftTopPoint();
 	virtual FVector GetXYRightBottomPoint();

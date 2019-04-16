@@ -8,7 +8,8 @@
 ASmallWorldGameMode::ASmallWorldGameMode()
 {
 	PlayerControllerClass = AUserController::StaticClass();
-	DefaultPawnClass = AUserPawn::StaticClass();
+	//DefaultPawnClass = AUserPawn::StaticClass();
+	//DefaultPawnClass = ADefaultPawn::StaticClass();
 	HUDClass = AUserHUD::StaticClass();
 
 }

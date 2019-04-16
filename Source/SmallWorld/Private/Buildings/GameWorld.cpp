@@ -22,35 +22,52 @@ GameWorld * GameWorld::GetInstance()
 	static GameWorld world;
 	return &world;
 }
-void GameWorld::InitWithGameInstance(USmallWorldInstance * _GameInstance)
-{
-	mGameInstance = _GameInstance;
-}
 void GameWorld::BuildWorld()
 {
-
-	for (int x = 0; x < WorldSize; x++)
+	for (int x = 0; x < WorldSize + BoundSize * 2 ; x++)
 	{
-		for (int y = 0; y < 1; y++)
+		if (IsInWorld(x))
 		{
-			FTransform trans;
-			ACityActor * CityActor = Cast<ACityActor>(UGameplayStatics::BeginDeferredActorSpawnFromClass(mGameInstance, ACityActor::StaticClass(), trans));
-			if (CityActor)
+			vector<ACityActor*> CityList;
+			for (int y = 0; y < WorldSize + BoundSize * 2; y++)
 			{
-				CityActor->SetIndex(FBuildingIndex(x, y));
-				UGameplayStatics::FinishSpawningActor(CityActor, trans);
-
-				CityMap[x][y] = CityActor;
+				if (IsInWorld(y))
+				{
+					ACityActor * CityActor = BuildCity(x, y);
+					if (CityActor)
+					{
+						CityList.push_back(CityActor);
+					}
+				}
+				else
+				{
+					BuildCity(x, y);
+				}
+			}
+			CityMap.push_back(CityList);
+		}
+		else
+		{
+			for (int y = 0; y < WorldSize + BoundSize * 2; y++)
+			{
+				BuildCity(x, y);
 			}
 		}
 	}
-	/*FTransform trans;
-	ABlockActor * BlockActor = Cast<ABlockActor>(UGameplayStatics::BeginDeferredActorSpawnFromClass(mGameInstance, ABlockActor::StaticClass(), trans));
-	if (BlockActor)
+}
+ACityActor *  GameWorld::BuildCity(int _x, int _y)
+{
+	FTransform trans(FVector(_x * CitySize * TitleSize + (CitySize * TitleSize * 0.5), _y * CitySize * TitleSize + (CitySize * TitleSize * 0.5), 0));
+	ACityActor * CityActor = Cast<ACityActor>(UGameplayStatics::BeginDeferredActorSpawnFromClass(SWI, ACityActor::StaticClass(), trans));
+	if (CityActor)
 	{
-
-		UGameplayStatics::FinishSpawningActor(BlockActor, trans);
-		
-	}*/
-
+		CityActor->SetIndex(FBuildingIndex(_x, _y));
+		UGameplayStatics::FinishSpawningActor(CityActor, trans);
+		return CityActor;
+	}
+	return nullptr;
+}
+bool GameWorld::IsInWorld(int _index)
+{
+	return _index >= BoundSize && _index <= WorldSize;
 }

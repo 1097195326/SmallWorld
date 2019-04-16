@@ -4,6 +4,8 @@
 
 #include "SmallWorldInstance.generated.h"
 
+#define  SWI USmallWorldInstance::GetInstance()
+
 UCLASS()
 class USmallWorldInstance : public UGAppInstance
 {

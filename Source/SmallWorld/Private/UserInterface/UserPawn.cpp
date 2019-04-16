@@ -31,7 +31,7 @@ AUserPawn::AUserPawn(const FObjectInitializer& ObjectInitializer)
 	armComponent->TargetArmLength = 800.f;
 	armComponent->bEnableCameraLag = true;
 	armComponent->CameraLagSpeed = 6.f;
-	armComponent->RelativeRotation = FRotator(-45.f, 0.f, 0.f);
+	armComponent->RelativeRotation = FRotator(-10.f, 0.f, 0.f);
 	armComponent->bDoCollisionTest = false;
 
 	cameraComponent = CreateDefaultSubobject<UCameraComponent>(TEXT("CameraComponent"));

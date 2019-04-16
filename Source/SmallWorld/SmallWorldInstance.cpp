@@ -10,7 +10,6 @@ USmallWorldInstance::USmallWorldInstance()
 void USmallWorldInstance::On_Init()
 {
 	m_Instance = this;
-	GameWorld::GetInstance()->InitWithGameInstance(this);
 }
 void USmallWorldInstance::On_Start()
 {
