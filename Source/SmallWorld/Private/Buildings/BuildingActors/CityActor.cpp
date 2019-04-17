@@ -3,11 +3,12 @@
 
 ACityActor::ACityActor()
 {
-	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("RootComponent"));
-		
+	RootComponent = CollisionBox = CreateDefaultSubobject<UBoxComponent>(TEXT("CollisionBox"));
+	CollisionBox->SetHiddenInGame(false);
+	CollisionBox->ShapeColor = FColor(0,255,0,255);
+
 	BaseMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("CityMeshComponent"));
 	BaseMeshComponent->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
-	
 	BaseMeshComponent->SetRelativeScale3D(FVector(0.1f));
 
 }
@@ -17,6 +18,9 @@ void ACityActor::InitData(CityData * _data)
 }
 void ACityActor::On_Init()
 {
+	float CityExtent = CitySize * TitleSize * 0.5f;
+	CollisionBox->SetBoxExtent(FVector(CityExtent, CityExtent, CityExtent));
+
 	float CityXOffSet = mIndex.X * CitySize * TitleSize;
 	float CityYOffSet = mIndex.Y * CitySize * TitleSize;
 

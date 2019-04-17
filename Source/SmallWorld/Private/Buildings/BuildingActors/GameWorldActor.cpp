@@ -1,0 +1,17 @@
+#include "GameWorldActor.h"
+
+
+AGameWorldActor::AGameWorldActor()
+{
+	RootComponent = CollisionBox = CreateDefaultSubobject<UBoxComponent>(TEXT("CollisionBox"));
+	CollisionBox->SetHiddenInGame(false);
+	CollisionBox->ShapeColor = FColor(0, 0, 255, 255);
+
+}
+void AGameWorldActor::On_Init()
+{
+	float Extent = WorldSize * CitySize * TitleSize * 0.5;
+
+	CollisionBox->SetBoxExtent(FVector(Extent, Extent, Extent));
+
+}

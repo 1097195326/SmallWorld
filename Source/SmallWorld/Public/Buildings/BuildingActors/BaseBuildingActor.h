@@ -6,6 +6,7 @@
 #include "Engine/StaticMesh.h"
 #include "Components/StaticMeshComponent.h"
 #include "Components/SkeletalMeshComponent.h"
+#include "Components/BoxComponent.h"
 #include "Components/MeshComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "SmallWorldInstance.h"

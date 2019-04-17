@@ -13,8 +13,10 @@ ABlockActor::ABlockActor()
 
 	mCity = nullptr;
 
-	RootComponent = BaseMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("BlockMeshComponent"));
-	
+	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("RootComponent"));
+	BaseMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("BlockMeshComponent"));
+	BaseMeshComponent->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
+
 //#ifdef ZHX_BUG
 	
 	

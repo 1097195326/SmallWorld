@@ -14,6 +14,9 @@ private:
 	vector<vector<ABlockActor*>> BlockMap;
 	CityData * mData;
 
+	UPROPERTY(VisibleDefaultsOnly)
+		UBoxComponent * CollisionBox;
+
 public:
 	ACityActor();
 
