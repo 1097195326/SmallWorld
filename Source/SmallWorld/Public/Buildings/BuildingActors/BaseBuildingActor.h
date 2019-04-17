@@ -30,7 +30,7 @@ struct FBuildingIndex
 };
 static float TitleSize = 2500.f;
 static int	CitySize = 3;
-static int  WorldSize = 2;
+static int  WorldSize = 1;
 
 static int  BoundSize = 1;
 

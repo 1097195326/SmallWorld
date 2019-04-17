@@ -1,6 +1,6 @@
 #include "GameWorld.h"
 #include "Kismet/GameplayStatics.h"
-#include "GameWorldActor.h"
+
 
 
 GameWorld::GameWorld()
@@ -26,13 +26,14 @@ GameWorld * GameWorld::GetInstance()
 }
 void GameWorld::BuildWorld()
 {
+	// Build Gameworld Actor
 	FTransform trans(FVector((WorldSize + BoundSize * 2) * CitySize * TitleSize * 0.5, (WorldSize + BoundSize * 2) * CitySize * TitleSize * 0.5, 0));
-	AGameWorldActor * GameWorldActor = Cast<AGameWorldActor>(UGameplayStatics::BeginDeferredActorSpawnFromClass(SWI, AGameWorldActor::StaticClass(), trans));
+	GameWorldActor = Cast<AGameWorldActor>(UGameplayStatics::BeginDeferredActorSpawnFromClass(SWI, AGameWorldActor::StaticClass(), trans));
 	if (GameWorldActor)
 	{
 		UGameplayStatics::FinishSpawningActor(GameWorldActor, trans);
 	}
-
+	// Build Cities
 	for (int x = 0; x < WorldSize + BoundSize * 2 ; x++)
 	{
 		if (IsInWorld(x))

@@ -2,7 +2,7 @@
 
 #include "CityActor.h"
 #include "SmallWorldInstance.h"
-
+#include "GameWorldActor.h"
 
 class GameWorld
 {
@@ -13,6 +13,7 @@ private:
 
 	// 
 	vector<vector<ACityActor *>> CityMap;
+	AGameWorldActor * GameWorldActor;
 
 public:
 	~GameWorld();
