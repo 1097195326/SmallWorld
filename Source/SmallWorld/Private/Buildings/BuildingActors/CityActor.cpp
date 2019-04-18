@@ -54,3 +54,24 @@ void ACityActor::On_Delete()
 {
 
 }
+
+FBuildingIndex ACityActor::GetCenterIndex()
+{
+	return FBuildingIndex(CitySize / 2, CitySize / 2);
+}
+FBuildingIndex ACityActor::GetXYLeftBottomIndex()
+{
+	return FBuildingIndex(0, 0);
+}
+FBuildingIndex ACityActor::GetXYLeftTopIndex()
+{
+	return FBuildingIndex(CitySize - 1, 0);
+}
+FBuildingIndex ACityActor::GetXYRightBottomIndex()
+{
+	return FBuildingIndex(0, CitySize -1);
+}
+FBuildingIndex ACityActor::GetXYRightTopIndex()
+{
+	return FBuildingIndex(CitySize - 1, CitySize - 1);
+}

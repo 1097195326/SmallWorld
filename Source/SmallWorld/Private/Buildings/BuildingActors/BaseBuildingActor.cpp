@@ -78,3 +78,23 @@ bool ABaseBuildingActor::IsInWorld(int _index)
 {
 	return _index >= BoundSize && _index <= WorldSize;
 }
+FBuildingIndex ABaseBuildingActor::GetCenterIndex()
+{
+	return FBuildingIndex();
+}
+FBuildingIndex ABaseBuildingActor::GetXYLeftBottomIndex()
+{
+	return FBuildingIndex();
+}
+FBuildingIndex ABaseBuildingActor::GetXYLeftTopIndex()
+{
+	return FBuildingIndex();
+}
+FBuildingIndex ABaseBuildingActor::GetXYRightBottomIndex()
+{
+	return FBuildingIndex();
+}
+FBuildingIndex ABaseBuildingActor::GetXYRightTopIndex()
+{
+	return FBuildingIndex();
+}

@@ -6,6 +6,8 @@
 
 class ACityActor;
 
+
+
 UCLASS()
 class ABlockActor : public ABaseBuildingActor
 {

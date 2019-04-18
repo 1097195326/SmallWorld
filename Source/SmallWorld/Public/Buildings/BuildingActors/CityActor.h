@@ -25,5 +25,9 @@ public:
 
 	void InitData(CityData * _data);
 
-
+	virtual FBuildingIndex GetCenterIndex() override;
+	virtual FBuildingIndex GetXYLeftBottomIndex() override;
+	virtual FBuildingIndex GetXYLeftTopIndex() override;
+	virtual FBuildingIndex GetXYRightBottomIndex() override;
+	virtual FBuildingIndex GetXYRightTopIndex() override;
 };
