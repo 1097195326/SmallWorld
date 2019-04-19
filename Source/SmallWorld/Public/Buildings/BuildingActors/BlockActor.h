@@ -18,6 +18,7 @@ enum BlockTitleType
 
 enum CityOrientation
 {
+	O_None,
 	// OutControll 
 	CornerOutControll_LeftBottom,
 	CornerOutControll_LeftTop,
@@ -25,9 +26,9 @@ enum CityOrientation
 	CornerOutControll_RightTop,
 
 	CenterOutControll_Left,
-	CornerOutControll_Right,
-	CornerOutControll_Top,
-	CornerOutControll_Bottom,
+	CenterOutControll_Right,
+	CenterOutControll_Top,
+	CenterOutControll_Bottom,
 
 	OutSkirtOutControll_LeftBottom,
 	OutSkirtOutControll_LeftTop,
@@ -83,7 +84,7 @@ enum CityOrientation
 };
 enum FillType
 {
-	None,
+	F_None,
 	Tree,
 	Stone,
 	Money,
@@ -140,5 +141,5 @@ public:
 	virtual bool IsInWorld() override;
 
 private:
-	
+	FString GetTileString();
 };

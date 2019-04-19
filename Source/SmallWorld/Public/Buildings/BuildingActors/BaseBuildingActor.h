@@ -28,7 +28,7 @@ struct FBuildingIndex
 
 	}
 };
-static int  BoundSize = 1;
+static int  BoundSize = 0;
 static int  WorldSize = 1;
 static int	CitySize = 15;
 static int  CastleControllSize = 11;

@@ -24,7 +24,7 @@ void ABlockActor::On_Init()
 	FString TitlePath;
 	if (mCity->IsInWorld())
 	{
-		TitlePath = GrassCentreDirtTile;
+		TitlePath = GetTileString();
 	}
 	else
 	{
@@ -32,11 +32,96 @@ void ABlockActor::On_Init()
 	}
 	UStaticMesh * mesh = LoadObject<UStaticMesh>(this, *TitlePath);
 	BaseMeshComponent->SetStaticMesh(mesh);
+}
+FString ABlockActor::GetTileString()
+{
+	FString tileStr;
+	switch (mCityOrientation)
+	{
+	case O_None:
+	case CornerOutControll_LeftBottom:
+	case CornerOutControll_LeftTop:
+	case CornerOutControll_RightBottom:
+	case CornerOutControll_RightTop:
+		tileStr = GrassToDirtEdgeTile;
+		break;
+	case CenterOutControll_Left:
+	case CenterOutControll_Right:
+	case CenterOutControll_Top:
+	case CenterOutControll_Bottom:
+		tileStr = DirtTile;
+		break;
+	case OutSkirtOutControll_LeftBottom:
+	case OutSkirtOutControll_LeftTop:
+	case OutSkirtOutControll_RightBottom:
+	case OutSkirtOutControll_RightTop:
+	case OutSkirtOutControll_TopLeft:
+	case OutSkirtOutControll_TopRight:
+	case OutSkirtOutControll_BottomLeft:
+	case OutSkirtOutControll_BottomRight:
+		tileStr = GrassToDirtEdgeTile;
+		break;
+	case FarmOutControll_LeftBottom:
+	case FarmOutControll_LeftTop:
+	case FarmOutControll_RightBottom:
+	case FarmOutControll_RightTop:
+	case FarmOutControll_TopLeft:
+	case FarmOutControll_TopRight:
+	case FarmOutControll_BottomLeft:
+	case FarmOutControll_BottomRight:
+		tileStr = GrassFullDirtTiles;
+		break;
+	case CornerControll_LeftBottom:
+	case CornerControll_LeftTop:
+	case CornerControll_RightBottom:
+	case CornerControll_RightTop:
+		tileStr = GrassCentreDirtTile;
+		break;
+	case CenterControll_Left:
+	case CenterControll_Right:
+	case CenterControll_Top:
+	case CenterControll_Bottom:
+		tileStr = DirtTile;
+		break;
+	case FarmControll_LeftBottom:
+	case FarmControll_LeftTop:
+	case FarmControll_RightBottom:
+	case FarmControll_RightTop:
+	case FarmControll_TopLeft:
+	case FarmControll_TopRight:
+	case FarmControll_BottomLeft:
+	case FarmControll_BottomRight:
+	case CornerCastle_LeftBottom:
+	case CornerCastle_LeftTop:
+	case CornerCastle_RightBottom:
+	case CornerCastle_RightTop:
+		tileStr = GrassFullDirtTiles;
+		break;
+	case CenterCastle_Left:
+	case CenterCastle_Right:
+	case CenterCastle_Top:
+	case CenterCastle_Bottom:
+		tileStr = DirtTile;
+		break;
+	case CityCenter:
+	case CenterOfCenter:
+		tileStr = GrassCentreDirtTile;
+		break;
+	default:
+		tileStr = GrassTile;
+		break;
+	}
 
-	
+	return tileStr;
+}
+void ABlockActor::InitData(BlockData * Data)
+{
+	mData = Data;
+	static ConstructorHelpers::FObjectFinder<UStaticMesh> BlockMesh(TEXT(""));
+
+	BaseMeshComponent->SetStaticMesh(BlockMesh.Object);
 
 }
-
 void ABlockActor::SetTileType(BlockTitleType _type)
 {
 	mTitleType = _type;
@@ -48,7 +133,7 @@ BlockTitleType ABlockActor::GetTileType()
 }
 void ABlockActor::SetOrientation(CityOrientation _orientation)
 {
-	mCityOrientation = _orientation; 
+	mCityOrientation = _orientation;
 }
 CityOrientation ABlockActor::GetOrientation()
 {
@@ -61,18 +146,6 @@ void ABlockActor::SetCity(ACityActor * _City)
 ACityActor * ABlockActor::GetCity()
 {
 	return mCity;
-}
-void ABlockActor::SetMesh()
-{
-	
-}
-void ABlockActor::InitData(BlockData * Data)
-{
-	mData = Data;
-	static ConstructorHelpers::FObjectFinder<UStaticMesh> BlockMesh(TEXT(""));
-
-	BaseMeshComponent->SetStaticMesh(BlockMesh.Object);
-
 }
 bool ABlockActor::IsInWorld()
 {
