@@ -17,10 +17,6 @@ ABlockActor::ABlockActor()
 	BaseMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("BlockMeshComponent"));
 	BaseMeshComponent->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
 
-//#ifdef ZHX_BUG
-	
-	
-//#endif // ZHX_BUG
 
 }
 void ABlockActor::On_Init()
@@ -37,6 +33,26 @@ void ABlockActor::On_Init()
 	UStaticMesh * mesh = LoadObject<UStaticMesh>(this, *TitlePath);
 	BaseMeshComponent->SetStaticMesh(mesh);
 
+	
+
+}
+
+void ABlockActor::SetTileType(BlockTitleType _type)
+{
+	mTitleType = _type;
+
+}
+BlockTitleType ABlockActor::GetTileType()
+{
+	return mTitleType;
+}
+void ABlockActor::SetOrientation(CityOrientation _orientation)
+{
+	mCityOrientation = _orientation; 
+}
+CityOrientation ABlockActor::GetOrientation()
+{
+	return mCityOrientation;
 }
 void ABlockActor::SetCity(ACityActor * _City)
 {

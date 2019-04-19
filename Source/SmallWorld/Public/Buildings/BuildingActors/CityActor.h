@@ -30,4 +30,7 @@ public:
 	virtual FBuildingIndex GetXYLeftTopIndex() override;
 	virtual FBuildingIndex GetXYRightBottomIndex() override;
 	virtual FBuildingIndex GetXYRightTopIndex() override;
+
+private:
+	CityOrientation CalCulateOrientation(int _x,int _y);
 };
