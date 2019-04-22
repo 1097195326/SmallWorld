@@ -31,16 +31,29 @@ struct FBuildingIndex
 enum BuildingDirection
 {
 	Dir_None,
-	Dir_Corner_LeftBottom,
-	Dir_Corner_LeftTop,
-	Dir_Corner_RightBottom,
-	Dir_Corner_RightTop,
+	
+    Dir_Corner_City_LeftBottom,
+	Dir_Corner_City_LeftTop,
+	Dir_Corner_City_RightBottom,
+	Dir_Corner_City_RightTop,
 
-	Dir_Left,
-	Dir_Right,
-	Dir_Top,
-	Dir_Bottom,
-	Dir_Center,
+	Dir_CityEdge_Left,
+	Dir_CityEdge_Right,
+	Dir_CityEdge_Top,
+	Dir_CityEdge_Bottom,
+    
+    Dir_Corner_Castle_LeftBottom,
+    Dir_Corner_Castle_LeftTop,
+    Dir_Corner_Castle_RightBottom,
+    Dir_Corner_Castle_RightTop,
+    
+    Dir_CastleEdge_Left,
+    Dir_CastleEdge_Right,
+    Dir_CastleEdge_Top,
+    Dir_CastleEdge_Bottom,
+    
+    
+	Dir_City_Center,
 
 };
 static int  BoundSize = 0;
