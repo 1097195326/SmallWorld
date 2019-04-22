@@ -28,6 +28,21 @@ struct FBuildingIndex
 
 	}
 };
+enum BuildingDirection
+{
+	Dir_None,
+	Dir_Corner_LeftBottom,
+	Dir_Corner_LeftTop,
+	Dir_Corner_RightBottom,
+	Dir_Corner_RightTop,
+
+	Dir_Left,
+	Dir_Right,
+	Dir_Top,
+	Dir_Bottom,
+	Dir_Center,
+
+};
 static int  BoundSize = 0;
 static int  WorldSize = 1;
 static int	CitySize = 15;
@@ -45,7 +60,8 @@ class ABaseBuildingActor : public AActor
 	GENERATED_BODY()
 protected:
 	FBuildingIndex mIndex;
-	
+	BuildingDirection mDirection;
+
 public:
 	ABaseBuildingActor();
 	virtual void PostInitializeComponents() override;
@@ -58,6 +74,11 @@ public:
 		UStaticMeshComponent * BaseMeshComponent;
 	UPROPERTY(VisibleDefaultsOnly, Category = BaseBuilding)
 		USkeletalMeshComponent * BaseSkeletalMeshComponent;
+
+	void SetDirection(BuildingDirection _dir);
+	BuildingDirection GetDirction();
+
+	FRotator DirectionRotation();
 
 	void SetIndex(FBuildingIndex _index);
 	FBuildingIndex GetIndex();

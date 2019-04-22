@@ -5,6 +5,8 @@ ABaseBuildingActor::ABaseBuildingActor()
 {
 	BaseMeshComponent = nullptr;
 	BaseSkeletalMeshComponent = nullptr;
+	mDirection = Dir_None;
+
 }
 void ABaseBuildingActor::PostInitializeComponents()
 {
@@ -61,6 +63,51 @@ FVector ABaseBuildingActor::GetXYRightBottomPoint()
 FVector ABaseBuildingActor::GetXYRightTopPoint()
 {
 	return GetBuildingBound().Min + FVector(GetBuildingLength(),GetBuidlingWidth(),0);
+}
+void ABaseBuildingActor::SetDirection(BuildingDirection _dir)
+{
+	mDirection = _dir;
+}
+BuildingDirection ABaseBuildingActor::GetDirction()
+{
+	return mDirection;
+}
+FRotator ABaseBuildingActor::DirectionRotation()
+{
+	FRotator Rotator(ForceInit);
+	switch (mDirection)
+	{
+	case Dir_None:
+		break;
+	case Dir_Corner_LeftBottom:
+		Rotator.Yaw = 90.f;
+		break;
+	case Dir_Corner_LeftTop:
+		break;
+	case Dir_Corner_RightBottom:
+		Rotator.Yaw = 180.f;
+		break;
+	case Dir_Corner_RightTop:
+		Rotator.Yaw = -90.f;
+		break;
+	case Dir_Left:
+		Rotator.Yaw = 90.f;
+		break;
+	case Dir_Right:
+		Rotator.Yaw = -90.f;
+		break;
+	case Dir_Top:
+		break;
+	case Dir_Bottom:
+		Rotator.Yaw = 180.f;
+		break;
+	case Dir_Center:
+		break;
+	default:
+		break;
+	}
+
+	return Rotator;
 }
 void ABaseBuildingActor::SetIndex(FBuildingIndex _index)
 {

@@ -33,4 +33,5 @@ public:
 
 private:
 	CityOrientation CalCulateOrientation(int _x,int _y);
+	//void BuidCityEdge(int _x, int _y);
 };
