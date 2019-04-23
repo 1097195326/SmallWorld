@@ -38,6 +38,7 @@ void ACityActor::On_Init()
 				if (IsInWorld())
 				{
 					BlockActor->SetOrientation(CalCulateOrientation(x, y));
+
 				}
 				BlockList.push_back(BlockActor);
 				UGameplayStatics::FinishSpawningActor(BlockActor, trans);

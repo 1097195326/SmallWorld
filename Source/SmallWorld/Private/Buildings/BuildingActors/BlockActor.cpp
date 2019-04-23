@@ -32,6 +32,10 @@ void ABlockActor::On_Init()
 	}
 	UStaticMesh * mesh = LoadObject<UStaticMesh>(this, *TitlePath);
 	BaseMeshComponent->SetStaticMesh(mesh);
+	if (mDirection != Dir_None)
+	{
+		BaseMeshComponent->SetRelativeRotation(DirectionRotation());
+	}
 }
 FString ABlockActor::GetTileString()
 {
@@ -43,14 +47,10 @@ FString ABlockActor::GetTileString()
 	case CornerOutControll_LeftTop:
 	case CornerOutControll_RightBottom:
 	case CornerOutControll_RightTop:
-		tileStr = GrassToDirtEdgeTile;
-		break;
 	case CenterOutControll_Left:
 	case CenterOutControll_Right:
 	case CenterOutControll_Top:
 	case CenterOutControll_Bottom:
-		tileStr = DirtTile;
-		break;
 	case OutSkirtOutControll_LeftBottom:
 	case OutSkirtOutControll_LeftTop:
 	case OutSkirtOutControll_RightBottom:
@@ -59,8 +59,6 @@ FString ABlockActor::GetTileString()
 	case OutSkirtOutControll_TopRight:
 	case OutSkirtOutControll_BottomLeft:
 	case OutSkirtOutControll_BottomRight:
-		tileStr = GrassToDirtEdgeTile;
-		break;
 	case FarmOutControll_LeftBottom:
 	case FarmOutControll_LeftTop:
 	case FarmOutControll_RightBottom:
@@ -69,7 +67,52 @@ FString ABlockActor::GetTileString()
 	case FarmOutControll_TopRight:
 	case FarmOutControll_BottomLeft:
 	case FarmOutControll_BottomRight:
-		tileStr = GrassFullDirtTiles;
+	{
+		if (mIndex.X == 0 && mIndex.Y == 0)
+		{
+			tileStr = GrassToDirtEdgeTile;
+			SetDirection(Dir_Corner_City_LeftBottom);
+		}
+		else if (mIndex.X == CitySize - 1 && mIndex.Y == 0)
+		{
+			tileStr = GrassToDirtEdgeTile;
+			SetDirection(Dir_Corner_City_LeftTop);
+		}
+		else if (mIndex.X == CitySize - 1 && mIndex.Y == CitySize - 1)
+		{
+			tileStr = GrassToDirtEdgeTile;
+			SetDirection(Dir_Corner_City_RightTop);
+		}
+		else if (mIndex.X == 0 && mIndex.Y == CitySize - 1)
+		{
+			tileStr = GrassToDirtEdgeTile;
+			SetDirection(Dir_Corner_City_RightBottom);
+		}
+		else if (mIndex.Y == 0)
+		{
+			tileStr = GrassToDirtTile;
+			SetDirection(Dir_CityEdge_Left);
+		}
+		else if (mIndex.Y == CitySize - 1)
+		{
+			tileStr = GrassToDirtTile;
+			SetDirection(Dir_CityEdge_Right);
+		}
+		else if (mIndex.X == 0)
+		{
+			tileStr = GrassToDirtTile;
+			SetDirection(Dir_CityEdge_Bottom);
+		}
+		else if (mIndex.X == CitySize - 1)
+		{
+			tileStr = GrassToDirtTile;
+			SetDirection(Dir_CityEdge_Top);
+		}
+		else
+		{
+			tileStr = GrassTile;
+		}
+	}
 		break;
 	case CornerControll_LeftBottom:
 	case CornerControll_LeftTop:

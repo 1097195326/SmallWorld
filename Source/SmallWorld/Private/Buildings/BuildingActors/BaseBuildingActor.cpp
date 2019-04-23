@@ -79,29 +79,38 @@ FRotator ABaseBuildingActor::DirectionRotation()
 	{
 	case Dir_None:
 		break;
-	case Dir_Corner_LeftBottom:
-		Rotator.Yaw = 90.f;
-		break;
-	case Dir_Corner_LeftTop:
-		break;
-	case Dir_Corner_RightBottom:
-		Rotator.Yaw = 180.f;
-		break;
-	case Dir_Corner_RightTop:
+	case Dir_Corner_City_LeftBottom:
+	case Dir_Corner_Castle_LeftBottom:
 		Rotator.Yaw = -90.f;
 		break;
-	case Dir_Left:
-		Rotator.Yaw = 90.f;
+	case Dir_Corner_City_LeftTop:
+	case Dir_Corner_Castle_LeftTop:
 		break;
-	case Dir_Right:
-		Rotator.Yaw = -90.f;
-		break;
-	case Dir_Top:
-		break;
-	case Dir_Bottom:
+	case Dir_Corner_City_RightBottom:
+	case Dir_Corner_Castle_RightBottom:
 		Rotator.Yaw = 180.f;
 		break;
-	case Dir_Center:
+	case Dir_Corner_City_RightTop:
+	case Dir_Corner_Castle_RightTop:
+		Rotator.Yaw = 90.f;
+		break;
+	case Dir_CityEdge_Left:
+	case Dir_CastleEdge_Left:
+		
+		break;
+	case Dir_CityEdge_Right:
+	case Dir_CastleEdge_Right:
+		Rotator.Yaw = 180.f;
+		break;
+	case Dir_CityEdge_Top:
+	case Dir_CastleEdge_Top:
+		Rotator.Yaw = 90.f;
+		break;
+	case Dir_CityEdge_Bottom:
+	case Dir_CastleEdge_Bottom:
+		Rotator.Yaw = -90.f;
+		break;
+	case Dir_City_Center:
 		break;
 	default:
 		break;

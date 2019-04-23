@@ -63,7 +63,7 @@ static int  CastleControllSize = 11;
 static int  CastleSize = 7;
 static int	CastleCenterSize = 3;
 static float TitleSize = 2500.f;
-
+static float WallSize = 625.f;
 
 
 
