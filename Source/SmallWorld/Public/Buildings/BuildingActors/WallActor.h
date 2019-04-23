@@ -9,6 +9,9 @@ class AWallActor : public ABaseBuildingActor
 	GENERATED_BODY()
 
 public:
+	AWallActor();
+
+	virtual void On_Init() override;
 
 
 };

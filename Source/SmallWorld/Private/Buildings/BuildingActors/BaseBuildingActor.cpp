@@ -6,6 +6,7 @@ ABaseBuildingActor::ABaseBuildingActor()
 	BaseMeshComponent = nullptr;
 	BaseSkeletalMeshComponent = nullptr;
 	mDirection = Dir_None;
+	mLevel = 0;
 
 }
 void ABaseBuildingActor::PostInitializeComponents()
@@ -25,6 +26,42 @@ void ABaseBuildingActor::On_Init()
 void ABaseBuildingActor::On_Delete()
 {
 
+}
+void ABaseBuildingActor::SetLevel(int _level)
+{
+	mLevel = _level;
+}
+int ABaseBuildingActor::GetLevel()
+{
+	return mLevel;
+}
+FString ABaseBuildingActor::GetMeshPath()
+{
+	FString Path;
+	switch (mLevel)
+	{
+	case 0:
+		Path = MeshPathLevel_0;
+		break;
+	case 1:
+		Path = MeshPathLevel_1;
+		break;
+	case 2:
+		Path = MeshPathLevel_2;
+		break;
+	case 3:
+		Path = MeshPathLevel_3;
+		break;
+	case 4:
+		Path = MeshPathLevel_4;
+		break;
+	case 5:
+		Path = MeshPathLevel_5;
+		break;
+	default:
+		break;
+	}
+	return Path;
 }
 FBox ABaseBuildingActor::GetBuildingBound()
 {

@@ -13,5 +13,6 @@ public:
 
 	virtual void On_Init() override;
 
-
+private:
+	
 };

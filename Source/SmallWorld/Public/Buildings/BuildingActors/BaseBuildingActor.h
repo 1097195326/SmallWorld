@@ -74,6 +74,19 @@ class ABaseBuildingActor : public AActor
 protected:
 	FBuildingIndex mIndex;
 	BuildingDirection mDirection;
+	
+	int					mLevel;
+	int					mMaxLevel;
+
+	FString  MeshPathLevel_0;
+	FString  MeshPathLevel_1;
+	FString  MeshPathLevel_2;
+	FString  MeshPathLevel_3;
+	FString  MeshPathLevel_4;
+	FString  MeshPathLevel_5;
+
+
+	FString GetMeshPath();
 
 public:
 	ABaseBuildingActor();
@@ -87,6 +100,9 @@ public:
 		UStaticMeshComponent * BaseMeshComponent;
 	UPROPERTY(VisibleDefaultsOnly, Category = BaseBuilding)
 		USkeletalMeshComponent * BaseSkeletalMeshComponent;
+
+	void SetLevel(int _level);
+	int	GetLevel();
 
 	void SetDirection(BuildingDirection _dir);
 	BuildingDirection GetDirction();
