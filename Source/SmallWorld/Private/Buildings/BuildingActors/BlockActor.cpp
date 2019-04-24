@@ -4,12 +4,12 @@
 
 ABlockActor::ABlockActor()
 {
-	GrassCentreDirtTile = "/Game/CastlePack/Meshes/SM_GrassCentreDirtTile";
-	GrassFullDirtTiles = "/Game/CastlePack/Meshes/SM_GrassFullDirtTiles";
-	GrassTile = "/Game/CastlePack/Meshes/SM_GrassTile";
-	GrassToDirtEdgeTile = "/Game/CastlePack/Meshes/SM_GrassToDirtEdgeTile";
-	GrassToDirtTile = "/Game/CastlePack/Meshes/SM_GrassToDirtTile";
-	DirtTile = "/Game/CastlePack/Meshes/SM_DirtTile";
+	GrassTile = "/Game/CastlePack/Meshes/SM_GrassTile_1";
+	GrassToDirtTile = "/Game/CastlePack/Meshes/SM_GrassTile_2";
+	GrassToDirtEdgeTile = "/Game/CastlePack/Meshes/SM_GrassTile_3";
+	GrassFullDirtTiles = "/Game/CastlePack/Meshes/SM_GrassTile_4";
+	GrassCentreDirtTile = "/Game/CastlePack/Meshes/SM_GrassTile_5";
+	DirtTile = "/Game/CastlePack/Meshes/SM_GrassTile_6";
 
 	mCity = nullptr;
 

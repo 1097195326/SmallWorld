@@ -55,7 +55,7 @@ void ACityActor::On_Init()
 	const float CastleWallLength = TitleSize * (CastleSize - 1);
 	for (int i = 0; i < 4; i++)
 	{
-		BuildingDirection Dir;
+		BuildingDirection Dir = Dir_None;
 		FVector DirV;
 		FVector Origin;
 		if (i == 0)

@@ -27,6 +27,6 @@ void AGateActor::On_Init()
 	}
 	if (mDirection != Dir_None)
 	{
-		BaseSkeletalMeshComponent->SetRelativeRotation(DirectionRotation() + FRotator(0.f,0.f,0.f));
+		BaseSkeletalMeshComponent->SetRelativeRotation(DirectionRotation() + FRotator(0.f,180.f,0.f));
 	}
 }
