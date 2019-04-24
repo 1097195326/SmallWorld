@@ -21,15 +21,8 @@ ABlockActor::ABlockActor()
 }
 void ABlockActor::On_Init()
 {
-	FString TitlePath;
-	if (mCity->IsInWorld())
-	{
-		TitlePath = GetTileString();
-	}
-	else
-	{
-		TitlePath = GrassTile;
-	}
+	FString TitlePath = GetMeshPath();
+	
 	UStaticMesh * mesh = LoadObject<UStaticMesh>(this, *TitlePath);
 	BaseMeshComponent->SetStaticMesh(mesh);
 	if (mDirection != Dir_None)
@@ -37,124 +30,173 @@ void ABlockActor::On_Init()
 		BaseMeshComponent->SetRelativeRotation(DirectionRotation());
 	}
 }
-FString ABlockActor::GetTileString()
+FString ABlockActor::GetMeshPath()
 {
-	FString tileStr;
-	switch (mCityOrientation)
+	FString tileStr = GrassTile;
+	if (IsInWorld())
 	{
-	case O_None:
-	case CornerOutControll_LeftBottom:
-	case CornerOutControll_LeftTop:
-	case CornerOutControll_RightBottom:
-	case CornerOutControll_RightTop:
-	case CenterOutControll_Left:
-	case CenterOutControll_Right:
-	case CenterOutControll_Top:
-	case CenterOutControll_Bottom:
-	case OutSkirtOutControll_LeftBottom:
-	case OutSkirtOutControll_LeftTop:
-	case OutSkirtOutControll_RightBottom:
-	case OutSkirtOutControll_RightTop:
-	case OutSkirtOutControll_TopLeft:
-	case OutSkirtOutControll_TopRight:
-	case OutSkirtOutControll_BottomLeft:
-	case OutSkirtOutControll_BottomRight:
-	case FarmOutControll_LeftBottom:
-	case FarmOutControll_LeftTop:
-	case FarmOutControll_RightBottom:
-	case FarmOutControll_RightTop:
-	case FarmOutControll_TopLeft:
-	case FarmOutControll_TopRight:
-	case FarmOutControll_BottomLeft:
-	case FarmOutControll_BottomRight:
-	{
-		if (mIndex.X == 0 && mIndex.Y == 0)
+		switch (mCityOrientation)
 		{
-			tileStr = GrassToDirtEdgeTile;
-			SetDirection(Dir_Corner_City_LeftBottom);
-		}
-		else if (mIndex.X == CitySize - 1 && mIndex.Y == 0)
+		case O_None:
+		case CornerOutControll_LeftBottom:
+		case CornerOutControll_LeftTop:
+		case CornerOutControll_RightBottom:
+		case CornerOutControll_RightTop:
+		case CenterOutControll_Left:
+		case CenterOutControll_Right:
+		case CenterOutControll_Top:
+		case CenterOutControll_Bottom:
+		case OutSkirtOutControll_LeftBottom:
+		case OutSkirtOutControll_LeftTop:
+		case OutSkirtOutControll_RightBottom:
+		case OutSkirtOutControll_RightTop:
+		case OutSkirtOutControll_TopLeft:
+		case OutSkirtOutControll_TopRight:
+		case OutSkirtOutControll_BottomLeft:
+		case OutSkirtOutControll_BottomRight:
+		case FarmOutControll_LeftBottom:
+		case FarmOutControll_LeftTop:
+		case FarmOutControll_RightBottom:
+		case FarmOutControll_RightTop:
+		case FarmOutControll_TopLeft:
+		case FarmOutControll_TopRight:
+		case FarmOutControll_BottomLeft:
+		case FarmOutControll_BottomRight:
 		{
-			tileStr = GrassToDirtEdgeTile;
-			SetDirection(Dir_Corner_City_LeftTop);
+			if (mIndex.X == 0 && mIndex.Y == 0)
+			{
+				tileStr = GrassToDirtEdgeTile;
+				SetDirection(Dir_Corner_City_LeftBottom);
+			}
+			else if (mIndex.X == CitySize - 1 && mIndex.Y == 0)
+			{
+				tileStr = GrassToDirtEdgeTile;
+				SetDirection(Dir_Corner_City_LeftTop);
+			}
+			else if (mIndex.X == CitySize - 1 && mIndex.Y == CitySize - 1)
+			{
+				tileStr = GrassToDirtEdgeTile;
+				SetDirection(Dir_Corner_City_RightTop);
+			}
+			else if (mIndex.X == 0 && mIndex.Y == CitySize - 1)
+			{
+				tileStr = GrassToDirtEdgeTile;
+				SetDirection(Dir_Corner_City_RightBottom);
+			}
+			else if (mIndex.Y == 0)
+			{
+				tileStr = GrassToDirtTile;
+				SetDirection(Dir_CityEdge_Left);
+			}
+			else if (mIndex.Y == CitySize - 1)
+			{
+				tileStr = GrassToDirtTile;
+				SetDirection(Dir_CityEdge_Right);
+			}
+			else if (mIndex.X == 0)
+			{
+				tileStr = GrassToDirtTile;
+				SetDirection(Dir_CityEdge_Bottom);
+			}
+			else if (mIndex.X == CitySize - 1)
+			{
+				tileStr = GrassToDirtTile;
+				SetDirection(Dir_CityEdge_Top);
+			}
+			else
+			{
+				tileStr = GrassTile;
+			}
 		}
-		else if (mIndex.X == CitySize - 1 && mIndex.Y == CitySize - 1)
-		{
-			tileStr = GrassToDirtEdgeTile;
-			SetDirection(Dir_Corner_City_RightTop);
-		}
-		else if (mIndex.X == 0 && mIndex.Y == CitySize - 1)
-		{
-			tileStr = GrassToDirtEdgeTile;
-			SetDirection(Dir_Corner_City_RightBottom);
-		}
-		else if (mIndex.Y == 0)
-		{
-			tileStr = GrassToDirtTile;
-			SetDirection(Dir_CityEdge_Left);
-		}
-		else if (mIndex.Y == CitySize - 1)
-		{
-			tileStr = GrassToDirtTile;
-			SetDirection(Dir_CityEdge_Right);
-		}
-		else if (mIndex.X == 0)
-		{
-			tileStr = GrassToDirtTile;
-			SetDirection(Dir_CityEdge_Bottom);
-		}
-		else if (mIndex.X == CitySize - 1)
-		{
-			tileStr = GrassToDirtTile;
-			SetDirection(Dir_CityEdge_Top);
-		}
-		else
-		{
-			tileStr = GrassTile;
-		}
-	}
 		break;
-	case CornerControll_LeftBottom:
-	case CornerControll_LeftTop:
-	case CornerControll_RightBottom:
-	case CornerControll_RightTop:
-		tileStr = GrassCentreDirtTile;
-		break;
-	case CenterControll_Left:
-	case CenterControll_Right:
-	case CenterControll_Top:
-	case CenterControll_Bottom:
-		tileStr = DirtTile;
-		break;
-	case FarmControll_LeftBottom:
-	case FarmControll_LeftTop:
-	case FarmControll_RightBottom:
-	case FarmControll_RightTop:
-	case FarmControll_TopLeft:
-	case FarmControll_TopRight:
-	case FarmControll_BottomLeft:
-	case FarmControll_BottomRight:
-	case CornerCastle_LeftBottom:
-	case CornerCastle_LeftTop:
-	case CornerCastle_RightBottom:
-	case CornerCastle_RightTop:
-		tileStr = GrassFullDirtTiles;
-		break;
-	case CenterCastle_Left:
-	case CenterCastle_Right:
-	case CenterCastle_Top:
-	case CenterCastle_Bottom:
-		tileStr = DirtTile;
-		break;
-	case CityCenter:
-	case CenterOfCenter:
-		tileStr = GrassCentreDirtTile;
-		break;
-	default:
-		tileStr = GrassTile;
-		break;
-	}
+		case CornerControll_LeftBottom:
+		case CornerControll_LeftTop:
+		case CornerControll_RightBottom:
+		case CornerControll_RightTop:
+			tileStr = GrassCentreDirtTile;
+			break;
+		case CenterControll_Left:
+		case CenterControll_Right:
+		case CenterControll_Top:
+		case CenterControll_Bottom:
+			tileStr = DirtTile;
+			break;
+		case FarmControll_LeftBottom:
+		case FarmControll_LeftTop:
+		case FarmControll_RightBottom:
+		case FarmControll_RightTop:
+		case FarmControll_TopLeft:
+		case FarmControll_TopRight:
+		case FarmControll_BottomLeft:
+		case FarmControll_BottomRight:
+			tileStr = GrassFullDirtTiles;
+			break;
+		case CornerCastle_LeftBottom:
+		case CornerCastle_LeftTop:
+		case CornerCastle_RightBottom:
+		case CornerCastle_RightTop:
+		case CenterCastle_Left:
+		case CenterCastle_Right:
+		case CenterCastle_Top:
+		case CenterCastle_Bottom:
+		{
+			const int OutCastleSize = (CitySize - CastleSize) * 0.5;
 
+			if (mIndex.X == OutCastleSize && mIndex.Y == OutCastleSize)
+			{
+				tileStr = GrassToDirtEdgeTile;
+				SetDirection(Dir_Corner_Castle_LeftBottom);
+			}
+			else if (mIndex.X == CitySize - OutCastleSize - 1 && mIndex.Y == OutCastleSize)
+			{
+				tileStr = GrassToDirtEdgeTile;
+				SetDirection(Dir_Corner_Castle_LeftTop);
+			}
+			else if (mIndex.X == CitySize - OutCastleSize - 1 && mIndex.Y == CitySize - OutCastleSize - 1)
+			{
+				tileStr = GrassToDirtEdgeTile;
+				SetDirection(Dir_Corner_Castle_RightTop);
+			}
+			else if (mIndex.X == OutCastleSize && mIndex.Y == CitySize - OutCastleSize - 1)
+			{
+				tileStr = GrassToDirtEdgeTile;
+				SetDirection(Dir_Corner_Castle_RightBottom);
+			}
+			else if (mIndex.Y == OutCastleSize)
+			{
+				tileStr = GrassToDirtTile;
+				SetDirection(Dir_CastleEdge_Left);
+			}
+			else if (mIndex.Y == CitySize - OutCastleSize - 1)
+			{
+				tileStr = GrassToDirtTile;
+				SetDirection(Dir_CastleEdge_Right);
+			}
+			else if (mIndex.X == OutCastleSize)
+			{
+				tileStr = GrassToDirtTile;
+				SetDirection(Dir_CastleEdge_Bottom);
+			}
+			else if (mIndex.X == CitySize - OutCastleSize - 1)
+			{
+				tileStr = GrassToDirtTile;
+				SetDirection(Dir_CastleEdge_Top);
+			}
+			else
+			{
+				tileStr = GrassTile;
+			}
+		}
+		break;
+		case CityCenter:
+		case CenterOfCenter:
+			tileStr = GrassCentreDirtTile;
+			break;
+		default:
+			tileStr = GrassTile;
+			break;
+		}
+	}
 	return tileStr;
 }
 void ABlockActor::InitData(BlockData * Data)
@@ -194,7 +236,7 @@ bool ABlockActor::IsInWorld()
 {
 	if (mCity)
 	{
-		mCity->IsInWorld();
+		return mCity->IsInWorld();
 	}
 	return false;
 }

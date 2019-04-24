@@ -22,4 +22,8 @@ void AWallActor::On_Init()
 	{
 		BaseMeshComponent->SetStaticMesh(mesh);
 	}
+	if (mDirection != Dir_None)
+	{
+		BaseMeshComponent->SetRelativeRotation(DirectionRotation() + FRotator(0.f, -90.f, 0.f));
+	}
 }

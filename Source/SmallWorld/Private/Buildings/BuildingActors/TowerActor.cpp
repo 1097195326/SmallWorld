@@ -22,5 +22,8 @@ void ATowerActor::On_Init()
 	{
 		BaseMeshComponent->SetStaticMesh(mesh);
 	}
-
+	if (mDirection != Dir_None)
+	{
+		BaseMeshComponent->SetRelativeRotation(DirectionRotation());
+	}
 }

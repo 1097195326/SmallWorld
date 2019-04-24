@@ -2,6 +2,9 @@
 
 #include "BaseBuildingActor.h"
 #include "BlockActor.h"
+#include "GateActor.h"
+#include "TowerActor.h"
+#include "WallActor.h"
 #include "CityData.h"
 #include "CityActor.generated.h"
 

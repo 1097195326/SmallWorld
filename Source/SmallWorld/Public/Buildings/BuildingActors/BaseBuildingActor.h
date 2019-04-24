@@ -86,7 +86,7 @@ protected:
 	FString  MeshPathLevel_5;
 
 
-	FString GetMeshPath();
+	virtual FString GetMeshPath();
 
 public:
 	ABaseBuildingActor();

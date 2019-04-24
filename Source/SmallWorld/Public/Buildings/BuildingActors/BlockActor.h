@@ -141,5 +141,5 @@ public:
 	virtual bool IsInWorld() override;
 
 private:
-	FString GetTileString();
+	virtual FString GetMeshPath() override;
 };

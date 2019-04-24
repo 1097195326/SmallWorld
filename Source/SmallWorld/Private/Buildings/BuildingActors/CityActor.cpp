@@ -21,8 +21,9 @@ void ACityActor::On_Init()
 	float CityExtent = CitySize * TitleSize * 0.5f;
 	CollisionBox->SetBoxExtent(FVector(CityExtent, CityExtent, CityExtent));
 
-	float CityXOffSet = mIndex.X * CitySize * TitleSize;
-	float CityYOffSet = mIndex.Y * CitySize * TitleSize;
+	// build City Map
+	const float CityXOffSet = mIndex.X * CitySize * TitleSize;
+	const float CityYOffSet = mIndex.Y * CitySize * TitleSize;
 
 	for (int x = 0; x < CitySize; x++)
 	{
@@ -46,6 +47,60 @@ void ACityActor::On_Init()
 		}
 		BlockMap.push_back(BlockList);
 	}
+	
+	// build castle wall
+	const int OutCastleSize = (CitySize - CastleSize) * 0.5;
+	const float CastleWallXOffSet = mIndex.X * CitySize * TitleSize + TitleSize * OutCastleSize + TitleSize * 0.5;
+	const float CastleWallYOffSet = mIndex.Y * CitySize * TitleSize + TitleSize * OutCastleSize + TitleSize * 0.5;
+	const float CastleWallLength = TitleSize * (CastleSize - 1);
+	for (int i = 0; i < 4; i++)
+	{
+		BuildingDirection Dir;
+		FVector DirV;
+		FVector Origin;
+		if (i == 0)
+		{
+			Origin = FVector(CastleWallXOffSet, CastleWallYOffSet, 0);
+			DirV = FVector(1,0,0);
+			Dir = Dir_CastleEdge_Left;
+		}else if (i == 1)
+		{
+			Origin = FVector(CastleWallXOffSet + CastleWallLength, CastleWallYOffSet, 0);
+			DirV = FVector(0, 1, 0);
+			Dir = Dir_CastleEdge_Top;
+		}else if (i ==2)
+		{
+			Origin = FVector(CastleWallXOffSet + CastleWallLength, CastleWallYOffSet + CastleWallLength, 0);
+			DirV = FVector(-1, 0, 0);
+			Dir = Dir_CastleEdge_Right;
+		}else if (i ==3)
+		{
+			Origin = FVector(CastleWallXOffSet, CastleWallYOffSet + CastleWallLength, 0);
+			DirV = FVector(0, -1, 0);
+			Dir = Dir_CastleEdge_Bottom;
+		}
+		for (int j = 0;j < (int)(CastleWallLength / WallSize); j++)
+		{
+			FTransform trans(Origin + DirV * WallSize * j);
+			ABaseBuildingActor * BuildingActor = nullptr;
+			if (j == 0)
+			{
+				BuildingActor = Cast<ATowerActor>(UGameplayStatics::BeginDeferredActorSpawnFromClass(SWI, ATowerActor::StaticClass(), trans));
+			}else if (j == (int)CastleWallLength / WallSize / 2)
+			{
+				BuildingActor = Cast<AGateActor>(UGameplayStatics::BeginDeferredActorSpawnFromClass(SWI, AGateActor::StaticClass(), trans));
+			}else
+			{
+				BuildingActor = Cast<AWallActor>(UGameplayStatics::BeginDeferredActorSpawnFromClass(SWI, AWallActor::StaticClass(), trans));
+			}
+			if (BuildingActor)
+			{
+				BuildingActor->SetDirection(Dir);
+				UGameplayStatics::FinishSpawningActor(BuildingActor, trans);
+			}
+		}
+	}
+	// Bild City Bound Moutain
 	if (!IsInWorld())
 	{
 		const FString Mountain1 = "/Game/CastlePack/Meshes/SM_01_Moutain";

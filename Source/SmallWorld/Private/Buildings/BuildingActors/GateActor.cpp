@@ -5,8 +5,8 @@ AGateActor::AGateActor()
 {
 	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("RootComponent"));
 
-	BaseMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("GateComponent"));
-	BaseMeshComponent->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
+	BaseSkeletalMeshComponent = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("GateComponent"));
+	BaseSkeletalMeshComponent->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
 
 	mLevel = 1;
 	mMaxLevel = 3;
@@ -19,10 +19,14 @@ AGateActor::AGateActor()
 void AGateActor::On_Init()
 {
 
-	UStaticMesh * mesh = LoadObject<UStaticMesh>(this, *GetMeshPath());
+	USkeletalMesh * mesh = LoadObject<USkeletalMesh>(this, *GetMeshPath());
 	if (mesh)
 	{
-		BaseMeshComponent->SetStaticMesh(mesh);
+		BaseSkeletalMeshComponent->SetSkeletalMesh(mesh);
+		
 	}
-
+	if (mDirection != Dir_None)
+	{
+		BaseSkeletalMeshComponent->SetRelativeRotation(DirectionRotation() + FRotator(0.f,0.f,0.f));
+	}
 }
