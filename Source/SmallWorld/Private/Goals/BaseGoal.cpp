@@ -8,6 +8,7 @@ BaseGoal::BaseGoal()
 }
 BaseGoal::~BaseGoal()
 {
+	ClearAllTask();
 	ClearAllGoal();
 }
 BaseGoal * BaseGoal::GetBestGoal()

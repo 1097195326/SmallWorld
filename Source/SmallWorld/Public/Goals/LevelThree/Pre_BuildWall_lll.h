@@ -1,7 +1,7 @@
 #pragma once
 #include "BaseGoal.h"
 
-class Pre_BuildCityWall_lll : public BaseGoal
+class Pre_BuildWall_lll : public BaseGoal
 {
 public:
 	virtual float  Evaluate()override;

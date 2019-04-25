@@ -124,14 +124,14 @@ enum BuildingDirection
 
 };
 
-static int  BoundSize = 0;
-static int  WorldSize = 1;
-static int	CitySize = 15;
-static int  CastleControllSize = 11;
-static int  CastleSize = 7;
-static int	CastleCenterSize = 3;
-static float TitleSize = 2500.f;
-static float WallSize = 625.f;
+const int  BoundSize = 0;
+const int  WorldSize = 1;
+const int	CitySize = 15;
+const int  CastleControllSize = 11;
+const int  CastleSize = 7;
+const int	CastleCenterSize = 3;
+const float TitleSize = 2500.f;
+const float WallSize = 625.f;
 
 
 

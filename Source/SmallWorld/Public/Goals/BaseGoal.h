@@ -12,6 +12,13 @@ enum GoalState
 	e_Fail,
 	e_Success,
 };
+// one level
+const float l_fight = 0.4f;
+const float l_prepare = 0.6f;
+// two level
+
+//three level
+
 class BaseGoal
 {
 protected:
