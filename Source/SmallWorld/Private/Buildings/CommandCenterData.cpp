@@ -4,7 +4,7 @@
 
 CommandCenterData::CommandCenterData()
 {
-    mType = e_CommandCenter;
+   
     
 }
 CommandCenterData::~CommandCenterData()

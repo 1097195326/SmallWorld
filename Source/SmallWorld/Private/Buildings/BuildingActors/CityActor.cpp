@@ -38,7 +38,7 @@ void ACityActor::On_Init()
 				BlockActor->SetIndex(FBuildingIndex(x, y));
 				if (IsInWorld())
 				{
-					BlockActor->SetOrientation(CalCulateOrientation(x, y));
+					CalCulateOrientation(x, y,BlockActor);
 
 				}
 				BlockList.push_back(BlockActor);
@@ -114,7 +114,7 @@ void ACityActor::On_Delete()
 {
 
 }
-CityOrientation ACityActor::CalCulateOrientation(int _x, int _y)
+void ACityActor::CalCulateOrientation(int _x, int _y,ABlockActor * _blockActor)
 {
 	// OutControll 
 	const int OutControllSize = (CitySize - CastleControllSize) * 0.5;
@@ -123,154 +123,257 @@ CityOrientation ACityActor::CalCulateOrientation(int _x, int _y)
 
 	if (_x <  OutControllSize && _y < OutControllSize)
 	{
-		return CornerOutControll_LeftBottom;
+		CornerOutControllLeftBottom.push_back(_blockActor);
+		_blockActor->SetOrientation(CornerOutControll_LeftBottom);
+		return ;
 	}else if (_x >= (CitySize - OutControllSize) && _y < OutControllSize)
 	{
-		return CornerOutControll_LeftTop;
+		CornerOutControllLeftTop.push_back(_blockActor);
+		_blockActor->SetOrientation(CornerOutControll_LeftTop);
+		return ;
 	}else if (_x <  OutControllSize && _y >= (CitySize - OutControllSize))
 	{
-		return CornerOutControll_RightBottom;
+		CornerOutControllRightBottom.push_back(_blockActor);
+		_blockActor->SetOrientation(CornerOutControll_RightBottom);
+		return ;
 	}else if (_x >= (CitySize - OutControllSize) && _y >= (CitySize - OutControllSize))
 	{
-		return CornerOutControll_RightTop;
+		CornerOutControllRightTop.push_back(_blockActor);
+		_blockActor->SetOrientation(CornerOutControll_RightTop);
+		return ;
 	}else if ( _x >= OutCenterSize && _x < (CitySize - OutCenterSize) && _y < OutControllSize)
 	{
-		return CenterOutControll_Left;
+		CenterOutControllLeft.push_back(_blockActor);
+		_blockActor->SetOrientation(CenterOutControll_Left);
+		return ;
 	}else if (_x >= OutCenterSize && _x < (CitySize - OutCenterSize) && _y >= (CitySize - OutControllSize))
 	{
-		return CenterOutControll_Right;
+		CenterOutControllRight.push_back(_blockActor);
+		_blockActor->SetOrientation(CenterOutControll_Right);
+		return ;
 	}else if (_y >= OutCenterSize && _y < (CitySize - OutCenterSize) && _x >= (CitySize - OutControllSize))
 	{
-		return CenterOutControll_Top;
+		CenterOutControllTop.push_back(_blockActor);
+		_blockActor->SetOrientation(CenterOutControll_Top);
+		return ;
 	}else if (_y >= OutCenterSize && _y < (CitySize - OutCenterSize) && _x  < OutControllSize)
 	{
-		return CenterOutControll_Bottom;
+		CenterOutControllBottom.push_back(_blockActor);
+		_blockActor->SetOrientation(CenterOutControll_Bottom);
+		return ;
 	}else if (_x >= OutControllSize && _x < OutCastleSize && _y < OutControllSize )
 	{
-		return OutSkirtOutControll_LeftBottom;
+		OutSkirtOutControllLeftBottom.push_back(_blockActor);
+		_blockActor->SetOrientation(OutSkirtOutControll_LeftBottom);
+		return ;
 	}else if (_x >= (CitySize - OutCastleSize) && _x < (CitySize - OutControllSize) && _y < OutControllSize)
 	{
-		return OutSkirtOutControll_LeftTop;
+		OutSkirtOutControllLeftTop.push_back(_blockActor);
+		_blockActor->SetOrientation(OutSkirtOutControll_LeftTop);
+		return ;
 	}else if (_x >= OutControllSize && _x < OutCastleSize && _y >= (CitySize - OutControllSize))
 	{
-		return OutSkirtOutControll_RightBottom;
+		OutSkirtOutControllRightBottom.push_back(_blockActor);
+		_blockActor->SetOrientation(OutSkirtOutControll_RightBottom);
+		return ;
 	}else if (_x >= (CitySize - OutCastleSize) && _x < (CitySize - OutControllSize) && _y >= (CitySize - OutControllSize))
 	{
-		return OutSkirtOutControll_RightTop;
+		OutSkirtOutControllRightTop.push_back(_blockActor);
+		_blockActor->SetOrientation(OutSkirtOutControll_RightTop);
+		return ;
 	}else if (_x >= CitySize - OutControllSize && _y >= OutControllSize && _y < OutCastleSize)
 	{
-		return OutSkirtOutControll_TopLeft;
+		OutSkirtOutControllTopLeft.push_back(_blockActor);
+		_blockActor->SetOrientation(OutSkirtOutControll_TopLeft);
+		return ;
 	}else if(_x >= CitySize - OutControllSize && _y >= (CitySize - OutCastleSize) && _y < (CitySize - OutControllSize))
 	{
-		return OutSkirtOutControll_TopRight;
+		OutSkirtOutControllTopRight.push_back(_blockActor);
+		_blockActor->SetOrientation(OutSkirtOutControll_TopRight);
+		return ;
 	}else if (_x < OutControllSize && _y >= OutControllSize && _y < OutCastleSize)
 	{
-		return OutSkirtOutControll_BottomLeft;
+		OutSkirtOutControllBottomLeft.push_back(_blockActor);
+		_blockActor->SetOrientation(OutSkirtOutControll_BottomLeft);
+		return ;
 	}else if (_x < OutControllSize && _y >= (CitySize - OutCastleSize) && _y < (CitySize - OutControllSize))
 	{
-		return OutSkirtOutControll_BottomRight;
+		OutSkirtOutControllBottomRight.push_back(_blockActor);
+		_blockActor->SetOrientation(OutSkirtOutControll_BottomRight);
+		return ;
 	}else if (_x >= OutCastleSize && _x < OutCenterSize && _y < OutControllSize)
 	{
-		return FarmOutControll_LeftBottom;
+		FarmOutControllLeftBottom.push_back(_blockActor);
+		_blockActor->SetOrientation(FarmOutControll_LeftBottom);
+		return ;
 	}else if (_x >= (CitySize - OutCenterSize) && _x <(CitySize - OutCastleSize) && _y < OutControllSize)
 	{
-		return FarmOutControll_LeftTop;
+		FarmOutControllLeftTop.push_back(_blockActor);
+		_blockActor->SetOrientation(FarmOutControll_LeftTop);
+		return ;
 	}else if (_x >= OutCastleSize && _x < OutCenterSize && _y >= (CitySize - OutControllSize))
 	{
-		return FarmOutControll_RightBottom;
+		FarmOutControllRightBottom.push_back(_blockActor);
+		_blockActor->SetOrientation(FarmOutControll_RightBottom);
+		return ;
 	}else if (_x >= (CitySize - OutCenterSize) && _x < (CitySize - OutCastleSize) && _y >= (CitySize - OutControllSize))
 	{
-		return FarmOutControll_RightTop;
+		FarmOutControllRightBottom.push_back(_blockActor);
+		_blockActor->SetOrientation(FarmOutControll_RightTop);
+		return ;
 	}else if (_x >= (CitySize - OutControllSize) && _y >= OutCastleSize && _y < OutCenterSize)
 	{
-		return FarmOutControll_TopLeft;
+		FarmOutControllTopLeft.push_back(_blockActor);
+		_blockActor->SetOrientation(FarmOutControll_TopLeft);
+		return ;
 	}else if (_x >= (CitySize - OutControllSize) && _y >= (CitySize - OutCenterSize) && _y < (CitySize - OutCastleSize))
 	{
-		return FarmOutControll_TopRight;
+		FarmOutControllTopRight.push_back(_blockActor);
+		_blockActor->SetOrientation(FarmOutControll_TopRight);
+		return ;
 	}else if (_x < OutControllSize && _y >= OutCastleSize && _y < OutCenterSize)
 	{
-		return FarmOutControll_BottomLeft;
+		FarmOutControllBottomLeft.push_back(_blockActor);
+		_blockActor->SetOrientation(FarmOutControll_BottomLeft);
+		return ;
 	}else if (_x < OutControllSize && _y >= (CitySize - OutCenterSize) && _y < (CitySize - OutCastleSize))
 	{
-		return FarmOutControll_BottomRight;
+		FarmOutControllBottomRight.push_back(_blockActor);
+		_blockActor->SetOrientation(FarmOutControll_BottomRight);
+		return ;
 	}
 	// Controll
 	else if (_x >= OutControllSize && _x < OutCastleSize && _y >= OutControllSize && _y < OutCastleSize)
 	{
-		return CornerControll_LeftBottom;
+		CornerControllLeftBottom.push_back(_blockActor);
+		_blockActor->SetOrientation(CornerControll_LeftBottom);
+		return ;
 	}else if (_x >= (CitySize - OutCastleSize) && _x < (CitySize - OutControllSize) && _y >= OutControllSize && _y < OutCastleSize)
 	{
-		return CornerControll_LeftTop;
+		CornerControllLeftTop.push_back(_blockActor);
+		_blockActor->SetOrientation(CornerControll_LeftTop);
+		return ;
 	}else if (_x >= OutControllSize && _x < OutCastleSize && _y >= (CitySize - OutCastleSize) && _y < (CitySize - OutControllSize))
 	{
-		return CornerControll_RightBottom;
+		CornerControllRightBottom.push_back(_blockActor);
+		_blockActor->SetOrientation(CornerControll_RightBottom);
+		return ;
 	}else if (_x >= (CitySize - OutCastleSize) && _x < (CitySize - OutControllSize) && _y >= (CitySize - OutCastleSize) && _y < (CitySize - OutControllSize))
 	{
-		return CornerControll_RightTop;
+		CornerControllRightTop.push_back(_blockActor);
+		_blockActor->SetOrientation(CornerControll_RightTop);
+		return ;
 	}else if (_x >= OutCenterSize && _x < (CitySize - OutCenterSize) && _y >= OutControllSize && _y < OutCastleSize)
 	{
-		return CenterControll_Left;
+		CenterControllLeft.push_back(_blockActor);
+		_blockActor->SetOrientation(CenterControll_Left);
+		return ;
 	}else if (_x >= OutCenterSize && _x < (CitySize - OutCenterSize) && _y >= (CitySize - OutCastleSize) && _y < (CitySize - OutControllSize))
 	{
-		return CenterControll_Right;
+		CenterControllRight.push_back(_blockActor);
+		_blockActor->SetOrientation(CenterControll_Right);
+		return ;
 	}else if (_x >= (CitySize - OutCastleSize) && _x < (CitySize - OutControllSize) && _y >= OutCenterSize && _y < (CitySize - OutCenterSize))
 	{
-		return CenterControll_Top;
+		CenterControllTop.push_back(_blockActor);
+		_blockActor->SetOrientation(CenterControll_Top);
+		return ;
 	}else if (_x >= OutControllSize && _x < OutCastleSize && _y >= OutCenterSize && _y < (CitySize - OutCenterSize))
 	{
-		return CenterControll_Bottom;
+		CenterControllBottom.push_back(_blockActor);
+		_blockActor->SetOrientation(CenterControll_Bottom);
+		return ;
 	}else if (_x >= OutCastleSize && _x < OutCenterSize && _y >= OutControllSize && _y < OutCastleSize)
 	{
-		return FarmControll_LeftBottom;
+		FarmControllLeftBottom.push_back(_blockActor);
+		_blockActor->SetOrientation(FarmControll_LeftBottom);
+		return ;
 	}else if (_x >= (CitySize - OutCenterSize) && _x < (CitySize - OutCastleSize) && _y >= OutControllSize && _y < OutCastleSize)
 	{
-		return FarmControll_LeftTop;
+		FarmControllLeftTop.push_back(_blockActor);
+		_blockActor->SetOrientation(FarmControll_LeftTop);
+		return ;
 	}else if (_x >= OutCastleSize && _x < OutCenterSize && _y >= (CitySize - OutCastleSize) && _y < (CitySize - OutControllSize))
 	{
-		return FarmControll_RightBottom;
+		FarmControllRightBottom.push_back(_blockActor);
+		_blockActor->SetOrientation(FarmControll_RightBottom);
+		return ;
 	}else if (_x >= (CitySize - OutCenterSize) && _x < (CitySize - OutCastleSize) && _y >= (CitySize - OutCastleSize) && _y < (CitySize - OutControllSize))
 	{
-		return FarmControll_RightTop;
+		FarmControllRightTop.push_back(_blockActor);
+		_blockActor->SetOrientation(FarmControll_RightTop);
+		return ;
 	}else if (_x >= (CitySize - OutCastleSize) && _x < (CitySize - OutControllSize) && _y >= OutCastleSize && _y < OutCenterSize)
 	{
-		return FarmControll_TopLeft;
+		FarmControllTopLeft.push_back(_blockActor);
+		_blockActor->SetOrientation(FarmControll_TopLeft);
+		return ;
 	}else if (_x >= (CitySize - OutCastleSize) && _x < (CitySize - OutControllSize) && _y >= (CitySize - OutCenterSize) && _y <(CitySize - OutControllSize))
 	{
-		return FarmControll_TopRight;
+		FarmControllTopRight.push_back(_blockActor);
+		_blockActor->SetOrientation(FarmControll_TopRight);
+		return ;
 	}else if (_x >= OutControllSize && _x < OutCastleSize && _y >= OutCastleSize && _y < OutCenterSize)
 	{
-		return FarmControll_BottomLeft;
+		FarmControllBottomLeft.push_back(_blockActor);
+		_blockActor->SetOrientation(FarmControll_BottomLeft);
+		return ;
 	}else if (_x >= OutControllSize && _x < OutCastleSize && _y >= OutCenterSize && _y < (CitySize - OutCastleSize))
 	{
-		return FarmControll_BottomRight;
+		FarmControllBottomRight.push_back(_blockActor);
+		_blockActor->SetOrientation(FarmControll_BottomRight);
+		return ;
 	}
 	//  In Castle
 	else if (_x >= OutCastleSize && _x < OutCenterSize && _y >= OutCastleSize && _y < OutCenterSize)
 	{
-		return CornerCastle_LeftBottom;
+		CornerCastleLeftBottom.push_back(_blockActor);
+		_blockActor->SetOrientation(CornerCastle_LeftBottom);
+		return ;
 	}else if (_x >= (CitySize - OutCenterSize) && _x < (CitySize - OutCastleSize) && _y >= OutCastleSize && _y < OutCenterSize)
 	{
-		return CornerCastle_LeftTop;
+		CornerCastleLeftTop.push_back(_blockActor);
+		_blockActor->SetOrientation(CornerCastle_LeftTop);
+		return ;
 	}else if (_x >= OutCastleSize && _x < OutCenterSize && _y >= (CitySize - OutCenterSize) && _y < (CitySize - OutCastleSize))
 	{
-		return CornerCastle_RightBottom;
+		CornerCastleRightBottom.push_back(_blockActor);
+		_blockActor->SetOrientation(CornerCastle_RightBottom);
+		return ;
 	}else if (_x >= (CitySize - OutCenterSize) && _x < (CitySize - OutCastleSize) && _y >= (CitySize - OutCenterSize) && _y < (CitySize - OutCastleSize))
 	{
-		return CornerCastle_RightTop;
+		CornerCastleRightTop.push_back(_blockActor);
+		_blockActor->SetOrientation(CornerCastle_RightTop);
+		return ;
 	}else if (_x >= OutCenterSize && _x < (CitySize - OutCenterSize) && _y >= OutCastleSize && _y < OutCenterSize)
 	{
-		return CenterCastle_Left;
+		CenterCastleLeft.push_back(_blockActor);
+		_blockActor->SetOrientation(CenterCastle_Left);
+		return ;
 	}else if (_x >= OutCenterSize && _x < (CitySize - OutCenterSize) && _y >= (CitySize - OutCenterSize) && _y < (CitySize - OutCastleSize))
 	{
-		return CenterCastle_Right;
+		CenterCastleRight.push_back(_blockActor);
+		_blockActor->SetOrientation(CenterCastle_Right);
+		return ;
 	}else if (_x >= (CitySize - OutCenterSize) && _x < (CitySize - OutCastleSize) && _y >= OutCenterSize && _y < (CitySize - OutCenterSize))
 	{
-		return CenterCastle_Top;
+		CenterCastleTop.push_back(_blockActor);
+		_blockActor->SetOrientation(CenterCastle_Top);
+		return ;
 	}else if (_x >= OutCastleSize && _x <  OutCenterSize && _y >= OutCenterSize && _y < (CitySize - OutCenterSize))
 	{
-		return CenterCastle_Bottom;
+		CenterCastleBottom.push_back(_blockActor);
+		_blockActor->SetOrientation(CenterCastle_Bottom);
+		return ;
+	}else if (_x == CitySize/2,_y == CitySize/2)
+	{
+		CenterOfCenterCity = _blockActor;
+		_blockActor->SetOrientation(CenterOfCenter_City);
+		return ;
 	}
-	return CityCenter;
+	CenterCity.push_back(_blockActor);
+	_blockActor->SetOrientation(Center_City);
+	return ;
 }
 FBuildingIndex ACityActor::GetCenterIndex()
 {

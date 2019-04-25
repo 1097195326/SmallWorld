@@ -11,7 +11,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "SmallWorldInstance.h"
 #include <vector>
-
+#include "BaseBuildingData.h"
 #include "BaseBuildingActor.generated.h"
 
 using namespace std;
@@ -90,31 +90,9 @@ enum CityOrientation
 	CenterCastle_Top,
 	CenterCastle_Bottom,
 	// City Center
-	CityCenter,
-	CenterOfCenter,
+	Center_City,
+	CenterOfCenter_City,
 
-
-};
-enum FillType
-{
-	F_None,
-	Tree,
-	Stone,
-	Mine,
-	Farm,
-	House,
-	Wall,
-	Tower,
-	Gate,
-	CommandCenter,
-	ArmyCenter,
-	FoodStore,
-	TreeStore,
-	StoneStore,
-	MoneyStore,
-
-	Bakery,
-	Mill,
 
 };
 enum BuildingDirection
@@ -145,6 +123,7 @@ enum BuildingDirection
 	Dir_City_Center,
 
 };
+
 static int  BoundSize = 0;
 static int  WorldSize = 1;
 static int	CitySize = 15;
@@ -161,6 +140,7 @@ class ABaseBuildingActor : public AActor
 {
 	GENERATED_BODY()
 protected:
+	BuildingType   mType;
 	FBuildingIndex mIndex;
 	BuildingDirection mDirection;
 	
@@ -189,6 +169,8 @@ public:
 		UStaticMeshComponent * BaseMeshComponent;
 	UPROPERTY(VisibleDefaultsOnly, Category = BaseBuilding)
 		USkeletalMeshComponent * BaseSkeletalMeshComponent;
+
+	BuildingType GetBuildingType();
 
 	void SetLevel(int _level);
 	int	GetLevel();

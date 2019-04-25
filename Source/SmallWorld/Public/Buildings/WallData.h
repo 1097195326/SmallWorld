@@ -2,13 +2,13 @@
 #include "BaseBuildingData.h"
 
 
-class CityWallData : public BaseBuildingData
+class WallData : public BaseBuildingData
 {
 protected:
     
 public:
-	CityWallData();
-    ~CityWallData();
+	WallData();
+    ~WallData();
     
     
     virtual void Serialization(TSharedRef<TJsonWriter<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>> Writer) override;

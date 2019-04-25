@@ -188,8 +188,10 @@ FString ABlockActor::GetMeshPath()
 			}
 		}
 		break;
-		case CityCenter:
-		case CenterOfCenter:
+		case Center_City:
+			tileStr = GrassFullDirtTiles;
+			break;
+		case CenterOfCenter_City:
 			tileStr = GrassCentreDirtTile;
 			break;
 		default:

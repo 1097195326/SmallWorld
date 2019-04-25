@@ -3,10 +3,31 @@
 
 enum BuildingType
 {
-    e_Barrack,
-    e_CityWall,
-    e_CommandCenter,
-    e_House
+	B_None,
+
+	B_World,
+
+	B_City,
+	B_CityBlock,
+
+	B_Tree,
+	B_Stone,
+	B_Mine,
+	B_Farm,
+	B_House,
+	B_Wall,
+	B_Tower,
+	B_Gate,
+	B_CommandCenter,
+	B_ArmyCenter,
+	B_FoodStore,
+	B_TreeStore,
+	B_StoneStore,
+	B_MoneyStore,
+
+	B_Bakery,
+	B_Mill,
+
 };
 
 

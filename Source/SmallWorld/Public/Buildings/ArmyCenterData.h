@@ -2,13 +2,13 @@
 #include "BaseBuildingData.h"
 
 
-class BarrackData : public BaseBuildingData
+class ArmyCenterData : public BaseBuildingData
 {
 protected:
     
 public:
-	BarrackData();
-    ~BarrackData();
+	ArmyCenterData();
+    ~ArmyCenterData();
     
     
     virtual void Serialization(TSharedRef<TJsonWriter<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>> Writer) override;

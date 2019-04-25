@@ -3,7 +3,7 @@
 
 HouseData::HouseData()
 {
-    mType = e_House;
+   
     
 }
 HouseData::~HouseData()

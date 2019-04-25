@@ -7,6 +7,8 @@ ABaseBuildingActor::ABaseBuildingActor()
 	BaseSkeletalMeshComponent = nullptr;
 	mDirection = Dir_None;
 	mLevel = 0;
+	mType = B_None;
+
 
 }
 void ABaseBuildingActor::PostInitializeComponents()
@@ -26,6 +28,10 @@ void ABaseBuildingActor::On_Init()
 void ABaseBuildingActor::On_Delete()
 {
 
+}
+BuildingType ABaseBuildingActor::GetBuildingType()
+{
+	return mType;
 }
 void ABaseBuildingActor::SetLevel(int _level)
 {
