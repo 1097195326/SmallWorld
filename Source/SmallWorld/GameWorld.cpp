@@ -9,7 +9,7 @@ GameWorld::GameWorld()
 }
 GameWorld::~GameWorld()
 {
-
+	ClearGeneralGoals();
 }
 GameWorld::GameWorld(const GameWorld & _world)
 {
@@ -65,6 +65,16 @@ void GameWorld::BuildWorld()
 		}
 	}
 }
+void GameWorld::ClearGeneralGoals()
+{
+	for (int i = 0; i < GeneralGoals.size(); i++)
+	{
+		GeneralGoal * goal = GeneralGoals[i];
+		delete goal;
+	}
+	GeneralGoals.clear();
+
+}
 ACityActor *  GameWorld::BuildCity(int _x, int _y)
 {
 	FTransform trans(FVector(_x * CitySize * TitleSize + (CitySize * TitleSize * 0.5), _y * CitySize * TitleSize + (CitySize * TitleSize * 0.5), 0));
@@ -72,8 +82,14 @@ ACityActor *  GameWorld::BuildCity(int _x, int _y)
 	if (CityActor)
 	{
 		CityActor->SetIndex(FBuildingIndex(_x, _y));
+
+
 		UGameplayStatics::FinishSpawningActor(CityActor, trans);
 		
+		GeneralGoal * goal = new GeneralGoal();
+		goal->InitWithCityActor(CityActor);
+		GeneralGoals.push_back(goal);
+
 		return CityActor;
 	}
 	return nullptr;

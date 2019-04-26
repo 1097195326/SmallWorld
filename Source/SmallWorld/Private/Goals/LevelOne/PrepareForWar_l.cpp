@@ -5,15 +5,21 @@
 
 PrepareForWar_l::PrepareForWar_l()
 {
-	BaseGoal * goal = nullptr;
-	goal = new Pre_Building_ll();
-	mCanChooseGoals.push_back(goal);
-	goal = new Pre_Soldiers_ll();
-	mCanChooseGoals.push_back(goal);
+	
 }
 PrepareForWar_l::~PrepareForWar_l()
 {
 
+}
+void PrepareForWar_l::InitGoals()
+{
+	BaseGoal * goal = nullptr;
+	goal = new Pre_Building_ll();
+	goal->InitWithCityActor(mCityActor);
+	mCanChooseGoals.push_back(goal);
+	goal = new Pre_Soldiers_ll();
+	goal->InitWithCityActor(mCityActor);
+	mCanChooseGoals.push_back(goal);
 }
 float PrepareForWar_l::Evaluate()
 {

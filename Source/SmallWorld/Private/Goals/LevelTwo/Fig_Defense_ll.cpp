@@ -12,25 +12,36 @@
 
 Fig_Defense_ll::Fig_Defense_ll()
 {
-	BaseGoal * goal = nullptr;
-	goal = new Fig_ArcherGroup_lll();
-	mCanChooseGoals.push_back(goal);
-	goal = new Fig_FootmanGroup_lll();
-	mCanChooseGoals.push_back(goal);
-	goal = new Fig_GriffinGroup_lll();
-	mCanChooseGoals.push_back(goal);
-	goal = new Fig_HorsemanGroup_lll();
-	mCanChooseGoals.push_back(goal);
-	goal = new Fig_KnightGroup_lll();
-	mCanChooseGoals.push_back(goal);
-	goal = new Fig_MageGroup_lll();
-	mCanChooseGoals.push_back(goal);
-	goal = new Fig_SiegeEngineGroup_lll();
-	mCanChooseGoals.push_back(goal);
+	
 }
 Fig_Defense_ll::~Fig_Defense_ll()
 {
 
+}
+void Fig_Defense_ll::InitGoals()
+{
+	BaseGoal * goal = nullptr;
+	goal = new Fig_ArcherGroup_lll();
+	goal->InitWithCityActor(mCityActor);
+	mCanChooseGoals.push_back(goal);
+	goal = new Fig_FootmanGroup_lll();
+	goal->InitWithCityActor(mCityActor);
+	mCanChooseGoals.push_back(goal);
+	goal = new Fig_GriffinGroup_lll();
+	goal->InitWithCityActor(mCityActor);
+	mCanChooseGoals.push_back(goal);
+	goal = new Fig_HorsemanGroup_lll();
+	goal->InitWithCityActor(mCityActor);
+	mCanChooseGoals.push_back(goal);
+	goal = new Fig_KnightGroup_lll();
+	goal->InitWithCityActor(mCityActor);
+	mCanChooseGoals.push_back(goal);
+	goal = new Fig_MageGroup_lll();
+	goal->InitWithCityActor(mCityActor);
+	mCanChooseGoals.push_back(goal);
+	goal = new Fig_SiegeEngineGroup_lll();
+	goal->InitWithCityActor(mCityActor);
+	mCanChooseGoals.push_back(goal);
 }
 float Fig_Defense_ll::Evaluate()
 {

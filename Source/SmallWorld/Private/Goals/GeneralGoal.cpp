@@ -5,15 +5,21 @@
 
 GeneralGoal::GeneralGoal()
 {
-	BaseGoal * goal = nullptr;
-	goal = new FightBattle_l();
-	mCanChooseGoals.push_back(goal);
-	goal = new PrepareForWar_l();
-	mCanChooseGoals.push_back(goal);
+	
 }
 GeneralGoal::~GeneralGoal()
 {
 
+}
+void GeneralGoal::InitGoals()
+{
+	BaseGoal * goal = nullptr;
+	goal = new FightBattle_l();
+	goal->InitWithCityActor(mCityActor);
+	mCanChooseGoals.push_back(goal);
+	goal = new PrepareForWar_l();
+	goal->InitWithCityActor(mCityActor);
+	mCanChooseGoals.push_back(goal);
 }
 float GeneralGoal::Evaluate()
 {

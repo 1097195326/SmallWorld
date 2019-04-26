@@ -7,6 +7,7 @@ public:
 	GeneralGoal();
 	~GeneralGoal();
 
+	virtual void InitGoals() override;
 	virtual float  Evaluate()override;
 	virtual void Enter()override;
 	virtual GoalState Process()override;

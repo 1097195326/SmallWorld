@@ -7,19 +7,27 @@
 
 FightBattle_l::FightBattle_l()
 {
-	BaseGoal * goal = nullptr;
-	goal = new Fig_Attack_ll();
-	mCanChooseGoals.push_back(goal);
-	goal = new Fig_AttackCity_ll();
-	mCanChooseGoals.push_back(goal);
-	goal = new Fig_Defense_ll();
-	mCanChooseGoals.push_back(goal);
-	goal = new Fig_DefenseFromCity_ll();
-	mCanChooseGoals.push_back(goal);
+	
 }
 FightBattle_l::~FightBattle_l()
 {
 
+}
+void FightBattle_l::InitGoals()
+{
+	BaseGoal * goal = nullptr;
+	goal = new Fig_Attack_ll();
+	goal->InitWithCityActor(mCityActor);
+	mCanChooseGoals.push_back(goal);
+	goal = new Fig_AttackCity_ll();
+	goal->InitWithCityActor(mCityActor);
+	mCanChooseGoals.push_back(goal);
+	goal = new Fig_Defense_ll();
+	goal->InitWithCityActor(mCityActor);
+	mCanChooseGoals.push_back(goal);
+	goal = new Fig_DefenseFromCity_ll();
+	goal->InitWithCityActor(mCityActor);
+	mCanChooseGoals.push_back(goal);
 }
 float FightBattle_l::Evaluate()
 {

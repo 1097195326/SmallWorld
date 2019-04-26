@@ -14,34 +14,49 @@
 
 Pre_Building_ll::Pre_Building_ll()
 {
-	BaseGoal * goal = nullptr;
-	goal = new Pre_BuildArmyCenter_lll();
-	mCanChooseGoals.push_back(goal);
-	goal = new Pre_BuildCommandCenter_lll();
-	mCanChooseGoals.push_back(goal);
-	goal = new Pre_BuildHouse_lll();
-	mCanChooseGoals.push_back(goal);
-	goal = new Pre_BuildWall_lll();
-	mCanChooseGoals.push_back(goal);
-	goal = new Pre_BuildBakery_lll();
-	mCanChooseGoals.push_back(goal);
-	goal = new Pre_BuildFarm_lll();
-	mCanChooseGoals.push_back(goal);
-	goal = new Pre_BuildFoodStore_lll();
-	mCanChooseGoals.push_back(goal);
-	goal = new Pre_BuildMoneyStore_lll();
-	mCanChooseGoals.push_back(goal);
-	goal = new Pre_BuildStoneStore_lll();
-	mCanChooseGoals.push_back(goal);
-	goal = new Pre_BuildWoodStore_lll();
-	mCanChooseGoals.push_back(goal);
-	goal = new Pre_BuildMill_lll();
-	mCanChooseGoals.push_back(goal);
+	
 
 }
 Pre_Building_ll::~Pre_Building_ll()
 {
 
+}
+void Pre_Building_ll::InitGoals()
+{
+	BaseGoal * goal = nullptr;
+	goal = new Pre_BuildArmyCenter_lll();
+	goal->InitWithCityActor(mCityActor);
+	mCanChooseGoals.push_back(goal);
+	goal = new Pre_BuildCommandCenter_lll();
+	goal->InitWithCityActor(mCityActor);
+	mCanChooseGoals.push_back(goal);
+	goal = new Pre_BuildHouse_lll();
+	goal->InitWithCityActor(mCityActor);
+	mCanChooseGoals.push_back(goal);
+	goal = new Pre_BuildWall_lll();
+	goal->InitWithCityActor(mCityActor);
+	mCanChooseGoals.push_back(goal);
+	goal = new Pre_BuildBakery_lll();
+	goal->InitWithCityActor(mCityActor);
+	mCanChooseGoals.push_back(goal);
+	goal = new Pre_BuildFarm_lll();
+	goal->InitWithCityActor(mCityActor);
+	mCanChooseGoals.push_back(goal);
+	goal = new Pre_BuildFoodStore_lll();
+	goal->InitWithCityActor(mCityActor);
+	mCanChooseGoals.push_back(goal);
+	goal = new Pre_BuildMoneyStore_lll();
+	goal->InitWithCityActor(mCityActor);
+	mCanChooseGoals.push_back(goal);
+	goal = new Pre_BuildStoneStore_lll();
+	goal->InitWithCityActor(mCityActor);
+	mCanChooseGoals.push_back(goal);
+	goal = new Pre_BuildWoodStore_lll();
+	goal->InitWithCityActor(mCityActor);
+	mCanChooseGoals.push_back(goal);
+	goal = new Pre_BuildMill_lll();
+	goal->InitWithCityActor(mCityActor);
+	mCanChooseGoals.push_back(goal);
 }
 float Pre_Building_ll::Evaluate()
 {

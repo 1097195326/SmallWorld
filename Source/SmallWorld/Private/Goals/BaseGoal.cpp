@@ -3,13 +3,28 @@
 
 BaseGoal::BaseGoal()
 {
+	mCityActor = nullptr;
 	mState = e_UnActive;
 	mCanChooseGoals.reserve(4);
 }
 BaseGoal::~BaseGoal()
 {
+	mCityActor = nullptr;
 	ClearAllTask();
 	ClearAllGoal();
+}
+void BaseGoal::InitWithCityActor(ACityActor * _cityActor)
+{
+	mCityActor = _cityActor;
+	InitGoals();
+}
+void BaseGoal::InitGoals()
+{
+
+}
+ACityActor * BaseGoal::GetSelfCityActor()
+{
+	return mCityActor;
 }
 BaseGoal * BaseGoal::GetBestGoal()
 {

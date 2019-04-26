@@ -7,6 +7,7 @@ public:
 	Pre_Building_ll();
 	~Pre_Building_ll();
 
+	virtual void InitGoals() override;
 	virtual float  Evaluate()override;
 	virtual void Enter()override;
 	virtual GoalState Process()override;

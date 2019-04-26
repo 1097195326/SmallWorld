@@ -3,6 +3,7 @@
 #include "CityActor.h"
 #include "SmallWorldInstance.h"
 #include "GameWorldActor.h"
+#include "GeneralGoal.h"
 
 class GameWorld
 {
@@ -12,6 +13,7 @@ private:
 	GameWorld & operator = (const GameWorld & _world);
 
 	// 
+	vector<GeneralGoal *>        GeneralGoals;
 	vector<vector<ACityActor *>> CityMap;
 	AGameWorldActor * GameWorldActor;
 
@@ -21,6 +23,7 @@ public:
 	static GameWorld * GetInstance();
 	void BuildWorld();
 
+	void  ClearGeneralGoals();
 
 private:
 	bool IsInWorld(int _index);
