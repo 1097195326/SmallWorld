@@ -365,7 +365,7 @@ void ACityActor::CalCulateOrientation(int _x, int _y,ABlockActor * _blockActor)
 		CenterCastleBottom.push_back(_blockActor);
 		_blockActor->SetOrientation(CenterCastle_Bottom);
 		return ;
-	}else if (_x == CitySize/2,_y == CitySize/2)
+	}else if (_x == CitySize/2 && _y == CitySize/2)
 	{
 		CenterOfCenterCity = _blockActor;
 		_blockActor->SetOrientation(CenterOfCenter_City);
