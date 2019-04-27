@@ -114,6 +114,50 @@ void ACityActor::On_Delete()
 {
 
 }
+void ACityActor::BuildArmyCenter()
+{
+    
+}
+void ACityActor::BuildBakery()
+{
+    
+}
+void ACityActor::BuildCommandCenter()
+{
+    
+}
+void ACityActor::BuildFarm()
+{
+    
+}
+void ACityActor::BuildFoodStore()
+{
+    
+}
+void ACityActor::BuildWall()
+{
+    
+}
+void ACityActor::BuildHouse()
+{
+    
+}
+void ACityActor::BuildMill()
+{
+    
+}
+void ACityActor::BuildMoneyStore()
+{
+    
+}
+void ACityActor::BuildStoneStore()
+{
+    
+}
+void ACityActor::BuildTreeStore()
+{
+    
+}
 void ACityActor::CalCulateOrientation(int _x, int _y,ABlockActor * _blockActor)
 {
 	// OutControll 

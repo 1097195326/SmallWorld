@@ -11,6 +11,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "SmallWorldInstance.h"
 #include <vector>
+#include <list>
 #include "BaseBuildingData.h"
 #include "BaseBuildingActor.generated.h"
 

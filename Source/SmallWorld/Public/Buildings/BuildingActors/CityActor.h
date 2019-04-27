@@ -19,6 +19,22 @@ private:
 	UPROPERTY(VisibleDefaultsOnly)
 		UBoxComponent * CollisionBox;
 
+    
+    list<AArmyCenterActor *>        ArmyCenterList;
+    list<ABakeryActor *>            BakeryList;
+    list<ACommandCenterActor *>     CommandCenterList;
+    list<AFarmActor *>              FarmList;
+    list<AHouseActor *>             HouseList;
+    list<AMillActor *>              MillList;
+    list<AMoneyStoreActor *>        MoneyStoreList;
+    list<AFoodStoreActor *>         FoodStoreList;
+    list<AStoneStoreActor *>        StoneStoreList;
+    list<ATreeStoreActor *>         TreeStoreList;
+    list<AWallActor *>              WallList;
+    list<ATowerActor *>             TowerList;
+    list<AGateActor *>              GateList;
+    
+    
 public:
 	ACityActor();
 
@@ -26,11 +42,28 @@ public:
 	virtual void On_Delete() override;
 
 	virtual void InitData(BaseBuildingData * _data) override;
-
-private:
-	void CalCulateOrientation(int _x,int _y, ABlockActor * _blockActor);
     
-
+    void BuildArmyCenter();
+    void BuildBakery();
+    void BuildCommandCenter();
+    void BuildFarm();
+    void BuildFoodStore();
+    void BuildWall();
+    void BuildHouse();
+    void BuildMill();
+    void BuildMoneyStore();
+    void BuildStoneStore();
+    void BuildTreeStore();
+    
+    
+private:
+	
+    
+    void CalCulateOrientation(int _x,int _y, ABlockActor * _blockActor);
+    
+    
+    
+    
 	vector<ABlockActor*>	CornerOutControllLeftBottom;
 	vector<ABlockActor*>	CornerOutControllLeftTop;
 	vector<ABlockActor*> 	CornerOutControllRightBottom;
