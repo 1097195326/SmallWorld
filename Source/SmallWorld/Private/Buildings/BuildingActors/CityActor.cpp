@@ -12,7 +12,7 @@ ACityActor::ACityActor()
 	BaseMeshComponent->SetRelativeScale3D(FVector(0.1f));
 
 }
-void ACityActor::InitData(CityData * _data)
+void ACityActor::InitData(BaseBuildingData * _data)
 {
 	mData = _data;
 }
@@ -22,8 +22,8 @@ void ACityActor::On_Init()
 	CollisionBox->SetBoxExtent(FVector(CityExtent, CityExtent, CityExtent));
 
 	// build City Map
-	const float CityXOffSet = mIndex.X * CitySize * TitleSize;
-	const float CityYOffSet = mIndex.Y * CitySize * TitleSize;
+	const float CityXOffSet = mData->mIndex.X * CitySize * TitleSize;
+	const float CityYOffSet = mData->mIndex.Y * CitySize * TitleSize;
 
 	for (int x = 0; x < CitySize; x++)
 	{
@@ -35,7 +35,7 @@ void ACityActor::On_Init()
 			if (BlockActor)
 			{
 				BlockActor->SetCity(this);
-				BlockActor->SetIndex(FBuildingIndex(x, y));
+				BlockActor->SetIndex(BuildingIndex(x, y));
 				if (IsInWorld())
 				{
 					CalCulateOrientation(x, y,BlockActor);
@@ -50,8 +50,8 @@ void ACityActor::On_Init()
 	
 	// build castle wall
 	const int OutCastleSize = (CitySize - CastleSize) * 0.5;
-	const float CastleWallXOffSet = mIndex.X * CitySize * TitleSize + TitleSize * OutCastleSize + TitleSize * 0.5;
-	const float CastleWallYOffSet = mIndex.Y * CitySize * TitleSize + TitleSize * OutCastleSize + TitleSize * 0.5;
+	const float CastleWallXOffSet = mData->mIndex.X * CitySize * TitleSize + TitleSize * OutCastleSize + TitleSize * 0.5;
+	const float CastleWallYOffSet = mData->mIndex.Y * CitySize * TitleSize + TitleSize * OutCastleSize + TitleSize * 0.5;
 	const float CastleWallLength = TitleSize * (CastleSize - 1);
 	for (int i = 0; i < 4; i++)
 	{
@@ -374,24 +374,4 @@ void ACityActor::CalCulateOrientation(int _x, int _y,ABlockActor * _blockActor)
 	CenterCity.push_back(_blockActor);
 	_blockActor->SetOrientation(Center_City);
 	return ;
-}
-FBuildingIndex ACityActor::GetCenterIndex()
-{
-	return FBuildingIndex(CitySize / 2, CitySize / 2);
-}
-FBuildingIndex ACityActor::GetXYLeftBottomIndex()
-{
-	return FBuildingIndex(0, 0);
-}
-FBuildingIndex ACityActor::GetXYLeftTopIndex()
-{
-	return FBuildingIndex(CitySize - 1, 0);
-}
-FBuildingIndex ACityActor::GetXYRightBottomIndex()
-{
-	return FBuildingIndex(0, CitySize -1);
-}
-FBuildingIndex ACityActor::GetXYRightTopIndex()
-{
-	return FBuildingIndex(CitySize - 1, CitySize - 1);
 }

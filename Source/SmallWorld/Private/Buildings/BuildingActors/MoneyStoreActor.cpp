@@ -9,7 +9,7 @@ AMoneyStoreActor::AMoneyStoreActor()
 	BaseMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("GateComponent"));
 	BaseMeshComponent->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
 
-	mLevel = 1;
+	mData->mLevel = 1;
 	mMaxLevel = 3;
 
 	MeshPathLevel_1 = TEXT("/Game/CastlePack/Meshes/SM_Treasurey_1");

@@ -5,9 +5,7 @@ ABaseBuildingActor::ABaseBuildingActor()
 {
 	BaseMeshComponent = nullptr;
 	BaseSkeletalMeshComponent = nullptr;
-	mDirection = Dir_None;
-	mLevel = 0;
-	mType = B_None;
+	
 
 
 }
@@ -29,22 +27,33 @@ void ABaseBuildingActor::On_Delete()
 {
 
 }
+
+void ABaseBuildingActor::InitData(BaseBuildingData * _data)
+{
+    mData = _data;
+    
+}
+void ABaseBuildingActor::SaveData(TSharedRef<TJsonWriter<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>> Writer)
+{
+    mData->Serialization(Writer);
+}
+
 BuildingType ABaseBuildingActor::GetBuildingType()
 {
-	return mType;
+    return mData->mType;
 }
 void ABaseBuildingActor::SetLevel(int _level)
 {
-	mLevel = _level;
+	mData->mLevel = _level;
 }
 int ABaseBuildingActor::GetLevel()
 {
-	return mLevel;
+	return mData->mLevel;
 }
 FString ABaseBuildingActor::GetMeshPath()
 {
 	FString Path;
-	switch (mLevel)
+	switch (mData->mLevel)
 	{
 	case 0:
 		Path = MeshPathLevel_0;
@@ -69,56 +78,19 @@ FString ABaseBuildingActor::GetMeshPath()
 	}
 	return Path;
 }
-FBox ABaseBuildingActor::GetBuildingBound()
-{
-	return GetComponentsBoundingBox(true);
-}
-float ABaseBuildingActor::GetBuidlingWidth()
-{
-	return GetBuildingBound().GetSize().X;
-}
-float ABaseBuildingActor::GetBuildingLength()
-{
-	return GetBuildingBound().GetSize().Y;
-}
-float ABaseBuildingActor::GetBuildingHeight()
-{
-	return GetBuildingBound().GetSize().Z;
-}
-FVector ABaseBuildingActor::GetCenterPoint()
-{
-	FVector Center, Extent;
-	GetBuildingBound().GetCenterAndExtents(Center,Extent);
-	return Center;
-}
-FVector ABaseBuildingActor::GetXYLeftBottomPoint()
-{
-	return GetBuildingBound().Min;
-}
-FVector ABaseBuildingActor::GetXYLeftTopPoint()
-{
-	return GetBuildingBound().Min + FVector(GetBuildingLength(),0,0);
-}
-FVector ABaseBuildingActor::GetXYRightBottomPoint()
-{
-	return GetBuildingBound().Min + FVector(0,GetBuidlingWidth(),0);
-}
-FVector ABaseBuildingActor::GetXYRightTopPoint()
-{
-	return GetBuildingBound().Min + FVector(GetBuildingLength(),GetBuidlingWidth(),0);
-}
+
 void ABaseBuildingActor::SetDirection(BuildingDirection _dir)
 {
-	mDirection = _dir;
+	mData->mDirection = _dir;
 }
 BuildingDirection ABaseBuildingActor::GetDirction()
 {
-	return mDirection;
+	return mData->mDirection;
 }
 FRotator ABaseBuildingActor::DirectionRotation()
 {
 	FRotator Rotator(ForceInit);
-	switch (mDirection)
+	switch (mData->mDirection)
 	{
 	case Dir_None:
 		break;
@@ -161,39 +133,19 @@ FRotator ABaseBuildingActor::DirectionRotation()
 
 	return Rotator;
 }
-void ABaseBuildingActor::SetIndex(FBuildingIndex _index)
+void ABaseBuildingActor::SetIndex(BuildingIndex _index)
 {
-	mIndex = _index;
+	mData->mIndex = _index;
 }
-FBuildingIndex ABaseBuildingActor::GetIndex()
+BuildingIndex ABaseBuildingActor::GetIndex()
 {
-	return mIndex;
+	return mData->mIndex;
 }
 bool ABaseBuildingActor::IsInWorld()
 {
-	return IsInWorld(mIndex.X) && IsInWorld(mIndex.Y);
+	return IsInWorld(mData->mIndex.X) && IsInWorld(mData->mIndex.Y);
 }
 bool ABaseBuildingActor::IsInWorld(int _index)
 {
 	return _index >= BoundSize && _index <= WorldSize;
-}
-FBuildingIndex ABaseBuildingActor::GetCenterIndex()
-{
-	return FBuildingIndex();
-}
-FBuildingIndex ABaseBuildingActor::GetXYLeftBottomIndex()
-{
-	return FBuildingIndex();
-}
-FBuildingIndex ABaseBuildingActor::GetXYLeftTopIndex()
-{
-	return FBuildingIndex();
-}
-FBuildingIndex ABaseBuildingActor::GetXYRightBottomIndex()
-{
-	return FBuildingIndex();
-}
-FBuildingIndex ABaseBuildingActor::GetXYRightTopIndex()
-{
-	return FBuildingIndex();
 }

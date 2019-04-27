@@ -25,7 +25,7 @@ void ABlockActor::On_Init()
 	
 	UStaticMesh * mesh = LoadObject<UStaticMesh>(this, *TitlePath);
 	BaseMeshComponent->SetStaticMesh(mesh);
-	if (mDirection != Dir_None)
+	if (mData->mDirection != Dir_None)
 	{
 		BaseMeshComponent->SetRelativeRotation(DirectionRotation());
 	}
@@ -63,42 +63,42 @@ FString ABlockActor::GetMeshPath()
 		case FarmOutControll_BottomLeft:
 		case FarmOutControll_BottomRight:
 		{
-			if (mIndex.X == 0 && mIndex.Y == 0)
+			if (mData->mIndex.X == 0 && mData->mIndex.Y == 0)
 			{
 				tileStr = GrassToDirtEdgeTile;
 				SetDirection(Dir_Corner_City_LeftBottom);
 			}
-			else if (mIndex.X == CitySize - 1 && mIndex.Y == 0)
+			else if (mData->mIndex.X == CitySize - 1 && mData->mIndex.Y == 0)
 			{
 				tileStr = GrassToDirtEdgeTile;
 				SetDirection(Dir_Corner_City_LeftTop);
 			}
-			else if (mIndex.X == CitySize - 1 && mIndex.Y == CitySize - 1)
+			else if (mData->mIndex.X == CitySize - 1 && mData->mIndex.Y == CitySize - 1)
 			{
 				tileStr = GrassToDirtEdgeTile;
 				SetDirection(Dir_Corner_City_RightTop);
 			}
-			else if (mIndex.X == 0 && mIndex.Y == CitySize - 1)
+			else if (mData->mIndex.X == 0 && mData->mIndex.Y == CitySize - 1)
 			{
 				tileStr = GrassToDirtEdgeTile;
 				SetDirection(Dir_Corner_City_RightBottom);
 			}
-			else if (mIndex.Y == 0)
+			else if (mData->mIndex.Y == 0)
 			{
 				tileStr = GrassToDirtTile;
 				SetDirection(Dir_CityEdge_Left);
 			}
-			else if (mIndex.Y == CitySize - 1)
+			else if (mData->mIndex.Y == CitySize - 1)
 			{
 				tileStr = GrassToDirtTile;
 				SetDirection(Dir_CityEdge_Right);
 			}
-			else if (mIndex.X == 0)
+			else if (mData->mIndex.X == 0)
 			{
 				tileStr = GrassToDirtTile;
 				SetDirection(Dir_CityEdge_Bottom);
 			}
-			else if (mIndex.X == CitySize - 1)
+			else if (mData->mIndex.X == CitySize - 1)
 			{
 				tileStr = GrassToDirtTile;
 				SetDirection(Dir_CityEdge_Top);
@@ -142,42 +142,42 @@ FString ABlockActor::GetMeshPath()
 		{
 			const int OutCastleSize = (CitySize - CastleSize) * 0.5;
 
-			if (mIndex.X == OutCastleSize && mIndex.Y == OutCastleSize)
+			if (mData->mIndex.X == OutCastleSize && mData->mIndex.Y == OutCastleSize)
 			{
 				tileStr = GrassToDirtEdgeTile;
 				SetDirection(Dir_Corner_Castle_LeftBottom);
 			}
-			else if (mIndex.X == CitySize - OutCastleSize - 1 && mIndex.Y == OutCastleSize)
+			else if (mData->mIndex.X == CitySize - OutCastleSize - 1 && mData->mIndex.Y == OutCastleSize)
 			{
 				tileStr = GrassToDirtEdgeTile;
 				SetDirection(Dir_Corner_Castle_LeftTop);
 			}
-			else if (mIndex.X == CitySize - OutCastleSize - 1 && mIndex.Y == CitySize - OutCastleSize - 1)
+			else if (mData->mIndex.X == CitySize - OutCastleSize - 1 && mData->mIndex.Y == CitySize - OutCastleSize - 1)
 			{
 				tileStr = GrassToDirtEdgeTile;
 				SetDirection(Dir_Corner_Castle_RightTop);
 			}
-			else if (mIndex.X == OutCastleSize && mIndex.Y == CitySize - OutCastleSize - 1)
+			else if (mData->mIndex.X == OutCastleSize && mData->mIndex.Y == CitySize - OutCastleSize - 1)
 			{
 				tileStr = GrassToDirtEdgeTile;
 				SetDirection(Dir_Corner_Castle_RightBottom);
 			}
-			else if (mIndex.Y == OutCastleSize)
+			else if (mData->mIndex.Y == OutCastleSize)
 			{
 				tileStr = GrassToDirtTile;
 				SetDirection(Dir_CastleEdge_Left);
 			}
-			else if (mIndex.Y == CitySize - OutCastleSize - 1)
+			else if (mData->mIndex.Y == CitySize - OutCastleSize - 1)
 			{
 				tileStr = GrassToDirtTile;
 				SetDirection(Dir_CastleEdge_Right);
 			}
-			else if (mIndex.X == OutCastleSize)
+			else if (mData->mIndex.X == OutCastleSize)
 			{
 				tileStr = GrassToDirtTile;
 				SetDirection(Dir_CastleEdge_Bottom);
 			}
-			else if (mIndex.X == CitySize - OutCastleSize - 1)
+			else if (mData->mIndex.X == CitySize - OutCastleSize - 1)
 			{
 				tileStr = GrassToDirtTile;
 				SetDirection(Dir_CastleEdge_Top);
@@ -201,14 +201,14 @@ FString ABlockActor::GetMeshPath()
 	}
 	return tileStr;
 }
-void ABlockActor::InitData(BlockData * Data)
-{
-	mData = Data;
-	static ConstructorHelpers::FObjectFinder<UStaticMesh> BlockMesh(TEXT(""));
-
-	BaseMeshComponent->SetStaticMesh(BlockMesh.Object);
-
-}
+//void ABlockActor::InitData(BlockData * Data)
+//{
+//    mData = Data;
+//    static ConstructorHelpers::FObjectFinder<UStaticMesh> BlockMesh(TEXT(""));
+//
+//    BaseMeshComponent->SetStaticMesh(BlockMesh.Object);
+//
+//}
 void ABlockActor::SetTileType(BlockTitleType _type)
 {
 	mTitleType = _type;

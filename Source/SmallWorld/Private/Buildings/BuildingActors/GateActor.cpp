@@ -8,7 +8,7 @@ AGateActor::AGateActor()
 	BaseSkeletalMeshComponent = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("GateComponent"));
 	BaseSkeletalMeshComponent->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
 
-	mLevel = 1;
+	mData->mLevel = 1;
 	mMaxLevel = 3;
 
 	MeshPathLevel_1 = TEXT("/Game/CastlePack/Meshes/SK_Lvl1_Gate");
@@ -25,7 +25,7 @@ void AGateActor::On_Init()
 		BaseSkeletalMeshComponent->SetSkeletalMesh(mesh);
 		
 	}
-	if (mDirection != Dir_None)
+	if (mData->mDirection != Dir_None)
 	{
 		BaseSkeletalMeshComponent->SetRelativeRotation(DirectionRotation() + FRotator(0.f,180.f,0.f));
 	}

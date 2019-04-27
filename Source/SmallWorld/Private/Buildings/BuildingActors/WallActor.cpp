@@ -8,7 +8,7 @@ AWallActor::AWallActor()
 	BaseMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("GateComponent"));
 	BaseMeshComponent->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
 
-	mLevel = 1;
+	mData->mLevel = 1;
 	mMaxLevel = 3;
 
 	MeshPathLevel_1 = TEXT("/Game/CastlePack/Meshes/SM_Lvl1_Wall");
@@ -22,7 +22,7 @@ void AWallActor::On_Init()
 	{
 		BaseMeshComponent->SetStaticMesh(mesh);
 	}
-	if (mDirection != Dir_None)
+	if (mData->mDirection != Dir_None)
 	{
 		BaseMeshComponent->SetRelativeRotation(DirectionRotation() + FRotator(0.f, -90.f, 0.f));
 	}

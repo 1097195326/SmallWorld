@@ -15,7 +15,6 @@ class ACityActor : public ABaseBuildingActor
 
 private:
 	vector<vector<ABlockActor*>> BlockMap;
-	CityData * mData;
 
 	UPROPERTY(VisibleDefaultsOnly)
 		UBoxComponent * CollisionBox;
@@ -26,13 +25,7 @@ public:
 	virtual void On_Init() override;
 	virtual void On_Delete() override;
 
-	void InitData(CityData * _data);
-
-	virtual FBuildingIndex GetCenterIndex() override;
-	virtual FBuildingIndex GetXYLeftBottomIndex() override;
-	virtual FBuildingIndex GetXYLeftTopIndex() override;
-	virtual FBuildingIndex GetXYRightBottomIndex() override;
-	virtual FBuildingIndex GetXYRightTopIndex() override;
+	virtual void InitData(BaseBuildingData * _data) override;
 
 private:
 	void CalCulateOrientation(int _x,int _y, ABlockActor * _blockActor);

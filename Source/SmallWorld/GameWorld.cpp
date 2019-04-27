@@ -81,7 +81,7 @@ ACityActor *  GameWorld::BuildCity(int _x, int _y)
 	ACityActor * CityActor = Cast<ACityActor>(UGameplayStatics::BeginDeferredActorSpawnFromClass(SWI, ACityActor::StaticClass(), trans));
 	if (CityActor)
 	{
-		CityActor->SetIndex(FBuildingIndex(_x, _y));
+		CityActor->SetIndex(BuildingIndex(_x, _y));
 
 
 		UGameplayStatics::FinishSpawningActor(CityActor, trans);

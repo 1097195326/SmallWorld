@@ -16,113 +16,6 @@
 
 using namespace std;
 
-//USTRUCT()
-struct FBuildingIndex
-{
-	//GENERATED_BODY()
-	int X;
-	int Y;
-	FBuildingIndex() {}
-	FBuildingIndex(int _x, int _y) :X(_x), Y(_y)
-	{
-
-	}
-};
-
-enum CityOrientation
-{
-	O_None,
-	// OutControll 
-	CornerOutControll_LeftBottom,
-	CornerOutControll_LeftTop,
-	CornerOutControll_RightBottom,
-	CornerOutControll_RightTop,
-
-	CenterOutControll_Left,
-	CenterOutControll_Right,
-	CenterOutControll_Top,
-	CenterOutControll_Bottom,
-
-	OutSkirtOutControll_LeftBottom,
-	OutSkirtOutControll_LeftTop,
-	OutSkirtOutControll_RightBottom,
-	OutSkirtOutControll_RightTop,
-	OutSkirtOutControll_TopLeft,
-	OutSkirtOutControll_TopRight,
-	OutSkirtOutControll_BottomLeft,
-	OutSkirtOutControll_BottomRight,
-
-	FarmOutControll_LeftBottom,
-	FarmOutControll_LeftTop,
-	FarmOutControll_RightBottom,
-	FarmOutControll_RightTop,
-	FarmOutControll_TopLeft,
-	FarmOutControll_TopRight,
-	FarmOutControll_BottomLeft,
-	FarmOutControll_BottomRight,
-	// Controll
-	CornerControll_LeftBottom,
-	CornerControll_LeftTop,
-	CornerControll_RightBottom,
-	CornerControll_RightTop,
-
-	CenterControll_Left,
-	CenterControll_Right,
-	CenterControll_Top,
-	CenterControll_Bottom,
-
-	FarmControll_LeftBottom,
-	FarmControll_LeftTop,
-	FarmControll_RightBottom,
-	FarmControll_RightTop,
-	FarmControll_TopLeft,
-	FarmControll_TopRight,
-	FarmControll_BottomLeft,
-	FarmControll_BottomRight,
-	// In Castle
-	CornerCastle_LeftBottom,
-	CornerCastle_LeftTop,
-	CornerCastle_RightBottom,
-	CornerCastle_RightTop,
-
-	CenterCastle_Left,
-	CenterCastle_Right,
-	CenterCastle_Top,
-	CenterCastle_Bottom,
-	// City Center
-	Center_City,
-	CenterOfCenter_City,
-
-
-};
-enum BuildingDirection
-{
-	Dir_None,
-	
-    Dir_Corner_City_LeftBottom,
-	Dir_Corner_City_LeftTop,
-	Dir_Corner_City_RightBottom,
-	Dir_Corner_City_RightTop,
-
-	Dir_CityEdge_Left,
-	Dir_CityEdge_Right,
-	Dir_CityEdge_Top,
-	Dir_CityEdge_Bottom,
-    
-    Dir_Corner_Castle_LeftBottom,
-    Dir_Corner_Castle_LeftTop,
-    Dir_Corner_Castle_RightBottom,
-    Dir_Corner_Castle_RightTop,
-    
-    Dir_CastleEdge_Left,
-    Dir_CastleEdge_Right,
-    Dir_CastleEdge_Top,
-    Dir_CastleEdge_Bottom,
-    
-    
-	Dir_City_Center,
-
-};
 
 const int  BoundSize = 0;
 const int  WorldSize = 1;
@@ -140,12 +33,13 @@ class ABaseBuildingActor : public AActor
 {
 	GENERATED_BODY()
 protected:
-	BuildingType   mType;
-	FBuildingIndex mIndex;
-	BuildingDirection mDirection;
-	
-	int					mLevel;
-	int					mMaxLevel;
+    BaseBuildingData * mData;
+    
+    // Need To Save
+        // position
+        // Rotator
+    // End
+    int                    mMaxLevel;
 
 	FString  MeshPathLevel_0;
 	FString  MeshPathLevel_1;
@@ -154,24 +48,23 @@ protected:
 	FString  MeshPathLevel_4;
 	FString  MeshPathLevel_5;
 
-
+    // protected function
+    
 	virtual FString GetMeshPath();
 
 public:
 	ABaseBuildingActor();
 	virtual void PostInitializeComponents() override;
 	virtual void BeginDestroy() override;
-
+    
 	virtual void On_Init();
 	virtual void On_Delete();
 
-	UPROPERTY(VisibleDefaultsOnly, Category = BaseBuilding)
-		UStaticMeshComponent * BaseMeshComponent;
-	UPROPERTY(VisibleDefaultsOnly, Category = BaseBuilding)
-		USkeletalMeshComponent * BaseSkeletalMeshComponent;
-
+    virtual void InitData(BaseBuildingData * _data);
+    virtual void SaveData(TSharedRef<TJsonWriter<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>> Writer);
+    
 	BuildingType GetBuildingType();
-
+    
 	void SetLevel(int _level);
 	int	GetLevel();
 
@@ -180,26 +73,18 @@ public:
 
 	FRotator DirectionRotation();
 
-	void SetIndex(FBuildingIndex _index);
-	FBuildingIndex GetIndex();
+	void SetIndex(BuildingIndex _index);
+	BuildingIndex GetIndex();
 	
 	virtual bool IsInWorld();
  	virtual bool IsInWorld(int _index);
+    
+public:
+    UPROPERTY(VisibleDefaultsOnly, Category = BaseBuilding)
+    UStaticMeshComponent * BaseMeshComponent;
+    UPROPERTY(VisibleDefaultsOnly, Category = BaseBuilding)
+    USkeletalMeshComponent * BaseSkeletalMeshComponent;
 
-	virtual FBox GetBuildingBound();
-	virtual float GetBuidlingWidth();
-	virtual float GetBuildingHeight();
-	virtual float GetBuildingLength();
-
-	virtual FVector GetCenterPoint();
-	virtual FVector GetXYLeftBottomPoint();
-	virtual FVector GetXYLeftTopPoint();
-	virtual FVector GetXYRightBottomPoint();
-	virtual FVector GetXYRightTopPoint();
-
-	virtual FBuildingIndex GetCenterIndex();
-	virtual FBuildingIndex GetXYLeftBottomIndex();
-	virtual FBuildingIndex GetXYLeftTopIndex();
-	virtual FBuildingIndex GetXYRightBottomIndex();
-	virtual FBuildingIndex GetXYRightTopIndex();
+    
+    
 };

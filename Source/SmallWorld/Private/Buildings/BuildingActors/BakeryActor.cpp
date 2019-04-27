@@ -10,7 +10,7 @@ ABakeryActor::ABakeryActor()
 	BaseMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("GateComponent"));
 	BaseMeshComponent->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
 
-	mLevel = 0;
+	mData->mLevel = 0;
 	mMaxLevel = 3;
 
 	MeshPathLevel_0 = TEXT("/Game/CastlePack/Meshes/SM_Bakery_Lvl0");

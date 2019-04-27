@@ -26,7 +26,6 @@ private:
 	BlockTitleType mTitleType;
 	CityOrientation mCityOrientation;
 
-	BlockData * mData;
 	ACityActor * mCity;
 
 	FString GrassCentreDirtTile;
@@ -39,7 +38,6 @@ public:
 	ABlockActor();
 	virtual void On_Init() override;
 
-	void InitData(BlockData * Data);
 
 	void SetTileType(BlockTitleType _type);
 	BlockTitleType GetTileType();
