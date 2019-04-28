@@ -3,7 +3,11 @@
 
 float Pre_BuildWall_lll::Evaluate()
 {
-	return 0.f;
+	if (mCityActor->GetWallLevel() > 0)
+	{
+		return 0.f;
+	}
+	return 50.f;
 }
 void Pre_BuildWall_lll::Enter()
 {

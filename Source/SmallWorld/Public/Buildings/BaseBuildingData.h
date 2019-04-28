@@ -134,8 +134,6 @@ enum BuildingDirection
     Dir_CastleEdge_Bottom,
     
     
-    Dir_City_Center,
-    
 };
 
 

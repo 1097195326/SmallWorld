@@ -3,7 +3,11 @@
 
 float Pre_BuildArmyCenter_lll::Evaluate()
 {
-	return 0.f;
+	if (mCityActor->GetArmyCenterLevel() > 0)
+	{
+		return 0.f;
+	}
+	return 90.f;
 }
 void Pre_BuildArmyCenter_lll::Enter()
 {

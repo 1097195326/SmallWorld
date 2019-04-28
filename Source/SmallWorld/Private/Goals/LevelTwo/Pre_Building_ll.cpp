@@ -60,7 +60,8 @@ void Pre_Building_ll::InitGoals()
 }
 float Pre_Building_ll::Evaluate()
 {
-	return 0.f;
+	
+	return 1.f;
 }
 void Pre_Building_ll::Enter()
 {

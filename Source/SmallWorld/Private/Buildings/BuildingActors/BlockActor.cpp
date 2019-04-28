@@ -12,6 +12,7 @@ ABlockActor::ABlockActor()
 	DirtTile = "/Game/CastlePack/Meshes/SM_GrassTile_6";
 
 	mCity = nullptr;
+	mBlockData = nullptr;
 
 	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("RootComponent"));
 	BaseMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("BlockMeshComponent"));
@@ -21,6 +22,8 @@ ABlockActor::ABlockActor()
 }
 void ABlockActor::On_Init()
 {
+	mBlockData = (BlockData *)mData;
+
 	FString TitlePath = GetMeshPath();
 	
 	UStaticMesh * mesh = LoadObject<UStaticMesh>(this, *TitlePath);
@@ -209,6 +212,14 @@ FString ABlockActor::GetMeshPath()
 //    BaseMeshComponent->SetStaticMesh(BlockMesh.Object);
 //
 //}
+void ABlockActor::SetFillType(BuildingType _fillType)
+{
+	mBlockData->mFillType = _fillType;
+}
+BuildingType ABlockActor::GetFillType()
+{	
+	return mBlockData->mFillType;
+}
 void ABlockActor::SetTileType(BlockTitleType _type)
 {
 	mTitleType = _type;

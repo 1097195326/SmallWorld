@@ -3,7 +3,11 @@
 
 float Pre_BuildCommandCenter_lll::Evaluate()
 {
-	return 0.f;
+	if (mCityActor->GetCommandCenterLevel() > 0)
+	{
+		return 0.f;
+	}
+	return 100.f;
 }
 void Pre_BuildCommandCenter_lll::Enter()
 {

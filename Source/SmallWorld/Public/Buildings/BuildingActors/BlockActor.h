@@ -34,10 +34,15 @@ private:
 	FString GrassToDirtEdgeTile;
 	FString GrassToDirtTile;
 	FString DirtTile;
+
+	BlockData * mBlockData;
+
 public:
 	ABlockActor();
 	virtual void On_Init() override;
 
+	void SetFillType(BuildingType _fillType);
+	BuildingType GetFillType();
 
 	void SetTileType(BlockTitleType _type);
 	BlockTitleType GetTileType();
@@ -47,7 +52,6 @@ public:
 	void SetCity(ACityActor * _City);
 	ACityActor * GetCity();
 
-	void SetMesh();
 
 	virtual bool IsInWorld() override;
 

@@ -126,8 +126,6 @@ FRotator ABaseBuildingActor::DirectionRotation()
 	case Dir_CastleEdge_Bottom:
 		Rotator.Yaw = -90.f;
 		break;
-	case Dir_City_Center:
-		break;
 	default:
 		break;
 	}

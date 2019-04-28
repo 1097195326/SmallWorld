@@ -47,7 +47,9 @@ private:
     list<ATowerActor *>             TowerList;
     list<AGateActor *>              GateList;
     
-    
+	bool  mCityIsFull;
+	bool  mCenterCityIsFull;
+
 public:
 	ACityActor();
 
@@ -56,17 +58,51 @@ public:
 
 	virtual void InitData(BaseBuildingData * _data) override;
     
-    void BuildArmyCenter();
-    void BuildBakery();
-    void BuildCommandCenter();
-    void BuildFarm();
-    void BuildFoodStore();
-    void BuildWall();
-    void BuildHouse();
-    void BuildMill();
-    void BuildMoneyStore();
-    void BuildStoneStore();
-    void BuildTreeStore();
+	bool	CityIsFull();
+	bool	CenterCityIsFull();
+
+	int		GetFarmNum();
+	int		GetHouseNum();
+	int		GetMillNum();
+	int		GetBakeryNum();
+	int		GetMoneyStoreNum();
+	int		GetFoodStoreNum();
+	int		GetStoneStoreNum();
+	int		GetTreeStoreNum();
+
+	int		GetCommandCenterLevel();
+	int		GetArmyCenterLevel();
+	int		GetWallLevel();
+	int		GetMillLevel();
+	int		GetBakeryLevel();
+	int		GetMoneyStoreLevel();
+	int		GetFoodStoreLevel();
+	int		GetStoneStoreLevel();
+	int		GetTreeStoreLevel();
+
+	bool CheckCanBuildCommandCenter(ABlockActor * OutBlockActor,FString & OutMsg);
+	bool CheckCanBuildArmyCenter(ABlockActor * OutBlockActor,FString & OutMsg);
+	bool CheckCanBuildBakery(ABlockActor * OutBlockActor, FString & OutMsg);
+	bool CheckCanBuildFarm(ABlockActor * OutBlockActor, FString & OutMsg);
+	bool CheckCanBuildHouse(ABlockActor * OutBlockActor, FString & OutMsg);
+	bool CheckCanBuildMill(ABlockActor * OutBlockActor, FString & OutMsg);
+	bool CheckCanBuildMoneyStore(ABlockActor * OutBlockActor, FString & OutMsg);
+	bool CheckCanBuildFoodStore(ABlockActor * OutBlockActor, FString & OutMsg);
+	bool CheckCanBuildStoneStore(ABlockActor * OutBlockActor, FString & OutMsg);
+	bool CheckCanBuildTreeStore(ABlockActor * OutBlockActor, FString & OutMsg);
+	bool CheckCanBuildWall(ABlockActor * OutBlockActor, FString & OutMsg);
+
+	bool BuildCommandCenter();
+	bool BuildArmyCenter();
+	bool BuildBakery();
+	bool BuildFarm();
+	bool BuildHouse();
+	bool BuildMill();
+	bool BuildMoneyStore();
+	bool BuildFoodStore();
+	bool BuildStoneStore();
+	bool BuildTreeStore();
+	bool BuildWall();
     
     
 private:
@@ -75,7 +111,8 @@ private:
     void CalCulateOrientation(int _x,int _y, ABlockActor * _blockActor);
     
     
-    
+	vector<ABlockActor*>	ControllBuildTiles;    // Controll Can Build Tiles
+	//vector<ABlockActor*>	OutControllBuildTiles; //  Out Controll Can Build Tiles
     
 	vector<ABlockActor*>	CornerOutControllLeftBottom;
 	vector<ABlockActor*>	CornerOutControllLeftTop;

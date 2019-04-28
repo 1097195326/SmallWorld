@@ -34,5 +34,5 @@ void BaseBuildingData::SetLevel(int _level)
 }
 void BaseBuildingData::SetHealth(float _health)
 {
-    mHealth == _health;
+    mHealth = _health;
 }

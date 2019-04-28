@@ -26,6 +26,7 @@ const float ll_Pre_Building = 0.5f;
 const float ll_Pre_Soldiers = 0.5f;
 
 //three level
+const float lll_Pre_Build_CommandCenter = 1.f;
 const float lll_Pre_Build_House = 0.5f;
 const float lll_Pre_Build_Farm = 0.4f;
 const float lll_Pre_Build_MoneyStore = 0.3f;
@@ -43,7 +44,7 @@ const float lll_Pre_Soldier_Griffin = 0.1f;
 const float lll_Pre_Soldier_Horseman = 0.1f;
 const float lll_Pre_Soldier_Knight = 0.2f;
 const float lll_Pre_Soldier_Mage = 0.1f;
-const float lll_Pre_Soldier_SiegeEngine = 0.f;
+const float lll_Pre_Soldier_SiegeEngine = 0.1f;
 
 
 class BaseGoal

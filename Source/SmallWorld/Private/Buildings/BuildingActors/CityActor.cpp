@@ -3,6 +3,9 @@
 
 ACityActor::ACityActor()
 {
+	mCityIsFull = false;
+	mCenterCityIsFull = false;
+
 	RootComponent = CollisionBox = CreateDefaultSubobject<UBoxComponent>(TEXT("CollisionBox"));
 	CollisionBox->SetHiddenInGame(false);
 	CollisionBox->ShapeColor = FColor(0,255,0,255);
@@ -48,58 +51,28 @@ void ACityActor::On_Init()
 		BlockMap.push_back(BlockList);
 	}
 	
-	// build castle wall
-	const int OutCastleSize = (CitySize - CastleSize) * 0.5;
-	const float CastleWallXOffSet = mData->mIndex.X * CitySize * TitleSize + TitleSize * OutCastleSize + TitleSize * 0.5;
-	const float CastleWallYOffSet = mData->mIndex.Y * CitySize * TitleSize + TitleSize * OutCastleSize + TitleSize * 0.5;
-	const float CastleWallLength = TitleSize * (CastleSize - 1);
-	for (int i = 0; i < 4; i++)
-	{
-		BuildingDirection Dir = Dir_None;
-		FVector DirV;
-		FVector Origin;
-		if (i == 0)
-		{
-			Origin = FVector(CastleWallXOffSet, CastleWallYOffSet, 0);
-			DirV = FVector(1,0,0);
-			Dir = Dir_CastleEdge_Left;
-		}else if (i == 1)
-		{
-			Origin = FVector(CastleWallXOffSet + CastleWallLength, CastleWallYOffSet, 0);
-			DirV = FVector(0, 1, 0);
-			Dir = Dir_CastleEdge_Top;
-		}else if (i ==2)
-		{
-			Origin = FVector(CastleWallXOffSet + CastleWallLength, CastleWallYOffSet + CastleWallLength, 0);
-			DirV = FVector(-1, 0, 0);
-			Dir = Dir_CastleEdge_Right;
-		}else if (i ==3)
-		{
-			Origin = FVector(CastleWallXOffSet, CastleWallYOffSet + CastleWallLength, 0);
-			DirV = FVector(0, -1, 0);
-			Dir = Dir_CastleEdge_Bottom;
-		}
-		for (int j = 0;j < (int)(CastleWallLength / WallSize); j++)
-		{
-			FTransform trans(Origin + DirV * WallSize * j);
-			ABaseBuildingActor * BuildingActor = nullptr;
-			if (j == 0)
-			{
-				BuildingActor = Cast<ATowerActor>(UGameplayStatics::BeginDeferredActorSpawnFromClass(SWI, ATowerActor::StaticClass(), trans));
-			}else if (j == (int)CastleWallLength / WallSize / 2)
-			{
-				BuildingActor = Cast<AGateActor>(UGameplayStatics::BeginDeferredActorSpawnFromClass(SWI, AGateActor::StaticClass(), trans));
-			}else
-			{
-				BuildingActor = Cast<AWallActor>(UGameplayStatics::BeginDeferredActorSpawnFromClass(SWI, AWallActor::StaticClass(), trans));
-			}
-			if (BuildingActor)
-			{
-				BuildingActor->SetDirection(Dir);
-				UGameplayStatics::FinishSpawningActor(BuildingActor, trans);
-			}
-		}
-	}
+	// Insert CanBuild titles
+	ControllBuildTiles.insert(ControllBuildTiles.end(), CornerCastleLeftBottom.begin(), CornerCastleLeftBottom.end());
+	ControllBuildTiles.insert(ControllBuildTiles.end(), CornerCastleLeftTop.begin(), CornerCastleLeftTop.end());
+	ControllBuildTiles.insert(ControllBuildTiles.end(), CornerCastleRightTop.begin(), CornerCastleRightTop.end());
+	ControllBuildTiles.insert(ControllBuildTiles.end(), CornerCastleRightBottom.begin(), CornerCastleRightBottom.end());
+
+	ControllBuildTiles.insert(ControllBuildTiles.end(), FarmControllLeftBottom.begin(), FarmControllLeftBottom.end());
+	ControllBuildTiles.insert(ControllBuildTiles.end(), FarmControllLeftTop.begin(), FarmControllLeftTop.end());
+	ControllBuildTiles.insert(ControllBuildTiles.end(), FarmControllTopLeft.begin(), FarmControllTopLeft.end());
+	ControllBuildTiles.insert(ControllBuildTiles.end(), FarmControllRightTop.begin(), FarmControllRightTop.end());
+	ControllBuildTiles.insert(ControllBuildTiles.end(), FarmControllRightBottom.begin(), FarmControllRightBottom.end());
+	ControllBuildTiles.insert(ControllBuildTiles.end(), FarmControllBottomLeft.begin(), FarmControllBottomLeft.end());
+
+	ControllBuildTiles.insert(ControllBuildTiles.end(), FarmOutControllLeftBottom.begin(), FarmOutControllLeftBottom.end());
+	ControllBuildTiles.insert(ControllBuildTiles.end(), FarmOutControllLeftTop.begin(), FarmOutControllLeftTop.end());
+	ControllBuildTiles.insert(ControllBuildTiles.end(), FarmOutControllTopLeft.begin(), FarmOutControllTopLeft.end());
+	ControllBuildTiles.insert(ControllBuildTiles.end(), FarmOutControllTopRight.begin(), FarmOutControllTopRight.end());
+	ControllBuildTiles.insert(ControllBuildTiles.end(), FarmOutControllRightTop.begin(), FarmOutControllRightTop.end());
+	ControllBuildTiles.insert(ControllBuildTiles.end(), FarmOutControllRightBottom.begin(), FarmOutControllRightBottom.end());
+	ControllBuildTiles.insert(ControllBuildTiles.end(), FarmOutControllBottomLeft.begin(), FarmOutControllBottomLeft.end());
+	ControllBuildTiles.insert(ControllBuildTiles.end(), FarmOutControllBottomRight.begin(), FarmOutControllBottomRight.end());
+
 	// Bild City Bound Moutain
 	if (!IsInWorld())
 	{
@@ -114,49 +87,494 @@ void ACityActor::On_Delete()
 {
 
 }
-void ACityActor::BuildArmyCenter()
+int ACityActor::GetFarmNum()
 {
-    
+	return FarmList.size();
 }
-void ACityActor::BuildBakery()
+int ACityActor::GetHouseNum()
 {
-    
+	return HouseList.size();
 }
-void ACityActor::BuildCommandCenter()
+int ACityActor::GetMillNum()
 {
-    
+	return MillList.size();
 }
-void ACityActor::BuildFarm()
+int ACityActor::GetBakeryNum()
 {
-    
+	return BakeryList.size();
 }
-void ACityActor::BuildFoodStore()
+int ACityActor::GetMoneyStoreNum()
 {
-    
+	return MoneyStoreList.size();
 }
-void ACityActor::BuildWall()
+int ACityActor::GetFoodStoreNum()
 {
-    
+	return FoodStoreList.size();
 }
-void ACityActor::BuildHouse()
+int ACityActor::GetStoneStoreNum()
 {
-    
+	return StoneStoreList.size();
 }
-void ACityActor::BuildMill()
+int ACityActor::GetTreeStoreNum()
 {
-    
+	return TreeStoreList.size();
 }
-void ACityActor::BuildMoneyStore()
+int ACityActor::GetCommandCenterLevel()
 {
-    
+	return CommandCenterList.size();
+	/*if (!CommandCenterList.empty())
+	{
+		return (*CommandCenterList.begin())->GetLevel();
+	}
+	return 0;*/
 }
-void ACityActor::BuildStoneStore()
+int ACityActor::GetArmyCenterLevel()
 {
-    
+	return ArmyCenterList.size();
 }
-void ACityActor::BuildTreeStore()
+int ACityActor::GetWallLevel()
 {
-    
+	if (WallList.empty())
+	{
+		return 0;
+	}
+	return 1;
+}
+int ACityActor::GetBakeryLevel()
+{
+	return BakeryList.size();
+}
+int ACityActor::GetMillLevel()
+{
+	return MillList.size();
+}
+int ACityActor::GetMoneyStoreLevel()
+{
+	return MoneyStoreList.size();
+}
+int ACityActor::GetFoodStoreLevel()
+{
+	return FoodStoreList.size();
+}
+int ACityActor::GetStoneStoreLevel()
+{
+	return StoneStoreList.size();
+}
+int ACityActor::GetTreeStoreLevel()
+{
+	return TreeStoreList.size();
+}
+bool ACityActor::CityIsFull()
+{
+	return mCityIsFull;
+}
+bool ACityActor::CenterCityIsFull()
+{
+	return mCenterCityIsFull;
+}
+bool ACityActor::CheckCanBuildCommandCenter(ABlockActor * OutBlockActor, FString & OutMsg)
+{
+	if (CommandCenterList.empty())
+	{
+		OutBlockActor = CenterOfCenterCity;
+		return true;
+	}
+	return false;
+}
+bool ACityActor::CheckCanBuildArmyCenter(ABlockActor * OutBlockActor, FString & OutMsg)
+{
+	if (ArmyCenterList.empty())
+	{
+		for (auto  blockActor : CenterCity)
+		{
+			if (blockActor->GetFillType() == B_None && blockActor->GetDirction() == Dir_None)
+			{
+				OutBlockActor = blockActor;
+				return true;
+			}
+			else
+			{
+				mCenterCityIsFull = true;
+			}
+		}
+	}
+	return false;
+}
+bool ACityActor::CheckCanBuildBakery(ABlockActor * OutBlockActor, FString & OutMsg)
+{
+	for (auto blockActor : ControllBuildTiles)
+	{
+		if (blockActor->GetFillType() == B_None && blockActor->GetDirction() == Dir_None)
+		{
+			OutBlockActor = blockActor;
+			return true;
+		}
+		else
+		{
+			mCityIsFull = true;
+		}
+	}
+	return false;
+}
+bool ACityActor::CheckCanBuildFarm(ABlockActor * OutBlockActor, FString & OutMsg)
+{
+	for (auto blockActor : ControllBuildTiles)
+	{
+		if (blockActor->GetFillType() == B_None && blockActor->GetDirction() == Dir_None)
+		{
+			OutBlockActor = blockActor;
+			return true;
+		}
+		else
+		{
+			mCityIsFull = true;
+		}
+	}
+	return false;
+}
+bool ACityActor::CheckCanBuildHouse(ABlockActor * OutBlockActor, FString & OutMsg)
+{
+	for (auto blockActor : ControllBuildTiles)
+	{
+		if (blockActor->GetFillType() == B_None && blockActor->GetDirction() == Dir_None)
+		{
+			OutBlockActor = blockActor;
+			return true;
+		}
+		else
+		{
+			mCityIsFull = true;
+		}
+	}
+	return false;
+}
+bool ACityActor::CheckCanBuildMill(ABlockActor * OutBlockActor, FString & OutMsg)
+{
+	for (auto blockActor : ControllBuildTiles)
+	{
+		if (blockActor->GetFillType() == B_None && blockActor->GetDirction() == Dir_None)
+		{
+			OutBlockActor = blockActor;
+			return true;
+		}
+		else
+		{
+			mCityIsFull = true;
+		}
+	}
+	return false;
+}
+bool ACityActor::CheckCanBuildMoneyStore(ABlockActor * OutBlockActor, FString & OutMsg)
+{
+	for (auto blockActor : CenterCity)
+	{
+		if (blockActor->GetFillType() == B_None && blockActor->GetDirction() == Dir_None)
+		{
+			OutBlockActor = blockActor;
+			return true;
+		}
+		else
+		{
+			mCenterCityIsFull = true;
+		}
+	}
+	return false;
+}
+bool ACityActor::CheckCanBuildFoodStore(ABlockActor * OutBlockActor, FString & OutMsg)
+{
+	for (auto blockActor : CenterCity)
+	{
+		if (blockActor->GetFillType() == B_None && blockActor->GetDirction() == Dir_None)
+		{
+			OutBlockActor = blockActor;
+			return true;
+		}
+		else
+		{
+			mCenterCityIsFull = true;
+		}
+	}
+	return false;
+}
+bool ACityActor::CheckCanBuildStoneStore(ABlockActor * OutBlockActor, FString & OutMsg)
+{
+	for (auto blockActor : CenterCity)
+	{
+		if (blockActor->GetFillType() == B_None && blockActor->GetDirction() == Dir_None)
+		{
+			OutBlockActor = blockActor;
+			return true;
+		}
+		else
+		{
+			mCenterCityIsFull = true;
+		}
+	}
+	return false;
+}
+bool ACityActor::CheckCanBuildTreeStore(ABlockActor * OutBlockActor, FString & OutMsg)
+{
+	for (auto blockActor : CenterCity)
+	{
+		if (blockActor->GetFillType() == B_None && blockActor->GetDirction() == Dir_None)
+		{
+			OutBlockActor = blockActor;
+			return true;
+		}
+		else
+		{
+			mCenterCityIsFull = true;
+		}
+	}
+	return false;
+}
+bool ACityActor::CheckCanBuildWall(ABlockActor * OutBlockActor, FString & OutMsg)
+{
+	if (WallList.empty())
+	{
+		return true;
+	}
+	return false;
+}
+bool ACityActor::BuildCommandCenter()
+{
+	ABlockActor * blockActor = nullptr;
+	FString ResSmg;
+	bool Result = CheckCanBuildCommandCenter(blockActor, ResSmg);
+	if (Result)
+	{
+		FTransform trans(blockActor->GetActorLocation());
+		ACommandCenterActor * BuildActor = Cast<ACommandCenterActor>(UGameplayStatics::BeginDeferredActorSpawnFromClass(SWI, ACommandCenterActor::StaticClass(), trans));
+		if (BuildActor)
+		{
+			CommandCenterList.push_back(BuildActor);
+			UGameplayStatics::FinishSpawningActor(BuildActor, trans);
+		}
+	}
+	return Result;
+}
+bool ACityActor::BuildArmyCenter()
+{
+	ABlockActor * blockActor = nullptr;
+	FString ResSmg;
+	bool Result = CheckCanBuildArmyCenter(blockActor, ResSmg);
+	if (Result)
+	{
+		FTransform trans(blockActor->GetActorLocation());
+		AArmyCenterActor * BuildActor = Cast<AArmyCenterActor>(UGameplayStatics::BeginDeferredActorSpawnFromClass(SWI, AArmyCenterActor::StaticClass(), trans));
+		if (BuildActor)
+		{
+			ArmyCenterList.push_back(BuildActor);
+			UGameplayStatics::FinishSpawningActor(BuildActor, trans);
+		}
+	}
+	return Result;
+}
+bool ACityActor::BuildBakery()
+{
+	ABlockActor * blockActor = nullptr;
+	FString ResSmg;
+	bool Result = CheckCanBuildBakery(blockActor, ResSmg);
+	if (Result)
+	{
+		FTransform trans(blockActor->GetActorLocation());
+		ABakeryActor * BuildActor = Cast<ABakeryActor>(UGameplayStatics::BeginDeferredActorSpawnFromClass(SWI, ABakeryActor::StaticClass(), trans));
+		if (BuildActor)
+		{
+			BakeryList.push_back(BuildActor);
+			UGameplayStatics::FinishSpawningActor(BuildActor, trans);
+		}
+	}
+	return Result;
+}
+bool ACityActor::BuildFarm()
+{
+	ABlockActor * blockActor = nullptr;
+	FString ResSmg;
+	bool Result = CheckCanBuildFarm(blockActor, ResSmg);
+	if (Result)
+	{
+		FTransform trans(blockActor->GetActorLocation());
+		AFarmActor * BuildActor = Cast<AFarmActor>(UGameplayStatics::BeginDeferredActorSpawnFromClass(SWI, AFarmActor::StaticClass(), trans));
+		if (BuildActor)
+		{
+			FarmList.push_back(BuildActor);
+			UGameplayStatics::FinishSpawningActor(BuildActor, trans);
+		}
+	}
+	return Result;
+}
+bool ACityActor::BuildHouse()
+{
+	ABlockActor * blockActor = nullptr;
+	FString ResSmg;
+	bool Result = CheckCanBuildHouse(blockActor, ResSmg);
+	if (Result)
+	{
+		FTransform trans(blockActor->GetActorLocation());
+		AHouseActor * BuildActor = Cast<AHouseActor>(UGameplayStatics::BeginDeferredActorSpawnFromClass(SWI, AHouseActor::StaticClass(), trans));
+		if (BuildActor)
+		{
+			HouseList.push_back(BuildActor);
+			UGameplayStatics::FinishSpawningActor(BuildActor, trans);
+		}
+	}
+	return Result;
+}
+bool ACityActor::BuildMill()
+{
+	ABlockActor * blockActor = nullptr;
+	FString ResSmg;
+	bool Result = CheckCanBuildMill(blockActor, ResSmg);
+	if (Result)
+	{
+		FTransform trans(blockActor->GetActorLocation());
+		AMillActor * BuildActor = Cast<AMillActor>(UGameplayStatics::BeginDeferredActorSpawnFromClass(SWI, AMillActor::StaticClass(), trans));
+		if (BuildActor)
+		{
+			MillList.push_back(BuildActor);
+			UGameplayStatics::FinishSpawningActor(BuildActor, trans);
+		}
+	}
+	return Result;
+}
+bool ACityActor::BuildMoneyStore()
+{
+	ABlockActor * blockActor = nullptr;
+	FString ResSmg;
+	bool Result = CheckCanBuildMoneyStore(blockActor, ResSmg);
+	if (Result)
+	{
+		FTransform trans(blockActor->GetActorLocation());
+		AMoneyStoreActor * BuildActor = Cast<AMoneyStoreActor>(UGameplayStatics::BeginDeferredActorSpawnFromClass(SWI, AMoneyStoreActor::StaticClass(), trans));
+		if (BuildActor)
+		{
+			MoneyStoreList.push_back(BuildActor);
+			UGameplayStatics::FinishSpawningActor(BuildActor, trans);
+		}
+	}
+	return Result;
+}
+bool ACityActor::BuildFoodStore()
+{
+	ABlockActor * blockActor = nullptr;
+	FString ResSmg;
+	bool Result = CheckCanBuildFoodStore(blockActor, ResSmg);
+	if (Result)
+	{
+		FTransform trans(blockActor->GetActorLocation());
+		AFoodStoreActor * BuildActor = Cast<AFoodStoreActor>(UGameplayStatics::BeginDeferredActorSpawnFromClass(SWI, AFoodStoreActor::StaticClass(), trans));
+		if (BuildActor)
+		{
+			FoodStoreList.push_back(BuildActor);
+			UGameplayStatics::FinishSpawningActor(BuildActor, trans);
+		}
+	}
+	return Result;
+}
+bool ACityActor::BuildStoneStore()
+{
+	ABlockActor * blockActor = nullptr;
+	FString ResSmg;
+	bool Result = CheckCanBuildStoneStore(blockActor, ResSmg);
+	if (Result)
+	{
+		FTransform trans(blockActor->GetActorLocation());
+		AStoneStoreActor * BuildActor = Cast<AStoneStoreActor>(UGameplayStatics::BeginDeferredActorSpawnFromClass(SWI, AStoneStoreActor::StaticClass(), trans));
+		if (BuildActor)
+		{
+			StoneStoreList.push_back(BuildActor);
+			UGameplayStatics::FinishSpawningActor(BuildActor, trans);
+		}
+	}
+	return Result;
+}
+bool ACityActor::BuildTreeStore()
+{
+	ABlockActor * blockActor = nullptr;
+	FString ResSmg;
+	bool Result = CheckCanBuildTreeStore(blockActor, ResSmg);
+	if (Result)
+	{
+		FTransform trans(blockActor->GetActorLocation());
+		ATreeStoreActor * BuildActor = Cast<ATreeStoreActor>(UGameplayStatics::BeginDeferredActorSpawnFromClass(SWI, ATreeStoreActor::StaticClass(), trans));
+		if (BuildActor)
+		{
+			TreeStoreList.push_back(BuildActor);
+			UGameplayStatics::FinishSpawningActor(BuildActor, trans);
+		}
+	}
+	return Result;
+}
+bool ACityActor::BuildWall()
+{
+	ABlockActor * blockActor = nullptr;
+	FString ResSmg;
+	bool Result = CheckCanBuildWall(blockActor, ResSmg);
+	if (Result)
+	{
+		// build castle wall
+		const int OutCastleSize = (CitySize - CastleSize) * 0.5;
+		const float CastleWallXOffSet = mData->mIndex.X * CitySize * TitleSize + TitleSize * OutCastleSize + TitleSize * 0.5;
+		const float CastleWallYOffSet = mData->mIndex.Y * CitySize * TitleSize + TitleSize * OutCastleSize + TitleSize * 0.5;
+		const float CastleWallLength = TitleSize * (CastleSize - 1);
+		for (int i = 0; i < 4; i++)
+		{
+			BuildingDirection Dir = Dir_None;
+			FVector DirV;
+			FVector Origin;
+			if (i == 0)
+			{
+				Origin = FVector(CastleWallXOffSet, CastleWallYOffSet, 0);
+				DirV = FVector(1, 0, 0);
+				Dir = Dir_CastleEdge_Left;
+			}
+			else if (i == 1)
+			{
+				Origin = FVector(CastleWallXOffSet + CastleWallLength, CastleWallYOffSet, 0);
+				DirV = FVector(0, 1, 0);
+				Dir = Dir_CastleEdge_Top;
+			}
+			else if (i == 2)
+			{
+				Origin = FVector(CastleWallXOffSet + CastleWallLength, CastleWallYOffSet + CastleWallLength, 0);
+				DirV = FVector(-1, 0, 0);
+				Dir = Dir_CastleEdge_Right;
+			}
+			else if (i == 3)
+			{
+				Origin = FVector(CastleWallXOffSet, CastleWallYOffSet + CastleWallLength, 0);
+				DirV = FVector(0, -1, 0);
+				Dir = Dir_CastleEdge_Bottom;
+			}
+			for (int j = 0; j < (int)(CastleWallLength / WallSize); j++)
+			{
+				FTransform trans(Origin + DirV * WallSize * j);
+				ABaseBuildingActor * BuildingActor = nullptr;
+				if (j == 0)
+				{
+					BuildingActor = Cast<ATowerActor>(UGameplayStatics::BeginDeferredActorSpawnFromClass(SWI, ATowerActor::StaticClass(), trans));
+					TowerList.push_back((ATowerActor*)BuildingActor);
+				}
+				else if (j == (int)CastleWallLength / WallSize / 2)
+				{
+					BuildingActor = Cast<AGateActor>(UGameplayStatics::BeginDeferredActorSpawnFromClass(SWI, AGateActor::StaticClass(), trans));
+					GateList.push_back((AGateActor*)BuildingActor);
+				}
+				else
+				{
+					BuildingActor = Cast<AWallActor>(UGameplayStatics::BeginDeferredActorSpawnFromClass(SWI, AWallActor::StaticClass(), trans));
+					WallList.push_back((AWallActor*)BuildingActor);
+				}
+				if (BuildingActor)
+				{
+					BuildingActor->SetDirection(Dir);
+					UGameplayStatics::FinishSpawningActor(BuildingActor, trans);
+				}
+			}
+		}
+	}
+	return Result;
 }
 void ACityActor::CalCulateOrientation(int _x, int _y,ABlockActor * _blockActor)
 {
