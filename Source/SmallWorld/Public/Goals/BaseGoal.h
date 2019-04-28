@@ -26,15 +26,15 @@ const float ll_Pre_Building = 0.5f;
 const float ll_Pre_Soldiers = 0.5f;
 
 //three level
-const float lll_Pre_Build_CommandCenter = 1.f;
-const float lll_Pre_Build_House = 0.5f;
+const float lll_Pre_Build_CommandCenter = 10.f;
+const float lll_Pre_Build_House = 0.9f;
 const float lll_Pre_Build_Farm = 0.4f;
-const float lll_Pre_Build_MoneyStore = 0.3f;
-const float lll_Pre_Build_StoneStore = 0.3f;
-const float lll_Pre_Build_WoodStore = 0.3f;
-const float lll_Pre_Build_FoodStore = 0.3f;
+const float lll_Pre_Build_ArmyCenter = 0.3f;
 const float lll_Pre_Build_Wall = 0.2f;
-const float lll_Pre_Build_ArmyCenter = 0.2f;
+const float lll_Pre_Build_MoneyStore = 0.2f;
+const float lll_Pre_Build_StoneStore = 0.1f;
+const float lll_Pre_Build_WoodStore = 0.1f;
+const float lll_Pre_Build_FoodStore = 0.1f;
 const float lll_Pre_Build_Mill = 0.1f;
 const float lll_Pre_Build_Bakery = 0.1f;
 

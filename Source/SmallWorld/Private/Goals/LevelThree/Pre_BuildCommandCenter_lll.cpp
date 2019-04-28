@@ -7,7 +7,7 @@ float Pre_BuildCommandCenter_lll::Evaluate()
 	{
 		return 0.f;
 	}
-	return 100.f;
+	return lll_Pre_Build_CommandCenter;
 }
 void Pre_BuildCommandCenter_lll::Enter()
 {

@@ -3,7 +3,7 @@
 
 float Pre_BuildFarm_lll::Evaluate()
 {
-	return 0.f;
+	return mCityActor->GetHouseNum() * lll_Pre_Build_Farm - mCityActor->GetFarmNum();
 }
 void Pre_BuildFarm_lll::Enter()
 {

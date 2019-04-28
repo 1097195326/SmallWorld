@@ -3,7 +3,7 @@
 
 float Pre_BuildFoodStore_lll::Evaluate()
 {
-	return 0.f;
+	return 	mCityActor->GetHouseNum() * lll_Pre_Build_FoodStore - mCityActor->GetFoodStoreNum() * 10;
 }
 void Pre_BuildFoodStore_lll::Enter()
 {

@@ -3,7 +3,7 @@
 
 float Pre_BuildMill_lll::Evaluate()
 {
-	return 0.f;
+	return 	mCityActor->GetHouseNum() * lll_Pre_Build_Mill - mCityActor->GetMillNum();
 }
 void Pre_BuildMill_lll::Enter()
 {

@@ -7,7 +7,7 @@ float Pre_BuildWall_lll::Evaluate()
 	{
 		return 0.f;
 	}
-	return 50.f;
+	return mCityActor->GetHouseNum() * lll_Pre_Build_Wall - mCityActor->GetWallLevel();
 }
 void Pre_BuildWall_lll::Enter()
 {

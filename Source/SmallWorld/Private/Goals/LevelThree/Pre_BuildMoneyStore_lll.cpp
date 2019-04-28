@@ -3,7 +3,7 @@
 
 float Pre_BuildMoneyStore_lll::Evaluate()
 {
-	return 0.f;
+	return 	mCityActor->GetHouseNum() * lll_Pre_Build_MoneyStore - mCityActor->GetMoneyStoreNum() * 10;
 }
 void Pre_BuildMoneyStore_lll::Enter()
 {

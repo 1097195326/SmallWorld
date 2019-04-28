@@ -7,7 +7,7 @@ float Pre_BuildArmyCenter_lll::Evaluate()
 	{
 		return 0.f;
 	}
-	return 90.f;
+	return mCityActor->GetHouseNum() * lll_Pre_Build_ArmyCenter - mCityActor->GetArmyCenterLevel();
 }
 void Pre_BuildArmyCenter_lll::Enter()
 {

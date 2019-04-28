@@ -3,8 +3,7 @@
 
 float Pre_BuildBakery_lll::Evaluate()
 {
-	
-	return 0.f;
+	return 	mCityActor->GetHouseNum() * lll_Pre_Build_Bakery - mCityActor->GetBakeryNum();
 }
 void Pre_BuildBakery_lll::Enter()
 {

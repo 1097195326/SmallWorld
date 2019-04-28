@@ -3,7 +3,7 @@
 
 float Pre_BuildHouse_lll::Evaluate()
 {
-	return 0.f;
+	return lll_Pre_Build_House;
 }
 void Pre_BuildHouse_lll::Enter()
 {

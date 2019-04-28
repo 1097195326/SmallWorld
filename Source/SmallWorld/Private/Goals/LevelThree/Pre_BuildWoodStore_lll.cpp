@@ -3,7 +3,8 @@
 
 float Pre_BuildWoodStore_lll::Evaluate()
 {
-	return 0.f;
+	return 	mCityActor->GetHouseNum() * lll_Pre_Build_WoodStore - mCityActor->GetTreeStoreNum() * 10;
+
 }
 void Pre_BuildWoodStore_lll::Enter()
 {
