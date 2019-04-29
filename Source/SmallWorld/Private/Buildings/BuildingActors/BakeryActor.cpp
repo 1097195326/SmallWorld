@@ -1,5 +1,5 @@
 #include "BakeryActor.h"
-
+#include "BakeryData.h"
 
 
 
@@ -7,10 +7,9 @@ ABakeryActor::ABakeryActor()
 {
 	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("RootComponent"));
 
-	BaseMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("GateComponent"));
+	BaseMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MeshComponent"));
 	BaseMeshComponent->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
-
-	mData->mLevel = 0;
+	
 	mMaxLevel = 3;
 
 	MeshPathLevel_0 = TEXT("/Game/CastlePack/Meshes/SM_Bakery_Lvl0");
@@ -20,6 +19,7 @@ ABakeryActor::ABakeryActor()
 }
 void ABakeryActor::On_Init()
 {
+	mData->mLevel = 0;
 	UStaticMesh * mesh = LoadObject<UStaticMesh>(this, *GetMeshPath());
 	if (mesh)
 	{

@@ -12,7 +12,6 @@ ABlockActor::ABlockActor()
 	DirtTile = "/Game/CastlePack/Meshes/SM_GrassTile_6";
 
 	mCity = nullptr;
-	mBlockData = nullptr;
 
 	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("RootComponent"));
 	BaseMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("BlockMeshComponent"));
@@ -22,7 +21,7 @@ ABlockActor::ABlockActor()
 }
 void ABlockActor::On_Init()
 {
-	mBlockData = (BlockData *)mData;
+	mBlockData = (BlockData*)mData;
 
 	FString TitlePath = GetMeshPath();
 	

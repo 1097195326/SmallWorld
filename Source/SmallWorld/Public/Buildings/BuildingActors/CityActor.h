@@ -56,7 +56,6 @@ public:
 	virtual void On_Init() override;
 	virtual void On_Delete() override;
 
-	virtual void InitData(BaseBuildingData * _data) override;
     
 	bool	CityIsFull();
 	bool	CenterCityIsFull();
@@ -80,17 +79,17 @@ public:
 	int		GetStoneStoreLevel();
 	int		GetTreeStoreLevel();
 
-	bool CheckCanBuildCommandCenter(ABlockActor * OutBlockActor,FString & OutMsg);
-	bool CheckCanBuildArmyCenter(ABlockActor * OutBlockActor,FString & OutMsg);
-	bool CheckCanBuildBakery(ABlockActor * OutBlockActor, FString & OutMsg);
-	bool CheckCanBuildFarm(ABlockActor * OutBlockActor, FString & OutMsg);
-	bool CheckCanBuildHouse(ABlockActor * OutBlockActor, FString & OutMsg);
-	bool CheckCanBuildMill(ABlockActor * OutBlockActor, FString & OutMsg);
-	bool CheckCanBuildMoneyStore(ABlockActor * OutBlockActor, FString & OutMsg);
-	bool CheckCanBuildFoodStore(ABlockActor * OutBlockActor, FString & OutMsg);
-	bool CheckCanBuildStoneStore(ABlockActor * OutBlockActor, FString & OutMsg);
-	bool CheckCanBuildTreeStore(ABlockActor * OutBlockActor, FString & OutMsg);
-	bool CheckCanBuildWall(ABlockActor * OutBlockActor, FString & OutMsg);
+	bool CheckCanBuildCommandCenter(ABlockActor *& OutBlockActor,FString & OutMsg);
+	bool CheckCanBuildArmyCenter(ABlockActor * &OutBlockActor,FString & OutMsg);
+	bool CheckCanBuildBakery(ABlockActor *& OutBlockActor, FString & OutMsg);
+	bool CheckCanBuildFarm(ABlockActor *& OutBlockActor, FString & OutMsg);
+	bool CheckCanBuildHouse(ABlockActor *& OutBlockActor, FString & OutMsg);
+	bool CheckCanBuildMill(ABlockActor *& OutBlockActor, FString & OutMsg);
+	bool CheckCanBuildMoneyStore(ABlockActor *& OutBlockActor, FString & OutMsg);
+	bool CheckCanBuildFoodStore(ABlockActor *& OutBlockActor, FString & OutMsg);
+	bool CheckCanBuildStoneStore(ABlockActor *& OutBlockActor, FString & OutMsg);
+	bool CheckCanBuildTreeStore(ABlockActor *& OutBlockActor, FString & OutMsg);
+	bool CheckCanBuildWall(ABlockActor *& OutBlockActor, FString & OutMsg);
 
 	bool BuildCommandCenter();
 	bool BuildArmyCenter();

@@ -25,7 +25,11 @@ public:
 
 	void  ClearGeneralGoals();
 
+	void	Update();
+
 private:
+	bool IsInitialized;
+
 	bool IsInWorld(int _index);
 	ACityActor *  BuildCity(int _x, int _y);
 };

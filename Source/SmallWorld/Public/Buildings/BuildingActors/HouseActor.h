@@ -1,5 +1,6 @@
 #pragma once
 #include "BaseBuildingActor.h"
+#include "HouseData.h"
 
 #include "HouseActor.generated.h"
 

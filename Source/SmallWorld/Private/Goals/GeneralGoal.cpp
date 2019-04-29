@@ -28,12 +28,18 @@ float GeneralGoal::Evaluate()
 void GeneralGoal::Enter()
 {
 	BaseGoal::Enter();
-	mTaskQueun.push(GetBestGoal());
+	BaseGoal * goal = GetBestGoal();
+	goal->Enter();
+	mTaskQueun.push(goal);
 }
 GoalState GeneralGoal::Process()
 {
-	return BaseGoal::Process();
-
+	mState = BaseGoal::Process();
+	if (mState == e_Success || mState == e_Fail)
+	{
+		End();
+	}
+	return mState;
 }
 void GeneralGoal::End()
 {

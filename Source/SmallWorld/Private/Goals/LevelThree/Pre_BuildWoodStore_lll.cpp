@@ -13,7 +13,11 @@ void Pre_BuildWoodStore_lll::Enter()
 }
 GoalState Pre_BuildWoodStore_lll::Process()
 {
-	return BaseGoal::Process();
+	if (mCityActor->BuildTreeStore())
+	{
+		return e_Success;
+	}
+	return e_Fail;
 
 }
 void Pre_BuildWoodStore_lll::End()

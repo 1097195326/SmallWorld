@@ -6,8 +6,7 @@ ABaseBuildingActor::ABaseBuildingActor()
 	BaseMeshComponent = nullptr;
 	BaseSkeletalMeshComponent = nullptr;
 	
-
-    mData = new BaseBuildingData();
+	mData = nullptr;
     
 }
 void ABaseBuildingActor::PostInitializeComponents()

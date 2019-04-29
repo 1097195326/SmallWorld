@@ -36,7 +36,9 @@ float FightBattle_l::Evaluate()
 void FightBattle_l::Enter()
 {
 	BaseGoal::Enter();
-	mTaskQueun.push(GetBestGoal());
+	BaseGoal * goal = GetBestGoal();
+	goal->Enter();
+	mTaskQueun.push(goal);
 }
 GoalState FightBattle_l::Process()
 {

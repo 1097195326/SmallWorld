@@ -16,7 +16,11 @@ void Pre_BuildArmyCenter_lll::Enter()
 }
 GoalState Pre_BuildArmyCenter_lll::Process()
 {
-	return BaseGoal::Process();
+	if (mCityActor->BuildArmyCenter())
+	{
+		return e_Success;
+	}
+	return e_Fail;
 
 }
 void Pre_BuildArmyCenter_lll::End()

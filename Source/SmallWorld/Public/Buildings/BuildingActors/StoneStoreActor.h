@@ -1,5 +1,6 @@
 #pragma once
 #include "BaseBuildingActor.h"
+#include "StoneStoreData.h"
 
 #include "StoneStoreActor.generated.h"
 

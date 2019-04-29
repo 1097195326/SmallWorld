@@ -4,10 +4,10 @@ ATowerActor::ATowerActor()
 {
 	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("RootComponent"));
 
-	BaseMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("GateComponent"));
+	BaseMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MeshComponent"));
 	BaseMeshComponent->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
 
-	mData->mLevel = 1;
+	
 	mMaxLevel = 3;
 
 	MeshPathLevel_1 = TEXT("/Game/CastlePack/Meshes/SM_Lvl1_Tower");
@@ -17,6 +17,7 @@ ATowerActor::ATowerActor()
 }
 void ATowerActor::On_Init()
 {
+	mData->mLevel = 1;
 	UStaticMesh * mesh = LoadObject<UStaticMesh>(this, *GetMeshPath());
 	if (mesh)
 	{

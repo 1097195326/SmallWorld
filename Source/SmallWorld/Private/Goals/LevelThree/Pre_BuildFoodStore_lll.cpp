@@ -12,7 +12,11 @@ void Pre_BuildFoodStore_lll::Enter()
 }
 GoalState Pre_BuildFoodStore_lll::Process()
 {
-	return BaseGoal::Process();
+	if (mCityActor->BuildFoodStore())
+	{
+		return e_Success;
+	}
+	return e_Fail;
 
 }
 void Pre_BuildFoodStore_lll::End()

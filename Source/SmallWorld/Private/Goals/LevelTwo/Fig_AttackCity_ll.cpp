@@ -49,7 +49,9 @@ float Fig_AttackCity_ll::Evaluate()
 void Fig_AttackCity_ll::Enter()
 {
 	BaseGoal::Enter();
-	mTaskQueun.push(GetBestGoal());
+	BaseGoal * goal = GetBestGoal();
+	goal->Enter();
+	mTaskQueun.push(goal);
 }
 GoalState Fig_AttackCity_ll::Process()
 {

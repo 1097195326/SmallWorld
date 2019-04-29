@@ -12,8 +12,11 @@ void Pre_BuildStoneStore_lll::Enter()
 }
 GoalState Pre_BuildStoneStore_lll::Process()
 {
-	return BaseGoal::Process();
-
+	if (mCityActor->BuildStoneStore())
+	{
+		return e_Success;
+	}
+	return e_Fail;
 }
 void Pre_BuildStoneStore_lll::End()
 {

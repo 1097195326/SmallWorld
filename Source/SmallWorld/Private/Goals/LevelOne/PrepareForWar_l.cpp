@@ -23,12 +23,14 @@ void PrepareForWar_l::InitGoals()
 }
 float PrepareForWar_l::Evaluate()
 {
-	return 0.f;
+	return 1.f;
 }
 void PrepareForWar_l::Enter()
 {
 	BaseGoal::Enter();
-	mTaskQueun.push(GetBestGoal());
+	BaseGoal * goal = GetBestGoal();
+	goal->Enter();
+	mTaskQueun.push(goal);
 }
 GoalState PrepareForWar_l::Process()
 {

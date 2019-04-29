@@ -5,7 +5,8 @@
 
 GameWorld::GameWorld()
 {
-	
+	IsInitialized = false;
+
 }
 GameWorld::~GameWorld()
 {
@@ -64,6 +65,8 @@ void GameWorld::BuildWorld()
 			}
 		}
 	}
+
+	IsInitialized = true;
 }
 void GameWorld::ClearGeneralGoals()
 {
@@ -81,6 +84,7 @@ ACityActor *  GameWorld::BuildCity(int _x, int _y)
 	ACityActor * CityActor = Cast<ACityActor>(UGameplayStatics::BeginDeferredActorSpawnFromClass(SWI, ACityActor::StaticClass(), trans));
 	if (CityActor)
 	{
+		CityActor->InitData(new CityData());
 		CityActor->SetIndex(BuildingIndex(_x, _y));
 
 
@@ -93,6 +97,23 @@ ACityActor *  GameWorld::BuildCity(int _x, int _y)
 		return CityActor;
 	}
 	return nullptr;
+}
+void GameWorld::Update()
+{
+	if (IsInitialized)
+	{
+		for (auto Goal : GeneralGoals)
+		{
+			if (Goal->GetState() == e_UnActive)
+			{
+				Goal->Enter();
+			}
+			else
+			{
+				Goal->Process();
+			}
+		}
+	}
 }
 bool GameWorld::IsInWorld(int _index)
 {

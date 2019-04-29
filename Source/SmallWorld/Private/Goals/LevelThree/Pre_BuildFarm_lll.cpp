@@ -12,7 +12,11 @@ void Pre_BuildFarm_lll::Enter()
 }
 GoalState Pre_BuildFarm_lll::Process()
 {
-	return BaseGoal::Process();
+	if (mCityActor->BuildFarm())
+	{
+		return e_Success;
+	}
+	return e_Fail;
 
 }
 void Pre_BuildFarm_lll::End()

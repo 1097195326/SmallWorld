@@ -66,7 +66,9 @@ float Pre_Building_ll::Evaluate()
 void Pre_Building_ll::Enter()
 {
 	BaseGoal::Enter();
-	mTaskQueun.push(GetBestGoal());
+	BaseGoal * goal = GetBestGoal();
+	goal->Enter();
+	mTaskQueun.push(goal);
 }
 GoalState Pre_Building_ll::Process()
 {

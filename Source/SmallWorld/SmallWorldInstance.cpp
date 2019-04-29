@@ -1,6 +1,6 @@
 #include "SmallWorldInstance.h"
 #include "GameWorld.h"
-
+#include "TimerManager.h"
 
 USmallWorldInstance::USmallWorldInstance()
 {
@@ -10,14 +10,23 @@ USmallWorldInstance::USmallWorldInstance()
 void USmallWorldInstance::On_Init()
 {
 	m_Instance = this;
+
+
+	
+
 }
 void USmallWorldInstance::On_Start()
 {
-	
+	GetTimerManager().SetTimer(GameUpdateHandle, this, &USmallWorldInstance::UpdateGame, 0.5f, true);
 
 }
 void USmallWorldInstance::On_Delete()
 {
+
+}
+void USmallWorldInstance::UpdateGame()
+{
+	GameWorld::GetInstance()->Update();
 
 }
 void USmallWorldInstance::ApplicationWillEnterBackground()

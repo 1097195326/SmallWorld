@@ -5,22 +5,23 @@ AMillActor::AMillActor()
 {
 	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("RootComponent"));
 
-	BaseMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("GateComponent"));
-	BaseMeshComponent->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
+	BaseSkeletalMeshComponent = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("MeshComponent"));
+	BaseSkeletalMeshComponent->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
 
-	mData->mLevel = 0;
+	
 	mMaxLevel = 3;
 
-	MeshPathLevel_1 = TEXT("/Game/CastlePack/Meshes/SK_Mill_Lvl0");
+	MeshPathLevel_0 = TEXT("/Game/CastlePack/Meshes/SK_Mill_Lvl0");
 	MeshPathLevel_1 = TEXT("/Game/CastlePack/Meshes/SK_Mill_Lvl1");
 	MeshPathLevel_2 = TEXT("/Game/CastlePack/Meshes/SK_Mill_Lvl2");
 	MeshPathLevel_3 = TEXT("/Game/CastlePack/Meshes/SK_Mill_Lvl3");
 }
 void AMillActor::On_Init()
 {
-	UStaticMesh * mesh = LoadObject<UStaticMesh>(this, *GetMeshPath());
+	mData->mLevel = 0;
+	USkeletalMesh * mesh = LoadObject<USkeletalMesh>(this, *GetMeshPath());
 	if (mesh)
 	{
-		BaseMeshComponent->SetStaticMesh(mesh);
+		BaseSkeletalMeshComponent->SetSkeletalMesh(mesh);
 	}
 }

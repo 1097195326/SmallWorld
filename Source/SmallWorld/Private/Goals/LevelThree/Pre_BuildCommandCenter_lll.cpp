@@ -16,7 +16,11 @@ void Pre_BuildCommandCenter_lll::Enter()
 }
 GoalState Pre_BuildCommandCenter_lll::Process()
 {
-	return BaseGoal::Process();
+	if (mCityActor->BuildCommandCenter())
+	{
+		return e_Success;
+	}
+	return e_Fail;
 
 }
 void Pre_BuildCommandCenter_lll::End()

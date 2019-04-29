@@ -5,10 +5,10 @@ AGateActor::AGateActor()
 {
 	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("RootComponent"));
 
-	BaseSkeletalMeshComponent = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("GateComponent"));
+	BaseSkeletalMeshComponent = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("MeshComponent"));
 	BaseSkeletalMeshComponent->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
 
-	mData->mLevel = 1;
+	
 	mMaxLevel = 3;
 
 	MeshPathLevel_1 = TEXT("/Game/CastlePack/Meshes/SK_Lvl1_Gate");
@@ -18,7 +18,7 @@ AGateActor::AGateActor()
 }
 void AGateActor::On_Init()
 {
-
+	mData->mLevel = 1;
 	USkeletalMesh * mesh = LoadObject<USkeletalMesh>(this, *GetMeshPath());
 	if (mesh)
 	{

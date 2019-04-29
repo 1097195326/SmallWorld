@@ -49,7 +49,9 @@ float Pre_Soldiers_ll::Evaluate()
 void Pre_Soldiers_ll::Enter()
 {
 	BaseGoal::Enter();
-	mTaskQueun.push(GetBestGoal());
+	BaseGoal * goal = GetBestGoal();
+	goal->Enter();
+	mTaskQueun.push(goal);
 }
 GoalState Pre_Soldiers_ll::Process()
 {

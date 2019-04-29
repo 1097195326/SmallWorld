@@ -12,7 +12,11 @@ void Pre_BuildBakery_lll::Enter()
 }
 GoalState Pre_BuildBakery_lll::Process()
 {
-	return BaseGoal::Process();
+	if (mCityActor->BuildBakery())
+	{
+		return e_Success;
+	}
+	return e_Fail;
 
 }
 void Pre_BuildBakery_lll::End()

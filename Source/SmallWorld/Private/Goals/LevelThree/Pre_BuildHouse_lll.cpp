@@ -12,8 +12,11 @@ void Pre_BuildHouse_lll::Enter()
 }
 GoalState Pre_BuildHouse_lll::Process()
 {
-	return BaseGoal::Process();
-
+	if (mCityActor->BuildHouse())
+	{
+		return e_Success;
+	}
+	return e_Fail;
 }
 void Pre_BuildHouse_lll::End()
 {

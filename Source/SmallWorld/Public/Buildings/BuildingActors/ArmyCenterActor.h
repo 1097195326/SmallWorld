@@ -1,5 +1,6 @@
 #pragma once
 #include "BaseBuildingActor.h"
+#include "ArmyCenterData.h"
 
 #include "ArmyCenterActor.generated.h"
 

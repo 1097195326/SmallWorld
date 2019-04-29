@@ -12,7 +12,11 @@ void Pre_BuildMoneyStore_lll::Enter()
 }
 GoalState Pre_BuildMoneyStore_lll::Process()
 {
-	return BaseGoal::Process();
+	if (mCityActor->BuildMoneyStore())
+	{
+		return e_Success;
+	}
+	return e_Fail;
 
 }
 void Pre_BuildMoneyStore_lll::End()

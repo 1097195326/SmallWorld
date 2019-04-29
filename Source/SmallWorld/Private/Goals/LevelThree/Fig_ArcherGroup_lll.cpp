@@ -8,7 +8,7 @@ float Fig_ArcherGroup_lll::Evaluate()
 void Fig_ArcherGroup_lll::Enter()
 {
 	BaseGoal::Enter();
-
+	
 }
 GoalState Fig_ArcherGroup_lll::Process()
 {

@@ -12,7 +12,11 @@ void Pre_BuildMill_lll::Enter()
 }
 GoalState Pre_BuildMill_lll::Process()
 {
-	return BaseGoal::Process();
+	if (mCityActor->BuildMill())
+	{
+		return e_Success;
+	}
+	return e_Fail;
 
 }
 void Pre_BuildMill_lll::End()
