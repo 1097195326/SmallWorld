@@ -14,5 +14,13 @@ public:
 
 	virtual void On_Init() override;
 
+private:
+
+	FString  Anim0;
+	FString  Anim1;
+	FString  Anim2;
+	FString  Anim3;
+
+	FString GetAnimPath();
 
 };
