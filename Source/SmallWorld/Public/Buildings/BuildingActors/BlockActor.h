@@ -46,6 +46,7 @@ public:
 
 	void SetTileType(BlockTitleType _type);
 	BlockTitleType GetTileType();
+
 	void SetOrientation(CityOrientation _orientation);
 	CityOrientation GetOrientation();
 
