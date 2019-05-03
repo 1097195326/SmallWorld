@@ -1,5 +1,5 @@
 #include "BaseBuildingActor.h"
-
+#include "BlockActor.h"
 
 ABaseBuildingActor::ABaseBuildingActor()
 {
@@ -37,7 +37,10 @@ void ABaseBuildingActor::SaveData(TSharedRef<TJsonWriter<TCHAR, TCondensedJsonPr
 {
     mData->Serialization(Writer);
 }
-
+BlockTitleType ABaseBuildingActor::GetBlockTileType()
+{
+    return mData->mBlockTileType;
+}
 BuildingType ABaseBuildingActor::GetBuildingType()
 {
     return mData->mType;
@@ -78,7 +81,14 @@ FString ABaseBuildingActor::GetMeshPath()
 	}
 	return Path;
 }
-
+void ABaseBuildingActor::SetOnBlockActor(ABlockActor * _blockActor)
+{
+    mOnBlockActor = _blockActor;
+}
+ABlockActor * ABaseBuildingActor::GetOnBlockActor()
+{
+    return mOnBlockActor;
+}
 void ABaseBuildingActor::SetDirection(BuildingDirection _dir)
 {
 	mData->mDirection = _dir;

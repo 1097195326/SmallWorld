@@ -12,6 +12,8 @@ ABlockActor::ABlockActor()
 	DirtTile = "/Game/CastlePack/Meshes/SM_GrassTile_6";
 
 	mCity = nullptr;
+    
+    mData->mBlockTileType = T_GrassTile;
 
 	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("RootComponent"));
 	BaseMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("BlockMeshComponent"));
@@ -21,8 +23,6 @@ ABlockActor::ABlockActor()
 }
 void ABlockActor::On_Init()
 {
-	mBlockData = (BlockData*)mData;
-
 	FString TitlePath = GetMeshPath();
 	
 	UStaticMesh * mesh = LoadObject<UStaticMesh>(this, *TitlePath);
@@ -37,7 +37,7 @@ FString ABlockActor::GetMeshPath()
 	FString tileStr = GrassTile;
 	if (IsInWorld())
 	{
-		switch (mCityOrientation)
+		switch (mData->mCityOrientation)
 		{
 		case O_None:
 		case CornerOutControll_LeftBottom:
@@ -203,25 +203,38 @@ FString ABlockActor::GetMeshPath()
 	}
 	return tileStr;
 }
+int ABlockActor::GetFillNum()
+{
+    return mFillBuildingActors.Num();
+}
 void ABlockActor::FillBuilding(ABaseBuildingActor * _building)
 {
-    
+    if(mFillBuildingActors.Num() == 0 || mFillBuildingActors.Num() < 4)
+    {
+        mData->mBlockTileType = _building->GetBlockTileType();
+        _building->SetOnBlockActor(this);
+        mFillBuildingActors.Add(_building);
+    }
 }
 void ABlockActor::RemoveBuilding(ABaseBuildingActor * _building)
 {
-    
+    mFillBuildingActors.Remove(_building);
+    if (mFillBuildingActors.Num() == 0)
+    {
+        mData->mBlockTileType = T_GrassTile;
+    }
 }
 BlockTitleType ABlockActor::GetTileType()
 {
-	return mTitleType;
+	return mData->mBlockTileType;
 }
 void ABlockActor::SetOrientation(CityOrientation _orientation)
 {
-	mCityOrientation = _orientation;
+	mData->mCityOrientation = _orientation;
 }
 CityOrientation ABlockActor::GetOrientation()
 {
-	return mCityOrientation;
+	return mData->mCityOrientation;
 }
 void ABlockActor::SetCity(ACityActor * _City)
 {

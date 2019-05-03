@@ -159,8 +159,9 @@ public:
     
     BuildingIndex           mIndex;
     BuildingType            mType;
+    CityOrientation         mCityOrientation;
     BuildingDirection       mDirection;
-    BlockTitleType          mBlockTitleType;
+    BlockTitleType          mBlockTileType;
 
 public:
     BaseBuildingData();
@@ -168,9 +169,5 @@ public:
 	virtual void Serialization(TSharedRef<TJsonWriter<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>> Writer) override;
 	virtual void Deserialization(TSharedPtr<FJsonObject>  JsonObject) override;
 
-
-    void SetPosition(FVector _position);
-    void SetHealth(float _health);
-    void SetLevel(int _level);
     
 };

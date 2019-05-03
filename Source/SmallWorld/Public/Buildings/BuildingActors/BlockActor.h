@@ -14,8 +14,7 @@ class ABlockActor : public ABaseBuildingActor
 	GENERATED_BODY()
 
 private:
-	BlockTitleType mTitleType;
-	CityOrientation mCityOrientation;
+	
     
 	ACityActor * mCity;
     
@@ -27,20 +26,20 @@ public:
 	ABlockActor();
 	virtual void On_Init() override;
     
-    
-    void FillBuilding(ABaseBuildingActor * _building);
-    void RemoveBuilding(ABaseBuildingActor * _building);
+    int             GetFillNum();
+    void            FillBuilding(ABaseBuildingActor * _building);
+    void            RemoveBuilding(ABaseBuildingActor * _building);
 
-	BlockTitleType GetTileType();
+	BlockTitleType  GetTileType();
 
-	void SetOrientation(CityOrientation _orientation);
+	void            SetOrientation(CityOrientation _orientation);
 	CityOrientation GetOrientation();
     
-	void SetCity(ACityActor * _City);
-	ACityActor * GetCity();
+	void            SetCity(ACityActor * _City);
+	ACityActor *    GetCity();
 
 
-	virtual bool IsInWorld() override;
+	virtual bool    IsInWorld() override;
 
 private:
 	virtual FString GetMeshPath() override;

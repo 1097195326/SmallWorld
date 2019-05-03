@@ -186,7 +186,7 @@ bool ACityActor::CheckCanBuildArmyCenter(ABlockActor *& OutBlockActor, FString &
 	{
 		for (auto  blockActor : CenterCity)
 		{
-			if (blockActor->GetTileType() == T_CenterDirtTile)
+			if (blockActor->GetTileType() == T_GrassTile)
 			{
 				OutBlockActor = blockActor;
 				return true;
@@ -207,7 +207,8 @@ bool ACityActor::CheckCanBuildBakery(ABlockActor *& OutBlockActor, FString & Out
 	}
 	for (auto blockActor : ControllBuildTiles)
 	{
-		if (blockActor->GetTileType() == T_FullDirtTile)
+		if ((blockActor->GetTileType() == T_FullDirtTile && blockActor->GetFillNum() < 4)
+            || blockActor->GetTileType() == T_GrassTile)
 		{
 			OutBlockActor = blockActor;
 			return true;
@@ -225,7 +226,8 @@ bool ACityActor::CheckCanBuildFarm(ABlockActor *& OutBlockActor, FString & OutMs
 	}
 	for (auto blockActor : ControllBuildTiles)
 	{
-		if (blockActor->GetTileType() == T_CenterDirtTile)
+        if ((blockActor->GetTileType() == T_FullDirtTile && blockActor->GetFillNum() < 4)
+            || blockActor->GetTileType() == T_GrassTile)
 		{
 			OutBlockActor = blockActor;
 			return true;
@@ -242,7 +244,8 @@ bool ACityActor::CheckCanBuildHouse(ABlockActor *& OutBlockActor, FString & OutM
 	}
 	for (auto blockActor : ControllBuildTiles)
 	{
-		if (blockActor->GetTileType() == T_FullDirtTile)
+        if ((blockActor->GetTileType() == T_FullDirtTile && blockActor->GetFillNum() < 4)
+            || blockActor->GetTileType() == T_GrassTile)
 		{
 			OutBlockActor = blockActor;
 			return true;
@@ -259,7 +262,8 @@ bool ACityActor::CheckCanBuildMill(ABlockActor *& OutBlockActor, FString & OutMs
 	}
 	for (auto blockActor : ControllBuildTiles)
 	{
-		if (blockActor->GetTileType() == T_FullDirtTile)
+        if ((blockActor->GetTileType() == T_FullDirtTile && blockActor->GetFillNum() < 4)
+            || blockActor->GetTileType() == T_GrassTile)
 		{
 			OutBlockActor = blockActor;
 			return true;
@@ -276,7 +280,8 @@ bool ACityActor::CheckCanBuildMoneyStore(ABlockActor *& OutBlockActor, FString &
 	}
 	for (auto blockActor : CenterCity)
 	{
-		if (blockActor->GetTileType() == T_CenterDirtTile)
+        if ((blockActor->GetTileType() == T_FullDirtTile && blockActor->GetFillNum() < 4)
+            || blockActor->GetTileType() == T_GrassTile)
 		{
 			OutBlockActor = blockActor;
 			return true;
@@ -293,7 +298,7 @@ bool ACityActor::CheckCanBuildFoodStore(ABlockActor *& OutBlockActor, FString & 
 	}
 	for (auto blockActor : CenterCity)
 	{
-		if (blockActor->GetTileType() == T_CenterDirtTile)
+		if (blockActor->GetTileType() == T_GrassTile)
 		{
 			OutBlockActor = blockActor;
 			return true;
@@ -310,7 +315,8 @@ bool ACityActor::CheckCanBuildStoneStore(ABlockActor *& OutBlockActor, FString &
 	}
 	for (auto blockActor : CenterCity)
 	{
-		if (blockActor->GetTileType() == T_FullDirtTile)
+        if ((blockActor->GetTileType() == T_FullDirtTile && blockActor->GetFillNum() < 4)
+            || blockActor->GetTileType() == T_GrassTile)
 		{
 			OutBlockActor = blockActor;
 			return true;
@@ -327,7 +333,8 @@ bool ACityActor::CheckCanBuildWoodStore(ABlockActor *& OutBlockActor, FString & 
 	}
 	for (auto blockActor : CenterCity)
 	{
-		if (blockActor->GetTileType() == T_FullDirtTile)
+        if ((blockActor->GetTileType() == T_FullDirtTile && blockActor->GetFillNum() < 4)
+            || blockActor->GetTileType() == T_GrassTile)
 		{
 			OutBlockActor = blockActor;
 			return true;
@@ -355,9 +362,9 @@ bool ACityActor::BuildCommandCenter()
 		ACommandCenterActor * BuildActor = Cast<ACommandCenterActor>(UGameplayStatics::BeginDeferredActorSpawnFromClass(SWI, ACommandCenterActor::StaticClass(), trans));
 		if (BuildActor)
 		{
-			blockActor->FillBuilding(BuildActor);
-
 			BuildActor->InitData(new CommandCenterData());
+            blockActor->FillBuilding(BuildActor);
+			
 			CommandCenterList.push_back(BuildActor);
 			UGameplayStatics::FinishSpawningActor(BuildActor, trans);
 		}
@@ -375,9 +382,9 @@ bool ACityActor::BuildArmyCenter()
 		AArmyCenterActor * BuildActor = Cast<AArmyCenterActor>(UGameplayStatics::BeginDeferredActorSpawnFromClass(SWI, AArmyCenterActor::StaticClass(), trans));
 		if (BuildActor)
 		{
+            BuildActor->InitData(new ArmyCenterData());
 			blockActor->FillBuilding(BuildActor);
 
-			BuildActor->InitData(new ArmyCenterData());
 			ArmyCenterList.push_back(BuildActor);
 			UGameplayStatics::FinishSpawningActor(BuildActor, trans);
 		}
@@ -395,9 +402,9 @@ bool ACityActor::BuildBakery()
 		ABakeryActor * BuildActor = Cast<ABakeryActor>(UGameplayStatics::BeginDeferredActorSpawnFromClass(SWI, ABakeryActor::StaticClass(), trans));
 		if (BuildActor)
 		{
+            BuildActor->InitData(new BlockData());
 			blockActor->FillBuilding(BuildActor);
 
-			BuildActor->InitData(new BlockData());
 			BakeryList.push_back(BuildActor);
 			UGameplayStatics::FinishSpawningActor(BuildActor, trans);
 		}
@@ -415,9 +422,9 @@ bool ACityActor::BuildFarm()
 		AFarmActor * BuildActor = Cast<AFarmActor>(UGameplayStatics::BeginDeferredActorSpawnFromClass(SWI, AFarmActor::StaticClass(), trans));
 		if (BuildActor)
 		{
+            BuildActor->InitData(new FarmData());
 			blockActor->FillBuilding(BuildActor);
 
-			BuildActor->InitData(new FarmData());
 			FarmList.push_back(BuildActor);
 			UGameplayStatics::FinishSpawningActor(BuildActor, trans);
 		}
@@ -435,9 +442,9 @@ bool ACityActor::BuildHouse()
 		AHouseActor * BuildActor = Cast<AHouseActor>(UGameplayStatics::BeginDeferredActorSpawnFromClass(SWI, AHouseActor::StaticClass(), trans));
 		if (BuildActor)
 		{
+            BuildActor->InitData(new HouseData());
 			blockActor->FillBuilding(BuildActor);
 
-			BuildActor->InitData(new HouseData());
 			HouseList.push_back(BuildActor);
 			UGameplayStatics::FinishSpawningActor(BuildActor, trans);
 		}
@@ -455,9 +462,10 @@ bool ACityActor::BuildMill()
 		AMillActor * BuildActor = Cast<AMillActor>(UGameplayStatics::BeginDeferredActorSpawnFromClass(SWI, AMillActor::StaticClass(), trans));
 		if (BuildActor)
 		{
+            BuildActor->InitData(new MillData());
 			blockActor->FillBuilding(BuildActor);
 
-			BuildActor->InitData(new MillData());
+			
 			MillList.push_back(BuildActor);
 			UGameplayStatics::FinishSpawningActor(BuildActor, trans);
 		}
@@ -475,9 +483,10 @@ bool ACityActor::BuildMoneyStore()
 		AMoneyStoreActor * BuildActor = Cast<AMoneyStoreActor>(UGameplayStatics::BeginDeferredActorSpawnFromClass(SWI, AMoneyStoreActor::StaticClass(), trans));
 		if (BuildActor)
 		{
+            BuildActor->InitData(new MoneyStoreData());
 			blockActor->FillBuilding(BuildActor);
 
-			BuildActor->InitData(new MoneyStoreData());
+			
 			MoneyStoreList.push_back(BuildActor);
 			UGameplayStatics::FinishSpawningActor(BuildActor, trans);
 		}
@@ -495,9 +504,10 @@ bool ACityActor::BuildFoodStore()
 		AFoodStoreActor * BuildActor = Cast<AFoodStoreActor>(UGameplayStatics::BeginDeferredActorSpawnFromClass(SWI, AFoodStoreActor::StaticClass(), trans));
 		if (BuildActor)
 		{
+            BuildActor->InitData(new FoodStoreData());
 			blockActor->FillBuilding(BuildActor);
 
-			BuildActor->InitData(new FoodStoreData());
+			
 			FoodStoreList.push_back(BuildActor);
 			UGameplayStatics::FinishSpawningActor(BuildActor, trans);
 		}
@@ -515,9 +525,10 @@ bool ACityActor::BuildStoneStore()
 		AStoneStoreActor * BuildActor = Cast<AStoneStoreActor>(UGameplayStatics::BeginDeferredActorSpawnFromClass(SWI, AStoneStoreActor::StaticClass(), trans));
 		if (BuildActor)
 		{
+            BuildActor->InitData(new StoneStoreData());
 			blockActor->FillBuilding(BuildActor);
 
-			BuildActor->InitData(new StoneStoreData());
+			
 			StoneStoreList.push_back(BuildActor);
 			UGameplayStatics::FinishSpawningActor(BuildActor, trans);
 		}
@@ -535,9 +546,10 @@ bool ACityActor::BuildWoodStore()
 		AWoodStoreActor * BuildActor = Cast<AWoodStoreActor>(UGameplayStatics::BeginDeferredActorSpawnFromClass(SWI, AWoodStoreActor::StaticClass(), trans));
 		if (BuildActor)
 		{
+            BuildActor->InitData(new WoodStoreData());
 			blockActor->FillBuilding(BuildActor);
 
-			BuildActor->InitData(new WoodStoreData());
+			
 			WoodStoreList.push_back(BuildActor);
 			UGameplayStatics::FinishSpawningActor(BuildActor, trans);
 		}

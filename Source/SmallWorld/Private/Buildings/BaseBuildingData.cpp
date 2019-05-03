@@ -24,15 +24,3 @@ void BaseBuildingData::Deserialization(TSharedPtr<FJsonObject> JsonObject)
     mPosition.InitFromString(JsonObject->GetStringField("mPosition"));
     
 }
-void BaseBuildingData::SetPosition(FVector _position)
-{
-    mPosition = _position;
-}
-void BaseBuildingData::SetLevel(int _level)
-{
-    mLevel = _level;
-}
-void BaseBuildingData::SetHealth(float _health)
-{
-    mHealth = _health;
-}

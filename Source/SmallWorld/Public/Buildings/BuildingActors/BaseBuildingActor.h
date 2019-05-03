@@ -27,7 +27,7 @@ const int	CastleCenterSize = 3;
 const float TitleSize = 2500.f;
 const float WallSize = 625.f;
 
-
+class ABlockActor;
 
 UCLASS()
 class ABaseBuildingActor : public AActor
@@ -53,6 +53,8 @@ protected:
     // protected function
     
 	virtual FString GetMeshPath();
+    
+    ABlockActor * mOnBlockActor;
 
 public:
 	ABaseBuildingActor();
@@ -65,21 +67,25 @@ public:
     virtual void InitData(BaseBuildingData * _data);
     virtual void SaveData(TSharedRef<TJsonWriter<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>> Writer);
     
-	BuildingType GetBuildingType();
+	BuildingType        GetBuildingType();
+    BlockTitleType      GetBlockTileType();
     
-	void SetLevel(int _level);
-	int	GetLevel();
+    ABlockActor *       GetOnBlockActor();
+    void                SetOnBlockActor(ABlockActor * _blockActor);
+    
+	void                SetLevel(int _level);
+	int	                GetLevel();
 
-	void SetDirection(BuildingDirection _dir);
-	BuildingDirection GetDirction();
+	void                SetDirection(BuildingDirection _dir);
+	BuildingDirection   GetDirction();
 
-	FRotator DirectionRotation();
+	FRotator            DirectionRotation();
 
-	void SetIndex(BuildingIndex _index);
-	BuildingIndex GetIndex();
+	void                SetIndex(BuildingIndex _index);
+	BuildingIndex       GetIndex();
 	
-	virtual bool IsInWorld();
- 	virtual bool IsInWorld(int _index);
+	virtual bool        IsInWorld();
+ 	virtual bool        IsInWorld(int _index);
     
 public:
     UPROPERTY(VisibleDefaultsOnly, Category = BaseBuilding)
