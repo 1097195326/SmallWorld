@@ -6,15 +6,6 @@
 
 class ACityActor;
 
-enum BlockTitleType
-{
-	T_GrassTile,
-	T_DirtTile, 
-	T_CenterDirtTile,
-	T_EdgeDirtTile,
-	T_CornerDirtTile,
-	T_FullDirtTile,
-};
 
 
 UCLASS()
@@ -25,31 +16,26 @@ class ABlockActor : public ABaseBuildingActor
 private:
 	BlockTitleType mTitleType;
 	CityOrientation mCityOrientation;
-
+    
 	ACityActor * mCity;
-
-	FString GrassCentreDirtTile;
-	FString GrassFullDirtTiles;
-	FString GrassTile;
-	FString GrassToDirtEdgeTile;
-	FString GrassToDirtTile;
-	FString DirtTile;
-
+    
 	BlockData * mBlockData;
-
+    
+    TArray<ABaseBuildingActor *>  mFillBuildingActors;
+    
 public:
 	ABlockActor();
 	virtual void On_Init() override;
+    
+    
+    void FillBuilding(ABaseBuildingActor * _building);
+    void RemoveBuilding(ABaseBuildingActor * _building);
 
-	void SetFillType(BuildingType _fillType);
-	BuildingType GetFillType();
-
-	void SetTileType(BlockTitleType _type);
 	BlockTitleType GetTileType();
 
 	void SetOrientation(CityOrientation _orientation);
 	CityOrientation GetOrientation();
-
+    
 	void SetCity(ACityActor * _City);
 	ACityActor * GetCity();
 
@@ -58,4 +44,12 @@ public:
 
 private:
 	virtual FString GetMeshPath() override;
+    
+    
+    FString GrassCentreDirtTile;
+    FString GrassFullDirtTiles;
+    FString GrassTile;
+    FString GrassToDirtEdgeTile;
+    FString GrassToDirtTile;
+    FString DirtTile;
 };

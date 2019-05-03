@@ -13,7 +13,7 @@
 #include "StoneActor.h"
 #include "StoneStoreActor.h"
 #include "TreeActor.h"
-#include "TreeStoreActor.h"
+#include "WoodStoreActor.h"
 #include "BlockActor.h"
 #include "GateActor.h"
 #include "TowerActor.h"
@@ -42,7 +42,7 @@ private:
     list<AMoneyStoreActor *>        MoneyStoreList;
     list<AFoodStoreActor *>         FoodStoreList;
     list<AStoneStoreActor *>        StoneStoreList;
-    list<ATreeStoreActor *>         TreeStoreList;
+    list<AWoodStoreActor *>         WoodStoreList;
     list<AWallActor *>              WallList;
     list<ATowerActor *>             TowerList;
     list<AGateActor *>              GateList;
@@ -67,7 +67,7 @@ public:
 	int		GetMoneyStoreNum();
 	int		GetFoodStoreNum();
 	int		GetStoneStoreNum();
-	int		GetTreeStoreNum();
+	int		GetWoodStoreNum();
 
 	int		GetCommandCenterLevel();
 	int		GetArmyCenterLevel();
@@ -77,7 +77,7 @@ public:
 	int		GetMoneyStoreLevel();
 	int		GetFoodStoreLevel();
 	int		GetStoneStoreLevel();
-	int		GetTreeStoreLevel();
+	int		GetWoodStoreLevel();
 
 	bool CheckCanBuildCommandCenter(ABlockActor *& OutBlockActor,FString & OutMsg);
 	bool CheckCanBuildArmyCenter(ABlockActor * &OutBlockActor,FString & OutMsg);
@@ -88,7 +88,7 @@ public:
 	bool CheckCanBuildMoneyStore(ABlockActor *& OutBlockActor, FString & OutMsg);
 	bool CheckCanBuildFoodStore(ABlockActor *& OutBlockActor, FString & OutMsg);
 	bool CheckCanBuildStoneStore(ABlockActor *& OutBlockActor, FString & OutMsg);
-	bool CheckCanBuildTreeStore(ABlockActor *& OutBlockActor, FString & OutMsg);
+	bool CheckCanBuildWoodStore(ABlockActor *& OutBlockActor, FString & OutMsg);
 	bool CheckCanBuildWall(ABlockActor *& OutBlockActor, FString & OutMsg);
 
 	bool BuildCommandCenter();
@@ -100,7 +100,7 @@ public:
 	bool BuildMoneyStore();
 	bool BuildFoodStore();
 	bool BuildStoneStore();
-	bool BuildTreeStore();
+	bool BuildWoodStore();
 	bool BuildWall();
     
     

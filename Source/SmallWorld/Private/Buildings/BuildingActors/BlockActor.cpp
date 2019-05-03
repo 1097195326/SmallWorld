@@ -203,26 +203,13 @@ FString ABlockActor::GetMeshPath()
 	}
 	return tileStr;
 }
-//void ABlockActor::InitData(BlockData * Data)
-//{
-//    mData = Data;
-//    static ConstructorHelpers::FObjectFinder<UStaticMesh> BlockMesh(TEXT(""));
-//
-//    BaseMeshComponent->SetStaticMesh(BlockMesh.Object);
-//
-//}
-void ABlockActor::SetFillType(BuildingType _fillType)
+void ABlockActor::FillBuilding(ABaseBuildingActor * _building)
 {
-	mBlockData->mFillType = _fillType;
+    
 }
-BuildingType ABlockActor::GetFillType()
-{	
-	return mBlockData->mFillType;
-}
-void ABlockActor::SetTileType(BlockTitleType _type)
+void ABlockActor::RemoveBuilding(ABaseBuildingActor * _building)
 {
-	mTitleType = _type;
-
+    
 }
 BlockTitleType ABlockActor::GetTileType()
 {

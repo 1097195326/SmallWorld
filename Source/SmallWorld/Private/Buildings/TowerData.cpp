@@ -4,7 +4,7 @@
 
 TowerData::TowerData()
 {
-   
+    mType = B_Tower;
     
 }
 TowerData::~TowerData()

@@ -2,13 +2,13 @@
 #include "BaseBuildingData.h"
 
 
-class TreeStoreData : public BaseBuildingData
+class WoodStoreData : public BaseBuildingData
 {
 protected:
     
 public:
-	TreeStoreData();
-    ~TreeStoreData();
+	WoodStoreData();
+    ~WoodStoreData();
     
     
     virtual void Serialization(TSharedRef<TJsonWriter<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>> Writer) override;

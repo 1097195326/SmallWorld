@@ -4,7 +4,7 @@
 
 MoneyStoreData::MoneyStoreData()
 {
-   
+    mType = B_MoneyStore;
     
 }
 MoneyStoreData::~MoneyStoreData()

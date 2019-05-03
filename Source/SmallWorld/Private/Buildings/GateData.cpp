@@ -4,7 +4,8 @@
 
 GateData::GateData()
 {
-   
+    mType = B_Gate;
+    
     
 }
 GateData::~GateData()

@@ -41,7 +41,8 @@ protected:
         // Rotator
     // End
     int                    mMaxLevel;
-
+    
+    
 	FString  MeshPathLevel_0;
 	FString  MeshPathLevel_1;
 	FString  MeshPathLevel_2;

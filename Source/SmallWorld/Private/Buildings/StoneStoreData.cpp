@@ -4,7 +4,7 @@
 
 StoneStoreData::StoneStoreData()
 {
-   
+    mType = B_StoneStore;
     
 }
 StoneStoreData::~StoneStoreData()

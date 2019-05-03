@@ -4,7 +4,7 @@
 
 GameWorldData::GameWorldData()
 {
-   
+    mType = B_World;
     
 }
 GameWorldData::~GameWorldData()

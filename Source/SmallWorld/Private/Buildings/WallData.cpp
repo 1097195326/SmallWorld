@@ -4,7 +4,7 @@
 
 WallData::WallData()
 {
-   
+    mType = B_Wall;
     
 }
 WallData::~WallData()

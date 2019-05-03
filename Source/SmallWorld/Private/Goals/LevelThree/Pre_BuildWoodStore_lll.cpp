@@ -3,7 +3,7 @@
 
 float Pre_BuildWoodStore_lll::Evaluate()
 {
-	return 	mCityActor->GetHouseNum() * lll_Pre_Build_WoodStore - mCityActor->GetTreeStoreNum() * 10;
+	return 	mCityActor->GetHouseNum() * lll_Pre_Build_WoodStore - mCityActor->GetWoodStoreNum() * 10;
 
 }
 void Pre_BuildWoodStore_lll::Enter()
@@ -13,7 +13,7 @@ void Pre_BuildWoodStore_lll::Enter()
 }
 GoalState Pre_BuildWoodStore_lll::Process()
 {
-	if (mCityActor->BuildTreeStore())
+	if (mCityActor->BuildWoodStore())
 	{
 		return e_Success;
 	}

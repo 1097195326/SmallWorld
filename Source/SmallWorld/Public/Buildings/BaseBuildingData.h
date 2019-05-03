@@ -15,6 +15,15 @@ struct BuildingIndex
         
     }
 };
+enum BlockTitleType
+{
+    T_GrassTile,
+    T_DirtTile,
+    T_CenterDirtTile,
+    T_EdgeDirtTile,
+    T_CornerDirtTile,
+    T_FullDirtTile,
+};
 enum BuildingType
 {
 	B_None,
@@ -35,7 +44,7 @@ enum BuildingType
 	B_CommandCenter,
 	B_ArmyCenter,
 	B_FoodStore,
-	B_TreeStore,
+	B_WoodStore,
 	B_StoneStore,
 	B_MoneyStore,
 
@@ -151,7 +160,7 @@ public:
     BuildingIndex           mIndex;
     BuildingType            mType;
     BuildingDirection       mDirection;
-    
+    BlockTitleType          mBlockTitleType;
 
 public:
     BaseBuildingData();

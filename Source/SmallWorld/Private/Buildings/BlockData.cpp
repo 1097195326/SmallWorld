@@ -4,9 +4,8 @@
 
 BlockData::BlockData()
 {
-	mFillType = B_None;
-
-
+    mType = B_CityBlock;
+    
 }
 void BlockData::Serialization(TSharedRef<TJsonWriter<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>> Writer)
 {

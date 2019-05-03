@@ -4,7 +4,7 @@
 class BlockData : public BaseBuildingData
 {
 public:
-	BuildingType  mFillType;
+	
 
 public:
 	BlockData();
