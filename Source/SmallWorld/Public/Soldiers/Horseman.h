@@ -9,5 +9,7 @@ class AHorseman : public ASoldierPawn
 	GENERATED_BODY()
 
 public:
+	AHorseman();
+
 
 };

@@ -10,5 +10,6 @@ class AArcher : public ASoldierPawn
 	GENERATED_BODY()
 
 public:
+	AArcher();
 
 };

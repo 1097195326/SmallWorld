@@ -10,5 +10,6 @@ class AGriffin : public ASoldierPawn
 	GENERATED_BODY()
 
 public:
+	AGriffin();
 
 };

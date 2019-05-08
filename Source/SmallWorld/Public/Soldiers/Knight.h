@@ -9,5 +9,7 @@ class AKnight : public ASoldierPawn
 	GENERATED_BODY()
 
 public:
+	AKnight();
+
 
 };

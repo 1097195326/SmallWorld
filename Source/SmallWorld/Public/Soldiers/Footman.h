@@ -9,6 +9,6 @@ class AFootman : public ASoldierPawn
 	GENERATED_BODY()
 
 public:
-
+	AFootman();
 
 };

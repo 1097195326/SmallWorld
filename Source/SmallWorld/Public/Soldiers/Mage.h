@@ -10,5 +10,7 @@ class AMage : public ASoldierPawn
 	GENERATED_BODY()
 
 public:
+	AMage();
+
 
 };

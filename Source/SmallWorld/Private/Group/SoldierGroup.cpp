@@ -4,7 +4,6 @@ SoldierGroup::SoldierGroup():mGroupType(G_None)
 {
 
 }
-
 void SoldierGroup::AddSoldierToGroup(ASoldierPawn * _soldier)
 {
 	if (_soldier == nullptr)
@@ -15,20 +14,20 @@ void SoldierGroup::AddSoldierToGroup(ASoldierPawn * _soldier)
 	{
 		SetGroupType(_soldier->mSoldierType);
 	}
-	AllSoldier.push_back(_soldier);
+	mAllSoldier.push_back(_soldier);
 }
 void SoldierGroup::RemoveSoldierFromGroup(ASoldierPawn * _soldier)
 {
-	AllSoldier.remove(_soldier);
+	mAllSoldier.remove(_soldier);
 }
 list<ASoldierPawn*> SoldierGroup::GetAllSoldier()
 {
-	return AllSoldier;
+	return mAllSoldier;
 }
 void SoldierGroup::ChangeFormation(BaseFormation * formation)
 {
-	CurrrentFormation = formation;
-	CurrrentFormation->CalculateOffSet(AllSoldier);
+	mCurrrentFormation = formation;
+	mCurrrentFormation->CalculateOffSet(mAllSoldier);
 }
 void SoldierGroup::SetGroupType(SoldierType _soldierType)
 {
@@ -36,33 +35,37 @@ void SoldierGroup::SetGroupType(SoldierType _soldierType)
 	{
 	case S_Archer:
 		mGroupType = G_ArcherGroup;
-		mGroupNum = 10;
+		mSoldierNum = 10;
 		break;
 	case S_Footman:
 		mGroupType = G_FootmanGroup;
-		mGroupNum = 10;
+		mSoldierNum = 10;
 		break;
 	case S_Griffin:
 		mGroupType = G_GriffinGroup;
-		mGroupNum = 10;
+		mSoldierNum = 10;
 		break;
 	case S_Horseman:
 		mGroupType = G_HorsemanGroup;
-		mGroupNum = 10;
+		mSoldierNum = 10;
 		break;
 	case S_Knight:
 		mGroupType = G_KnightGroup;
-		mGroupNum = 10;
+		mSoldierNum = 10;
 		break;
 	case S_Mage:
 		mGroupType = G_MageGroup;
-		mGroupNum = 10;
+		mSoldierNum = 10;
 		break;
 	case S_SiegeEngine:
 		mGroupType = G_SiegeEngineGroup;
-		mGroupNum = 10;
+		mSoldierNum = 10;
 		break;
 	default:
 		break;
 	}
+}
+bool SoldierGroup::IsFull()
+{
+	return mAllSoldier.size() == mSoldierNum;
 }

@@ -15,12 +15,7 @@ enum GroupType
 };
 class SoldierGroup : public BaseGroup
 {
-protected:
-	GroupType					mGroupType;
-	int32						mGroupNum;
 
-	std::list<ASoldierPawn*>	AllSoldier;
-	BaseFormation *				CurrrentFormation;
 public:
 	SoldierGroup();
 
@@ -29,7 +24,14 @@ public:
 	void					RemoveSoldierFromGroup(ASoldierPawn * soldier);
 	list<ASoldierPawn*>		GetAllSoldier();
 	void					ChangeFormation(BaseFormation * formation);
-public:
+	bool					IsFull();
+protected:
+	GroupType					mGroupType;
+	int32						mSoldierNum;
+
+	std::list<ASoldierPawn*>	mAllSoldier;
+	BaseFormation *				mCurrrentFormation;
+private:
 
 
 };
