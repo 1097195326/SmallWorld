@@ -9,7 +9,7 @@
 #include "Projectile.h"
 #include "SoldierPawn.generated.h"
 
-class BaseGroup;
+class SoldierGroup;
 
 UENUM()
 enum BehaviorType
@@ -30,7 +30,17 @@ enum BehaviorType
 	e_offsetpursuit = 1 << 11,
 
 };
-
+UENUM()
+enum SoldierType
+{
+	S_Archer,
+	S_Footman,
+	S_Griffin,
+	S_Horseman,
+	S_Knight,
+	S_Mage,
+	S_SiegeEngine,
+};
 
 UCLASS()
 class ASoldierPawn : public AGamePawn
@@ -39,38 +49,39 @@ class ASoldierPawn : public AGamePawn
 public:
 	ASoldierPawn();
 
-	virtual void On_Init() override;
-	virtual void On_Start() override;
-	virtual void On_Tick(float delta) override;
-	virtual void On_Delete() override;
+	virtual void	On_Init() override;
+	virtual void	On_Start() override;
+	virtual void	On_Tick(float delta) override;
+	virtual void	On_Delete() override;
 
-	virtual float TakeDamage(float Damage, struct FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser) override;
+	virtual float	TakeDamage(float Damage, struct FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser) override;
 	virtual void	Attack();
 
-	void SetFormationPosition(const FVector & formationPosition);
-	void SetOffsetToLeader(const FVector & offset);
-	void SetLeader(ASoldierPawn * leader);
+	void			SetFormationPosition(const FVector & formationPosition);
+	void			SetOffsetToLeader(const FVector & offset);
+	void			SetLeader(ASoldierPawn * leader);
 	
 
-	float GetDamage();
-	bool	CanAttack();
-	bool	IsHaveEnemy();
-	bool	IsAlive();
+	float			GetDamage();
+	bool			CanAttack();
+	bool			IsHaveEnemy();
+	bool			IsAlive();
 
 	UFUNCTION(BlueprintCallable)
-		void AnimAttack();
+		void		AnimAttack();
 	UFUNCTION(BlueprintCallable)
-		void AnimAttackEnd();
+		void		AnimAttackEnd();
 	UFUNCTION(BlueprintCallable)
-		void AnimHitEnd();
+		void		AnimHitEnd();
 	UFUNCTION(BlueprintCallable)
-		void AnimDieingEnd();
+		void		AnimDieingEnd();
 public:
-	FVector mFormationPosition;
-	FVector mOffsetToLeader;
-	ASoldierPawn * mLeader;
-	ASoldierPawn * mEnemy;
-	BaseGroup * mGroup;
+	SoldierType			mSoldierType;
+	FVector				mFormationPosition;
+	FVector				mOffsetToLeader;
+	ASoldierPawn *		mLeader;
+	ASoldierPawn *		mEnemy;
+	SoldierGroup *		mGroup;
 
 	UPROPERTY(EditAnywhere, Category = Soldier)
 		float	fFieldOfView;
@@ -90,30 +101,30 @@ public:
 		float	fAttackInterval;
 
 	UPROPERTY(EditAnywhere)
-		UBehaviorTree * BehaviorTree;
+		UBehaviorTree *				BehaviorTree;
 	UPROPERTY(VisibleAnywhere)
-		USoldierPawnMovement * SoldierMovement;
+		USoldierPawnMovement *		SoldierMovement;
 	UPROPERTY(VisibleDefaultsOnly)
-		USkeletalMeshComponent * MeshComponent;
+		USkeletalMeshComponent *	MeshComponent;
 	
 public:
-	void	AddSteeringForce(FVector Force);
-	FVector	SteeringForce();
-	void	SetMoveToLocation(FVector Location);
-	FVector	MoveToLocation();
+	void		AddSteeringForce(FVector Force);
+	FVector		SteeringForce();
+	void		SetMoveToLocation(FVector Location);
+	FVector		MoveToLocation();
 
 private:
-	FVector vSteeringForce;
-	FVector	vMoveToLocation;
+	FVector		vSteeringForce;
+	FVector		vMoveToLocation;
 
-	int iBehaviorType;
+	int			iBehaviorType;
 
-	FVector Seek(FVector TargetLocation);
-	FVector Arrive(FVector TargetLocation);
-	FVector OffsetPursuit(ASoldierPawn * Leader);
-	FVector Separation(BaseGroup *  Group);
-	FVector Alignment(BaseGroup *  Group);
-	FVector Cohesion(BaseGroup *  Group);
+	FVector		Seek(FVector TargetLocation);
+	FVector		Arrive(FVector TargetLocation);
+	FVector		OffsetPursuit(ASoldierPawn * Leader);
+	FVector		Separation(SoldierGroup *  Group);
+	FVector		Alignment(SoldierGroup *  Group);
+	FVector		Cohesion(SoldierGroup *  Group);
 
 public:
 	// beavior func

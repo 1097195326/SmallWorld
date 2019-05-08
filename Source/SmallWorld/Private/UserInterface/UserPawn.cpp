@@ -5,7 +5,7 @@
 // test exec
 #include "SoldierPawnController.h"
 #include "SoldierPawn.h"
-#include "BaseGroup.h"
+#include "SoldierGroup.h"
 #include "HorizonalRectFormation.h"
 #include "ConeFormation.h"
 #include "CircleFormation.h"
@@ -118,7 +118,7 @@ void AUserPawn::CreateGroup()
 {
 	TArray<AActor*> soldiers;
 	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ASoldierPawn::StaticClass(), soldiers);
-	BaseGroup * group = new BaseGroup();
+	SoldierGroup * group = new SoldierGroup();
 
 	for (int i = 0; i < soldiers.Num(); i++)
 	{

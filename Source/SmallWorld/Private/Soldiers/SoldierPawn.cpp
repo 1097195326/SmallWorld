@@ -1,6 +1,6 @@
 #include "SoldierPawn.h"
 #include "SoldierPawnController.h"
-#include "BaseGroup.h"
+#include "SoldierGroup.h"
 #include "GameFramework/DamageType.h"
 
 ASoldierPawn::ASoldierPawn()
@@ -175,7 +175,7 @@ FVector ASoldierPawn::OffsetPursuit(ASoldierPawn * Leader)
 
 	return Arrive(mOffsetToLeader + Leader->GetVelocity() * LookAheadTime);
 }
-FVector ASoldierPawn::Separation(BaseGroup * Group)
+FVector ASoldierPawn::Separation(SoldierGroup * Group)
 {
 	FVector Steer = FVector::ZeroVector;
 	list<ASoldierPawn*> Soldiers = Group->GetAllSoldier();
@@ -191,7 +191,7 @@ FVector ASoldierPawn::Separation(BaseGroup * Group)
 	}
 	return Steer;
 }
-FVector ASoldierPawn::Alignment(BaseGroup * Group)
+FVector ASoldierPawn::Alignment(SoldierGroup * Group)
 {
 	FVector AverageHeading = FVector::ZeroVector;
 	int    NeighborCount = 0;
@@ -214,7 +214,7 @@ FVector ASoldierPawn::Alignment(BaseGroup * Group)
 	}
 	return AverageHeading;
 }
-FVector ASoldierPawn::Cohesion(BaseGroup *  Group)
+FVector ASoldierPawn::Cohesion(SoldierGroup *  Group)
 {
 	FVector CenterOfMass, Steering;
 
