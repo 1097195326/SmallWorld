@@ -17,7 +17,7 @@ void USmallWorldInstance::On_Init()
 }
 void USmallWorldInstance::On_Start()
 {
-	GetTimerManager().SetTimer(GameUpdateHandle, this, &USmallWorldInstance::UpdateGame, 0.5f, true);
+	GetTimerManager().SetTimer(GameUpdateHandle, this, &USmallWorldInstance::UpdateGame, 0.1f, true);
 
 }
 void USmallWorldInstance::On_Delete()

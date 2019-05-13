@@ -4,7 +4,7 @@
 HouseData::HouseData()
 {
     mType = B_House;
-    
+	mBlockTileType = T_FullDirtTile;
 }
 HouseData::~HouseData()
 {

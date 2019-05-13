@@ -5,7 +5,7 @@
 StoneStoreData::StoneStoreData()
 {
     mType = B_StoneStore;
-    
+	mBlockTileType = T_FullDirtTile;
 }
 StoneStoreData::~StoneStoreData()
 {

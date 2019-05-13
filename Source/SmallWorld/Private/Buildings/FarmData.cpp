@@ -5,7 +5,7 @@
 FarmData::FarmData()
 {
     mType = B_Farm;
-    
+	mBlockTileType = T_CenterDirtTile;
 }
 FarmData::~FarmData()
 {

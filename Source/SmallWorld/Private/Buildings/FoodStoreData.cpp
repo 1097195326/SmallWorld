@@ -5,7 +5,7 @@
 FoodStoreData::FoodStoreData()
 {
     mType = B_FoodStore;
-    
+	mBlockTileType = T_CenterDirtTile;
 }
 FoodStoreData::~FoodStoreData()
 {

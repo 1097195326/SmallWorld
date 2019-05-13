@@ -5,7 +5,7 @@
 MoneyStoreData::MoneyStoreData()
 {
     mType = B_MoneyStore;
-    
+	mBlockTileType = T_FullDirtTile;
 }
 MoneyStoreData::~MoneyStoreData()
 {

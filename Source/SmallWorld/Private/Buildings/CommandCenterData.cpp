@@ -5,7 +5,7 @@
 CommandCenterData::CommandCenterData()
 {
     mType = B_CommandCenter;
-    
+	mBlockTileType = T_CenterDirtTile;
 }
 CommandCenterData::~CommandCenterData()
 {

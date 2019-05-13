@@ -25,6 +25,7 @@ const int  CastleControllSize = 11;
 const int  CastleSize = 7;
 const int	CastleCenterSize = 3;
 const float TitleSize = 2500.f;
+const float QuarterTitleSize = TitleSize / 4.f;
 const float WallSize = 625.f;
 
 class ABlockActor;
@@ -60,8 +61,10 @@ public:
 	ABaseBuildingActor();
 	virtual void PostInitializeComponents() override;
 	virtual void BeginDestroy() override;
-    
+	virtual void Tick(float DeltaSeconds) override;
+
 	virtual void On_Init();
+	virtual void On_Update(float DeltaSeconds);
 	virtual void On_Delete();
 
     virtual void InitData(BaseBuildingData * _data);

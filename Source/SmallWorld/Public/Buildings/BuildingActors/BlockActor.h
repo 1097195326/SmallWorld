@@ -12,34 +12,25 @@ UCLASS()
 class ABlockActor : public ABaseBuildingActor
 {
 	GENERATED_BODY()
-
-private:
-	
-    
-	ACityActor * mCity;
-    
-	BlockData * mBlockData;
-    
-    TArray<ABaseBuildingActor *>  mFillBuildingActors;
-    
 public:
 	ABlockActor();
-	virtual void On_Init() override;
+	virtual void		On_Init() override;
     
-    int             GetFillNum();
-    void            FillBuilding(ABaseBuildingActor * _building);
-    void            RemoveBuilding(ABaseBuildingActor * _building);
+	FVector				GetFillLocation();
+	int					GetFillNum();
+    void				FillBuilding(ABaseBuildingActor * _building);
+    void				RemoveBuilding(ABaseBuildingActor * _building);
 
-	BlockTitleType  GetTileType();
+	BlockTitleType		GetTileType();
 
-	void            SetOrientation(CityOrientation _orientation);
-	CityOrientation GetOrientation();
+	void				SetOrientation(CityOrientation _orientation);
+	CityOrientation		GetOrientation();
     
-	void            SetCity(ACityActor * _City);
-	ACityActor *    GetCity();
+	void				SetCity(ACityActor * _City);
+	ACityActor *		GetCity();
 
 
-	virtual bool    IsInWorld() override;
+	virtual bool		IsInWorld() override;
 
 private:
 	virtual FString GetMeshPath() override;
@@ -51,4 +42,11 @@ private:
     FString GrassToDirtEdgeTile;
     FString GrassToDirtTile;
     FString DirtTile;
+
+	ACityActor * mCity;
+
+	BlockData * mBlockData;
+
+	TArray<ABaseBuildingActor *>  mFillBuildingActors;
+
 };

@@ -13,7 +13,6 @@ ABlockActor::ABlockActor()
 
 	mCity = nullptr;
     
-    mData->mBlockTileType = T_GrassTile;
 
 	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("RootComponent"));
 	BaseMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("BlockMeshComponent"));
@@ -206,6 +205,35 @@ FString ABlockActor::GetMeshPath()
 int ABlockActor::GetFillNum()
 {
     return mFillBuildingActors.Num();
+}
+FVector ABlockActor::GetFillLocation()
+{
+	int fillNum = mFillBuildingActors.Num();
+	FVector temLoc = GetActorLocation();
+	switch (fillNum)
+	{
+	case 0:
+	{
+		temLoc += FVector(-QuarterTitleSize, -QuarterTitleSize, 0);
+		break;
+	}
+	case 1:
+	{
+		temLoc += FVector(QuarterTitleSize, -QuarterTitleSize, 0);
+		break;
+	}
+	case 2:
+	{
+		temLoc += FVector(QuarterTitleSize, QuarterTitleSize, 0);
+		break;
+	}
+	case 3:
+	{
+		temLoc += FVector(-QuarterTitleSize, QuarterTitleSize, 0);
+		break;
+	}
+	}
+	return temLoc;
 }
 void ABlockActor::FillBuilding(ABaseBuildingActor * _building)
 {
