@@ -8,6 +8,7 @@ ASoldierPawn::ASoldierPawn()
 
 	AIControllerClass = ASoldierPawnController::StaticClass();
 
+	mSoldierState = nullptr;
 	mLeader = nullptr;
 	mEnemy = nullptr;
 	mGroup = nullptr;
@@ -42,6 +43,8 @@ void ASoldierPawn::On_Delete()
 	mGroup = nullptr;
 	mLeader = nullptr;
 
+	delete mSoldierState;
+	mSoldierState = nullptr;
 }
 float ASoldierPawn::TakeDamage(float Damage, struct FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
 {
@@ -70,6 +73,31 @@ void ASoldierPawn::SetOffsetToLeader(const FVector & offset)
 void ASoldierPawn::SetLeader(ASoldierPawn * leader)
 {
 	mLeader = leader;
+}
+void ASoldierPawn::SetGroup(SoldierGroup * _group)
+{
+	mGroup = _group;
+}
+void ASoldierPawn::ChangeSoldierState(SoldierBaseState * _soldierState)
+{
+	if (mSoldierState)
+	{
+		mSoldierState->OnEnd();
+		delete mSoldierState;
+		mSoldierState = nullptr;
+	}
+	if (_soldierState)
+	{
+		mSoldierState = _soldierState;
+		mSoldierState->OnEnter();
+	}
+}
+void ASoldierPawn::HaveMoveToGroup()
+{
+	if (mGroup)
+	{
+		mGroup->AddGroupNum();
+	}
 }
 float ASoldierPawn::GetDamage()
 {

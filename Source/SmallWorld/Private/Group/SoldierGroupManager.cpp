@@ -3,7 +3,7 @@
 
 SoldierGroupManager::SoldierGroupManager()
 {
-	mGroupNum = 2;
+	mGroupMaxNum = 2;
 	mCurrentGroup = nullptr;
 
 }
@@ -39,5 +39,5 @@ void SoldierGroupManager::ClearSoldierGroups()
 }
 bool SoldierGroupManager::IsFull()
 {
-	return mSoldierGroups.size() == mGroupNum;
+	return mSoldierGroups.size() == mGroupMaxNum;
 }

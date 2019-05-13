@@ -6,7 +6,7 @@ class SoldierGroupManager
 {
 public:
 	static SoldierGroupManager * GetInstance();
-
+	SoldierGroupManager();
 
 	void					PushSoldierToGroup(ASoldierPawn * _soldier);
 
@@ -15,10 +15,9 @@ public:
 protected:
 
 private:
-	SoldierGroupManager();
 
 	SoldierGroup *			mCurrentGroup;
 	list<SoldierGroup*>		mSoldierGroups;
 
-	int32					mGroupNum;
+	int32					mGroupMaxNum;
 };

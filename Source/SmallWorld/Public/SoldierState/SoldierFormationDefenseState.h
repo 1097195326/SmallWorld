@@ -2,11 +2,11 @@
 
 #include "SoldierBaseState.h"
 
-class SoldierFormationFightState : public SoldierBaseState
+class SoldierFormationDefenseState : public SoldierBaseState
 {
 public:
-	SoldierFormationFightState(ASoldierPawn * _soldier);
-	~SoldierFormationFightState();
+	SoldierFormationDefenseState(ASoldierPawn * _soldier);
+	~SoldierFormationDefenseState();
 
 	virtual void OnEnter() override;
 	virtual void OnProcess() override;

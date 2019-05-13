@@ -1,6 +1,9 @@
 #pragma once
 #include "BaseGroup.h"
 #include "SoldierPawn.h"
+#include "GroupBaseState.h"
+
+
 
 enum GroupType
 {
@@ -18,20 +21,30 @@ class SoldierGroup : public BaseGroup
 
 public:
 	SoldierGroup();
+	~SoldierGroup();
 
 	void					SetGroupType(SoldierType _soldierType);
+	
 	void					AddSoldierToGroup(ASoldierPawn * soldier);
 	void					RemoveSoldierFromGroup(ASoldierPawn * soldier);
 	list<ASoldierPawn*>		GetAllSoldier();
+	
 	void					ChangeFormation(BaseFormation * formation);
-	bool					IsFull();
+	void					ChangeGroupState(GroupBaseState * _groupState);
+	void					ChangeStateIndex(GroupStateIndex _index);
+	void					UpdateSoldierState();
+
 protected:
+	//void					
+	void					ChangeSoldierState(ASoldierPawn * _soldier);
+
+	GroupStateIndex				mStateIndex;
+	GroupBaseState *			mCurrentState;
+	BaseFormation *				mCurrrentFormation;
+
 	GroupType					mGroupType;
-	int32						mSoldierNum;
 
 	std::list<ASoldierPawn*>	mAllSoldier;
-	BaseFormation *				mCurrrentFormation;
 private:
-
-
+	
 };

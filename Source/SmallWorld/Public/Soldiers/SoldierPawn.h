@@ -7,6 +7,8 @@
 #include "BehaviorTree/BehaviorTree.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "Projectile.h"
+#include "SoldierBaseState.h"
+
 #include "SoldierPawn.generated.h"
 
 class SoldierGroup;
@@ -61,11 +63,18 @@ public:
 	void			SetOffsetToLeader(const FVector & offset);
 	void			SetLeader(ASoldierPawn * leader);
 	
+	void			SetGroup(SoldierGroup * _group);
+	void			ChangeSoldierState(SoldierBaseState * _soldierState);
 
 	float			GetDamage();
 	bool			CanAttack();
 	bool			IsHaveEnemy();
 	bool			IsAlive();
+
+	void			AddSteeringForce(FVector Force);
+	FVector			SteeringForce();
+	void			SetMoveToLocation(FVector Location);
+	FVector			MoveToLocation();
 
 	UFUNCTION(BlueprintCallable)
 		void		AnimAttack();
@@ -84,21 +93,21 @@ public:
 	SoldierGroup *		mGroup;
 
 	UPROPERTY(EditAnywhere, Category = Soldier)
-		float	fFieldOfView;
+		float			fFieldOfView;
 	UPROPERTY(EditAnywhere, Category = Soldier)
-		float	fFieldOfBody;
+		float			fFieldOfBody;
 	UPROPERTY(EditAnywhere, Category = Soldier)
-		float	fFieldOfAttack;
+		float			fFieldOfAttack;
 	UPROPERTY(EditAnywhere, Category = Soldier)
-		float	fMaxForce;
+		float			fMaxForce;
 	UPROPERTY(EditAnywhere, Category = Soldier)
-		float	fMass;
+		float			fMass;
 	UPROPERTY(EditAnywhere, Category = Soldier)
-		float	fHeath;
+		float			fHeath;
 	UPROPERTY(EditAnywhere, Category = Soldier)
-		float	fBaseDamage;
+		float			fBaseDamage;
 	UPROPERTY(EditAnywhere, Category = Soldier)
-		float	fAttackInterval;
+		float			fAttackInterval;
 
 	UPROPERTY(EditAnywhere)
 		UBehaviorTree *				BehaviorTree;
@@ -107,24 +116,23 @@ public:
 	UPROPERTY(VisibleDefaultsOnly)
 		USkeletalMeshComponent *	MeshComponent;
 	
-public:
-	void		AddSteeringForce(FVector Force);
-	FVector		SteeringForce();
-	void		SetMoveToLocation(FVector Location);
-	FVector		MoveToLocation();
 
-private:
-	FVector		vSteeringForce;
-	FVector		vMoveToLocation;
+protected:
+	void					HaveMoveToGroup();
 
-	int			iBehaviorType;
+	SoldierBaseState *				mSoldierState;
 
-	FVector		Seek(FVector TargetLocation);
-	FVector		Arrive(FVector TargetLocation);
-	FVector		OffsetPursuit(ASoldierPawn * Leader);
-	FVector		Separation(SoldierGroup *  Group);
-	FVector		Alignment(SoldierGroup *  Group);
-	FVector		Cohesion(SoldierGroup *  Group);
+	FVector					vSteeringForce;
+	FVector					vMoveToLocation;
+
+	int						iBehaviorType;
+
+	FVector					Seek(FVector TargetLocation);
+	FVector					Arrive(FVector TargetLocation);
+	FVector					OffsetPursuit(ASoldierPawn * Leader);
+	FVector					Separation(SoldierGroup *  Group);
+	FVector					Alignment(SoldierGroup *  Group);
+	FVector					Cohesion(SoldierGroup *  Group);
 
 public:
 	// beavior func
