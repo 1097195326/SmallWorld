@@ -25,7 +25,10 @@ public:
 		void CreateGroup();
 	UFUNCTION(Exec)
 		void Fire();
-
+	UFUNCTION(Exec)
+		void Prepare();
+	UFUNCTION(Exec)
+		void Attack();
 private:
 	void	MoveLeftAndRight(float dle);
 	void	MoveUpAndDown(float dle);
@@ -45,5 +48,19 @@ private:
 	UPROPERTY(VisibleAnywhere)
 		UFloatingPawnMovement * PawnMovement;
 
+	// test 
+	class SoldierGroupManager * RedGroupMange;
+	class SoldierGroupManager * BlueGroupMange;
+
+	UFUNCTION(BlueprintCallable, Category = "Pawn")
+		virtual void MoveForward(float Val);
+	UFUNCTION(BlueprintCallable, Category = "Pawn")
+		virtual void MoveRight(float Val);
+	UFUNCTION(BlueprintCallable, Category = "Pawn")
+		virtual void MoveUp_World(float Val);
+	UFUNCTION(BlueprintCallable, Category = "Pawn")
+		virtual void TurnAtRate(float Rate);
+	UFUNCTION(BlueprintCallable, Category = "Pawn")
+		virtual void LookUpAtRate(float Rate);
 };
 

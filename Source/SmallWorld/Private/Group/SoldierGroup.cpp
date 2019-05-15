@@ -126,6 +126,10 @@ void SoldierGroup::ChangeStateIndex(GroupStateIndex _index)
 {
 	mStateIndex = _index;
 }
+void SoldierGroup::SetGroupLocation(FVector _location)
+{
+	mGroupLocation = _location;
+}
 void SoldierGroup::SetGroupType(SoldierType _soldierType)
 {
 	switch (_soldierType)

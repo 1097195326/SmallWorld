@@ -6,6 +6,8 @@
 GameWorld::GameWorld()
 {
 	IsInitialized = false;
+	IsPaused = false;
+
 
 }
 GameWorld::~GameWorld()
@@ -100,6 +102,7 @@ ACityActor *  GameWorld::BuildCity(int _x, int _y)
 }
 void GameWorld::Update()
 {
+
 	if (IsInitialized)
 	{
 		for (auto Goal : GeneralGoals)

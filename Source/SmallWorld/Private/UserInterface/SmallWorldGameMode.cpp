@@ -8,7 +8,7 @@
 ASmallWorldGameMode::ASmallWorldGameMode()
 {
 	PlayerControllerClass = AUserController::StaticClass();
-	//DefaultPawnClass = AUserPawn::StaticClass();
+	DefaultPawnClass = AUserPawn::StaticClass();
 	//DefaultPawnClass = ADefaultPawn::StaticClass();
 	HUDClass = AUserHUD::StaticClass();
 
@@ -17,6 +17,6 @@ void ASmallWorldGameMode::StartPlay()
 {
 	Super::StartPlay();
 
-	GameWorld::GetInstance()->BuildWorld();
+	//GameWorld::GetInstance()->BuildWorld();
 
 }

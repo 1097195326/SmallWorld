@@ -13,23 +13,24 @@ private:
 	GameWorld & operator = (const GameWorld & _world);
 
 	// 
-	vector<GeneralGoal *>        GeneralGoals;
-	vector<vector<ACityActor *>> CityMap;
-	AGameWorldActor * GameWorldActor;
+	vector<GeneralGoal *>			GeneralGoals;
+	vector<vector<ACityActor *>>	CityMap;
+	AGameWorldActor *				GameWorldActor;
 
 public:
 	~GameWorld();
 
-	static GameWorld * GetInstance();
-	void BuildWorld();
+	static GameWorld *				GetInstance();
+	void							BuildWorld();
 
-	void  ClearGeneralGoals();
+	void							ClearGeneralGoals();
 
-	void	Update();
+	void							Update();
 
 private:
-	bool IsInitialized;
+	bool							IsInitialized;
+	bool							IsPaused;
 
-	bool IsInWorld(int _index);
-	ACityActor *  BuildCity(int _x, int _y);
+	bool							IsInWorld(int _index);
+	ACityActor *					BuildCity(int _x, int _y);
 };

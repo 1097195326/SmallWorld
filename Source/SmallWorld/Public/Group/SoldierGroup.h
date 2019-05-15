@@ -3,6 +3,16 @@
 #include "SoldierPawn.h"
 #include "GroupBaseState.h"
 
+const int32 ArcherGroupMaxNum = 12;
+const int32 FootmanGroupMaxNum = 12;
+const int32 GriffinGroupMaxNum = 12;
+const int32 HorsemanGroupMaxNum = 12;
+const int32 KnightGroupMaxNum = 12;
+const int32 MageGroupMaxNum = 12;
+const int32 SiegeEngineGroupMaxNum = 12;
+
+const int32 AllGroupMaxNum = 2;
+const float GroupSize = 2500 * 3 * 0.5f;
 
 
 enum GroupType
@@ -33,7 +43,8 @@ public:
 	void					ChangeGroupState(GroupBaseState * _groupState);
 	void					ChangeStateIndex(GroupStateIndex _index);
 	void					UpdateSoldierState();
-
+	
+	void					SetGroupLocation(FVector _location);
 protected:
 	//void					
 	void					ChangeSoldierState(ASoldierPawn * _soldier);
@@ -45,6 +56,8 @@ protected:
 	GroupType					mGroupType;
 
 	std::list<ASoldierPawn*>	mAllSoldier;
+
+	FVector						mGroupLocation;
 private:
 	
 };

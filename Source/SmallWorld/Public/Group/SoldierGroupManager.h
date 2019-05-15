@@ -12,12 +12,18 @@ public:
 
 	bool					IsFull();
 	void					ClearSoldierGroups();
+
+	void					SetOriginAndForward(FVector _origin,FVector _forward);
+
 protected:
 
 private:
+	map<int32, FVector>		mGroupLocationMap;
+
+	FVector					mOrigin;
+	FVector					mNormalForward;
 
 	SoldierGroup *			mCurrentGroup;
 	list<SoldierGroup*>		mSoldierGroups;
 
-	int32					mGroupMaxNum;
 };

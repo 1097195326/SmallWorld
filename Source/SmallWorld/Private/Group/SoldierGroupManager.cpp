@@ -3,7 +3,6 @@
 
 SoldierGroupManager::SoldierGroupManager()
 {
-	mGroupMaxNum = 2;
 	mCurrentGroup = nullptr;
 
 }
@@ -19,6 +18,7 @@ void SoldierGroupManager::PushSoldierToGroup(ASoldierPawn * _soldier)
 		if (mCurrentGroup == nullptr)
 		{
 			mCurrentGroup = new SoldierGroup();
+			mCurrentGroup->SetGroupLocation(mOrigin);
 		}
 		mCurrentGroup->AddSoldierToGroup(_soldier);
 		if (mCurrentGroup->IsFull())
@@ -39,5 +39,15 @@ void SoldierGroupManager::ClearSoldierGroups()
 }
 bool SoldierGroupManager::IsFull()
 {
-	return mSoldierGroups.size() == mGroupMaxNum;
+	return mSoldierGroups.size() == AllGroupMaxNum;
+}
+void SoldierGroupManager::SetOriginAndForward(FVector _origin, FVector _forward)
+{
+	mOrigin = _origin;
+	mNormalForward = _forward;
+	for (int i = 0; i < AllGroupMaxNum; i++)
+	{
+		
+	}
+
 }
