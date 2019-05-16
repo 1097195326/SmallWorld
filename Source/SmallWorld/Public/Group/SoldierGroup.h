@@ -12,7 +12,8 @@ const int32 MageGroupMaxNum = 12;
 const int32 SiegeEngineGroupMaxNum = 12;
 
 const int32 AllGroupMaxNum = 2;
-const float GroupSize = 2500 * 3 * 0.5f;
+const float GroupSize = 2500 * 3.f;
+const float FormationSize = 2500 * 2.f;
 
 
 enum GroupType

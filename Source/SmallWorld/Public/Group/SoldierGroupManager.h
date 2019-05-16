@@ -20,7 +20,8 @@ protected:
 private:
 	map<int32, FVector>		mGroupLocationMap;
 
-	FVector					mOrigin;
+	FVector					mPrepareOrigin;
+	FVector					mStartOrigin;
 	FVector					mNormalForward;
 
 	SoldierGroup *			mCurrentGroup;

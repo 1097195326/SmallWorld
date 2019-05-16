@@ -29,7 +29,6 @@ public class SmallWorld : ModuleRules
             "Slate",
             "SlateCore",
             "RenderCore",
-            "ShaderCore",
             "RHI",
         });
 
