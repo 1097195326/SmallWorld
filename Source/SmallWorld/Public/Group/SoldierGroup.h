@@ -45,7 +45,11 @@ public:
 	void					ChangeStateIndex(GroupStateIndex _index);
 	void					UpdateSoldierState();
 	
-	void					SetGroupLocation(FVector _location);
+	void					SetGroupIndexAndLocation(int32 _index, FVector _location);
+
+	FVector					GetGroupLocation();
+	int32					GetGroupIndex();
+
 protected:
 	//void					
 	void					ChangeSoldierState(ASoldierPawn * _soldier);
@@ -59,6 +63,7 @@ protected:
 	std::list<ASoldierPawn*>	mAllSoldier;
 
 	FVector						mGroupLocation;
+	int32						mGroupIndex;
 private:
 	
 };

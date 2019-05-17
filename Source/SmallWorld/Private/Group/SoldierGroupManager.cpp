@@ -18,7 +18,8 @@ void SoldierGroupManager::PushSoldierToGroup(ASoldierPawn * _soldier)
 		if (mCurrentGroup == nullptr)
 		{
 			mCurrentGroup = new SoldierGroup();
-			mCurrentGroup->SetGroupLocation(mStartOrigin);
+			int GroupNum = mSoldierGroups.size();
+			mCurrentGroup->SetGroupIndexAndLocation(GroupNum, mGroupLocationMap[GroupNum]);
 		}
 		mCurrentGroup->AddSoldierToGroup(_soldier);
 		if (mCurrentGroup->IsFull())

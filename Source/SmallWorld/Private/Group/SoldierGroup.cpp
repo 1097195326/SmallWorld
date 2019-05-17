@@ -44,6 +44,7 @@ void SoldierGroup::AddSoldierToGroup(ASoldierPawn * _soldier)
 	{
 		SetGroupType(_soldier->mSoldierType);
 	}
+	_soldier->SetGroup(this);
 	ChangeSoldierState(_soldier);
 	mAllSoldier.push_back(_soldier);
 	if (mAllSoldier.size() == mGroupMaxNum)
@@ -126,9 +127,18 @@ void SoldierGroup::ChangeStateIndex(GroupStateIndex _index)
 {
 	mStateIndex = _index;
 }
-void SoldierGroup::SetGroupLocation(FVector _location)
+void SoldierGroup::SetGroupIndexAndLocation(int32 _index, FVector _location)
 {
+	mGroupIndex = _index;
 	mGroupLocation = _location;
+}
+FVector SoldierGroup::GetGroupLocation()
+{
+	return mGroupLocation;
+}
+int32 SoldierGroup::GetGroupIndex()
+{
+	return mGroupIndex;
 }
 void SoldierGroup::SetGroupType(SoldierType _soldierType)
 {
