@@ -1,7 +1,8 @@
 #pragma once
+#include "GObject.h"
 
 
-class BaseState
+class BaseState : public GObject
 {
 public:
 

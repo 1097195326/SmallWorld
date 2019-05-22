@@ -9,7 +9,7 @@
 using namespace std;
 
 
-class BaseGroup
+class BaseGroup : public GObject
 {
 
 public:

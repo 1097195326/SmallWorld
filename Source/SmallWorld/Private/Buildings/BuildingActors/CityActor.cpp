@@ -6,6 +6,9 @@ ACityActor::ACityActor()
 	mCityIsFull = false;
 	mCenterCityIsFull = false;
 
+	mGeneralGoal = new GeneralGoal();
+	mGeneralGoal->InitWithCityActor(this);
+
 	RootComponent = CollisionBox = CreateDefaultSubobject<UBoxComponent>(TEXT("CollisionBox"));
 	CollisionBox->SetHiddenInGame(false);
 	CollisionBox->ShapeColor = FColor(0,255,0,255);
@@ -17,6 +20,7 @@ ACityActor::ACityActor()
 }
 void ACityActor::On_Init()
 {
+
 	float CityExtent = CitySize * TitleSize * 0.5f;
 	CollisionBox->SetBoxExtent(FVector(CityExtent, CityExtent, CityExtent));
 
@@ -81,10 +85,28 @@ void ACityActor::On_Init()
 		UStaticMesh * mesh = LoadObject<UStaticMesh>(this, *Mountain1);
 		BaseMeshComponent->SetStaticMesh(mesh);
 	}
+
+	mGeneralGoal->Enter();
+}
+void ACityActor::On_GameUpdate()
+{
+	
+	if (mGeneralGoal)
+	{
+		mGeneralGoal->Process();
+	}
+	for (auto groupManager : mGroupManagers)
+	{
+		groupManager->On_GameUpdate();
+	}
+
 }
 void ACityActor::On_Delete()
 {
+	mGeneralGoal->End();
 
+	delete mGeneralGoal;
+	mGeneralGoal = nullptr;
 }
 int ACityActor::GetFarmNum()
 {

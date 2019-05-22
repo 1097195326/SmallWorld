@@ -2,6 +2,7 @@
 
 #include <queue>
 #include <vector>
+#include "GObject.h"
 #include "CityActor.h"
 //#include <math.h>
 
@@ -47,7 +48,7 @@ const float lll_Pre_Soldier_Mage = 0.1f;
 const float lll_Pre_Soldier_SiegeEngine = 0.1f;
 
 
-class BaseGoal
+class BaseGoal : public GObject
 {
 protected:
 	GoalState mState;

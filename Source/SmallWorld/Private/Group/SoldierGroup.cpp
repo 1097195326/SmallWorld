@@ -30,6 +30,13 @@ SoldierGroup::~SoldierGroup()
 	}
 
 }
+void SoldierGroup::On_GameUpdate()
+{
+	for (auto soldier : mAllSoldier)
+	{
+		soldier->On_GameUpdate();
+	}
+}
 void SoldierGroup::AddSoldierToGroup(ASoldierPawn * _soldier)
 {
 	if (_soldier == nullptr)

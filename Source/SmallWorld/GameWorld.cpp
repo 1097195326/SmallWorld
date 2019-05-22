@@ -12,7 +12,7 @@ GameWorld::GameWorld()
 }
 GameWorld::~GameWorld()
 {
-	ClearGeneralGoals();
+	
 }
 GameWorld::GameWorld(const GameWorld & _world)
 {
@@ -70,14 +70,9 @@ void GameWorld::BuildWorld()
 
 	IsInitialized = true;
 }
-void GameWorld::ClearGeneralGoals()
+void GameWorld::ClearCityMap()
 {
-	for (int i = 0; i < GeneralGoals.size(); i++)
-	{
-		GeneralGoal * goal = GeneralGoals[i];
-		delete goal;
-	}
-	GeneralGoals.clear();
+	
 
 }
 ACityActor *  GameWorld::BuildCity(int _x, int _y)
@@ -92,9 +87,9 @@ ACityActor *  GameWorld::BuildCity(int _x, int _y)
 
 		UGameplayStatics::FinishSpawningActor(CityActor, trans);
 		
-		GeneralGoal * goal = new GeneralGoal();
+		/*GeneralGoal * goal = new GeneralGoal();
 		goal->InitWithCityActor(CityActor);
-		GeneralGoals.push_back(goal);
+		GeneralGoals.push_back(goal);*/
 
 		return CityActor;
 	}
@@ -105,15 +100,11 @@ void GameWorld::Update()
 
 	if (IsInitialized)
 	{
-		for (auto Goal : GeneralGoals)
+		for (auto CityList : CityMap )
 		{
-			if (Goal->GetState() == e_UnActive)
+			for(auto City : CityList)
 			{
-				Goal->Enter();
-			}
-			else
-			{
-				Goal->Process();
+				City->On_GameUpdate();
 			}
 		}
 	}

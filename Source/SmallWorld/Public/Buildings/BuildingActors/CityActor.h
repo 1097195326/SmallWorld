@@ -19,6 +19,10 @@
 #include "TowerActor.h"
 #include "WallActor.h"
 #include "CityData.h"
+
+#include "GeneralGoal.h"
+#include "SoldierGroupManager.h"
+
 #include "CityActor.generated.h"
 
 UCLASS()
@@ -26,36 +30,12 @@ class ACityActor : public ABaseBuildingActor
 {
 	GENERATED_BODY()
 
-private:
-	vector<vector<ABlockActor*>> BlockMap;
-
-	UPROPERTY(VisibleDefaultsOnly)
-		UBoxComponent * CollisionBox;
-
-    
-    list<AArmyCenterActor *>        ArmyCenterList;
-    list<ABakeryActor *>            BakeryList;
-    list<ACommandCenterActor *>     CommandCenterList;
-    list<AFarmActor *>              FarmList;
-    list<AHouseActor *>             HouseList;
-    list<AMillActor *>              MillList;
-    list<AMoneyStoreActor *>        MoneyStoreList;
-    list<AFoodStoreActor *>         FoodStoreList;
-    list<AStoneStoreActor *>        StoneStoreList;
-    list<AWoodStoreActor *>         WoodStoreList;
-    list<AWallActor *>              WallList;
-    list<ATowerActor *>             TowerList;
-    list<AGateActor *>              GateList;
-    
-	bool  mCityIsFull;
-	bool  mCenterCityIsFull;
-
 public:
 	ACityActor();
 
 	virtual void On_Init() override;
 	virtual void On_Delete() override;
-
+	virtual void On_GameUpdate() override;
     
 	bool	CityIsFull();
 	bool	CenterCityIsFull();
@@ -103,7 +83,34 @@ public:
 	bool BuildWoodStore();
 	bool BuildWall();
     
-    
+
+private:
+	vector<vector<ABlockActor*>> BlockMap;
+
+	UPROPERTY(VisibleDefaultsOnly)
+		UBoxComponent * CollisionBox;
+
+	GeneralGoal *					mGeneralGoal;
+
+	list<SoldierGroupManager*>		mGroupManagers;
+
+	list<AArmyCenterActor *>        ArmyCenterList;
+	list<ABakeryActor *>            BakeryList;
+	list<ACommandCenterActor *>     CommandCenterList;
+	list<AFarmActor *>              FarmList;
+	list<AHouseActor *>             HouseList;
+	list<AMillActor *>              MillList;
+	list<AMoneyStoreActor *>        MoneyStoreList;
+	list<AFoodStoreActor *>         FoodStoreList;
+	list<AStoneStoreActor *>        StoneStoreList;
+	list<AWoodStoreActor *>         WoodStoreList;
+	list<AWallActor *>              WallList;
+	list<ATowerActor *>             TowerList;
+	list<AGateActor *>              GateList;
+
+	bool  mCityIsFull;
+	bool  mCenterCityIsFull;
+
 private:
 	
     

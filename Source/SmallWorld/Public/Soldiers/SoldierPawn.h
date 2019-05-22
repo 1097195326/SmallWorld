@@ -54,6 +54,7 @@ public:
 	virtual void	On_Init() override;
 	virtual void	On_Start() override;
 	virtual void	On_Tick(float delta) override;
+	virtual void	On_End() override;
 	virtual void	On_Delete() override;
 
 	virtual float	TakeDamage(float Damage, struct FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser) override;

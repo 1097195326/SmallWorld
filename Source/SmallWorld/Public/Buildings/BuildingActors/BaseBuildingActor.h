@@ -31,7 +31,7 @@ const float WallSize = 625.f;
 class ABlockActor;
 
 UCLASS()
-class ABaseBuildingActor : public AActor
+class ABaseBuildingActor : public AActor, public GObject
 {
 	GENERATED_BODY()
 protected:
@@ -66,6 +66,8 @@ public:
 	virtual void On_Init();
 	virtual void On_Update(float DeltaSeconds);
 	virtual void On_Delete();
+
+	virtual void On_GameUpdate();
 
     virtual void InitData(BaseBuildingData * _data);
     virtual void SaveData(TSharedRef<TJsonWriter<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>> Writer);

@@ -3,7 +3,7 @@
 #include "CityActor.h"
 #include "SmallWorldInstance.h"
 #include "GameWorldActor.h"
-#include "GeneralGoal.h"
+
 
 class GameWorld
 {
@@ -12,8 +12,7 @@ private:
 	GameWorld(const GameWorld & _world);
 	GameWorld & operator = (const GameWorld & _world);
 
-	// 
-	vector<GeneralGoal *>			GeneralGoals;
+
 	vector<vector<ACityActor *>>	CityMap;
 	AGameWorldActor *				GameWorldActor;
 
@@ -23,7 +22,7 @@ public:
 	static GameWorld *				GetInstance();
 	void							BuildWorld();
 
-	void							ClearGeneralGoals();
+	void							ClearCityMap();
 
 	void							Update();
 

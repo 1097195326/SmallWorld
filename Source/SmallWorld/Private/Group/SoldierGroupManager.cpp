@@ -11,6 +11,13 @@ SoldierGroupManager * SoldierGroupManager::GetInstance()
 	static SoldierGroupManager manger;
 	return &manger;
 }
+void SoldierGroupManager::On_GameUpdate()
+{
+	for (auto group : mSoldierGroups)
+	{
+		group->On_GameUpdate();
+	}
+}
 void SoldierGroupManager::PushSoldierToGroup(ASoldierPawn * _soldier)
 {
 	if (!IsFull())

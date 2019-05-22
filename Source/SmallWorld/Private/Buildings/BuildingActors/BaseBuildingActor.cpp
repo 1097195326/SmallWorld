@@ -33,6 +33,10 @@ void ABaseBuildingActor::On_Update(float DeltaSeconds)
 {
 
 }
+void ABaseBuildingActor::On_GameUpdate()
+{
+
+}
 void ABaseBuildingActor::On_Delete()
 {
 

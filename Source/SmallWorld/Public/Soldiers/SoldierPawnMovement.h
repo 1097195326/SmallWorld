@@ -12,8 +12,19 @@ public:
 	virtual void ApplyControlInputToVelocity(float DeltaTime) override;
 
 protected:
+	/*void			AddSteeringForce(FVector Force);
+	FVector			SteeringForce();
+
+	FVector					Seek(FVector TargetLocation);
+	FVector					Arrive(FVector TargetLocation);
+	FVector					OffsetPursuit(ASoldierPawn * Leader);
+	FVector					Separation(SoldierGroup *  Group);
+	FVector					Alignment(SoldierGroup *  Group);
+	FVector					Cohesion(SoldierGroup *  Group);*/
 
 private:
+	FVector					vSteeringForce;
+
 	class ASoldierPawn * SoldierPawn;
 	class ASoldierPawnController * SoldierController;
 

@@ -2,11 +2,13 @@
 #include "SoldierGroup.h"
 
 
-class SoldierGroupManager
+class SoldierGroupManager : public GObject
 {
 public:
 	static SoldierGroupManager * GetInstance();
 	SoldierGroupManager();
+
+	virtual	void			On_GameUpdate() override;
 
 	void					PushSoldierToGroup(ASoldierPawn * _soldier);
 

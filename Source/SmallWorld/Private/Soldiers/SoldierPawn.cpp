@@ -15,8 +15,8 @@ ASoldierPawn::ASoldierPawn()
 
 	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("RootComponent"));
 
-	SoldierMovement = CreateDefaultSubobject<USoldierPawnMovement>(TEXT("SoldierMovement"));
-	SoldierMovement->SetUpdatedComponent(RootComponent);
+	/*SoldierMovement = CreateDefaultSubobject<USoldierPawnMovement>(TEXT("SoldierMovement"));
+	SoldierMovement->SetUpdatedComponent(RootComponent);*/
 	
 	MeshComponent = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("MeshComponent"));
 	MeshComponent->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
@@ -30,10 +30,17 @@ void ASoldierPawn::On_Init()
 }
 void ASoldierPawn::On_Start()
 {
-
+	
 	
 }
 void ASoldierPawn::On_Tick(float delta)
+{
+	if (mSoldierState)
+	{
+		mSoldierState->OnProcess();
+	}
+}
+void ASoldierPawn::On_End()
 {
 
 }

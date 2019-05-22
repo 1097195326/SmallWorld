@@ -33,6 +33,7 @@ class SoldierGroup : public BaseGroup
 public:
 	SoldierGroup();
 	~SoldierGroup();
+	virtual void			On_GameUpdate() override;
 
 	void					SetGroupType(SoldierType _soldierType);
 	
