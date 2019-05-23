@@ -35,10 +35,12 @@ void ASoldierPawn::On_Start()
 }
 void ASoldierPawn::On_Tick(float delta)
 {
+
 	if (mSoldierState)
 	{
 		mSoldierState->OnProcess();
 	}
+
 }
 void ASoldierPawn::On_End()
 {

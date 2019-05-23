@@ -30,6 +30,7 @@ void AGamePawn::Tick(float DeltaSeconds)
 void AGamePawn::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
 	Super::EndPlay(EndPlayReason);
+	
 
 	On_End();
 }
