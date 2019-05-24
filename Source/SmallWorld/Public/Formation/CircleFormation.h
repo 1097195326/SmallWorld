@@ -7,6 +7,6 @@ class CircleFormation : public BaseFormation
 public:
 	CircleFormation();
 
-	virtual void CalculateOffSet(list<ASoldierPawn*> & soldiers) override;
+	virtual void CalculateOffSet(const FormationInfo & _info) override;
 
 };

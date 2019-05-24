@@ -3,17 +3,8 @@
 #include "SoldierPawn.h"
 #include "GroupBaseState.h"
 
-const int32 ArcherGroupMaxNum = 12;
-const int32 FootmanGroupMaxNum = 12;
-const int32 GriffinGroupMaxNum = 12;
-const int32 HorsemanGroupMaxNum = 12;
-const int32 KnightGroupMaxNum = 12;
-const int32 MageGroupMaxNum = 12;
-const int32 SiegeEngineGroupMaxNum = 12;
+#include "GameConfig.h"
 
-const int32 AllGroupMaxNum = 2;
-const float GroupSize = 2500 * 3.f;
-const float FormationSize = 2500 * 2.f;
 
 
 enum GroupType
@@ -27,6 +18,7 @@ enum GroupType
 	G_MageGroup,
 	G_SiegeEngineGroup,
 };
+
 class SoldierGroup : public BaseGroup
 {
 
@@ -52,7 +44,7 @@ public:
 	int32					GetGroupIndex();
 
 protected:
-	//void					
+	FormationInfo			GetFormationInfo(FormationType _type);
 	void					ChangeSoldierState(ASoldierPawn * _soldier);
 
 	GroupStateIndex				mStateIndex;

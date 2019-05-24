@@ -3,7 +3,11 @@
 #include "CoreMinimal.h"
 #include "SoldierPawn.h"
 #include "GameConfig.h"
+#include "GObject.h"
 #include <list>
+
+
+
 
 enum FormationType
 {
@@ -14,17 +18,26 @@ enum FormationType
 	e_VerticalRectFormation,
 
 };
+struct FormationInfo
+{
+	float Offset_X;
+	float Offset_Y;
+	int32 Formation_W;
+	int32 Formation_L;
+};
 
-class BaseFormation
+class BaseFormation : public GObject
 {
 public:
 	BaseFormation();
 
-	virtual void CalculateOffSet(list<ASoldierPawn*> & soldiers) {}
+	virtual void		CalculateOffSet(const FormationInfo & _info) {}
 
-	FormationType GetFormationType();
+	FVector				GetLocationByIndex(int _index);
+	FormationType		GetFormationType();
 protected:
-	FormationType mFormationType;
+	FormationType		mFormationType;
 	
+	map<int, FVector>	mFormationLocationMap;
 
 };

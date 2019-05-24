@@ -1,6 +1,7 @@
 #pragma once
 #include "DataR.h"
 #include "CoreMinimal.h"
+#include "GameConfig.h"
 
 
 #define  ZHX_BUG

@@ -1,5 +1,5 @@
 #include "SoldierGroupManager.h"
-
+#include "SquareFormation.h"
 
 SoldierGroupManager::SoldierGroupManager()
 {
@@ -25,6 +25,8 @@ void SoldierGroupManager::PushSoldierToGroup(ASoldierPawn * _soldier)
 		if (mCurrentGroup == nullptr)
 		{
 			mCurrentGroup = new SoldierGroup();
+			mCurrentGroup->SetGroupType(_soldier->mSoldierType);	
+			mCurrentGroup->ChangeFormation(new SquareFormation());
 			int GroupNum = mSoldierGroups.size();
 			mCurrentGroup->SetGroupIndexAndLocation(GroupNum, mGroupLocationMap[GroupNum]);
 		}

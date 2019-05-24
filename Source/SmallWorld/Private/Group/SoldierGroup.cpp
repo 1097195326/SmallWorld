@@ -47,10 +47,6 @@ void SoldierGroup::AddSoldierToGroup(ASoldierPawn * _soldier)
 	{
 		return;
 	}
-	if (mGroupType == G_None)
-	{
-		SetGroupType(_soldier->mSoldierType);
-	}
 	_soldier->SetGroup(this);
 	ChangeSoldierState(_soldier);
 	mAllSoldier.push_back(_soldier);
@@ -78,7 +74,7 @@ void SoldierGroup::ChangeFormation(BaseFormation * _formation)
 	if (_formation)
 	{
 		mCurrrentFormation = _formation;
-		mCurrrentFormation->CalculateOffSet(mAllSoldier);
+		mCurrrentFormation->CalculateOffSet(GetFormationInfo(_formation->GetFormationType()));
 	}
 }
 void SoldierGroup::ChangeGroupState(GroupBaseState * _groupState)
@@ -147,30 +143,183 @@ int32 SoldierGroup::GetGroupIndex()
 {
 	return mGroupIndex;
 }
+FormationInfo SoldierGroup::GetFormationInfo(FormationType _type)
+{
+	FormationInfo info;
+	switch (mGroupType)
+	{
+	case G_ArcherGroup:
+	{
+		info.Offset_X = Archer_FormationBoundX;
+		info.Offset_Y = Archer_FormationBoundY;
+		switch (_type)
+		{
+		case e_SquareFormation:
+			info.Formation_W = Archer_SquareFormation_W;
+			info.Formation_L = Archer_SquareFormation_L;
+			break;
+		case e_HorizonalRectFormation:
+			info.Formation_W = Archer_HorizonalFormation_W;
+			info.Formation_L = Archer_HorizonalFormation_L;
+			break;
+		case e_VerticalRectFormation:
+			info.Formation_W = Archer_VerticalFormation_W;
+			info.Formation_L = Archer_VerticalFormation_L;
+			break;
+		}
+	}
+	break;
+	case G_FootmanGroup:
+		info.Offset_X = Footman_FormationBoundX;
+		info.Offset_Y = Footman_FormationBoundY;
+		switch (_type)
+		{
+		case e_SquareFormation:
+			info.Formation_W = Footman_SquareFormation_W;
+			info.Formation_L = Footman_SquareFormation_L;
+			break;
+		case e_HorizonalRectFormation:
+			info.Formation_W = Footman_HorizonalFormation_W;
+			info.Formation_L = Footman_HorizonalFormation_L;
+			break;
+		case e_VerticalRectFormation:
+			info.Formation_W = Footman_VerticalFormation_W;
+			info.Formation_L = Footman_VerticalFormation_L;
+			break;
+		}
+		break;
+	case G_GriffinGroup:
+		info.Offset_X = Griffin_FormationBoundX;
+		info.Offset_Y = Griffin_FormationBoundY;
+		switch (_type)
+		{
+		case e_SquareFormation:
+			info.Formation_W = Griffin_SquareFormation_W;
+			info.Formation_L = Griffin_SquareFormation_L;
+			break;
+		case e_HorizonalRectFormation:
+			info.Formation_W = Griffin_HorizonalFormation_W;
+			info.Formation_L = Griffin_HorizonalFormation_L;
+			break;
+		case e_VerticalRectFormation:
+			info.Formation_W = Griffin_VerticalFormation_W;
+			info.Formation_L = Griffin_VerticalFormation_L;
+			break;
+		}
+		break;
+	case G_HorsemanGroup:
+		info.Offset_X = Horseman_FormationBoundX;
+		info.Offset_Y = Horseman_FormationBoundY;
+		switch (_type)
+		{
+		case e_SquareFormation:
+			info.Formation_W = Horseman_SquareFormation_W;
+			info.Formation_L = Horseman_SquareFormation_L;
+			break;
+		case e_HorizonalRectFormation:
+			info.Formation_W = Horseman_HorizonalFormation_W;
+			info.Formation_L = Horseman_HorizonalFormation_L;
+			break;
+		case e_VerticalRectFormation:
+			info.Formation_W = Horseman_VerticalFormation_W;
+			info.Formation_L = Horseman_VerticalFormation_L;
+			break;
+		}
+		break;
+	case G_KnightGroup:
+		info.Offset_X = Knight_FormationBoundX;
+		info.Offset_Y = Knight_FormationBoundY;
+		switch (_type)
+		{
+		case e_SquareFormation:
+			info.Formation_W = Knight_SquareFormation_W;
+			info.Formation_L = Knight_SquareFormation_L;
+			break;
+		case e_HorizonalRectFormation:
+			info.Formation_W = Knight_HorizonalFormation_W;
+			info.Formation_L = Knight_HorizonalFormation_L;
+			break;
+		case e_VerticalRectFormation:
+			info.Formation_W = Archer_VerticalFormation_W;
+			info.Formation_L = Archer_VerticalFormation_L;
+			break;
+		}
+		break;
+	case G_MageGroup:
+		info.Offset_X = Mage_FormationBoundX;
+		info.Offset_Y = Mage_FormationBoundY;
+		switch (_type)
+		{
+		case e_SquareFormation:
+			info.Formation_W = Mage_SquareFormation_W;
+			info.Formation_L = Mage_SquareFormation_L;
+			break;
+		case e_HorizonalRectFormation:
+			info.Formation_W = Mage_HorizonalFormation_W;
+			info.Formation_L = Mage_HorizonalFormation_L;
+			break;
+		case e_VerticalRectFormation:
+			info.Formation_W = Mage_VerticalFormation_W;
+			info.Formation_L = Mage_VerticalFormation_L;
+			break;
+		}
+		break;
+	case G_SiegeEngineGroup:
+		info.Offset_X = SiegeEngine_FormationBoundX;
+		info.Offset_Y = SiegeEngine_FormationBoundY;
+		switch (_type)
+		{
+		case e_SquareFormation:
+			info.Formation_W = SiegeEngine_SquareFormation_W;
+			info.Formation_L = SiegeEngine_SquareFormation_L;
+			break;
+		case e_HorizonalRectFormation:
+			info.Formation_W = SiegeEngine_HorizonalFormation_W;
+			info.Formation_L = SiegeEngine_HorizonalFormation_L;
+			break;
+		case e_VerticalRectFormation:
+			info.Formation_W = SiegeEngine_VerticalFormation_W;
+			info.Formation_L = SiegeEngine_VerticalFormation_L;
+			break;
+		}
+		break;
+	default:
+		break;
+	}
+	return std::move(info);
+}
+
 void SoldierGroup::SetGroupType(SoldierType _soldierType)
 {
 	switch (_soldierType)
 	{
 	case S_Archer:
 		mGroupType = G_ArcherGroup;
+		mGroupMaxNum = ArcherGroupMaxNum;
 		break;
 	case S_Footman:
 		mGroupType = G_FootmanGroup;
+		mGroupMaxNum = FootmanGroupMaxNum;
 		break;
 	case S_Griffin:
 		mGroupType = G_GriffinGroup;
+		mGroupMaxNum = GriffinGroupMaxNum;
 		break;
 	case S_Horseman:
 		mGroupType = G_HorsemanGroup;
+		mGroupMaxNum = HorsemanGroupMaxNum;
 		break;
 	case S_Knight:
 		mGroupType = G_KnightGroup;
+		mGroupMaxNum = KnightGroupMaxNum;
 		break;
 	case S_Mage:
 		mGroupType = G_MageGroup;
+		mGroupMaxNum = MageGroupMaxNum;
 		break;
 	case S_SiegeEngine:
 		mGroupType = G_SiegeEngineGroup;
+		mGroupMaxNum = SiegeEngineGroupMaxNum;
 		break;
 	default:
 		break;

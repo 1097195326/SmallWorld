@@ -18,15 +18,7 @@
 using namespace std;
 
 
-const int  BoundSize = 0;
-const int  WorldSize = 1;
-const int	CitySize = 15;
-const int  CastleControllSize = 11;
-const int  CastleSize = 7;
-const int	CastleCenterSize = 3;
-const float TitleSize = 2500.f;
-const float QuarterTitleSize = TitleSize / 4.f;
-const float WallSize = 625.f;
+
 
 class ABlockActor;
 

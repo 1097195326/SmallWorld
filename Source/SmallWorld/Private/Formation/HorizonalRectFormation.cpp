@@ -6,9 +6,9 @@ HorizonalRectFormation::HorizonalRectFormation()
 	mFormationType = e_HorizonalRectFormation;
 }
 
-void HorizonalRectFormation::CalculateOffSet(list<ASoldierPawn *> & soldiers)
+void HorizonalRectFormation::CalculateOffSet(const FormationInfo & _info)
 {
-	list<ASoldierPawn*>::const_iterator iter = soldiers.begin();
+	/*list<ASoldierPawn*>::const_iterator iter = soldiers.begin();
 	FVector HeaderLocation = (*iter)->GetActorLocation();
 	FVector ForwardVector = (*iter)->GetActorForwardVector();
 	FVector RightVector = (*iter)->GetActorRightVector();
@@ -47,5 +47,5 @@ void HorizonalRectFormation::CalculateOffSet(list<ASoldierPawn *> & soldiers)
 		}
 		
 		index++;
-	}
+	}*/
 }
