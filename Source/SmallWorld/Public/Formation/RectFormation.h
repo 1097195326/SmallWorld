@@ -1,10 +1,10 @@
 #pragma once
 #include "BaseFormation.h"
 
-class HorizonalRectFormation : public BaseFormation
+class RectFormation : public BaseFormation
 {
 public:
-	HorizonalRectFormation();
+	RectFormation();
 
 	virtual void CalculateOffSet(const FormationInfo & _info) override;
 

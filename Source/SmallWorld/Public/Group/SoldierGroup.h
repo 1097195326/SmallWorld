@@ -40,6 +40,8 @@ public:
 	
 	void					SetGroupIndexAndLocation(int32 _index, FVector _location);
 
+	FVector					GetSoldierLocationByIndex(int _index);
+
 	FVector					GetGroupLocation();
 	int32					GetGroupIndex();
 
@@ -56,7 +58,7 @@ protected:
 	std::list<ASoldierPawn*>	mAllSoldier;
 
 	FVector						mGroupLocation;
-	int32						mGroupIndex;
+	int32						mIndexInManger;
 private:
 	
 };

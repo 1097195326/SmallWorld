@@ -17,7 +17,7 @@ bool BaseGroup::IsFull()
 }
 void BaseGroup::AddGroupNum()
 {
-	--mGroupReadyNum;
+	++mGroupReadyNum;
 }
 void BaseGroup::SubGroupNum()
 {

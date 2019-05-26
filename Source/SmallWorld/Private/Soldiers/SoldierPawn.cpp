@@ -83,9 +83,10 @@ void ASoldierPawn::SetLeader(ASoldierPawn * leader)
 {
 	mLeader = leader;
 }
-void ASoldierPawn::SetGroup(SoldierGroup * _group)
+void ASoldierPawn::SetGroupAndIndex(SoldierGroup * _group,int _index)
 {
 	mGroup = _group;
+	mIndexInGroup = _index;
 }
 void ASoldierPawn::ChangeSoldierState(SoldierBaseState * _soldierState)
 {

@@ -7,7 +7,7 @@
 #include "SoldierPawnController.h"
 #include "SoldierPawn.h"
 #include "SoldierGroup.h"
-#include "HorizonalRectFormation.h"
+#include "RectFormation.h"
 #include "ConeFormation.h"
 #include "CircleFormation.h"
 #include "Engine/TargetPoint.h"
@@ -288,7 +288,7 @@ void AUserPawn::CreateGroup()
 		ASoldierPawn * Soldier = Cast<ASoldierPawn>(soldiers[i]);
 		group->AddSoldierToGroup(Soldier);
 	}
-	group->ChangeFormation(new HorizonalRectFormation());
+	group->ChangeFormation(new RectFormation());
 	
 	for (int i = 0; i < soldiers.Num(); i++)
 	{

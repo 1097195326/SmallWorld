@@ -13,7 +13,7 @@ enum FormationType
 {
 	e_CircleFormation,
 	e_ConeFormation,
-	e_SquareFormation,
+	e_SquareRectFormation,
 	e_HorizonalRectFormation,
 	e_VerticalRectFormation,
 

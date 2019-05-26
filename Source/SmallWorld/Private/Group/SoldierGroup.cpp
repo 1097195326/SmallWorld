@@ -47,7 +47,12 @@ void SoldierGroup::AddSoldierToGroup(ASoldierPawn * _soldier)
 	{
 		return;
 	}
-	_soldier->SetGroup(this);
+	static int indexInGroup = 0;
+	
+	_soldier->SetGroupAndIndex(this, indexInGroup);
+	
+	indexInGroup++;
+
 	ChangeSoldierState(_soldier);
 	mAllSoldier.push_back(_soldier);
 	if (mAllSoldier.size() == mGroupMaxNum)
@@ -132,8 +137,12 @@ void SoldierGroup::ChangeStateIndex(GroupStateIndex _index)
 }
 void SoldierGroup::SetGroupIndexAndLocation(int32 _index, FVector _location)
 {
-	mGroupIndex = _index;
+	mIndexInManger = _index;
 	mGroupLocation = _location;
+}
+FVector SoldierGroup::GetSoldierLocationByIndex(int _index)
+{
+	return mGroupLocation + mCurrrentFormation->GetLocationByIndex(_index);
 }
 FVector SoldierGroup::GetGroupLocation()
 {
@@ -141,7 +150,7 @@ FVector SoldierGroup::GetGroupLocation()
 }
 int32 SoldierGroup::GetGroupIndex()
 {
-	return mGroupIndex;
+	return mIndexInManger;
 }
 FormationInfo SoldierGroup::GetFormationInfo(FormationType _type)
 {
@@ -154,7 +163,7 @@ FormationInfo SoldierGroup::GetFormationInfo(FormationType _type)
 		info.Offset_Y = Archer_FormationBoundY;
 		switch (_type)
 		{
-		case e_SquareFormation:
+		case e_SquareRectFormation:
 			info.Formation_W = Archer_SquareFormation_W;
 			info.Formation_L = Archer_SquareFormation_L;
 			break;
@@ -174,7 +183,7 @@ FormationInfo SoldierGroup::GetFormationInfo(FormationType _type)
 		info.Offset_Y = Footman_FormationBoundY;
 		switch (_type)
 		{
-		case e_SquareFormation:
+		case e_SquareRectFormation:
 			info.Formation_W = Footman_SquareFormation_W;
 			info.Formation_L = Footman_SquareFormation_L;
 			break;
@@ -193,7 +202,7 @@ FormationInfo SoldierGroup::GetFormationInfo(FormationType _type)
 		info.Offset_Y = Griffin_FormationBoundY;
 		switch (_type)
 		{
-		case e_SquareFormation:
+		case e_SquareRectFormation:
 			info.Formation_W = Griffin_SquareFormation_W;
 			info.Formation_L = Griffin_SquareFormation_L;
 			break;
@@ -212,7 +221,7 @@ FormationInfo SoldierGroup::GetFormationInfo(FormationType _type)
 		info.Offset_Y = Horseman_FormationBoundY;
 		switch (_type)
 		{
-		case e_SquareFormation:
+		case e_SquareRectFormation:
 			info.Formation_W = Horseman_SquareFormation_W;
 			info.Formation_L = Horseman_SquareFormation_L;
 			break;
@@ -231,7 +240,7 @@ FormationInfo SoldierGroup::GetFormationInfo(FormationType _type)
 		info.Offset_Y = Knight_FormationBoundY;
 		switch (_type)
 		{
-		case e_SquareFormation:
+		case e_SquareRectFormation:
 			info.Formation_W = Knight_SquareFormation_W;
 			info.Formation_L = Knight_SquareFormation_L;
 			break;
@@ -250,7 +259,7 @@ FormationInfo SoldierGroup::GetFormationInfo(FormationType _type)
 		info.Offset_Y = Mage_FormationBoundY;
 		switch (_type)
 		{
-		case e_SquareFormation:
+		case e_SquareRectFormation:
 			info.Formation_W = Mage_SquareFormation_W;
 			info.Formation_L = Mage_SquareFormation_L;
 			break;
@@ -269,7 +278,7 @@ FormationInfo SoldierGroup::GetFormationInfo(FormationType _type)
 		info.Offset_Y = SiegeEngine_FormationBoundY;
 		switch (_type)
 		{
-		case e_SquareFormation:
+		case e_SquareRectFormation:
 			info.Formation_W = SiegeEngine_SquareFormation_W;
 			info.Formation_L = SiegeEngine_SquareFormation_L;
 			break;
