@@ -5,12 +5,8 @@
 
 ASoldierPawn::ASoldierPawn()
 {
-
 	AIControllerClass = ASoldierPawnController::StaticClass();
 
-	mSoldierState = nullptr;
-	mLeader = nullptr;
-	mEnemy = nullptr;
 	mGroup = nullptr;
 
 	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("RootComponent"));
@@ -26,20 +22,13 @@ ASoldierPawn::ASoldierPawn()
 void ASoldierPawn::On_Init()
 {
 	
-
 }
 void ASoldierPawn::On_Start()
 {
 	
-	
 }
 void ASoldierPawn::On_Tick(float delta)
 {
-
-	if (mSoldierState)
-	{
-		mSoldierState->OnProcess();
-	}
 
 }
 void ASoldierPawn::On_End()
@@ -48,12 +37,8 @@ void ASoldierPawn::On_End()
 }
 void ASoldierPawn::On_Delete()
 {
-	mEnemy = nullptr;
 	mGroup = nullptr;
-	mLeader = nullptr;
 
-	delete mSoldierState;
-	mSoldierState = nullptr;
 }
 float ASoldierPawn::TakeDamage(float Damage, struct FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
 {
@@ -61,46 +46,27 @@ float ASoldierPawn::TakeDamage(float Damage, struct FDamageEvent const& DamageEv
 	{
 		float damage = Super::TakeDamage(Damage, DamageEvent, EventInstigator, DamageCauser);
 
-		fHeath -= damage;
-		if (fHeath <= 0.f)
+		mHeath -= damage;
+		if (mHeath <= 0.f)
 		{
-			fHeath = 0.f;
-			DieingOn();
+			mHeath = 0.f;
 		}
 		return damage;
 	}
 	return 0.f;
 }
-void ASoldierPawn::SetFormationPosition(const FVector & formationPosition)
+void ASoldierPawn::Attack()
 {
-	mFormationPosition = formationPosition;
-}
-void ASoldierPawn::SetOffsetToLeader(const FVector & offset)
-{
-	mOffsetToLeader = offset;
-}
-void ASoldierPawn::SetLeader(ASoldierPawn * leader)
-{
-	mLeader = leader;
+
 }
 void ASoldierPawn::SetGroupAndIndex(SoldierGroup * _group,int _index)
 {
 	mGroup = _group;
 	mIndexInGroup = _index;
 }
-void ASoldierPawn::ChangeSoldierState(SoldierBaseState * _soldierState)
+void ASoldierPawn::ChangeSoldierState(SoldierState _soldierState)
 {
-	if (mSoldierState)
-	{
-		mSoldierState->OnEnd();
-		delete mSoldierState;
-		mSoldierState = nullptr;
-	}
-	if (_soldierState)
-	{
-		mSoldierState = _soldierState;
-		mSoldierState->OnEnter();
-	}
+	
 }
 void ASoldierPawn::HaveMoveToGroup()
 {
@@ -109,167 +75,92 @@ void ASoldierPawn::HaveMoveToGroup()
 		mGroup->AddGroupNum();
 	}
 }
-float ASoldierPawn::GetDamage()
-{
-
-	return fBaseDamage;
-}
-bool ASoldierPawn::CanAttack()
-{
-	if (IsHaveEnemy())
-	{
-		return fFieldOfAttack * fFieldOfAttack > (GetActorLocation() - mEnemy->GetActorLocation()).SizeSquared();
-	}
-	return false;
-}
-void ASoldierPawn::Attack()
-{
-	UGameplayStatics::ApplyDamage(mEnemy, GetDamage(), GetController(), this, UDamageType::StaticClass());
-
-
-}
-// Anim Call End
-void ASoldierPawn::AnimAttack()
-{
-
-}
-void ASoldierPawn::AnimAttackEnd()
-{
-
-}
-void ASoldierPawn::AnimHitEnd()
-{
-
-}
-void ASoldierPawn::AnimDieingEnd()
-{
-
-}
-bool ASoldierPawn::IsHaveEnemy()
-{
-	if (mEnemy && mEnemy->IsAlive())
-	{
-		return true;
-	}
-	return false;
-}
-bool ASoldierPawn::IsAlive()
-{
-	return fHeath > 0.f;
-}
-void ASoldierPawn::AddSteeringForce(FVector Force)
-{
-	vSteeringForce += Force;
-}
-FVector ASoldierPawn::SteeringForce()
-{
-	vSteeringForce = FVector::ZeroVector;
-
-	if (IsSeek())
-	{
-		vSteeringForce += Seek(vMoveToLocation);
-	}
-	if (IsArrive())
-	{
-		vSteeringForce += Arrive(vMoveToLocation);
-	}
-	return vSteeringForce.GetClampedToMaxSize(fMaxForce);
-}
-void ASoldierPawn::SetMoveToLocation(FVector Location)
-{
-	vMoveToLocation = Location;
-}
-FVector ASoldierPawn::MoveToLocation()
-{
-	return vMoveToLocation;
-}
-// ----------------------  behavior tree -------------------
-
-FVector ASoldierPawn::Seek(FVector TargetLocation)
-{
-	FVector DesiredVelocity = (TargetLocation - GetActorLocation()).GetSafeNormal() * SoldierMovement->MaxSpeed;
-
-	return DesiredVelocity - GetVelocity();
-}
-FVector ASoldierPawn::Arrive(FVector TargetLocation)
-{
-	FVector ToTarget = TargetLocation - GetActorLocation();
-	if (ToTarget.Size() > 0)
-	{
-		FVector vv = GetVelocity();
-		float speed = ToTarget.Size() / (SoldierMovement->Deceleration * 0.3f);
-		speed = FMath::Min(speed, SoldierMovement->MaxSpeed);
-		FVector DesiredVelocity = ToTarget.GetSafeNormal() * speed;
-
-		return DesiredVelocity - vv;
-	}
-	return FVector::ZeroVector;
-}
-FVector ASoldierPawn::OffsetPursuit(ASoldierPawn * Leader)
-{
-	FVector ToOffset = mOffsetToLeader - GetActorLocation();
-
-	float LookAheadTime = ToOffset.Size() / (SoldierMovement->MaxSpeed + Leader->GetVelocity().Size());
-
-	return Arrive(mOffsetToLeader + Leader->GetVelocity() * LookAheadTime);
-}
-FVector ASoldierPawn::Separation(SoldierGroup * Group)
-{
-	FVector Steer = FVector::ZeroVector;
-	list<ASoldierPawn*> Soldiers = Group->GetAllSoldier();
-	list<ASoldierPawn*>::iterator iter = Soldiers.begin();
-	for (; iter != Soldiers.end(); iter++)
-	{
-		ASoldierPawn * soldier = *iter;
-		if (soldier != this)
-		{
-			FVector ToTarget = GetActorLocation() - soldier->GetActorLocation();
-			Steer += ToTarget.GetSafeNormal() / ToTarget.Size();
-		}
-	}
-	return Steer;
-}
-FVector ASoldierPawn::Alignment(SoldierGroup * Group)
-{
-	FVector AverageHeading = FVector::ZeroVector;
-	int    NeighborCount = 0;
-
-	list<ASoldierPawn*> Soldiers = Group->GetAllSoldier();
-	list<ASoldierPawn*>::iterator iter = Soldiers.begin();
-	for (; iter != Soldiers.end(); iter++)
-	{
-		ASoldierPawn * soldier = *iter;
-		if (soldier != this)
-		{
-			AverageHeading += soldier->GetActorForwardVector();
-			++NeighborCount;
-		}
-	}
-	if (NeighborCount > 0)
-	{
-		AverageHeading /= NeighborCount;
-		AverageHeading -= GetActorForwardVector();
-	}
-	return AverageHeading;
-}
-FVector ASoldierPawn::Cohesion(SoldierGroup *  Group)
-{
-	FVector CenterOfMass, Steering;
-
-	int NeighborCount = 0;
-
-	list<ASoldierPawn*> Soldiers = Group->GetAllSoldier();
-	list<ASoldierPawn*>::iterator iter = Soldiers.begin();
-	for (; iter != Soldiers.end(); iter++)
-	{
-		ASoldierPawn * soldier = *iter;
-		CenterOfMass += soldier->GetActorLocation();
-		++NeighborCount;
-	}
-	if (NeighborCount > 0)
-	{
-		CenterOfMass /= NeighborCount;
-		Steering = Seek(CenterOfMass);
-	}
-	return Steering;
-}
+//
+//FVector ASoldierPawn::Seek(FVector TargetLocation)
+//{
+//	FVector DesiredVelocity = (TargetLocation - GetActorLocation()).GetSafeNormal() * SoldierMovement->MaxSpeed;
+//
+//	return DesiredVelocity - GetVelocity();
+//}
+//FVector ASoldierPawn::Arrive(FVector TargetLocation)
+//{
+//	FVector ToTarget = TargetLocation - GetActorLocation();
+//	if (ToTarget.Size() > 0)
+//	{
+//		FVector vv = GetVelocity();
+//		float speed = ToTarget.Size() / (SoldierMovement->Deceleration * 0.3f);
+//		speed = FMath::Min(speed, SoldierMovement->MaxSpeed);
+//		FVector DesiredVelocity = ToTarget.GetSafeNormal() * speed;
+//
+//		return DesiredVelocity - vv;
+//	}
+//	return FVector::ZeroVector;
+//}
+//FVector ASoldierPawn::OffsetPursuit(ASoldierPawn * Leader)
+//{
+//	FVector ToOffset = mOffsetToLeader - GetActorLocation();
+//
+//	float LookAheadTime = ToOffset.Size() / (SoldierMovement->MaxSpeed + Leader->GetVelocity().Size());
+//
+//	return Arrive(mOffsetToLeader + Leader->GetVelocity() * LookAheadTime);
+//}
+//FVector ASoldierPawn::Separation(SoldierGroup * Group)
+//{
+//	FVector Steer = FVector::ZeroVector;
+//	list<ASoldierPawn*> Soldiers = Group->GetAllSoldier();
+//	list<ASoldierPawn*>::iterator iter = Soldiers.begin();
+//	for (; iter != Soldiers.end(); iter++)
+//	{
+//		ASoldierPawn * soldier = *iter;
+//		if (soldier != this)
+//		{
+//			FVector ToTarget = GetActorLocation() - soldier->GetActorLocation();
+//			Steer += ToTarget.GetSafeNormal() / ToTarget.Size();
+//		}
+//	}
+//	return Steer;
+//}
+//FVector ASoldierPawn::Alignment(SoldierGroup * Group)
+//{
+//	FVector AverageHeading = FVector::ZeroVector;
+//	int    NeighborCount = 0;
+//
+//	list<ASoldierPawn*> Soldiers = Group->GetAllSoldier();
+//	list<ASoldierPawn*>::iterator iter = Soldiers.begin();
+//	for (; iter != Soldiers.end(); iter++)
+//	{
+//		ASoldierPawn * soldier = *iter;
+//		if (soldier != this)
+//		{
+//			AverageHeading += soldier->GetActorForwardVector();
+//			++NeighborCount;
+//		}
+//	}
+//	if (NeighborCount > 0)
+//	{
+//		AverageHeading /= NeighborCount;
+//		AverageHeading -= GetActorForwardVector();
+//	}
+//	return AverageHeading;
+//}
+//FVector ASoldierPawn::Cohesion(SoldierGroup *  Group)
+//{
+//	FVector CenterOfMass, Steering;
+//
+//	int NeighborCount = 0;
+//
+//	list<ASoldierPawn*> Soldiers = Group->GetAllSoldier();
+//	list<ASoldierPawn*>::iterator iter = Soldiers.begin();
+//	for (; iter != Soldiers.end(); iter++)
+//	{
+//		ASoldierPawn * soldier = *iter;
+//		CenterOfMass += soldier->GetActorLocation();
+//		++NeighborCount;
+//	}
+//	if (NeighborCount > 0)
+//	{
+//		CenterOfMass /= NeighborCount;
+//		Steering = Seek(CenterOfMass);
+//	}
+//	return Steering;
+//}

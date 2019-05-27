@@ -289,12 +289,7 @@ void AUserPawn::CreateGroup()
 		group->AddSoldierToGroup(Soldier);
 	}
 	group->ChangeFormation(new RectFormation());
-	
-	for (int i = 0; i < soldiers.Num(); i++)
-	{
-		ASoldierPawn * Soldier = Cast<ASoldierPawn>(soldiers[i]);
-		Soldier->SetMoveToLocation(Soldier->mFormationPosition);
-	}
+
 }
 void AUserPawn::Fire()
 {
