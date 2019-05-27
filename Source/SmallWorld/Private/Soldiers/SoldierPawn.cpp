@@ -14,8 +14,8 @@ ASoldierPawn::ASoldierPawn()
 	/*SoldierMovement = CreateDefaultSubobject<USoldierPawnMovement>(TEXT("SoldierMovement"));
 	SoldierMovement->SetUpdatedComponent(RootComponent);*/
 	
-	MeshComponent = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("MeshComponent"));
-	MeshComponent->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
+	mMeshComponent = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("MeshComponent"));
+	mMeshComponent->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
 
 
 }
@@ -42,7 +42,7 @@ void ASoldierPawn::On_Delete()
 }
 float ASoldierPawn::TakeDamage(float Damage, struct FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
 {
-	if (!IsDieing() && !IsDied())
+	if (mSoldierState != S_Dieing && mSoldierState != S_Died)
 	{
 		float damage = Super::TakeDamage(Damage, DamageEvent, EventInstigator, DamageCauser);
 
@@ -63,10 +63,6 @@ void ASoldierPawn::SetGroupAndIndex(SoldierGroup * _group,int _index)
 {
 	mGroup = _group;
 	mIndexInGroup = _index;
-}
-void ASoldierPawn::ChangeSoldierState(SoldierState _soldierState)
-{
-	
 }
 void ASoldierPawn::HaveMoveToGroup()
 {

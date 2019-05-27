@@ -8,25 +8,25 @@ ASoldierPawnController::ASoldierPawnController(const FObjectInitializer& ObjectI
 	
 
 }
-//void ASoldierPawnController::Possess(APawn* InPawn)
-//{
-//	Super::Possess(InPawn);
-//
-//	ASoldierPawn * SoldierPawn = Cast<ASoldierPawn>(InPawn);
-//
-//	// start behavior
-//	if (SoldierPawn && SoldierPawn->BehaviorTree)
-//	{
-//		RunBehaviorTree(SoldierPawn->BehaviorTree);
-//	}
-//
-//}
-//void ASoldierPawnController::UnPossess()
-//{
-//	Super::UnPossess();
-//	if (BrainComponent)
-//	{
-//		Cast<UBehaviorTreeComponent>(BrainComponent)->StopTree();
-//	}
-//
-//}
+void ASoldierPawnController::OnPossess(APawn* InPawn)
+{
+	Super::OnPossess(InPawn);
+
+	ASoldierPawn * SoldierPawn = Cast<ASoldierPawn>(InPawn);
+
+	// start behavior
+	if (SoldierPawn && SoldierPawn->GetBehaviorTree())
+	{
+		RunBehaviorTree(SoldierPawn->GetBehaviorTree());
+	}
+
+}
+void ASoldierPawnController::OnUnPossess()
+{
+	Super::OnUnPossess();
+	if (BrainComponent)
+	{
+		Cast<UBehaviorTreeComponent>(BrainComponent)->StopTree();
+	}
+
+}

@@ -35,9 +35,9 @@ enum BehaviorType
 {
 	// move
 	B_Normal = 0,
-	B_Seek = 1 << 9,
-	B_Arrive = 1 << 10,
-	B_Offsetpursuit = 1 << 11,
+	B_Seek = 1 << 0,
+	B_Arrive = 1 << 1,
+	B_Offsetpursuit = 1 << 2,
 
 };
 UENUM()
@@ -69,16 +69,30 @@ public:
 	virtual void	Attack();
 
 	void			SetGroupAndIndex(SoldierGroup * _group,int _index);
-	void			ChangeSoldierState(SoldierState _soldierState);
+	
+	// --------- SoldierSate ------------
+	FORCEINLINE SoldierState	GetSoldierState() { return mSoldierState; }
+	FORCEINLINE void			ChangeSoldierState(SoldierState _state) { mSoldierState = _state; }
+	FORCEINLINE bool			IsInState(SoldierState _state) { return mSoldierState == _state; }
+
+	FORCEINLINE SoldierType		GetSoldierType() { return mSoldierType; }
+	FORCEINLINE	UBehaviorTree *		GetBehaviorTree() { return mBehaviorTree; }
 
 protected:
 	void					HaveMoveToGroup();
 
+	UPROPERTY(EditAnywhere)
+		UBehaviorTree *				mBehaviorTree;
+	UPROPERTY(VisibleAnywhere)
+		USoldierPawnMovement *		mSoldierMovement;
+	UPROPERTY(VisibleDefaultsOnly)
+		USkeletalMeshComponent *	mMeshComponent;
+
 	SoldierState			mSoldierState;
-	int32					mBehaviorType;
 	SoldierType				mSoldierType;
-	SoldierGroup *			mGroup;
+	int32					mBehaviorType;
 	int32					mIndexInGroup;
+	SoldierGroup *			mGroup;
 
 	float					mFieldOfView;
 	float					mFieldOfBody;
@@ -90,12 +104,7 @@ protected:
 
 	float					mAttackInterval;
 
-	UPROPERTY(EditAnywhere)
-		UBehaviorTree *				BehaviorTree;
-	UPROPERTY(VisibleAnywhere)
-		USoldierPawnMovement *		SoldierMovement;
-	UPROPERTY(VisibleDefaultsOnly)
-		USkeletalMeshComponent *	MeshComponent;
+	
 	
 	/*FVector					Seek(FVector TargetLocation);
 	FVector					Arrive(FVector TargetLocation);
@@ -104,15 +113,4 @@ protected:
 	FVector					Alignment(SoldierGroup *  Group);
 	FVector					Cohesion(SoldierGroup *  Group);*/
 
-public:
-	SoldierType  GetSoldierType() {return mSoldierType;}
-	// beavior func
-
-		bool IsHit() { return mSoldierState == S_Hit;}
-		bool IsVictory() { return mSoldierState == S_Victory; }
-		bool IsIdle() { return mSoldierState == S_Idle; }
-		bool IsDieing() { return mSoldierState == S_Dieing; }
-		bool IsDied() { return mSoldierState == S_Died; }
-	// move func
-		
 };

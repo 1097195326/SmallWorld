@@ -15,9 +15,9 @@ class ASoldierPawnController : public AAIController
 public:
 	ASoldierPawnController(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get());
 	
-	/*virtual void Possess(APawn* InPawn) override;
-	virtual void UnPossess() override;
-*/
+	virtual void OnPossess(APawn* InPawn) override;
+	virtual void OnUnPossess() override;
+
 	
 
 };
