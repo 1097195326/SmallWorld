@@ -42,7 +42,7 @@ void ASoldierPawn::On_Delete()
 }
 float ASoldierPawn::TakeDamage(float Damage, struct FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
 {
-	if (mSoldierState != S_Dieing && mSoldierState != S_Died)
+	if (mSoldierState != SoldierState::S_Dieing && mSoldierState != SoldierState::S_Died)
 	{
 		float damage = Super::TakeDamage(Damage, DamageEvent, EventInstigator, DamageCauser);
 
@@ -70,6 +70,10 @@ void ASoldierPawn::HaveMoveToGroup()
 	{
 		mGroup->AddGroupNum();
 	}
+}
+FVector ASoldierPawn::GetLocationInGroup()
+{
+	return mGroup->GetSoldierLocationByIndex(mIndexInGroup);
 }
 //
 //FVector ASoldierPawn::Seek(FVector TargetLocation)

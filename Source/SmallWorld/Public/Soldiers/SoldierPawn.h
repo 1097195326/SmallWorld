@@ -1,6 +1,5 @@
 #pragma once
 
-
 #include "GamePawn.h"
 #include "SoldierPawnMovement.h"
 #include "Kismet/GameplayStatics.h"
@@ -14,7 +13,7 @@
 class SoldierGroup;
 
 UENUM()
-enum SoldierState
+enum class SoldierState : uint32
 {
 	//state
 	S_Normal = 0, 
@@ -29,6 +28,18 @@ enum SoldierState
 	S_Died,
 	S_Hit,
 	S_Victory,
+};
+UENUM()
+enum SoldierAnimState 
+{
+	Anim_Idle = 1,
+	Anim_Attack1,
+	Anim_Attack2,
+	Anim_Death,
+	Anim_Hit,
+	Anim_Run,
+	Anim_Walk,
+	Anim_Victory,
 };
 UENUM()
 enum BehaviorType
@@ -75,8 +86,15 @@ public:
 	FORCEINLINE void			ChangeSoldierState(SoldierState _state) { mSoldierState = _state; }
 	FORCEINLINE bool			IsInState(SoldierState _state) { return mSoldierState == _state; }
 
-	FORCEINLINE SoldierType		GetSoldierType() { return mSoldierType; }
+	FORCEINLINE SoldierType			GetSoldierType() { return mSoldierType; }
 	FORCEINLINE	UBehaviorTree *		GetBehaviorTree() { return mBehaviorTree; }
+
+	FVector						GetLocationInGroup();
+
+	FORCEINLINE void						SetSoldierAnimState(SoldierAnimState _state) { mSoldierAnimState = _state; }
+	
+	UFUNCTION(BlueprintCallable)
+	SoldierAnimState						GetSoldierAnimState() { return mSoldierAnimState; }
 
 protected:
 	void					HaveMoveToGroup();
@@ -88,6 +106,7 @@ protected:
 	UPROPERTY(VisibleDefaultsOnly)
 		USkeletalMeshComponent *	mMeshComponent;
 
+	SoldierAnimState		mSoldierAnimState;
 	SoldierState			mSoldierState;
 	SoldierType				mSoldierType;
 	int32					mBehaviorType;
@@ -112,5 +131,6 @@ protected:
 	FVector					Separation(SoldierGroup *  Group);
 	FVector					Alignment(SoldierGroup *  Group);
 	FVector					Cohesion(SoldierGroup *  Group);*/
+
 
 };

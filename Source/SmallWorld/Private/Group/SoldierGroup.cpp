@@ -104,22 +104,22 @@ void SoldierGroup::ChangeSoldierState(ASoldierPawn * _soldier)
 	{
 		if (mCurrrentFormation)
 		{
-			_soldier->ChangeSoldierState(S_FormationFight);
+			_soldier->ChangeSoldierState(SoldierState::S_FormationFight);
 		}
 		else
 		{
-			_soldier->ChangeSoldierState(S_FightSelf);
+			_soldier->ChangeSoldierState(SoldierState::S_FightSelf);
 		}
 		break;
 	}
 	case  I_ReadyIndex:
 	{
-		_soldier->ChangeSoldierState(S_FormationDefense);
+		_soldier->ChangeSoldierState(SoldierState::S_FormationDefense);
 		break;
 	}
 	case I_WaitingIndex:
 	{
-		_soldier->ChangeSoldierState(S_MoveToGroup);
+		_soldier->ChangeSoldierState(SoldierState::S_MoveToGroup);
 		break;
 	}
 	}

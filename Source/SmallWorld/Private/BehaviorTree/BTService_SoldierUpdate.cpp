@@ -1,12 +1,12 @@
 #include "BTService_SoldierUpdate.h"
 #include "SoldierPawnController.h"
-
+#include "BehaviorTree/BlackboardComponent.h"
 #include "Engine.h"
 #include "Kismet/GameplayStatics.h"
 
 UBTService_SoldierUpdate::UBTService_SoldierUpdate()
 {
-	preSoldierState = S_Normal;
+	preSoldierState = SoldierState::S_Normal;
 
 }
 void UBTService_SoldierUpdate::TickNode(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, float DeltaSeconds)
@@ -26,56 +26,57 @@ void UBTService_SoldierUpdate::TickNode(UBehaviorTreeComponent& OwnerComp, uint8
 
 	switch (SoldierState)
 	{
-		case	S_Normal:
+		case	SoldierState::S_Normal:
 		{
 
 		}break;
-		case	S_Idle:
+		case	SoldierState::S_Idle:
 		{
 
 		}break;
-		case	S_FightSelf:
+		case	SoldierState::S_FightSelf:
 		{
 
 		}break;
-		case	S_FormationDefense:
+		case	SoldierState::S_FormationDefense:
 		{
 
 		}break;
-		case	S_FormationFight:
+		case	SoldierState::S_FormationFight:
 		{
 
 		}break;
-		case	S_MoveToCity:
+		case	SoldierState::S_MoveToCity:
 		{
 
 		}break;
-		case	S_MoveToGroup:
+		case	SoldierState::S_MoveToGroup:
 		{
 			if (preSoldierState != SoldierState)
 			{
 				preSoldierState = SoldierState;
-				OwnerComp.GetBlackboardComponent()->SetValue();
+
+				OwnerComp.GetBlackboardComponent()->SetValueAsVector(FName(TEXT("LocationInGroup")),SoldierPawn->GetLocationInGroup());
 
 			}
 		}break;
-		case	S_ReadyInGroup:
+		case	SoldierState::S_ReadyInGroup:
 		{
 
 		}break;
-		case	S_Dieing:
+		case	SoldierState::S_Dieing:
 		{
 
 		}break;
-		case	S_Died:
+		case	SoldierState::S_Died:
 		{
 
 		}break;
-		case	S_Hit:
+		case	SoldierState::S_Hit:
 		{
 
 		}break;
-		case	S_Victory:
+		case	SoldierState::S_Victory:
 		{
 
 		}break;
