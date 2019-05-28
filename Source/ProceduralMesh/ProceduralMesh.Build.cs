@@ -17,7 +17,7 @@ public class ProceduralMesh : ModuleRules
         PrivateDependencyModuleNames.AddRange(
             new string[] {
                 "RenderCore",
-                "RHI"
+                "RHI",
             });
     }
 }

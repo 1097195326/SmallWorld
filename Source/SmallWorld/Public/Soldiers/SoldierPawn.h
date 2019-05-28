@@ -89,7 +89,7 @@ public:
 	FORCEINLINE SoldierType			GetSoldierType() { return mSoldierType; }
 	FORCEINLINE	UBehaviorTree *		GetBehaviorTree() { return mBehaviorTree; }
 
-	FVector						GetLocationInGroup();
+	FVector							GetLocationInGroup();
 
 	FORCEINLINE void						SetSoldierAnimState(SoldierAnimState _state) { mSoldierAnimState = _state; }
 	

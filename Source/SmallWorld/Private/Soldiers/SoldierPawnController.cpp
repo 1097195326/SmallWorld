@@ -6,7 +6,7 @@
 ASoldierPawnController::ASoldierPawnController(const FObjectInitializer& ObjectInitializer /* = FObjectInitializer::Get() */)
 {
 	
-
+	UE_LOG(LogTemp, Log, TEXT("zhx : ASoldierPawnController::ASoldierPawnController"));
 }
 void ASoldierPawnController::OnPossess(APawn* InPawn)
 {
