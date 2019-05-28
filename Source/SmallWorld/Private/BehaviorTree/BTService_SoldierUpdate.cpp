@@ -22,9 +22,9 @@ void UBTService_SoldierUpdate::TickNode(UBehaviorTreeComponent& OwnerComp, uint8
 
 	UE_LOG(LogTemp, Log, TEXT("zhx -- service update"));
 
-	SoldierState SoldierState = SoldierPawn->GetSoldierState();
+	SoldierState soldierState = SoldierPawn->GetSoldierState();
 
-	switch (SoldierState)
+	switch (soldierState)
 	{
 		case	SoldierState::S_Normal:
 		{
@@ -52,9 +52,9 @@ void UBTService_SoldierUpdate::TickNode(UBehaviorTreeComponent& OwnerComp, uint8
 		}break;
 		case	SoldierState::S_MoveToGroup:
 		{
-			if (preSoldierState != SoldierState)
+			if (preSoldierState != soldierState)
 			{
-				preSoldierState = SoldierState;
+				preSoldierState = soldierState;
 
 				OwnerComp.GetBlackboardComponent()->SetValueAsVector(FName(TEXT("LocationInGroup")),SoldierPawn->GetLocationInGroup());
 

@@ -9,7 +9,7 @@ class USoldierPawnMovement :public UFloatingPawnMovement
 	GENERATED_BODY()
 public:
 	virtual void BeginPlay() override;
-	virtual void ApplyControlInputToVelocity(float DeltaTime) override;
+	//virtual void ApplyControlInputToVelocity(float DeltaTime) override;
 
 protected:
 	/*void			AddSteeringForce(FVector Force);

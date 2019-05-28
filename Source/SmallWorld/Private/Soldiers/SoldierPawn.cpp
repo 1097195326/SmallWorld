@@ -6,13 +6,14 @@
 ASoldierPawn::ASoldierPawn()
 {
 	AIControllerClass = ASoldierPawnController::StaticClass();
+	AutoPossessAI = EAutoPossessAI::Spawned;
 
 	mGroup = nullptr;
 
 	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("RootComponent"));
 
-	/*SoldierMovement = CreateDefaultSubobject<USoldierPawnMovement>(TEXT("SoldierMovement"));
-	SoldierMovement->SetUpdatedComponent(RootComponent);*/
+	mSoldierMovement = CreateDefaultSubobject<USoldierPawnMovement>(TEXT("SoldierMovement"));
+	mSoldierMovement->SetUpdatedComponent(RootComponent);
 	
 	mMeshComponent = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("MeshComponent"));
 	mMeshComponent->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
