@@ -79,7 +79,10 @@ void SoldierGroup::ChangeFormation(BaseFormation * _formation)
 	if (_formation)
 	{
 		mCurrrentFormation = _formation;
-		mCurrrentFormation->CalculateOffSet(GetFormationInfo(_formation->GetFormationType()));
+		FormationInfo info = GetFormationInfo(_formation->GetFormationType());
+		mGroupLenth = info.Formation_L * info.Offset_Y;
+		mGroupWidth = info.Formation_W * info.Offset_X;
+		mCurrrentFormation->CalculateOffSet(info);
 	}
 }
 void SoldierGroup::ChangeGroupState(GroupBaseState * _groupState)

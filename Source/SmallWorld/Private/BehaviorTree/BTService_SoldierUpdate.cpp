@@ -13,6 +13,10 @@ void UBTService_SoldierUpdate::TickNode(UBehaviorTreeComponent& OwnerComp, uint8
 {
 	Super::TickNode(OwnerComp, NodeMemory, DeltaSeconds);
 
+	//OwnerComp.GetBlackboardComponent()->SetValueAsVector(FName(TEXT("LocationInGroup")), FVector(0,0,0));
+	//UE_LOG(LogTemp, Log, TEXT("zhx -- service update"));
+
+
 	ASoldierPawnController * SoldierController = Cast<ASoldierPawnController>(OwnerComp.GetAIOwner());
 	ASoldierPawn * SoldierPawn = Cast<ASoldierPawn>(SoldierController->GetPawn());
 	if (SoldierController == nullptr || SoldierPawn == nullptr)
@@ -20,8 +24,7 @@ void UBTService_SoldierUpdate::TickNode(UBehaviorTreeComponent& OwnerComp, uint8
 		return;
 	}
 
-	UE_LOG(LogTemp, Log, TEXT("zhx -- service update"));
-
+	
 	SoldierState soldierState = SoldierPawn->GetSoldierState();
 
 	switch (soldierState)
@@ -52,12 +55,14 @@ void UBTService_SoldierUpdate::TickNode(UBehaviorTreeComponent& OwnerComp, uint8
 		}break;
 		case	SoldierState::S_MoveToGroup:
 		{
-			if (preSoldierState != soldierState)
+			const FVector location = SoldierPawn->GetLocationInGroup();
+
+			if (preSoldierState != soldierState || OwnerComp.GetBlackboardComponent()->GetValueAsVector(FName(TEXT("LocationInGroup"))) != location )
 			{
+				SoldierPawn->SetSoldierAnimState(Anim_Walk);
+				
+				OwnerComp.GetBlackboardComponent()->SetValueAsVector(FName(TEXT("LocationInGroup")), location);
 				preSoldierState = soldierState;
-
-				OwnerComp.GetBlackboardComponent()->SetValueAsVector(FName(TEXT("LocationInGroup")),SoldierPawn->GetLocationInGroup());
-
 			}
 		}break;
 		case	SoldierState::S_ReadyInGroup:

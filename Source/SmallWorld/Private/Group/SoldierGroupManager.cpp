@@ -55,11 +55,11 @@ void SoldierGroupManager::SetOriginAndForward(FVector _origin, FVector _forward)
 {
 	mStartOrigin = _origin;
 	mNormalForward = _forward;
-	mPrepareOrigin = _origin + mNormalForward * GroupSize;
+	mPrepareOrigin = _origin + mNormalForward * 2500;
 
 	for (int i = 0; i < AllGroupMaxNum; i++)
 	{
-		mGroupLocationMap[i] = mStartOrigin + -mNormalForward * i;
+		mGroupLocationMap[i] = mStartOrigin + mNormalForward * 2500 * (i + 1);
 	}
 
 }

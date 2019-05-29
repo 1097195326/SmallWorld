@@ -246,6 +246,9 @@ void AUserPawn::Prepare()
 	RedGroupMange = new SoldierGroupManager();
 	BlueGroupMange = new SoldierGroupManager();
 
+	RedGroupMange->SetOriginAndForward(RedLocation, (BlueLocation - RedLocation).GetSafeNormal());
+	BlueGroupMange->SetOriginAndForward(BlueLocation, (RedLocation - BlueLocation).GetSafeNormal());
+	
 	FTransform  RedTran(RedLocation);
 	FTransform  BlueTran(BlueLocation);
 
@@ -255,8 +258,9 @@ void AUserPawn::Prepare()
 		ASoldierPawn * soldierPawn = Cast<ASoldierPawn>(UGameplayStatics::BeginDeferredActorSpawnFromClass(this, soldierClass, RedTran));
 		if (soldierPawn)
 		{
-			UGameplayStatics::FinishSpawningActor(soldierPawn, RedTran);
 			RedGroupMange->PushSoldierToGroup(soldierPawn);
+
+			UGameplayStatics::FinishSpawningActor(soldierPawn, RedTran);
 		}
 	}
 	for (int i = 0; i < 1; i++)
@@ -265,8 +269,9 @@ void AUserPawn::Prepare()
 		ASoldierPawn * soldierPawn = Cast<ASoldierPawn>(UGameplayStatics::BeginDeferredActorSpawnFromClass(this, soldierClass, RedTran));
 		if (soldierPawn)
 		{
-			UGameplayStatics::FinishSpawningActor(soldierPawn, BlueTran);
 			BlueGroupMange->PushSoldierToGroup(soldierPawn);
+
+			UGameplayStatics::FinishSpawningActor(soldierPawn, BlueTran);
 		}
 	}
 

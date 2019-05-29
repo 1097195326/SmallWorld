@@ -38,6 +38,9 @@ public:
 	void					ChangeStateIndex(GroupStateIndex _index);
 	void					UpdateSoldierState();
 	
+	float					GetGroupLength() { return mGroupLenth; }
+	float					GetGroupWidth() { return mGroupWidth; }
+
 	void					SetGroupIndexAndLocation(int32 _index, FVector _location);
 
 	FVector					GetSoldierLocationByIndex(int _index);
@@ -59,6 +62,9 @@ protected:
 
 	FVector						mGroupLocation;
 	int32						mIndexInManger;
+
+	float						mGroupLenth;
+	float						mGroupWidth;
 private:
 	
 };
