@@ -47,11 +47,10 @@ void SoldierGroup::AddSoldierToGroup(ASoldierPawn * _soldier)
 	{
 		return;
 	}
-	static int indexInGroup = 0;
+	int indexInGroup = mAllSoldier.size() + 1;
 	
 	_soldier->SetGroupAndIndex(this, indexInGroup);
 	
-	indexInGroup++;
 
 	ChangeSoldierState(_soldier);
 	mAllSoldier.push_back(_soldier);
@@ -138,14 +137,17 @@ void SoldierGroup::ChangeStateIndex(GroupStateIndex _index)
 {
 	mStateIndex = _index;
 }
-void SoldierGroup::SetGroupIndexAndLocation(int32 _index, FVector _location)
+void SoldierGroup::SetGroupIndexAndLocationAndForward(int32 _index, FVector _location,FVector _forward)
 {
 	mIndexInManger = _index;
 	mGroupLocation = _location;
+	mGroupForward = _forward;
 }
 FVector SoldierGroup::GetSoldierLocationByIndex(int _index)
 {
-	return mGroupLocation + mCurrrentFormation->GetLocationByIndex(_index);
+	FTransform tran(mGroupForward.Rotation(),mGroupLocation);
+	return tran.TransformPosition(mCurrrentFormation->GetLocationByIndex(_index));
+	//return mGroupLocation + mCurrrentFormation->GetLocationByIndex(_index);
 }
 FVector SoldierGroup::GetGroupLocation()
 {

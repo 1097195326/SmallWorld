@@ -7,7 +7,9 @@ ASoldierPawn::ASoldierPawn()
 {
 	AIControllerClass = ASoldierPawnController::StaticClass();
 	AutoPossessAI = EAutoPossessAI::Spawned;
-
+	
+	bUseControllerRotationYaw = true;
+	
 	mGroup = nullptr;
 
 	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("RootComponent"));

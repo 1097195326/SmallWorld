@@ -41,7 +41,7 @@ public:
 	float					GetGroupLength() { return mGroupLenth; }
 	float					GetGroupWidth() { return mGroupWidth; }
 
-	void					SetGroupIndexAndLocation(int32 _index, FVector _location);
+	void					SetGroupIndexAndLocationAndForward(int32 _index, FVector _location, FVector _forward);
 
 	FVector					GetSoldierLocationByIndex(int _index);
 
@@ -61,6 +61,7 @@ protected:
 	std::list<ASoldierPawn*>	mAllSoldier;
 
 	FVector						mGroupLocation;
+	FVector						mGroupForward;
 	int32						mIndexInManger;
 
 	float						mGroupLenth;

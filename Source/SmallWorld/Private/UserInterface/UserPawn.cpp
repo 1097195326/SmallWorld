@@ -235,6 +235,8 @@ void AUserPawn::MoveUpAndDown(float dle)
 {
 	AddMovementInput(GetActorForwardVector(), dle);
 }
+static int RedIndex = 0;
+
 void AUserPawn::Prepare()
 {
 	TArray<AActor*> Points;
@@ -252,31 +254,44 @@ void AUserPawn::Prepare()
 	FTransform  RedTran(RedLocation);
 	FTransform  BlueTran(BlueLocation);
 
-	for (int i = 0; i < 1; i++)
+	RedIndex = 0;
+	GetWorld()->GetTimerManager().SetTimer(hendle, this, &AUserPawn::SpawnSoldier, 1.f, true);
+
+}
+void AUserPawn::SpawnSoldier()
+{
+	TArray<AActor*> Points;
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ATargetPoint::StaticClass(), Points);
+
+	FVector RedLocation = Points[0]->GetActorLocation();
+	FVector BlueLocation = Points[1]->GetActorLocation();
+
+	FTransform  RedTran(RedLocation);
+	FTransform  BlueTran(BlueLocation);
+
+
+	while(RedIndex < 1)
 	{
+		RedIndex++;
+
 		UClass * soldierClass = LoadClass<ASoldierPawn>(this, TEXT("/Game/Soldiers/Knight.Knight_C"));
-		ASoldierPawn * soldierPawn = Cast<ASoldierPawn>(UGameplayStatics::BeginDeferredActorSpawnFromClass(this, soldierClass, RedTran));
-		if (soldierPawn)
+		ASoldierPawn * RedSoldierPawn = Cast<ASoldierPawn>(UGameplayStatics::BeginDeferredActorSpawnFromClass(this, soldierClass, RedTran, ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn));
+		if (RedSoldierPawn)
 		{
-			RedGroupMange->PushSoldierToGroup(soldierPawn);
+			RedGroupMange->PushSoldierToGroup(RedSoldierPawn);
 
-			UGameplayStatics::FinishSpawningActor(soldierPawn, RedTran);
+			UGameplayStatics::FinishSpawningActor(RedSoldierPawn, RedTran);
 		}
-	}
-	for (int i = 0; i < 1; i++)
-	{
-		UClass * soldierClass = LoadClass<ASoldierPawn>(this, TEXT("/Game/Soldiers/Knight.Knight_C"));
-		ASoldierPawn * soldierPawn = Cast<ASoldierPawn>(UGameplayStatics::BeginDeferredActorSpawnFromClass(this, soldierClass, RedTran));
-		if (soldierPawn)
+		ASoldierPawn * BlueSoldierPawn = Cast<ASoldierPawn>(UGameplayStatics::BeginDeferredActorSpawnFromClass(this, soldierClass, RedTran, ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn));
+		if (BlueSoldierPawn)
 		{
-			BlueGroupMange->PushSoldierToGroup(soldierPawn);
+			BlueGroupMange->PushSoldierToGroup(BlueSoldierPawn);
 
-			UGameplayStatics::FinishSpawningActor(soldierPawn, BlueTran);
+			UGameplayStatics::FinishSpawningActor(BlueSoldierPawn, BlueTran);
 		}
+		return;
 	}
-
-
-
+	GetWorld()->GetTimerManager().ClearTimer(hendle);
 }
 void AUserPawn::Attack()
 {

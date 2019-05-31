@@ -56,13 +56,12 @@ void UBTService_SoldierUpdate::TickNode(UBehaviorTreeComponent& OwnerComp, uint8
 		case	SoldierState::S_MoveToGroup:
 		{
 			const FVector location = SoldierPawn->GetLocationInGroup();
-
-			if (preSoldierState != soldierState || OwnerComp.GetBlackboardComponent()->GetValueAsVector(FName(TEXT("LocationInGroup"))) != location )
+			const FVector targetLocation = OwnerComp.GetBlackboardComponent()->GetValueAsVector(FName(TEXT("LocationInGroup")));
+			if (targetLocation != location )
 			{
 				SoldierPawn->SetSoldierAnimState(Anim_Walk);
 				
 				OwnerComp.GetBlackboardComponent()->SetValueAsVector(FName(TEXT("LocationInGroup")), location);
-				preSoldierState = soldierState;
 			}
 		}break;
 		case	SoldierState::S_ReadyInGroup:

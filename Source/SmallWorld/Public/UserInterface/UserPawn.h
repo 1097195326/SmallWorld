@@ -29,6 +29,9 @@ public:
 		void Prepare();
 	UFUNCTION(Exec)
 		void Attack();
+
+	FTimerHandle hendle;
+	void	SpawnSoldier();
 private:
 	void	MoveLeftAndRight(float dle);
 	void	MoveUpAndDown(float dle);
