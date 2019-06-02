@@ -153,6 +153,10 @@ FVector SoldierGroup::GetGroupLocation()
 {
 	return mGroupLocation;
 }
+FVector SoldierGroup::GetGroupForward()
+{
+	return mGroupForward;
+}
 int32 SoldierGroup::GetGroupIndex()
 {
 	return mIndexInManger;

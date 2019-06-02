@@ -1,11 +1,11 @@
 #pragma once
 #include "BehaviorTree/BTTaskNode.h"
 
-#include "BTTask_OffsetPursuit.generated.h"
+#include "BTTask_ToGroupForward.generated.h"
 
 
 UCLASS()
-class UBTTask_OffsetPursuit : public UBTTaskNode
+class UBTTask_ToGroupForward : public UBTTaskNode
 {
 	GENERATED_BODY()
 public:

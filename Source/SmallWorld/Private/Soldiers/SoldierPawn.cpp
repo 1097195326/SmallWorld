@@ -78,6 +78,10 @@ FVector ASoldierPawn::GetLocationInGroup()
 {
 	return mGroup->GetSoldierLocationByIndex(mIndexInGroup);
 }
+void ASoldierPawn::ToGroupForward()
+{
+	SetActorRotation(mGroup->GetGroupForward().Rotation());
+}
 //
 //FVector ASoldierPawn::Seek(FVector TargetLocation)
 //{

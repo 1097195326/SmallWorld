@@ -46,6 +46,7 @@ public:
 	FVector					GetSoldierLocationByIndex(int _index);
 
 	FVector					GetGroupLocation();
+	FVector					GetGroupForward();
 	int32					GetGroupIndex();
 
 protected:

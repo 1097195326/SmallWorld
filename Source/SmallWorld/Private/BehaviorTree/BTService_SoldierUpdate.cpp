@@ -55,20 +55,19 @@ void UBTService_SoldierUpdate::TickNode(UBehaviorTreeComponent& OwnerComp, uint8
 		}break;
 		case	SoldierState::S_MoveToGroup:
 		{
-			if (preSoldierState != SoldierState::S_MoveToGroup)
-			{
+			
 				const FVector location = SoldierPawn->GetLocationInGroup();
 				const FVector targetLocation = OwnerComp.GetBlackboardComponent()->GetValueAsVector(FName(TEXT("LocationInGroup")));
-				if (targetLocation == location)
-				{
-					preSoldierState = SoldierState::S_MoveToGroup;
-				}
-				else
+				if (targetLocation != location /*|| preSoldierState != SoldierState::S_MoveToGroup*/)
 				{
 					SoldierPawn->SetSoldierAnimState(Anim_Walk);
 					OwnerComp.GetBlackboardComponent()->SetValueAsVector(FName(TEXT("LocationInGroup")), location);
 				}
-			}
+				else
+				{
+					//preSoldierState = SoldierState::S_MoveToGroup;
+					
+				}
 		}break;
 		case	SoldierState::S_ReadyInGroup:
 		{

@@ -16,8 +16,8 @@ EBTNodeResult::Type UBTTask_ToIdle::ExecuteTask(UBehaviorTreeComponent& OwnerCom
 	    return EBTNodeResult::Failed;
 	}
 	
-	SoldierPawn->SetSoldierAnimState(Anim_Idle);
 	SoldierPawn->ChangeSoldierState(SoldierState::S_Idle);
-	
+	SoldierPawn->SetSoldierAnimState(Anim_Idle);
+
 	return EBTNodeResult::Succeeded;
 }

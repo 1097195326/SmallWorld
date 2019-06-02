@@ -91,6 +91,7 @@ public:
 
 	FVector							GetLocationInGroup();
 
+	void							ToGroupForward();
 	FORCEINLINE void						SetSoldierAnimState(SoldierAnimState _state) { mSoldierAnimState = _state; }
 	
 	UFUNCTION(BlueprintCallable)
