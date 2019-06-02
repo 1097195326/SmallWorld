@@ -70,7 +70,7 @@ void ASoldierPawn::SetGroupAndIndex(SoldierGroup * _group,int _index)
 void ASoldierPawn::HaveMoveToGroup()
 {
 	if (mGroup)
-	{
+	{ 
 		mGroup->AddGroupNum();
 	}
 }
