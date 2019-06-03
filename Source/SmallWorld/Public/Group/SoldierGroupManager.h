@@ -17,9 +17,15 @@ public:
 
 	void					SetOriginAndForward(FVector _origin,FVector _forward);
 
+	void					SetEnemyGroupManager(SoldierGroupManager * _enemyGroupManager);
+	SoldierGroupManager *	GetEnemyGroupManager();
+	SoldierGroup *			GetNearestGroupToLocation(FVector _location);
+
 protected:
 
 private:
+	SoldierGroupManager *	mEnemyGroupManager;
+
 	map<int32, FVector>		mGroupLocationMap;
 
 	FVector					mPrepareOrigin;

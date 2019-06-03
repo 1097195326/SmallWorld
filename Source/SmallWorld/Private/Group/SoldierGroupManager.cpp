@@ -4,6 +4,7 @@
 SoldierGroupManager::SoldierGroupManager()
 {
 	mCurrentGroup = nullptr;
+	mEnemyGroupManager = nullptr;
 
 }
 SoldierGroupManager * SoldierGroupManager::GetInstance()
@@ -25,6 +26,7 @@ void SoldierGroupManager::PushSoldierToGroup(ASoldierPawn * _soldier)
 		if (mCurrentGroup == nullptr)
 		{
 			mCurrentGroup = new SoldierGroup();
+			mCurrentGroup->SetSoldierGroupManager(this);
 			mCurrentGroup->SetGroupType(_soldier->GetSoldierType());
 			mCurrentGroup->ChangeFormation(new RectFormation());
 			int GroupNum = mSoldierGroups.size();
@@ -46,6 +48,32 @@ void SoldierGroupManager::ClearSoldierGroups()
 		soldierGroup = nullptr;
 	}
 	mSoldierGroups.clear();
+}
+void SoldierGroupManager::SetEnemyGroupManager(SoldierGroupManager * _enemyGroupManager)
+{
+	mEnemyGroupManager = _enemyGroupManager;
+}
+SoldierGroupManager * SoldierGroupManager::GetEnemyGroupManager()
+{
+	return mEnemyGroupManager;
+}
+SoldierGroup * SoldierGroupManager::GetNearestGroupToLocation(FVector _location)
+{
+	SoldierGroup * resultGroup = nullptr;
+	float preDistance = FLT_MAX;
+	for (SoldierGroup * soldierGroup : mSoldierGroups)
+	{
+		if (!soldierGroup->IsPendingKill())
+		{
+			float dis = FVector::DistSquaredXY(_location, soldierGroup->GetGroupLocation());
+			if (dis < preDistance)
+			{
+				resultGroup = soldierGroup;
+				preDistance = dis;
+			}
+		}
+	}
+	return resultGroup;
 }
 bool SoldierGroupManager::IsFull()
 {

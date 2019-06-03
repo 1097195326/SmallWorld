@@ -27,35 +27,50 @@ public:
 	~SoldierGroup();
 	virtual void			On_GameUpdate() override;
 
+	void					SetSoldierGroupManager(class SoldierGroupManager * _groupManager);
 	void					SetGroupType(SoldierType _soldierType);
-	
+
 	void					AddSoldierToGroup(ASoldierPawn * soldier);
 	void					RemoveSoldierFromGroup(ASoldierPawn * soldier);
 	list<ASoldierPawn*>		GetAllSoldier();
 	
+	// Group State
 	void					ChangeFormation(BaseFormation * formation);
 	void					ChangeGroupState(GroupBaseState * _groupState);
 	void					ChangeStateIndex(GroupStateIndex _index);
 	void					UpdateSoldierState();
-	
-	float					GetGroupLength() { return mGroupLenth; }
-	float					GetGroupWidth() { return mGroupWidth; }
+	// behavior action
+	bool					SearchEnemyGroup();
+	void					MoveToForward();
+	void					MoveToEnemyGroup();
+	void					AttackEnemyGroup();
+
+
+	inline float			GetGroupLength() { return mGroupLenth; }
+	inline float			GetGroupWidth() { return mGroupWidth; }
 
 	void					SetGroupIndexAndLocationAndForward(int32 _index, FVector _location, FVector _forward);
 
 	FVector					GetSoldierLocationByIndex(int _index);
 
+	FVector					GetGroupCenter();
 	FVector					GetGroupLocation();
 	FVector					GetGroupForward();
 	int32					GetGroupIndex();
 
+
+	inline bool				IsPendingKill() { return mIsPendingKill; }
 protected:
 	FormationInfo			GetFormationInfo(FormationType _type);
 	void					ChangeSoldierState(ASoldierPawn * _soldier);
 
+	bool						mIsPendingKill;
+
 	GroupStateIndex				mStateIndex;
 	GroupBaseState *			mCurrentState;
 	BaseFormation *				mCurrrentFormation;
+	SoldierGroup *				mEnemyGroup;
+	class SoldierGroupManager *	mGroupManager;
 
 	GroupType					mGroupType;
 

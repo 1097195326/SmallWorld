@@ -1,4 +1,5 @@
 #include "SoldierGroup.h"
+#include "SoldierGroupManager.h"
 #include "GroupWaitingState.h"
 
 #include "CircleFormation.h"
@@ -11,6 +12,8 @@ SoldierGroup::SoldierGroup():mGroupType(G_None)
 	mGroupMaxNum = 12;
 	mCurrrentFormation = nullptr;
 	mCurrentState = nullptr;
+	mEnemyGroup = nullptr;
+	mIsPendingKill = false;
 
 	ChangeGroupState(new GroupWaitingState(this));
 
@@ -132,6 +135,28 @@ void SoldierGroup::UpdateSoldierState()
 		ChangeSoldierState(soldier);
 	}
 }
+bool SoldierGroup::SearchEnemyGroup()
+{
+	SoldierGroup * enemyGroup = mGroupManager->GetEnemyGroupManager()->GetNearestGroupToLocation(GetGroupCenter());
+	if (enemyGroup)
+	{
+		mEnemyGroup = enemyGroup;
+		return true;
+	}
+	return false;
+}
+void SoldierGroup::MoveToForward()
+{
+
+}
+void SoldierGroup::MoveToEnemyGroup()
+{
+
+}
+void SoldierGroup::AttackEnemyGroup()
+{
+
+}
 void SoldierGroup::ChangeStateIndex(GroupStateIndex _index)
 {
 	mStateIndex = _index;
@@ -147,6 +172,10 @@ FVector SoldierGroup::GetSoldierLocationByIndex(int _index)
 	FTransform tran(mGroupForward.Rotation(),mGroupLocation);
 	return tran.TransformPosition(mCurrrentFormation->GetLocationByIndex(_index));
 	//return mGroupLocation + mCurrrentFormation->GetLocationByIndex(_index);
+}
+FVector SoldierGroup::GetGroupCenter()
+{
+	return mGroupLocation;
 }
 FVector SoldierGroup::GetGroupLocation()
 {
@@ -341,4 +370,8 @@ void SoldierGroup::SetGroupType(SoldierType _soldierType)
 	default:
 		break;
 	}
+}
+void SoldierGroup::SetSoldierGroupManager(SoldierGroupManager * _groupManager)
+{
+	mGroupManager = _groupManager;
 }

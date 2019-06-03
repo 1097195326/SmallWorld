@@ -1,9 +1,9 @@
 #pragma once
 #include "BehaviorTree/BTTaskNode.h"
-#include "BTTask_Seek.generated.h"
+#include "BTTask_SearchEnemy.generated.h"
 
 UCLASS()
-class UBTTask_Seek : public UBTTaskNode
+class UBTTask_SearchEnemy : public UBTTaskNode
 {
 	GENERATED_BODY()
 
