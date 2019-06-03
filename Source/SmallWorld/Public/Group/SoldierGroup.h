@@ -61,6 +61,7 @@ protected:
 
 	std::list<ASoldierPawn*>	mAllSoldier;
 
+	
 	FVector						mGroupLocation;
 	FVector						mGroupForward;
 	int32						mIndexInManger;

@@ -1,10 +1,9 @@
 #include "SoldierGroup.h"
 #include "GroupWaitingState.h"
 
-#include "SoldierFightSelfState.h"
-#include "SoldierFormationFightState.h"
-#include "SoldierFormationDefenseState.h"
-#include "SoldierMoveToGroupState.h"
+#include "CircleFormation.h"
+#include "ConeFormation.h"
+#include "RectFormation.h"
 
 
 SoldierGroup::SoldierGroup():mGroupType(G_None)

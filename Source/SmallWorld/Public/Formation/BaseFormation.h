@@ -34,6 +34,8 @@ public:
 	virtual void		CalculateOffSet(const FormationInfo & _info) {}
 
 	FVector				GetLocationByIndex(int _index);
+
+	void				SetFormationType(FormationType _type);
 	FormationType		GetFormationType();
 protected:
 	FormationType		mFormationType;

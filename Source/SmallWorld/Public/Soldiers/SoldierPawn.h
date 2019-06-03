@@ -6,7 +6,6 @@
 #include "BehaviorTree/BehaviorTree.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "Projectile.h"
-#include "SoldierBaseState.h"
 
 #include "SoldierPawn.generated.h"
 
