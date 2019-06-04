@@ -1,5 +1,8 @@
 #include "SoldierGroupManager.h"
 #include "RectFormation.h"
+#include "CloseCombatGroup.h"
+#include "CommandoGroup.h"
+#include "DistantFightGroup.h"
 
 SoldierGroupManager::SoldierGroupManager()
 {
@@ -25,7 +28,7 @@ void SoldierGroupManager::PushSoldierToGroup(ASoldierPawn * _soldier)
 	{
 		if (mCurrentGroup == nullptr)
 		{
-			mCurrentGroup = new SoldierGroup();
+			mCurrentGroup = CreateGroupBySoldierType(_soldier->GetSoldierType());
 			mCurrentGroup->SetSoldierGroupManager(this);
 			mCurrentGroup->SetGroupType(_soldier->GetSoldierType());
 			mCurrentGroup->ChangeFormation(new RectFormation());
@@ -56,6 +59,27 @@ void SoldierGroupManager::SetEnemyGroupManager(SoldierGroupManager * _enemyGroup
 SoldierGroupManager * SoldierGroupManager::GetEnemyGroupManager()
 {
 	return mEnemyGroupManager;
+}
+SoldierGroup * SoldierGroupManager::CreateGroupBySoldierType(SoldierType _type)
+{
+	SoldierGroup * resultGroup = nullptr;
+	switch (_type)
+	{
+	case S_Knight:
+	case S_Footman:
+		resultGroup = new CloseCombatGroup();
+		break;
+	case S_Griffin:
+	case S_Horseman:
+		resultGroup = new CommandoGroup();
+		break;
+	case S_Archer:
+	case S_Mage:
+	case S_SiegeEngine:
+		resultGroup = new DistantFightGroup();
+		break;
+	}
+	return resultGroup;
 }
 SoldierGroup * SoldierGroupManager::GetNearestGroupToLocation(FVector _location)
 {

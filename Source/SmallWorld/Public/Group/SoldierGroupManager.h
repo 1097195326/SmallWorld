@@ -22,7 +22,7 @@ public:
 	SoldierGroup *			GetNearestGroupToLocation(FVector _location);
 
 protected:
-
+	SoldierGroup *			CreateGroupBySoldierType(SoldierType _type);
 private:
 	SoldierGroupManager *	mEnemyGroupManager;
 

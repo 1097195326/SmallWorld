@@ -130,10 +130,15 @@ void SoldierGroup::ChangeSoldierState(ASoldierPawn * _soldier)
 }
 void SoldierGroup::UpdateSoldierState()
 {
+
 	for (auto soldier : mAllSoldier)
 	{
 		ChangeSoldierState(soldier);
 	}
+}
+void SoldierGroup::GroupBehaviorActions()
+{
+
 }
 bool SoldierGroup::SearchEnemyGroup()
 {
@@ -146,10 +151,6 @@ bool SoldierGroup::SearchEnemyGroup()
 	return false;
 }
 void SoldierGroup::MoveToForward()
-{
-
-}
-void SoldierGroup::MoveToEnemyGroup()
 {
 
 }

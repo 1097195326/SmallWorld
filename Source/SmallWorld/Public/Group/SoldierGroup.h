@@ -40,10 +40,10 @@ public:
 	void					ChangeStateIndex(GroupStateIndex _index);
 	void					UpdateSoldierState();
 	// behavior action
-	bool					SearchEnemyGroup();
-	void					MoveToForward();
-	void					MoveToEnemyGroup();
-	void					AttackEnemyGroup();
+	virtual void			GroupBehaviorActions();
+	virtual bool			SearchEnemyGroup();
+	virtual void			MoveToForward();
+	virtual void			AttackEnemyGroup();
 
 
 	inline float			GetGroupLength() { return mGroupLenth; }
