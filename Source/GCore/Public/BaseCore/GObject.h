@@ -10,8 +10,9 @@
 
 #include "CoreMinimal.h"
 #include "ClassReflect.h"
+#include <utility>
 
-class GCORE_API GObject  : public TSharedFromThis<GObject>
+class GCORE_API GObject
 {
 private:
 	FGuid	m_ID;

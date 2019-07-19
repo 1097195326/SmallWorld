@@ -1,6 +1,6 @@
 #pragma once
 
-#include "BaseCore/GObject.h"
+#include "GObject.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
 #include "GamePawn.generated.h"

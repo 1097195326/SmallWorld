@@ -20,7 +20,8 @@ public class SmallWorld : ModuleRules
             "GCore",
             "ProceduralMesh",
             "SlateUI",
-            "UnrealEngineWrap"
+            "UnrealEngineWrap",
+            "GameFrame",
             
         });
 
