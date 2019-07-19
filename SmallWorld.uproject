@@ -1,6 +1,6 @@
 {
 	"FileVersion": 3,
-	"EngineAssociation": "{040C3539-4F0E-F0AE-B0E9-7B9756457045}",
+	"EngineAssociation": "4.22",
 	"Category": "",
 	"Description": "",
 	"Modules": [
@@ -10,22 +10,5 @@
 			"LoadingPhase": "Default"
 		}
 	],
-	"Plugins": [
-		{
-			"Name": "DownloadTool",
-			"Enabled": true
-		},
-		{
-			"Name": "EncryptAndDecrypt",
-			"Enabled": true
-		},
-		{
-			"Name": "GCore",
-			"Enabled": true
-		},
-		{
-			"Name": "MsgCore",
-			"Enabled": true
-		}
-	]
+	"Plugins": []
 }

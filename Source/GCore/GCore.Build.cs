@@ -7,7 +7,7 @@ public class GCore : ModuleRules
     public GCore(ReadOnlyTargetRules Target) : base(Target)
     {
         //PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;
-        PrivatePCHHeaderFile = "GCore/Public/GCore.h";
+        PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 
         PublicIncludePaths.AddRange(
             new string[] {

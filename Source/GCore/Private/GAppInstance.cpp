@@ -181,7 +181,9 @@ UTexture2D* UGAppInstance::CreateTexture(UObject* Outer, const TArray<uint8>& Pi
 	// Allocate first mipmap and upload the pixel data
 	int32 NumBlocksX = InSizeX / GPixelFormats[InFormat].BlockSizeX;
 	int32 NumBlocksY = InSizeY / GPixelFormats[InFormat].BlockSizeY;
-	FTexture2DMipMap* Mip = new(NewTexture->PlatformData->Mips) FTexture2DMipMap();
+	
+	FTexture2DMipMap* Mip = new FTexture2DMipMap();
+	//FTexture2DMipMap* Mip = new(NewTexture->PlatformData->Mips) FTexture2DMipMap();
 	Mip->SizeX = InSizeX;
 	Mip->SizeY = InSizeY;
 	Mip->BulkData.Lock(LOCK_READ_WRITE);

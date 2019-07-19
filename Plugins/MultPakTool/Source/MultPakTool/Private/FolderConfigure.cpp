@@ -84,7 +84,7 @@ void UFolderConfigure::SaveConfigure()
 	helper.PakList = PakList;
 	helper.PakRootDir = PakRootDir;
 	helper.NeverCook = NeverCook;
-	_SaveUStructToJsonFile(FPaths::Combine(FPaths::GameConfigDir(), TEXT("pakConfig.ini")), helper);
+	_SaveUStructToJsonFile(FPaths::Combine(FPaths::ProjectConfigDir(), TEXT("pakConfig.ini")), helper);
 }
 
 void UFolderConfigure::LoadConfigure()

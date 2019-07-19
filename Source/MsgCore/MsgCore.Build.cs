@@ -3,23 +3,16 @@
 using UnrealBuildTool;
 using System.IO;
 
-public class EncryptAndDecrypt : ModuleRules
+public class MsgCore : ModuleRules
 {
-    private string ModulePath
-    {
-        get { return ModuleDirectory; }
-    }
-    private string ThirdPartyPath
-    {
-        get { return Path.GetFullPath(Path.Combine(ModulePath, "../../Thirdparty/")); }
-    }
-	public EncryptAndDecrypt(ReadOnlyTargetRules Target) : base(Target)
+	public MsgCore(ReadOnlyTargetRules Target) : base(Target)
 	{
-		PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;
-        
-		PublicIncludePaths.AddRange(
+        PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
+
+        PublicIncludePaths.AddRange(
 			new string[] {
-                //"EncryptAndDecrypt/Public"
+                //"MsgCore/Public",
+                //"MsgCore/Public/SubClass"
 				
 				// ... add public include paths required here ...
 			}
@@ -28,8 +21,8 @@ public class EncryptAndDecrypt : ModuleRules
 		
 		PrivateIncludePaths.AddRange(
 			new string[] {
-                //"EncryptAndDecrypt/Private",
-				
+                //"MsgCore/Private",
+                // "MsgCore/Private/SubClass"
 				// ... add other private include paths required here ...
 			}
 			);
@@ -39,7 +32,10 @@ public class EncryptAndDecrypt : ModuleRules
 			new string[]
 			{
 				"Core",
-				
+                "HTTP",
+                "JsonUtilities",
+                "Json",
+                "Networking",
 				// ... add other public dependencies that you statically link with here ...
 			}
 			);

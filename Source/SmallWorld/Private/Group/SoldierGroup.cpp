@@ -176,6 +176,7 @@ FVector SoldierGroup::GetSoldierLocationByIndex(int _index)
 }
 FVector SoldierGroup::GetGroupCenter()
 {
+
 	return mGroupLocation;
 }
 FVector SoldierGroup::GetGroupLocation()

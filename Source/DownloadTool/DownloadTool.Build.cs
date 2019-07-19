@@ -7,7 +7,7 @@ public class DownloadTool : ModuleRules
 	public DownloadTool(ReadOnlyTargetRules Target) : base(Target)
 	{
         //PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;
-        PrivatePCHHeaderFile = "Public/DownloadTool.h";
+        PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 
         PublicIncludePaths.AddRange(
 			new string[] {

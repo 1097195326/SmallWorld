@@ -270,7 +270,7 @@ void AUserPawn::SpawnSoldier()
 	FTransform  BlueTran(BlueLocation);
 
 
-	while(RedIndex < KnightGroupMaxNum)
+	while(RedIndex < 1/*KnightGroupMaxNum*/)
 	{
 		RedIndex++;
 
