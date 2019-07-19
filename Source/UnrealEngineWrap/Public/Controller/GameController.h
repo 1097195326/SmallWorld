@@ -14,7 +14,7 @@
 #include "GameController.generated.h"
 
 UCLASS()
-class GCORE_API AGameController : public APlayerController, public GObject
+class UNREALENGINEWRAP_API AGameController : public APlayerController, public GObject
 {
     GENERATED_BODY()
     

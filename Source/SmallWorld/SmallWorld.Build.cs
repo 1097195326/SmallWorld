@@ -19,7 +19,9 @@ public class SmallWorld : ModuleRules
             "Json",
             "GCore",
             "ProceduralMesh",
-            "SlateUI"
+            "SlateUI",
+            "UnrealEngineWrap"
+            
         });
 
         //PrivateDependencyModuleNames.AddRange(new string[] {  });

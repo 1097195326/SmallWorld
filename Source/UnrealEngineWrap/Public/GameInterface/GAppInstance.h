@@ -23,7 +23,7 @@ typedef enum {
 } ENetworkStatus;
 
 UCLASS()
-class GCORE_API UGAppInstance : public UGameInstance, public GObject
+class UNREALENGINEWRAP_API UGAppInstance : public UGameInstance, public GObject
 {
     GENERATED_BODY()
 protected:
@@ -44,7 +44,7 @@ public:
 
     virtual	void OpenLevel(const FString & _levelName);
 
-	ENetworkStatus GetNetworkStatus();
+	//ENetworkStatus GetNetworkStatus();
 
 	static bool CheckStringIsValid(const FString& str, const FString& Reg);
 	static bool CheckPhone(const FString& str);

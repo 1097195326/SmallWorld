@@ -13,7 +13,7 @@
 #include "BaseUI.generated.h"
 
 UCLASS()
-class GCORE_API UBaseUI : public UUserWidget, public GObject
+class UNREALENGINEWRAP_API UBaseUI : public UUserWidget, public GObject
 {
 	GENERATED_UCLASS_BODY()
 

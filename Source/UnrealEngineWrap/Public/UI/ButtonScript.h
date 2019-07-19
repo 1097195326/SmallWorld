@@ -15,7 +15,7 @@ enum ButtonAction
 };
 
 UCLASS()
-class GCORE_API UButtonScript : public UObject, public GObject
+class UNREALENGINEWRAP_API UButtonScript : public UObject, public GObject
 {
 	GENERATED_BODY()
 	
