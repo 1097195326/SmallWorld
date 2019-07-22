@@ -6,6 +6,10 @@ PawnBase::PawnBase() :
 {
 
 }
+PawnBase::~PawnBase()
+{
+
+}
 bool PawnBase::IsAlive()
 {
 	return Health <= 0;

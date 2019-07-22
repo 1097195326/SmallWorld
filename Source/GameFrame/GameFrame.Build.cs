@@ -11,7 +11,6 @@ public class GameFrame : ModuleRules
                 "Core",
                 "CoreUObject",
                 "Engine",
-                "GCore",
             });
 
         PrivateDependencyModuleNames.AddRange(

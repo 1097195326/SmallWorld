@@ -1,7 +1,7 @@
 #pragma once
 #include "PawnBase.h"
 
-class DisableAttackPawn : public PawnBase
+class GAMEFRAME_API DisableAttackPawn : public PawnBase
 {
 public:
 	DisableAttackPawn();

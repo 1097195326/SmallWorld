@@ -3,7 +3,7 @@
 #include "WeaponBase.h"
 
 
-class EnableAttackPawn : public PawnBase
+class GAMEFRAME_API EnableAttackPawn : public PawnBase
 {
 public:
 	EnableAttackPawn();

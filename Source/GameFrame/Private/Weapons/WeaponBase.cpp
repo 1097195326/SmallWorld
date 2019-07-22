@@ -5,23 +5,12 @@
 
 
 WeaponBase::WeaponBase():
-	Owner(nullptr)
+	Owner(nullptr),
+	StartRange(0.f)
 {
 
 }
 WeaponBase::~WeaponBase()
 {
 	Owner = nullptr;
-}
-void WeaponBase::AttackEnemy()
-{
-
-}
-void WeaponBase::SetOwner(PawnBase * temOwner)
-{
-	Owner = temOwner;
-}
-PawnBase * WeaponBase::GetOwner()
-{
-	return Owner;
 }

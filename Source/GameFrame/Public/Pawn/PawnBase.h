@@ -1,10 +1,10 @@
 #pragma once
-#include "GObject.h"
 
-class PawnBase : public GObject
+class GAMEFRAME_API PawnBase
 {
 public:
 	PawnBase();
+	virtual ~PawnBase();
 
 	virtual float		CalculateDamage(const float & damage);
 

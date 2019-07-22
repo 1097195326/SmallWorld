@@ -6,7 +6,7 @@
 #include "BehaviorTree/BehaviorTree.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "Projectile.h"
-
+#include "EnableAttackPawn.h"
 #include "SoldierPawn.generated.h"
 
 class SoldierGroup;
@@ -63,7 +63,7 @@ enum SoldierType
 };
 
 UCLASS()
-class ASoldierPawn : public AGamePawn
+class ASoldierPawn : public AGamePawn, public EnableAttackPawn
 {
 	GENERATED_BODY()
 public:
