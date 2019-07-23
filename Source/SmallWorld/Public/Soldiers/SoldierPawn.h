@@ -7,6 +7,8 @@
 #include "Components/SkeletalMeshComponent.h"
 #include "Projectile.h"
 #include "EnableAttackPawn.h"
+#include "SoldierInstantWeapon.h"
+#include "SoldierProjectileWeapon.h"
 #include "SoldierPawn.generated.h"
 
 class SoldierGroup;
@@ -106,6 +108,7 @@ protected:
 	UPROPERTY(VisibleDefaultsOnly)
 		USkeletalMeshComponent *	mMeshComponent;
 
+
 	SoldierAnimState		mSoldierAnimState;
 	SoldierState			mSoldierState;
 	SoldierType				mSoldierType;
@@ -113,15 +116,7 @@ protected:
 	int32					mIndexInGroup;
 	SoldierGroup *			mGroup;
 
-	float					mFieldOfView;
-	float					mFieldOfBody;
-	float					mFieldOfAttack;
-	float					mMaxForce;
-	float					mMass;
-	float					mHeath;
-	float					mBaseDamage;
-
-	float					mAttackInterval;
+	
 
 	
 	

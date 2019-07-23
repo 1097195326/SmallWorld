@@ -4,6 +4,9 @@
 
 class GAMEFRAME_API ProjectileWeapon : public WeaponBase
 {
+public:
+	ProjectileWeapon();
+	~ProjectileWeapon();
 
 };
 

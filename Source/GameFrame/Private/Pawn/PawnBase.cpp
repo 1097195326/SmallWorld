@@ -2,7 +2,12 @@
 
 
 PawnBase::PawnBase() :
-	Health(0.0)
+	Health(0.f),
+	FieldOfView(0.f),
+	FieldOfBody(0.f),
+	FieldOfAttack(0.f),
+	MaxForce(0.f),
+	Mass(0.f)
 {
 
 }
@@ -26,8 +31,4 @@ void PawnBase::SetHealth(float health)
 	{
 		Health = 0.0;
 	}
-}
-float PawnBase::GetHealth()
-{
-	return Health;
 }

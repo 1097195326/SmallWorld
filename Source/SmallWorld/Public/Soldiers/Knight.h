@@ -3,6 +3,7 @@
 #include "Knight.generated.h"
 
 
+
 UCLASS()
 class AKnight : public ASoldierPawn
 {
@@ -10,6 +11,14 @@ class AKnight : public ASoldierPawn
 
 public:
 	AKnight();
+	~AKnight();
 
+	virtual void  On_Start() override;
+
+	USoldierInstantWeapon * InstantWeapon;
+
+
+	UPROPERTY(EditAnywhere)
+		FInstantWeaponInfo	InstantWeaponInfo;
 
 };

@@ -20,7 +20,6 @@ ASoldierPawn::ASoldierPawn()
 	mMeshComponent = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("MeshComponent"));
 	mMeshComponent->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
 
-
 }
 void ASoldierPawn::On_Init()
 {
@@ -49,11 +48,8 @@ float ASoldierPawn::TakeDamage(float Damage, struct FDamageEvent const& DamageEv
 	{
 		float damage = Super::TakeDamage(Damage, DamageEvent, EventInstigator, DamageCauser);
 
-		mHeath -= damage;
-		if (mHeath <= 0.f)
-		{
-			mHeath = 0.f;
-		}
+		SetHealth(Health - damage);
+
 		return damage;
 	}
 	return 0.f;

@@ -11,10 +11,7 @@ EnableAttackPawn::EnableAttackPawn() :
 EnableAttackPawn::~EnableAttackPawn()
 {
 	EnemyPawn = nullptr;
-	if (CurrentWeapon)
-	{
-		delete CurrentWeapon;
-	}
+	CurrentWeapon = nullptr;
 }
 void EnableAttackPawn::SetEnemy(PawnBase * temEnemyPawn)
 {

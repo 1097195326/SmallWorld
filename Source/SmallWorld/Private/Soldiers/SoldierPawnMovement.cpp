@@ -2,6 +2,16 @@
 #include "SoldierPawn.h"
 #include "SoldierPawnController.h"
 
+
+
+USoldierPawnMovement::USoldierPawnMovement()
+{
+
+}
+USoldierPawnMovement::~USoldierPawnMovement()
+{
+
+}
 void USoldierPawnMovement::BeginPlay()
 {
 	Super::BeginPlay();

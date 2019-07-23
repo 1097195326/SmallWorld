@@ -295,7 +295,13 @@ void AUserPawn::SpawnSoldier()
 }
 void AUserPawn::Attack()
 {
-
+	TArray<AActor*> Points;
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ASoldierPawn::StaticClass(), Points);
+	for (int i = 0; i< Points.Num() ;i ++)
+	{
+		Points[i]->Destroy();
+	}
+	GEngine->ForceGarbageCollection(true);
 }
 void AUserPawn::CreateGroup()
 {
