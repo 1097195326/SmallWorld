@@ -70,13 +70,13 @@ class ASoldierPawn : public AGamePawn, public EnableAttackPawn
 	GENERATED_BODY()
 public:
 	ASoldierPawn();
-
+	// --------- GObject --------------
 	virtual void	On_Init() override;
 	virtual void	On_Start() override;
 	virtual void	On_Tick(float delta) override;
 	virtual void	On_End() override;
 	virtual void	On_Delete() override;
-
+	// ------------
 	virtual float	TakeDamage(float Damage, struct FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser) override;
 	virtual void	Attack();
 

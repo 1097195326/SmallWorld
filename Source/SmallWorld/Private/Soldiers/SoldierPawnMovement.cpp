@@ -4,14 +4,14 @@
 
 
 
-USoldierPawnMovement::USoldierPawnMovement()
-{
-
-}
-USoldierPawnMovement::~USoldierPawnMovement()
-{
-
-}
+//USoldierPawnMovement::USoldierPawnMovement()
+//{
+//
+//}
+//USoldierPawnMovement::~USoldierPawnMovement()
+//{
+//
+//}
 void USoldierPawnMovement::BeginPlay()
 {
 	Super::BeginPlay();

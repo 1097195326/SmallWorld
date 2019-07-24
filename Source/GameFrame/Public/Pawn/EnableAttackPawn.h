@@ -14,9 +14,8 @@ public:
 
 	virtual void	AttackEnemy();
 
-	void			SetCurrentWeapon(WeaponBase * temWeapon);
 protected:
-	WeaponBase *	CurrentWeapon;
+
 	PawnBase *		EnemyPawn;
 
 };

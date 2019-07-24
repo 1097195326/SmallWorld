@@ -11,5 +11,14 @@ class AArcher : public ASoldierPawn
 
 public:
 	AArcher();
+	~AArcher();
+
+
+	virtual void On_Start() override;
+
+	UPROPERTY(EditAnywhere)
+	FProjectileWeaponInfo	ProjectileWeaponInfo;
+
+	USoldierProjectileWeapon * ProjectileWeapon;
 
 };

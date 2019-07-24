@@ -12,8 +12,10 @@ class AKnight : public ASoldierPawn
 public:
 	AKnight();
 	~AKnight();
-
+	// --------  Overirde GObject -------------
 	virtual void  On_Start() override;
+
+
 
 	USoldierInstantWeapon * InstantWeapon;
 

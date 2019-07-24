@@ -1,10 +1,13 @@
 #include "ProjectileWeapon.h"
 
-ProjectileWeapon::ProjectileWeapon()
-{
-
-}
-ProjectileWeapon::~ProjectileWeapon()
-{
-
-}
+//
+//template<class PawnClass>
+//ProjectileWeapon<PawnClass>::ProjectileWeapon()
+//{
+//
+//}
+//template<class PawnClass>
+//ProjectileWeapon<PawnClass>::~ProjectileWeapon()
+//{
+//
+//}

@@ -1,12 +1,12 @@
 #pragma once
 #include "WeaponBase.h"
 
-
-class GAMEFRAME_API ProjectileWeapon : public WeaponBase
+template<class PawnClass>
+class ProjectileWeapon : public WeaponBase<PawnClass>
 {
 public:
-	ProjectileWeapon();
-	~ProjectileWeapon();
+	ProjectileWeapon(){}
+	~ProjectileWeapon(){}
 
 };
 

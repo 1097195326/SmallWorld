@@ -2,6 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "InstantWeapon.h"
+//#include "SoldierPawn.h"
 #include "SoldierInstantWeapon.generated.h"
 
 USTRUCT()
@@ -20,8 +21,10 @@ struct FInstantWeaponInfo
 
 };
 
+class ASoldierPawn;
+
 UCLASS()
-class USoldierInstantWeapon : public UObject, public InstantWeapon
+class USoldierInstantWeapon : public UObject, public InstantWeapon<ASoldierPawn>
 {
 	GENERATED_BODY()
 public:
@@ -30,5 +33,8 @@ public:
 
 	void	InitWithWeaponInfo(const FInstantWeaponInfo & weaponInfo);
 
-	
+	// ---- Weapon base----------
+	virtual void		AttackEnemy() override;
+	virtual bool		IsInRange(ASoldierPawn * temPawn) override;
+
 };

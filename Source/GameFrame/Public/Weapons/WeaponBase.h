@@ -4,20 +4,31 @@
 
 class PawnBase;
 
-
-class GAMEFRAME_API WeaponBase
+template<typename PawnClass>
+class WeaponBase
 {
 public:
-	WeaponBase();
-	virtual ~WeaponBase();
+	WeaponBase():
+		Owner(nullptr),
+		StartRange(0.f),
+		AttackRange(0.f),
+		AttackInterval(0.f)
+	{
+		
+	}
+	virtual ~WeaponBase()
+	{
+		Owner = nullptr;
+	}
+
 
 	// need subClass implement 
 	virtual void		AttackEnemy(){}
-	virtual bool		IsInRange(PawnBase * temPawn) { return std::move(false); }
+	virtual bool		IsInRange(PawnClass * temPawn) { return std::move(false); }
 
 	//-----------
-	inline void				SetOwner(PawnBase * temOwner) { Owner = temOwner; }
-	inline PawnBase *		GetOwner() { return Owner; }
+	inline void				SetOwner(PawnClass * temOwner) { Owner = temOwner; }
+	inline PawnClass *		GetOwner() { return Owner; }
 	
 	template<typename T>
 	T* GetOwner()
@@ -34,7 +45,8 @@ public:
 
 protected:
 
-	PawnBase *			Owner;
+	PawnClass *			Owner;
+
 	float				StartRange;
 	float				AttackRange;
 

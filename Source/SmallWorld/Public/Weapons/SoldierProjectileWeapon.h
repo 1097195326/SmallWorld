@@ -4,12 +4,13 @@
 #include "ProjectileWeapon.h"
 #include "SoldierProjectileWeapon.generated.h"
 
+
 USTRUCT()
 struct FProjectileWeaponInfo
 {
 	GENERATED_BODY()
 
-		UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere)
 		float	Damage;
 	UPROPERTY(EditAnywhere)
 		float	StartRange;
@@ -19,16 +20,22 @@ struct FProjectileWeaponInfo
 		float	AttackInterval;
 
 };
+class ASoldierPawn;
 
 UCLASS()
-class USoldierProjectileWeapon : public UObject, public ProjectileWeapon
+class USoldierProjectileWeapon : public UObject, public ProjectileWeapon<ASoldierPawn>
 {
 	GENERATED_BODY()
 
 public:
 	USoldierProjectileWeapon();
+	~USoldierProjectileWeapon();
 
-	UPROPERTY(EditAnywhere)
-		FProjectileWeaponInfo	ProjectileWeaponInfo;
+	// ---- Weapon base----------
+	virtual void		AttackEnemy() override;
+	virtual bool		IsInRange(ASoldierPawn * temPawn) override;
+
+	// self
+	void	InitWithWeaponInfo(const FProjectileWeaponInfo & weaponInfo);
 
 };
