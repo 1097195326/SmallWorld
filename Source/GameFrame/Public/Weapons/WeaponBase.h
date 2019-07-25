@@ -42,6 +42,8 @@ public:
 	inline float			GetAttackRange() { return AttackRange; }
 	inline void				SetAttackInterval(float temAttackInterval) { AttackInterval = std::move(temAttackInterval); }
 	inline float			GetAttackInterval() { return AttackInterval; }
+	inline void				SetAttackPonit(float temAttackPoint) { AttackPoint = std::move(temAttackPoint); }
+	inline float			GetAttackPonit() { return AttackPoint; }
 
 protected:
 
@@ -51,5 +53,6 @@ protected:
 	float				AttackRange;
 
 	float				AttackInterval;
+	float				AttackPoint;
 
 };

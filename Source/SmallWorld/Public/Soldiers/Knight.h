@@ -14,7 +14,8 @@ public:
 	~AKnight();
 	// --------  Overirde GObject -------------
 	virtual void  On_Start() override;
-
+	// -------- Override EnableAttackPawn ---------
+	
 
 
 	USoldierInstantWeapon * InstantWeapon;

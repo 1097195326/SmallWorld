@@ -65,20 +65,24 @@ enum SoldierType
 };
 
 UCLASS()
-class ASoldierPawn : public AGamePawn, public EnableAttackPawn
+class ASoldierPawn : public AGamePawn, public EnableAttackPawn<ASoldierPawn>
 {
 	GENERATED_BODY()
 public:
 	ASoldierPawn();
-	// --------- GObject --------------
+	// --------- Override GObject --------------
 	virtual void	On_Init() override;
 	virtual void	On_Start() override;
 	virtual void	On_Tick(float delta) override;
 	virtual void	On_End() override;
 	virtual void	On_Delete() override;
-	// ------------
+	// ------------ Override APawn ----------
 	virtual float	TakeDamage(float Damage, struct FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser) override;
-	virtual void	Attack();
+	
+	//------- Override EanbleAttackPawn
+	virtual void	AttackEnemy() override;
+	virtual bool	CanAttack()override;
+	virtual void	HandleAttack() override;
 
 	void			SetGroupAndIndex(SoldierGroup * _group,int _index);
 	
@@ -99,6 +103,8 @@ public:
 	SoldierAnimState						GetSoldierAnimState() { return mSoldierAnimState; }
 
 protected:
+	
+
 	void					HaveMoveToGroup();
 
 	UPROPERTY(EditAnywhere)
@@ -108,7 +114,6 @@ protected:
 	UPROPERTY(VisibleDefaultsOnly)
 		USkeletalMeshComponent *	mMeshComponent;
 
-
 	SoldierAnimState		mSoldierAnimState;
 	SoldierState			mSoldierState;
 	SoldierType				mSoldierType;
@@ -116,7 +121,8 @@ protected:
 	int32					mIndexInGroup;
 	SoldierGroup *			mGroup;
 
-	
+private:
+	float					LastAttackTime;
 
 	
 	

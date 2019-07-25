@@ -2,20 +2,26 @@
 #include "PawnBase.h"
 #include "WeaponBase.h"
 
-
-class GAMEFRAME_API EnableAttackPawn : public PawnBase
+template<typename PawnClass>
+class EnableAttackPawn : public PawnBase
 {
 public:
-	EnableAttackPawn();
-	~EnableAttackPawn();
+	EnableAttackPawn(){EnemyPawn = nullptr;}
+	~EnableAttackPawn(){EnemyPawn = nullptr;}
 
-	void			SetEnemy(PawnBase * temEnemyPawn);
-	PawnBase *		GetEnemy();
+	void						SetEnemy(PawnClass * temEnemyPawn){EnemyPawn = temEnemyPawn;}
+	PawnClass *					GetEnemy(){return EnemyPawn;}
+	void						SetCurrentWeapon(WeaponBase<PawnClass> *	temCurrentWeapon){CurrentWeapon = temCurrentWeapon;}
+	WeaponBase<PawnClass> *		GetCurrentWeapon(){return CurrentWeapon;}
 
-	virtual void	AttackEnemy();
+	virtual bool				CanAttack() { return false; }
+	virtual void				HandleAttack(){}
+	virtual void				AttackEnemy(){}
 
 protected:
 
-	PawnBase *		EnemyPawn;
+	WeaponBase<PawnClass> *	CurrentWeapon;
+
+	PawnClass *		EnemyPawn;
 
 };

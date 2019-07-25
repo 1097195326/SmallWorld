@@ -13,8 +13,10 @@ public:
 	AArcher();
 	~AArcher();
 
-
+	// -----------Override Gobject -------------
 	virtual void On_Start() override;
+	// ----------- Override EnableAttackPawn -----------
+	
 
 	UPROPERTY(EditAnywhere)
 	FProjectileWeaponInfo	ProjectileWeaponInfo;

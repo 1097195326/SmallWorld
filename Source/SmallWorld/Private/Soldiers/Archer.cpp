@@ -4,7 +4,7 @@
 AArcher::AArcher()
 {
 	mSoldierType = S_Archer;
-	ProjectileWeapon = NewObject<USoldierProjectileWeapon>();
+	CurrentWeapon = ProjectileWeapon = NewObject<USoldierProjectileWeapon>();
 	ProjectileWeapon->SetOwner(this);
 	ProjectileWeapon->AddToRoot();
 }

@@ -3,7 +3,8 @@
 #include "SoldierGroup.h"
 #include "GameFramework/DamageType.h"
 
-ASoldierPawn::ASoldierPawn()
+ASoldierPawn::ASoldierPawn():
+	LastAttackTime(0.f)
 {
 	AIControllerClass = ASoldierPawnController::StaticClass();
 	AutoPossessAI = EAutoPossessAI::Spawned;
@@ -54,9 +55,31 @@ float ASoldierPawn::TakeDamage(float Damage, struct FDamageEvent const& DamageEv
 	}
 	return 0.f;
 }
-void ASoldierPawn::Attack()
+bool ASoldierPawn::CanAttack()
 {
+	float currentTime = GetWorld()->TimeSeconds;
 
+	if (currentTime >= LastAttackTime + CurrentWeapon->GetAttackInterval() && CurrentWeapon->IsInRange(EnemyPawn))
+	{
+		return true;
+	}
+	return false;
+}
+void ASoldierPawn::AttackEnemy()
+{
+	if (CanAttack())
+	{
+		mSoldierAnimState = Anim_Attack1;
+
+		FTimerHandle attackHandle;
+		GetWorld()->GetTimerManager().SetTimer(attackHandle, this, &ASoldierPawn::HandleAttack, CurrentWeapon->GetAttackPonit(),false);
+		LastAttackTime = GetWorld()->TimeSeconds;
+
+	}
+}
+void ASoldierPawn::HandleAttack()
+{
+	CurrentWeapon->AttackEnemy();
 }
 void ASoldierPawn::SetGroupAndIndex(SoldierGroup * _group,int _index)
 {

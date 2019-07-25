@@ -21,6 +21,7 @@ void USoldierInstantWeapon::InitWithWeaponInfo(const FInstantWeaponInfo & weapon
 
 void USoldierInstantWeapon::AttackEnemy()
 {
+	UGameplayStatics::ApplyDamage(Owner->GetEnemy(), Damage, Owner->GetController(), Owner, UDamageType::StaticClass());
 
 }
 bool USoldierInstantWeapon::IsInRange(ASoldierPawn * temPawn)
