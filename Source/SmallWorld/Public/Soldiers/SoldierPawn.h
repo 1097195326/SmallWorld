@@ -102,6 +102,8 @@ public:
 	UFUNCTION(BlueprintCallable)
 	SoldierAnimState						GetSoldierAnimState() { return mSoldierAnimState; }
 
+	FVector			GetSpawnProjectileLoction();
+
 protected:
 	
 

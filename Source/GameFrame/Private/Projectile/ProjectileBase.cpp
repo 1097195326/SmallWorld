@@ -1,6 +1,7 @@
 #include "ProjectileBase.h"
 
-ProjectileBase::ProjectileBase()
+ProjectileBase::ProjectileBase():
+	HorizontalSpeed(0.f)
 {
 
 }

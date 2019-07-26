@@ -2,6 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "ProjectileWeapon.h"
+#include "Projectile.h"
 #include "SoldierProjectileWeapon.generated.h"
 
 
@@ -18,6 +19,8 @@ struct FProjectileWeaponInfo
 		float	AttackRange;
 	UPROPERTY(EditAnywhere)
 		float	AttackInterval;
+	UPROPERTY(EditAnywhere)
+		TSubclassOf<AProjectile>	ProjectileClass;
 
 };
 class ASoldierPawn;
@@ -37,5 +40,6 @@ public:
 
 	// self
 	void	InitWithWeaponInfo(const FProjectileWeaponInfo & weaponInfo);
-
+protected:
+	TSubclassOf<AProjectile>	ProjectileClass;
 };

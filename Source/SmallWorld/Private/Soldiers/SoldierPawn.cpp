@@ -101,6 +101,11 @@ void ASoldierPawn::ToGroupForward()
 {
 	SetActorRotation(mGroup->GetGroupForward().Rotation());
 }
+FVector ASoldierPawn::GetSpawnProjectileLoction()
+{
+
+	return GetActorLocation();
+}
 //
 //FVector ASoldierPawn::Seek(FVector TargetLocation)
 //{
