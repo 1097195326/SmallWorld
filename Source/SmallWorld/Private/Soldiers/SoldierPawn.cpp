@@ -21,6 +21,8 @@ ASoldierPawn::ASoldierPawn():
 	mMeshComponent = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("MeshComponent"));
 	mMeshComponent->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
 
+	
+
 }
 void ASoldierPawn::On_Init()
 {

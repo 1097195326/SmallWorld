@@ -1,6 +1,6 @@
 #pragma once
 #include "AIController.h"
-
+#include "Perception/AIPerceptionTypes.h"
 
 #include "SoldierPawnController.generated.h"
 
@@ -19,5 +19,7 @@ public:
 	virtual void OnUnPossess() override;
 
 	
+	UFUNCTION()
+	void  OnSightEnemy(AActor* Actor, FAIStimulus Stimulus);
 
 };

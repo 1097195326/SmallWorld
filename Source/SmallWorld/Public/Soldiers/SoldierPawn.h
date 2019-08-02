@@ -5,6 +5,8 @@
 #include "Kismet/GameplayStatics.h"
 #include "BehaviorTree/BehaviorTree.h"
 #include "Components/SkeletalMeshComponent.h"
+#include "Perception/AISenseConfig_Sight.h"
+
 #include "Projectile.h"
 #include "EnableAttackPawn.h"
 #include "SoldierInstantWeapon.h"
@@ -104,6 +106,8 @@ public:
 
 	FVector			GetSpawnProjectileLoction();
 
+	UPROPERTY(EditAnywhere, Category = AI)
+		UAISenseConfig_Sight*	Sightonfig;
 protected:
 	
 
@@ -115,6 +119,7 @@ protected:
 		USoldierPawnMovement *		mSoldierMovement;
 	UPROPERTY(VisibleDefaultsOnly)
 		USkeletalMeshComponent *	mMeshComponent;
+	
 
 	SoldierAnimState		mSoldierAnimState;
 	SoldierState			mSoldierState;
