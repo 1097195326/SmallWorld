@@ -5,7 +5,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "BehaviorTree/BehaviorTree.h"
 #include "Components/SkeletalMeshComponent.h"
-#include "Perception/AISenseConfig_Sight.h"
+#include "Perception/AISenseConfig.h"
 
 #include "Projectile.h"
 #include "EnableAttackPawn.h"
@@ -106,8 +106,9 @@ public:
 
 	FVector			GetSpawnProjectileLoction();
 
-	UPROPERTY(EditAnywhere, Category = AI)
-		UAISenseConfig_Sight*	Sightonfig;
+	UPROPERTY(EditDefaultsOnly, Instanced, Category = AI)
+		TArray<UAISenseConfig*>		SenseConfigs;
+
 protected:
 	
 

@@ -20,8 +20,10 @@ void ASoldierPawnController::OnPossess(APawn* InPawn)
 	Super::OnPossess(InPawn);
 
 	ASoldierPawn * SoldierPawn = Cast<ASoldierPawn>(InPawn);
-
-	PerceptionComponent->ConfigureSense(*SoldierPawn->Sightonfig);
+	for (auto senseConfig : SoldierPawn->SenseConfigs)
+	{
+		PerceptionComponent->ConfigureSense(*senseConfig);
+	}
 	// start behavior
 	if (SoldierPawn && SoldierPawn->GetBehaviorTree())
 	{
