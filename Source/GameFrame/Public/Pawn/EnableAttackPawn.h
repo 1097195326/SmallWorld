@@ -11,6 +11,7 @@ public:
 
 	void						SetEnemy(PawnClass * temEnemyPawn){EnemyPawn = temEnemyPawn;}
 	PawnClass *					GetEnemy(){return EnemyPawn;}
+	bool						IsHaveEnemy() { return EnemyPawn != nullptr; }
 	void						SetCurrentWeapon(WeaponBase<PawnClass> *	temCurrentWeapon){CurrentWeapon = temCurrentWeapon;}
 	WeaponBase<PawnClass> *		GetCurrentWeapon(){return CurrentWeapon;}
 

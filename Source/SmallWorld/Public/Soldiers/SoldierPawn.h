@@ -99,12 +99,13 @@ public:
 	FVector							GetLocationInGroup();
 
 	void							ToGroupForward();
-	FORCEINLINE void						SetSoldierAnimState(SoldierAnimState _state) { mSoldierAnimState = _state; }
+	FORCEINLINE void				SetSoldierAnimState(SoldierAnimState _state) { mSoldierAnimState = _state; }
 	
 	UFUNCTION(BlueprintCallable)
-	SoldierAnimState						GetSoldierAnimState() { return mSoldierAnimState; }
+	SoldierAnimState				GetSoldierAnimState() { return mSoldierAnimState; }
 
-	FVector			GetSpawnProjectileLoction();
+	FVector							GetSpawnProjectileLoction();
+	ASoldierPawn *					GetBestEnemy(const TArray<AActor*> & SeachList);
 
 	UPROPERTY(EditDefaultsOnly, Instanced, Category = AI)
 		TArray<UAISenseConfig*>		SenseConfigs;

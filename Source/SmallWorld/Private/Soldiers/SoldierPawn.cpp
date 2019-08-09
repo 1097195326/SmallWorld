@@ -108,6 +108,12 @@ FVector ASoldierPawn::GetSpawnProjectileLoction()
 
 	return GetActorLocation();
 }
+ASoldierPawn * ASoldierPawn::GetBestEnemy(const TArray<AActor *> & SeachList)
+{
+
+
+	return nullptr;
+}
 //
 //FVector ASoldierPawn::Seek(FVector TargetLocation)
 //{

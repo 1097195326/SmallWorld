@@ -41,6 +41,18 @@ void ASoldierPawnController::OnUnPossess()
 void  ASoldierPawnController::ActorsPerceptionUpdated(const TArray<AActor *>& UpdatedActors)
 {
 	ASoldierPawn * SoldierPawn = Cast<ASoldierPawn>(GetPawn());
+	if (!SoldierPawn )
+	{
+		return;
+	}
+	if (SoldierPawn->IsHaveEnemy())
+	{
 
-	Blackboard->SetValueAsObject(FName(TEXT("EnemyPawn")), UpdatedActors[0]);
+	}
+	else
+	{
+		ASoldierPawn * bestEnemy = SoldierPawn->GetBestEnemy(UpdatedActors);
+		Blackboard->SetValueAsObject(FName(TEXT("EnemyPawn")), bestEnemy);
+
+	}
 }
