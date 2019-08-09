@@ -18,8 +18,7 @@ public:
 	virtual void OnPossess(APawn* InPawn) override;
 	virtual void OnUnPossess() override;
 
-	
-	UFUNCTION()
-	void  OnSightEnemy(AActor* Actor, FAIStimulus Stimulus);
+	virtual void ActorsPerceptionUpdated(const TArray<AActor*>& UpdatedActors) override;
+
 
 };

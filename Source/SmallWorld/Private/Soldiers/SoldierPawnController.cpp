@@ -10,8 +10,6 @@ ASoldierPawnController::ASoldierPawnController(const FObjectInitializer& ObjectI
 	UE_LOG(LogTemp, Log, TEXT("zhx : ASoldierPawnController::ASoldierPawnController"));
 	
 	PerceptionComponent = CreateDefaultSubobject<UAIPerceptionComponent>("PerceptionComponent");
-
-	PerceptionComponent->OnTargetPerceptionUpdated.AddDynamic(this, &ASoldierPawnController::OnSightEnemy);
 	
 
 }
@@ -40,7 +38,9 @@ void ASoldierPawnController::OnUnPossess()
 	}
 
 }
-void  ASoldierPawnController::OnSightEnemy(AActor* Actor, FAIStimulus Stimulus)
+void  ASoldierPawnController::ActorsPerceptionUpdated(const TArray<AActor *>& UpdatedActors)
 {
+	ASoldierPawn * SoldierPawn = Cast<ASoldierPawn>(GetPawn());
 
+	Blackboard->SetValueAsObject(FName(TEXT("EnemyPawn")), UpdatedActors[0]);
 }
