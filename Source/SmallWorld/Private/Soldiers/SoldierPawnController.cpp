@@ -22,6 +22,7 @@ void ASoldierPawnController::OnPossess(APawn* InPawn)
 	{
 		PerceptionComponent->ConfigureSense(*senseConfig);
 	}
+	PerceptionComponent->ReregisterComponent();
 	// start behavior
 	if (SoldierPawn && SoldierPawn->GetBehaviorTree())
 	{
@@ -51,8 +52,13 @@ void  ASoldierPawnController::ActorsPerceptionUpdated(const TArray<AActor *>& Up
 	}
 	else
 	{
-		ASoldierPawn * bestEnemy = SoldierPawn->GetBestEnemy(UpdatedActors);
-		Blackboard->SetValueAsObject(FName(TEXT("EnemyPawn")), bestEnemy);
-
+		//ASoldierPawn * bestEnemy = SoldierPawn->GetBestEnemy(UpdatedActors);
+		ASoldierPawn * bestEnemy = Cast<ASoldierPawn>(UpdatedActors[0]);
+		if (bestEnemy)
+		{
+			SoldierPawn->SetEnemy(bestEnemy);
+			Blackboard->SetValueAsObject(FName(TEXT("EnemyPawn")), bestEnemy);
+		}
+		
 	}
 }
