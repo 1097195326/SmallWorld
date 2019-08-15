@@ -18,6 +18,8 @@ struct FInstantWeaponInfo
 	float	AttackRange;
 	UPROPERTY(EditAnywhere)
 	float	AttackInterval;
+	UPROPERTY(EditAnywhere)
+	float	AttackPoint;
 
 };
 

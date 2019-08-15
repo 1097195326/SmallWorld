@@ -58,6 +58,7 @@ void  ASoldierPawnController::ActorsPerceptionUpdated(const TArray<AActor *>& Up
 		{
 			SoldierPawn->SetEnemy(bestEnemy);
 			Blackboard->SetValueAsObject(FName(TEXT("EnemyPawn")), bestEnemy);
+			SoldierPawn->ChangeSoldierState(SoldierState::S_FightSelf);
 		}
 		
 	}
