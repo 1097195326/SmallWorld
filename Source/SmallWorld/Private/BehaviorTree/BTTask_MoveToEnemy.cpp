@@ -10,6 +10,10 @@ EBTNodeResult::Type UBTTask_MoveToEnemy::ExecuteTask(UBehaviorTreeComponent& Own
 	{
 		return EBTNodeResult::Failed;
 	}
-
-	return EBTNodeResult::Succeeded;
+	
+	if (EPathFollowingRequestResult::AlreadyAtGoal ==SoldierController->MoveToActor(SoldierPawn->GetEnemy()),SoldierPawn->GetFieldOfAttack())
+	{
+		return EBTNodeResult::Succeeded;
+	}
+	return EBTNodeResult::InProgress;
 }

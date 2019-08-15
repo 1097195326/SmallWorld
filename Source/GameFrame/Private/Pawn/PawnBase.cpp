@@ -17,7 +17,7 @@ PawnBase::~PawnBase()
 }
 bool PawnBase::IsAlive()
 {
-	return Health <= 0;
+	return Health > 0;
 }
 float PawnBase::CalculateDamage(const float & damage)
 {
