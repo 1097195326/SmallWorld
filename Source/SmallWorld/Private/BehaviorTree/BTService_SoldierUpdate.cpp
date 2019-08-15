@@ -35,7 +35,11 @@ void UBTService_SoldierUpdate::TickNode(UBehaviorTreeComponent& OwnerComp, uint8
 		}break;
 		case	SoldierState::S_Idle:
 		{
-
+			if (SoldierPawn->IsHaveEnemy())
+			{
+				OwnerComp.GetBlackboardComponent()->SetValueAsObject(FName(TEXT("EnemyPawn")), SoldierPawn->GetEnemy());
+				SoldierPawn->ChangeSoldierState(SoldierState::S_FightSelf);
+			}
 		}break;
 		case	SoldierState::S_FightSelf:
 		{
