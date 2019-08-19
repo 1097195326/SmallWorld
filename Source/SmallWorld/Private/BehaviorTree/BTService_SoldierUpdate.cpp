@@ -35,16 +35,17 @@ void UBTService_SoldierUpdate::TickNode(UBehaviorTreeComponent& OwnerComp, uint8
 		}break;
 		case	SoldierState::S_Idle:
 		{
-			if (SoldierPawn->IsHaveEnemy() && !SoldierPawn->IsInState(SoldierState::S_FightSelf))
-			{
-				OwnerComp.GetBlackboardComponent()->SetValueAsObject(FName(TEXT("EnemyPawn")), SoldierPawn->GetEnemy());
-				SoldierPawn->ChangeSoldierState(SoldierState::S_FightSelf);
-				SoldierPawn->SetSoldierAnimState(Anim_Walk);
-			}
+			
+			SoldierPawn->SetSoldierAnimState(Anim_Idle);
+			
 		}break;
 		case	SoldierState::S_FightSelf:
 		{
 			if (SoldierPawn->IsHaveEnemy())
+			{
+				OwnerComp.GetBlackboardComponent()->SetValueAsVector(FName(TEXT("LocationInGroup")), SoldierPawn->GetEnemy()->GetActorLocation());
+			}
+			else
 			{
 
 			}

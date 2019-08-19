@@ -14,6 +14,9 @@ public:
 
 	bool					IsFull();
 	void					ClearSoldierGroups();
+	
+	SoldierGroup *			GetCurrentGroup();
+	void					SetCurrentGroup(SoldierGroup * temGroup);
 
 	void					SetOriginAndForward(FVector _origin,FVector _forward);
 

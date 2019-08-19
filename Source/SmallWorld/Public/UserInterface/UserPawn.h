@@ -52,8 +52,8 @@ private:
 		UFloatingPawnMovement * PawnMovement;
 
 	// test 
-	class SoldierGroupManager * RedGroupMange;
-	class SoldierGroupManager * BlueGroupMange;
+	class SoldierGroupManager * RedGroupManager;
+	class SoldierGroupManager * BlueGroupManager;
 
 	UFUNCTION(BlueprintCallable, Category = "Pawn")
 		virtual void MoveForward(float Val);

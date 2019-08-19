@@ -115,3 +115,11 @@ void SoldierGroupManager::SetOriginAndForward(FVector _origin, FVector _forward)
 	}
 
 }
+SoldierGroup * SoldierGroupManager::GetCurrentGroup()
+{
+	return mCurrentGroup;
+}
+void SoldierGroupManager::SetCurrentGroup(SoldierGroup * temGroup)
+{
+	mCurrentGroup = temGroup;
+}

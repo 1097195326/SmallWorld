@@ -21,6 +21,7 @@
 #include "Knight.h"
 #include "Mage.h"
 #include "SiegeEngine.h"
+#include "GroupFightState.h"
 
 
 AUserPawn::AUserPawn(const FObjectInitializer& ObjectInitializer)
@@ -245,11 +246,11 @@ void AUserPawn::Prepare()
 	FVector RedLocation = Points[0]->GetActorLocation();
 	FVector BlueLocation = Points[1]->GetActorLocation();
 
-	RedGroupMange = new SoldierGroupManager();
-	BlueGroupMange = new SoldierGroupManager();
+	RedGroupManager = new SoldierGroupManager();
+	BlueGroupManager = new SoldierGroupManager();
 
-	RedGroupMange->SetOriginAndForward(RedLocation, (BlueLocation - RedLocation).GetSafeNormal());
-	BlueGroupMange->SetOriginAndForward(BlueLocation, (RedLocation - BlueLocation).GetSafeNormal());
+	RedGroupManager->SetOriginAndForward(RedLocation, (BlueLocation - RedLocation).GetSafeNormal());
+	BlueGroupManager->SetOriginAndForward(BlueLocation, (RedLocation - BlueLocation).GetSafeNormal());
 	
 	FTransform  RedTran(RedLocation);
 	FTransform  BlueTran(BlueLocation);
@@ -278,14 +279,14 @@ void AUserPawn::SpawnSoldier()
 		ASoldierPawn * RedSoldierPawn = Cast<ASoldierPawn>(UGameplayStatics::BeginDeferredActorSpawnFromClass(this, soldierClass, RedTran, ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn));
 		if (RedSoldierPawn)
 		{
-			RedGroupMange->PushSoldierToGroup(RedSoldierPawn);
+			RedGroupManager->PushSoldierToGroup(RedSoldierPawn);
 
 			UGameplayStatics::FinishSpawningActor(RedSoldierPawn, RedTran);
 		}
 		ASoldierPawn * BlueSoldierPawn = Cast<ASoldierPawn>(UGameplayStatics::BeginDeferredActorSpawnFromClass(this, soldierClass, RedTran, ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn));
 		if (BlueSoldierPawn)
 		{
-			BlueGroupMange->PushSoldierToGroup(BlueSoldierPawn);
+			BlueGroupManager->PushSoldierToGroup(BlueSoldierPawn);
 
 			UGameplayStatics::FinishSpawningActor(BlueSoldierPawn, BlueTran);
 		}
@@ -295,13 +296,14 @@ void AUserPawn::SpawnSoldier()
 }
 void AUserPawn::Attack()
 {
-	TArray<AActor*> Points;
+	//BlueGroupManager->GetCurrentGroup()->ChangeGroupState(new GroupFightState());
+	/*TArray<AActor*> Points;
 	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ASoldierPawn::StaticClass(), Points);
 	for (int i = 0; i< Points.Num() ;i ++)
 	{
 		Points[i]->Destroy();
 	}
-	GEngine->ForceGarbageCollection(true);
+	GEngine->ForceGarbageCollection(true);*/
 }
 void AUserPawn::CreateGroup()
 {
