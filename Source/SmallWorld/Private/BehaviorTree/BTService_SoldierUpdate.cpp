@@ -39,6 +39,7 @@ void UBTService_SoldierUpdate::TickNode(UBehaviorTreeComponent& OwnerComp, uint8
 			{
 				OwnerComp.GetBlackboardComponent()->SetValueAsObject(FName(TEXT("EnemyPawn")), SoldierPawn->GetEnemy());
 				SoldierPawn->ChangeSoldierState(SoldierState::S_FightSelf);
+				SoldierPawn->SetSoldierAnimState(Anim_Walk);
 			}
 		}break;
 		case	SoldierState::S_FightSelf:

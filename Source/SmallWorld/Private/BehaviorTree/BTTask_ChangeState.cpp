@@ -1,13 +1,12 @@
-#include "BTTask_ToIdle.h"
+#include "BTTask_ChangeState.h"
 #include "SoldierPawnController.h"
-#include "SoldierPawn.h"
 
 
-UBTTask_ToIdle::UBTTask_ToIdle()
+UBTTask_ChangeState::UBTTask_ChangeState()
 {
-
+	mToState = SoldierState::S_Normal;
 }
-EBTNodeResult::Type UBTTask_ToIdle::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
+EBTNodeResult::Type UBTTask_ChangeState::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
 {
 	ASoldierPawnController * SoldierController = Cast<ASoldierPawnController>(OwnerComp.GetAIOwner());
 	ASoldierPawn * SoldierPawn = Cast<ASoldierPawn>(SoldierController->GetPawn());
@@ -16,7 +15,7 @@ EBTNodeResult::Type UBTTask_ToIdle::ExecuteTask(UBehaviorTreeComponent& OwnerCom
 	    return EBTNodeResult::Failed;
 	}
 	
-	SoldierPawn->ChangeSoldierState(SoldierState::S_Idle);
+	SoldierPawn->ChangeSoldierState(mToState);
 	SoldierPawn->SetSoldierAnimState(Anim_Idle);
 
 	return EBTNodeResult::Succeeded;
