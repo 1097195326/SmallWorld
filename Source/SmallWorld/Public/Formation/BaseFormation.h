@@ -36,15 +36,17 @@ class BaseFormation : public GObject
 public:
 	BaseFormation();
 
-	virtual void		CalculateOffSet(const FormationInfo & _info) {}
+	virtual void			CalculateOffSet(const FormationInfo & _info);
 
-	FVector				GetLocationByIndex(int _index);
+	FVector					GetLocationByIndex(int _index);
 
-	void				SetFormationType(FormationType _type);
-	FormationType		GetFormationType();
+	void					SetFormationType(FormationType _type);
+	FormationType			GetFormationType();
+	inline const  FormationInfo& 	GetFormationInfo() { return mFormationInfo; }
 protected:
 	FormationType		mFormationType;
-	
+	FormationInfo		mFormationInfo;
+
 	map<int, FVector>	mFormationLocationMap;
 
 };

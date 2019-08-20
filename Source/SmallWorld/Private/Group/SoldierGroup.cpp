@@ -84,16 +84,13 @@ void SoldierGroup::ChangeFormation(BaseFormation * _formation)
 {
 	if (mCurrrentFormation)
 	{
-		delete mCurrrentFormation;
 		mCurrrentFormation = nullptr;
 	}
 	if (_formation)
 	{
 		mCurrrentFormation = _formation;
-		FormationInfo info = GetFormationInfo(_formation->GetFormationType());
-		mGroupLenth = info.Formation_L * info.Offset_Y;
-		mGroupWidth = info.Formation_W * info.Offset_X;
-		mCurrrentFormation->CalculateOffSet(info);
+		mGroupLenth = mCurrrentFormation->GetFormationInfo().Formation_L * mCurrrentFormation->GetFormationInfo().Offset_Y;
+		mGroupWidth = mCurrrentFormation->GetFormationInfo().Formation_W * mCurrrentFormation->GetFormationInfo().Offset_X;
 	}
 }
 void SoldierGroup::ChangeGroupState(GroupBaseState * _groupState)
@@ -141,6 +138,9 @@ void SoldierGroup::ChangeFormationByIndex(const FormationSpace::FormationType & 
 		}
 		if (AddFormation)
 		{
+			FormationInfo info = GetFormationInfo(AddFormation->GetFormationType());
+			mCurrrentFormation->CalculateOffSet(info);
+
 			mGroupFormationMap.insert(std::pair<FormationSpace::FormationType, BaseFormation*>(formationIndex, AddFormation));
 			ChangeFormation(AddFormation);
 		}

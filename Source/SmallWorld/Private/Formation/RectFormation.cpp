@@ -9,6 +9,8 @@ RectFormation::RectFormation()
 
 void RectFormation::CalculateOffSet(const FormationInfo & _info)
 {
+	BaseFormation::CalculateOffSet(_info);
+
 	float PointX = _info.Offset_X * (_info.Formation_W / 2 + (_info.Formation_W % 2 > 0 ? 1 : 0)) - _info.Offset_X * 0.5f;
 	float PointY = _info.Offset_Y * (_info.Formation_L / 2 + (_info.Formation_L % 2 > 0 ? 1 : 0)) - _info.Offset_Y * 0.5f;
 	
