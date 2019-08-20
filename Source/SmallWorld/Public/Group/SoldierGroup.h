@@ -30,14 +30,13 @@ public:
 	void					SetSoldierGroupManager(class SoldierGroupManager * _groupManager);
 	void					SetGroupType(SoldierType _soldierType);
 
-	void					AddSoldierToGroup(ASoldierPawn * soldier);
+	bool					AddSoldierToGroup(ASoldierPawn * soldier);
 	void					RemoveSoldierFromGroup(ASoldierPawn * soldier);
 	list<ASoldierPawn*>		GetAllSoldier();
 	
+	void					ChangeFormationByIndex(const FormationSpace::FormationType & formationIndex);
 	// Group State
-	void					ChangeFormation(BaseFormation * formation);
-	void					ChangeGroupState(GroupBaseState * _groupState);
-	void					ChangeStateIndex(GroupStateIndex _index);
+	void					ChangeGrouyStateByIndex(const GroupStateIndex & _index);
 	void					UpdateSoldierState();
 	// behavior action
 	virtual void			GroupBehaviorActions();
@@ -61,12 +60,14 @@ public:
 
 	inline bool				IsPendingKill() { return mIsPendingKill; }
 protected:
-	FormationInfo			GetFormationInfo(FormationType _type);
+	void					ChangeGroupState(GroupBaseState * _groupState);
+	void					ChangeFormation(BaseFormation * formation);
+
+	FormationSpace::FormationInfo			GetFormationInfo(FormationSpace::FormationType _type);
 	void					ChangeSoldierState(ASoldierPawn * _soldier);
 
 	bool						mIsPendingKill;
 
-	GroupStateIndex				mStateIndex;
 	GroupBaseState *			mCurrentState;
 	BaseFormation *				mCurrrentFormation;
 	SoldierGroup *				mEnemyGroup;
@@ -75,6 +76,8 @@ protected:
 	GroupType					mGroupType;
 
 	std::list<ASoldierPawn*>	mAllSoldier;
+	std::map<GroupStateIndex, GroupBaseState*>		mGroupStateMap;
+	std::map<FormationSpace::FormationType, BaseFormation*>		mGroupFormationMap;
 
 	
 	FVector						mGroupLocation;

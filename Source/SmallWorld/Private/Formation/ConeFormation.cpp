@@ -3,7 +3,7 @@
 
 ConeFormation::ConeFormation()
 {
-	mFormationType = e_ConeFormation;
+	mFormationType = ConeFormationType;
 }
 void ConeFormation::CalculateOffSet(const FormationInfo & _info)
 {

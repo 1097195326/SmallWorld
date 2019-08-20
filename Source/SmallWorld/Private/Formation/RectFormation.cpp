@@ -3,7 +3,7 @@
 
 RectFormation::RectFormation()
 {
-	mFormationType = e_SquareRectFormation;
+	mFormationType = SquareRectFormationType;
 
 }
 

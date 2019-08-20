@@ -3,7 +3,7 @@
 
 CircleFormation::CircleFormation()
 {
-	mFormationType = e_CircleFormation;
+	mFormationType = CircleFormationType;
 }
 void CircleFormation::CalculateOffSet(const FormationInfo & _info)
 {

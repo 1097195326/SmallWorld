@@ -1,10 +1,14 @@
 #include "SoldierGroup.h"
 #include "SoldierGroupManager.h"
 #include "GroupWaitingState.h"
+#include "GroupAutoFightState.h"
+#include "GroupFightState.h"
+#include "GroupReadyState.h"
 
 #include "CircleFormation.h"
 #include "ConeFormation.h"
 #include "RectFormation.h"
+
 
 
 SoldierGroup::SoldierGroup():mGroupType(G_None)
@@ -30,6 +34,11 @@ SoldierGroup::~SoldierGroup()
 		delete mCurrrentFormation;
 		mCurrrentFormation = nullptr;
 	}
+	for (auto mapIter : mGroupStateMap)
+	{
+		delete mapIter.second;
+	}
+	mGroupStateMap.clear();
 
 }
 void SoldierGroup::On_GameUpdate()
@@ -39,15 +48,15 @@ void SoldierGroup::On_GameUpdate()
 		soldier->On_GameUpdate();
 	}
 }
-void SoldierGroup::AddSoldierToGroup(ASoldierPawn * _soldier)
+bool SoldierGroup::AddSoldierToGroup(ASoldierPawn * _soldier)
 {
 	if (_soldier == nullptr)
 	{
-		return;
+		return false;
 	}
 	if (mIsFull)
 	{
-		return;
+		return false;
 	}
 	int indexInGroup = mAllSoldier.size() + 1;
 	
@@ -60,6 +69,7 @@ void SoldierGroup::AddSoldierToGroup(ASoldierPawn * _soldier)
 	{
 		mIsFull = true;
 	}
+	return true;
 }
 void SoldierGroup::RemoveSoldierFromGroup(ASoldierPawn * _soldier)
 {
@@ -91,7 +101,6 @@ void SoldierGroup::ChangeGroupState(GroupBaseState * _groupState)
 	if (mCurrentState)
 	{
 		mCurrentState->OnEnd();
-		delete mCurrentState;
 		mCurrentState = nullptr;
 	}
 	if (_groupState)
@@ -100,9 +109,84 @@ void SoldierGroup::ChangeGroupState(GroupBaseState * _groupState)
 		mCurrentState->OnEnter();
 	}
 }
+void SoldierGroup::ChangeFormationByIndex(const FormationSpace::FormationType & formationIndex)
+{
+	std::map<FormationSpace::FormationType, BaseFormation*>::iterator  formationIter = mGroupFormationMap.find(formationIndex);
+	if (formationIter != mGroupFormationMap.end())
+	{
+		ChangeFormation(formationIter->second);
+	}
+	else
+	{
+		BaseFormation * AddFormation = nullptr;
+		switch (formationIndex)
+		{
+		case CircleFormationType:
+			AddFormation = new  CircleFormation();
+			break;
+		case ConeFormationType:
+			AddFormation = new  ConeFormation();
+			break;
+		case SquareRectFormationType:
+			AddFormation = new  RectFormation();
+			break;
+		case HorizonalRectFormationType:
+			AddFormation = new  RectFormation();
+			break;
+		case VerticalRectFormationType:
+			AddFormation = new  RectFormation();
+			break;
+		default:
+			break;
+		}
+		if (AddFormation)
+		{
+			mGroupFormationMap.insert(std::pair<FormationSpace::FormationType, BaseFormation*>(formationIndex, AddFormation));
+			ChangeFormation(AddFormation);
+		}
+	}
+}
+void SoldierGroup::ChangeGrouyStateByIndex(const GroupStateIndex & _index)
+{
+	std::map<GroupStateIndex, GroupBaseState*>::iterator  StateIter = mGroupStateMap.find(_index);
+	if (StateIter != mGroupStateMap.end())
+	{
+		ChangeGroupState(StateIter->second);
+	}
+	else
+	{
+		GroupBaseState * AddState = nullptr;
+		switch (_index)
+		{
+		case I_AutoFightIndex:
+			AddState = new  GroupAutoFightState(this);
+			break;
+		case I_FightIndex:
+			AddState = new  GroupFightState(this);
+			break;
+		case I_ReadyIndex:
+			AddState = new  GroupReadyState(this);
+			break;
+		case I_WaitingIndex:
+			AddState = new  GroupWaitingState(this);
+			break;
+		default:
+			break;
+		}
+		if (AddState)
+		{
+			mGroupStateMap.insert(std::pair<GroupStateIndex, GroupBaseState*>(_index, AddState));
+			ChangeGroupState(AddState);
+		}
+	}
+}
 void SoldierGroup::ChangeSoldierState(ASoldierPawn * _soldier)
 {
-	switch (mStateIndex)
+	if (!mCurrentState)
+	{
+		return;
+	}
+	switch (mCurrentState->GetStateIndex())
 	{
 	case I_FightIndex:
 	{
@@ -158,10 +242,7 @@ void SoldierGroup::AttackEnemyGroup()
 {
 
 }
-void SoldierGroup::ChangeStateIndex(GroupStateIndex _index)
-{
-	mStateIndex = _index;
-}
+
 void SoldierGroup::SetGroupIndexAndLocationAndForward(int32 _index, FVector _location,FVector _forward)
 {
 	mIndexInManger = _index;
@@ -202,15 +283,15 @@ FormationInfo SoldierGroup::GetFormationInfo(FormationType _type)
 		info.Offset_Y = Archer_FormationBoundY;
 		switch (_type)
 		{
-		case e_SquareRectFormation:
+		case SquareRectFormationType:
 			info.Formation_W = Archer_SquareFormation_W;
 			info.Formation_L = Archer_SquareFormation_L;
 			break;
-		case e_HorizonalRectFormation:
+		case HorizonalRectFormationType:
 			info.Formation_W = Archer_HorizonalFormation_W;
 			info.Formation_L = Archer_HorizonalFormation_L;
 			break;
-		case e_VerticalRectFormation:
+		case VerticalRectFormationType:
 			info.Formation_W = Archer_VerticalFormation_W;
 			info.Formation_L = Archer_VerticalFormation_L;
 			break;
@@ -222,15 +303,15 @@ FormationInfo SoldierGroup::GetFormationInfo(FormationType _type)
 		info.Offset_Y = Footman_FormationBoundY;
 		switch (_type)
 		{
-		case e_SquareRectFormation:
+		case SquareRectFormationType:
 			info.Formation_W = Footman_SquareFormation_W;
 			info.Formation_L = Footman_SquareFormation_L;
 			break;
-		case e_HorizonalRectFormation:
+		case HorizonalRectFormationType:
 			info.Formation_W = Footman_HorizonalFormation_W;
 			info.Formation_L = Footman_HorizonalFormation_L;
 			break;
-		case e_VerticalRectFormation:
+		case VerticalRectFormationType:
 			info.Formation_W = Footman_VerticalFormation_W;
 			info.Formation_L = Footman_VerticalFormation_L;
 			break;
@@ -241,15 +322,15 @@ FormationInfo SoldierGroup::GetFormationInfo(FormationType _type)
 		info.Offset_Y = Griffin_FormationBoundY;
 		switch (_type)
 		{
-		case e_SquareRectFormation:
+		case SquareRectFormationType:
 			info.Formation_W = Griffin_SquareFormation_W;
 			info.Formation_L = Griffin_SquareFormation_L;
 			break;
-		case e_HorizonalRectFormation:
+		case HorizonalRectFormationType:
 			info.Formation_W = Griffin_HorizonalFormation_W;
 			info.Formation_L = Griffin_HorizonalFormation_L;
 			break;
-		case e_VerticalRectFormation:
+		case VerticalRectFormationType:
 			info.Formation_W = Griffin_VerticalFormation_W;
 			info.Formation_L = Griffin_VerticalFormation_L;
 			break;
@@ -260,15 +341,15 @@ FormationInfo SoldierGroup::GetFormationInfo(FormationType _type)
 		info.Offset_Y = Horseman_FormationBoundY;
 		switch (_type)
 		{
-		case e_SquareRectFormation:
+		case SquareRectFormationType:
 			info.Formation_W = Horseman_SquareFormation_W;
 			info.Formation_L = Horseman_SquareFormation_L;
 			break;
-		case e_HorizonalRectFormation:
+		case HorizonalRectFormationType:
 			info.Formation_W = Horseman_HorizonalFormation_W;
 			info.Formation_L = Horseman_HorizonalFormation_L;
 			break;
-		case e_VerticalRectFormation:
+		case VerticalRectFormationType:
 			info.Formation_W = Horseman_VerticalFormation_W;
 			info.Formation_L = Horseman_VerticalFormation_L;
 			break;
@@ -279,15 +360,15 @@ FormationInfo SoldierGroup::GetFormationInfo(FormationType _type)
 		info.Offset_Y = Knight_FormationBoundY;
 		switch (_type)
 		{
-		case e_SquareRectFormation:
+		case SquareRectFormationType:
 			info.Formation_W = Knight_SquareFormation_W;
 			info.Formation_L = Knight_SquareFormation_L;
 			break;
-		case e_HorizonalRectFormation:
+		case HorizonalRectFormationType:
 			info.Formation_W = Knight_HorizonalFormation_W;
 			info.Formation_L = Knight_HorizonalFormation_L;
 			break;
-		case e_VerticalRectFormation:
+		case VerticalRectFormationType:
 			info.Formation_W = Archer_VerticalFormation_W;
 			info.Formation_L = Archer_VerticalFormation_L;
 			break;
@@ -298,15 +379,15 @@ FormationInfo SoldierGroup::GetFormationInfo(FormationType _type)
 		info.Offset_Y = Mage_FormationBoundY;
 		switch (_type)
 		{
-		case e_SquareRectFormation:
+		case SquareRectFormationType:
 			info.Formation_W = Mage_SquareFormation_W;
 			info.Formation_L = Mage_SquareFormation_L;
 			break;
-		case e_HorizonalRectFormation:
+		case HorizonalRectFormationType:
 			info.Formation_W = Mage_HorizonalFormation_W;
 			info.Formation_L = Mage_HorizonalFormation_L;
 			break;
-		case e_VerticalRectFormation:
+		case VerticalRectFormationType:
 			info.Formation_W = Mage_VerticalFormation_W;
 			info.Formation_L = Mage_VerticalFormation_L;
 			break;
@@ -317,15 +398,15 @@ FormationInfo SoldierGroup::GetFormationInfo(FormationType _type)
 		info.Offset_Y = SiegeEngine_FormationBoundY;
 		switch (_type)
 		{
-		case e_SquareRectFormation:
+		case SquareRectFormationType:
 			info.Formation_W = SiegeEngine_SquareFormation_W;
 			info.Formation_L = SiegeEngine_SquareFormation_L;
 			break;
-		case e_HorizonalRectFormation:
+		case HorizonalRectFormationType:
 			info.Formation_W = SiegeEngine_HorizonalFormation_W;
 			info.Formation_L = SiegeEngine_HorizonalFormation_L;
 			break;
-		case e_VerticalRectFormation:
+		case VerticalRectFormationType:
 			info.Formation_W = SiegeEngine_VerticalFormation_W;
 			info.Formation_L = SiegeEngine_VerticalFormation_L;
 			break;

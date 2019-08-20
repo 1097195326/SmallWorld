@@ -5,7 +5,7 @@ BaseFormation::BaseFormation()
 {
 
 }
-FormationType BaseFormation::GetFormationType()
+FormationSpace::FormationType BaseFormation::GetFormationType()
 {
 	return mFormationType;
 }

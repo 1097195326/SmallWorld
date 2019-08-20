@@ -3,11 +3,10 @@
 
 GroupFightState::GroupFightState(SoldierGroup * _soldierGroup) :GroupBaseState(_soldierGroup)
 {
-
+	mStateIndex = I_FightIndex;
 }
 void GroupFightState::OnEnter()
 {
-	mSoldierGroup->ChangeStateIndex(I_FightIndex);
 	mSoldierGroup->UpdateSoldierState();
 }
 void GroupFightState::OnProcess()

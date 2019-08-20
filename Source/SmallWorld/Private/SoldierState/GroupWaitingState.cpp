@@ -3,11 +3,12 @@
 
 GroupWaitingState::GroupWaitingState(SoldierGroup * _soldierGroup) :GroupBaseState(_soldierGroup)
 {
+	mStateIndex = I_WaitingIndex;
 
 }
 void GroupWaitingState::OnEnter()
 {
-	mSoldierGroup->ChangeStateIndex(I_WaitingIndex);
+	mSoldierGroup->UpdateSoldierState();
 }
 void GroupWaitingState::OnProcess()
 {

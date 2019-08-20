@@ -31,7 +31,7 @@ void SoldierGroupManager::PushSoldierToGroup(ASoldierPawn * _soldier)
 			mCurrentGroup = CreateGroupBySoldierType(_soldier->GetSoldierType());
 			mCurrentGroup->SetSoldierGroupManager(this);
 			mCurrentGroup->SetGroupType(_soldier->GetSoldierType());
-			mCurrentGroup->ChangeFormation(new RectFormation());
+			mCurrentGroup->ChangeFormationByIndex(SquareRectFormationType);
 			int GroupNum = mSoldierGroups.size();
 			mCurrentGroup->SetGroupIndexAndLocationAndForward(GroupNum, mGroupLocationMap[GroupNum],mNormalForward);
 		}

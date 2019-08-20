@@ -316,7 +316,7 @@ void AUserPawn::CreateGroup()
 		ASoldierPawn * Soldier = Cast<ASoldierPawn>(soldiers[i]);
 		group->AddSoldierToGroup(Soldier);
 	}
-	group->ChangeFormation(new RectFormation());
+	group->ChangeFormationByIndex(SquareRectFormationType);
 
 }
 void AUserPawn::Fire()

@@ -3,11 +3,11 @@
 
 GroupReadyState::GroupReadyState(SoldierGroup * _soldierGroup) :GroupBaseState(_soldierGroup)
 {
-
+	mStateIndex = I_ReadyIndex;
 }
 void GroupReadyState::OnEnter()
 {
-	mSoldierGroup->ChangeStateIndex(I_ReadyIndex);
+	mSoldierGroup->UpdateSoldierState();
 
 }
 void GroupReadyState::OnProcess()

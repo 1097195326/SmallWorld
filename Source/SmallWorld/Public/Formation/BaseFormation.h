@@ -8,23 +8,28 @@
 
 
 
-
-enum FormationType
+namespace FormationSpace
 {
-	e_CircleFormation,
-	e_ConeFormation,
-	e_SquareRectFormation,
-	e_HorizonalRectFormation,
-	e_VerticalRectFormation,
+	enum FormationType
+	{
+		CircleFormationType,
+		ConeFormationType,
+		SquareRectFormationType,
+		HorizonalRectFormationType,
+		VerticalRectFormationType,
 
+	};
+	struct FormationInfo
+	{
+		float Offset_X;
+		float Offset_Y;
+		int32 Formation_W;
+		int32 Formation_L;
+	};
 };
-struct FormationInfo
-{
-	float Offset_X;
-	float Offset_Y;
-	int32 Formation_W;
-	int32 Formation_L;
-};
+
+using namespace FormationSpace;
+
 
 class BaseFormation : public GObject
 {
