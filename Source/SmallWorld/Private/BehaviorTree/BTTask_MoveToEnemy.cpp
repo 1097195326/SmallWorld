@@ -11,7 +11,7 @@ EBTNodeResult::Type UBTTask_MoveToEnemy::ExecuteTask(UBehaviorTreeComponent& Own
 		return EBTNodeResult::Failed;
 	}
 	FVector Location = SoldierPawn->GetEnemy()->GetActorLocation();
-	return EBTNodeResult::InProgress;
+	return EBTNodeResult::Succeeded;
 
 	if (EPathFollowingRequestResult::RequestSuccessful == SoldierController->MoveToActor(SoldierPawn->GetEnemy(), 5000.f))
 	//if (EPathFollowingRequestResult::AlreadyAtGoal == SoldierController->MoveToLocation(Location, 100.f))
@@ -20,4 +20,9 @@ EBTNodeResult::Type UBTTask_MoveToEnemy::ExecuteTask(UBehaviorTreeComponent& Own
 
 	}
 	return EBTNodeResult::Succeeded;
+}
+void UBTTask_MoveToEnemy::TickTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, float DeltaSeconds)
+{
+
+
 }

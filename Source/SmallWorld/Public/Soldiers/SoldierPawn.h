@@ -5,7 +5,9 @@
 #include "Kismet/GameplayStatics.h"
 #include "BehaviorTree/BehaviorTree.h"
 #include "Components/SkeletalMeshComponent.h"
+#include "Components/CapsuleComponent.h"
 #include "Perception/AISenseConfig.h"
+#include "GameFramework/CharacterMovementComponent.h"
 
 #include "Projectile.h"
 #include "EnableAttackPawn.h"
@@ -94,7 +96,7 @@ public:
 	FORCEINLINE bool			IsInState(SoldierState _state) { return mSoldierState == _state; }
 
 	FORCEINLINE SoldierType			GetSoldierType() { return mSoldierType; }
-	FORCEINLINE	UBehaviorTree *		GetBehaviorTree() { return mBehaviorTree; }
+	FORCEINLINE	UBehaviorTree *		GetBehaviorTree() { return BehaviorTree; }
 
 	FVector							GetLocationInGroup();
 
@@ -116,11 +118,15 @@ protected:
 	void					HaveMoveToGroup();
 
 	UPROPERTY(EditAnywhere)
-		UBehaviorTree *				mBehaviorTree;
+		UBehaviorTree *				BehaviorTree;
 	UPROPERTY(VisibleAnywhere)
-		USoldierPawnMovement *		mSoldierMovement;
+		USoldierPawnMovement *		SoldierMovement;
+	UPROPERTY(VisibleAnywhere)
+		UCharacterMovementComponent *		CharacterMovement;
 	UPROPERTY(VisibleDefaultsOnly)
-		USkeletalMeshComponent *	mMeshComponent;
+		USkeletalMeshComponent *	MeshComponent;
+	UPROPERTY(VisibleDefaultsOnly)
+		UCapsuleComponent *			CapsuleComponent;
 	
 
 	SoldierAnimState		mSoldierAnimState;

@@ -283,13 +283,13 @@ void AUserPawn::SpawnSoldier()
 
 			UGameplayStatics::FinishSpawningActor(RedSoldierPawn, RedTran);
 		}
-		/*ASoldierPawn * BlueSoldierPawn = Cast<ASoldierPawn>(UGameplayStatics::BeginDeferredActorSpawnFromClass(this, soldierClass, RedTran, ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn));
+		ASoldierPawn * BlueSoldierPawn = Cast<ASoldierPawn>(UGameplayStatics::BeginDeferredActorSpawnFromClass(this, soldierClass, RedTran, ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn));
 		if (BlueSoldierPawn)
 		{
 			BlueGroupManager->PushSoldierToGroup(BlueSoldierPawn);
 
 			UGameplayStatics::FinishSpawningActor(BlueSoldierPawn, BlueTran);
-		}*/
+		}
 		return;
 	}
 	GetWorld()->GetTimerManager().ClearTimer(hendle);

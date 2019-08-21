@@ -39,6 +39,8 @@ void ASoldierPawnController::OnUnPossess()
 	}
 
 }
+static bool IsOpen = true;
+
 void  ASoldierPawnController::ActorsPerceptionUpdated(const TArray<AActor *>& UpdatedActors)
 {
 	ASoldierPawn * SoldierPawn = Cast<ASoldierPawn>(GetPawn());
@@ -53,10 +55,12 @@ void  ASoldierPawnController::ActorsPerceptionUpdated(const TArray<AActor *>& Up
 	else
 	{
 		//ASoldierPawn * bestEnemy = SoldierPawn->GetBestEnemy(UpdatedActors);
-		ASoldierPawn * bestEnemy = Cast<ASoldierPawn>(UpdatedActors[0]);
-		if (bestEnemy)
+		AActor * bestEnemy = Cast<AActor>(UpdatedActors[0]);
+		if (bestEnemy && IsOpen)
 		{
-			SoldierPawn->SetEnemy(bestEnemy);
+			//IsOpen = false;
+			//SoldierPawn->SetEnemy(bestEnemy);
+			MoveToActor(bestEnemy, 100.f);
 		}
 		
 	}

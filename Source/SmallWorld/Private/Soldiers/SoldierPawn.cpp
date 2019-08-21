@@ -13,13 +13,22 @@ ASoldierPawn::ASoldierPawn():
 	
 	mGroup = nullptr;
 
-	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("RootComponent"));
+	CapsuleComponent = CreateDefaultSubobject<UCapsuleComponent>(TEXT("CapsuleComponent"));
+	CapsuleComponent->SetEnableGravity(true);
+	CapsuleComponent->SetSimulatePhysics(true);
 
-	mSoldierMovement = CreateDefaultSubobject<USoldierPawnMovement>(TEXT("SoldierMovement"));
-	mSoldierMovement->SetUpdatedComponent(RootComponent);
+	RootComponent = CapsuleComponent;
 	
-	mMeshComponent = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("MeshComponent"));
-	mMeshComponent->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
+	//RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("CapsuleComponent"));
+
+	/*SoldierMovement = CreateDefaultSubobject<USoldierPawnMovement>(TEXT("SoldierMovement"));
+	SoldierMovement->SetUpdatedComponent(RootComponent);*/
+
+	CharacterMovement = CreateDefaultSubobject<UCharacterMovementComponent>(TEXT("SoldierMovement"));
+	CharacterMovement->SetUpdatedComponent(RootComponent);
+	
+	MeshComponent = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("MeshComponent"));
+	MeshComponent->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
 
 	
 
