@@ -43,11 +43,8 @@ void UBTService_SoldierUpdate::TickNode(UBehaviorTreeComponent& OwnerComp, uint8
 		{
 			if (SoldierPawn->IsHaveEnemy())
 			{
-				OwnerComp.GetBlackboardComponent()->SetValueAsVector(FName(TEXT("LocationInGroup")), SoldierPawn->GetEnemy()->GetActorLocation());
-			}
-			else
-			{
-
+				OwnerComp.GetBlackboardComponent()->SetValueAsVector(FName(TEXT("TargetLocation")), SoldierPawn->GetEnemy()->GetActorLocation());
+					
 			}
 		}break;
 		case	SoldierState::S_FormationDefense:
@@ -66,11 +63,11 @@ void UBTService_SoldierUpdate::TickNode(UBehaviorTreeComponent& OwnerComp, uint8
 		{
 			
 				const FVector location = SoldierPawn->GetLocationInGroup();
-				const FVector targetLocation = OwnerComp.GetBlackboardComponent()->GetValueAsVector(FName(TEXT("LocationInGroup")));
+				const FVector targetLocation = OwnerComp.GetBlackboardComponent()->GetValueAsVector(FName(TEXT("TargetLocation")));
 				if (targetLocation != location /*|| preSoldierState != SoldierState::S_MoveToGroup*/)
 				{
 					SoldierPawn->SetSoldierAnimState(Anim_Walk);
-					OwnerComp.GetBlackboardComponent()->SetValueAsVector(FName(TEXT("LocationInGroup")), location);
+					OwnerComp.GetBlackboardComponent()->SetValueAsVector(FName(TEXT("TargetLocation")), location);
 				}
 				else
 				{

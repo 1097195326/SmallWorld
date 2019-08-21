@@ -139,7 +139,7 @@ void SoldierGroup::ChangeFormationByIndex(const FormationSpace::FormationType & 
 		if (AddFormation)
 		{
 			FormationInfo info = GetFormationInfo(AddFormation->GetFormationType());
-			mCurrrentFormation->CalculateOffSet(info);
+			AddFormation->CalculateOffSet(info);
 
 			mGroupFormationMap.insert(std::pair<FormationSpace::FormationType, BaseFormation*>(formationIndex, AddFormation));
 			ChangeFormation(AddFormation);
@@ -188,6 +188,11 @@ void SoldierGroup::ChangeSoldierState(ASoldierPawn * _soldier)
 	}
 	switch (mCurrentState->GetStateIndex())
 	{
+	case  I_AutoFightIndex:
+	{
+		_soldier->ChangeSoldierState(SoldierState::S_FightSelf);
+		break;
+	}
 	case I_FightIndex:
 	{
 		if (mCurrrentFormation)
