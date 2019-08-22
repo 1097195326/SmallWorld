@@ -26,7 +26,7 @@ void ASoldierPawnController::OnPossess(APawn* InPawn)
 	// start behavior
 	if (SoldierPawn && SoldierPawn->GetBehaviorTree())
 	{
-		RunBehaviorTree(SoldierPawn->GetBehaviorTree());
+		//RunBehaviorTree(SoldierPawn->GetBehaviorTree());
 	}
 
 }
@@ -60,7 +60,7 @@ void  ASoldierPawnController::ActorsPerceptionUpdated(const TArray<AActor *>& Up
 		{
 			//IsOpen = false;
 			//SoldierPawn->SetEnemy(bestEnemy);
-			MoveToActor(bestEnemy, 100.f);
+			//MoveToActor(bestEnemy, 500.f);
 		}
 		
 	}

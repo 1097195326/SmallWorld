@@ -290,6 +290,9 @@ void AUserPawn::SpawnSoldier()
 
 			UGameplayStatics::FinishSpawningActor(BlueSoldierPawn, BlueTran);
 		}
+
+		Cast<AAIController>(RedSoldierPawn->GetController())->MoveToActor(BlueSoldierPawn);
+		Cast<AAIController>(BlueSoldierPawn->GetController())->MoveToActor(RedSoldierPawn);
 		return;
 	}
 	GetWorld()->GetTimerManager().ClearTimer(hendle);
