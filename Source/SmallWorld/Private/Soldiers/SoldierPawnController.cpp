@@ -44,24 +44,26 @@ static bool IsOpen = true;
 void  ASoldierPawnController::ActorsPerceptionUpdated(const TArray<AActor *>& UpdatedActors)
 {
 	ASoldierPawn * SoldierPawn = Cast<ASoldierPawn>(GetPawn());
-	if (!SoldierPawn )
-	{
-		return;
-	}
-	if (SoldierPawn->IsHaveEnemy())
-	{
+	MoveToActor(SoldierPawn->GetEnemy());
 
-	}
-	else
-	{
-		//ASoldierPawn * bestEnemy = SoldierPawn->GetBestEnemy(UpdatedActors);
-		AActor * bestEnemy = Cast<AActor>(UpdatedActors[0]);
-		if (bestEnemy && IsOpen)
-		{
-			//IsOpen = false;
-			//SoldierPawn->SetEnemy(bestEnemy);
-			//MoveToActor(bestEnemy, 500.f);
-		}
-		
-	}
+	//if (!SoldierPawn )
+	//{
+	//	return;
+	//}
+	//if (SoldierPawn->IsHaveEnemy())
+	//{
+
+	//}
+	//else
+	//{
+	//	//ASoldierPawn * bestEnemy = SoldierPawn->GetBestEnemy(UpdatedActors);
+	//	AActor * bestEnemy = Cast<AActor>(UpdatedActors[0]);
+	//	if (bestEnemy && IsOpen)
+	//	{
+	//		//IsOpen = false;
+	//		//SoldierPawn->SetEnemy(bestEnemy);
+	//		//MoveToActor(bestEnemy, 500.f);
+	//	}
+	//	
+	//}
 }

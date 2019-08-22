@@ -21,11 +21,11 @@ ASoldierPawn::ASoldierPawn():
 	
 	//RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("CapsuleComponent"));
 
-	/*SoldierMovement = CreateDefaultSubobject<USoldierPawnMovement>(TEXT("SoldierMovement"));
-	SoldierMovement->SetUpdatedComponent(RootComponent);*/
+	SoldierMovement = CreateDefaultSubobject<USoldierPawnMovement>(TEXT("SoldierMovement"));
+	SoldierMovement->SetUpdatedComponent(RootComponent);
 
-	CharacterMovement = CreateDefaultSubobject<UCharacterMovementComponent>(TEXT("CharacterMovement"));
-	CharacterMovement->SetUpdatedComponent(RootComponent);
+	/*CharacterMovement = CreateDefaultSubobject<UCharacterMovementComponent>(TEXT("CharacterMovement"));
+	CharacterMovement->SetUpdatedComponent(RootComponent);*/
 	
 	MeshComponent = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("MeshComponent"));
 	MeshComponent->VisibilityBasedAnimTickOption = EVisibilityBasedAnimTickOption::AlwaysTickPose;
@@ -35,31 +35,7 @@ ASoldierPawn::ASoldierPawn():
 }
 void ASoldierPawn::On_Init()
 {
-
-	if (!IsPendingKill())
-	{
-		if (MeshComponent)
-		{
-			// force animation tick after movement component updates
-			if (MeshComponent->PrimaryComponentTick.bCanEverTick && CharacterMovement)
-			{
-				MeshComponent->PrimaryComponentTick.AddPrerequisite(CharacterMovement, CharacterMovement->PrimaryComponentTick);
-			}
-		}
-
-		if (CharacterMovement && CapsuleComponent)
-		{
-			CharacterMovement->UpdateNavAgent(*CapsuleComponent);
-		}
-
-		if (Controller == nullptr && GetNetMode() != NM_Client)
-		{
-			if (CharacterMovement && CharacterMovement->bRunPhysicsWithNoController)
-			{
-				CharacterMovement->SetDefaultMovementMode();
-			}
-		}
-	}
+	
 }
 void ASoldierPawn::On_Start()
 {
