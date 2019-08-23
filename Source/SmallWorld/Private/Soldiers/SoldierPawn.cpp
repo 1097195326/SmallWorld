@@ -6,6 +6,7 @@
 ASoldierPawn::ASoldierPawn():
 	LastAttackTime(0.f)
 {
+
 	AIControllerClass = ASoldierPawnController::StaticClass();
 	AutoPossessAI = EAutoPossessAI::Spawned;
 	
@@ -13,13 +14,13 @@ ASoldierPawn::ASoldierPawn():
 	
 	mGroup = nullptr;
 
-	CapsuleComponent = CreateDefaultSubobject<UCapsuleComponent>(TEXT("CapsuleComponent"));
+	/*CapsuleComponent = CreateDefaultSubobject<UCapsuleComponent>(TEXT("CapsuleComponent"));
 	CapsuleComponent->SetEnableGravity(true);
 	CapsuleComponent->SetSimulatePhysics(true);
 
-	RootComponent = CapsuleComponent;
+	RootComponent = CapsuleComponent;*/
 	
-	//RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("CapsuleComponent"));
+	RootComponent = SceneComponent = CreateDefaultSubobject<USceneComponent>(TEXT("SceneComponent"));
 
 	SoldierMovement = CreateDefaultSubobject<USoldierPawnMovement>(TEXT("SoldierMovement"));
 	SoldierMovement->SetUpdatedComponent(RootComponent);
@@ -31,7 +32,7 @@ ASoldierPawn::ASoldierPawn():
 	MeshComponent->VisibilityBasedAnimTickOption = EVisibilityBasedAnimTickOption::AlwaysTickPose;
 	MeshComponent->PrimaryComponentTick.TickGroup = TG_PrePhysics;
 	//MeshComponent->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
-	MeshComponent->SetupAttachment(CapsuleComponent);
+	MeshComponent->SetupAttachment(RootComponent);
 }
 void ASoldierPawn::On_Init()
 {
@@ -123,6 +124,14 @@ ASoldierPawn * ASoldierPawn::GetBestEnemy(const TArray<AActor *> & SeachList)
 
 	return nullptr;
 }
+void ASoldierPawn::SetGenericTeamId(const FGenericTeamId& NewTeamID)
+{
+	if (TeamID != NewTeamID)
+	{
+		TeamID = NewTeamID;
+	}
+}
+
 //
 //FVector ASoldierPawn::Seek(FVector TargetLocation)
 //{

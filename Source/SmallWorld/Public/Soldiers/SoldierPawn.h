@@ -8,6 +8,7 @@
 #include "Components/CapsuleComponent.h"
 #include "Perception/AISenseConfig.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "GenericTeamAgentInterface.h"
 
 #include "Projectile.h"
 #include "EnableAttackPawn.h"
@@ -69,7 +70,7 @@ enum SoldierType
 };
 
 UCLASS()
-class ASoldierPawn : public AGamePawn, public EnableAttackPawn<ASoldierPawn>
+class ASoldierPawn : public AGamePawn, public EnableAttackPawn<ASoldierPawn>, public IGenericTeamAgentInterface
 {
 	GENERATED_BODY()
 public:
@@ -87,6 +88,7 @@ public:
 	virtual void	AttackEnemy() override;
 	virtual bool	CanAttack()override;
 	virtual void	HandleAttack() override;
+	
 
 	void			SetGroupAndIndex(SoldierGroup * _group,int _index);
 	
@@ -127,7 +129,8 @@ protected:
 		USkeletalMeshComponent *	MeshComponent;
 	UPROPERTY(VisibleDefaultsOnly)
 		UCapsuleComponent *			CapsuleComponent;
-	
+	UPROPERTY(VisibleDefaultsOnly)
+		USceneComponent *			SceneComponent;
 
 	SoldierAnimState		mSoldierAnimState;
 	SoldierState			mSoldierState;
@@ -135,6 +138,12 @@ protected:
 	int32					mBehaviorType;
 	int32					mIndexInGroup;
 	SoldierGroup *			mGroup;
+
+private:
+	FGenericTeamId TeamID;
+public:
+	virtual void SetGenericTeamId(const FGenericTeamId& NewTeamID) override;
+	virtual FGenericTeamId GetGenericTeamId() const override { return TeamID; }
 
 private:
 	float					LastAttackTime;

@@ -266,9 +266,14 @@ void AUserPawn::SpawnSoldier()
 
 	FVector RedLocation = Points[0]->GetActorLocation();
 	FVector BlueLocation = Points[1]->GetActorLocation();
+	
+	RedLocation.Z = 0.f;
+	BlueLocation.Z = 0.f;
 
 	FTransform  RedTran(RedLocation);
 	FTransform  BlueTran(BlueLocation);
+
+	static int TeamIndex = 1;
 
 
 	while(RedIndex < 1/*KnightGroupMaxNum*/)
@@ -279,6 +284,8 @@ void AUserPawn::SpawnSoldier()
 		ASoldierPawn * RedSoldierPawn = Cast<ASoldierPawn>(UGameplayStatics::BeginDeferredActorSpawnFromClass(this, soldierClass, RedTran, ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn));
 		if (RedSoldierPawn)
 		{
+			RedSoldierPawn->SetGenericTeamId(FGenericTeamId(TeamIndex++));
+
 			RedGroupManager->PushSoldierToGroup(RedSoldierPawn);
 
 			UGameplayStatics::FinishSpawningActor(RedSoldierPawn, RedTran);
@@ -286,14 +293,16 @@ void AUserPawn::SpawnSoldier()
 		ASoldierPawn * BlueSoldierPawn = Cast<ASoldierPawn>(UGameplayStatics::BeginDeferredActorSpawnFromClass(this, soldierClass, RedTran, ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn));
 		if (BlueSoldierPawn)
 		{
+			BlueSoldierPawn->SetGenericTeamId(FGenericTeamId(TeamIndex++));
+
 			BlueGroupManager->PushSoldierToGroup(BlueSoldierPawn);
 
 			UGameplayStatics::FinishSpawningActor(BlueSoldierPawn, BlueTran);
 		}
 		RedSoldierPawn->SetEnemy(BlueSoldierPawn);
 		BlueSoldierPawn->SetEnemy(RedSoldierPawn);
-		/*Cast<AAIController>(RedSoldierPawn->GetController())->MoveToActor(BlueSoldierPawn);
-		Cast<AAIController>(BlueSoldierPawn->GetController())->MoveToActor(RedSoldierPawn);*/
+		Cast<AAIController>(RedSoldierPawn->GetController())->MoveToActor(BlueSoldierPawn);
+		Cast<AAIController>(BlueSoldierPawn->GetController())->MoveToActor(RedSoldierPawn);
 		return;
 	}
 	GetWorld()->GetTimerManager().ClearTimer(hendle);

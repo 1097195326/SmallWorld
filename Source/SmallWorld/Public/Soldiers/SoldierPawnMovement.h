@@ -12,6 +12,7 @@ public:
 		~USoldierPawnMovement();*/
 	virtual void BeginPlay() override;
 	//virtual void ApplyControlInputToVelocity(float DeltaTime) override;
+	virtual void UpdateComponentVelocity() override ;
 
 protected:
 	/*void			AddSteeringForce(FVector Force);

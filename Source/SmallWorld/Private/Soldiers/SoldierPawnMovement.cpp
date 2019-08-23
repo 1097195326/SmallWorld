@@ -42,7 +42,11 @@ void USoldierPawnMovement::BeginPlay()
 //		
 //	}
 //}
-
+void USoldierPawnMovement::UpdateComponentVelocity()
+{
+	//Velocity.Z = 0.f;
+	//Super::UpdateComponentVelocity();
+}
 //
 //void USoldierPawnMovement::AddSteeringForce(FVector Force)
 //{

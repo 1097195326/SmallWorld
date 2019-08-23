@@ -11,13 +11,14 @@ ASoldierPawnController::ASoldierPawnController(const FObjectInitializer& ObjectI
 	
 	PerceptionComponent = CreateDefaultSubobject<UAIPerceptionComponent>("PerceptionComponent");
 	
-
+	
 }
 void ASoldierPawnController::OnPossess(APawn* InPawn)
 {
 	Super::OnPossess(InPawn);
 
 	ASoldierPawn * SoldierPawn = Cast<ASoldierPawn>(InPawn);
+
 	for (auto senseConfig : SoldierPawn->SenseConfigs)
 	{
 		PerceptionComponent->ConfigureSense(*senseConfig);
@@ -44,7 +45,7 @@ static bool IsOpen = true;
 void  ASoldierPawnController::ActorsPerceptionUpdated(const TArray<AActor *>& UpdatedActors)
 {
 	ASoldierPawn * SoldierPawn = Cast<ASoldierPawn>(GetPawn());
-	MoveToActor(SoldierPawn->GetEnemy());
+	//MoveToActor(SoldierPawn->GetEnemy());
 
 	//if (!SoldierPawn )
 	//{
