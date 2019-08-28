@@ -43,7 +43,7 @@ void UBTService_SoldierUpdate::TickNode(UBehaviorTreeComponent& OwnerComp, uint8
 		{
 			if (SoldierPawn->IsHaveEnemy())
 			{
-				OwnerComp.GetBlackboardComponent()->SetValueAsVector(FName(TEXT("TargetLocation")), SoldierPawn->GetEnemy()->GetActorLocation());
+				OwnerComp.GetBlackboardComponent()->SetValueAsObject(FName(TEXT("EnemyActor")), SoldierPawn->GetEnemy());
 					
 			}
 		}break;

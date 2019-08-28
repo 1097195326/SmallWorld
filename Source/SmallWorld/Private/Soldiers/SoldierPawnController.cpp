@@ -27,7 +27,7 @@ void ASoldierPawnController::OnPossess(APawn* InPawn)
 	// start behavior
 	if (SoldierPawn && SoldierPawn->GetBehaviorTree())
 	{
-		//RunBehaviorTree(SoldierPawn->GetBehaviorTree());
+		RunBehaviorTree(SoldierPawn->GetBehaviorTree());
 	}
 
 }
@@ -40,31 +40,27 @@ void ASoldierPawnController::OnUnPossess()
 	}
 
 }
-static bool IsOpen = true;
 
 void  ASoldierPawnController::ActorsPerceptionUpdated(const TArray<AActor *>& UpdatedActors)
 {
 	ASoldierPawn * SoldierPawn = Cast<ASoldierPawn>(GetPawn());
-	//MoveToActor(SoldierPawn->GetEnemy());
 
-	//if (!SoldierPawn )
-	//{
-	//	return;
-	//}
-	//if (SoldierPawn->IsHaveEnemy())
-	//{
+	if (!SoldierPawn )
+	{
+		return;
+	}
+	if (SoldierPawn->IsHaveEnemy())
+	{
 
-	//}
-	//else
-	//{
-	//	//ASoldierPawn * bestEnemy = SoldierPawn->GetBestEnemy(UpdatedActors);
-	//	AActor * bestEnemy = Cast<AActor>(UpdatedActors[0]);
-	//	if (bestEnemy && IsOpen)
-	//	{
-	//		//IsOpen = false;
-	//		//SoldierPawn->SetEnemy(bestEnemy);
-	//		//MoveToActor(bestEnemy, 500.f);
-	//	}
-	//	
-	//}
+	}
+	else
+	{
+		//ASoldierPawn * bestEnemy = SoldierPawn->GetBestEnemy(UpdatedActors);
+		ASoldierPawn * bestEnemy = Cast<ASoldierPawn>(UpdatedActors[0]);
+		if (bestEnemy)
+		{
+			SoldierPawn->SetEnemy(bestEnemy);
+		}
+		
+	}
 }

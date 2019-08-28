@@ -268,7 +268,7 @@ void AUserPawn::SpawnSoldier()
 	FVector BlueLocation = Points[1]->GetActorLocation();
 	
 	RedLocation.Z = 0.f;
-	BlueLocation.Z = 0.f;
+	BlueLocation.Z = 150.f;
 
 	FTransform  RedTran(RedLocation);
 	FTransform  BlueTran(BlueLocation);
@@ -280,7 +280,7 @@ void AUserPawn::SpawnSoldier()
 	{
 		RedIndex++;
 
-		UClass * soldierClass = LoadClass<ASoldierPawn>(this, TEXT("/Game/Soldiers/Knight.Knight_C"));
+		UClass * soldierClass = LoadClass<ASoldierPawn>(this, TEXT("/Game/Soldiers/Knight_BP.Knight_BP_C"));
 		ASoldierPawn * RedSoldierPawn = Cast<ASoldierPawn>(UGameplayStatics::BeginDeferredActorSpawnFromClass(this, soldierClass, RedTran, ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn));
 		if (RedSoldierPawn)
 		{
@@ -299,10 +299,10 @@ void AUserPawn::SpawnSoldier()
 
 			UGameplayStatics::FinishSpawningActor(BlueSoldierPawn, BlueTran);
 		}
-		RedSoldierPawn->SetEnemy(BlueSoldierPawn);
+		/*RedSoldierPawn->SetEnemy(BlueSoldierPawn);
 		BlueSoldierPawn->SetEnemy(RedSoldierPawn);
 		Cast<AAIController>(RedSoldierPawn->GetController())->MoveToActor(BlueSoldierPawn);
-		Cast<AAIController>(BlueSoldierPawn->GetController())->MoveToActor(RedSoldierPawn);
+		Cast<AAIController>(BlueSoldierPawn->GetController())->MoveToActor(RedSoldierPawn);*/
 		return;
 	}
 	GetWorld()->GetTimerManager().ClearTimer(hendle);

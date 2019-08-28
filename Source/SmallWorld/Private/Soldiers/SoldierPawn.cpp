@@ -14,25 +14,23 @@ ASoldierPawn::ASoldierPawn():
 	
 	mGroup = nullptr;
 
-	/*CapsuleComponent = CreateDefaultSubobject<UCapsuleComponent>(TEXT("CapsuleComponent"));
-	CapsuleComponent->SetEnableGravity(true);
-	CapsuleComponent->SetSimulatePhysics(true);
+	//CapsuleComponent = CreateDefaultSubobject<UCapsuleComponent>(TEXT("CapsuleComponent"));
+	//
+	//RootComponent = CapsuleComponent;
+	//
+	////RootComponent = SceneComponent = CreateDefaultSubobject<USceneComponent>(TEXT("SceneComponent"));
 
-	RootComponent = CapsuleComponent;*/
-	
-	RootComponent = SceneComponent = CreateDefaultSubobject<USceneComponent>(TEXT("SceneComponent"));
+	//SoldierMovement = CreateDefaultSubobject<USoldierPawnMovement>(TEXT("SoldierMovement"));
+	//SoldierMovement->SetUpdatedComponent(RootComponent);
 
-	SoldierMovement = CreateDefaultSubobject<USoldierPawnMovement>(TEXT("SoldierMovement"));
-	SoldierMovement->SetUpdatedComponent(RootComponent);
-
-	/*CharacterMovement = CreateDefaultSubobject<UCharacterMovementComponent>(TEXT("CharacterMovement"));
-	CharacterMovement->SetUpdatedComponent(RootComponent);*/
-	
-	MeshComponent = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("MeshComponent"));
-	MeshComponent->VisibilityBasedAnimTickOption = EVisibilityBasedAnimTickOption::AlwaysTickPose;
-	MeshComponent->PrimaryComponentTick.TickGroup = TG_PrePhysics;
-	//MeshComponent->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
-	MeshComponent->SetupAttachment(RootComponent);
+	///*CharacterMovement = CreateDefaultSubobject<UCharacterMovementComponent>(TEXT("CharacterMovement"));
+	//CharacterMovement->SetUpdatedComponent(RootComponent);*/
+	//
+	//MeshComponent = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("MeshComponent"));
+	//MeshComponent->VisibilityBasedAnimTickOption = EVisibilityBasedAnimTickOption::AlwaysTickPose;
+	//MeshComponent->PrimaryComponentTick.TickGroup = TG_PrePhysics;
+	////MeshComponent->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
+	//MeshComponent->SetupAttachment(RootComponent);
 }
 void ASoldierPawn::On_Init()
 {

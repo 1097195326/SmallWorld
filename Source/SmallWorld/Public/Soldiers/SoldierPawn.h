@@ -1,13 +1,9 @@
 #pragma once
 
-#include "GamePawn.h"
-#include "SoldierPawnMovement.h"
+#include "GameCharacter.h"
 #include "Kismet/GameplayStatics.h"
 #include "BehaviorTree/BehaviorTree.h"
-#include "Components/SkeletalMeshComponent.h"
-#include "Components/CapsuleComponent.h"
 #include "Perception/AISenseConfig.h"
-#include "GameFramework/CharacterMovementComponent.h"
 #include "GenericTeamAgentInterface.h"
 
 #include "Projectile.h"
@@ -70,7 +66,7 @@ enum SoldierType
 };
 
 UCLASS()
-class ASoldierPawn : public AGamePawn, public EnableAttackPawn<ASoldierPawn>, public IGenericTeamAgentInterface
+class ASoldierPawn : public AGameCharacter, public EnableAttackPawn<ASoldierPawn>, public IGenericTeamAgentInterface
 {
 	GENERATED_BODY()
 public:
@@ -121,7 +117,7 @@ protected:
 
 	UPROPERTY(EditAnywhere)
 		UBehaviorTree *				BehaviorTree;
-	UPROPERTY(VisibleAnywhere)
+	/*UPROPERTY(VisibleAnywhere)
 		USoldierPawnMovement *		SoldierMovement;
 	UPROPERTY(VisibleAnywhere)
 		UCharacterMovementComponent *		CharacterMovement;
@@ -130,7 +126,7 @@ protected:
 	UPROPERTY(VisibleDefaultsOnly)
 		UCapsuleComponent *			CapsuleComponent;
 	UPROPERTY(VisibleDefaultsOnly)
-		USceneComponent *			SceneComponent;
+		USceneComponent *			SceneComponent;*/
 
 	SoldierAnimState		mSoldierAnimState;
 	SoldierState			mSoldierState;
