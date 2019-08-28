@@ -32,7 +32,7 @@ enum class SoldierState : uint32
 	S_Victory,
 };
 UENUM()
-enum SoldierAnimState 
+enum class SoldierAnimState : uint32
 {
 	Anim_Idle = 1,
 	Anim_Attack1,

@@ -2,18 +2,18 @@
 #include "BehaviorTree/BTTaskNode.h"
 #include "SoldierPawn.h"
 
-#include "BTTask_ChangeState.generated.h"
+#include "BTTask_ChangeAnimState.generated.h"
 
 UCLASS()
-class UBTTask_ChangeState : public UBTTaskNode
+class UBTTask_ChangeAnimState : public UBTTaskNode
 {
 	GENERATED_BODY()
 
 public:
-	UBTTask_ChangeState();
+	UBTTask_ChangeAnimState();
 
 	virtual EBTNodeResult::Type ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory) override;
 
 	UPROPERTY(EditAnywhere)
-		SoldierState  mToState;
+		SoldierAnimState  ToAnimState;
 };

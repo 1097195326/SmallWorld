@@ -36,7 +36,7 @@ void UBTService_SoldierUpdate::TickNode(UBehaviorTreeComponent& OwnerComp, uint8
 		case	SoldierState::S_Idle:
 		{
 			
-			SoldierPawn->SetSoldierAnimState(Anim_Idle);
+			
 			
 		}break;
 		case	SoldierState::S_FightSelf:
@@ -66,7 +66,6 @@ void UBTService_SoldierUpdate::TickNode(UBehaviorTreeComponent& OwnerComp, uint8
 				const FVector targetLocation = OwnerComp.GetBlackboardComponent()->GetValueAsVector(FName(TEXT("TargetLocation")));
 				if (targetLocation != location /*|| preSoldierState != SoldierState::S_MoveToGroup*/)
 				{
-					SoldierPawn->SetSoldierAnimState(Anim_Walk);
 					OwnerComp.GetBlackboardComponent()->SetValueAsVector(FName(TEXT("TargetLocation")), location);
 				}
 				else

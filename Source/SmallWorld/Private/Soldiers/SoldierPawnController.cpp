@@ -60,6 +60,7 @@ void  ASoldierPawnController::ActorsPerceptionUpdated(const TArray<AActor *>& Up
 		if (bestEnemy)
 		{
 			SoldierPawn->SetEnemy(bestEnemy);
+			SoldierPawn->ChangeSoldierState(SoldierState::S_FightSelf);
 		}
 		
 	}

@@ -79,8 +79,7 @@ void ASoldierPawn::AttackEnemy()
 {
 	if (CanAttack())
 	{
-		mSoldierAnimState = Anim_Attack1;
-
+		
 		FTimerHandle attackHandle;
 		GetWorld()->GetTimerManager().SetTimer(attackHandle, this, &ASoldierPawn::HandleAttack, CurrentWeapon->GetAttackPonit(),false);
 		LastAttackTime = GetWorld()->TimeSeconds;

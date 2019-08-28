@@ -21,8 +21,6 @@ EBTNodeResult::Type UBTTask_AttackEnemy::ExecuteTask(UBehaviorTreeComponent& Own
 	}
 	
 
-	SoldierPawn->SetSoldierAnimState(Anim_Attack1);
-
 	FTimerHandle AttackHandle;
 	FTimerHandle AttackPointHandle;
 
@@ -51,7 +49,7 @@ void UBTTask_AttackEnemy::AttackFunc()
 {
 	if (SoldierPawn->IsAlive())
 	{
-		SoldierPawn->SetSoldierAnimState(Anim_Idle);
+		
 	}
 	IsActive = false;
 }
