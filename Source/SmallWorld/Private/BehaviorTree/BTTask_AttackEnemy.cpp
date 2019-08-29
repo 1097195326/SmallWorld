@@ -26,6 +26,8 @@ EBTNodeResult::Type UBTTask_AttackEnemy::ExecuteTask(UBehaviorTreeComponent& Own
 	GetWorld()->GetTimerManager().SetTimer(AttackHandle, this, &UBTTask_AttackEnemy::AttackFunc, SoldierPawn->GetCurrentWeapon()->GetAttackInterval());
 	GetWorld()->GetTimerManager().SetTimer(AttackPointHandle, this, &UBTTask_AttackEnemy::AttackPointFunc, SoldierPawn->GetCurrentWeapon()->GetAttackPonit());
 	
+	SoldierPawn->SetSoldierAnimState(SoldierAnimState::Anim_Attack1);
+
 	return EBTNodeResult::InProgress;
 }
 void UBTTask_AttackEnemy::TickTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, float DeltaSeconds)
@@ -40,8 +42,9 @@ void UBTTask_AttackEnemy::OnTaskFinished(UBehaviorTreeComponent& OwnerComp, uint
 {
 	if (SoldierPawn)
 	{
-
+		SoldierPawn->SetSoldierAnimState(SoldierAnimState::Anim_Idle);
 	}
+
 }
 void UBTTask_AttackEnemy::AttackFunc()
 {

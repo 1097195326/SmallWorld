@@ -10,19 +10,21 @@ EBTNodeResult::Type UBTTask_MoveToEnemy::ExecuteTask(UBehaviorTreeComponent& Own
 	{
 		return EBTNodeResult::Failed;
 	}
-	FVector Location = SoldierPawn->GetEnemy()->GetActorLocation();
-	return EBTNodeResult::Succeeded;
-
-	if (EPathFollowingRequestResult::RequestSuccessful == SoldierController->MoveToActor(SoldierPawn->GetEnemy(), 5000.f))
-	//if (EPathFollowingRequestResult::AlreadyAtGoal == SoldierController->MoveToLocation(Location, 100.f))
+	EBTNodeResult::Type ReturnResult = Super::ExecuteTask(OwnerComp, NodeMemory);
+	if (ReturnResult == EBTNodeResult::InProgress)
 	{
-		return EBTNodeResult::InProgress;
-
+		SoldierPawn->SetSoldierAnimState(SoldierAnimState::Anim_Run);
 	}
-	return EBTNodeResult::Succeeded;
+
+	return ReturnResult;
 }
-void UBTTask_MoveToEnemy::TickTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, float DeltaSeconds)
+void UBTTask_MoveToEnemy::OnTaskFinished(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, EBTNodeResult::Type TaskResult)
 {
-
-
+	ASoldierPawnController * SoldierController = Cast<ASoldierPawnController>(OwnerComp.GetAIOwner());
+	ASoldierPawn * SoldierPawn = Cast<ASoldierPawn>(SoldierController->GetPawn());
+	if (SoldierPawn)
+	{
+		SoldierPawn->SetSoldierAnimState(SoldierAnimState::Anim_Idle);
+	}
+	Super::OnTaskFinished(OwnerComp, NodeMemory, TaskResult);
 }
