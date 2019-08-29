@@ -6,9 +6,8 @@
 
 UBTTask_AttackEnemy::UBTTask_AttackEnemy()
 {
-	
 	SoldierPawn = nullptr;
-
+	IsCallBack = false;
 }
 EBTNodeResult::Type UBTTask_AttackEnemy::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
 {
@@ -23,19 +22,18 @@ EBTNodeResult::Type UBTTask_AttackEnemy::ExecuteTask(UBehaviorTreeComponent& Own
 
 	FTimerHandle AttackHandle;
 	FTimerHandle AttackPointHandle;
-
+	IsCallBack = false;
 	GetWorld()->GetTimerManager().SetTimer(AttackHandle, this, &UBTTask_AttackEnemy::AttackFunc, SoldierPawn->GetCurrentWeapon()->GetAttackInterval());
 	GetWorld()->GetTimerManager().SetTimer(AttackPointHandle, this, &UBTTask_AttackEnemy::AttackPointFunc, SoldierPawn->GetCurrentWeapon()->GetAttackPonit());
 	
-	return EBTNodeResult::Succeeded;
+	return EBTNodeResult::InProgress;
 }
 void UBTTask_AttackEnemy::TickTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, float DeltaSeconds)
 {
-
-}
-void UBTTask_AttackEnemy::OnMessage(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, FName Message, int32 RequestID, bool bSuccess)
-{
-	Super::OnMessage(OwnerComp, NodeMemory, Message, RequestID, bSuccess);
+	if (IsCallBack)
+	{
+		FinishLatentTask(OwnerComp, EBTNodeResult::Succeeded);
+	}
 
 }
 void UBTTask_AttackEnemy::OnTaskFinished(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, EBTNodeResult::Type TaskResult)
@@ -51,7 +49,8 @@ void UBTTask_AttackEnemy::AttackFunc()
 	{
 		
 	}
-	IsActive = false;
+
+	IsCallBack = true;
 }
 void UBTTask_AttackEnemy::AttackPointFunc()
 {

@@ -15,5 +15,5 @@ public:
 	virtual EBTNodeResult::Type ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory) override;
 
 	UPROPERTY(EditAnywhere)
-		SoldierAnimState  ToAnimState;
+		TEnumAsByte<SoldierAnimState>  ToAnimState;
 };
