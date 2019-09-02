@@ -77,18 +77,13 @@ bool ASoldierPawn::CanAttack()
 }
 void ASoldierPawn::AttackEnemy()
 {
-	if (CanAttack())
-	{
-		
-		FTimerHandle attackHandle;
-		GetWorld()->GetTimerManager().SetTimer(attackHandle, this, &ASoldierPawn::HandleAttack, CurrentWeapon->GetAttackPonit(),false);
-		LastAttackTime = GetWorld()->TimeSeconds;
+	CurrentWeapon->AttackEnemy();
 
-	}
 }
 void ASoldierPawn::HandleAttack()
 {
-	CurrentWeapon->AttackEnemy();
+	//CurrentWeapon->AttackEnemy();
+
 }
 void ASoldierPawn::SetGroupAndIndex(SoldierGroup * _group,int _index)
 {

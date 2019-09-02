@@ -16,6 +16,15 @@ AProjectile::AProjectile()
 	MoveComponent = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("MoveComponent"));
 	MoveComponent->SetUpdatedComponent(RootComponent);
 }
+void AProjectile::PostInitializeComponents()
+{
+	AActor::PostInitializeComponents();
+
+	ProHorizontalSpeed = ProjectileInfo.HorizontalSpeed;
+	ProDamage = ProjectileInfo.Damage;
+	ProRange = ProjectileInfo.Range;
+
+}
 void AProjectile::SetVelocity(const FVector & velocity)
 {
 	MoveComponent->Velocity = velocity;

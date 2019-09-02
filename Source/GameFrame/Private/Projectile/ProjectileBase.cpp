@@ -1,7 +1,9 @@
 #include "ProjectileBase.h"
 
 ProjectileBase::ProjectileBase():
-	HorizontalSpeed(0.f)
+	ProHorizontalSpeed(0.f),
+	ProDamage(0.f),
+	ProRange(0.f)
 {
 
 }

@@ -24,7 +24,9 @@ void USoldierProjectileWeapon::AttackEnemy()
 	if (Owner && Owner->IsValidLowLevel() && Owner->IsAlive() && Owner->GetEnemy() && Owner->GetEnemy()->IsValidLowLevel() && Owner->GetEnemy()->IsAlive())
 	{
 		FVector FireLocation = Owner->GetSpawnProjectileLoction();
-		FVector TargetLocation = Owner->GetEnemy()->GetActorLocation() + FVector(0,0,80);
+		FVector TargetLocation = Owner->GetEnemy()->GetActorLocation();
+		FireLocation.Z = Owner->BaseEyeHeight;
+		TargetLocation.Z = Owner->GetEnemy()->BaseEyeHeight;
 
 		FTransform transform(FireLocation);
 

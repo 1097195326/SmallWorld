@@ -10,6 +10,19 @@
 #define  ProjectileObject ECC_GameTraceChannel1
 #define  ProjectileChannel ECC_GameTraceChannel2
 
+USTRUCT()
+struct FProjectileInfo
+{
+	GENERATED_BODY();
+
+	UPROPERTY(EditDefaultsOnly)
+		float		HorizontalSpeed;
+	UPROPERTY(EditDefaultsOnly)
+		float		Damage;
+	UPROPERTY(EditDefaultsOnly)
+		float		Range;
+
+};
 
 UCLASS()
 class AProjectile : public AActor, public ProjectileBase
@@ -19,13 +32,19 @@ class AProjectile : public AActor, public ProjectileBase
 public:
 	AProjectile();
 
+	virtual void	PostInitializeComponents() override;
+	virtual float	GetHorizontalSpeed() override { return ProjectileInfo.HorizontalSpeed; }
+
+	void			SetVelocity(const FVector & velocity);
+
 	UPROPERTY(VisibleDefaultsOnly)
 		USphereComponent * CollisionComponent;
 	UPROPERTY(VisibleDefaultsOnly)
 		UProjectileMovementComponent * MoveComponent;
 	UPROPERTY(VisibleDefaultsOnly)
 		UStaticMeshComponent * MeshComponent;
-
-	void SetVelocity(const FVector & velocity);
-
+	
+	UPROPERTY(EditDefaultsOnly , Category = Projectile)
+		FProjectileInfo			ProjectileInfo;
+	
 };
