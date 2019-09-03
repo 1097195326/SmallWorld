@@ -10,6 +10,8 @@ EBTNodeResult::Type UBTTask_MoveToEnemy::ExecuteTask(UBehaviorTreeComponent& Own
 	{
 		return EBTNodeResult::Failed;
 	}
+	AcceptableRadius = SoldierPawn->GetCurrentWeapon()->GetAttackRange();
+
 	EBTNodeResult::Type ReturnResult = Super::ExecuteTask(OwnerComp, NodeMemory);
 	if (ReturnResult == EBTNodeResult::InProgress)
 	{
