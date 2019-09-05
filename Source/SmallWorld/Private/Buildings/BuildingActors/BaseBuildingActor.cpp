@@ -8,6 +8,7 @@ ABaseBuildingActor::ABaseBuildingActor()
 	
 	mData = nullptr;
     
+	InteractivePointName = TEXT("InteractivePoint");
 }
 void ABaseBuildingActor::PostInitializeComponents()
 {
@@ -66,6 +67,17 @@ void ABaseBuildingActor::SetLevel(int _level)
 int ABaseBuildingActor::GetLevel()
 {
 	return mData->mLevel;
+}
+FVector ABaseBuildingActor::GetInteractivePoint()
+{
+	if (BaseSkeletalMeshComponent && BaseSkeletalMeshComponent->DoesSocketExist(FName(*InteractivePointName)))
+	{
+		return BaseSkeletalMeshComponent->GetSocketLocation(FName(*InteractivePointName));
+	}else if (BaseMeshComponent && BaseMeshComponent->DoesSocketExist(FName(*InteractivePointName)))
+	{
+		return BaseMeshComponent->GetSocketLocation(FName(*InteractivePointName));
+	}
+	return GetActorLocation();
 }
 FString ABaseBuildingActor::GetMeshPath()
 {

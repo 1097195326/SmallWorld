@@ -55,7 +55,7 @@ void UBTService_SoldierUpdate::TickNode(UBehaviorTreeComponent& OwnerComp, uint8
 		{
 
 		}break;
-		case	SoldierState::S_MoveToCity:
+		case	SoldierState::S_MoveToHome:
 		{
 
 		}break;

@@ -23,7 +23,7 @@ enum class SoldierState : uint32
 	S_FightSelf,
 	S_FormationDefense,
 	S_FormationFight,
-	S_MoveToCity,
+	S_MoveToHome,
 	S_MoveToGroup,
 	S_ReadyInGroup,
 	S_Dieing,
@@ -65,6 +65,7 @@ enum SoldierType
 	S_Knight,
 	S_Mage,
 	S_SiegeEngine,
+	S_Peasant,
 };
 
 UCLASS()
@@ -113,22 +114,16 @@ public:
 		TArray<UAISenseConfig*>		SenseConfigs;
 
 protected:
+	FTimerHandle			DeathTimerHandle;
+	void					PendingDestory();
 	
+	UFUNCTION(BlueprintCallable)
+		void				DeathCallBack();
 
 	void					HaveMoveToGroup();
 
 	UPROPERTY(EditAnywhere)
 		UBehaviorTree *				BehaviorTree;
-	/*UPROPERTY(VisibleAnywhere)
-		USoldierPawnMovement *		SoldierMovement;
-	UPROPERTY(VisibleAnywhere)
-		UCharacterMovementComponent *		CharacterMovement;
-	UPROPERTY(VisibleDefaultsOnly)
-		USkeletalMeshComponent *	MeshComponent;
-	UPROPERTY(VisibleDefaultsOnly)
-		UCapsuleComponent *			CapsuleComponent;
-	UPROPERTY(VisibleDefaultsOnly)
-		USceneComponent *			SceneComponent;*/
 
 	SoldierAnimState		mSoldierAnimState;
 	SoldierState			mSoldierState;

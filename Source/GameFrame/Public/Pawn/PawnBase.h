@@ -11,7 +11,7 @@ public:
 	virtual float		CalculateDamage(const float & damage);
 
 	bool				IsAlive();
-	void				SetHealth(float health);
+	void				SetHealth(float && health);
 	inline float		GetHealth() { return Health; };
 
 	inline void			SetFieldOfView(float temFieldOfView) { FieldOfView = std::move(temFieldOfView); }

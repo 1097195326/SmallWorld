@@ -60,10 +60,34 @@ float ASoldierPawn::TakeDamage(float Damage, struct FDamageEvent const& DamageEv
 		float damage = Super::TakeDamage(Damage, DamageEvent, EventInstigator, DamageCauser);
 
 		SetHealth(Health - damage);
-
+		if (!IsAlive())
+		{
+			ASoldierPawnController * MyController = Cast<ASoldierPawnController>(Controller);
+			if (MyController)
+			{
+				UBehaviorTreeComponent * BehaviorTreeCom = Cast<UBehaviorTreeComponent>(MyController->GetBrainComponent());
+				if (BehaviorTreeCom)
+				{
+					BehaviorTreeCom->StopTree();
+				}
+				MyController->StopMovement();
+			}
+			mSoldierState = SoldierState::S_Dieing;
+			mSoldierAnimState = Anim_Death;
+			Health = 0.f;
+		}
 		return damage;
 	}
 	return 0.f;
+}
+void ASoldierPawn::DeathCallBack()
+{
+	mSoldierState = SoldierState::S_Died;
+	GetWorld()->GetTimerManager().SetTimer(DeathTimerHandle, this, &ASoldierPawn::PendingDestory, 5.f, false);
+}
+void ASoldierPawn::PendingDestory()
+{
+	BeginDestroy();
 }
 bool ASoldierPawn::CanAttack()
 {

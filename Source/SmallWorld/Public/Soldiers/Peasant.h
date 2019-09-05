@@ -10,5 +10,6 @@ class APeasant : public ASoldierPawn
 	GENERATED_BODY()
 
 public:
+	APeasant();
 
 };

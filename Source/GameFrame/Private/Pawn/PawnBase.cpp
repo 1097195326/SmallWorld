@@ -23,12 +23,8 @@ float PawnBase::CalculateDamage(const float & damage)
 {
 	return damage;
 }
-void PawnBase::SetHealth(float health)
+void PawnBase::SetHealth(float && health)
 {
 	Health = std::move(health);
 
-	if (!IsAlive())
-	{
-		Health = 0.0;
-	}
 }

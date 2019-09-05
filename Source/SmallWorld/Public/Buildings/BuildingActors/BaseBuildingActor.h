@@ -64,6 +64,8 @@ public:
     virtual void InitData(BaseBuildingData * _data);
     virtual void SaveData(TSharedRef<TJsonWriter<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>> Writer);
     
+	FVector				GetInteractivePoint();
+
 	BuildingType        GetBuildingType();
     BlockTitleType      GetBlockTileType();
     
@@ -90,6 +92,7 @@ public:
     UPROPERTY(VisibleDefaultsOnly, Category = BaseBuilding)
     USkeletalMeshComponent * BaseSkeletalMeshComponent;
 
-    
+	UPROPERTY(EditDefaultsOnly)
+		FString		InteractivePointName;
     
 };
