@@ -15,7 +15,7 @@ public class UnrealEngineWrap : ModuleRules
                 "Slate",
                 "SlateCore",
                 "UMG",
-                "GCore",
+                "GameFrame",
 
             });
 

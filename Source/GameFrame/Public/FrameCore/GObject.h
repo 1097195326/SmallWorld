@@ -8,18 +8,14 @@
 
 #pragma once
 
-#include "CoreMinimal.h"
-#include "ClassReflect.h"
-#include <utility>
+#include "BaseObject.h"
 
-class GCORE_API GObject
+class GAMEFRAME_API GObject : public BaseObject
 {
 private:
-	FGuid	m_ID;
+	
 public:
-    GObject();
-    virtual ~GObject();
-
+    
 	virtual void On_Init();
 	virtual void On_Start();
 	virtual void On_Tick(float delta);
@@ -28,7 +24,6 @@ public:
 	virtual void On_Delete();
 public:
 
-    FGuid GetID();
     
 };
 

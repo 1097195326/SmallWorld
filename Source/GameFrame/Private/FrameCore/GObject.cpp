@@ -8,22 +8,10 @@
 ////#include "GCore.h"
 #include "GObject.h"
 
-GObject::GObject()
-{
-	FPlatformMisc::CreateGuid(m_ID);
 
-}
-GObject::~GObject()
-{
-	On_Delete();
-}
 void GObject::On_Init(){}
 void GObject::On_Start(){}
 void GObject::On_Tick(float delta){}
 void GObject::On_GameUpdate(){}
 void GObject::On_End(){}
 void GObject::On_Delete(){}
-FGuid GObject::GetID()
-{
-    return m_ID;
-}

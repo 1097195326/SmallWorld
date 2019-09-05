@@ -3,7 +3,7 @@
 #include "GData.h"
 
 
-class GCORE_API DataT : public GData
+class GAMEFRAME_API DataT : public GData
 {
 protected:
 	int		m_Tid;

@@ -5,7 +5,7 @@
 #include "Json.h"
 #include "XmlParser.h"
 
-class GCORE_API GData : public GObject
+class GAMEFRAME_API GData : public GObject
 {
 
 public :

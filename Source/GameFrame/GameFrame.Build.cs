@@ -11,6 +11,16 @@ public class GameFrame : ModuleRules
                 "Core",
                 "CoreUObject",
                 "Engine",
+                "Slate",
+                "SlateCore",
+                "UMG",
+                "InputCore",
+                "JsonUtilities",
+                "Json",
+                "HTTP",
+                "Networking",
+                "XmlParser",
+                "GCore",
             });
 
         PrivateDependencyModuleNames.AddRange(

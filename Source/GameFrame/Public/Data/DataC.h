@@ -1,7 +1,7 @@
 #pragma once
 #include "GData.h"
 
-class GCORE_API DataC : public GData
+class GAMEFRAME_API DataC : public GData
 {
 protected:
 	int		m_Tid;

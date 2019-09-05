@@ -3,16 +3,18 @@
 #include "GObject.h"
 #include "UIController.h"
 
-class GameModule : public GObject
+class GAMEFRAME_API GameModule : public GObject
 {
 private:
 
 protected:
-	//list<UIController*>		m_UIControllers;
+
 	UIController * m_CurrentUIController;
+
+	void SetUIController(UIController * _uiController);
+
 public:
 	
-	void SetUIController(UIController * _uiController);
 
 	UIController * GetCurrentUIController();
 };
