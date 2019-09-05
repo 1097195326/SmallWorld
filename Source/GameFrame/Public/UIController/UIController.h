@@ -1,8 +1,8 @@
 #pragma once
-#include "GObject.h"
+#include "BaseObject.h"
 
 
-class GAMEFRAME_API UIController : public GObject
+class GAMEFRAME_API UIController : public BaseObject
 {
 protected:
 	

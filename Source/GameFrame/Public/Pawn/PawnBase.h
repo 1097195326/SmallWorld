@@ -1,12 +1,11 @@
 #pragma once
-#include <utility>
+#include "BaseObject.h"
 
 
-class GAMEFRAME_API PawnBase
+class GAMEFRAME_API PawnBase : public BaseObject
 {
 public:
 	PawnBase();
-	virtual ~PawnBase();
 
 	virtual float		CalculateDamage(const float & damage);
 

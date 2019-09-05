@@ -1,11 +1,11 @@
 #pragma once
 
 
-#include "GObject.h"
+#include "BaseObject.h"
 #include "Json.h"
 #include "XmlParser.h"
 
-class GAMEFRAME_API GData : public GObject
+class GAMEFRAME_API GData : public BaseObject
 {
 
 public :

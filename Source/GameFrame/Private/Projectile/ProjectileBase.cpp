@@ -7,7 +7,3 @@ ProjectileBase::ProjectileBase():
 {
 
 }
-ProjectileBase::~ProjectileBase()
-{
-
-}

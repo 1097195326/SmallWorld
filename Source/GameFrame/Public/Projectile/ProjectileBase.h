@@ -1,11 +1,11 @@
 #pragma once
-#include <utility>
+#include "BaseObject.h"
 
-class GAMEFRAME_API ProjectileBase
+
+class GAMEFRAME_API ProjectileBase : public BaseObject
 {
 public:
 	ProjectileBase();
-	virtual ~ProjectileBase();
 
 	inline void			SetHorizontalSpeed(float && temSpeed) { ProHorizontalSpeed = std::move(temSpeed); }
 	virtual float				GetHorizontalSpeed() { return ProHorizontalSpeed; }

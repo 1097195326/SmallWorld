@@ -1,9 +1,9 @@
 #pragma once
 
-#include "GObject.h"
+#include "BaseObject.h"
 #include "UIController.h"
 
-class GAMEFRAME_API GameModule : public GObject
+class GAMEFRAME_API GameModule : public BaseObject
 {
 private:
 
