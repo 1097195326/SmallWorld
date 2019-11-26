@@ -65,5 +65,8 @@ private:
 		virtual void TurnAtRate(float Rate);
 	UFUNCTION(BlueprintCallable, Category = "Pawn")
 		virtual void LookUpAtRate(float Rate);
+
+	void LeftMouseButtonOnPressed();
+	void RightMouseButtonOnReleased();
 };
 

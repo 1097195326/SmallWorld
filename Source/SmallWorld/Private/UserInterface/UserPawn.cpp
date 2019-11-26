@@ -2,7 +2,8 @@
 #include "UserController.h"
 #include "Kismet/GameplayStatics.h"
 #include "GameFramework/PlayerInput.h"
-
+#include "Landscape.h"
+#include "Landscape/Public/LandscapeEdit.h"
 // test exec
 #include "SoldierPawnController.h"
 #include "SoldierPawn.h"
@@ -13,6 +14,7 @@
 #include "Engine/TargetPoint.h"
 #include "Projectile.h"
 #include "SoldierGroupManager.h"
+
 // test soldier
 #include "Archer.h"
 #include "Footman.h"
@@ -108,6 +110,11 @@ void InitializeDefaultPawnInputBindings()
 
 		UPlayerInput::AddEngineDefinedAxisMapping(FInputAxisKeyMapping("DefaultPawn_LookUpRate", EKeys::Gamepad_RightY, 1.f));
 		UPlayerInput::AddEngineDefinedAxisMapping(FInputAxisKeyMapping("DefaultPawn_LookUp", EKeys::MouseY, -1.f));
+
+		UPlayerInput::AddEngineDefinedActionMapping(FInputActionKeyMapping("LeftMouse",EKeys::LeftMouseButton));
+		UPlayerInput::AddEngineDefinedActionMapping(FInputActionKeyMapping("RightMouse",EKeys::RightMouseButton));
+
+		UPlayerInput::AddEngineDefinedActionMapping(FInputActionKeyMapping("Touch1", EKeys::TouchKeys[0]));
 }
 }
 
@@ -117,14 +124,40 @@ void AUserPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 		InitializeDefaultPawnInputBindings();
 
-		PlayerInputComponent->BindAxis("DefaultPawn_MoveForward", this, &AUserPawn::MoveForward);
-		PlayerInputComponent->BindAxis("DefaultPawn_MoveRight", this, &AUserPawn::MoveRight);
-		PlayerInputComponent->BindAxis("DefaultPawn_MoveUp", this, &AUserPawn::MoveUp_World);
-		PlayerInputComponent->BindAxis("DefaultPawn_Turn", this, &AUserPawn::AddControllerYawInput);
-		PlayerInputComponent->BindAxis("DefaultPawn_TurnRate", this, &AUserPawn::TurnAtRate);
-		PlayerInputComponent->BindAxis("DefaultPawn_LookUp", this, &AUserPawn::AddControllerPitchInput);
-		PlayerInputComponent->BindAxis("DefaultPawn_LookUpRate", this, &AUserPawn::LookUpAtRate);
-	
+	PlayerInputComponent->BindAxis("DefaultPawn_MoveForward", this, &AUserPawn::MoveForward);
+	PlayerInputComponent->BindAxis("DefaultPawn_MoveRight", this, &AUserPawn::MoveRight);
+	PlayerInputComponent->BindAxis("DefaultPawn_MoveUp", this, &AUserPawn::MoveUp_World);
+	PlayerInputComponent->BindAxis("DefaultPawn_Turn", this, &AUserPawn::AddControllerYawInput);
+	PlayerInputComponent->BindAxis("DefaultPawn_TurnRate", this, &AUserPawn::TurnAtRate);
+	PlayerInputComponent->BindAxis("DefaultPawn_LookUp", this, &AUserPawn::AddControllerPitchInput);
+	PlayerInputComponent->BindAxis("DefaultPawn_LookUpRate", this, &AUserPawn::LookUpAtRate);
+	PlayerInputComponent->BindAction("LeftMouse", IE_Pressed, this, &AUserPawn::LeftMouseButtonOnPressed);
+	PlayerInputComponent->BindAction("RightMouse", IE_Released, this, &AUserPawn::RightMouseButtonOnReleased);
+
+
+}
+void AUserPawn::LeftMouseButtonOnPressed()
+{
+	APlayerController * PlayerController = Cast<APlayerController>(Controller);
+	if (PlayerController)
+	{
+		FHitResult HitResult;
+		PlayerController->GetHitResultUnderCursorByChannel(UEngineTypes::ConvertToTraceType(ECC_WorldStatic), false, HitResult);
+		ALandscape * Landscape = Cast<ALandscape>(HitResult.GetActor());
+		if (Landscape)
+		{
+			
+			ULandscapeInfo * LandscapeInfo = Landscape->CreateLandscapeInfo();
+			//LandscapeInfo = Landscape->GetLandscapeInfo();
+
+			ULandscapeLayerInfoObject * LayerInfo = LandscapeInfo->GetLayerInfoByName("auto");
+			LayerInfo->IsReferencedFromLoadedData;
+		}
+	}
+}
+void AUserPawn::RightMouseButtonOnReleased()
+{
+
 }
 float BaseTurnRate = 45.f;
 float BaseLookUpRate = 45.f;

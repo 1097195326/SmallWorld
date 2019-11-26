@@ -22,7 +22,8 @@ public class SmallWorld : ModuleRules
             "SlateUI",
             "UnrealEngineWrap",
             "GameFrame",
-            
+            "Landscape",
+            "Foliage",
         });
 
         //PrivateDependencyModuleNames.AddRange(new string[] {  });
