@@ -2,14 +2,14 @@
 
 
 
-void FLandscapeToolStrokePaint::Apply(FLandscapeBrush* Brush, const TArray<FLandscapeToolInteractorPosition>& InteractorPositions)
+void FCLandscapeToolStrokePaint::Apply(FCLandscapeBrush* Brush, const TArray<FCLandscapeToolInteractorPosition>& InteractorPositions)
 {
 	// Invert when holding Shift
 	//UE_LOG(LogLandscape, Log, TEXT("bInvert = %d"), bInvert);
 	bool bInvert = InteractorPositions.Last().bModifierPressed;
 
 	// Get list of verts to update
-	FLandscapeBrushData BrushInfo = Brush->ApplyBrush(InteractorPositions);
+	FCLandscapeBrushData BrushInfo = Brush->ApplyBrush(InteractorPositions);
 	if (!BrushInfo)
 	{
 		return;
@@ -59,7 +59,7 @@ void FLandscapeToolStrokePaint::Apply(FLandscapeBrush* Brush, const TArray<FLand
 
 	// Adjust strength based on brush size and drawscale, so strength 1 = one hemisphere
 	const float AdjustedStrength = 255.f;// ToolTarget::StrengthMultiplier(this->LandscapeInfo, 100.f);
-	FWeightmapToolTarget::CacheClass::DataType DestValue = FWeightmapToolTarget::CacheClass::ClampValue(255.0f * 1);
+	FCWeightmapToolTarget::CacheClass::DataType DestValue = FCWeightmapToolTarget::CacheClass::ClampValue(255.0f * 1);
 
 	float PaintStrength = 0.3f * Pressure * AdjustedStrength;
 

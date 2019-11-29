@@ -12,7 +12,7 @@
 #include "LandscapeRender.h"
 
 
-class FLandscapeBrushCircle : public FLandscapeBrush
+class EDITLANDSCAPE_API FCLandscapeBrushCircle : public FCLandscapeBrush
 {
 	TSet<ULandscapeComponent*> BrushMaterialComponents;
 	TArray<UMaterialInstanceDynamic*> BrushMaterialFreeInstances;
@@ -26,39 +26,39 @@ protected:
 	float		BrushRadius;
 	float		BrushFalloff;
 public:
-	FLandscapeBrushCircle(ULandscapeInfo* UseLandscapeInfo, float Radius, float Falloff):
+	FCLandscapeBrushCircle(ULandscapeInfo* UseLandscapeInfo, float Radius, float Falloff):
 		LandscapeInfo(UseLandscapeInfo),
 		BrushRadius(Radius),
 		BrushFalloff(Falloff)
 	{
 	}
 	virtual void AddReferencedObjects(FReferenceCollector& Collector) override;
-	virtual FLandscapeBrushData ApplyBrush(const TArray<FLandscapeToolInteractorPosition>& InInteractorPositions) override;
+	virtual FCLandscapeBrushData ApplyBrush(const TArray<FCLandscapeToolInteractorPosition>& InInteractorPositions) override;
 };
 
 
-class FLandscapeBrushCircle_Linear : public FLandscapeBrushCircle
+class EDITLANDSCAPE_API FCLandscapeBrushCircle_Linear : public FCLandscapeBrushCircle
 {
 protected:
 	virtual float CalculateFalloff(float Distance, float Radius, float Falloff) override;
 
 public:
-	FLandscapeBrushCircle_Linear(ULandscapeInfo* UseLandscapeInfo, float Radius, float Falloff)
-		: FLandscapeBrushCircle(UseLandscapeInfo, Radius, Falloff)
+	FCLandscapeBrushCircle_Linear(ULandscapeInfo* UseLandscapeInfo, float Radius, float Falloff)
+		: FCLandscapeBrushCircle(UseLandscapeInfo, Radius, Falloff)
 	{
 	}
 };
 
 
-class FLandscapeBrushCircle_Smooth : public FLandscapeBrushCircle_Linear
+class EDITLANDSCAPE_API FCLandscapeBrushCircle_Smooth : public FCLandscapeBrushCircle_Linear
 {
 protected:
 	
 	virtual float CalculateFalloff(float Distance, float Radius, float Falloff) override;
 
 public:
-	FLandscapeBrushCircle_Smooth(ULandscapeInfo* UseLandscapeInfo, float Radius, float Falloff)
-		: FLandscapeBrushCircle_Linear(UseLandscapeInfo, Radius, Falloff)
+	FCLandscapeBrushCircle_Smooth(ULandscapeInfo* UseLandscapeInfo, float Radius, float Falloff)
+		: FCLandscapeBrushCircle_Linear(UseLandscapeInfo, Radius, Falloff)
 	{
 	}
 	

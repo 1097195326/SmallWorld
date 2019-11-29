@@ -4,11 +4,11 @@
 
 
 template<class ToolTarget>
-class FLandscapeToolStrokePaintBase : public FLandscapeToolStrokeBase
+class FCLandscapeToolStrokePaintBase : public FCLandscapeToolStrokeBase
 {
 public:
-	FLandscapeToolStrokePaintBase(const FLandscapeToolTarget& InTarget)
-		: FLandscapeToolStrokeBase(InTarget)
+	FCLandscapeToolStrokePaintBase(const FCLandscapeToolTarget& InTarget)
+		: FCLandscapeToolStrokeBase(InTarget)
 		, Cache(InTarget)
 	{
 	}
@@ -17,9 +17,9 @@ protected:
 	typename ToolTarget::CacheClass Cache;
 };
 
-class FLandscapeToolStrokePaint : public FLandscapeToolStrokePaintBase<FWeightmapToolTarget>
+class EDITLANDSCAPE_API FCLandscapeToolStrokePaint : public FCLandscapeToolStrokePaintBase<FCWeightmapToolTarget>
 {
-	typedef FWeightmapToolTarget ToolTarget;
+	typedef FCWeightmapToolTarget ToolTarget;
 
 	TMap<FIntPoint, float> TotalInfluenceMap; // amount of time and weight the brush has spent on each vertex.
 
@@ -27,11 +27,11 @@ public:
 	// Heightmap sculpt tool will continuously sculpt in the same location, weightmap paint tool doesn't
 	enum { UseContinuousApply = false };
 
-	FLandscapeToolStrokePaint(const FLandscapeToolTarget& InTarget)
-		: FLandscapeToolStrokePaintBase<FWeightmapToolTarget>(InTarget)
+	FCLandscapeToolStrokePaint(const FCLandscapeToolTarget& InTarget)
+		: FCLandscapeToolStrokePaintBase<FCWeightmapToolTarget>(InTarget)
 	{
 	}
 
-	void Apply(FLandscapeBrush* Brush, const TArray<FLandscapeToolInteractorPosition>& InteractorPositions);
+	void Apply(FCLandscapeBrush* Brush, const TArray<FCLandscapeToolInteractorPosition>& InteractorPositions);
 	
 };

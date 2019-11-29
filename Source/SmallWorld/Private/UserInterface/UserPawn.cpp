@@ -137,6 +137,7 @@ void AUserPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 
 }
+
 void AUserPawn::LeftMouseButtonOnPressed()
 {
 	APlayerController * PlayerController = Cast<APlayerController>(Controller);
@@ -148,10 +149,25 @@ void AUserPawn::LeftMouseButtonOnPressed()
 		if (Landscape)
 		{
 			ULandscapeInfo * LandscapeInfo = Landscape->CreateLandscapeInfo();
-			//LandscapeInfo = Landscape->GetLandscapeInfo();
-
 			ULandscapeLayerInfoObject * LayerInfo = LandscapeInfo->GetLayerInfoByName("auto");
-			LayerInfo->IsReferencedFromLoadedData;
+			
+			FCLandscapeToolTarget  ToolTarget;
+			ToolTarget.LandscapeInfo = LandscapeInfo;
+			ToolTarget.LayerInfo = LayerInfo;
+			ToolTarget.TargetType = ECLandscapeToolTargetType::Weightmap;
+
+			FVector LandscapePos = Landscape->LandscapeActorToWorld().InverseTransformPosition(HitResult.Location);
+
+			TArray<FCLandscapeToolInteractorPosition> InteractorPositions;
+			InteractorPositions.Empty(1);
+			InteractorPositions.Emplace(FVector2D(LandscapePos),false);
+
+			FCLandscapeBrushCircle_Smooth * Brush = new FCLandscapeBrushCircle_Smooth(LandscapeInfo, 500.f, 0.5f);
+			FCLandscapeToolStrokePaint * StrokePaint = new FCLandscapeToolStrokePaint(ToolTarget);
+
+			StrokePaint->Apply(Brush, InteractorPositions);
+
+
 		}
 	}
 }

@@ -13,13 +13,13 @@
 
 
 template<class Accessor, typename AccessorType>
-struct TLandscapeEditCache
+struct TCLandscapeEditCache
 {
 public:
 	typedef AccessorType DataType;
 	Accessor DataAccess;
 
-	TLandscapeEditCache(const FLandscapeToolTarget& InTarget)
+	TCLandscapeEditCache(const FCLandscapeToolTarget& InTarget)
 		: DataAccess(InTarget)
 		, Valid(false)
 	{
@@ -333,34 +333,34 @@ private:
 
 
 template<bool bInUseInterp, bool bInUseTotalNormalize>
-struct FAlphamapAccessorTool : public FAlphamapAccessor<bInUseInterp, bInUseTotalNormalize>
+struct FCAlphamapAccessorTool : public FAlphamapAccessor<bInUseInterp, bInUseTotalNormalize>
 {
-	FAlphamapAccessorTool(ULandscapeInfo* InLandscapeInfo, ULandscapeLayerInfoObject* InLayerInfo)
+	FCAlphamapAccessorTool(ULandscapeInfo* InLandscapeInfo, ULandscapeLayerInfoObject* InLayerInfo)
 		: FAlphamapAccessor<bInUseInterp, bInUseTotalNormalize>(InLandscapeInfo, InLayerInfo)
 	{}
 
-	FAlphamapAccessorTool(const FLandscapeToolTarget& InTarget)
+	FCAlphamapAccessorTool(const FCLandscapeToolTarget& InTarget)
 		: FAlphamapAccessor<bInUseInterp, bInUseTotalNormalize>(InTarget.LandscapeInfo.Get(), InTarget.LayerInfo.Get())
 	{
 	}
 };
 
 
-struct FLandscapeAlphaCache : public TLandscapeEditCache<FAlphamapAccessorTool<true, false>, uint8>
+struct FCLandscapeAlphaCache : public TCLandscapeEditCache<FCAlphamapAccessorTool<true, false>, uint8>
 {
 	static uint8 ClampValue(int32 Value) { return FMath::Clamp(Value, 0, 255); }
 
-	FLandscapeAlphaCache(const FLandscapeToolTarget& InTarget)
-		: TLandscapeEditCache<FAlphamapAccessorTool<true, false>, uint8>(InTarget)
+	FCLandscapeAlphaCache(const FCLandscapeToolTarget& InTarget)
+		: TCLandscapeEditCache<FCAlphamapAccessorTool<true, false>, uint8>(InTarget)
 	{
 	}
 };
 
 
-struct FWeightmapToolTarget
+struct FCWeightmapToolTarget
 {
-	typedef FLandscapeAlphaCache CacheClass;
-	static const ELandscapeToolTargetType::Type TargetType = ELandscapeToolTargetType::Weightmap;
+	typedef FCLandscapeAlphaCache CacheClass;
+	static const ECLandscapeToolTargetType::Type TargetType = ECLandscapeToolTargetType::Weightmap;
 
 	static float StrengthMultiplier(ULandscapeInfo* LandscapeInfo, float BrushRadius)
 	{
@@ -372,14 +372,14 @@ struct FWeightmapToolTarget
 };
 
 
-class FLandscapeToolStrokeBase : protected FGCObject
+class FCLandscapeToolStrokeBase : protected FGCObject
 {
 public:
 	// Whether to call Apply() every frame even if the mouse hasn't moved
 	enum { UseContinuousApply = false };
 
 	// This is also the expected signature of derived class constructor used by FLandscapeToolBase
-	FLandscapeToolStrokeBase(const FLandscapeToolTarget& InTarget)
+	FCLandscapeToolStrokeBase(const FCLandscapeToolTarget& InTarget)
 		: Target(InTarget)
 		, LandscapeInfo(InTarget.LandscapeInfo.Get())
 	{
@@ -394,6 +394,6 @@ public:
 	}
 
 protected:
-	const FLandscapeToolTarget& Target;
+	const FCLandscapeToolTarget& Target;
 	ULandscapeInfo* LandscapeInfo;
 };

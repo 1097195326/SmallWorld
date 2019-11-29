@@ -12,20 +12,20 @@ class UMaterialInstance;
 class UMaterialInterface;
 
 
-struct FLandscapeToolInteractorPosition
+struct FCLandscapeToolInteractorPosition
 {
 	// Stored in heightmap space.
 	FVector2D Position;
 	bool bModifierPressed;
 
-	FLandscapeToolInteractorPosition(FVector2D InPosition, const bool bInModifierPressed)
+	FCLandscapeToolInteractorPosition(FVector2D InPosition, const bool bInModifierPressed)
 		: Position(InPosition)
 		, bModifierPressed(bInModifierPressed)
 	{
 	}
 };
 
-enum class ELandscapeBrushType
+enum class ECLandscapeBrushType
 {
 	Normal = 0,
 	Alpha,
@@ -34,19 +34,19 @@ enum class ELandscapeBrushType
 	Splines
 };
 
-class FLandscapeBrushData
+class FCLandscapeBrushData
 {
 protected:
 	FIntRect Bounds;
 	TArray<float> BrushAlpha;
 
 public:
-	FLandscapeBrushData()
+	FCLandscapeBrushData()
 		: Bounds()
 	{
 	}
 
-	FLandscapeBrushData(FIntRect InBounds)
+	FCLandscapeBrushData(FIntRect InBounds)
 		: Bounds(InBounds)
 	{
 		BrushAlpha.SetNumZeroed(Bounds.Area());
@@ -86,21 +86,21 @@ public:
 	}
 };
 
-class FLandscapeBrush : public FGCObject
+class EDITLANDSCAPE_API FCLandscapeBrush : public FGCObject
 {
 public:
 	
-	virtual FLandscapeBrushData ApplyBrush(const TArray<FLandscapeToolInteractorPosition>& InteractorPositions) = 0;
+	virtual FCLandscapeBrushData ApplyBrush(const TArray<FCLandscapeToolInteractorPosition>& InteractorPositions) = 0;
 	virtual void Tick(float DeltaTime) {};
-	virtual ~FLandscapeBrush() {}
-	virtual ELandscapeBrushType GetBrushType() { return ELandscapeBrushType::Normal; }
+	virtual ~FCLandscapeBrush() {}
+	virtual ECLandscapeBrushType GetBrushType() { return ECLandscapeBrushType::Normal; }
 
 	// FGCObject interface
 	virtual void AddReferencedObjects(FReferenceCollector& Collector) override {}
 };
 
 
-namespace ELandscapeToolTargetType
+namespace ECLandscapeToolTargetType
 {
 	enum Type : int8
 	{
@@ -113,17 +113,17 @@ namespace ELandscapeToolTargetType
 }
 
 
-struct FLandscapeToolTarget
+struct FCLandscapeToolTarget
 {
 	TWeakObjectPtr<ULandscapeInfo> LandscapeInfo;
-	ELandscapeToolTargetType::Type TargetType;
+	ECLandscapeToolTargetType::Type TargetType;
 	TWeakObjectPtr<ULandscapeLayerInfoObject> LayerInfo;
 	FName LayerName;
 	int32 CurrentProceduralLayerIndex;
 
-	FLandscapeToolTarget()
+	FCLandscapeToolTarget()
 		: LandscapeInfo()
-		, TargetType(ELandscapeToolTargetType::Heightmap)
+		, TargetType(ECLandscapeToolTargetType::Heightmap)
 		, LayerInfo()
 		, LayerName(NAME_None)
 		, CurrentProceduralLayerIndex(INDEX_NONE)

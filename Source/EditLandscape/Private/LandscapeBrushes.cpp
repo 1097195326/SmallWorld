@@ -1,6 +1,6 @@
 #include "LandscapeBrushes.h"
 
-void FLandscapeBrushCircle::AddReferencedObjects(FReferenceCollector& Collector)
+void FCLandscapeBrushCircle::AddReferencedObjects(FReferenceCollector& Collector)
 {
 	// Allow any currently unused material instances to be GC'd
 	BrushMaterialFreeInstances.Empty();
@@ -26,7 +26,7 @@ void FLandscapeBrushCircle::AddReferencedObjects(FReferenceCollector& Collector)
 	}
 }
 
-FLandscapeBrushData FLandscapeBrushCircle::ApplyBrush(const TArray<FLandscapeToolInteractorPosition>& InInteractorPositions)
+FCLandscapeBrushData FCLandscapeBrushCircle::ApplyBrush(const TArray<FCLandscapeToolInteractorPosition>& InInteractorPositions)
 {
 	const float ScaleXY = FMath::Abs(LandscapeInfo->DrawScale.X);
 	const float TotalRadius = BrushRadius / ScaleXY;
@@ -34,7 +34,7 @@ FLandscapeBrushData FLandscapeBrushCircle::ApplyBrush(const TArray<FLandscapeToo
 	const float Falloff = BrushFalloff * TotalRadius;
 
 	// Cap number of mouse positions to a sensible number
-	TArray<FLandscapeToolInteractorPosition> InteractorPositions;
+	TArray<FCLandscapeToolInteractorPosition> InteractorPositions;
 	if (InInteractorPositions.Num() > 10)
 	{
 		for (int32 i = 0; i < 10; ++i)
@@ -49,7 +49,7 @@ FLandscapeBrushData FLandscapeBrushCircle::ApplyBrush(const TArray<FLandscapeToo
 	}
 
 	FIntRect Bounds;
-	for (const FLandscapeToolInteractorPosition& InteractorPosition : InteractorPositions)
+	for (const FCLandscapeToolInteractorPosition& InteractorPosition : InteractorPositions)
 	{
 		FIntRect SpotBounds;
 		SpotBounds.Min.X = FMath::FloorToInt(InteractorPosition.Position.X - TotalRadius);
@@ -73,13 +73,13 @@ FLandscapeBrushData FLandscapeBrushCircle::ApplyBrush(const TArray<FLandscapeToo
 	if (!ensure(LandscapeInfo->GetLandscapeExtent(MinX, MinY, MaxX, MaxY)))
 	{
 		// Landscape has no components somehow
-		return FLandscapeBrushData();
+		return FCLandscapeBrushData();
 	}
 	Bounds.Clip(FIntRect(MinX, MinY, MaxX + 1, MaxY + 1));
 
-	FLandscapeBrushData BrushData(Bounds);
+	FCLandscapeBrushData BrushData(Bounds);
 
-	for (const FLandscapeToolInteractorPosition& InteractorPosition : InteractorPositions)
+	for (const FCLandscapeToolInteractorPosition& InteractorPosition : InteractorPositions)
 	{
 		FIntRect SpotBounds;
 		SpotBounds.Min.X = FMath::Max(FMath::FloorToInt(InteractorPosition.Position.X - TotalRadius), Bounds.Min.X);
@@ -126,16 +126,16 @@ FLandscapeBrushData FLandscapeBrushCircle::ApplyBrush(const TArray<FLandscapeToo
 }
 
 
-float FLandscapeBrushCircle_Linear::CalculateFalloff(float Distance, float Radius, float Falloff)
+float FCLandscapeBrushCircle_Linear::CalculateFalloff(float Distance, float Radius, float Falloff)
 {
 	return Distance < Radius ? 1.0f :
 		Falloff > 0.0f ? FMath::Max<float>(0.0f, 1.0f - (Distance - Radius) / Falloff) :
 		0.0f;
 }
 
-float FLandscapeBrushCircle_Smooth::CalculateFalloff(float Distance, float Radius, float Falloff)
+float FCLandscapeBrushCircle_Smooth::CalculateFalloff(float Distance, float Radius, float Falloff)
 {
-	float y = FLandscapeBrushCircle_Linear::CalculateFalloff(Distance, Radius, Falloff);
+	float y = FCLandscapeBrushCircle_Linear::CalculateFalloff(Distance, Radius, Falloff);
 	// Smooth-step it
 	return y * y*(3 - 2 * y);
 }
