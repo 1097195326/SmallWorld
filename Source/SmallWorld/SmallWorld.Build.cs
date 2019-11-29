@@ -24,6 +24,8 @@ public class SmallWorld : ModuleRules
             "GameFrame",
             "Landscape",
             "Foliage",
+            "LandscapeEditor",
+            
         });
 
         //PrivateDependencyModuleNames.AddRange(new string[] {  });
