@@ -2,8 +2,8 @@
 #include "UserController.h"
 #include "Kismet/GameplayStatics.h"
 #include "GameFramework/PlayerInput.h"
-#include "Landscape.h"
-#include "Landscape/Public/LandscapeEdit.h"
+#include "EditLandscapeHandle.h"
+
 // test exec
 #include "SoldierPawnController.h"
 #include "SoldierPawn.h"
@@ -14,6 +14,7 @@
 #include "Engine/TargetPoint.h"
 #include "Projectile.h"
 #include "SoldierGroupManager.h"
+
 
 // test soldier
 #include "Archer.h"
@@ -146,7 +147,6 @@ void AUserPawn::LeftMouseButtonOnPressed()
 		ALandscape * Landscape = Cast<ALandscape>(HitResult.GetActor());
 		if (Landscape)
 		{
-			
 			ULandscapeInfo * LandscapeInfo = Landscape->CreateLandscapeInfo();
 			//LandscapeInfo = Landscape->GetLandscapeInfo();
 

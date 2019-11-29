@@ -24,7 +24,7 @@ public class SmallWorld : ModuleRules
             "GameFrame",
             "Landscape",
             "Foliage",
-            "LandscapeEditor",
+            "EditLandscape",
             
         });
 
