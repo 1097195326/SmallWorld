@@ -98,3 +98,35 @@ public:
 	// FGCObject interface
 	virtual void AddReferencedObjects(FReferenceCollector& Collector) override {}
 };
+
+
+namespace ELandscapeToolTargetType
+{
+	enum Type : int8
+	{
+		Heightmap = 0,
+		Weightmap = 1,
+		Visibility = 2,
+
+		Invalid = -1, // only valid for LandscapeEdMode->CurrentToolTarget.TargetType
+	};
+}
+
+
+struct FLandscapeToolTarget
+{
+	TWeakObjectPtr<ULandscapeInfo> LandscapeInfo;
+	ELandscapeToolTargetType::Type TargetType;
+	TWeakObjectPtr<ULandscapeLayerInfoObject> LayerInfo;
+	FName LayerName;
+	int32 CurrentProceduralLayerIndex;
+
+	FLandscapeToolTarget()
+		: LandscapeInfo()
+		, TargetType(ELandscapeToolTargetType::Heightmap)
+		, LayerInfo()
+		, LayerName(NAME_None)
+		, CurrentProceduralLayerIndex(INDEX_NONE)
+	{
+	}
+};
