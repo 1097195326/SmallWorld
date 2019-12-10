@@ -17,6 +17,8 @@ public class SmallWorld : ModuleRules
             "GameplayTasks",
             "NavigationSystem",
             "Json",
+            "Slate",
+            "SlateCore",
             "GCore",
             "ProceduralMesh",
             "SlateUI",
