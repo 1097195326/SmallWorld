@@ -14,7 +14,7 @@ void NineGridUIController::InitControllerView()
 			SNew(SVerticalBox)
 			+SVerticalBox::Slot()
 			.VAlign(VAlign_Top)
-			.HAlign(HAlign_Center)
+			.HAlign(HAlign_Fill)
 			[
 				SNew(SHorizontalBox)
 				+SHorizontalBox::Slot()
@@ -62,7 +62,7 @@ void NineGridUIController::InitControllerView()
 			]
 			+ SVerticalBox::Slot()
 			.VAlign(VAlign_Bottom)
-			.HAlign(HAlign_Center)
+			.HAlign(HAlign_Fill)
 			[
 				SNew(SHorizontalBox)
 				+ SHorizontalBox::Slot()

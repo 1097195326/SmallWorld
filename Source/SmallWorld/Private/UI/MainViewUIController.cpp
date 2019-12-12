@@ -6,14 +6,16 @@ TSharedPtr<SWidget> MainViewUIController::MakeTopLeftWidget()
 {
 	return 
 	SNew(SBox)
-		.WidthOverride(100)
-		.HeightOverride(100)
+		.WidthOverride(500)
+		.HeightOverride(500)
 		.Content()
 		[
 			SNew(SBorder)
 			.HAlign(HAlign_Fill)
 			.VAlign(VAlign_Fill)
-			.ColorAndOpacity(FLinearColor(1, 1, 1, 1))
+			//.ColorAndOpacity(FLinearColor(1, 1, 1, 1))
+			.BorderBackgroundColor(FLinearColor::Green)
+			
 		];
 }
 TSharedPtr<SWidget>	MainViewUIController::MakeTopCenterWidget()
