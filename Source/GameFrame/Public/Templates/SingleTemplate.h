@@ -2,10 +2,10 @@
 
 
 template<class ClassType>
-class GAMEFRAME_API SingleTemplate
+class  SingleTemplate
 {
 public:
-	ClassType * GetInstance()
+	static ClassType * GetInstance()
 	{
 		static ClassType Instance;
 		return &Instance;

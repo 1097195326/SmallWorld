@@ -8,11 +8,13 @@
 class UIControllerManager : public SingleTemplate<UIControllerManager>
 {
 public:
+	UIControllerManager();
+
 	void		ChangeUIController(UIControllerInterface * UIController);
 
 	UIControllerInterface * GetUIController();
+
 private:
-	UIControllerManager();
 
 	UIControllerInterface *	CurrentUIController;
 };

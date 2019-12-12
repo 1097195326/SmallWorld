@@ -15,6 +15,8 @@
 #include "Projectile.h"
 #include "SoldierGroupManager.h"
 
+#include "UI/UIControllerManager.h"
+#include "UI/MainViewUIController.h"
 
 // test soldier
 #include "Archer.h"
@@ -56,7 +58,7 @@ AUserPawn::AUserPawn(const FObjectInitializer& ObjectInitializer)
 void AUserPawn::On_Init()
 {
 	mController = (AUserController*)Controller;
-
+	UIControllerManager::GetInstance()->ChangeUIController(new MainViewUIController());
 }
 void AUserPawn::On_Start()
 {

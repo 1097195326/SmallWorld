@@ -1,10 +1,10 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "SOverlay.h"
-#include "SWidget.h"
+#include "SlateStyles/GameStyle.h"
 
 #include "UserViewportClient.h"
+
 
 
 class UIControllerInterface
