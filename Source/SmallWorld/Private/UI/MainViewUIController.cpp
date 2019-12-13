@@ -8,45 +8,114 @@ TSharedPtr<SWidget> MainViewUIController::MakeTopLeftWidget()
 	SNew(SBox)
 		.WidthOverride(500)
 		.HeightOverride(500)
-		.Content()
 		[
 			SNew(SBorder)
-			.HAlign(HAlign_Fill)
-			.VAlign(VAlign_Fill)
-			//.ColorAndOpacity(FLinearColor(1, 1, 1, 1))
-			.BorderBackgroundColor(FLinearColor::Green)
-			
+			//.BorderBackgroundColor(FLinearColor(1,0,0,0.3f))
+		.BorderBackgroundColor(FGameStyle::Get().GetColor("Color.FFFFC266"))
+			.BorderImage(FCoreStyle::Get().GetBrush("GenericWhiteBox"))
 		];
 }
 TSharedPtr<SWidget>	MainViewUIController::MakeTopCenterWidget()
 {
-	return SNew(SOverlay);
+	return
+		SNew(SBox)
+		.WidthOverride(500)
+		.HeightOverride(500)
+		[
+			SNew(SBorder)
+			//.BorderBackgroundColor(FLinearColor(1,0,0,0.3f))
+		.BorderBackgroundColor(FGameStyle::Get().GetColor("Color.FFFFC266"))
+		.BorderImage(FCoreStyle::Get().GetBrush("GenericWhiteBox"))
+		];
 }
 TSharedPtr<SWidget>	MainViewUIController::MakeTopRightWidget()
 {
-	return SNew(SOverlay);
+	return
+		SNew(SBox)
+		.WidthOverride(500)
+		.HeightOverride(500)
+		[
+			SNew(SBorder)
+			//.BorderBackgroundColor(FLinearColor(1,0,0,0.3f))
+		.BorderBackgroundColor(FGameStyle::Get().GetColor("Color.FFFFC266"))
+		.BorderImage(FCoreStyle::Get().GetBrush("GenericWhiteBox"))
+		];
 }
 TSharedPtr<SWidget>	MainViewUIController::MakeMiddleLeftWidget()
 {
-	return SNew(SOverlay);
+	return
+		SNew(SBox)
+		.WidthOverride(100)
+		.HeightOverride(100)
+		[
+			SNew(SBorder)
+			//.BorderBackgroundColor(FLinearColor(1,0,0,0.3f))
+		.BorderBackgroundColor(FGameStyle::Get().GetColor("Color.FFFFC266"))
+		.BorderImage(FCoreStyle::Get().GetBrush("GenericWhiteBox"))
+		];
 }
 TSharedPtr<SWidget>		MainViewUIController::MakeMiddleCenterWidget()
 {
-	return SNew(SOverlay);
+	return
+		SNew(SBox)
+		.WidthOverride(100)
+		.HeightOverride(100)
+		[
+			SNew(SBorder)
+			//.BorderBackgroundColor(FLinearColor(1,0,0,0.3f))
+		.BorderBackgroundColor(FGameStyle::Get().GetColor("Color.FFFFC266"))
+		.BorderImage(FCoreStyle::Get().GetBrush("GenericWhiteBox"))
+		];
 }
 TSharedPtr<SWidget>	MainViewUIController::MakeMiddleRightWidget()
 {
-	return SNew(SOverlay);
+	return
+		SNew(SBox)
+		.WidthOverride(100)
+		.HeightOverride(100)
+		[
+			SNew(SBorder)
+			//.BorderBackgroundColor(FLinearColor(1,0,0,0.3f))
+		.BorderBackgroundColor(FGameStyle::Get().GetColor("Color.FFFFC266"))
+		.BorderImage(FCoreStyle::Get().GetBrush("GenericWhiteBox"))
+		];
 }
 TSharedPtr<SWidget>	MainViewUIController::MakeBottomLeftWidget()
 {
-	return SNew(SOverlay);
+	return
+		SNew(SBox)
+		.WidthOverride(500)
+		.HeightOverride(500)
+		[
+			SNew(SBorder)
+			//.BorderBackgroundColor(FLinearColor(1,0,0,0.3f))
+		.BorderBackgroundColor(FGameStyle::Get().GetColor("Color.FFFFC266"))
+		.BorderImage(FCoreStyle::Get().GetBrush("GenericWhiteBox"))
+		];
 }
 TSharedPtr<SWidget>	MainViewUIController::MakeBottomCenterWidget()
 {
-	return SNew(SOverlay);
+	return
+		SNew(SBox)
+		.WidthOverride(500)
+		.HeightOverride(500)
+		[
+			SNew(SBorder)
+			//.BorderBackgroundColor(FLinearColor(1,0,0,0.3f))
+		.BorderBackgroundColor(FGameStyle::Get().GetColor("Color.FFFFC266"))
+		.BorderImage(FCoreStyle::Get().GetBrush("GenericWhiteBox"))
+		];
 }
 TSharedPtr<SWidget>	MainViewUIController::MakeBottomRightWidget()
 {
-	return SNew(SOverlay);
+	return
+		SNew(SBox)
+		.WidthOverride(500)
+		.HeightOverride(500)
+		[
+			SNew(SBorder)
+			//.BorderBackgroundColor(FLinearColor(1,0,0,0.3f))
+		.BorderBackgroundColor(FGameStyle::Get().GetColor("Color.FFFFC266"))
+		.BorderImage(FCoreStyle::Get().GetBrush("GenericWhiteBox"))
+		];
 }

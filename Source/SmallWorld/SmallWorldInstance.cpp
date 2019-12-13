@@ -2,6 +2,8 @@
 #include "GameWorld.h"
 #include "TimerManager.h"
 
+#include "UI/SlateStyles/GameStyle.h"
+
 USmallWorldInstance::USmallWorldInstance()
 {
 	
@@ -10,7 +12,7 @@ USmallWorldInstance::USmallWorldInstance()
 void USmallWorldInstance::On_Init()
 {
 	m_Instance = this;
-
+	FGameStyle::Startup();
 
 	
 
