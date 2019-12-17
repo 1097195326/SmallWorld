@@ -10,6 +10,10 @@ class AUserHUD : public AHUD
 {
 	GENERATED_BODY()
 private:
-	
+	AUserHUD();
+
+	virtual void BeginPlay() override;
+	virtual void DrawHUD() override;
+
 };
 

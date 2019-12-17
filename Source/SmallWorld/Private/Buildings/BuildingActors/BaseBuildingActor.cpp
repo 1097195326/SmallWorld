@@ -10,39 +10,6 @@ ABaseBuildingActor::ABaseBuildingActor()
     
 	InteractivePointName = TEXT("InteractivePoint");
 }
-void ABaseBuildingActor::PostInitializeComponents()
-{
-	Super::PostInitializeComponents();
-	On_Init();
-}
-void ABaseBuildingActor::Tick(float DeltaSeconds)
-{
-	Super::Tick(DeltaSeconds);
-
-	On_Update(DeltaSeconds);
-}
-void ABaseBuildingActor::BeginDestroy()
-{
-	On_Delete();
-	Super::BeginDestroy();
-}
-void ABaseBuildingActor::On_Init()
-{
-
-}
-void ABaseBuildingActor::On_Update(float DeltaSeconds)
-{
-
-}
-void ABaseBuildingActor::On_GameUpdate()
-{
-
-}
-void ABaseBuildingActor::On_Delete()
-{
-
-}
-
 void ABaseBuildingActor::InitData(BaseBuildingData * _data)
 {
     mData = _data;

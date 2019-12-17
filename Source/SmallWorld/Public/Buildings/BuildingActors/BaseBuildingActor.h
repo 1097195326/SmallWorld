@@ -1,7 +1,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/Actor.h"
+#include "GameActor.h"
 #include "ConstructorHelpers.h"
 #include "Engine/StaticMesh.h"
 #include "Components/StaticMeshComponent.h"
@@ -23,7 +23,7 @@ using namespace std;
 class ABlockActor;
 
 UCLASS()
-class ABaseBuildingActor : public AActor, public GObject
+class ABaseBuildingActor : public AGameActor
 {
 	GENERATED_BODY()
 protected:
@@ -51,15 +51,6 @@ protected:
 
 public:
 	ABaseBuildingActor();
-	virtual void PostInitializeComponents() override;
-	virtual void BeginDestroy() override;
-	virtual void Tick(float DeltaSeconds) override;
-
-	virtual void On_Init();
-	virtual void On_Update(float DeltaSeconds);
-	virtual void On_Delete();
-
-	virtual void On_GameUpdate();
 
     virtual void InitData(BaseBuildingData * _data);
     virtual void SaveData(TSharedRef<TJsonWriter<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>> Writer);

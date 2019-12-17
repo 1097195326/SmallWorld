@@ -12,6 +12,8 @@ public:
 	GENERATED_BODY()
 		
 	virtual void PostInitProperties() override;
+	virtual void Tick(float DeltaTime) override;
+
 
 	static UUserViewportClient * GetInstance();
 private:

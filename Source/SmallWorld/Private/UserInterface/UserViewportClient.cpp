@@ -13,3 +13,10 @@ UUserViewportClient * UUserViewportClient::GetInstance()
 {
 	return UserViewportClientInstance;
 }
+
+void UUserViewportClient::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+
+
+}
