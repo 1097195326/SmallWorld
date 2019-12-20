@@ -19,6 +19,7 @@ public class SmallWorld : ModuleRules
             "Json",
             "Slate",
             "SlateCore",
+            "UnrealEd",
             "GCore",
             "ProceduralMesh",
             "SlateUI",

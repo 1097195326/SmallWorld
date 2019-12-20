@@ -2,8 +2,11 @@
 
 #include "CoreMinimal.h"
 #include "SlateStyles/GameStyle.h"
-
+#include "UnrealEd/Public/ObjectTools.h"
+#include "UnrealEd/Public/Tests/AutomationEditorCommon.h"
 #include "UserViewportClient.h"
+#include "UnrealEd/Public/ClassIconFinder.h"
+#include "SlateCore/Public/Styling/SlateIconFinder.h"
 
 
 
