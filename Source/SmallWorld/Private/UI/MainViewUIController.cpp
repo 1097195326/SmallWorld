@@ -48,32 +48,30 @@ TSharedPtr<SWidget>	MainViewUIController::MakeMiddleLeftWidget()
 	FString PackageFilename;
 	if (FPackageName::DoesPackageExist(PackageName, NULL, &PackageFilename))
 	{
-		bool bIsClassType;
 		FAssetData AssetData = FAutomationEditorCommonUtils::GetAssetDataFromPackagePath(PackageFilename);
-		TWeakObjectPtr<UClass> ThumbnailClass = MakeWeakObjectPtr(const_cast<UClass*>(FClassIconFinder::GetIconClassForAssetData(AssetData,&bIsClassType)));
-		const FName DefaultThumbnail = (bIsClassType) ? NAME_None : FName(*FString::Printf(TEXT("ClassThumbnail.%s"), *AssetData.AssetClass.ToString()));
+		FName ObjectFullName = FName(*AssetData.GetFullName());
 		
-		const FSlateBrush * ThumbnailBrush = FClassIconFinder::FindThumbnailForClass(ThumbnailClass.Get(), DefaultThumbnail);
-		//ShowImage->SetImage(ThumbnailBrush);
-		const FSlateBrush * IconBrush = FSlateIconFinder::FindIconBrushForClass(ThumbnailClass.Get());
-		ShowImage->SetImage(IconBrush);
-
-
-		/*TSet<FName> ObjectFullNames;
 		FThumbnailMap ThumbnailMap;
 
-		FName ObjectFullName = FName(TEXT("StaticMesh /Game/CastlePack/Meshes/SM_Mine_lvl0.SM_Mine_lvl0"));
-		ObjectFullNames.Add(ObjectFullName);
-
-		ThumbnailTools::LoadThumbnailsFromPackage(PackageFilename, ObjectFullNames, ThumbnailMap);
-
-		const FObjectThumbnail* ThumbnailPtr = ThumbnailMap.Find(ObjectFullName);
+		const FObjectThumbnail* ThumbnailPtr = ThumbnailTools::FindCachedThumbnail(ObjectFullName.ToString());
+		if (!ThumbnailPtr)
+		{
+			TSet<FName> ObjectFullNames;
+			ObjectFullNames.Add(ObjectFullName);
+			ThumbnailTools::LoadThumbnailsFromPackage(PackageFilename, ObjectFullNames, ThumbnailMap);
+			ThumbnailPtr = ThumbnailMap.Find(ObjectFullName);
+		}
 		if (ThumbnailPtr)
 		{
-			const FObjectThumbnail& ObjectThumbnail = *ThumbnailPtr;
-			TSharedPtr<FSlateDynamicImageBrush> DynamicBrush = FSlateDynamicImageBrush::CreateWithImageData(ObjectFullName,FVector2D(ObjectThumbnail.GetImageWidth(),ObjectThumbnail.GetImageHeight()),ObjectThumbnail.AccessImageData());
-			ShowImage->SetImage(DynamicBrush.Get());
-		}*/
+			static TSharedPtr<FSlateDynamicImageBrush> DynamicBrush = FSlateDynamicImageBrush::CreateWithImageData(
+				ObjectFullName,
+				FVector2D(ThumbnailPtr->GetImageWidth(), ThumbnailPtr->GetImageHeight()),
+				ThumbnailPtr->GetUncompressedImageData());
+			if (DynamicBrush.IsValid() && ThumbnailPtr->GetUncompressedImageData().Num() > 0)
+			{
+				ShowImage->SetImage(DynamicBrush.Get());
+			}
+		}
 	}
 	return
 		SNew(SBox)
@@ -81,6 +79,7 @@ TSharedPtr<SWidget>	MainViewUIController::MakeMiddleLeftWidget()
 		.HeightOverride(100)
 		[
 			SNew(SBorder)
+			.Padding(0)
 			//.BorderBackgroundColor(FLinearColor(1,0,0,0.3f))
 			.BorderBackgroundColor(FGameStyle::Get().GetColor("Color.FFFFC266"))
 			.BorderImage(FCoreStyle::Get().GetBrush("GenericWhiteBox"))
