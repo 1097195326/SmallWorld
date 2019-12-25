@@ -1,47 +1,44 @@
 #include "MainViewUIController.h"
 
 
+void MainViewUIController::InitControllerView()
+{
+	TopLeftSlot->AttachWidget(CreateUserView().ToSharedRef());
+	BottomLeftSlot->AttachWidget(CreateToWorldButton().ToSharedRef());
+	BottomRightSlot->AttachWidget(CreateBuildingButton().ToSharedRef());
+}
+TSharedPtr<SWidget> MainViewUIController::CreateUserView()
+{
+	FSlateApplication::Get().GetApplicationScale();
+	/*TSharedPtr<SVerticalBox> ResWidget = SNew(SVerticalBox)
+		+SVerticalBox::Slot()
+		.HAlign(HAlign_Left)
+		.VAlign(VAlign_Top)
+		[
 
-TSharedPtr<SWidget> MainViewUIController::MakeTopLeftWidget()
-{
-	return 
-	SNew(SBox)
-		.WidthOverride(500)
-		.HeightOverride(500)
-		[
-			SNew(SBorder)
-			//.BorderBackgroundColor(FLinearColor(1,0,0,0.3f))
-		.BorderBackgroundColor(FGameStyle::Get().GetColor("Color.FFFFC266"))
-			.BorderImage(FCoreStyle::Get().GetBrush("GenericWhiteBox"))
-		];
+		]*/
+
+	return SNullWidget::NullWidget;
 }
-TSharedPtr<SWidget>	MainViewUIController::MakeTopCenterWidget()
+TSharedPtr<SWidget>	MainViewUIController::CreateToWorldButton()
 {
-	return
-		SNew(SBox)
-		.WidthOverride(500)
-		.HeightOverride(500)
-		[
-			SNew(SBorder)
-			//.BorderBackgroundColor(FLinearColor(1,0,0,0.3f))
-		.BorderBackgroundColor(FGameStyle::Get().GetColor("Color.FFFFC266"))
-		.BorderImage(FCoreStyle::Get().GetBrush("GenericWhiteBox"))
-		];
+
+	return SNullWidget::NullWidget;
 }
-TSharedPtr<SWidget>	MainViewUIController::MakeTopRightWidget()
+TSharedPtr<SWidget>	MainViewUIController::CreateBuildingButton()
 {
-	return
-		SNew(SBox)
-		.WidthOverride(500)
-		.HeightOverride(500)
-		[
-			SNew(SBorder)
-			//.BorderBackgroundColor(FLinearColor(1,0,0,0.3f))
-		.BorderBackgroundColor(FGameStyle::Get().GetColor("Color.FFFFC266"))
-		.BorderImage(FCoreStyle::Get().GetBrush("GenericWhiteBox"))
-		];
+
+	return SNullWidget::NullWidget;
 }
-TSharedPtr<SWidget>	MainViewUIController::MakeMiddleLeftWidget()
+
+
+
+
+
+
+
+
+TSharedPtr<SWidget>	MainViewUIController::TestWidget()
 {
 	TSharedPtr<SImage> ShowImage = SNew(SImage);
 	FString  PackageName = TEXT("/Game/CastlePack/Meshes/SM_Mine_lvl0");
@@ -88,69 +85,4 @@ TSharedPtr<SWidget>	MainViewUIController::MakeMiddleLeftWidget()
 			]
 		];
 	
-}
-TSharedPtr<SWidget>		MainViewUIController::MakeMiddleCenterWidget()
-{
-	return
-		SNew(SBox)
-		.WidthOverride(100)
-		.HeightOverride(100)
-		[
-			SNew(SBorder)
-			//.BorderBackgroundColor(FLinearColor(1,0,0,0.3f))
-		.BorderBackgroundColor(FGameStyle::Get().GetColor("Color.FFFFC266"))
-		.BorderImage(FCoreStyle::Get().GetBrush("GenericWhiteBox"))
-		];
-}
-TSharedPtr<SWidget>	MainViewUIController::MakeMiddleRightWidget()
-{
-	return
-		SNew(SBox)
-		.WidthOverride(100)
-		.HeightOverride(100)
-		[
-			SNew(SBorder)
-			//.BorderBackgroundColor(FLinearColor(1,0,0,0.3f))
-		.BorderBackgroundColor(FGameStyle::Get().GetColor("Color.FFFFC266"))
-		.BorderImage(FCoreStyle::Get().GetBrush("GenericWhiteBox"))
-		];
-}
-TSharedPtr<SWidget>	MainViewUIController::MakeBottomLeftWidget()
-{
-	return
-		SNew(SBox)
-		.WidthOverride(500)
-		.HeightOverride(500)
-		[
-			SNew(SBorder)
-			//.BorderBackgroundColor(FLinearColor(1,0,0,0.3f))
-		.BorderBackgroundColor(FGameStyle::Get().GetColor("Color.FFFFC266"))
-		.BorderImage(FCoreStyle::Get().GetBrush("GenericWhiteBox"))
-		];
-}
-TSharedPtr<SWidget>	MainViewUIController::MakeBottomCenterWidget()
-{
-	return
-		SNew(SBox)
-		.WidthOverride(500)
-		.HeightOverride(500)
-		[
-			SNew(SBorder)
-			//.BorderBackgroundColor(FLinearColor(1,0,0,0.3f))
-		.BorderBackgroundColor(FGameStyle::Get().GetColor("Color.FFFFC266"))
-		.BorderImage(FCoreStyle::Get().GetBrush("GenericWhiteBox"))
-		];
-}
-TSharedPtr<SWidget>	MainViewUIController::MakeBottomRightWidget()
-{
-	return
-		SNew(SBox)
-		.WidthOverride(500)
-		.HeightOverride(500)
-		[
-			SNew(SBorder)
-			//.BorderBackgroundColor(FLinearColor(1,0,0,0.3f))
-		.BorderBackgroundColor(FGameStyle::Get().GetColor("Color.FFFFC266"))
-		.BorderImage(FCoreStyle::Get().GetBrush("GenericWhiteBox"))
-		];
 }

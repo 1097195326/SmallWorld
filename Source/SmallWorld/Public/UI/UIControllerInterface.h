@@ -7,6 +7,7 @@
 #include "UserViewportClient.h"
 #include "UnrealEd/Public/ClassIconFinder.h"
 #include "SlateCore/Public/Styling/SlateIconFinder.h"
+#include "Framework/Application/SlateApplication.h"
 
 
 
@@ -19,9 +20,9 @@ public:
 		T_NineGrid,
 	};
 	
-	virtual void			InitControllerView() = 0;
-	virtual void			Enter() = 0;
-	virtual void			Exit() = 0;
+	virtual void			InitControllerView();
+	virtual void			Enter();
+	virtual void			Exit();
 
 	virtual ~UIControllerInterface(){}
 

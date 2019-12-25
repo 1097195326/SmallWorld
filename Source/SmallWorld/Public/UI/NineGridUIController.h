@@ -8,20 +8,29 @@ class NineGridUIController : public UIControllerInterface
 public:
 	NineGridUIController();
 
-	virtual void			InitControllerView();
-	virtual void			Enter();
-	virtual void			Exit();
+	
+	SHorizontalBox::FSlot * GetTopLeftSlot() { return TopLeftSlot; }
+	SHorizontalBox::FSlot * GetTopCenterSlot() { return TopCenterSlot; }
+	SHorizontalBox::FSlot * GetTopRightSlot() { return TopRightSlot; }
 
-	virtual TSharedPtr<SWidget>		MakeTopLeftWidget();
-	virtual TSharedPtr<SWidget>		MakeTopCenterWidget();
-	virtual TSharedPtr<SWidget>		MakeTopRightWidget();
+	SHorizontalBox::FSlot * GetMiddleLeftSlot() { return MiddleLeftSlot; }
+	SHorizontalBox::FSlot * GetMiddleCenterSlot() { return MiddleCenterSlot; }
+	SHorizontalBox::FSlot * GetMiddleRightSlot() { return MiddleRightSlot; }
 
-	virtual TSharedPtr<SWidget>		MakeMiddleLeftWidget();
-	virtual TSharedPtr<SWidget>		MakeMiddleCenterWidget();
-	virtual TSharedPtr<SWidget>		MakeMiddleRightWidget();
+	SHorizontalBox::FSlot * GetBottomLeftSlot() { return BottomLeftSlot; }
+	SHorizontalBox::FSlot * GetBottomCenterSlot() { return BottomCenterSlot; }
+	SHorizontalBox::FSlot * GetBottomRightSlot() { return BottomRightSlot; }
+protected:
 
-	virtual TSharedPtr<SWidget>		MakeBottomLeftWidget();
-	virtual TSharedPtr<SWidget>		MakeBottomCenterWidget();
-	virtual TSharedPtr<SWidget>		MakeBottomRightWidget();
+	SHorizontalBox::FSlot * TopLeftSlot = NULL;
+	SHorizontalBox::FSlot * TopCenterSlot = NULL;
+	SHorizontalBox::FSlot * TopRightSlot = NULL;
 
+	SHorizontalBox::FSlot * MiddleLeftSlot = NULL;
+	SHorizontalBox::FSlot * MiddleCenterSlot = NULL;
+	SHorizontalBox::FSlot * MiddleRightSlot = NULL;
+
+	SHorizontalBox::FSlot * BottomLeftSlot = NULL;
+	SHorizontalBox::FSlot * BottomCenterSlot = NULL;
+	SHorizontalBox::FSlot * BottomRightSlot = NULL;
 };
