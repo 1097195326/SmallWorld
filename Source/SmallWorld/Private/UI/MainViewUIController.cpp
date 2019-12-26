@@ -9,16 +9,41 @@ void MainViewUIController::InitControllerView()
 }
 TSharedPtr<SWidget> MainViewUIController::CreateUserView()
 {
-	FSlateApplication::Get().GetApplicationScale();
-	/*TSharedPtr<SVerticalBox> ResWidget = SNew(SVerticalBox)
+	TSharedPtr<SVerticalBox> ResWidget = SNew(SVerticalBox)
 		+SVerticalBox::Slot()
 		.HAlign(HAlign_Left)
 		.VAlign(VAlign_Top)
+		.Padding(32, 18, 0, 0)
 		[
-
-		]*/
-
-	return SNullWidget::NullWidget;
+			SNew(SHorizontalBox)
+			+SHorizontalBox::Slot()
+			.HAlign(HAlign_Left)
+			.VAlign(VAlign_Center)
+			[
+				SNew(SBox)
+				.WidthOverride(40)
+				.HeightOverride(40)
+				[
+					SNew(SButton)
+					.ButtonStyle(&FGameStyle::Get().GetWidgetStyle<FButtonStyle>("Button.Power"))
+				]
+			]
+			+ SHorizontalBox::Slot()
+				.HAlign(HAlign_Left)
+				.VAlign(VAlign_Center)
+				.Padding(18, 0, 0, 0)
+			[
+				SNew(SBox)
+				.WidthOverride(100)
+				.HeightOverride(100)
+				[
+					SNew(SImage)
+					.Image(FGameStyle::Get().GetBrush("Icon.Power"))
+				]
+			]
+		];
+	
+	return ResWidget;
 }
 TSharedPtr<SWidget>	MainViewUIController::CreateToWorldButton()
 {
@@ -30,13 +55,6 @@ TSharedPtr<SWidget>	MainViewUIController::CreateBuildingButton()
 
 	return SNullWidget::NullWidget;
 }
-
-
-
-
-
-
-
 
 TSharedPtr<SWidget>	MainViewUIController::TestWidget()
 {
