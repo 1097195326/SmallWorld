@@ -12,7 +12,7 @@ public:
 
 	static void Shutdown();
 
-	static const ISlateStyle& Get();
+	static  ISlateStyle& Get();
 
 	static FName GetStyleName();
 private:

@@ -47,24 +47,48 @@ TSharedRef<FSlateStyleSet> FGameStyle::Create()
 	const FVector2D Icon16x16(16.0f, 16.0f);
 	const FVector2D Icon20x20(20.0f, 20.0f);
 	const FVector2D Icon40x40(40.0f, 40.0f);
-	// ImageBrush
-	//Style.Set("Icon.Power", IMAGE_BRUSH("Icon_Power", Icon40x40));
-
+	
+	// Texture
+	UTexture2D * Texture = nullptr;
+	
+	Texture = Cast<UTexture2D>(StaticLoadObject(UTexture2D::StaticClass(), NULL, TEXT("/Game/UI/Texture/Icon_Power")));
+	Style.Set("Icon.Power", new FSlateDynamicImageBrush(Texture,FVector2D(100, 100),NAME_None));
+	Texture = Cast<UTexture2D>(StaticLoadObject(UTexture2D::StaticClass(), NULL, TEXT("/Game/UI/Texture/Icon_Hero")));
+	Style.Set("Icon.Hero", new FSlateDynamicImageBrush(Texture, FVector2D(100, 100), NAME_None));
+	Texture = Cast<UTexture2D>(StaticLoadObject(UTexture2D::StaticClass(), NULL, TEXT("/Game/UI/Texture/Icon_Map")));
+	Style.Set("Icon.Map", new FSlateDynamicImageBrush(Texture, FVector2D(100, 100), NAME_None));
+	Texture = Cast<UTexture2D>(StaticLoadObject(UTexture2D::StaticClass(), NULL, TEXT("/Game/UI/Texture/Icon_Menu")));
+	Style.Set("Icon.Menu", new FSlateDynamicImageBrush(Texture, FVector2D(100, 100), NAME_None));
+	
 	// ButtonStyle
-	Style.Set("Button.Power", FButtonStyle()
-		.SetNormal(IMAGE_BRUSH("Icon_Power",Icon40x40))
-		.SetHovered(IMAGE_BRUSH("Icon_Power", Icon40x40))
-		.SetPressed(IMAGE_BRUSH("Icon_Power",Icon40x40))
+	Style.Set("MainView.Button.Power", FButtonStyle()
+		.SetNormal(*Style.GetBrush("Icon.Power"))
+		.SetHovered(*Style.GetBrush("Icon.Power"))
+		.SetPressed(*Style.GetBrush("Icon.Power"))
 		.SetNormalPadding(0)
 		.SetPressedPadding(0)
 	);
-	//
-	
-	UTexture2D * Texture  = Cast<UTexture2D>(StaticLoadObject(UTexture2D::StaticClass(), NULL, TEXT("/Game/UI/Texture/Icon_Hero")));
-	if (Texture)
-	{
-		Style.Set("Icon.Power", new FSlateDynamicImageBrush(Texture,FVector2D(100,100),FName()));
-	}
+	Style.Set("MainView.Button.Hero", FButtonStyle()
+		.SetNormal(*Style.GetBrush("Icon.Hero"))
+		.SetHovered(*Style.GetBrush("Icon.Hero"))
+		.SetPressed(*Style.GetBrush("Icon.Hero"))
+		.SetNormalPadding(0)
+		.SetPressedPadding(0)
+	);
+	Style.Set("MainView.Button.Map", FButtonStyle()
+		.SetNormal(*Style.GetBrush("Icon.Map"))
+		.SetHovered(*Style.GetBrush("Icon.Map"))
+		.SetPressed(*Style.GetBrush("Icon.Map"))
+		.SetNormalPadding(0)
+		.SetPressedPadding(0)
+	);
+	Style.Set("MainView.Button.Menu", FButtonStyle()
+		.SetNormal(*Style.GetBrush("Icon.Menu"))
+		.SetHovered(*Style.GetBrush("Icon.Menu"))
+		.SetPressed(*Style.GetBrush("Icon.Menu"))
+		.SetNormalPadding(0)
+		.SetPressedPadding(0)
+	);
 
 	return StyleSet;
 }
@@ -74,7 +98,7 @@ TSharedRef<FSlateStyleSet> FGameStyle::Create()
 #undef BORDER_BRUSH
 #undef TTF_FONT
 #undef OTF_FONT
-const ISlateStyle& FGameStyle::Get()
+ ISlateStyle& FGameStyle::Get()
 {
 	return *GameStyleInstance;
 }

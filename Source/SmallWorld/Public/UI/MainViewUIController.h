@@ -15,4 +15,11 @@ protected:
 	TSharedPtr<SWidget>	CreateToWorldButton();
 	TSharedPtr<SWidget>	CreateBuildingButton();
 
+
+	FReply OnPowerClicked();
+	FReply OnHeroClicked();
+	FReply OnMapClicked();
+	FReply OnMenuClicked();
+
+
 };
