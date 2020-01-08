@@ -58,7 +58,6 @@ public:
 	FVector				GetInteractivePoint();
 
 	BuildingType        GetBuildingType();
-    BlockTitleType      GetBlockTileType();
     
     ABlockActor *       GetOnBlockActor();
     void                SetOnBlockActor(ABlockActor * _blockActor);
@@ -66,16 +65,13 @@ public:
 	void                SetLevel(int _level);
 	int	                GetLevel();
 
-	void                SetDirection(BuildingDirection _dir);
-	BuildingDirection   GetDirction();
+	FRotator            DirectionRotation() {};
 
-	FRotator            DirectionRotation();
-
-	void                SetIndex(BuildingIndex _index);
-	BuildingIndex       GetIndex();
 	
-	virtual bool        IsInWorld();
- 	virtual bool        IsInWorld(int _index);
+	virtual bool        IsInWorld() {
+		return true;
+	}
+	virtual bool        IsInWorld(int _index) { return true; }
     
 public:
     UPROPERTY(VisibleDefaultsOnly, Category = BaseBuilding)

@@ -21,10 +21,6 @@ public:
     void				FillBuilding(ABaseBuildingActor * _building);
     void				RemoveBuilding(ABaseBuildingActor * _building);
 
-	BlockTitleType		GetTileType();
-
-	void				SetOrientation(CityOrientation _orientation);
-	CityOrientation		GetOrientation();
     
 	void				SetCity(ACityActor * _City);
 	ACityActor *		GetCity();

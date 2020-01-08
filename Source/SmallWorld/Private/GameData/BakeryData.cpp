@@ -5,7 +5,6 @@
 BakeryData::BakeryData()
 {
     mType = B_Bakery;
-	mBlockTileType = T_FullDirtTile;
 
 }
 BakeryData::~BakeryData()

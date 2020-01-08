@@ -5,10 +5,8 @@
 BaseBuildingData::BaseBuildingData()
 {
     
-    mDirection = Dir_None;
     mLevel = 0;
     mType = B_None;
-	mBlockTileType = T_GrassTile;
 
 }
 void BaseBuildingData::Serialization(TSharedRef<TJsonWriter<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>> Writer)

@@ -19,10 +19,7 @@ void ABaseBuildingActor::SaveData(TSharedRef<TJsonWriter<TCHAR, TCondensedJsonPr
 {
     mData->Serialization(Writer);
 }
-BlockTitleType ABaseBuildingActor::GetBlockTileType()
-{
-    return mData->mBlockTileType;
-}
+
 BuildingType ABaseBuildingActor::GetBuildingType()
 {
     return mData->mType;
@@ -81,72 +78,4 @@ void ABaseBuildingActor::SetOnBlockActor(ABlockActor * _blockActor)
 ABlockActor * ABaseBuildingActor::GetOnBlockActor()
 {
     return mOnBlockActor;
-}
-void ABaseBuildingActor::SetDirection(BuildingDirection _dir)
-{
-	mData->mDirection = _dir;
-}
-BuildingDirection ABaseBuildingActor::GetDirction()
-{
-	return mData->mDirection;
-}
-FRotator ABaseBuildingActor::DirectionRotation()
-{
-	FRotator Rotator(ForceInit);
-	switch (mData->mDirection)
-	{
-	case Dir_None:
-		break;
-	case Dir_Corner_City_LeftBottom:
-	case Dir_Corner_Castle_LeftBottom:
-		Rotator.Yaw = -90.f;
-		break;
-	case Dir_Corner_City_LeftTop:
-	case Dir_Corner_Castle_LeftTop:
-		break;
-	case Dir_Corner_City_RightBottom:
-	case Dir_Corner_Castle_RightBottom:
-		Rotator.Yaw = 180.f;
-		break;
-	case Dir_Corner_City_RightTop:
-	case Dir_Corner_Castle_RightTop:
-		Rotator.Yaw = 90.f;
-		break;
-	case Dir_CityEdge_Left:
-	case Dir_CastleEdge_Left:
-		
-		break;
-	case Dir_CityEdge_Right:
-	case Dir_CastleEdge_Right:
-		Rotator.Yaw = 180.f;
-		break;
-	case Dir_CityEdge_Top:
-	case Dir_CastleEdge_Top:
-		Rotator.Yaw = 90.f;
-		break;
-	case Dir_CityEdge_Bottom:
-	case Dir_CastleEdge_Bottom:
-		Rotator.Yaw = -90.f;
-		break;
-	default:
-		break;
-	}
-
-	return Rotator;
-}
-void ABaseBuildingActor::SetIndex(BuildingIndex _index)
-{
-	mData->mIndex = _index;
-}
-BuildingIndex ABaseBuildingActor::GetIndex()
-{
-	return mData->mIndex;
-}
-bool ABaseBuildingActor::IsInWorld()
-{
-	return IsInWorld(mData->mIndex.X) && IsInWorld(mData->mIndex.Y);
-}
-bool ABaseBuildingActor::IsInWorld(int _index)
-{
-	return _index >= BoundSize && _index <= WorldSize;
 }

@@ -5,7 +5,6 @@
 ArmyCenterData::ArmyCenterData()
 {
     mType= B_ArmyCenter;
-	mBlockTileType = T_CenterDirtTile;
 }
 ArmyCenterData::~ArmyCenterData()
 {

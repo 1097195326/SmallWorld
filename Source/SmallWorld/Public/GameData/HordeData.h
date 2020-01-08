@@ -2,7 +2,7 @@
 
 #include "BaseBuildingData.h"
 
-class CityData : public BaseBuildingData
+class HordeData : public DataR
 {
 protected:
     
@@ -11,6 +11,10 @@ public:
     virtual void Deserialization(TSharedPtr<FJsonObject>  JsonObject) override;
 
     
+	TArray<BaseBuildingData*>		BuildingDatas;
+
+private:
+	int32 HordeId;
     
 };
 

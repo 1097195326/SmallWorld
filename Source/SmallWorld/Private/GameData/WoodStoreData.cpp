@@ -5,7 +5,6 @@
 WoodStoreData::WoodStoreData()
 {
     mType = B_WoodStore;
-	mBlockTileType = T_FullDirtTile;
 }
 WoodStoreData::~WoodStoreData()
 {

@@ -81,15 +81,13 @@ ACityActor *  GameWorld::BuildCity(int _x, int _y)
 	ACityActor * CityActor = Cast<ACityActor>(UGameplayStatics::BeginDeferredActorSpawnFromClass(SWI, ACityActor::StaticClass(), trans));
 	if (CityActor)
 	{
-		CityActor->InitData(new CityData());
-		CityActor->SetIndex(BuildingIndex(_x, _y));
 
 
 		UGameplayStatics::FinishSpawningActor(CityActor, trans);
 		
-		/*GeneralGoal * goal = new GeneralGoal();
-		goal->InitWithCityActor(CityActor);
-		GeneralGoals.push_back(goal);*/
+		//GeneralGoal * goal = new GeneralGoal();
+		//goal->InitWithCityActor(CityActor);
+		////GeneralGoals.push_back(goal);
 
 		return CityActor;
 	}

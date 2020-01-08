@@ -5,7 +5,6 @@
 MillData::MillData()
 {
     mType = B_Mill;
-	mBlockTileType = T_FullDirtTile;
 }
 MillData::~MillData()
 {

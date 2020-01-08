@@ -18,9 +18,9 @@
 #include "GateActor.h"
 #include "TowerActor.h"
 #include "WallActor.h"
-#include "CityData.h"
+#include "HordeData.h"
 
-#include "GeneralGoal.h"
+//#include "TGeneralGoal.h"
 #include "SoldierGroupManager.h"
 
 #include "CityActor.generated.h"
@@ -90,7 +90,7 @@ private:
 	UPROPERTY(VisibleDefaultsOnly)
 		UBoxComponent * CollisionBox;
 
-	GeneralGoal *					mGeneralGoal;
+	//GeneralGoal *					mGeneralGoal;
 
 	list<SoldierGroupManager*>		mGroupManagers;
 

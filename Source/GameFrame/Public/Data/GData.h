@@ -5,6 +5,7 @@
 #include "Json.h"
 #include "XmlParser.h"
 
+
 class GAMEFRAME_API GData : public BaseObject
 {
 
