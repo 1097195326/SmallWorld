@@ -4,7 +4,7 @@
 
 WoodStoreData::WoodStoreData()
 {
-    mType = B_WoodStore;
+	BuildingType = B_WoodStore;
 }
 WoodStoreData::~WoodStoreData()
 {

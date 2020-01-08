@@ -5,22 +5,22 @@
 BaseBuildingData::BaseBuildingData()
 {
     
-    mLevel = 0;
-    mType = B_None;
+    BuildingLevel = 0;
+    BuildingType = B_None;
 
 }
 void BaseBuildingData::Serialization(TSharedRef<TJsonWriter<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>> Writer)
 {
 	Writer->WriteObjectStart("BaseBuilding");
-	Writer->WriteValue("Health", mHealth);
-	Writer->WriteValue("Level", mLevel);
-    Writer->WriteValue("mPositon",mPosition.ToString());
+	Writer->WriteValue("BuildingHealth", BuildingHealth);
+	Writer->WriteValue("BuildingLevel", BuildingLevel);
+    Writer->WriteValue("BuildingPosition",BuildingPosition.ToString());
 	Writer->WriteObjectEnd();//BaseBuilding
 }
 void BaseBuildingData::Deserialization(TSharedPtr<FJsonObject> JsonObject)
 {
-	mHealth = JsonObject->GetNumberField("mHealth");
-	mLevel = JsonObject->GetIntegerField("mLevel");
-    mPosition.InitFromString(JsonObject->GetStringField("mPosition"));
+	BuildingHealth = JsonObject->GetNumberField("BuildingHealth");
+	BuildingLevel = JsonObject->GetIntegerField("BuildingLevel");
+    BuildingPosition.InitFromString(JsonObject->GetStringField("BuildingPosition"));
     
 }

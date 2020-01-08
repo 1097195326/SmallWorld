@@ -4,7 +4,7 @@
 
 FoodStoreData::FoodStoreData()
 {
-    mType = B_FoodStore;
+	BuildingType = B_FoodStore;
 }
 FoodStoreData::~FoodStoreData()
 {

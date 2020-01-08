@@ -23,7 +23,7 @@ AMillActor::AMillActor()
 }
 void AMillActor::On_Init()
 {
-	mData->mLevel = 0;
+	mData->BuildingLevel = 0;
 	USkeletalMesh * mesh = LoadObject<USkeletalMesh>(this, *GetMeshPath());
 	if (mesh)
 	{
@@ -40,7 +40,7 @@ void AMillActor::On_Init()
 FString AMillActor::GetAnimPath()
 {
 	FString AnimPath;
-	switch (mData->mLevel)
+	switch (mData->BuildingLevel)
 	{
 	case 0:
 		AnimPath = Anim0;

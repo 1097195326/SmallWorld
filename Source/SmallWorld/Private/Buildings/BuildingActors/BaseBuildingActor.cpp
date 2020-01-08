@@ -20,17 +20,17 @@ void ABaseBuildingActor::SaveData(TSharedRef<TJsonWriter<TCHAR, TCondensedJsonPr
     mData->Serialization(Writer);
 }
 
-BuildingType ABaseBuildingActor::GetBuildingType()
+EBuildingType ABaseBuildingActor::GetBuildingType()
 {
-    return mData->mType;
+    return mData->BuildingType;
 }
 void ABaseBuildingActor::SetLevel(int _level)
 {
-	mData->mLevel = _level;
+	mData->BuildingLevel = _level;
 }
 int ABaseBuildingActor::GetLevel()
 {
-	return mData->mLevel;
+	return mData->BuildingLevel;
 }
 FVector ABaseBuildingActor::GetInteractivePoint()
 {
@@ -46,7 +46,7 @@ FVector ABaseBuildingActor::GetInteractivePoint()
 FString ABaseBuildingActor::GetMeshPath()
 {
 	FString Path;
-	switch (mData->mLevel)
+	switch (mData->BuildingLevel)
 	{
 	case 0:
 		Path = MeshPathLevel_0;

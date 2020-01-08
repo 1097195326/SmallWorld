@@ -18,7 +18,7 @@ AGateActor::AGateActor()
 }
 void AGateActor::On_Init()
 {
-	mData->mLevel = 1;
+	mData->BuildingLevel = 1;
 	USkeletalMesh * mesh = LoadObject<USkeletalMesh>(this, *GetMeshPath());
 	if (mesh)
 	{

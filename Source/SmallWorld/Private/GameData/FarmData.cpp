@@ -4,7 +4,7 @@
 
 FarmData::FarmData()
 {
-    mType = B_Farm;
+	BuildingType = B_Farm;
 }
 FarmData::~FarmData()
 {

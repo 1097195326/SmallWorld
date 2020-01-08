@@ -19,7 +19,7 @@ ABakeryActor::ABakeryActor()
 }
 void ABakeryActor::On_Init()
 {
-	mData->mLevel = 0;
+	mData->BuildingLevel = 0;
 	UStaticMesh * mesh = LoadObject<UStaticMesh>(this, *GetMeshPath());
 	if (mesh)
 	{

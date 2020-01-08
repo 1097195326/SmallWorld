@@ -4,7 +4,7 @@
 
 BakeryData::BakeryData()
 {
-    mType = B_Bakery;
+    BuildingType = B_Bakery;
 
 }
 BakeryData::~BakeryData()

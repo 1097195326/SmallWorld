@@ -4,7 +4,7 @@
 
 MillData::MillData()
 {
-    mType = B_Mill;
+	BuildingType = B_Mill;
 }
 MillData::~MillData()
 {

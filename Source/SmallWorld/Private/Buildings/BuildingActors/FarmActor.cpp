@@ -19,7 +19,7 @@ AFarmActor::AFarmActor()
 }
 void AFarmActor::On_Init()
 {
-	mData->mLevel = 1;
+	mData->BuildingLevel = 1;
 	UStaticMesh * mesh = LoadObject<UStaticMesh>(this, *GetMeshPath());
 	if (mesh)
 	{

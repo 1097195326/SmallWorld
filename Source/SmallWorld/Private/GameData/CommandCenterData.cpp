@@ -4,7 +4,7 @@
 
 CommandCenterData::CommandCenterData()
 {
-    mType = B_CommandCenter;
+	BuildingType = B_CommandCenter;
 }
 CommandCenterData::~CommandCenterData()
 {

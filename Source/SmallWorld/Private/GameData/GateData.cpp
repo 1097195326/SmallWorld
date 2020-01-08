@@ -4,7 +4,7 @@
 
 GateData::GateData()
 {
-    mType = B_Gate;
+	BuildingType = B_Gate;
     
     
 }

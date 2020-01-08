@@ -4,7 +4,7 @@
 
 ArmyCenterData::ArmyCenterData()
 {
-    mType= B_ArmyCenter;
+    BuildingType= B_ArmyCenter;
 }
 ArmyCenterData::~ArmyCenterData()
 {

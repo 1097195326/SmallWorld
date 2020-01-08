@@ -6,7 +6,7 @@
 
 #define  ZHX_BUG
 
-enum BuildingType
+enum EBuildingType
 {
 	B_None,
 
@@ -40,21 +40,19 @@ class BaseBuildingData : public DataR
 {
 
 public:
-    
-    FVector     mPosition;
-    FRotator    mRotator;
-    
-	float	    mHealth;
-	int		    mLevel;
-    
-    BuildingType            mType;
-    
+	friend class ABaseBuildingActor;
 
-public:
     BaseBuildingData();
     
 	virtual void Serialization(TSharedRef<TJsonWriter<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>> Writer) override;
 	virtual void Deserialization(TSharedPtr<FJsonObject>  JsonObject) override;
 
-    
+	
+	public:
+	FVector     BuildingPosition;
+	FRotator    BuildingRotator;
+	float	    BuildingHealth;
+	int32		    BuildingLevel;
+	EBuildingType	BuildingType;
+
 };

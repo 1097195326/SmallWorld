@@ -57,7 +57,7 @@ public:
     
 	FVector				GetInteractivePoint();
 
-	BuildingType        GetBuildingType();
+	EBuildingType        GetBuildingType();
     
     ABlockActor *       GetOnBlockActor();
     void                SetOnBlockActor(ABlockActor * _blockActor);

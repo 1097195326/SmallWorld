@@ -19,7 +19,7 @@ AMineActor::AMineActor()
 }
 void AMineActor::On_Init()
 {
-	mData->mLevel = 0;
+	mData->BuildingLevel = 0;
 	UStaticMesh * mesh = LoadObject<UStaticMesh>(this, *GetMeshPath());
 	if (mesh)
 	{
