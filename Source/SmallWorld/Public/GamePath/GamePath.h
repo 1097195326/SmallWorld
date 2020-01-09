@@ -16,7 +16,7 @@ public:
 
 	FString SaveAbsolutePath();
 	FString IOSSavePath();
-	FString GamePath(const TCHAR * appPath = TEXT(""));
+	FString ProjectPath(const TCHAR * appPath = TEXT(""));
 
 
 private:

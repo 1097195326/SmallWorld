@@ -21,7 +21,7 @@ FString GamePath::IOSSavePath()
 	FString iosDir = ExtractIOSDir(*downDir);
 	return iosDir;
 }
-FString GamePath::GamePath(const TCHAR * appPath)
+FString GamePath::ProjectPath(const TCHAR * appPath)
 {
 	IPlatformFile &  pf = FPlatformFileManager::Get().GetPlatformFile();
 	FString AppendPath = FPaths::Combine(FPaths::ProjectDir(), appPath);
