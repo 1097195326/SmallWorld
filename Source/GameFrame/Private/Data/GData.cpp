@@ -8,7 +8,7 @@ void GData::Serialization(TSharedRef<TJsonWriter<TCHAR, TCondensedJsonPrintPolic
 }
 void GData::Deserialization(TSharedPtr<FJsonObject> JsonObject)
 {
-	int ss = JsonObject->GetNumberField("");
+	
 
 }
 void GData::InitWithXML(const FXmlFile * _file)

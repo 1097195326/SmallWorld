@@ -10,17 +10,19 @@
 using namespace std;
 
 
-class GamePath : public SingleTemplate<GamePath>
+class GamePath
 {
 public:
 
-	FString SaveAbsolutePath();
-	FString IOSSavePath();
-	FString ProjectPath(const TCHAR * appPath = TEXT(""));
+	static FString SaveAbsolutePath();
+	static FString IOSSavePath();
+	static FString GameConfigPath();
+
+	static FString ProjectPath(const TCHAR * appPath = TEXT(""));
 
 
 private:
-	string	ExtractIOSDir(const string &DirPath);
-	FString ExtractIOSDir(const TCHAR * DirPath);
+	static string	ExtractIOSDir(const string &DirPath);
+	static FString ExtractIOSDir(const TCHAR * DirPath);
 
 };
