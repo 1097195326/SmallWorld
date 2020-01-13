@@ -1,6 +1,7 @@
 
 #include "TowerData.h"
 
+G_REGISTER_CLASS(TowerData)
 
 TowerData::TowerData()
 {
@@ -13,7 +14,12 @@ TowerData::~TowerData()
 }
 void TowerData::Serialization(TSharedRef<TJsonWriter<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>> Writer)
 {
-    
+	Writer->WriteObjectStart("TowerData");
+	BaseBuildingData::Serialization(Writer);
+
+
+
+	Writer->WriteObjectEnd();// TowerData
     
 }
 void TowerData::Deserialization(TSharedPtr<FJsonObject>  JsonObject)

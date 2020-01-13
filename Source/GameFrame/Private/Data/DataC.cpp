@@ -1,15 +1,18 @@
 ////#include "GCore.h"
 #include "DataC.h"
 
-int DataC::GetTid()
+
+
+void DataC::Serialization(TSharedRef<TJsonWriter<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>> Writer)
 {
-	return m_Tid;
+	Writer->WriteObjectStart("DataC");
+	GData::Serialization(Writer);
+
+	Writer->WriteObjectEnd();//DataC
 }
-int DataC::GetRid()
+void DataC::Deserialization(TSharedPtr<FJsonObject>  JsonObject)
 {
-	return m_Rid;
-}
-int DataC::GetCid()
-{
-	return m_Cid;
+	GData::Deserialization(JsonObject->GetObjectField("GData"));
+
+
 }

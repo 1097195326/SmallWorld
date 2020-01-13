@@ -20,24 +20,13 @@ void GameWorldData::Deserialization(TSharedPtr<FJsonObject>  JsonObject)
     
     
 }
-int32 GameWorldData::CreateHordeId()
-{
-	int32 HordeId = 1;
-	while (HordeList.Contains(HordeId))
-	{
-		++HordeId;
-	}
-	HordeList.AddUnique(HordeId);
-	
-	return HordeId;
-}
 
-bool GameWorldData::HordeIdIsValid(int32 hordeId)
+bool GameWorldData::HordeIdIsValid(FGuid hordeId)
 {
 	return HordeList.Contains(hordeId);
 }
 
-bool GameWorldData::DestroyHordeId(int32 hordeId)
+bool GameWorldData::DestroyHordeId(FGuid hordeId)
 {
 	if (HordeList.Contains(hordeId))
 	{

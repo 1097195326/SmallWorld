@@ -6,10 +6,12 @@
 class GAMEFRAME_API DataT : public GData
 {
 protected:
-	int		m_Tid;
+	
 public:
-	int	GetTid();
 	
-	
+
+	virtual void Serialization(TSharedRef<TJsonWriter<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>> Writer);
+	virtual void Deserialization(TSharedPtr<FJsonObject> JsonObject);
+
 
 };

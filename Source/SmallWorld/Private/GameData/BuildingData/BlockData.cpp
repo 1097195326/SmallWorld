@@ -1,5 +1,6 @@
 #include "BlockData.h"
 
+G_REGISTER_CLASS(BlockData)
 
 
 BlockData::BlockData()

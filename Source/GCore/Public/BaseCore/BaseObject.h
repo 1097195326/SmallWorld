@@ -9,7 +9,7 @@
 class GCORE_API BaseObject
 {
 
-private:
+protected:
 	FGuid	m_ID;
 public:
 	BaseObject();

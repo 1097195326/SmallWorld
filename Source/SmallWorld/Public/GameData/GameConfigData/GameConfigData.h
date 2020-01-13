@@ -28,12 +28,14 @@ class GameConfigData : public DataT
 public:
 	virtual void InitWithXML(const FXmlFile * _file) override;
 
-
 	
+	const BuildingConfig & GetBuildingConfig(FString name);
+	FString TranslateLanguage(FString key);
 private:
 
 	TMap<FString, BuildingConfig>  BuildingConfigMap;
-	TMap<FString, FString> LanguageMap;
+	TMap<FString,TMap<FString, FString>> LanguageMap;
 };
+
 
 

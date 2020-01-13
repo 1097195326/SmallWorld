@@ -10,7 +10,7 @@
 using namespace std;
 
 
-class GamePath
+class GamePath : public FPaths
 {
 public:
 

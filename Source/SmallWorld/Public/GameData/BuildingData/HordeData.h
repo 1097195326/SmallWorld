@@ -13,8 +13,8 @@ public:
     
 	TArray<BaseBuildingData*>		BuildingDatas;
 
+
 private:
-	int32 HordeId;
     
 };
 

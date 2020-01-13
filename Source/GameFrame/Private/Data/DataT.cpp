@@ -3,7 +3,18 @@
 #include "DataT.h"
 
 
-int DataT::GetTid()
+
+
+void DataT::Serialization(TSharedRef<TJsonWriter<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>> Writer)
 {
-	return m_Tid;
+	Writer->WriteObjectStart("DataT");
+	GData::Serialization(Writer);
+
+	Writer->WriteObjectEnd();//DataT
+}
+void DataT::Deserialization(TSharedPtr<FJsonObject>  JsonObject)
+{
+	GData::Deserialization(JsonObject->GetObjectField("GData"));
+
+
 }

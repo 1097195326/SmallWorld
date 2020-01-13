@@ -1,5 +1,6 @@
 #pragma once
-#include "BaseBuildingData.h"
+
+#include "HordeData.h"
 
 
 class GameWorldData : public DataR
@@ -16,12 +17,13 @@ public:
     
 
 	// Manage HordeId
-	int32	CreateHordeId();
-	bool	HordeIdIsValid(int32 hordeId);
-	bool	DestroyHordeId(int32 hordeId);
+	
+	bool	HordeIdIsValid(FGuid hordeId);
+	bool	DestroyHordeId(FGuid hordeId);
 private:
 
-	TArray<int32>  HordeList;
+
+	TArray<FGuid>  HordeList;
 
     
 };

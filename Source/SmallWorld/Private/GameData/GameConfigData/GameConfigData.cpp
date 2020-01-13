@@ -41,21 +41,31 @@ void GameConfigData::InitWithXML(const FXmlFile * xmlFile)
 		{
 			for (const FXmlNode * DataInfo = DataTypeInfo->GetFirstChildNode(); DataInfo != NULL; DataInfo = DataInfo->GetNextNode())
 			{
-				if (DataInfo->GetAttribute(TEXT("name")).Equals(LocalLanguage))
+				TMap<FString, FString> language;
+				for (const FXmlNode * info = DataInfo->GetFirstChildNode(); info != NULL; info = info->GetNextNode())
 				{
-					for (const FXmlNode * info = DataInfo->GetFirstChildNode(); info != NULL; info = info->GetNextNode())
-					{
-						LanguageMap.Add(info->GetAttribute(TEXT("key")), info->GetAttribute(TEXT("value")));
-					}
+					language.Add(info->GetAttribute(TEXT("key")), info->GetAttribute(TEXT("value")));
 				}
+				LanguageMap.Add(DataInfo->GetAttribute(TEXT("name")), language);
 			}
 		}
 	}
-
-	for (auto & config : BuildingConfigMap)
+	for (auto & building : BuildingConfigMap)
 	{
-		config.Value.title = LanguageMap.Contains(config.Value.title) ? LanguageMap[config.Value.title] : config.Value.title;
-		config.Value.describe = LanguageMap.Contains(config.Value.describe) ? LanguageMap[config.Value.describe] : config.Value.describe;
+		building.Value.title = LanguageMap[LocalLanguage][building.Value.title];
+		building.Value.describe = LanguageMap[LocalLanguage][building.Value.describe];
 	}
 	
+}
+const BuildingConfig & GameConfigData::GetBuildingConfig(FString name)
+{
+	return BuildingConfigMap[name];
+}
+FString GameConfigData::TranslateLanguage(FString key)
+{
+	if (LanguageMap.Contains(LocalLanguage) && LanguageMap[LocalLanguage].Contains(key))
+	{
+		return LanguageMap[LocalLanguage][key];
+	}
+	return TEXT("");
 }

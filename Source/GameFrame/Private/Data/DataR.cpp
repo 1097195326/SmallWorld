@@ -2,11 +2,17 @@
 #include "DataR.h"
 
 
-int DataR::GetTid()
+
+void DataR::Serialization(TSharedRef<TJsonWriter<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>> Writer)
 {
-	return m_Tid;
+	Writer->WriteObjectStart("DataR");
+	GData::Serialization(Writer);
+
+	Writer->WriteObjectEnd();//DataR
 }
-int DataR::GetRid()
+void DataR::Deserialization(TSharedPtr<FJsonObject>  JsonObject)
 {
-	return m_Rid;
+	GData::Deserialization(JsonObject->GetObjectField("GData"));
+
+
 }

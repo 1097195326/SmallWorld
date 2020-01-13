@@ -3,13 +3,14 @@
 
 FString GamePath::SaveAbsolutePath()
 {
+	FString SavePath = TEXT("");
 #if PLATFORM_WINDOWS
-	static FString persistentDir = FPaths::ConvertRelativePathToFull(FPaths::ProjectSavedDir(), TEXT(""));
+	static FString persistentDir = FPaths::ConvertRelativePathToFull(FPaths::ProjectSavedDir(), SavePath);
 #elif PLATFORM_ANDROID
-	static FString persistentDir = FPaths::ConvertRelativePathToFull(FPaths::ProjectPersistentDownloadDir(), TEXT(""));
+	static FString persistentDir = FPaths::ConvertRelativePathToFull(FPaths::ProjectPersistentDownloadDir(), SavePath);
 #else
 	IPlatformFile &  pf = FPlatformFileManager::Get().GetPlatformFile();
-	FString AppendPath = FPaths::Combine(FPaths::ProjectSavedDir(), TEXT(""));
+	FString AppendPath = FPaths::Combine(FPaths::ProjectSavedDir(), SavePath);
 	static FString persistentDir = pf.ConvertToAbsolutePathForExternalAppForWrite(*AppendPath);
 #endif
 	//UE_LOG(LogTemp,Log,TEXT("zhx : SaveAbsolutePath : %s"),*persistentDir);

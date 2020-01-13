@@ -3,7 +3,7 @@
 
 BaseObject::BaseObject()
 {
-	FPlatformMisc::CreateGuid(m_ID);
+	m_ID = FGuid::NewGuid();
 
 }
 BaseObject::~BaseObject()

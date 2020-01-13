@@ -16,4 +16,7 @@ public :
 	virtual void Serialization(TSharedRef<TJsonWriter<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>> Writer);
 	virtual void Deserialization(TSharedPtr<FJsonObject> JsonObject);
 
+	bool operator==(const GData & data) { return m_ID == data.m_ID; }
+	bool operator==(const GData * data) { return m_ID == data->m_ID; }
+
 };

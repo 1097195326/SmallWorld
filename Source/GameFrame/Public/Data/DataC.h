@@ -4,13 +4,11 @@
 class GAMEFRAME_API DataC : public GData
 {
 protected:
-	int		m_Tid;
-	int		m_Rid;
-	int		m_Cid;
+	
 public:
-	int	GetTid();
-	int GetRid();
-	int GetCid();
+	
 
+	virtual void Serialization(TSharedRef<TJsonWriter<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>> Writer);
+	virtual void Deserialization(TSharedPtr<FJsonObject> JsonObject);
 
 };
