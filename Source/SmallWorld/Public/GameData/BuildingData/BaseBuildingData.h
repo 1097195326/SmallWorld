@@ -4,35 +4,29 @@
 #include "GameConfig.h"
 
 
-#define  ZHX_BUG
 
 enum EBuildingType
 {
 	B_None,
+	// building
+	B_ArmyCenter,
+	B_Bakery,
+	B_CommandCenter,
+	B_Farm,
+	B_FoodStore,
+	B_FruitFarm,
+	B_Gate,
+	B_House,
+	B_Mill,
+	B_MoneyStore,
+	B_WoodStoneStore,
+	B_Tower,
+	B_Wall,
 
-	B_World,
-
-	B_City,
-	B_CityBlock,
-
+	//
 	B_Tree,
 	B_Stone,
 	B_Mine,
-	B_Farm,
-	B_FruitFarm,
-	B_House,
-	B_Wall,
-	B_Tower,
-	B_Gate,
-	B_CommandCenter,
-	B_ArmyCenter,
-	B_FoodStore,
-	B_WoodStore,
-	B_StoneStore,
-	B_MoneyStore,
-
-	B_Bakery,
-	B_Mill,
 
 };
 

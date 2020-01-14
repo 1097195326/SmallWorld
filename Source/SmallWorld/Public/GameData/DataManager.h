@@ -13,6 +13,7 @@ public:
 
 	void InitData();
 	void LoadData();
+	void SaveData();
 	void ClearData();
 		
 

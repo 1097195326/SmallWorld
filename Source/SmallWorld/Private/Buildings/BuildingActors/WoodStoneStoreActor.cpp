@@ -1,7 +1,7 @@
-#include "StoneStoreActor.h"
+#include "WoodStoneStoreActor.h"
 
 
-AStoneStoreActor::AStoneStoreActor()
+AWoodStoneStoreActor::AWoodStoneStoreActor()
 {
 	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("RootComponent"));
 
@@ -13,7 +13,7 @@ AStoneStoreActor::AStoneStoreActor()
 
 	MeshPathLevel_1 = TEXT("/Game/CastlePack/Meshes/SM_Stockpile_Lvl1");
 }
-void AStoneStoreActor::On_Init()
+void AWoodStoneStoreActor::On_Init()
 {
 	mData->BuildingLevel = 1;
 	UStaticMesh * mesh = LoadObject<UStaticMesh>(this, *GetMeshPath());

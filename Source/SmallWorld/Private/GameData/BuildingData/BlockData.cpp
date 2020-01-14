@@ -5,7 +5,7 @@ G_REGISTER_CLASS(BlockData)
 
 BlockData::BlockData()
 {
-	BuildingType = B_CityBlock;
+	
 
 }
 void BlockData::Serialization(TSharedRef<TJsonWriter<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>> Writer)

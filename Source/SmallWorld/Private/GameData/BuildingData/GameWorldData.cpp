@@ -8,31 +8,35 @@ GameWorldData::GameWorldData()
 }
 GameWorldData::~GameWorldData()
 {
-    
+    for (auto hordeData : HordeDataMap)
+    {
+		delete hordeData.Value;
+    }
+	HordeDataMap.Empty();
 }
 void GameWorldData::Serialization(TSharedRef<TJsonWriter<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>> Writer)
 {
 	Writer->WriteObjectStart("GameWorldData");
 
-		Writer->WriteObjectStart("HordeDatas");
-		for (auto temHordeData : HordeDatas)
+		Writer->WriteObjectStart("HordeDataMap");
+		for (auto temHordeData : HordeDataMap)
 		{
-			temHordeData->Serialization(Writer);
+			temHordeData.Value->Serialization(Writer);
 		}
-		Writer->WriteObjectEnd();//HordeDatas
+		Writer->WriteObjectEnd();//HordeDataMap
 	Writer->WriteObjectEnd();//GameWorldData
 }
 void GameWorldData::Deserialization(TSharedPtr<FJsonObject>  JsonObject)
 {
-	TSharedPtr<FJsonObject> JHordeDatas = JsonObject->GetObjectField("HordeDatas");
-	for (auto jPair : JHordeDatas->Values)
+	TSharedPtr<FJsonObject> JHordeDataMap = JsonObject->GetObjectField("HordeDataMap");
+	for (auto jPair : JHordeDataMap->Values)
 	{
 		FString DataClass = jPair.Key;
 		HordeData * Data = (HordeData*)(ReflectManager::Get()->GetClassByName(TCHAR_TO_UTF8(*DataClass)));
 		if (Data)
 		{
 			Data->Deserialization(jPair.Value->AsObject());
-			HordeDatas.Add(Data);
+			HordeDataMap.Add(Data->GetID(), Data);
 		}
 	}
     
@@ -40,25 +44,35 @@ void GameWorldData::Deserialization(TSharedPtr<FJsonObject>  JsonObject)
 void GameWorldData::InitUserData(UserData * userData)
 {
 	HordeData * userHordeData = nullptr;
-	if (!userData->GetHordeId().IsValid())
+	if (HordeIdIsValid(userData->GetHordeId()))
 	{
-		userHordeData = new HordeData();
-		userData->SetHordeId(userHordeData->GetID());
+		userHordeData = HordeDataMap[userData->GetHordeId()];
 	}
-	
-	userData->SetHordeData(userHordeData);
+	else
+	{
+		userHordeData = CreateHordeData();
+		userData->hordeId = userHordeData->GetID();
+	}
+	userData->hordeData = userHordeData;
+}
+HordeData * GameWorldData::CreateHordeData()
+{
+	HordeData * resData = new HordeData();
 
+	HordeDataMap.Add(resData->GetID(), resData);
+
+	return resData;
 }
 bool GameWorldData::HordeIdIsValid(FGuid hordeId)
 {
-	return HordeList.Contains(hordeId);
+	return hordeId.IsValid() && HordeDataMap.Contains(hordeId);
 }
 
 bool GameWorldData::DestroyHordeId(FGuid hordeId)
 {
-	if (HordeList.Contains(hordeId))
+	if (HordeDataMap.Contains(hordeId))
 	{
-		HordeList.Remove(hordeId);
+		HordeDataMap.Remove(hordeId);
 		return true;
 	}
 	return false;

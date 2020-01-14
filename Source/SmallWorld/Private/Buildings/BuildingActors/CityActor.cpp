@@ -427,10 +427,10 @@ bool ACityActor::BuildStoneStore()
 	if (Result)
 	{
 		FTransform trans(blockActor->GetFillLocation());
-		AStoneStoreActor * BuildActor = Cast<AStoneStoreActor>(UGameplayStatics::BeginDeferredActorSpawnFromClass(SWI, AStoneStoreActor::StaticClass(), trans));
+		AWoodStoneStoreActor * BuildActor = Cast<AWoodStoneStoreActor>(UGameplayStatics::BeginDeferredActorSpawnFromClass(SWI, AWoodStoneStoreActor::StaticClass(), trans));
 		if (BuildActor)
 		{
-            BuildActor->InitData(new StoneStoreData());
+            BuildActor->InitData(new WoodStoneStoreData());
 			blockActor->FillBuilding(BuildActor);
 
 			

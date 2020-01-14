@@ -15,14 +15,7 @@ DataManager::DataManager()
 }
 void DataManager::InitData()
 {
-	if (FPlatformFileManager::Get().GetPlatformFile().FileExists(*UserDataFilePath))
-	{
-
-	}
-	if (FPlatformFileManager::Get().GetPlatformFile().FileExists(*GameWorldDataFilePath))
-	{
-
-	}
+	mGameWorldData->InitUserData(mUserData);
 
 }
 void DataManager::LoadData()
@@ -31,6 +24,24 @@ void DataManager::LoadData()
 	LoadGameConfigData();
 	LoadGameWorldData();
 
+	if (!mUserData->GetHordeId().IsValid())
+	{
+		InitData();
+		SaveData();
+	}
+}
+void DataManager::SaveData()
+{
+	FString Content;
+	auto writer = TJsonWriterFactory<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>::Create(&Content);
+	mUserData->Serialization(writer);
+	writer->Close();
+	FFileHelper::SaveStringToFile(Content, *UserDataFilePath);
+
+	Content.Empty();
+	mGameWorldData->Serialization(writer);
+	writer->Close();
+	FFileHelper::SaveStringToFile(Content, *GameWorldDataFilePath);
 }
 void DataManager::ClearData()
 {
@@ -58,14 +69,35 @@ void DataManager::LoadGameConfigData()
 }
 bool DataManager::LoadUserData()
 {
+	if (mUserData == nullptr)
+	{
+		mUserData = new UserData();
+	}
 	if (FPlatformFileManager::Get().GetPlatformFile().FileExists(*UserDataFilePath))
 	{
-
+		FString Content;
+		FFileHelper::LoadFileToString(Content, *UserDataFilePath);
+		auto fileReader = TJsonReaderFactory<TCHAR>::Create(Content);
+		TSharedPtr<FJsonObject> JsonContent = MakeShareable(new FJsonObject);
+		FJsonSerializer::Deserialize(fileReader, JsonContent);
+		mUserData->Deserialization(JsonContent);
 		return true;
 	}
 	return false;
 }
 void DataManager::LoadGameWorldData()
 {
-
+	if (mGameWorldData == nullptr)
+	{
+		mGameWorldData = new GameWorldData();
+	}
+	if (FPlatformFileManager::Get().GetPlatformFile().FileExists(*GameWorldDataFilePath))
+	{
+		FString Content;
+		FFileHelper::LoadFileToString(Content, *GameWorldDataFilePath);
+		auto fileReader = TJsonReaderFactory<TCHAR>::Create(Content);
+		TSharedPtr<FJsonObject> JsonContent = MakeShareable(new FJsonObject);
+		FJsonSerializer::Deserialize(fileReader, JsonContent);
+		mGameWorldData->Deserialization(JsonContent);
+	}
 }

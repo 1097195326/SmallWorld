@@ -29,7 +29,7 @@ void HordeData::Deserialization(TSharedPtr<FJsonObject>  JsonObject)
 			BuildingDatas.Add(BuildingData);
 		}
 	}
-
+	
 }
 
 

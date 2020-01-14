@@ -18,13 +18,13 @@ public:
     
 	void	InitUserData(class UserData * userData);
 	// Manage HordeId
-	
+	HordeData * CreateHordeData();
+
 	bool	HordeIdIsValid(FGuid hordeId);
 	bool	DestroyHordeId(FGuid hordeId);
 private:
-	TArray<HordeData *>	HordeDatas;
+	TMap<FGuid,HordeData *>	HordeDataMap;
 
-	TArray<FGuid>  HordeList;
 
     
 };

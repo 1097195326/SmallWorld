@@ -11,7 +11,7 @@
 #include "MineActor.h"
 #include "MoneyStoreActor.h"
 #include "StoneActor.h"
-#include "StoneStoreActor.h"
+#include "WoodStoneStoreActor.h"
 #include "TreeActor.h"
 #include "WoodStoreActor.h"
 #include "BlockActor.h"
@@ -102,7 +102,7 @@ private:
 	list<AMillActor *>              MillList;
 	list<AMoneyStoreActor *>        MoneyStoreList;
 	list<AFoodStoreActor *>         FoodStoreList;
-	list<AStoneStoreActor *>        StoneStoreList;
+	list<AWoodStoneStoreActor *>        StoneStoreList;
 	list<AWoodStoreActor *>         WoodStoreList;
 	list<AWallActor *>              WallList;
 	list<ATowerActor *>             TowerList;

@@ -5,7 +5,7 @@ G_REGISTER_CLASS(WoodStoreData)
 
 WoodStoreData::WoodStoreData()
 {
-	BuildingType = B_WoodStore;
+	
 }
 WoodStoreData::~WoodStoreData()
 {

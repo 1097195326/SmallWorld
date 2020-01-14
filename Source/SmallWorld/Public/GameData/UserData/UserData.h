@@ -1,25 +1,23 @@
 #pragma once
 
 #include "DataC.h"
-
+#include "HordeData.h"
 
 class UserData : public DataC
 {
 public:
+	friend class GameWorldData;
+
 	UserData();
 
 	virtual void Serialization(TSharedRef<TJsonWriter<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>> Writer) override;
 	virtual void Deserialization(TSharedPtr<FJsonObject>  JsonObject) override;
 
-	const FGuid &	GetHordeId() { return HordeId; }
-	void			SetHordeId(const FGuid& hordeId) { HordeId = hordeId; }
-
-	void  SetHordeData(class HordeData * hordeData);
-	HordeData * GetHordeData();
+	const FGuid &	GetHordeId() { return hordeId; }
+	 HordeData * GetHordeData() { return hordeData; }
 private:
-	class HordeData * mHordeData;
-
-	FGuid  HordeId;
+	HordeData * hordeData;
+	FGuid  hordeId;
 
 };
 
