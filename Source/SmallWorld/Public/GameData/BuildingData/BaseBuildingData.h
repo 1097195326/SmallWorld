@@ -42,8 +42,8 @@ public:
 	virtual void Serialization(TSharedRef<TJsonWriter<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>> Writer) override;
 	virtual void Deserialization(TSharedPtr<FJsonObject>  JsonObject) override;
 
-	
-	public:
+	virtual FString GetName() { return TEXT(""); }
+public:
 	FVector     BuildingPosition;
 	FRotator    BuildingRotator;
 	float	    BuildingHealth;
