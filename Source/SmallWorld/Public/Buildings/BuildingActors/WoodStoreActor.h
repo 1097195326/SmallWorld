@@ -1,6 +1,5 @@
 #pragma once
 #include "BaseBuildingActor.h"
-#include "WoodStoreData.h"
 
 #include "WoodStoreActor.generated.h"
 

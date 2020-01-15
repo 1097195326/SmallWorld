@@ -16,6 +16,9 @@ public:
     
 	virtual FString GetName() override { return TEXT("Farm"); }
 
-    
+	bool	IsFull();
+
+public:
+	int32 CropNum;
     
 };

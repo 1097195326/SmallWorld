@@ -17,5 +17,13 @@ public:
     
 	virtual FString GetName() override { return TEXT("WoodStoneStore"); }
 
+
+	void	ChangeWoodStoneNum(int32 plusWood = 0, int32 plusStone = 0);
+	void	GetWoodStoneNum(int32 & OutWoodNum, int32 & OutStoneNum);
+
+protected:
+
+	int32 WoodNum;
+	int32 StoneNum;
     
 };

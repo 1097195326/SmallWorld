@@ -5,6 +5,10 @@ G_REGISTER_CLASS(GameConfigData)
 
 const FString LocalLanguage = TEXT("zh");
 
+TArray<FString> GameConfigData::NoCenterBuilding = { TEXT("CommandCenter") };
+TArray<FString> GameConfigData::HaveCenterBuilding = { TEXT("ArmyCenter"),TEXT("Bakery"), TEXT("Farm"), TEXT("FoodStore"), TEXT("FruitFarm"), TEXT("Gate"), TEXT("House"), TEXT("Mill"), TEXT("MoneyStore"), TEXT("WoodStoneStore"), TEXT("ArmyCenter"), TEXT("Tower"), TEXT("Wall") };
+
+
 void GameConfigData::InitWithXML(const FXmlFile * xmlFile)
 {
 	const FXmlNode * RootNode = xmlFile->GetRootNode();
@@ -60,6 +64,18 @@ void GameConfigData::InitWithXML(const FXmlFile * xmlFile)
 const BuildingConfig & GameConfigData::GetBuildingConfig(FString name)
 {
 	return BuildingConfigMap[name];
+}
+TArray<BuildingConfig> GameConfigData::GetBuildingConfigs(const TArray<FString> & names)
+{
+	TArray<BuildingConfig> TemArray;
+	for (auto name : names)
+	{
+		if (BuildingConfigMap.Contains(name))
+		{
+			TemArray.Add(BuildingConfigMap[name]);
+		}
+	}
+	return MoveTemp(TemArray);
 }
 FString GameConfigData::TranslateLanguage(FString key)
 {

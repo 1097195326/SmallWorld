@@ -17,5 +17,7 @@ public:
     
 	virtual FString GetName() override { return TEXT("MoneyStore"); }
 
+public:
+	int32 GoldNum;
     
 };

@@ -451,7 +451,7 @@ bool ACityActor::BuildWoodStore()
 		AWoodStoreActor * BuildActor = Cast<AWoodStoreActor>(UGameplayStatics::BeginDeferredActorSpawnFromClass(SWI, AWoodStoreActor::StaticClass(), trans));
 		if (BuildActor)
 		{
-            BuildActor->InitData(new WoodStoreData());
+           // BuildActor->InitData(new WoodStoreData());
 			blockActor->FillBuilding(BuildActor);
 
 			

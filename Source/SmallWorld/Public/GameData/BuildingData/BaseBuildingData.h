@@ -2,6 +2,7 @@
 #include "DataR.h"
 #include "CoreMinimal.h"
 #include "GameConfig.h"
+#include "GameConfigData.h"
 
 
 
@@ -43,11 +44,26 @@ public:
 	virtual void Deserialization(TSharedPtr<FJsonObject>  JsonObject) override;
 
 	virtual FString GetName() { return TEXT(""); }
+	virtual void CalculateData(){}
+
+	bool	IsMaxLevel() { return BuildingLevel == BConfig.maxlevel; }
+
 public:
+	EBuildingType	BuildingType;
 	FVector     BuildingPosition;
 	FRotator    BuildingRotator;
+
 	float	    BuildingHealth;
-	int32		    BuildingLevel;
-	EBuildingType	BuildingType;
+	int32		BuildingLevel;
+
+	bool		IsUpdating;
+	int32		RemainingUpdateTime; // second
+
+	// CalculateDatas
+	BuildingConfig  BConfig;
+
+	int32		MaxHealth;
+	int32		MaxUpdateTime;
+
 
 };

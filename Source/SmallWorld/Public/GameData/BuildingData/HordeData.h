@@ -40,6 +40,5 @@ public:
 protected:
 	TArray<BaseBuildingData*>		BuildingDatas;
 
-    
 };
 

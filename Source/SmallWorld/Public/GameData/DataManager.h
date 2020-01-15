@@ -6,6 +6,13 @@
 #include "GameConfigData.h"
 #include "GameWorldData.h"
 
+
+DECLARE_MULTICAST_DELEGATE(FFoodDataChangedDelegate);
+DECLARE_MULTICAST_DELEGATE(FGoldDataChangedDelegate);
+DECLARE_MULTICAST_DELEGATE(FWoodStoneDataChangedDelegate);
+DECLARE_MULTICAST_DELEGATE(FPeopleDataChangedDelegate);
+
+
 class DataManager : public SingleTemplate<DataManager>
 {
 public:
@@ -16,6 +23,10 @@ public:
 	void SaveData();
 	void ClearData();
 		
+	FFoodDataChangedDelegate  FoodDataChangedDelegate;
+	FGoldDataChangedDelegate  GoldDataChangedDelegate;
+	FWoodStoneDataChangedDelegate  WoodStoneDataChangedDelegate;
+	FPeopleDataChangedDelegate  PeopleDataChangedDelegate;
 
 	UserData * GetUserData() { return mUserData; }
 	GameConfigData * GetGameConfigData() { return mGameConfigData; }

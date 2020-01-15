@@ -26,9 +26,13 @@ struct BuildingConfig
 class GameConfigData : public DataT
 {
 public:
+	static TArray<FString> NoCenterBuilding;
+	static TArray<FString> HaveCenterBuilding;
+
 	virtual void InitWithXML(const FXmlFile * _file) override;
 
 	
+	TArray<BuildingConfig> GetBuildingConfigs(const TArray<FString> &  names);
 	const BuildingConfig & GetBuildingConfig(FString name);
 	FString TranslateLanguage(FString key);
 private:

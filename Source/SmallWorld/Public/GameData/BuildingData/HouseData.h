@@ -16,6 +16,9 @@ public:
     
 	virtual FString GetName() override { return TEXT("House"); }
 
-    
+	void	ChangePeopleNum(int32 plusNum);
+	inline int32	GetPeopleNum() { return PeopleNum; }
+protected:
+	int32	PeopleNum;
     
 };
