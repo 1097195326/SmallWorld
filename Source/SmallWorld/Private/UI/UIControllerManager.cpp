@@ -1,5 +1,4 @@
 #include "UIControllerManager.h"
-#include "MainViewUIController.h"
 
 
 
@@ -22,7 +21,7 @@ void UIControllerManager::ChangeUIController(UIControllerInterface * UIControlle
 	CurrentUIController = UIController;
 	CurrentUIController->Enter();
 }
-UIControllerInterface * UIControllerManager::GetUIController()
+UIControllerInterface * UIControllerManager::GetInternalUIController()
 {
 	return CurrentUIController;
 }

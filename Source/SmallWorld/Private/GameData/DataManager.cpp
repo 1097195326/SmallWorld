@@ -20,6 +20,12 @@ void DataManager::InitData()
 }
 void DataManager::LoadData()
 {
+	TMap<int*, int> Tess;
+	int * in = new int(10);
+	Tess.Add(in, 10);
+	Tess.Add(in, 20);
+	Tess.Remove(in);
+
 	LoadUserData();
 	LoadGameConfigData();
 	LoadGameWorldData();

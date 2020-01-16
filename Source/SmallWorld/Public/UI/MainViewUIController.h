@@ -10,16 +10,19 @@ public:
 	TSharedPtr<SWidget>	 TestWidget();
 	
 	virtual void InitControllerView();
-protected:
-	TSharedPtr<SWidget> CreateUserView();
-	TSharedPtr<SWidget>	CreateToWorldButton();
-	TSharedPtr<SWidget>	CreateBuildingButton();
 
 
 	FReply OnPowerClicked();
 	FReply OnHeroClicked();
 	FReply OnMapClicked();
 	FReply OnMenuClicked();
+
+protected:
+	TSharedPtr<SWidget> CreateUserView();
+	TSharedPtr<SWidget>	CreateToWorldButton();
+	TSharedPtr<SWidget>	CreateBuildingButton();
+
+
 
 
 };

@@ -8,28 +8,12 @@ UButtonScript * UButtonScript::Create()
 	bs->AddToRoot();
 	return bs;
 }
-void UButtonScript::OnButtonClick()
+void UButtonScript::OnUButtonClick()
 {
-	if (m_IsWithAction)
-	{
-		m_CallWithAction(m_Index,b_Click);
-	}
-	else
-	{
-		m_Call(m_Index);
-	}
-	
-	
+	m_Call(m_Index);
 }
-void UButtonScript::OnButtonPressed()
+FReply UButtonScript::OnSButtonClick()
 {
-	m_CallWithAction(m_Index, b_Pressed);
-}
-void UButtonScript::OnButtonReleased()
-{
-	m_CallWithAction(m_Index, b_Released);
-}
-void UButtonScript::On_Delete()
-{
-	
+	m_Call(m_Index);
+	return FReply::Handled();
 }

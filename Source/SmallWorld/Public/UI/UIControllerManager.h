@@ -3,6 +3,7 @@
 
 #include "Templates/SingleTemplate.h"
 #include "UIControllerInterface.h"
+#include "MainViewUIController.h"
 
 
 class UIControllerManager : public SingleTemplate<UIControllerManager>
@@ -12,9 +13,17 @@ public:
 
 	void		ChangeUIController(UIControllerInterface * UIController);
 
-	UIControllerInterface * GetUIController();
+	UIControllerInterface * GetInternalUIController();
 
-private:
+	template<typename ControllerClass>
+	ControllerClass * GetUIController()
+	{
+		return (ControllerClass*)(GetInternalUIController());
+	}
+
+protected:
 
 	UIControllerInterface *	CurrentUIController;
 };
+
+#define  GetUIController(ControllerClass) UIControllerManager::GetInstance()->GetUIController<ControllerClass>()

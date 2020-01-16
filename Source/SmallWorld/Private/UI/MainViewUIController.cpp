@@ -1,5 +1,5 @@
 #include "MainViewUIController.h"
-
+#include "SHordePreviewWidget.h"
 
 void MainViewUIController::InitControllerView()
 {
@@ -9,61 +9,10 @@ void MainViewUIController::InitControllerView()
 }
 TSharedPtr<SWidget> MainViewUIController::CreateUserView()
 {
-	//UUserWidget * testUMG = LoadClass<UUserWidget>(nullptr, TEXT("/Game/TestUMG.TestUMG_C"));
-
-	TSharedPtr<SVerticalBox> ResWidget = SNew(SVerticalBox)
-		+SVerticalBox::Slot()
-		.HAlign(HAlign_Left)
-		.VAlign(VAlign_Top)
-		.AutoHeight()
-		.Padding(0, 0, 0, 0)
-		[
-			SNew(SHorizontalBox)
-			+SHorizontalBox::Slot()
-			.HAlign(HAlign_Left)
-			.VAlign(VAlign_Center)
-			.AutoWidth()
-			[
-				SNew(SBox)
-				.HAlign(HAlign_Center)
-				.VAlign(VAlign_Center)
-				.WidthOverride(128)
-				.HeightOverride(128)
-				[
-					SNew(SButton)
-					.ButtonStyle(&FGameStyle::Get().GetWidgetStyle<FButtonStyle>("MainView.Button.Power"))
-					.OnClicked_Raw(this,&MainViewUIController::OnPowerClicked)
-				]
-			]
-		];
-	if (true)
-	{
-		ResWidget->AddSlot()
-			.HAlign(HAlign_Left)
-			.VAlign(VAlign_Top)
-			.AutoHeight()
-			.Padding(0, 0, 0, 0)
-			[
-				SNew(SHorizontalBox)
-				+ SHorizontalBox::Slot()
-				.HAlign(HAlign_Left)
-				.VAlign(VAlign_Center)
-				.AutoWidth()
-				[
-					SNew(SBox)
-					.HAlign(HAlign_Center)
-					.VAlign(VAlign_Center)
-					.WidthOverride(128)
-					.HeightOverride(128)
-					[
-						SNew(SButton)
-						.ButtonStyle(&FGameStyle::Get().GetWidgetStyle<FButtonStyle>("MainView.Button.Hero"))
-						.OnClicked_Raw(this,&MainViewUIController::OnHeroClicked)
-					]
-				]
-			];
-	}
-	
+	TSharedPtr<SWidget> ResWidget = SNew(SHordePreviewWidget)
+		.OnPowerClicked_Raw(this, &MainViewUIController::OnPowerClicked)
+		.OnHeroClicked_Raw(this, &MainViewUIController::OnHeroClicked);
+		
 	return ResWidget;
 }
 TSharedPtr<SWidget>	MainViewUIController::CreateToWorldButton()
@@ -76,7 +25,6 @@ TSharedPtr<SWidget>	MainViewUIController::CreateToWorldButton()
 		[
 			SNew(SButton)
 			.ButtonStyle(&FGameStyle::Get().GetWidgetStyle<FButtonStyle>("MainView.Button.Map"))
-			.OnClicked_Raw(this, &MainViewUIController::OnMapClicked)
 		];
 	return ResBox;
 }
@@ -90,7 +38,6 @@ TSharedPtr<SWidget>	MainViewUIController::CreateBuildingButton()
 		[
 			SNew(SButton)
 			.ButtonStyle(&FGameStyle::Get().GetWidgetStyle<FButtonStyle>("MainView.Button.Menu"))
-			.OnClicked_Raw(this, &MainViewUIController::OnMenuClicked)
 		];
 	return ResBox;
 }
@@ -101,7 +48,6 @@ FReply MainViewUIController::OnPowerClicked()
 }
 FReply MainViewUIController::OnHeroClicked()
 {
-
 	return FReply::Handled();
 }
 FReply MainViewUIController::OnMapClicked()
@@ -111,7 +57,6 @@ FReply MainViewUIController::OnMapClicked()
 }
 FReply MainViewUIController::OnMenuClicked()
 {
-
 	return FReply::Handled();
 }
 
