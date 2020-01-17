@@ -42,7 +42,7 @@ void SBuildingIconItem::Construct(const FArguments & InArgs)
 			[
 				SAssignNew(IconText,STextBlock)
 				.TextStyle(&FGameStyle::Get().GetWidgetStyle<FTextBlockStyle>("Text_12"))
-				.Text(BConfig.title)
+				.Text(FText::FromString(BConfig.title))
 			]
 		];
 
