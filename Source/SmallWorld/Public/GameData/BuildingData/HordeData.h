@@ -23,9 +23,12 @@ public:
     virtual void Deserialization(TSharedPtr<FJsonObject>  JsonObject) override;
 
     
+	int32 GetGoldNum();
+	int32 GetWoodNum();
+	int32 GetStoneNum();
 
 	template<typename BuildingClass = BaseBuildingData>
-	TArray<BuildingClass *> GetBuildings(EBuildingType BuildingType)
+	TArray<BuildingClass *> GetBuildingDatas(EBuildingType BuildingType)
 	{
 		TArray<BuildingClass *> TemArray;
 		for (auto building : BuildingDatas)

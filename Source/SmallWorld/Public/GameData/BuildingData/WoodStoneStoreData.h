@@ -18,8 +18,10 @@ public:
 	virtual FString GetName() override { return TEXT("WoodStoneStore"); }
 
 
-	void	ChangeWoodStoneNum(int32 plusWood = 0, int32 plusStone = 0);
-	void	GetWoodStoneNum(int32 & OutWoodNum, int32 & OutStoneNum);
+	void	ChangeWoodNum(const int32 & plusWood);
+	void	ChangeStoneNum(const int32 & plusStone);
+	inline int32	GetStoneNum() { return StoneNum; }
+	inline int32	GetWoodNum(){return WoodNum;}
 
 protected:
 

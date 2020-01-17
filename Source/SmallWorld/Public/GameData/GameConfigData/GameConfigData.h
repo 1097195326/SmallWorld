@@ -20,7 +20,7 @@ struct BuildingConfig
 	FString title;
 	FString describe;
 	int32 maxlevel;
-	TArray<BuildingLevelInfo> LevelInfos;
+	TMap<int32,BuildingLevelInfo> LevelInfos;
 };
 
 class GameConfigData : public DataT

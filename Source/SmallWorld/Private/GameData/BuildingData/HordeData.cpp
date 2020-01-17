@@ -29,7 +29,35 @@ void HordeData::Deserialization(TSharedPtr<FJsonObject>  JsonObject)
 			BuildingDatas.Add(BuildingData);
 		}
 	}
-	
 }
-
+int32 HordeData::GetGoldNum()
+{
+	int32 OutNum = 0;
+	TArray<MoneyStoreData*> Datas = GetBuildingDatas<MoneyStoreData>(B_MoneyStore);
+	for (auto data : Datas)
+	{
+		OutNum += data->GetGoldNum();
+	}
+	return MoveTemp(OutNum);
+}
+int32 HordeData::GetWoodNum()
+{
+	int32 OutNum = 0;
+	TArray<WoodStoneStoreData*> Datas = GetBuildingDatas<WoodStoneStoreData>(B_WoodStoneStore);
+	for (auto data : Datas)
+	{
+		OutNum += data->GetWoodNum();
+	}
+	return MoveTemp(OutNum);
+}
+int32 HordeData::GetStoneNum()
+{
+	int32 OutNum = 0;
+	TArray<WoodStoneStoreData*> Datas = GetBuildingDatas<WoodStoneStoreData>(B_WoodStoneStore);
+	for (auto data : Datas)
+	{
+		OutNum += data->GetStoneNum();
+	}
+	return MoveTemp(OutNum);
+}
 

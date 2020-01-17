@@ -32,7 +32,7 @@ void GameConfigData::InitWithXML(const FXmlFile * xmlFile)
 					info.upstone = FCString::Atoi(*LevelInfo->GetAttribute(TEXT("upstone")));
 					info.upwood = FCString::Atoi(*LevelInfo->GetAttribute(TEXT("upwood")));
 					info.factor = FCString::Atof(*LevelInfo->GetAttribute(TEXT("factor")));
-					config.LevelInfos.Add(info);
+					config.LevelInfos.Add(info.level,info);
 				}
 				BuildingConfigMap.Add(config.name, config);
 			}

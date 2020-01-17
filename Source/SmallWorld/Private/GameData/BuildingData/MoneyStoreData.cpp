@@ -1,5 +1,6 @@
 
 #include "MoneyStoreData.h"
+#include "DataManager.h"
 
 G_REGISTER_CLASS(MoneyStoreData)
 
@@ -27,7 +28,11 @@ void MoneyStoreData::Deserialization(TSharedPtr<FJsonObject>  JsonObject)
 	BaseBuildingData::Deserialization(JsonObject->GetObjectField("BaseBuildingData"));
 
 	GoldNum = JsonObject->GetIntegerField("GoldNum");
-
-    
 }
 
+void  MoneyStoreData::ChangeGoldNum(const int32 & plusNum)
+{
+	GoldNum += plusNum;
+	GoldNum = GoldNum < 0 ? GoldNum = 0 : GoldNum;
+	DataManager::GetInstance()->GoldDataChangedDelegate.Broadcast();
+}

@@ -5,8 +5,10 @@
 #include "GameStyle.h"
 #include "ButtonRegister.h"
 
+
 class SBaseCompoundWidget : public SCompoundWidget
 {
 public:
+
 
 };

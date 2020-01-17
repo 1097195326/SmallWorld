@@ -37,16 +37,21 @@ void WoodStoneStoreData::Deserialization(TSharedPtr<FJsonObject>  JsonObject)
     
 }
 
-void WoodStoneStoreData::ChangeWoodStoneNum(int32 plusWood /* = 0 */, int32 plusStone /* = 0 */)
+void WoodStoneStoreData::ChangeWoodNum(const int32 & plusWood)
 {
 	WoodNum += plusWood;
-	StoneNum += plusStone;
-
-	DataManager::GetInstance()->WoodStoneDataChangedDelegate.Broadcast();
+	WoodNum = WoodNum < 0 ? 0 : WoodNum;
+	if (plusWood != 0)
+	{
+		DataManager::GetInstance()->WoodDataChangedDelegate.Broadcast();
+	}
 }
-void WoodStoneStoreData::GetWoodStoneNum(int32 & OutWoodNum, int32 & OutStoneNum)
+void WoodStoneStoreData::ChangeStoneNum(const int32 & plusStone)
 {
-	OutWoodNum = WoodNum;
-	OutStoneNum = StoneNum;
+	StoneNum += plusStone;
+	StoneNum = StoneNum < 0 ? 0 : StoneNum;
+	if (plusStone != 0)
+	{
+		DataManager::GetInstance()->StoneDataChangedDelegate.Broadcast();
+	}
 }
-

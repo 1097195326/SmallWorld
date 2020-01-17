@@ -9,28 +9,28 @@ public:
 	NineGridUIController();
 
 	
-	SHorizontalBox::FSlot * GetTopLeftSlot() { return TopLeftSlot; }
-	SHorizontalBox::FSlot * GetTopCenterSlot() { return TopCenterSlot; }
-	SHorizontalBox::FSlot * GetTopRightSlot() { return TopRightSlot; }
+	SVerticalBox::FSlot * GetLeftTopSlot() { return LeftTopSlot; }
+	SVerticalBox::FSlot * GetLeftCenterSlot() { return LeftCenterSlot; }
+	SVerticalBox::FSlot * GeLeftBottomSlot() { return LeftBottomSlot; }
 
-	SHorizontalBox::FSlot * GetMiddleLeftSlot() { return MiddleLeftSlot; }
-	SHorizontalBox::FSlot * GetMiddleCenterSlot() { return MiddleCenterSlot; }
-	SHorizontalBox::FSlot * GetMiddleRightSlot() { return MiddleRightSlot; }
+	SVerticalBox::FSlot * GetMiddleTopSlot() { return MiddleTopSlot; }
+	SVerticalBox::FSlot * GetMiddleCenterSlot() { return MiddleCenterSlot; }
+	SVerticalBox::FSlot * GetMiddleBottomSlot() { return MiddleBottomSlot; }
 
-	SHorizontalBox::FSlot * GetBottomLeftSlot() { return BottomLeftSlot; }
-	SHorizontalBox::FSlot * GetBottomCenterSlot() { return BottomCenterSlot; }
-	SHorizontalBox::FSlot * GetBottomRightSlot() { return BottomRightSlot; }
+	SVerticalBox::FSlot * GetRightTopSlot() { return RightTopSlot; }
+	SVerticalBox::FSlot * GetRightCenterSlot() { return RightCenterSlot; }
+	SVerticalBox::FSlot * GetRightBottomSlot() { return RightBottomSlot; }
 protected:
 
-	SHorizontalBox::FSlot * TopLeftSlot = NULL;
-	SHorizontalBox::FSlot * TopCenterSlot = NULL;
-	SHorizontalBox::FSlot * TopRightSlot = NULL;
+	SVerticalBox::FSlot * LeftTopSlot = NULL;
+	SVerticalBox::FSlot * LeftCenterSlot = NULL;
+	SVerticalBox::FSlot * LeftBottomSlot = NULL;
 
-	SHorizontalBox::FSlot * MiddleLeftSlot = NULL;
-	SHorizontalBox::FSlot * MiddleCenterSlot = NULL;
-	SHorizontalBox::FSlot * MiddleRightSlot = NULL;
+	SVerticalBox::FSlot * MiddleTopSlot = NULL;
+	SVerticalBox::FSlot * MiddleCenterSlot = NULL;
+	SVerticalBox::FSlot * MiddleBottomSlot = NULL;
 
-	SHorizontalBox::FSlot * BottomLeftSlot = NULL;
-	SHorizontalBox::FSlot * BottomCenterSlot = NULL;
-	SHorizontalBox::FSlot * BottomRightSlot = NULL;
+	SVerticalBox::FSlot * RightTopSlot = NULL;
+	SVerticalBox::FSlot * RightCenterSlot = NULL;
+	SVerticalBox::FSlot * RightBottomSlot = NULL;
 };

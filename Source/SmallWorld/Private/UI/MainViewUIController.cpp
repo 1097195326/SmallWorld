@@ -1,18 +1,38 @@
 #include "MainViewUIController.h"
 #include "SHordePreviewWidget.h"
+#include "SShowBuildingWidget.h"
+
 
 void MainViewUIController::InitControllerView()
 {
-	TopLeftSlot->AttachWidget(CreateUserView().ToSharedRef());
-	BottomLeftSlot->AttachWidget(CreateToWorldButton().ToSharedRef());
-	BottomRightSlot->AttachWidget(CreateBuildingButton().ToSharedRef());
+	LeftTopSlot->AttachWidget(CreateUserView().ToSharedRef());
+	LeftBottomSlot->AttachWidget(CreateToWorldButton().ToSharedRef());
+	RightBottomSlot->AttachWidget(CreateBuildingButton().ToSharedRef());
 }
+FReply MainViewUIController::OnPowerClicked()
+{
+
+	return FReply::Handled();
+}
+FReply MainViewUIController::OnHeroClicked()
+{
+	return FReply::Handled();
+}
+FReply MainViewUIController::OnMapClicked()
+{
+
+	return FReply::Handled();
+}
+FReply MainViewUIController::OnMenuClicked()
+{
+	return FReply::Handled();
+}
+
 TSharedPtr<SWidget> MainViewUIController::CreateUserView()
 {
 	TSharedPtr<SWidget> ResWidget = SNew(SHordePreviewWidget)
 		.OnPowerClicked_Raw(this, &MainViewUIController::OnPowerClicked)
 		.OnHeroClicked_Raw(this, &MainViewUIController::OnHeroClicked);
-		
 	return ResWidget;
 }
 TSharedPtr<SWidget>	MainViewUIController::CreateToWorldButton()
@@ -41,25 +61,6 @@ TSharedPtr<SWidget>	MainViewUIController::CreateBuildingButton()
 		];
 	return ResBox;
 }
-FReply MainViewUIController::OnPowerClicked()
-{
-
-	return FReply::Handled();
-}
-FReply MainViewUIController::OnHeroClicked()
-{
-	return FReply::Handled();
-}
-FReply MainViewUIController::OnMapClicked()
-{
-
-	return FReply::Handled();
-}
-FReply MainViewUIController::OnMenuClicked()
-{
-	return FReply::Handled();
-}
-
 
 
 // -----------------

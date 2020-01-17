@@ -25,7 +25,8 @@ public:
 		
 	FFoodDataChangedDelegate  FoodDataChangedDelegate;
 	FGoldDataChangedDelegate  GoldDataChangedDelegate;
-	FWoodStoneDataChangedDelegate  WoodStoneDataChangedDelegate;
+	FWoodStoneDataChangedDelegate  StoneDataChangedDelegate;
+	FWoodStoneDataChangedDelegate  WoodDataChangedDelegate;
 	FPeopleDataChangedDelegate  PeopleDataChangedDelegate;
 
 	UserData * GetUserData() { return mUserData; }
