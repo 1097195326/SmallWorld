@@ -3,10 +3,10 @@
 #include "SBaseCompoundWidget.h"
 
 
-class SHordePreviewWidget : public SBaseCompoundWidget
+class SHordePowerWidget : public SBaseCompoundWidget
 {
 public:
-	SLATE_BEGIN_ARGS(SHordePreviewWidget){}
+	SLATE_BEGIN_ARGS(SHordePowerWidget){}
 
 	SLATE_EVENT(FOnClicked, OnPowerClicked)
 	SLATE_EVENT(FOnClicked, OnHeroClicked)

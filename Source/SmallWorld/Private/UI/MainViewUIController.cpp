@@ -1,5 +1,5 @@
 #include "MainViewUIController.h"
-#include "SHordePreviewWidget.h"
+#include "SHordePowerWidget.h"
 #include "SShowBuildingWidget.h"
 
 
@@ -30,7 +30,7 @@ FReply MainViewUIController::OnMenuClicked()
 
 TSharedPtr<SWidget> MainViewUIController::CreateUserView()
 {
-	TSharedPtr<SWidget> ResWidget = SNew(SHordePreviewWidget)
+	TSharedPtr<SWidget> ResWidget = SNew(SHordePowerWidget)
 		.OnPowerClicked_Raw(this, &MainViewUIController::OnPowerClicked)
 		.OnHeroClicked_Raw(this, &MainViewUIController::OnHeroClicked);
 	return ResWidget;

@@ -1,7 +1,7 @@
-#include "SHordePreviewWidget.h"
+#include "SHordePowerWidget.h"
 
 
-void SHordePreviewWidget::Construct(const FArguments& InArgs)
+void SHordePowerWidget::Construct(const FArguments& InArgs)
 {
 	ChildSlot
 		[
