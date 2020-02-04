@@ -20,6 +20,7 @@ void UserData::Serialization(TSharedRef<TJsonWriter<TCHAR, TCondensedJsonPrintPo
 
 void UserData::Deserialization(TSharedPtr<FJsonObject> JsonObject)
 {
+
 	DataC::Deserialization(JsonObject->GetObjectField("DataC"));
 	FGuid::Parse(JsonObject->GetStringField("HordeId"), hordeId);
 

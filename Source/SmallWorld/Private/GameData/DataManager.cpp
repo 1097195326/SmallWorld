@@ -20,11 +20,6 @@ void DataManager::InitData()
 }
 void DataManager::LoadData()
 {
-	TMap<int*, int> Tess;
-	int * in = new int(10);
-	Tess.Add(in, 10);
-	Tess.Add(in, 20);
-	Tess.Remove(in);
 
 	LoadUserData();
 	LoadGameConfigData();
@@ -39,14 +34,20 @@ void DataManager::LoadData()
 void DataManager::SaveData()
 {
 	FString Content;
-	auto writer = TJsonWriterFactory<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>::Create(&Content);
-	mUserData->Serialization(writer);
-	writer->Close();
+	auto UserWriter = TJsonWriterFactory<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>::Create(&Content);
+
+	UserWriter->WriteObjectStart();
+	mUserData->Serialization(UserWriter);
+	UserWriter->WriteObjectEnd();
+	UserWriter->Close();
 	FFileHelper::SaveStringToFile(Content, *UserDataFilePath);
 
 	Content.Empty();
-	mGameWorldData->Serialization(writer);
-	writer->Close();
+	auto WorldWriter = TJsonWriterFactory<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>::Create(&Content);
+	WorldWriter->WriteObjectStart();
+	mGameWorldData->Serialization(WorldWriter);
+	WorldWriter->WriteObjectEnd();
+	WorldWriter->Close();
 	FFileHelper::SaveStringToFile(Content, *GameWorldDataFilePath);
 }
 void DataManager::ClearData()
@@ -86,7 +87,7 @@ bool DataManager::LoadUserData()
 		auto fileReader = TJsonReaderFactory<TCHAR>::Create(Content);
 		TSharedPtr<FJsonObject> JsonContent = MakeShareable(new FJsonObject);
 		FJsonSerializer::Deserialize(fileReader, JsonContent);
-		mUserData->Deserialization(JsonContent);
+		mUserData->Deserialization(JsonContent->GetObjectField("UserData"));
 		return true;
 	}
 	return false;
@@ -104,6 +105,6 @@ void DataManager::LoadGameWorldData()
 		auto fileReader = TJsonReaderFactory<TCHAR>::Create(Content);
 		TSharedPtr<FJsonObject> JsonContent = MakeShareable(new FJsonObject);
 		FJsonSerializer::Deserialize(fileReader, JsonContent);
-		mGameWorldData->Deserialization(JsonContent);
+		mGameWorldData->Deserialization(JsonContent->GetObjectField("GameWorldData"));
 	}
 }

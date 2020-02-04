@@ -81,17 +81,11 @@ TSharedRef<FSlateStyleSet> FGameStyle::Create()
 	const FVector2D Icon40x40(40.0f, 40.0f);
 	
 	// Texture
-	UTexture2D * Texture = nullptr;
-	
-	Texture = Cast<UTexture2D>(StaticLoadObject(UTexture2D::StaticClass(), NULL, TEXT("/Game/UI/Texture/Icon_Power")));
-	Style.Set("Icon.Power", new FSlateDynamicImageBrush(Texture,FVector2D(100, 100),NAME_None));
-	Texture = Cast<UTexture2D>(StaticLoadObject(UTexture2D::StaticClass(), NULL, TEXT("/Game/UI/Texture/Icon_Hero")));
-	Style.Set("Icon.Hero", new FSlateDynamicImageBrush(Texture, FVector2D(100, 100), NAME_None));
-	Texture = Cast<UTexture2D>(StaticLoadObject(UTexture2D::StaticClass(), NULL, TEXT("/Game/UI/Texture/Icon_Map")));
-	Style.Set("Icon.Map", new FSlateDynamicImageBrush(Texture, FVector2D(100, 100), NAME_None));
-	Texture = Cast<UTexture2D>(StaticLoadObject(UTexture2D::StaticClass(), NULL, TEXT("/Game/UI/Texture/Icon_Menu")));
-	Style.Set("Icon.Menu", new FSlateDynamicImageBrush(Texture, FVector2D(100, 100), NAME_None));
-	
+	Style.Set("Icon.Power",new IMAGE_BRUSH(TEXT("Icon_Power"), FVector2D(100, 100), Style.GetColor("Color.FFFFFFFF")));
+	Style.Set("Icon.Hero", new IMAGE_BRUSH(TEXT("Icon_Hero"), FVector2D(100, 100), Style.GetColor("Color.FFFFFFFF")));
+	Style.Set("Icon.Map", new IMAGE_BRUSH(TEXT("Icon_Map"), FVector2D(100, 100), Style.GetColor("Color.FFFFFFFF")));
+	Style.Set("Icon.Menu", new IMAGE_BRUSH(TEXT("Icon_Menu"), FVector2D(100, 100), Style.GetColor("Color.FFFFFFFF")));
+
 	// ButtonStyle
 	Style.Set("MainView.Button.Power", FButtonStyle()
 		.SetNormal(*Style.GetBrush("Icon.Power"))
