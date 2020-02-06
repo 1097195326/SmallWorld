@@ -8,6 +8,11 @@ void AUserController::On_Init()
 	CurrentLandscape = nullptr;
 	CurrentControllType = ECT_None;
 
+	FInputModeGameAndUI InputMode;
+	InputMode.SetHideCursorDuringCapture(false);
+	InputMode.SetLockMouseToViewportBehavior(EMouseLockMode::DoNotLock);
+	SetInputMode(InputMode);
+
 }
 void AUserController::On_Start()
 {
