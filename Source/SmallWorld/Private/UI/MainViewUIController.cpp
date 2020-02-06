@@ -9,24 +9,6 @@ void MainViewUIController::InitControllerView()
 	LeftBottomSlot->AttachWidget(CreateToWorldButton().ToSharedRef());
 	RightBottomSlot->AttachWidget(CreateBuildingButton().ToSharedRef());
 }
-FReply MainViewUIController::OnPowerClicked()
-{
-
-	return FReply::Handled();
-}
-FReply MainViewUIController::OnHeroClicked()
-{
-	return FReply::Handled();
-}
-FReply MainViewUIController::OnMapClicked()
-{
-
-	return FReply::Handled();
-}
-FReply MainViewUIController::OnMenuClicked()
-{
-	return FReply::Handled();
-}
 
 TSharedPtr<SWidget> MainViewUIController::CreateUserView()
 {
@@ -58,10 +40,34 @@ TSharedPtr<SWidget>	MainViewUIController::CreateBuildingButton()
 		[
 			SNew(SButton)
 			.ButtonStyle(&FGameStyle::Get().GetWidgetStyle<FButtonStyle>("MainView.Button.Menu"))
+			.OnClicked_Raw(this,&MainViewUIController::OnMenuClicked)
 		];
 	return ResBox;
 }
+void MainViewUIController::ShowBuildingWidget()
+{
 
+}
+FReply MainViewUIController::OnPowerClicked()
+{
+
+	return FReply::Handled();
+}
+FReply MainViewUIController::OnHeroClicked()
+{
+	return FReply::Handled();
+}
+FReply MainViewUIController::OnMapClicked()
+{
+
+	return FReply::Handled();
+}
+FReply MainViewUIController::OnMenuClicked()
+{
+	ShowBuildingWidget();
+
+	return FReply::Handled();
+}
 
 // -----------------
 TSharedPtr<SWidget>	MainViewUIController::TestWidget()

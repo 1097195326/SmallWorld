@@ -11,6 +11,8 @@ public:
 	
 	virtual void InitControllerView();
 
+	void	ShowBuildingWidget();
+
 
 	FReply OnPowerClicked();
 	FReply OnHeroClicked();
