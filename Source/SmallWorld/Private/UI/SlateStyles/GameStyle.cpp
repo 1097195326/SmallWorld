@@ -85,6 +85,48 @@ TSharedRef<FSlateStyleSet> FGameStyle::Create()
 	Style.Set("Icon.Hero", new IMAGE_BRUSH(TEXT("Icon_Hero"), FVector2D(100, 100), Style.GetColor("Color.FFFFFFFF")));
 	Style.Set("Icon.Map", new IMAGE_BRUSH(TEXT("Icon_Map"), FVector2D(100, 100), Style.GetColor("Color.FFFFFFFF")));
 	Style.Set("Icon.Menu", new IMAGE_BRUSH(TEXT("Icon_Menu"), FVector2D(100, 100), Style.GetColor("Color.FFFFFFFF")));
+	
+	Style.Set("Icon.ArmyCenter0", new IMAGE_BRUSH(TEXT("IconArmyCenter0"), FVector2D(100, 100), Style.GetColor("Color.FFFFFFFF")));
+	Style.Set("Icon.ArmyCenter1", new IMAGE_BRUSH(TEXT("IconArmyCenter1"), FVector2D(100, 100), Style.GetColor("Color.FFFFFFFF")));
+	Style.Set("Icon.ArmyCenter2", new IMAGE_BRUSH(TEXT("IconArmyCenter2"), FVector2D(100, 100), Style.GetColor("Color.FFFFFFFF")));
+	Style.Set("Icon.Bakery0", new IMAGE_BRUSH(TEXT("IconBakery0"), FVector2D(100, 100), Style.GetColor("Color.FFFFFFFF")));
+	Style.Set("Icon.Bakery1", new IMAGE_BRUSH(TEXT("IconBakery0"), FVector2D(100, 100), Style.GetColor("Color.FFFFFFFF")));
+	Style.Set("Icon.Bakery2", new IMAGE_BRUSH(TEXT("IconBakery0"), FVector2D(100, 100), Style.GetColor("Color.FFFFFFFF")));
+	Style.Set("Icon.Bakery3", new IMAGE_BRUSH(TEXT("IconBakery3"), FVector2D(100, 100), Style.GetColor("Color.FFFFFFFF")));
+	Style.Set("Icon.CommandCenter0", new IMAGE_BRUSH(TEXT("IconCommandCenter0"), FVector2D(100, 100), Style.GetColor("Color.FFFFFFFF")));
+	Style.Set("Icon.CommandCenter1", new IMAGE_BRUSH(TEXT("IconCommandCenter1"), FVector2D(100, 100), Style.GetColor("Color.FFFFFFFF")));
+	Style.Set("Icon.CommandCenter2", new IMAGE_BRUSH(TEXT("IconCommandCenter2"), FVector2D(100, 100), Style.GetColor("Color.FFFFFFFF")));
+	Style.Set("Icon.CommandCenter3", new IMAGE_BRUSH(TEXT("IconCommandCenter3"), FVector2D(100, 100), Style.GetColor("Color.FFFFFFFF")));
+	Style.Set("Icon.Farm0", new IMAGE_BRUSH(TEXT("IconFarm0"), FVector2D(100, 100), Style.GetColor("Color.FFFFFFFF")));
+	Style.Set("Icon.Farm1", new IMAGE_BRUSH(TEXT("IconFarm1"), FVector2D(100, 100), Style.GetColor("Color.FFFFFFFF")));
+	Style.Set("Icon.Farm2", new IMAGE_BRUSH(TEXT("IconFarm2"), FVector2D(100, 100), Style.GetColor("Color.FFFFFFFF")));
+	Style.Set("Icon.FoodStore0", new IMAGE_BRUSH(TEXT("IconFoodStore0"), FVector2D(100, 100), Style.GetColor("Color.FFFFFFFF")));
+	Style.Set("Icon.FoodStore1", new IMAGE_BRUSH(TEXT("IconFoodStore1"), FVector2D(100, 100), Style.GetColor("Color.FFFFFFFF")));
+	Style.Set("Icon.FoodStore2", new IMAGE_BRUSH(TEXT("IconFoodStore2"), FVector2D(100, 100), Style.GetColor("Color.FFFFFFFF")));
+	Style.Set("Icon.FruitFarm0", new IMAGE_BRUSH(TEXT("IconFruitFarm0"), FVector2D(100, 100), Style.GetColor("Color.FFFFFFFF")));
+	Style.Set("Icon.FruitFarm1", new IMAGE_BRUSH(TEXT("IconFruitFarm1"), FVector2D(100, 100), Style.GetColor("Color.FFFFFFFF")));
+	Style.Set("Icon.FruitFarm2", new IMAGE_BRUSH(TEXT("IconFruitFarm2"), FVector2D(100, 100), Style.GetColor("Color.FFFFFFFF")));
+	Style.Set("Icon.Gate0", new IMAGE_BRUSH(TEXT("IconGate0"), FVector2D(100, 100), Style.GetColor("Color.FFFFFFFF")));
+	Style.Set("Icon.Gate1", new IMAGE_BRUSH(TEXT("IconGate1"), FVector2D(100, 100), Style.GetColor("Color.FFFFFFFF")));
+	Style.Set("Icon.Gate2", new IMAGE_BRUSH(TEXT("IconGate2"), FVector2D(100, 100), Style.GetColor("Color.FFFFFFFF")));
+	Style.Set("Icon.House0", new IMAGE_BRUSH(TEXT("IconHouse0"), FVector2D(100, 100), Style.GetColor("Color.FFFFFFFF")));
+	Style.Set("Icon.House1", new IMAGE_BRUSH(TEXT("IconHouse1"), FVector2D(100, 100), Style.GetColor("Color.FFFFFFFF")));
+	Style.Set("Icon.House2", new IMAGE_BRUSH(TEXT("IconHouse2"), FVector2D(100, 100), Style.GetColor("Color.FFFFFFFF")));
+	Style.Set("Icon.Mill0", new IMAGE_BRUSH(TEXT("IconMill0"), FVector2D(100, 100), Style.GetColor("Color.FFFFFFFF")));
+	Style.Set("Icon.Mill1", new IMAGE_BRUSH(TEXT("IconMill1"), FVector2D(100, 100), Style.GetColor("Color.FFFFFFFF")));
+	Style.Set("Icon.Mill2", new IMAGE_BRUSH(TEXT("IconMill2"), FVector2D(100, 100), Style.GetColor("Color.FFFFFFFF")));
+	Style.Set("Icon.MoneyStore0", new IMAGE_BRUSH(TEXT("IconMoneyStore0"), FVector2D(100, 100), Style.GetColor("Color.FFFFFFFF")));
+	Style.Set("Icon.MoneyStore1", new IMAGE_BRUSH(TEXT("IconMoneyStore1"), FVector2D(100, 100), Style.GetColor("Color.FFFFFFFF")));
+	Style.Set("Icon.MoneyStore2", new IMAGE_BRUSH(TEXT("IconMoneyStore2"), FVector2D(100, 100), Style.GetColor("Color.FFFFFFFF")));
+	Style.Set("Icon.WoodStoneStore0", new IMAGE_BRUSH(TEXT("IconWoodStoneStore0"), FVector2D(100, 100), Style.GetColor("Color.FFFFFFFF")));
+	Style.Set("Icon.Tower0", new IMAGE_BRUSH(TEXT("IconTower0"), FVector2D(100, 100), Style.GetColor("Color.FFFFFFFF")));
+	Style.Set("Icon.Tower1", new IMAGE_BRUSH(TEXT("IconTower1"), FVector2D(100, 100), Style.GetColor("Color.FFFFFFFF")));
+	Style.Set("Icon.Tower2", new IMAGE_BRUSH(TEXT("IconTower2"), FVector2D(100, 100), Style.GetColor("Color.FFFFFFFF")));
+	Style.Set("Icon.Wall0", new IMAGE_BRUSH(TEXT("IconWall0"), FVector2D(100, 100), Style.GetColor("Color.FFFFFFFF")));
+	Style.Set("Icon.Wall1", new IMAGE_BRUSH(TEXT("IconWall1"), FVector2D(100, 100), Style.GetColor("Color.FFFFFFFF")));
+	Style.Set("Icon.Wall2", new IMAGE_BRUSH(TEXT("IconWall2"), FVector2D(100, 100), Style.GetColor("Color.FFFFFFFF")));
+
+
 
 	// ButtonStyle
 	Style.Set("MainView.Button.Power", FButtonStyle()

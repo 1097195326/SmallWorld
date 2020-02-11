@@ -31,11 +31,14 @@ public:
 	TArray<BuildingClass *> GetBuildingDatas(EBuildingType BuildingType)
 	{
 		TArray<BuildingClass *> TemArray;
-		for (auto building : BuildingDatas)
+		if (BuildingDatas.Num() > 0)
 		{
-			if (building->BuildingType == BuildingType)
+			for (auto building : BuildingDatas)
 			{
-				TemArray.Add((BuildingClass*)(building));
+				if (building->BuildingType == BuildingType)
+				{
+					TemArray.Add((BuildingClass*)(building));
+				}
 			}
 		}
 		return MoveTemp(TemArray);

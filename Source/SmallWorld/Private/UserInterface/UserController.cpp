@@ -12,6 +12,9 @@ void AUserController::On_Init()
 	InputMode.SetHideCursorDuringCapture(false);
 	InputMode.SetLockMouseToViewportBehavior(EMouseLockMode::DoNotLock);
 	SetInputMode(InputMode);
+	
+	bShowMouseCursor = true;
+
 
 }
 void AUserController::On_Start()

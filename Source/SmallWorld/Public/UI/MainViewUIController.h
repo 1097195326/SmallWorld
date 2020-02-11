@@ -11,8 +11,7 @@ public:
 	
 	virtual void InitControllerView();
 
-	void	ShowBuildingWidget();
-
+	
 
 	FReply OnPowerClicked();
 	FReply OnHeroClicked();
@@ -23,6 +22,7 @@ protected:
 	TSharedPtr<SWidget> CreateUserView();
 	TSharedPtr<SWidget>	CreateToWorldButton();
 	TSharedPtr<SWidget>	CreateBuildingButton();
+	TSharedPtr<SWidget> CreateShowBuildingsWidget();
 
 
 

@@ -19,6 +19,8 @@ public:
 
 	void OnDataChanged();
 
+	virtual FReply OnDragDetected(const FGeometry& MyGeometry, const FPointerEvent& MouseEvent) override;
+
 protected:
 	FDelegateHandle  GoldDelegateHandle;
 	FDelegateHandle  StoneDelegateHandle;

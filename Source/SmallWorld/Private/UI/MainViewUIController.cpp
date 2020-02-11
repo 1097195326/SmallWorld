@@ -1,13 +1,14 @@
 #include "MainViewUIController.h"
 #include "SHordePowerWidget.h"
 #include "SShowBuildingWidget.h"
-
+#include "DataManager.h"
 
 void MainViewUIController::InitControllerView()
 {
 	LeftTopSlot->AttachWidget(CreateUserView().ToSharedRef());
 	LeftBottomSlot->AttachWidget(CreateToWorldButton().ToSharedRef());
 	RightBottomSlot->AttachWidget(CreateBuildingButton().ToSharedRef());
+
 }
 
 TSharedPtr<SWidget> MainViewUIController::CreateUserView()
@@ -44,9 +45,25 @@ TSharedPtr<SWidget>	MainViewUIController::CreateBuildingButton()
 		];
 	return ResBox;
 }
-void MainViewUIController::ShowBuildingWidget()
+TSharedPtr<SWidget> MainViewUIController::CreateShowBuildingsWidget()
 {
+	TArray<FString>  IconNames;
+	/*if (DataManager::GetInstance()->GetUserData() != nullptr &&
+		DataManager::GetInstance()->GetUserData()->GetHordeData() != nullptr &&
+		DataManager::GetInstance()->GetUserData()->GetHordeData()->GetBuildingDatas(EBuildingType::B_CommandCenter).Num() > 0)
+	{
+		IconNames = GameConfigData::HaveCenterBuilding;
+	}
+	else
+	{
+		IconNames = GameConfigData::NoCenterBuilding;
+	}*/
+	IconNames = GameConfigData::HaveCenterBuilding;
 
+	TSharedPtr<SWidget> ResWidget = SNew(SShowBuildingWidget)
+		.IconNames(IconNames);
+
+	return ResWidget;
 }
 FReply MainViewUIController::OnPowerClicked()
 {
@@ -64,7 +81,8 @@ FReply MainViewUIController::OnMapClicked()
 }
 FReply MainViewUIController::OnMenuClicked()
 {
-	ShowBuildingWidget();
+	MiddleBottomSlot->AttachWidget(CreateShowBuildingsWidget().ToSharedRef());
+
 
 	return FReply::Handled();
 }
