@@ -41,11 +41,12 @@ void SBuildingIconItem::Construct(const FArguments & InArgs)
 						SAssignNew(IconImage,SImage)
 						.Image(FGameStyle::Get().GetBrush(*IconBrush))
 					]
-					+ SOverlay::Slot()
+					/*+ SOverlay::Slot()
 					[
 						SAssignNew(IconButton,SButton)
+						.ClickMethod(EButtonClickMethod::PreciseClick)
 						.ButtonColorAndOpacity(FGameStyle::Get().GetColor("Color.None"))
-					]
+					]*/
 				]
 			]
 			+ SVerticalBox::Slot()
@@ -88,8 +89,25 @@ void SBuildingIconItem::OnDataChanged()
 {
 	RefreshView();
 }
+FReply SBuildingIconItem::OnMouseButtonDown(const FGeometry& MyGeometry, const FPointerEvent& MouseEvent)
+{
+	if (MouseEvent.GetEffectingButton() == EKeys::LeftMouseButton)
+	{
+		return FReply::Handled().DetectDrag(SharedThis(this),EKeys::LeftMouseButton);
+	}
+	return FReply::Unhandled();
+}
+FReply SBuildingIconItem::OnTouchStarted(const FGeometry& MyGeometry, const FPointerEvent& InTouchEvent)
+{
+	if (InTouchEvent.GetPointerIndex() == ETouchIndex::Touch1)
+	{
+		return FReply::Handled().DetectDrag(SharedThis(this), EKeys::LeftMouseButton);
+	}
+	return FReply::Unhandled();
+}
 FReply SBuildingIconItem::OnDragDetected(const FGeometry& MyGeometry, const FPointerEvent& MouseEvent)
 {
+	
+	return FReply::Handled().BeginDragDrop(SharedThis(new FDragDropOperation()));
 
-	return FReply::Handled();
 }

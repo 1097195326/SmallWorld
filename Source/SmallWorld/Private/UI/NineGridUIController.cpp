@@ -5,11 +5,13 @@ NineGridUIController::NineGridUIController()
 {
 	ControllerType = UIControllerInterface::T_NineGrid;
 
-	ControllerView = SNew(SOverlay)
-		+ SOverlay::Slot()
+	ControllerView = SNew(SOverlay);
+
+	ControllerView->AddSlot(1)
 		.HAlign(HAlign_Fill)
 		.VAlign(VAlign_Fill)
 		.Padding(0)
+		.Expose(LowOverlaySlot)
 		[
 			SNew(SHorizontalBox)
 			+ SHorizontalBox::Slot()
@@ -30,7 +32,7 @@ NineGridUIController::NineGridUIController()
 				.HAlign(HAlign_Left)
 				.Expose(LeftBottomSlot)
 			]
-		+ SHorizontalBox::Slot()
+			+ SHorizontalBox::Slot()
 			.VAlign(VAlign_Fill)
 			.HAlign(HAlign_Fill)
 			[
@@ -48,7 +50,7 @@ NineGridUIController::NineGridUIController()
 				.HAlign(HAlign_Center)
 				.Expose(MiddleBottomSlot)
 			]
-		+ SHorizontalBox::Slot()
+			+ SHorizontalBox::Slot()
 			.VAlign(VAlign_Fill)
 			.HAlign(HAlign_Right)
 			[

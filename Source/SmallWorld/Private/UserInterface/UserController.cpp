@@ -45,7 +45,7 @@ void AUserController::On_Delete()
 }
 bool AUserController::InputKey(FKey Key, EInputEvent EventType, float AmountDepressed, bool bGamepad)
 {
-	if (Key == EKeys::LeftMouseButton && EventType == IE_Pressed)
+	/*if (Key == EKeys::LeftMouseButton && EventType == IE_Pressed)
 	{
 		FHitResult HitResult;
 		GetHitResultUnderCursorByChannel(UEngineTypes::ConvertToTraceType(ECC_Visibility), false, HitResult);
@@ -70,7 +70,7 @@ bool AUserController::InputKey(FKey Key, EInputEvent EventType, float AmountDepr
 		{
 
 		}
-	}
+	}*/
 	return Super::InputKey(Key, EventType, AmountDepressed, bGamepad);
 }
 bool AUserController::InputTouch(uint32 Handle, ETouchType::Type Type, const FVector2D& TouchLocation, float Force, FDateTime DeviceTimestamp, uint32 TouchpadIndex)

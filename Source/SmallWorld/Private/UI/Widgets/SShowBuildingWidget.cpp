@@ -42,6 +42,8 @@ void SShowBuildingWidget::Construct(const FArguments & InArgs)
 	}
 
 }
+
+/*
 void SShowBuildingWidget::OnDragEnter(const FGeometry& MyGeometry, const FDragDropEvent& DragDropEvent)
 {
 
@@ -59,4 +61,4 @@ FReply SShowBuildingWidget::OnDrop(const FGeometry& MyGeometry, const FDragDropE
 {
 
 	return FReply::Handled();
-}
+}*/

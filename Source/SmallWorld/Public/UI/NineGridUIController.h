@@ -33,4 +33,7 @@ protected:
 	SVerticalBox::FSlot * RightTopSlot = NULL;
 	SVerticalBox::FSlot * RightCenterSlot = NULL;
 	SVerticalBox::FSlot * RightBottomSlot = NULL;
+
+	SOverlay::FOverlaySlot * LowOverlaySlot = NULL;
+
 };

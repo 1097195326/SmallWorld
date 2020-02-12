@@ -2,12 +2,20 @@
 #include "SHordePowerWidget.h"
 #include "SShowBuildingWidget.h"
 #include "DataManager.h"
+#include "SServiceDragDropWidget.h"
+
+
 
 void MainViewUIController::InitControllerView()
 {
+	/*ControllerView->AddSlot(0)
+		[
+			SNew(SServiceDragDropWidget)
+		];*/
 	LeftTopSlot->AttachWidget(CreateUserView().ToSharedRef());
 	LeftBottomSlot->AttachWidget(CreateToWorldButton().ToSharedRef());
 	RightBottomSlot->AttachWidget(CreateBuildingButton().ToSharedRef());
+
 
 }
 
