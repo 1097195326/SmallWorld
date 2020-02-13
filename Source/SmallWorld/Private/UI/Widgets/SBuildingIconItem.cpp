@@ -1,6 +1,6 @@
 #include "SBuildingIconItem.h"
 #include "DataManager.h"
-
+#include "FBuildingDragDropOp.h"
 
 
 SBuildingIconItem::~SBuildingIconItem()
@@ -107,7 +107,7 @@ FReply SBuildingIconItem::OnTouchStarted(const FGeometry& MyGeometry, const FPoi
 }
 FReply SBuildingIconItem::OnDragDetected(const FGeometry& MyGeometry, const FPointerEvent& MouseEvent)
 {
-	
-	return FReply::Handled().BeginDragDrop(SharedThis(new FDragDropOperation()));
+
+	return FReply::Handled().BeginDragDrop(FBuildingDragDropOp::New(IconName));
 
 }

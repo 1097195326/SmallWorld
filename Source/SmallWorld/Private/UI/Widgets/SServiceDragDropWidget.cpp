@@ -7,8 +7,9 @@ void SServiceDragDropWidget::Construct(const FArguments & InArgs)
 		[
 			SNew(SBorder)
 			.BorderBackgroundColor(FGameStyle::Get().GetColor("Color.FFFA4147"))
+			.BorderImage(FCoreStyle::Get().GetBrush("GenericWhiteBox"))
 		];
-} /*
+}
 void SServiceDragDropWidget::OnDragEnter(const FGeometry& MyGeometry, const FDragDropEvent& DragDropEvent)
 {
 
@@ -27,4 +28,4 @@ FReply SServiceDragDropWidget::OnDrop(const FGeometry& MyGeometry, const FDragDr
 {
 
 	return FReply::Handled();
-}*/
+}

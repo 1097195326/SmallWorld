@@ -53,6 +53,8 @@ TSharedRef<FSlateStyleSet> FGameStyle::Create()
 	Style.Set("Color.FFE1E2E6", FLinearColor(FColor(0XFFE1E2E6)));//black-1
 	Style.Set("Color.FFAFB0B3", FLinearColor(FColor(0XFFAFB0B3)));//black-2
 	Style.Set("Color.FF6E6F70", FLinearColor(FColor(0XFF6E6F70)));//black-3
+	Style.Set("Color.7F6E6F70", FLinearColor(FColor(0X7F6E6F70)));//black-3
+	Style.Set("Color.4C6E6F70", FLinearColor(FColor(0X4C6E6F70)));//black-3
 	Style.Set("Color.FF424447", FLinearColor(FColor(0XFF424447)));//black-4
 	Style.Set("Color.FF383A3D", FLinearColor(FColor(0XFF383A3D)));//black-5
 	Style.Set("Color.FF2F3033", FLinearColor(FColor(0XFF2F3033)));//black-6

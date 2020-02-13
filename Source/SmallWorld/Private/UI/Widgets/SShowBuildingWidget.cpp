@@ -11,14 +11,24 @@ void SShowBuildingWidget::Construct(const FArguments & InArgs)
 		.HAlign(HAlign_Center)
 		.VAlign(VAlign_Center)
 		[
-			SNew(SVerticalBox)
-			+ SVerticalBox::Slot()
-			.VAlign(VAlign_Bottom)
-			.HAlign(HAlign_Center)
-			.AutoHeight()
+			SNew(SScaleBox)
 			[
-				SAssignNew(IconGridPanel, SGridPanel)
+				SNew(SBorder)
+				.BorderBackgroundColor(FGameStyle::Get().GetColor("Color.7F6E6F70"))
+				.BorderImage(FCoreStyle::Get().GetBrush("GenericWhiteBox"))
+				[
+					SNew(SVerticalBox)
+					+ SVerticalBox::Slot()
+					.VAlign(VAlign_Bottom)
+					.HAlign(HAlign_Center)
+					.Padding(5)
+					.AutoHeight()
+					[
+						SAssignNew(IconGridPanel, SGridPanel)
+					]
+				]
 			]
+			
 		];
 
 	HordeData * UserHordeData = DataManager::GetInstance()->GetUserData()->GetHordeData();
@@ -43,7 +53,7 @@ void SShowBuildingWidget::Construct(const FArguments & InArgs)
 
 }
 
-/*
+
 void SShowBuildingWidget::OnDragEnter(const FGeometry& MyGeometry, const FDragDropEvent& DragDropEvent)
 {
 
@@ -61,4 +71,4 @@ FReply SShowBuildingWidget::OnDrop(const FGeometry& MyGeometry, const FDragDropE
 {
 
 	return FReply::Handled();
-}*/
+}
