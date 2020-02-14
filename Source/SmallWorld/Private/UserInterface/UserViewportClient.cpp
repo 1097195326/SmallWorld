@@ -20,3 +20,19 @@ void UUserViewportClient::Tick(float DeltaTime)
 
 
 }
+bool UUserViewportClient::HavePriviewActor()
+{
+	return PriviewActor.IsValid();
+}
+void UUserViewportClient::UpdatePriviewActor()
+{
+
+}
+void UUserViewportClient::DropPriviewActor()
+{
+
+}
+void UUserViewportClient::DestroyPriviewActor()
+{
+
+}

@@ -1,4 +1,7 @@
 #include "SServiceDragDropWidget.h"
+#include "FBuildingDragDropOp.h"
+#include "UserViewportClient.h"
+
 
 
 void SServiceDragDropWidget::Construct(const FArguments & InArgs)
@@ -12,20 +15,49 @@ void SServiceDragDropWidget::Construct(const FArguments & InArgs)
 }
 void SServiceDragDropWidget::OnDragEnter(const FGeometry& MyGeometry, const FDragDropEvent& DragDropEvent)
 {
+	TSharedPtr< FDragDropOperation> Operation = DragDropEvent.GetOperation();
+	
+	bool IsValidDrap = false;
+	if (Operation->IsOfType<FBuildingDragDropOp>())
+	{
+		IsValidDrap = true;
+	}
+	if (IsValidDrap)
+	{
 
-
+	}
 }
 void SServiceDragDropWidget::OnDragLeave(const FDragDropEvent& DragDropEvent)
 {
-
+	if (GVC->HavePriviewActor())
+	{
+		GVC->DestroyPriviewActor();
+	}
 }
 FReply SServiceDragDropWidget::OnDragOver(const FGeometry& MyGeometry, const FDragDropEvent& DragDropEvent)
 {
-
-	return FReply::Handled();
+	if (GVC->HavePriviewActor())
+	{
+		GVC->UpdatePriviewActor();
+		FReply::Handled();
+	}
+	return FReply::Unhandled();
 }
 FReply SServiceDragDropWidget::OnDrop(const FGeometry& MyGeometry, const FDragDropEvent& DragDropEvent)
 {
+	TSharedPtr< FDragDropOperation> Operation = DragDropEvent.GetOperation();
 
-	return FReply::Handled();
+	bool IsValidDrap = false;
+	if (Operation->IsOfType<FBuildingDragDropOp>())
+	{
+		IsValidDrap = true;
+	}
+	if (IsValidDrap && GVC->HavePriviewActor())
+	{
+		GVC->DestroyPriviewActor();
+		GVC->DropPriviewActor();
+
+		return FReply::Handled();
+	}
+	return FReply::Unhandled();
 }

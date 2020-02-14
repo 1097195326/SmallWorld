@@ -14,9 +14,16 @@ public:
 	virtual void PostInitProperties() override;
 	virtual void Tick(float DeltaTime) override;
 
+	bool	HavePriviewActor();
+	void	UpdatePriviewActor();
+	void	DropPriviewActor();
+	void	DestroyPriviewActor();
 
 	static UUserViewportClient * GetInstance();
 private:
 	static UUserViewportClient * UserViewportClientInstance;
+
+	TSharedPtr<AActor>  PriviewActor;
+
 };
 #define  GVC  UUserViewportClient::GetInstance()
