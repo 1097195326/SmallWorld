@@ -8,10 +8,10 @@
 
 void MainViewUIController::InitControllerView()
 {
-	/*ControllerView->AddSlot(0)
+	ControllerView->AddSlot(0)
 		[
 			SNew(SServiceDragDropWidget)
-		];*/
+		];
 	LeftTopSlot->AttachWidget(CreateUserView().ToSharedRef());
 	LeftBottomSlot->AttachWidget(CreateToWorldButton().ToSharedRef());
 	RightBottomSlot->AttachWidget(CreateBuildingButton().ToSharedRef());

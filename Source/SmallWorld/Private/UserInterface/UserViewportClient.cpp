@@ -24,8 +24,15 @@ bool UUserViewportClient::HavePriviewActor()
 {
 	return PriviewActor.IsValid();
 }
-void UUserViewportClient::UpdatePriviewActor()
+void UUserViewportClient::UpdatePriviewActor(FString IconName /* = TEXT("") */)
 {
+	if (!IconName.IsEmpty())
+	{
+		DestroyPriviewActor();
+		GetGameInstance()->GetFirstLocalPlayerController();
+	}
+	
+
 
 }
 void UUserViewportClient::DropPriviewActor()
@@ -34,5 +41,9 @@ void UUserViewportClient::DropPriviewActor()
 }
 void UUserViewportClient::DestroyPriviewActor()
 {
-
+	if (PriviewActor.IsValid())
+	{
+		PriviewActor->BeginDestroy();
+	}
+	PriviewActor.Reset();
 }

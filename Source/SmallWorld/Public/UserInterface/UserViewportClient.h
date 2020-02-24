@@ -15,7 +15,7 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	bool	HavePriviewActor();
-	void	UpdatePriviewActor();
+	void	UpdatePriviewActor(FString IconName = TEXT(""));
 	void	DropPriviewActor();
 	void	DestroyPriviewActor();
 

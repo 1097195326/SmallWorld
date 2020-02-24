@@ -20,6 +20,10 @@ void SServiceDragDropWidget::OnDragEnter(const FGeometry& MyGeometry, const FDra
 	bool IsValidDrap = false;
 	if (Operation->IsOfType<FBuildingDragDropOp>())
 	{
+		TSharedPtr<FBuildingDragDropOp> BuildingOperation = StaticCastSharedPtr<FBuildingDragDropOp>(Operation);
+		BuildingOperation->SetDecoratorVisibility(false);
+
+		GVC->UpdatePriviewActor(BuildingOperation->IconName);
 		IsValidDrap = true;
 	}
 	if (IsValidDrap)
@@ -48,7 +52,7 @@ FReply SServiceDragDropWidget::OnDrop(const FGeometry& MyGeometry, const FDragDr
 	TSharedPtr< FDragDropOperation> Operation = DragDropEvent.GetOperation();
 
 	bool IsValidDrap = false;
-	if (Operation->IsOfType<FBuildingDragDropOp>())
+	if (Operation.IsValid() && Operation->IsOfType<FBuildingDragDropOp>())
 	{
 		IsValidDrap = true;
 	}
