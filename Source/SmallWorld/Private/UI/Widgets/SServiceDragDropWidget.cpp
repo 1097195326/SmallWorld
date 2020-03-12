@@ -9,7 +9,7 @@ void SServiceDragDropWidget::Construct(const FArguments & InArgs)
 	ChildSlot
 		[
 			SNew(SBorder)
-			.BorderBackgroundColor(FGameStyle::Get().GetColor("Color.FFFA4147"))
+			.BorderBackgroundColor(FGameStyle::Get().GetColor("Color.None"))
 			.BorderImage(FCoreStyle::Get().GetBrush("GenericWhiteBox"))
 		];
 }

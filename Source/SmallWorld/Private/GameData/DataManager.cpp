@@ -1,6 +1,11 @@
 #include "DataManager.h"
 #include "GamePath.h"
 
+#include "Modules/ModuleManager.h"
+#include "AssetRegistryModule.h"
+#include "Engine/StreamableManager.h"
+#include "Engine/ObjectLibrary.h"
+
 
 FString GameConfigDataFilePath = GamePath::GameConfigPath() + TEXT("GameConfigData.xml");
 FString UserDataFilePath = GamePath::SaveAbsolutePath() + TEXT("UserData.json");
@@ -12,14 +17,29 @@ DataManager::DataManager()
 	mUserData = nullptr;
 	mGameConfigData = nullptr;
 	mGameWorldData = nullptr;
+
+	
+
+}
+DataManager::~DataManager()
+{
+	
+	mUserData = nullptr;
+	mGameConfigData = nullptr;
+	mGameWorldData = nullptr;
 }
 void DataManager::InitData()
 {
+	
 	mGameWorldData->InitUserData(mUserData);
 
 }
 void DataManager::LoadData()
 {
+	UObjectLibrary * BuildingAssetLibrary = UObjectLibrary::CreateLibrary(UObject::StaticClass(), false, false);
+	BuildingAssetLibrary->LoadAssetDataFromPath(GamePath::BuildingAssetPath);
+	BuildingAssetLibrary->GetAssetDataList(BuildingAssetArray);
+
 
 	LoadUserData();
 	LoadGameConfigData();
@@ -107,4 +127,15 @@ void DataManager::LoadGameWorldData()
 		FJsonSerializer::Deserialize(fileReader, JsonContent);
 		mGameWorldData->Deserialization(JsonContent->GetObjectField("GameWorldData"));
 	}
+}
+ FAssetData DataManager::GetBuildingAssetDataByIconName(FString MeshName)
+{
+	for (auto & assetData : BuildingAssetArray)
+	{
+		if (assetData.AssetName.ToString().Equals(MeshName))
+		{
+			return assetData;
+		}
+	}
+	return NULL;
 }

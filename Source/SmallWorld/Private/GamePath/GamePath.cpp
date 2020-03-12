@@ -1,6 +1,9 @@
 #include "GamePath.h"
 
 
+FString GamePath::BuildingAssetPath = TEXT("/Game/CastlePack/RenameMeshes");
+
+
 FString GamePath::SaveAbsolutePath()
 {
 	FString SavePath = TEXT("");

@@ -17,6 +17,7 @@ class DataManager : public SingleTemplate<DataManager>
 {
 public:
 	DataManager();
+	~DataManager();
 
 	void InitData();
 	void LoadData();
@@ -31,6 +32,9 @@ public:
 
 	UserData * GetUserData() { return mUserData; }
 	GameConfigData * GetGameConfigData() { return mGameConfigData; }
+
+	FAssetData  GetBuildingAssetDataByIconName(FString MeshName);
+
 private:
 	void  LoadGameConfigData();
 	bool  LoadUserData();
@@ -39,6 +43,7 @@ private:
 	UserData * mUserData;
 	GameConfigData * mGameConfigData;
 	GameWorldData * mGameWorldData;
+	TArray<FAssetData> BuildingAssetArray;
 
 };
 

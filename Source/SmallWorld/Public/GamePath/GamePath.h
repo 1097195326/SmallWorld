@@ -13,6 +13,7 @@ using namespace std;
 class GamePath : public FPaths
 {
 public:
+	static FString BuildingAssetPath;
 
 	static FString SaveAbsolutePath();
 	static FString IOSSavePath();

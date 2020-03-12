@@ -22,7 +22,7 @@ void AUserController::On_Start()
 	CurrentLandscapeInfo = nullptr;
 
 	TArray<AActor*> AllLandscape;
-	UGameplayStatics::GetAllActorsOfClass(this, ALandscape::StaticClass(), AllLandscape);
+	/*UGameplayStatics::GetAllActorsOfClass(this, ALandscape::StaticClass(), AllLandscape);
 	for (int i = 0; i < AllLandscape.Num(); i++)
 	{
 		ALandscape * Landscape = Cast<ALandscape>(AllLandscape[i]);
@@ -32,7 +32,7 @@ void AUserController::On_Start()
 			CurrentLandscapeInfo = Landscape->CreateLandscapeInfo();
 			break;
 		}
-	}
+	}*/
 
 }
 void AUserController::On_Tick(float delta)
