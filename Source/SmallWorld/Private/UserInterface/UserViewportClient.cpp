@@ -28,19 +28,24 @@ void UUserViewportClient::Tick(float DeltaTime)
 }
 bool UUserViewportClient::HavePriviewActor()
 {
-	return PriviewActor.IsValid();
+	return PriviewActor != nullptr;
 }
-void UUserViewportClient::UpdatePriviewActor(FString IconName /* = TEXT("") */)
+void UUserViewportClient::UpdatePriviewActor(FVector2D ScreenPosition, FString IconName /* = TEXT("") */)
 {
 	const AUserController * UserController = Cast<AUserController>(GetGameInstance()->GetFirstLocalPlayerController());
 	FHitResult HitResult;
+	FVector2D MousePosition = ScreenPosition;
+	//GetMousePosition(MousePosition);
 #if PLATFORM_WINDOWS
-	UserController->GetHitResultUnderCursor(ECC_Visibility, false, HitResult);
+	UserController->GetHitResultAtScreenPosition(ScreenPosition, ECC_Visibility, false, HitResult);
+	//UserController->GetHitResultUnderCursorByChannel(UEngineTypes::ConvertToTraceType(ECC_Visibility), false, HitResult);
+	//UserController->GetHitResultUnderCursor(ECC_Visibility, false, HitResult);
 #elif PLATFORM_IOS || PLATFORM_ANDROID
 	UserController->GetHitResultUnderFinger(ETouchIndex::Touch1, ECC_Visibility, false, HitResult);
 #endif
 	if (HitResult.bBlockingHit)
 	{
+		UE_LOG(LogTemp, Log, TEXT("zhx : HitResult %s:%f,%f,%f"),*HitResult.GetActor()->GetName(), HitResult.ImpactPoint.X, HitResult.ImpactPoint.Y, HitResult.ImpactPoint.Z);
 		if (!IconName.IsEmpty())
 		{
 			DestroyPriviewActor();
@@ -50,18 +55,20 @@ void UUserViewportClient::UpdatePriviewActor(FString IconName /* = TEXT("") */)
 			FString MeshName = FString::Printf(TEXT("Mesh%s0"), *IconName);
 			FAssetData MeshData = DataManager::GetInstance()->GetBuildingAssetDataByIconName(MeshName);
 
-			AActor * Dactor = nullptr;
+			PriviewActor = nullptr;
 
 			if (MeshData.AssetClass == FName(TEXT("SkeletalMesh")))
 			{
 				USkeletalMesh * Mesh = Cast<USkeletalMesh>(MeshData.GetAsset());
 				if (Mesh)
 				{
-					Dactor = UGameplayStatics::BeginDeferredActorSpawnFromClass(GetWorld(), ASkeletalMeshActor::StaticClass(), SpawnPosition, ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn);
-					ASkeletalMeshActor * SkeletalActor = Cast<ASkeletalMeshActor>(Dactor);
+					PriviewActor = UGameplayStatics::BeginDeferredActorSpawnFromClass(GetWorld(), ASkeletalMeshActor::StaticClass(), SpawnPosition, ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn);
+					ASkeletalMeshActor * SkeletalActor = Cast<ASkeletalMeshActor>(PriviewActor);
 					if (SkeletalActor)
 					{
+						//SkeletalActor->GetSkeletalMeshComponent()->Mobility = EComponentMobility::Movable;
 						SkeletalActor->GetSkeletalMeshComponent()->SetSkeletalMesh(Mesh);
+						SkeletalActor->GetSkeletalMeshComponent()->RegisterComponent();
 					}
 				}
 			}
@@ -70,25 +77,27 @@ void UUserViewportClient::UpdatePriviewActor(FString IconName /* = TEXT("") */)
 				UStaticMesh * Mesh = Cast<UStaticMesh>(MeshData.GetAsset());
 				if (Mesh)
 				{
-					Dactor = UGameplayStatics::BeginDeferredActorSpawnFromClass(GetWorld(), AStaticMeshActor::StaticClass(), SpawnPosition, ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn);
-					AStaticMeshActor * StaticActor = Cast<AStaticMeshActor>(Dactor);
+					PriviewActor = UGameplayStatics::BeginDeferredActorSpawnFromClass(GetWorld(), AStaticMeshActor::StaticClass(), SpawnPosition, ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn);
+					AStaticMeshActor * StaticActor = Cast<AStaticMeshActor>(PriviewActor);
 					if (StaticActor)
 					{
+						StaticActor->GetStaticMeshComponent()->Mobility = EComponentMobility::Movable;
 						StaticActor->GetStaticMeshComponent()->SetStaticMesh(Mesh);
+						StaticActor->GetStaticMeshComponent()->RegisterComponent();
 					}
 				}
 			}
-			if (Dactor)
+			if (PriviewActor)
 			{
-				UGameplayStatics::FinishSpawningActor(Dactor, SpawnPosition);
-				PriviewActor = MakeShareable(Dactor);
+				UGameplayStatics::FinishSpawningActor(PriviewActor, SpawnPosition);
 			}
 		}
-		if (PriviewActor.IsValid())
+		if (PriviewActor)
 		{
 			PriviewActor->SetActorLocation(HitResult.ImpactPoint);
 		}
 	}
+
 }
 void UUserViewportClient::DropPriviewActor()
 {
@@ -98,9 +107,9 @@ void UUserViewportClient::DropPriviewActor()
 }
 void UUserViewportClient::DestroyPriviewActor()
 {
-	if (PriviewActor.IsValid())
+	/*if (PriviewActor)
 	{
 		PriviewActor->BeginDestroy();
 	}
-	PriviewActor.Reset();
+	PriviewActor = nullptr;*/
 }

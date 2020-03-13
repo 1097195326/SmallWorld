@@ -15,7 +15,7 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	bool	HavePriviewActor();
-	void	UpdatePriviewActor(FString IconName = TEXT(""));
+	void	UpdatePriviewActor(FVector2D ScreenPosition, FString IconName = TEXT(""));
 	void	DropPriviewActor();
 	void	DestroyPriviewActor();
 
@@ -23,7 +23,7 @@ public:
 private:
 	static UUserViewportClient * UserViewportClientInstance;
 
-	TSharedPtr<AActor>  PriviewActor;
+	AActor *  PriviewActor;
 
 };
 #define  GVC  UUserViewportClient::GetInstance()
