@@ -33,19 +33,17 @@ bool UUserViewportClient::HavePriviewActor()
 void UUserViewportClient::UpdatePriviewActor(FVector2D ScreenPosition, FString IconName /* = TEXT("") */)
 {
 	const AUserController * UserController = Cast<AUserController>(GetGameInstance()->GetFirstLocalPlayerController());
+	
 	FHitResult HitResult;
-	FVector2D MousePosition = ScreenPosition;
-	//GetMousePosition(MousePosition);
-#if PLATFORM_WINDOWS
-	UserController->GetHitResultAtScreenPosition(ScreenPosition, ECC_Visibility, false, HitResult);
-	//UserController->GetHitResultUnderCursorByChannel(UEngineTypes::ConvertToTraceType(ECC_Visibility), false, HitResult);
-	//UserController->GetHitResultUnderCursor(ECC_Visibility, false, HitResult);
-#elif PLATFORM_IOS || PLATFORM_ANDROID
-	UserController->GetHitResultUnderFinger(ETouchIndex::Touch1, ECC_Visibility, false, HitResult);
-#endif
-	if (HitResult.bBlockingHit)
+	
+	TArray<TEnumAsByte<EObjectTypeQuery>> TrackObj;
+	TrackObj.Add(UEngineTypes::ConvertToObjectType(ECC_GameTraceChannel3));
+
+	UserController->GetHitResultAtScreenPosition(ScreenPosition, TrackObj, false, HitResult);
+
+	if (HitResult.bBlockingHit && PriviewActor != HitResult.GetActor())
 	{
-		UE_LOG(LogTemp, Log, TEXT("zhx : HitResult %s:%f,%f,%f"),*HitResult.GetActor()->GetName(), HitResult.ImpactPoint.X, HitResult.ImpactPoint.Y, HitResult.ImpactPoint.Z);
+		//UE_LOG(LogTemp, Log, TEXT("zhx : HitResult %s:%f,%f,%f"),*HitResult.GetActor()->GetName(), HitResult.ImpactPoint.X, HitResult.ImpactPoint.Y, HitResult.ImpactPoint.Z);
 		if (!IconName.IsEmpty())
 		{
 			DestroyPriviewActor();
@@ -54,8 +52,6 @@ void UUserViewportClient::UpdatePriviewActor(FVector2D ScreenPosition, FString I
 
 			FString MeshName = FString::Printf(TEXT("Mesh%s0"), *IconName);
 			FAssetData MeshData = DataManager::GetInstance()->GetBuildingAssetDataByIconName(MeshName);
-
-			PriviewActor = nullptr;
 
 			if (MeshData.AssetClass == FName(TEXT("SkeletalMesh")))
 			{

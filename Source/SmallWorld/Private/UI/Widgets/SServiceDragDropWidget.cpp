@@ -23,7 +23,9 @@ void SServiceDragDropWidget::OnDragEnter(const FGeometry& MyGeometry, const FDra
 		TSharedPtr<FBuildingDragDropOp> BuildingOperation = StaticCastSharedPtr<FBuildingDragDropOp>(Operation);
 		BuildingOperation->SetDecoratorVisibility(false);
 
-		GVC->UpdatePriviewActor(DragDropEvent.GetScreenSpacePosition(), BuildingOperation->IconName);
+		FVector2D CachedOnDropLocalMousePos = MyGeometry.AbsoluteToLocal(DragDropEvent.GetScreenSpacePosition()) * MyGeometry.Scale;
+		
+		GVC->UpdatePriviewActor(CachedOnDropLocalMousePos, BuildingOperation->IconName);
 		IsValidDrap = true;
 	}
 	if (IsValidDrap)
@@ -53,7 +55,9 @@ void SServiceDragDropWidget::OnDragLeave(const FDragDropEvent& DragDropEvent)
 }
 FReply SServiceDragDropWidget::OnDragOver(const FGeometry& MyGeometry, const FDragDropEvent& DragDropEvent)
 {
-	GVC->UpdatePriviewActor(DragDropEvent.GetScreenSpacePosition());
+	FVector2D CachedOnDropLocalMousePos = MyGeometry.AbsoluteToLocal(DragDropEvent.GetScreenSpacePosition()) * MyGeometry.Scale;
+
+	GVC->UpdatePriviewActor(CachedOnDropLocalMousePos);
 	if (GVC->HavePriviewActor())
 	{
 		FReply::Handled();
