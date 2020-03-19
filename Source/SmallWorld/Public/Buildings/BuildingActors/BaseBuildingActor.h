@@ -29,25 +29,6 @@ class ABaseBuildingActor : public AGameActor
 protected:
     BaseBuildingData * mData;
     
-    // Need To Save
-        // position
-        // Rotator
-    // End
-    int                    mMaxLevel;
-    
-    
-	FString  MeshPathLevel_0;
-	FString  MeshPathLevel_1;
-	FString  MeshPathLevel_2;
-	FString  MeshPathLevel_3;
-	FString  MeshPathLevel_4;
-	FString  MeshPathLevel_5;
-
-    // protected function
-    
-	virtual FString GetMeshPath();
-    
-    ABlockActor * mOnBlockActor;
 
 public:
 	ABaseBuildingActor();
@@ -57,22 +38,6 @@ public:
     
 	FVector				GetInteractivePoint();
 
-	EBuildingType        GetBuildingType();
-    
-    ABlockActor *       GetOnBlockActor();
-    void                SetOnBlockActor(ABlockActor * _blockActor);
-    
-	void                SetLevel(int _level);
-	int	                GetLevel();
-
-	FRotator            DirectionRotation() {};
-
-	
-	virtual bool        IsInWorld() {
-		return true;
-	}
-	virtual bool        IsInWorld(int _index) { return true; }
-    
 public:
     UPROPERTY(VisibleDefaultsOnly, Category = BaseBuilding)
     UStaticMeshComponent * BaseMeshComponent;

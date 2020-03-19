@@ -3,7 +3,7 @@
 
 float Pre_BuildBakery_lll::Evaluate()
 {
-	return 	mCityActor->GetHouseNum() * lll_Pre_Build_Bakery - mCityActor->GetBakeryNum();
+	return 	0.f;// mCityActor->GetHouseNum() * lll_Pre_Build_Bakery - mCityActor->GetBakeryNum();
 }
 void Pre_BuildBakery_lll::Enter()
 {
@@ -12,10 +12,10 @@ void Pre_BuildBakery_lll::Enter()
 }
 GoalState Pre_BuildBakery_lll::Process()
 {
-	if (mCityActor->BuildBakery())
+	/*if (mCityActor->BuildBakery())
 	{
 		return e_Success;
-	}
+	}*/
 	return e_Fail;
 
 }

@@ -15,7 +15,6 @@ public:
     virtual void Deserialization(TSharedPtr<FJsonObject>  JsonObject) override;
     
     
-	virtual FString GetName() override { return TEXT("MoneyStore"); }
 
 	void  ChangeGoldNum(const int32 & plusNum);
 	inline int32 GetGoldNum() { return GoldNum; }

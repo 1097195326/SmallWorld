@@ -3,7 +3,7 @@
 
 float Pre_BuildFarm_lll::Evaluate()
 {
-	return mCityActor->GetHouseNum() * lll_Pre_Build_Farm - mCityActor->GetFarmNum();
+	return 0.f;// mCityActor->GetHouseNum() * lll_Pre_Build_Farm - mCityActor->GetFarmNum();
 }
 void Pre_BuildFarm_lll::Enter()
 {
@@ -12,10 +12,10 @@ void Pre_BuildFarm_lll::Enter()
 }
 GoalState Pre_BuildFarm_lll::Process()
 {
-	if (mCityActor->BuildFarm())
+	/*if (mCityActor->BuildFarm())
 	{
 		return e_Success;
-	}
+	}*/
 	return e_Fail;
 
 }

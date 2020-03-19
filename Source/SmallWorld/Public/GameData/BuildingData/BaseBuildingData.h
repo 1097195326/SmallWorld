@@ -34,36 +34,37 @@ enum EBuildingType
 
 class BaseBuildingData : public DataR
 {
-
 public:
 	friend class ABaseBuildingActor;
 
     BaseBuildingData();
-    
+	void	SetConfigDataByName(FString InName);
+
 	virtual void Serialization(TSharedRef<TJsonWriter<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>> Writer) override;
 	virtual void Deserialization(TSharedPtr<FJsonObject>  JsonObject) override;
 
-	virtual FString GetName() { return TEXT(""); }
 	virtual void CalculateData(){}
 
-	bool	IsMaxLevel() { return BuildingLevel == BConfig.maxlevel; }
-
-public:
+	inline bool IsMaxLevel() { return BuildingLevel == ConfigData.maxlevel; }
+	inline FString GetBuildingName() { return BuildingName; }
+	inline EBuildingType GetBuildingType() { return BuildingType; }
+protected:
+	//Config Data
+	FString			BuildingName;
 	EBuildingType	BuildingType;
-	FVector     BuildingPosition;
-	FRotator    BuildingRotator;
+public:
+	// Running Datas
+	BuildingConfig  ConfigData;
+	FVector			BuildingPosition;
+	FRotator		BuildingRotator;
+
+	int32			MaxHealth;
+	int32			MaxUpdateTime;
 
 	float	    BuildingHealth;
 	int32		BuildingLevel;
 
 	bool		IsUpdating;
 	int32		RemainingUpdateTime; // second
-
-	// CalculateDatas
-	BuildingConfig  BConfig;
-
-	int32		MaxHealth;
-	int32		MaxUpdateTime;
-
 
 };

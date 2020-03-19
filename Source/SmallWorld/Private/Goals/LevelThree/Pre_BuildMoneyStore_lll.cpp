@@ -3,7 +3,7 @@
 
 float Pre_BuildMoneyStore_lll::Evaluate()
 {
-	return 	mCityActor->GetHouseNum() * lll_Pre_Build_MoneyStore - mCityActor->GetMoneyStoreNum() * 10;
+	return 	0.f;// mCityActor->GetHouseNum() * lll_Pre_Build_MoneyStore - mCityActor->GetMoneyStoreNum() * 10;
 }
 void Pre_BuildMoneyStore_lll::Enter()
 {
@@ -12,10 +12,10 @@ void Pre_BuildMoneyStore_lll::Enter()
 }
 GoalState Pre_BuildMoneyStore_lll::Process()
 {
-	if (mCityActor->BuildMoneyStore())
+	/*if (mCityActor->BuildMoneyStore())
 	{
 		return e_Success;
-	}
+	}*/
 	return e_Fail;
 
 }

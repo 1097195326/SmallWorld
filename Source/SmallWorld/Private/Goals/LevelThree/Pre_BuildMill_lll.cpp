@@ -3,7 +3,7 @@
 
 float Pre_BuildMill_lll::Evaluate()
 {
-	return 	mCityActor->GetHouseNum() * lll_Pre_Build_Mill - mCityActor->GetMillNum();
+	return 	0.f;// mCityActor->GetHouseNum() * lll_Pre_Build_Mill - mCityActor->GetMillNum();
 }
 void Pre_BuildMill_lll::Enter()
 {
@@ -12,10 +12,10 @@ void Pre_BuildMill_lll::Enter()
 }
 GoalState Pre_BuildMill_lll::Process()
 {
-	if (mCityActor->BuildMill())
+	/*if (mCityActor->BuildMill())
 	{
 		return e_Success;
-	}
+	}*/
 	return e_Fail;
 
 }

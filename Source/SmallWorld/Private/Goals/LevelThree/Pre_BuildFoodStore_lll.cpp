@@ -3,7 +3,7 @@
 
 float Pre_BuildFoodStore_lll::Evaluate()
 {
-	return 	mCityActor->GetHouseNum() * lll_Pre_Build_FoodStore - mCityActor->GetFoodStoreNum() * 10;
+	return 	0.f;// mCityActor->GetHouseNum() * lll_Pre_Build_FoodStore - mCityActor->GetFoodStoreNum() * 10;
 }
 void Pre_BuildFoodStore_lll::Enter()
 {
@@ -12,10 +12,10 @@ void Pre_BuildFoodStore_lll::Enter()
 }
 GoalState Pre_BuildFoodStore_lll::Process()
 {
-	if (mCityActor->BuildFoodStore())
+	/*if (mCityActor->BuildFoodStore())
 	{
 		return e_Success;
-	}
+	}*/
 	return e_Fail;
 
 }

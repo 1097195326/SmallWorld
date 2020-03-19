@@ -19,23 +19,24 @@
 class HordeData : public DataR
 {
 public:
+	~HordeData();
+
     virtual void Serialization(TSharedRef<TJsonWriter<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>> Writer) override;
     virtual void Deserialization(TSharedPtr<FJsonObject>  JsonObject) override;
 
-    
 	int32 GetGoldNum();
 	int32 GetWoodNum();
 	int32 GetStoneNum();
 
 	template<typename BuildingClass = BaseBuildingData>
-	TArray<BuildingClass *> GetBuildingDatas(EBuildingType BuildingType)
+	TArray<BuildingClass *> GetBuildingDatasByType(EBuildingType BuildingType)
 	{
 		TArray<BuildingClass *> TemArray;
 		if (BuildingDatas.Num() > 0)
 		{
 			for (auto building : BuildingDatas)
 			{
-				if (building->BuildingType == BuildingType)
+				if (building->GetBuildingType() == BuildingType)
 				{
 					TemArray.Add((BuildingClass*)(building));
 				}

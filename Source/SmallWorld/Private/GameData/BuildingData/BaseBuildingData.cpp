@@ -13,14 +13,18 @@ BaseBuildingData::BaseBuildingData()
 	IsUpdating = false;
 	RemainingUpdateTime = 0;
 	
-
+}
+void BaseBuildingData::SetConfigDataByName(FString InName)
+{
+	BuildingName = InName;
+	ConfigData = DataManager::GetInstance()->GetGameConfigData()->GetBuildingConfig(BuildingName);
 }
 void BaseBuildingData::Serialization(TSharedRef<TJsonWriter<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>> Writer)
 {
 	Writer->WriteObjectStart("BaseBuildingData");
 	DataR::Serialization(Writer);
 
-
+	Writer->WriteValue("BuildingName", *BuildingName);
 	Writer->WriteValue("BuildingPosition", BuildingPosition.ToString());
 	Writer->WriteValue("BuildingRotator", BuildingRotator.ToString());
 	Writer->WriteValue("BuildingHealth", BuildingHealth);
@@ -34,14 +38,12 @@ void BaseBuildingData::Deserialization(TSharedPtr<FJsonObject> JsonObject)
 {
 	DataR::Deserialization(JsonObject->GetObjectField("DataR"));
 
+	BuildingName = JsonObject->GetStringField("BuildingName");
 	BuildingPosition.InitFromString(JsonObject->GetStringField("BuildingPosition"));
 	BuildingRotator.InitFromString(JsonObject->GetStringField("BuildingRotator"));
 	BuildingHealth = JsonObject->GetNumberField("BuildingHealth");
 	BuildingLevel = JsonObject->GetIntegerField("BuildingLevel");
 	IsUpdating = JsonObject->GetBoolField("IsUpdating");
 	RemainingUpdateTime = JsonObject->GetIntegerField("RemainingUpdateTime");
-
-	BConfig = DataManager::GetInstance()->GetGameConfigData()->GetBuildingConfig(GetName());
-
 
 }

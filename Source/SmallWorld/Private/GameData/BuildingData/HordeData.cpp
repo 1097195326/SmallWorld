@@ -1,6 +1,13 @@
 #include "HordeData.h"
 
-
+HordeData::~HordeData()
+{
+	for (auto data : BuildingDatas)
+	{
+		delete data;
+	}
+	BuildingDatas.Empty();
+}
 void HordeData::Serialization(TSharedRef<TJsonWriter<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>> Writer)
 {
 	Writer->WriteObjectStart("HordeData");
@@ -33,7 +40,7 @@ void HordeData::Deserialization(TSharedPtr<FJsonObject>  JsonObject)
 int32 HordeData::GetGoldNum()
 {
 	int32 OutNum = 0;
-	TArray<MoneyStoreData*> Datas = GetBuildingDatas<MoneyStoreData>(B_MoneyStore);
+	TArray<MoneyStoreData*> Datas = GetBuildingDatasByType<MoneyStoreData>(B_MoneyStore);
 	for (auto data : Datas)
 	{
 		OutNum += data->GetGoldNum();
@@ -43,7 +50,7 @@ int32 HordeData::GetGoldNum()
 int32 HordeData::GetWoodNum()
 {
 	int32 OutNum = 0;
-	TArray<WoodStoneStoreData*> Datas = GetBuildingDatas<WoodStoneStoreData>(B_WoodStoneStore);
+	TArray<WoodStoneStoreData*> Datas = GetBuildingDatasByType<WoodStoneStoreData>(B_WoodStoneStore);
 	for (auto data : Datas)
 	{
 		OutNum += data->GetWoodNum();
@@ -53,7 +60,7 @@ int32 HordeData::GetWoodNum()
 int32 HordeData::GetStoneNum()
 {
 	int32 OutNum = 0;
-	TArray<WoodStoneStoreData*> Datas = GetBuildingDatas<WoodStoneStoreData>(B_WoodStoneStore);
+	TArray<WoodStoneStoreData*> Datas = GetBuildingDatasByType<WoodStoneStoreData>(B_WoodStoneStore);
 	for (auto data : Datas)
 	{
 		OutNum += data->GetStoneNum();

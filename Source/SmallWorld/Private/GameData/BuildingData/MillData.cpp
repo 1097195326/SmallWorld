@@ -6,6 +6,8 @@ G_REGISTER_CLASS(MillData)
 MillData::MillData()
 {
 	BuildingType = B_Mill;
+	//MillData * __restrict testPtr;
+
 }
 MillData::~MillData()
 {

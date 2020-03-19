@@ -3,10 +3,10 @@
 
 float Pre_BuildCommandCenter_lll::Evaluate()
 {
-	if (mCityActor->GetCommandCenterLevel() > 0)
+	/*if (mCityActor->GetCommandCenterLevel() > 0)
 	{
 		return 0.f;
-	}
+	}*/
 	return lll_Pre_Build_CommandCenter;
 }
 void Pre_BuildCommandCenter_lll::Enter()
@@ -16,10 +16,10 @@ void Pre_BuildCommandCenter_lll::Enter()
 }
 GoalState Pre_BuildCommandCenter_lll::Process()
 {
-	if (mCityActor->BuildCommandCenter())
+	/*if (mCityActor->BuildCommandCenter())
 	{
 		return e_Success;
-	}
+	}*/
 	return e_Fail;
 
 }

@@ -15,7 +15,6 @@ public:
     virtual void Deserialization(TSharedPtr<FJsonObject>  JsonObject) override;
     
     
-	virtual FString GetName() override { return TEXT("Tower"); }
 
     
 };

@@ -3,11 +3,12 @@
 
 float Pre_BuildWall_lll::Evaluate()
 {
-	if (mCityActor->GetWallLevel() > 0)
+	return 0.f;
+	/*if (mCityActor->GetWallLevel() > 0)
 	{
 		return 0.f;
 	}
-	return mCityActor->GetHouseNum() * lll_Pre_Build_Wall - mCityActor->GetWallLevel();
+	return mCityActor->GetHouseNum() * lll_Pre_Build_Wall - mCityActor->GetWallLevel();*/
 }
 void Pre_BuildWall_lll::Enter()
 {
@@ -16,10 +17,10 @@ void Pre_BuildWall_lll::Enter()
 }
 GoalState Pre_BuildWall_lll::Process()
 {
-	if (mCityActor->BuildWall())
+	/*if (mCityActor->BuildWall())
 	{
 		return e_Success;
-	}
+	}*/
 	return e_Fail;
 
 }

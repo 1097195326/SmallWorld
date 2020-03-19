@@ -58,7 +58,7 @@ TSharedPtr<SWidget> MainViewUIController::CreateShowBuildingsWidget()
 	TArray<FString>  IconNames;
 	/*if (DataManager::GetInstance()->GetUserData() != nullptr &&
 		DataManager::GetInstance()->GetUserData()->GetHordeData() != nullptr &&
-		DataManager::GetInstance()->GetUserData()->GetHordeData()->GetBuildingDatas(EBuildingType::B_CommandCenter).Num() > 0)
+		DataManager::GetInstance()->GetUserData()->GetHordeData()->GetBuildingDatasByType(EBuildingType::B_CommandCenter).Num() > 0)
 	{
 		IconNames = GameConfigData::HaveCenterBuilding;
 	}
