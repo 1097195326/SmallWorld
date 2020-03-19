@@ -14,11 +14,7 @@ BaseBuildingData::BaseBuildingData()
 	RemainingUpdateTime = 0;
 	
 }
-void BaseBuildingData::SetConfigDataByName(FString InName)
-{
-	BuildingName = InName;
-	ConfigData = DataManager::GetInstance()->GetGameConfigData()->GetBuildingConfig(BuildingName);
-}
+
 void BaseBuildingData::Serialization(TSharedRef<TJsonWriter<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>> Writer)
 {
 	Writer->WriteObjectStart("BaseBuildingData");
@@ -47,3 +43,9 @@ void BaseBuildingData::Deserialization(TSharedPtr<FJsonObject> JsonObject)
 	RemainingUpdateTime = JsonObject->GetIntegerField("RemainingUpdateTime");
 
 }
+void BaseBuildingData::SetConfigDataByName(FString InName)
+{
+	BuildingName = InName;
+	ConfigData = DataManager::GetInstance()->GetGameConfigData()->GetBuildingConfig(BuildingName);
+}
+

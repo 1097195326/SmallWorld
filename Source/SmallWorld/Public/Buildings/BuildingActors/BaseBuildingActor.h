@@ -25,26 +25,23 @@ class ABlockActor;
 UCLASS()
 class ABaseBuildingActor : public AGameActor
 {
-	GENERATED_BODY()
-protected:
-    BaseBuildingData * mData;
-    
-
 public:
+	GENERATED_BODY()
 	ABaseBuildingActor();
 
-    virtual void InitData(BaseBuildingData * _data);
+    virtual void InitData(BaseBuildingData * InData);
     virtual void SaveData(TSharedRef<TJsonWriter<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>> Writer);
-    
+	virtual bool SetMeshComponent(const FAssetData & MeshData);
+
 	FVector				GetInteractivePoint();
+protected:
+	BaseBuildingData * mData;
 
 public:
-    UPROPERTY(VisibleDefaultsOnly, Category = BaseBuilding)
-    UStaticMeshComponent * BaseMeshComponent;
-    UPROPERTY(VisibleDefaultsOnly, Category = BaseBuilding)
-    USkeletalMeshComponent * BaseSkeletalMeshComponent;
+	UPROPERTY(VisibleDefaultsOnly, Category = BaseBuilding)
+	UMeshComponent * MeshComponent;
 
 	UPROPERTY(EditDefaultsOnly)
-		FString		InteractivePointName;
+		FString		HotPointName;
     
 };

@@ -38,12 +38,14 @@ public:
 	friend class ABaseBuildingActor;
 
     BaseBuildingData();
-	void	SetConfigDataByName(FString InName);
 
 	virtual void Serialization(TSharedRef<TJsonWriter<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>> Writer) override;
 	virtual void Deserialization(TSharedPtr<FJsonObject>  JsonObject) override;
 
 	virtual void CalculateData(){}
+	virtual bool SpawnActor() { return false; };
+
+	void	SetConfigDataByName(FString InName);
 
 	inline bool IsMaxLevel() { return BuildingLevel == ConfigData.maxlevel; }
 	inline FString GetBuildingName() { return BuildingName; }

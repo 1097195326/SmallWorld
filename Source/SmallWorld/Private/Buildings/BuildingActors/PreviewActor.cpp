@@ -1,26 +1,20 @@
-#include "BaseBuildingActor.h"
-#include "BlockActor.h"
+#include "PreviewActor.h"
+#include "Engine/StaticMesh.h"
+#include "Components/StaticMeshComponent.h"
+#include "Components/SkeletalMeshComponent.h"
+#include "DataManager.h"
 
-ABaseBuildingActor::ABaseBuildingActor()
+APreviewActor::APreviewActor()
 {
 	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("RootComponent"));
 
-	mData = nullptr;
-    
-	HotPointName = TEXT("HotPoint");
 }
-void ABaseBuildingActor::InitData(BaseBuildingData * _data)
-{
-    mData = _data;
-    
-}
-void ABaseBuildingActor::SaveData(TSharedRef<TJsonWriter<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>> Writer)
-{
-    mData->Serialization(Writer);
-}
-bool ABaseBuildingActor::SetMeshComponent(const FAssetData & MeshData)
+bool APreviewActor::SetMeshComponent(const FString & InIconName)
 {
 	bool IsOk = false;
+	FString MeshName = FString::Printf(TEXT("Mesh%s0"), *InIconName);
+	FAssetData MeshData = DataManager::GetInstance()->GetBuildingAssetDataByIconName(MeshName);
+
 	if (MeshData.AssetClass == FName(TEXT("SkeletalMesh")))
 	{
 		USkeletalMesh * Mesh = Cast<USkeletalMesh>(MeshData.GetAsset());
@@ -54,12 +48,4 @@ bool ABaseBuildingActor::SetMeshComponent(const FAssetData & MeshData)
 		}
 	}
 	return IsOk;
-}
-FVector ABaseBuildingActor::GetInteractivePoint()
-{
-	if (MeshComponent && MeshComponent->DoesSocketExist(FName(*HotPointName)))
-	{
-		return MeshComponent->GetSocketLocation(FName(*HotPointName));
-	}
-	return GetActorLocation();
 }

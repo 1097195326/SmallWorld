@@ -2,11 +2,8 @@
 #include "UserController.h"
 #include "Kismet/GameplayStatics.h"
 #include "DataManager.h"
+#include "PreviewActor.h"
 
-#include "Classes/Animation/SkeletalMeshActor.h"
-#include "Engine/StaticMeshActor.h"
-#include "Components/SkeletalMeshComponent.h"
-#include "Components/StaticMeshComponent.h"
 
 UUserViewportClient * UUserViewportClient::UserViewportClientInstance = NULL;
 
@@ -49,43 +46,11 @@ void UUserViewportClient::UpdatePriviewActor(FVector2D ScreenPosition, FString I
 			DestroyPriviewActor();
 
 			FTransform SpawnPosition(HitResult.ImpactPoint);
-
-			FString MeshName = FString::Printf(TEXT("Mesh%s0"), *IconName);
-			FAssetData MeshData = DataManager::GetInstance()->GetBuildingAssetDataByIconName(MeshName);
-
-			if (MeshData.AssetClass == FName(TEXT("SkeletalMesh")))
-			{
-				USkeletalMesh * Mesh = Cast<USkeletalMesh>(MeshData.GetAsset());
-				if (Mesh)
-				{
-					PriviewActor = UGameplayStatics::BeginDeferredActorSpawnFromClass(GetWorld(), ASkeletalMeshActor::StaticClass(), SpawnPosition, ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn);
-					ASkeletalMeshActor * SkeletalActor = Cast<ASkeletalMeshActor>(PriviewActor);
-					if (SkeletalActor)
-					{
-						//SkeletalActor->GetSkeletalMeshComponent()->Mobility = EComponentMobility::Movable;
-						SkeletalActor->GetSkeletalMeshComponent()->SetSkeletalMesh(Mesh);
-						SkeletalActor->GetSkeletalMeshComponent()->RegisterComponent();
-					}
-				}
-			}
-			else if (MeshData.AssetClass == FName(TEXT("StaticMesh")))
-			{
-				UStaticMesh * Mesh = Cast<UStaticMesh>(MeshData.GetAsset());
-				if (Mesh)
-				{
-					PriviewActor = UGameplayStatics::BeginDeferredActorSpawnFromClass(GetWorld(), AStaticMeshActor::StaticClass(), SpawnPosition, ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn);
-					AStaticMeshActor * StaticActor = Cast<AStaticMeshActor>(PriviewActor);
-					if (StaticActor)
-					{
-						StaticActor->GetStaticMeshComponent()->Mobility = EComponentMobility::Movable;
-						StaticActor->GetStaticMeshComponent()->SetStaticMesh(Mesh);
-						StaticActor->GetStaticMeshComponent()->RegisterComponent();
-					}
-				}
-			}
+			PriviewActor = GetWorld()->SpawnActorDeferred<APreviewActor>(APreviewActor::StaticClass(), SpawnPosition, nullptr, nullptr, ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn);
 			if (PriviewActor)
 			{
-				UGameplayStatics::FinishSpawningActor(PriviewActor, SpawnPosition);
+				PriviewActor->SetMeshComponent(IconName);
+				PriviewActor->FinishSpawning(SpawnPosition);
 			}
 		}
 		if (PriviewActor)

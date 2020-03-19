@@ -23,7 +23,7 @@ public:
 private:
 	static UUserViewportClient * UserViewportClientInstance;
 
-	AActor *  PriviewActor;
+	class APreviewActor *  PriviewActor;
 
 };
 #define  GVC  UUserViewportClient::GetInstance()
