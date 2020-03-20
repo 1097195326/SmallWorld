@@ -1,26 +1,30 @@
 #include "BaseBuildingActor.h"
 #include "BlockActor.h"
+#include "DataManager.h"
 
 ABaseBuildingActor::ABaseBuildingActor()
 {
 	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("RootComponent"));
 
-	mData = nullptr;
+	BuildingData = nullptr;
     
 	HotPointName = TEXT("HotPoint");
 }
-void ABaseBuildingActor::InitData(BaseBuildingData * _data)
+void ABaseBuildingActor::SetBuildingData(BaseBuildingData * _data)
 {
-    mData = _data;
+	BuildingData = _data;
     
 }
 void ABaseBuildingActor::SaveData(TSharedRef<TJsonWriter<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>> Writer)
 {
-    mData->Serialization(Writer);
+	BuildingData->Serialization(Writer);
 }
-bool ABaseBuildingActor::SetMeshComponent(const FAssetData & MeshData)
+bool ABaseBuildingActor::SetMeshComponent(const FString & InIconName)
 {
 	bool IsOk = false;
+	FString MeshName = FString::Printf(TEXT("Mesh%s0"), *InIconName);
+	FAssetData MeshData = DataManager::GetInstance()->GetBuildingAssetDataByIconName(MeshName);
+
 	if (MeshData.AssetClass == FName(TEXT("SkeletalMesh")))
 	{
 		USkeletalMesh * Mesh = Cast<USkeletalMesh>(MeshData.GetAsset());

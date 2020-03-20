@@ -27,6 +27,15 @@ void ArmyCenterData::Deserialization(TSharedPtr<FJsonObject>  JsonObject)
 }
 bool ArmyCenterData::SpawnBuildingActor(UWorld * world, const FVector & Location, const FRotator & Rotation)
 {
-
+	FTransform SpawnTF(Rotation, Location);
+	BuildingActor = world->SpawnActorDeferred<AArmyCenterActor>(AArmyCenterActor::StaticClass(), SpawnTF,nullptr,nullptr
+	,ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn);
+	if (BuildingActor)
+	{
+		BuildingActor->SetBuildingData(this);
+		BuildingActor->SetMeshComponent(BuildingName);
+		BuildingActor->FinishSpawning(SpawnTF);
+		return true;
+	}
 	return false;
 }

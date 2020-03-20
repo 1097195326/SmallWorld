@@ -29,13 +29,13 @@ public:
 	GENERATED_BODY()
 	ABaseBuildingActor();
 
-    virtual void InitData(BaseBuildingData * InData);
+    void SetBuildingData(BaseBuildingData * InData);
     virtual void SaveData(TSharedRef<TJsonWriter<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>> Writer);
-	virtual bool SetMeshComponent(const FAssetData & MeshData);
+	virtual bool SetMeshComponent(const FString & InIconName);
 
 	FVector				GetInteractivePoint();
 protected:
-	BaseBuildingData * mData;
+	BaseBuildingData * BuildingData;
 
 public:
 	UPROPERTY(VisibleDefaultsOnly, Category = BaseBuilding)
