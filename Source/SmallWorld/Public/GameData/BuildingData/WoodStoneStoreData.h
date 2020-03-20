@@ -14,6 +14,8 @@ public:
     virtual void Serialization(TSharedRef<TJsonWriter<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>> Writer) override;
     virtual void Deserialization(TSharedPtr<FJsonObject>  JsonObject) override;
     
+	virtual bool SpawnBuildingActor(UWorld * world, const FVector & Location, const FRotator & Rotation) override;
+
 	void	ChangeWoodNum(const int32 & plusWood);
 	void	ChangeStoneNum(const int32 & plusStone);
 	inline int32	GetStoneNum() { return StoneNum; }

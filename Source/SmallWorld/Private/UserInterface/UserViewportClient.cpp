@@ -62,15 +62,27 @@ void UUserViewportClient::UpdatePriviewActor(FVector2D ScreenPosition, FString I
 }
 void UUserViewportClient::DropPriviewActor()
 {
-	
-
-
+	if (PriviewActor)
+	{
+		//PriviewActor->GetActorRotation(), PriviewActor->GetActorLocation();
+		//UWorld * world, const FVector & Location, const FRotator & Rotation, 
+		HordeData * UserHordeData = DataManager::GetInstance()->GetUserData()->GetHordeData();
+		BaseBuildingData * BuildingData = UserHordeData->SpawnBuilding(PriviewActor->IconName);
+		if (!BuildingData->SpawnBuildingActor(GetWorld(), PriviewActor->GetActorLocation(), PriviewActor->GetActorRotation()))
+		{
+			UserHordeData->DestroyBuilding(BuildingData);
+			UE_LOG(LogTemp,Log,TEXT("zhx:Warning:UUserViewportClient::DropPriviewActor:SpawnBuilding Fail"))
+		}
+		
+		//DestroyPriviewActor();
+	}
 }
+
 void UUserViewportClient::DestroyPriviewActor()
 {
-	/*if (PriviewActor)
+	if (PriviewActor)
 	{
 		PriviewActor->BeginDestroy();
 	}
-	PriviewActor = nullptr;*/
+	PriviewActor = nullptr;
 }

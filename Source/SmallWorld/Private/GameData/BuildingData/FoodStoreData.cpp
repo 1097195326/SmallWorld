@@ -1,5 +1,6 @@
 
 #include "FoodStoreData.h"
+#include "FoodStoreActor.h"
 #include "DataManager.h"
 
 
@@ -36,6 +37,11 @@ void FoodStoreData::Deserialization(TSharedPtr<FJsonObject>  JsonObject)
 	BreadNum = JsonObject->GetIntegerField("BreadNum");
 	FruitNum = JsonObject->GetIntegerField("FruitNum");
     
+}
+bool FoodStoreData::SpawnBuildingActor(UWorld * world, const FVector & Location, const FRotator & Rotation)
+{
+
+	return false;
 }
 void FoodStoreData::ChangeFoodNum(int32 plusCrop /* = 0 */, int32 plusBreak /* = 0 */, int32 plusFruit /* = 0 */)
 {

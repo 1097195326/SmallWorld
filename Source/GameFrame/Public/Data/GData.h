@@ -17,6 +17,8 @@ public :
 	virtual void Deserialization(TSharedPtr<FJsonObject> JsonObject);
 
 	bool operator==(const GData & data) { return m_ID == data.m_ID; }
+	bool operator!=(const GData & data) { return m_ID != data.m_ID; }
 	bool operator==(const GData * data) { return m_ID == data->m_ID; }
-
+	bool operator!=(const GData * data) { return m_ID != data->m_ID; }
+	
 };

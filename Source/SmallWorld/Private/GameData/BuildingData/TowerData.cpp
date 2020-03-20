@@ -1,5 +1,6 @@
 
 #include "TowerData.h"
+#include "TowerActor.h"
 
 G_REGISTER_CLASS(TowerData)
 
@@ -26,5 +27,10 @@ void TowerData::Deserialization(TSharedPtr<FJsonObject>  JsonObject)
 {
     
     
+}
+bool TowerData::SpawnBuildingActor(UWorld * world, const FVector & Location, const FRotator & Rotation)
+{
+
+	return false;
 }
 

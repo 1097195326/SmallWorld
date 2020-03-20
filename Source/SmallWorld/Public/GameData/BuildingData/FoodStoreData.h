@@ -14,7 +14,8 @@ public:
     virtual void Serialization(TSharedRef<TJsonWriter<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>> Writer) override;
     virtual void Deserialization(TSharedPtr<FJsonObject>  JsonObject) override;
     
-    
+	virtual bool SpawnBuildingActor(UWorld * world, const FVector & Location, const FRotator & Rotation) override;
+
 
 	void	ChangeFoodNum(int32 plusCrop = 0, int32 plusBreak = 0, int32 plusFruit = 0);
 	void	GetFoodNum(int32 & OutCropNum, int32 & OutBreadNum, int32 & OutFruitNuM);

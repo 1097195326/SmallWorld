@@ -38,12 +38,13 @@ public:
 	friend class ABaseBuildingActor;
 
     BaseBuildingData();
+	~BaseBuildingData();
 
 	virtual void Serialization(TSharedRef<TJsonWriter<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>> Writer) override;
 	virtual void Deserialization(TSharedPtr<FJsonObject>  JsonObject) override;
 
 	virtual void CalculateData(){}
-	virtual bool SpawnActor() { return false; };
+	virtual bool SpawnBuildingActor(UWorld * world, const FVector & Location, const FRotator & Rotation) { return false; };
 
 	void	SetConfigDataByName(FString InName);
 
@@ -56,6 +57,9 @@ protected:
 	EBuildingType	BuildingType;
 public:
 	// Running Datas
+	class HordeData *	BuildingBelongHorde;
+	class ABaseBuildingActor * BuildingActor;
+
 	BuildingConfig  ConfigData;
 	FVector			BuildingPosition;
 	FRotator		BuildingRotator;

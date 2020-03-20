@@ -16,6 +16,7 @@ public:
 
 	bool SetMeshComponent(const FString & InName);
 
+	FString IconName;
 private:
 	UMeshComponent * MeshComponent;
 

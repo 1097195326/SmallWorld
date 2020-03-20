@@ -1,5 +1,7 @@
 
 #include "FarmData.h"
+#include "FarmActor.h"
+
 
 G_REGISTER_CLASS(FarmData)
 
@@ -28,6 +30,11 @@ void FarmData::Deserialization(TSharedPtr<FJsonObject>  JsonObject)
     
 	CropNum = JsonObject->GetIntegerField("CropNum");
 
+}
+bool FarmData::SpawnBuildingActor(UWorld * world, const FVector & Location, const FRotator & Rotation)
+{
+
+	return false;
 }
 bool FarmData::IsFull()
 {

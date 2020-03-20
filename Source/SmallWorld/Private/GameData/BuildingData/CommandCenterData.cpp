@@ -1,5 +1,7 @@
 
 #include "CommandCenterData.h"
+#include "CommandCenterActor.h"
+
 
 G_REGISTER_CLASS(CommandCenterData)
 
@@ -26,4 +28,8 @@ void CommandCenterData::Deserialization(TSharedPtr<FJsonObject>  JsonObject)
     
     
 }
+bool CommandCenterData::SpawnBuildingActor(UWorld * world, const FVector & Location, const FRotator & Rotation)
+{
 
+	return false;
+}

@@ -12,6 +12,8 @@ APreviewActor::APreviewActor()
 bool APreviewActor::SetMeshComponent(const FString & InIconName)
 {
 	bool IsOk = false;
+	IconName = InIconName;
+
 	FString MeshName = FString::Printf(TEXT("Mesh%s0"), *InIconName);
 	FAssetData MeshData = DataManager::GetInstance()->GetBuildingAssetDataByIconName(MeshName);
 

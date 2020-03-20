@@ -1,4 +1,5 @@
 #include "ArmyCenterData.h"
+#include "ArmyCenterActor.h"
 
 G_REGISTER_CLASS(ArmyCenterData)
 
@@ -23,4 +24,9 @@ void ArmyCenterData::Deserialization(TSharedPtr<FJsonObject>  JsonObject)
 {
     
     
+}
+bool ArmyCenterData::SpawnBuildingActor(UWorld * world, const FVector & Location, const FRotator & Rotation)
+{
+
+	return false;
 }

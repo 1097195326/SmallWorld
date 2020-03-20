@@ -1,5 +1,6 @@
 
 #include "MillData.h"
+#include "MillActor.h"
 
 G_REGISTER_CLASS(MillData)
 
@@ -29,3 +30,8 @@ void MillData::Deserialization(TSharedPtr<FJsonObject>  JsonObject)
     
 }
 
+bool MillData::SpawnBuildingActor(UWorld * world, const FVector & Location, const FRotator & Rotation)
+{
+
+	return false;
+}

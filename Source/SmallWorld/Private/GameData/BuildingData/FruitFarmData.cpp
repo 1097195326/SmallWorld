@@ -1,4 +1,5 @@
 #include "FruitFarmData.h"
+#include "FruitFarmActor.h"
 
 G_REGISTER_CLASS(FruitFarmData)
 
@@ -29,6 +30,11 @@ void FruitFarmData::Deserialization(TSharedPtr<FJsonObject>  JsonObject)
 	FruitNum = JsonObject->GetIntegerField("FruitNum");
 
 
+}
+bool FruitFarmData::SpawnBuildingActor(UWorld * world, const FVector & Location, const FRotator & Rotation)
+{
+
+	return false;
 }
 bool FruitFarmData::IsFull()
 {

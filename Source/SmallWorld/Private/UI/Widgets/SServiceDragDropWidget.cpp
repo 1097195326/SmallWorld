@@ -71,13 +71,13 @@ FReply SServiceDragDropWidget::OnDrop(const FGeometry& MyGeometry, const FDragDr
 	bool IsValidDrap = false;
 	if (Operation.IsValid() && Operation->IsOfType<FBuildingDragDropOp>())
 	{
+		GVC->DropPriviewActor();
+		
 		IsValidDrap = true;
 	}
-	if (IsValidDrap && GVC->HavePriviewActor())
+	if (IsValidDrap)
 	{
-		GVC->DestroyPriviewActor();
-		GVC->DropPriviewActor();
-
+		
 		return FReply::Handled();
 	}
 	return FReply::Unhandled();

@@ -37,6 +37,46 @@ void HordeData::Deserialization(TSharedPtr<FJsonObject>  JsonObject)
 		}
 	}
 }
+BaseBuildingData * HordeData::SpawnBuilding(const FString & BuildingName)
+{
+	FString DataClassName = FString::Printf(TEXT("%sData"), *BuildingName);
+	BaseBuildingData * BuildingData = (BaseBuildingData*)ReflectManager::Get()->GetClassByName(TCHAR_TO_UTF8(*DataClassName));
+	BuildingData->SetConfigDataByName(BuildingName);
+	BuildingDatas.Add(BuildingData);
+	return BuildingData;
+}
+bool HordeData::DestroyBuildingById(const FGuid & InId)
+{
+	bool IsOk = false;
+	BaseBuildingData * BuildingData = GetBuildingDataById(InId);
+	if (BuildingData)
+	{
+		BuildingDatas.Remove(BuildingData);
+		delete BuildingData;
+	}
+	return MoveTemp(IsOk);
+}
+bool HordeData::DestroyBuilding(BaseBuildingData * InBuildingData)
+{
+	bool IsOk = false;
+	if (InBuildingData)
+	{
+		BuildingDatas.Remove(InBuildingData);
+		delete InBuildingData;
+	}
+	return MoveTemp(IsOk);
+}
+BaseBuildingData * HordeData::GetBuildingDataById(const FGuid & InId)
+{
+	for (auto data : BuildingDatas)
+	{
+		if (data->GetID() ==(InId))
+		{
+			return data;
+		}
+	}
+	return nullptr;
+}
 int32 HordeData::GetGoldNum()
 {
 	int32 OutNum = 0;

@@ -1,4 +1,5 @@
 #include "HouseData.h"
+#include "HouseActor.h"
 #include "DataManager.h"
 
 
@@ -30,6 +31,11 @@ void HouseData::Deserialization(TSharedPtr<FJsonObject>  JsonObject)
 
 	PeopleNum = JsonObject->GetIntegerField("PeopleNum");
     
+}
+bool HouseData::SpawnBuildingActor(UWorld * world, const FVector & Location, const FRotator & Rotation)
+{
+
+	return false;
 }
 void HouseData::ChangePeopleNum(int32 plusNum)
 {

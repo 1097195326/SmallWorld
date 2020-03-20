@@ -1,5 +1,6 @@
 
 #include "WoodStoneStoreData.h"
+#include "WoodStoneStoreActor.h"
 #include "DataManager.h"
 
 
@@ -36,7 +37,11 @@ void WoodStoneStoreData::Deserialization(TSharedPtr<FJsonObject>  JsonObject)
 
     
 }
+bool WoodStoneStoreData::SpawnBuildingActor(UWorld * world, const FVector & Location, const FRotator & Rotation)
+{
 
+	return false;
+}
 void WoodStoneStoreData::ChangeWoodNum(const int32 & plusWood)
 {
 	WoodNum += plusWood;

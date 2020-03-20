@@ -1,5 +1,7 @@
 
 #include "BakeryData.h"
+#include "BakeryActor.h"
+
 
 G_REGISTER_CLASS(BakeryData)
 
@@ -27,4 +29,8 @@ void BakeryData::Deserialization(TSharedPtr<FJsonObject>  JsonObject)
     
     
 }
+bool BakeryData::SpawnBuildingActor(UWorld * world, const FVector & Location, const FRotator & Rotation)
+{
 
+	return false;
+}

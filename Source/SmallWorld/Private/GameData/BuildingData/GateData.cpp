@@ -1,5 +1,6 @@
 
 #include "GateData.h"
+#include "GateActor.h"
 
 G_REGISTER_CLASS(GateData)
 
@@ -27,5 +28,10 @@ void GateData::Deserialization(TSharedPtr<FJsonObject>  JsonObject)
 {
     
     
+}
+bool GateData::SpawnBuildingActor(UWorld * world, const FVector & Location, const FRotator & Rotation)
+{
+
+	return false;
 }
 

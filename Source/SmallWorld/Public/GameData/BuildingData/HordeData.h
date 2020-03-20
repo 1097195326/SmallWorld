@@ -24,6 +24,10 @@ public:
     virtual void Serialization(TSharedRef<TJsonWriter<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>> Writer) override;
     virtual void Deserialization(TSharedPtr<FJsonObject>  JsonObject) override;
 
+	BaseBuildingData *	SpawnBuilding(const FString & BuildingName);
+	bool	DestroyBuildingById(const FGuid & InId);
+	bool	DestroyBuilding(BaseBuildingData * InBuildingData);
+
 	int32 GetGoldNum();
 	int32 GetWoodNum();
 	int32 GetStoneNum();
@@ -44,6 +48,7 @@ public:
 		}
 		return MoveTemp(TemArray);
 	}
+	BaseBuildingData * GetBuildingDataById(const FGuid & InId);
 protected:
 	TArray<BaseBuildingData*>		BuildingDatas;
 

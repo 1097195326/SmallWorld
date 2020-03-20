@@ -1,5 +1,7 @@
 #include "BaseBuildingData.h"
 #include "DataManager.h"
+#include "HordeData.h"
+#include "BaseBuildingActor.h"
 
 
 BaseBuildingData::BaseBuildingData()
@@ -12,7 +14,14 @@ BaseBuildingData::BaseBuildingData()
 	BuildingHealth = 0.f;
 	IsUpdating = false;
 	RemainingUpdateTime = 0;
-	
+	BuildingBelongHorde = nullptr;
+	BuildingActor = nullptr;
+}
+BaseBuildingData::~BaseBuildingData()
+{
+	BuildingActor->BeginDestroy();
+	BuildingActor = nullptr;
+
 }
 
 void BaseBuildingData::Serialization(TSharedRef<TJsonWriter<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>> Writer)

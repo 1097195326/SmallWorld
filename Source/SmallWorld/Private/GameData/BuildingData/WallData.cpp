@@ -1,5 +1,6 @@
 
 #include "WallData.h"
+#include "WallActor.h"
 
 G_REGISTER_CLASS(WallData)
 
@@ -27,4 +28,8 @@ void WallData::Deserialization(TSharedPtr<FJsonObject>  JsonObject)
     
     
 }
+bool WallData::SpawnBuildingActor(UWorld * world, const FVector & Location, const FRotator & Rotation)
+{
 
+	return false;
+}

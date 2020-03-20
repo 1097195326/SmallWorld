@@ -1,5 +1,6 @@
 
 #include "MoneyStoreData.h"
+#include "MoneyStoreActor.h"
 #include "DataManager.h"
 
 G_REGISTER_CLASS(MoneyStoreData)
@@ -29,7 +30,11 @@ void MoneyStoreData::Deserialization(TSharedPtr<FJsonObject>  JsonObject)
 
 	GoldNum = JsonObject->GetIntegerField("GoldNum");
 }
+bool MoneyStoreData::SpawnBuildingActor(UWorld * world, const FVector & Location, const FRotator & Rotation)
+{
 
+	return false;
+}
 void  MoneyStoreData::ChangeGoldNum(const int32 & plusNum)
 {
 	GoldNum += plusNum;
