@@ -30,10 +30,9 @@ bool ArmyCenterData::SpawnBuildingActor(UWorld * world, const FVector & Location
 	FTransform SpawnTF(Rotation, Location);
 	BuildingActor = world->SpawnActorDeferred<AArmyCenterActor>(AArmyCenterActor::StaticClass(), SpawnTF,nullptr,nullptr
 	,ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn);
-	if (BuildingActor)
+	if (BuildingActor && BuildingActor->SetMeshComponentByIconName(BuildingName))
 	{
 		BuildingActor->SetBuildingData(this);
-		BuildingActor->SetMeshComponent(BuildingName);
 		BuildingActor->FinishSpawning(SpawnTF);
 		return true;
 	}

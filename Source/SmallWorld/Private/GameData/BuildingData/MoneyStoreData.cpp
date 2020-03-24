@@ -32,7 +32,15 @@ void MoneyStoreData::Deserialization(TSharedPtr<FJsonObject>  JsonObject)
 }
 bool MoneyStoreData::SpawnBuildingActor(UWorld * world, const FVector & Location, const FRotator & Rotation)
 {
-
+	FTransform SpawnTF(Rotation, Location);
+	BuildingActor = world->SpawnActorDeferred<AMoneyStoreActor>(AMoneyStoreActor::StaticClass(), SpawnTF, nullptr, nullptr
+		, ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn);
+	if (BuildingActor && BuildingActor->SetMeshComponentByIconName(BuildingName))
+	{
+		BuildingActor->SetBuildingData(this);
+		BuildingActor->FinishSpawning(SpawnTF);
+		return true;
+	}
 	return false;
 }
 void  MoneyStoreData::ChangeGoldNum(const int32 & plusNum)

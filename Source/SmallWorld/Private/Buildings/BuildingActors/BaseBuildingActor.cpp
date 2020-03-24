@@ -19,7 +19,7 @@ void ABaseBuildingActor::SaveData(TSharedRef<TJsonWriter<TCHAR, TCondensedJsonPr
 {
 	BuildingData->Serialization(Writer);
 }
-bool ABaseBuildingActor::SetMeshComponent(const FString & InIconName)
+bool ABaseBuildingActor::SetMeshComponentByIconName(const FString & InIconName)
 {
 	bool IsOk = false;
 	FString MeshName = FString::Printf(TEXT("Mesh%s0"), *InIconName);

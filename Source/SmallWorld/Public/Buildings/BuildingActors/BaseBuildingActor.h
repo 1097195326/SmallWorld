@@ -31,7 +31,7 @@ public:
 
     void SetBuildingData(BaseBuildingData * InData);
     virtual void SaveData(TSharedRef<TJsonWriter<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>> Writer);
-	virtual bool SetMeshComponent(const FString & InIconName);
+	virtual bool SetMeshComponentByIconName(const FString & InIconName);
 
 	FVector				GetInteractivePoint();
 protected:
