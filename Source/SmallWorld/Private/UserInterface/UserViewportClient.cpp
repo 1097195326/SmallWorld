@@ -25,7 +25,7 @@ void UUserViewportClient::Tick(float DeltaTime)
 }
 bool UUserViewportClient::HavePriviewActor()
 {
-	return PriviewActor != nullptr;
+	return PreviewActor != nullptr;
 }
 void UUserViewportClient::UpdatePriviewActor(FVector2D ScreenPosition, FString IconName /* = TEXT("") */)
 {
@@ -38,7 +38,7 @@ void UUserViewportClient::UpdatePriviewActor(FVector2D ScreenPosition, FString I
 
 	UserController->GetHitResultAtScreenPosition(ScreenPosition, TrackObj, false, HitResult);
 
-	if (HitResult.bBlockingHit && PriviewActor != HitResult.GetActor())
+	if (HitResult.bBlockingHit && PreviewActor != HitResult.GetActor())
 	{
 		//UE_LOG(LogTemp, Log, TEXT("zhx : HitResult %s:%f,%f,%f"),*HitResult.GetActor()->GetName(), HitResult.ImpactPoint.X, HitResult.ImpactPoint.Y, HitResult.ImpactPoint.Z);
 		if (!IconName.IsEmpty())
@@ -46,29 +46,33 @@ void UUserViewportClient::UpdatePriviewActor(FVector2D ScreenPosition, FString I
 			DestroyPriviewActor();
 
 			FTransform SpawnPosition(HitResult.ImpactPoint);
-			PriviewActor = GetWorld()->SpawnActorDeferred<APreviewActor>(APreviewActor::StaticClass(), SpawnPosition, nullptr, nullptr, ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn);
-			if (PriviewActor)
+			PreviewActor = GetWorld()->SpawnActorDeferred<APreviewActor>(APreviewActor::StaticClass(), SpawnPosition, nullptr, nullptr, ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn);
+			if (PreviewActor)
 			{
-				PriviewActor->SetMeshComponent(IconName);
-				PriviewActor->FinishSpawning(SpawnPosition);
+				PreviewActor->SetMeshComponent(IconName);
+				PreviewActor->FinishSpawning(SpawnPosition);
 			}
 		}
-		if (PriviewActor)
+		if (PreviewActor)
 		{
-			PriviewActor->SetActorLocation(HitResult.ImpactPoint);
+			PreviewActor->SetActorLocation(HitResult.ImpactPoint);
 		}
 	}
 
 }
 void UUserViewportClient::DropPriviewActor()
 {
-	if (PriviewActor)
+	if (PreviewActor)
 	{
-		//PriviewActor->GetActorRotation(), PriviewActor->GetActorLocation();
+		//PreviewActor->GetActorRotation(), PreviewActor->GetActorLocation();
 		//UWorld * world, const FVector & Location, const FRotator & Rotation, 
+		FString IconName = PreviewActor->IconName;
+		FVector Location = PreviewActor->GetActorLocation();
+		FRotator Rotator = PreviewActor->GetActorRotation();
+		DestroyPriviewActor();
 		HordeData * UserHordeData = DataManager::GetInstance()->GetUserData()->GetHordeData();
-		BaseBuildingData * BuildingData = UserHordeData->SpawnBuilding(PriviewActor->IconName);
-		if (!BuildingData->SpawnBuildingActor(GetWorld(), PriviewActor->GetActorLocation(), PriviewActor->GetActorRotation()))
+		BaseBuildingData * BuildingData = UserHordeData->SpawnBuilding(IconName);
+		if (!BuildingData->SpawnBuildingActor(GetWorld(), Location, Rotator))
 		{
 			UserHordeData->DestroyBuilding(BuildingData);
 			UE_LOG(LogTemp,Log,TEXT("zhx:Warning:UUserViewportClient::DropPriviewActor:SpawnBuilding Fail"))
@@ -80,9 +84,9 @@ void UUserViewportClient::DropPriviewActor()
 
 void UUserViewportClient::DestroyPriviewActor()
 {
-	if (PriviewActor)
+	if (PreviewActor)
 	{
-		PriviewActor->BeginDestroy();
+		PreviewActor->Destroy();
 	}
-	PriviewActor = nullptr;
+	PreviewActor = nullptr;
 }

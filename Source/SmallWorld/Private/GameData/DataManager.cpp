@@ -40,16 +40,14 @@ void DataManager::LoadData()
 	BuildingAssetLibrary->LoadAssetDataFromPath(GamePath::BuildingAssetPath);
 	BuildingAssetLibrary->GetAssetDataList(BuildingAssetArray);
 
-
-	LoadUserData();
+	// load data
 	LoadGameConfigData();
 	LoadGameWorldData();
+	LoadUserData();
+	// Init Data
+	InitData();
 
-	if (!mUserData->GetHordeId().IsValid())
-	{
-		InitData();
-		SaveData();
-	}
+	
 }
 void DataManager::SaveData()
 {
@@ -108,6 +106,8 @@ bool DataManager::LoadUserData()
 		TSharedPtr<FJsonObject> JsonContent = MakeShareable(new FJsonObject);
 		FJsonSerializer::Deserialize(fileReader, JsonContent);
 		mUserData->Deserialization(JsonContent->GetObjectField("UserData"));
+
+
 		return true;
 	}
 	return false;
