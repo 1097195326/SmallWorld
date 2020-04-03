@@ -113,9 +113,9 @@ void InitializeDefaultPawnInputBindings()
 		UPlayerInput::AddEngineDefinedAxisMapping(FInputAxisKeyMapping("DefaultPawn_LookUpRate", EKeys::Gamepad_RightY, 1.f));
 		UPlayerInput::AddEngineDefinedAxisMapping(FInputAxisKeyMapping("DefaultPawn_LookUp", EKeys::MouseY, -1.f));
 
-		/*UPlayerInput::AddEngineDefinedActionMapping(FInputActionKeyMapping("LeftMouse",EKeys::LeftMouseButton));
+		UPlayerInput::AddEngineDefinedActionMapping(FInputActionKeyMapping("LeftMouse",EKeys::LeftMouseButton));
 		UPlayerInput::AddEngineDefinedActionMapping(FInputActionKeyMapping("RightMouse",EKeys::RightMouseButton));
-*/
+
 		UPlayerInput::AddEngineDefinedActionMapping(FInputActionKeyMapping("Touch1", EKeys::TouchKeys[0]));
 }
 }
@@ -135,16 +135,16 @@ void AUserPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	PlayerInputComponent->BindAxis("DefaultPawn_LookUp", this, &AUserPawn::AddControllerPitchInput);
 	PlayerInputComponent->BindAxis("DefaultPawn_LookUpRate", this, &AUserPawn::LookUpAtRate);
 
-	/*PlayerInputComponent->BindAction("LeftMouse", IE_Pressed, this, &AUserPawn::LeftMouseButtonOnPressed);
+	PlayerInputComponent->BindAction("LeftMouse", IE_Pressed, this, &AUserPawn::LeftMouseButtonOnPressed);
 	PlayerInputComponent->BindAction("RightMouse", IE_Released, this, &AUserPawn::RightMouseButtonOnReleased);
-*/
+
 
 }
 
 void AUserPawn::LeftMouseButtonOnPressed()
 {
-	/*APlayerController * PlayerController = Cast<APlayerController>(Controller);
-	if (PlayerController)
+	APlayerController * PlayerController = Cast<APlayerController>(Controller);
+	/*if (PlayerController)
 	{
 		FHitResult HitResult;
 		PlayerController->GetHitResultUnderCursorByChannel(UEngineTypes::ConvertToTraceType(ECC_WorldStatic), false, HitResult);

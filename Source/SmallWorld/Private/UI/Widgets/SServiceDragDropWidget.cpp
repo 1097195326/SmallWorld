@@ -3,7 +3,6 @@
 #include "UserViewportClient.h"
 
 
-
 void SServiceDragDropWidget::Construct(const FArguments & InArgs)
 {
 	ChildSlot
@@ -12,6 +11,11 @@ void SServiceDragDropWidget::Construct(const FArguments & InArgs)
 			.BorderBackgroundColor(FGameStyle::Get().GetColor("Color.None"))
 			.BorderImage(FCoreStyle::Get().GetBrush("GenericWhiteBox"))
 		];
+}
+FReply SServiceDragDropWidget::OnMouseButtonDown(const FGeometry& MyGeometry, const FPointerEvent& MouseEvent)
+{
+
+	return FReply::Unhandled();
 }
 void SServiceDragDropWidget::OnDragEnter(const FGeometry& MyGeometry, const FDragDropEvent& DragDropEvent)
 {
