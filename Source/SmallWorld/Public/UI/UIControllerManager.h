@@ -5,15 +5,19 @@
 #include "UIControllerInterface.h"
 #include "MainViewUIController.h"
 
-
 class UIControllerManager : public SingleTemplate<UIControllerManager>
 {
 public:
+	enum UIControllerIndex
+	{
+		MainViewUIControllerIndex,
+
+	};
 	UIControllerManager();
 
-	void		ChangeUIController(UIControllerInterface * UIController);
+	void		ChangeUIController(UIControllerIndex  ToIndex);
 
-	UIControllerInterface * GetInternalUIController();
+	UIControllerInterface * GetInternalUIController() { return CurrentUIController; }
 
 	template<typename ControllerClass>
 	ControllerClass * GetUIController()
@@ -22,7 +26,8 @@ public:
 	}
 
 protected:
-
+	TMap<UIControllerIndex, UIControllerInterface*>   LoadedControllers;
+	
 	UIControllerInterface *	CurrentUIController;
 };
 

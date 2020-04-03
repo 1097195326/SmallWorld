@@ -43,10 +43,16 @@ void DataManager::LoadData()
 	// load data
 	LoadGameConfigData();
 	LoadGameWorldData();
-	LoadUserData();
+	bool UserDataIsOk = LoadUserData();
 	// Init Data
 	InitData();
 
+	
+	if (!UserDataIsOk)
+	{
+		// User Data First Save
+		SaveData();
+	}
 	
 }
 void DataManager::SaveData()

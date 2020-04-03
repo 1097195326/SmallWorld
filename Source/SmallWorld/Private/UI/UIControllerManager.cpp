@@ -8,9 +8,26 @@ UIControllerManager::UIControllerManager()
 
 
 }
-void UIControllerManager::ChangeUIController(UIControllerInterface * UIController)
+void UIControllerManager::ChangeUIController(UIControllerIndex  ToIndex)
 {
-	if (CurrentUIController == UIController)
+	UIControllerInterface * WantToController = nullptr;
+	if (LoadedControllers.Contains(ToIndex))
+	{
+		WantToController = LoadedControllers[ToIndex];
+	}
+	else
+	{
+		switch (ToIndex)
+		{
+		case MainViewUIControllerIndex:
+			WantToController = new MainViewUIController();
+			LoadedControllers.Add(MainViewUIControllerIndex, WantToController);
+			break;
+		default:
+			break;
+		}
+	}
+	if (CurrentUIController == WantToController)
 	{
 		return;
 	}
@@ -18,10 +35,6 @@ void UIControllerManager::ChangeUIController(UIControllerInterface * UIControlle
 	{
 		CurrentUIController->Exit();
 	}
-	CurrentUIController = UIController;
+	CurrentUIController = WantToController;
 	CurrentUIController->Enter();
-}
-UIControllerInterface * UIControllerManager::GetInternalUIController()
-{
-	return CurrentUIController;
 }

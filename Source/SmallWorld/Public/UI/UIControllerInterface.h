@@ -20,9 +20,10 @@ public:
 		T_NineGrid,
 	};
 	
-	virtual void			InitControllerView();
-	virtual void			Enter();
-	virtual void			Exit();
+	virtual void	InitControllerView();
+	virtual void	Enter();
+	virtual void	Exit();
+	virtual void	SelectGameObject(const FGuid & ObjectId){}
 
 	virtual ~UIControllerInterface(){}
 
