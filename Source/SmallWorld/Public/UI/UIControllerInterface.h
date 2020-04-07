@@ -2,6 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "GObject.h"
+#include "GameConfig.h"
 #include "SlateStyles/GameStyle.h"
 #include "UnrealEd/Public/ObjectTools.h"
 #include "UnrealEd/Public/Tests/AutomationEditorCommon.h"
@@ -26,7 +27,7 @@ public:
 	virtual void	Exit() final;
 	virtual void	OnEnter(){}
 	virtual void	OnExit(){}
-	virtual void	SelectGameObject(const GObject * ObjectPtr){}
+	virtual void	SelectGameObject(GObject * ObjectPtr){}
 
 	virtual ~UIControllerInterface(){}
 

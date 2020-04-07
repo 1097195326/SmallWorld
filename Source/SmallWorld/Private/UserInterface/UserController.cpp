@@ -1,16 +1,17 @@
 #include "UserController.h"
 #include "Kismet/GameplayStatics.h"
-#include "GameActor.h"
-
-
 #include "DataManager.h"
-#include "Classes/Animation/SkeletalMeshActor.h"
-#include "Engine/StaticMeshActor.h"
-#include "Components/SkeletalMeshComponent.h"
-#include "Components/StaticMeshComponent.h"
+#include "PreviewActor.h"
+#include "GameConfig.h"
+#include "UIControllerManager.h"
+
+
+AUserController * AUserController::Instance = nullptr;
 
 void AUserController::On_Init()
 {
+	Instance = this;
+
 	CurrentLandscapeInfo = nullptr;
 	CurrentLandscape = nullptr;
 	CurrentControllType = ECT_None;
@@ -50,72 +51,86 @@ void AUserController::On_Delete()
 {
 
 }
-bool AUserController::InputKey(FKey Key, EInputEvent EventType, float AmountDepressed, bool bGamepad)
+
+AGameActor * AUserController::TrySelectGameActor(FVector2D ScreenPosition)
 {
-	if (Key == EKeys::LeftMouseButton && EventType == IE_Pressed)
+	FHitResult HitResult;
+	GetHitResultAtScreenPosition(ScreenPosition,ECC_Visibility,false,HitResult);
+	if (HitResult.bBlockingHit)
 	{
-		FHitResult HitResult;
-		GetHitResultUnderCursorByChannel(UEngineTypes::ConvertToTraceType(ECC_Visibility), false, HitResult);
-		ALandscape * Landscape = Cast<ALandscape>(HitResult.GetActor());
 		AGameActor * GameActor = Cast<AGameActor>(HitResult.GetActor());
-
-		//FString MeshName = FString::Printf(TEXT("Mesh%s0"), TEXT("CommandCenter"));
-		//FAssetData MeshData = DataManager::GetInstance()->GetBuildingAssetDataByIconName(MeshName);
-
-		//AActor * PriviewActor = nullptr;
-		//const FTransform SpawnPosition(HitResult.ImpactPoint);
-
-		//UStaticMesh * Mesh = Cast<UStaticMesh>(MeshData.GetAsset());
-		//if (Mesh)
-		//{
-		//	FActorSpawnParameters Par;
-		//	Par.Owner = this;
-		//	Par.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
-		//	
-		//	AStaticMeshActor * StaticActor = GetWorld()->SpawnActor<AStaticMeshActor>(AStaticMeshActor::StaticClass(), Par);
-		//	//AStaticMeshActor * StaticActor = Cast<AStaticMeshActor>(PriviewActor);
-		//	if (StaticActor)
-		//	{
-		//		StaticActor->GetStaticMeshComponent()->Mobility = EComponentMobility::Movable;
-		//		bool success = StaticActor->GetStaticMeshComponent()->SetStaticMesh(Mesh);
-		//		StaticActor->GetStaticMeshComponent()->RegisterComponent();
-		//		StaticActor->RegisterAllComponents();
-		//		StaticActor->SetActorLocation(HitResult.ImpactPoint);
-		//	}
-		//}
-		
-
-		if (Landscape)
+		if (GameActor)
 		{
-
-		}else if (GameActor && CurrentControllType == ECT_ShowSomething)
-		{
-
-		}
-	}else if (Key == EKeys::LeftMouseButton && EventType == IE_Repeat)
-	{
-
-	}else if (Key == EKeys::LeftMouseButton && EventType == IE_Released)
-	{
-		FHitResult HitResult;
-		GetHitResultUnderCursorByChannel(UEngineTypes::ConvertToTraceType(ECC_Visibility), false, HitResult);
-		ALandscape * Landscape = Cast<ALandscape>(HitResult.GetActor());
-		if (Landscape)
-		{
-
+			GetCurrentUIController->SelectGameObject(GameActor);
+			return GameActor;
 		}
 	}
-	return Super::InputKey(Key, EventType, AmountDepressed, bGamepad);
+	return nullptr;
 }
-bool AUserController::InputTouch(uint32 Handle, ETouchType::Type Type, const FVector2D& TouchLocation, float Force, FDateTime DeviceTimestamp, uint32 TouchpadIndex)
+bool AUserController::HavePriviewActor()
 {
-
-	return Super::InputTouch(Handle, Type, TouchLocation, Force, DeviceTimestamp, TouchpadIndex);
+	return PreviewActor != nullptr;
 }
-bool AUserController::InputAxis(FKey Key, float Delta, float DeltaTime, int32 NumSamples, bool bGamepad)
+void AUserController::UpdatePriviewActor(FVector2D ScreenPosition, FString IconName /* = TEXT("") */)
 {
+	FHitResult HitResult;
 
-	return Super::InputAxis(Key, Delta, DeltaTime, NumSamples, bGamepad);
+	TArray<TEnumAsByte<EObjectTypeQuery>> TrackObj;
+	TrackObj.Add(UEngineTypes::ConvertToObjectType(LandscapeObject));
+
+	GetHitResultAtScreenPosition(ScreenPosition, TrackObj, false, HitResult);
+
+	if (HitResult.bBlockingHit && PreviewActor != HitResult.GetActor())
+	{
+		//UE_LOG(LogTemp, Log, TEXT("zhx : HitResult %s:%f,%f,%f"),*HitResult.GetActor()->GetName(), HitResult.ImpactPoint.X, HitResult.ImpactPoint.Y, HitResult.ImpactPoint.Z);
+		if (!IconName.IsEmpty())
+		{
+			DestroyPriviewActor();
+
+			FTransform SpawnPosition(HitResult.ImpactPoint);
+			PreviewActor = GetWorld()->SpawnActorDeferred<APreviewActor>(APreviewActor::StaticClass(), SpawnPosition, nullptr, nullptr, ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn);
+			if (PreviewActor)
+			{
+				PreviewActor->SetMeshComponent(IconName);
+				PreviewActor->FinishSpawning(SpawnPosition);
+			}
+		}
+		if (PreviewActor)
+		{
+			PreviewActor->SetActorLocation(HitResult.ImpactPoint);
+		}
+	}
+
+}
+void AUserController::DropPriviewActor()
+{
+	if (PreviewActor)
+	{
+		//PreviewActor->GetActorRotation(), PreviewActor->GetActorLocation();
+		//UWorld * world, const FVector & Location, const FRotator & Rotation, 
+		FString IconName = PreviewActor->IconName;
+		FVector Location = PreviewActor->GetActorLocation();
+		FRotator Rotator = PreviewActor->GetActorRotation();
+		DestroyPriviewActor();
+		HordeData * UserHordeData = DataManager::GetInstance()->GetUserData()->GetHordeData();
+		BaseBuildingData * BuildingData = UserHordeData->SpawnBuilding(IconName);
+		if (!BuildingData->SpawnBuildingActor(GetWorld(), Location, Rotator))
+		{
+			UserHordeData->DestroyBuilding(BuildingData);
+			UE_LOG(LogTemp, Log, TEXT("zhx:Warning:UUserViewportClient::DropPriviewActor:SpawnBuilding Fail"))
+		}
+
+		//DestroyPriviewActor();
+	}
+}
+
+void AUserController::DestroyPriviewActor()
+{
+	if (PreviewActor)
+	{
+		PreviewActor->Destroy();
+	}
+	PreviewActor = nullptr;
 }
 void AUserController::ChangeControllType(EControllType ControllType)
 {

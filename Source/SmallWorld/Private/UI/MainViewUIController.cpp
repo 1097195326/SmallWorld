@@ -25,7 +25,29 @@ void MainViewUIController::OnExit()
 {
 
 }
+void MainViewUIController::SelectGameObject(GObject * ObjectPtr)
+{
+	CheckNullPtr(ObjectPtr);
+	GData * ObjectData = ObjectPtr->GetObjectData();
+	CheckNullPtr(ObjectData);
 
+	switch (ObjectData->GetGDataType())
+	{
+	case GData::Pawn:
+
+		break;
+	case GData::Building:
+	{
+		//BaseBuildingData * BuildingData = Cast<BaseBuildingData>(ObjectData);
+
+		break;
+	}	
+	default:
+		break;
+	}
+	DataManager::GetInstance()->GetGameWorldData();
+
+}
 TSharedPtr<SWidget> MainViewUIController::CreateUserView()
 {
 	TSharedPtr<SWidget> ResWidget = SNew(SHordePowerWidget)

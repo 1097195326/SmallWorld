@@ -19,6 +19,7 @@ protected:
 public:
 	GObject();
 	~GObject();
+	inline GData * GetObjectData() { return ObjectData; }
     
 	virtual void On_Init();
 	virtual void On_Start();

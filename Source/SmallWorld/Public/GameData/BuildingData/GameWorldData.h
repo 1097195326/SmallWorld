@@ -19,6 +19,7 @@ public:
 	void	InitUserData(class UserData * userData);
 	// Manage HordeId
 	HordeData * CreateHordeData();
+	HordeData *	GetHordeDataById(FGuid hordeId);
 
 	bool	HordeIdIsValid(FGuid hordeId);
 	bool	DestroyHordeId(FGuid hordeId);

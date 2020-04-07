@@ -12,7 +12,8 @@ public:
 	virtual void InitControllerView() override; 
 	virtual void OnEnter() override;
 	virtual void OnExit() override;
-	
+	virtual void SelectGameObject(GObject * ObjectPtr) override;
+
 
 	FReply OnPowerClicked();
 	FReply OnHeroClicked();

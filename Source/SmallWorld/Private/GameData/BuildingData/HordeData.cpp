@@ -4,7 +4,7 @@ HordeData::~HordeData()
 {
 	for (auto data : BuildingDatas)
 	{
-		delete data;
+		delete data.Value;
 	}
 	BuildingDatas.Empty();
 }
@@ -16,7 +16,7 @@ void HordeData::Serialization(TSharedRef<TJsonWriter<TCHAR, TCondensedJsonPrintP
 		Writer->WriteObjectStart("BuildingDatas");
 		for (auto data : BuildingDatas)
 		{
-			data->Serialization(Writer);
+			data.Value->Serialization(Writer);
 		}
 		Writer->WriteObjectEnd();//BuildingDatas
 	Writer->WriteObjectEnd();//HordeData
@@ -33,7 +33,7 @@ void HordeData::Deserialization(TSharedPtr<FJsonObject>  JsonObject)
 		if (BuildingData)
 		{
 			BuildingData->Deserialization(jPair.Value->AsObject());
-			BuildingDatas.Add(BuildingData);
+			BuildingDatas.Add(BuildingData->GetID(), BuildingData);
 		}
 	}
 }
@@ -42,40 +42,28 @@ BaseBuildingData * HordeData::SpawnBuilding(const FString & BuildingName)
 	FString DataClassName = FString::Printf(TEXT("%sData"), *BuildingName);
 	BaseBuildingData * BuildingData = (BaseBuildingData*)ReflectManager::Get()->GetClassByName(TCHAR_TO_UTF8(*DataClassName));
 	BuildingData->SetConfigDataByName(BuildingName);
-	BuildingDatas.Add(BuildingData);
+	BuildingData->SetParentId(GetID());
+	BuildingDatas.Add(BuildingData->GetID(),BuildingData);
 	return BuildingData;
 }
 bool HordeData::DestroyBuildingById(const FGuid & InId)
 {
-	bool IsOk = false;
 	BaseBuildingData * BuildingData = GetBuildingDataById(InId);
-	if (BuildingData)
-	{
-		BuildingDatas.Remove(BuildingData);
-		delete BuildingData;
-	}
-	return MoveTemp(IsOk);
+	return DestroyBuilding(BuildingData);
 }
 bool HordeData::DestroyBuilding(BaseBuildingData * InBuildingData)
 {
 	bool IsOk = false;
 	if (InBuildingData)
 	{
-		BuildingDatas.Remove(InBuildingData);
+		BuildingDatas.Remove(InBuildingData->GetID());
 		delete InBuildingData;
 	}
 	return MoveTemp(IsOk);
 }
 BaseBuildingData * HordeData::GetBuildingDataById(const FGuid & InId)
 {
-	for (auto data : BuildingDatas)
-	{
-		if (data->GetID() ==(InId))
-		{
-			return data;
-		}
-	}
-	return nullptr;
+	return BuildingDatas[InId];
 }
 int32 HordeData::GetGoldNum()
 {

@@ -27,11 +27,6 @@ public:
 	BaseBuildingData *	SpawnBuilding(const FString & BuildingName);
 	bool	DestroyBuildingById(const FGuid & InId);
 	bool	DestroyBuilding(BaseBuildingData * InBuildingData);
-
-	int32 GetGoldNum();
-	int32 GetWoodNum();
-	int32 GetStoneNum();
-
 	template<typename BuildingClass = BaseBuildingData>
 	TArray<BuildingClass *> GetBuildingDatasByType(EBuildingType BuildingType)
 	{
@@ -40,17 +35,25 @@ public:
 		{
 			for (auto building : BuildingDatas)
 			{
-				if (building->GetBuildingType() == BuildingType)
+				if (building.Value->GetBuildingType() == BuildingType)
 				{
-					TemArray.Add((BuildingClass*)(building));
+					TemArray.Add((BuildingClass*)(building.Value));
 				}
 			}
 		}
 		return MoveTemp(TemArray);
 	}
 	BaseBuildingData * GetBuildingDataById(const FGuid & InId);
+
+
+	int32 GetGoldNum();
+	int32 GetWoodNum();
+	int32 GetStoneNum();
+
+	
 protected:
-	TArray<BaseBuildingData*>		BuildingDatas;
+	TMap<FGuid, BaseBuildingData*>		BuildingDatas;
+	//TArray<BaseBuildingData*>		BuildingDatas;
 
 };
 

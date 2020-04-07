@@ -18,17 +18,24 @@ public:
 		ECT_InputSomething,
 
 	};
+	static AUserController * Instance;
+
 	virtual void On_Init() override;
 	virtual void On_Start() override;
 	virtual void On_Tick(float delta) override;
 	virtual void On_Delete() override;
 
-	virtual bool InputKey(FKey Key, EInputEvent EventType, float AmountDepressed, bool bGamepad) override;
-	virtual bool InputTouch(uint32 Handle, ETouchType::Type Type, const FVector2D& TouchLocation, float Force, FDateTime DeviceTimestamp, uint32 TouchpadIndex) override;
-	virtual bool InputAxis(FKey Key, float Delta, float DeltaTime, int32 NumSamples, bool bGamepad) override;
-
 	void		 ChangeControllType(EControllType ControllType);
+
+	class AGameActor * TrySelectGameActor(FVector2D ScreenPosition);
+
+	bool	HavePriviewActor();
+	void	UpdatePriviewActor(FVector2D ScreenPosition, FString IconName = TEXT(""));
+	void	DropPriviewActor();
+	void	DestroyPriviewActor();
 protected:
+	class APreviewActor *  PreviewActor;
+
 	EControllType		CurrentControllType;
 	ALandscape *		CurrentLandscape;
 	ULandscapeInfo *	CurrentLandscapeInfo;

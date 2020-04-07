@@ -30,8 +30,9 @@ public:
 	FWoodStoneDataChangedDelegate  WoodDataChangedDelegate;
 	FPeopleDataChangedDelegate  PeopleDataChangedDelegate;
 
-	UserData * GetUserData() { return mUserData; }
-	GameConfigData * GetGameConfigData() { return mGameConfigData; }
+	inline UserData * GetUserData() { return mUserData; }
+	inline GameConfigData * GetGameConfigData() { return mGameConfigData; }
+	inline GameWorldData * GetGameWorldData() { return mGameWorldData; }
 
 	FAssetData  GetBuildingAssetDataByIconName(FString MeshName);
 

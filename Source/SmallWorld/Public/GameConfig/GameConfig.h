@@ -1,5 +1,11 @@
 #pragma once
 
+
+#define LandscapeObject ECC_GameTraceChannel3
+
+
+#define CheckNullPtr(Ptr)  {if (Ptr == nullptr)return;}
+
 // ------------------- Building ----------------------
 const int  BoundSize = 0;
 const int  WorldSize = 1;

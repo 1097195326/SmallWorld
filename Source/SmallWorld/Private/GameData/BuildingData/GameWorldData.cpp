@@ -58,16 +58,17 @@ void GameWorldData::InitUserData(UserData * userData)
 HordeData * GameWorldData::CreateHordeData()
 {
 	HordeData * resData = new HordeData();
-
 	HordeDataMap.Add(resData->GetID(), resData);
-
 	return resData;
+}
+HordeData * GameWorldData::GetHordeDataById(FGuid hordeId)
+{
+	return HordeDataMap[hordeId];
 }
 bool GameWorldData::HordeIdIsValid(FGuid hordeId)
 {
 	return hordeId.IsValid() && HordeDataMap.Contains(hordeId);
 }
-
 bool GameWorldData::DestroyHordeId(FGuid hordeId)
 {
 	if (HordeDataMap.Contains(hordeId))
