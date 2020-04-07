@@ -6,6 +6,8 @@
 
 BaseBuildingData::BaseBuildingData()
 {
+	GDataType = GData::Data;
+
 	BuildingType = B_None;
 	BuildingPosition = FVector::ZeroVector;
 	BuildingRotator = FRotator::ZeroRotator;

@@ -8,7 +8,16 @@
 ////#include "GCore.h"
 #include "GObject.h"
 
+GObject::GObject()
+{
+	ObjectData = nullptr;
 
+}
+GObject::~GObject()
+{
+	ObjectData = nullptr;
+
+}
 void GObject::On_Init(){}
 void GObject::On_Start(){}
 void GObject::On_Tick(float delta){}

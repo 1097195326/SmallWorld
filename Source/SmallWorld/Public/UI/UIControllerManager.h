@@ -17,15 +17,15 @@ public:
 
 	void		ChangeUIController(UIControllerIndex  ToIndex);
 
+protected:
 	UIControllerInterface * GetInternalUIController() { return CurrentUIController; }
 
 	template<typename ControllerClass>
 	ControllerClass * GetUIController()
 	{
-		return (ControllerClass*)(GetInternalUIController());
+		return dynamic_cast<ControllerClass*>(GetInternalUIController());
 	}
 
-protected:
 	TMap<UIControllerIndex, UIControllerInterface*>   LoadedControllers;
 	
 	UIControllerInterface *	CurrentUIController;

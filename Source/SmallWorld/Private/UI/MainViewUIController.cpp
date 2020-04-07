@@ -16,6 +16,13 @@ void MainViewUIController::InitControllerView()
 	LeftBottomSlot->AttachWidget(CreateToWorldButton().ToSharedRef());
 	RightBottomSlot->AttachWidget(CreateBuildingButton().ToSharedRef());
 
+}
+void MainViewUIController::OnEnter()
+{
+
+}
+void MainViewUIController::OnExit()
+{
 
 }
 

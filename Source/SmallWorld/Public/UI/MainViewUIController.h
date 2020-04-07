@@ -9,8 +9,9 @@ class MainViewUIController : public NineGridUIController
 public:
 	TSharedPtr<SWidget>	 TestWidget();
 	
-	virtual void InitControllerView();
-
+	virtual void InitControllerView() override; 
+	virtual void OnEnter() override;
+	virtual void OnExit() override;
 	
 
 	FReply OnPowerClicked();

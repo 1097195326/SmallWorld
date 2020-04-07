@@ -8,8 +8,16 @@
 
 class GAMEFRAME_API GData : public BaseObject
 {
-
 public :
+	enum Type
+	{
+		None,
+		Actor,
+		Data,
+	};
+	GData();
+	~GData();
+
 	virtual void InitWithXML(const FXmlFile * _file);
 
 	
@@ -20,5 +28,8 @@ public :
 	bool operator!=(const GData & data) { return m_ID != data.m_ID; }
 	bool operator==(const GData * data) { return m_ID == data->m_ID; }
 	bool operator!=(const GData * data) { return m_ID != data->m_ID; }
-	
+
+protected:
+	Type GDataType;
+
 };

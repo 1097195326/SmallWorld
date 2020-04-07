@@ -1,6 +1,14 @@
 //#include "GCore.h"
 #include "GData.h"
 
+GData::GData()
+{
+	GDataType = None;
+}
+GData::~GData()
+{
+	GDataType = None;
+}
 void GData::Serialization(TSharedRef<TJsonWriter<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>> Writer)
 {
 	Writer->WriteObjectStart("GData");

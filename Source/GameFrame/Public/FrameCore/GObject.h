@@ -9,12 +9,16 @@
 #pragma once
 
 #include "BaseObject.h"
+#include "GData.h"
 
 class GAMEFRAME_API GObject : public BaseObject
 {
-private:
+protected:
+	GData * ObjectData;
 	
 public:
+	GObject();
+	~GObject();
     
 	virtual void On_Init();
 	virtual void On_Start();
