@@ -28,7 +28,7 @@ void MainViewUIController::OnExit()
 void MainViewUIController::SelectGameActor(AGameActor * GameActorPtr)
 {
 	CheckNullPtr(GameActorPtr);
-	MiddleCenterSlot->AttachWidget(GameActorPtr->CreateActorDetailWidget().ToSharedRef());
+	MiddleBottomSlot->AttachWidget(GameActorPtr->CreateActorDetailWidget().ToSharedRef());
 	
 }
 TSharedPtr<SWidget> MainViewUIController::CreateUserView()
