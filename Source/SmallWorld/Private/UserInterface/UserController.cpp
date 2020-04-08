@@ -61,7 +61,7 @@ AGameActor * AUserController::TrySelectGameActor(FVector2D ScreenPosition)
 		AGameActor * GameActor = Cast<AGameActor>(HitResult.GetActor());
 		if (GameActor)
 		{
-			GetCurrentUIController->SelectGameObject(GameActor);
+			GetCurrentUIController->SelectGameActor(GameActor);
 			return GameActor;
 		}
 	}

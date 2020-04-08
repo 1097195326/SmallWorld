@@ -1,7 +1,6 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GObject.h"
 #include "GameConfig.h"
 #include "SlateStyles/GameStyle.h"
 #include "UnrealEd/Public/ObjectTools.h"
@@ -10,6 +9,7 @@
 #include "UnrealEd/Public/ClassIconFinder.h"
 #include "SlateCore/Public/Styling/SlateIconFinder.h"
 #include "Framework/Application/SlateApplication.h"
+#include "GameActor.h"
 
 
 
@@ -27,7 +27,7 @@ public:
 	virtual void	Exit() final;
 	virtual void	OnEnter(){}
 	virtual void	OnExit(){}
-	virtual void	SelectGameObject(GObject * ObjectPtr){}
+	virtual void	SelectGameActor(AGameActor * GameActorPtr){}
 
 	virtual ~UIControllerInterface(){}
 

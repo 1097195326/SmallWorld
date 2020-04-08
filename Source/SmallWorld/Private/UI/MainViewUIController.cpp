@@ -1,6 +1,6 @@
 #include "MainViewUIController.h"
 #include "SHordePowerWidget.h"
-#include "SShowBuildingWidget.h"
+#include "SBuildingIconItemListWidget.h"
 #include "DataManager.h"
 #include "SServiceDragDropWidget.h"
 
@@ -25,28 +25,11 @@ void MainViewUIController::OnExit()
 {
 
 }
-void MainViewUIController::SelectGameObject(GObject * ObjectPtr)
+void MainViewUIController::SelectGameActor(AGameActor * GameActorPtr)
 {
-	CheckNullPtr(ObjectPtr);
-	GData * ObjectData = ObjectPtr->GetObjectData();
-	CheckNullPtr(ObjectData);
-
-	switch (ObjectData->GetGDataType())
-	{
-	case GData::Pawn:
-
-		break;
-	case GData::Building:
-	{
-		//BaseBuildingData * BuildingData = Cast<BaseBuildingData>(ObjectData);
-
-		break;
-	}	
-	default:
-		break;
-	}
-	DataManager::GetInstance()->GetGameWorldData();
-
+	CheckNullPtr(GameActorPtr);
+	MiddleCenterSlot->AttachWidget(GameActorPtr->CreateActorDetailWidget().ToSharedRef());
+	
 }
 TSharedPtr<SWidget> MainViewUIController::CreateUserView()
 {
@@ -97,7 +80,7 @@ TSharedPtr<SWidget> MainViewUIController::CreateShowBuildingsWidget()
 	}*/
 	IconNames = GameConfigData::HaveCenterBuilding;
 
-	TSharedPtr<SWidget> ResWidget = SNew(SShowBuildingWidget)
+	TSharedPtr<SWidget> ResWidget = SNew(SBuildingIconItemListWidget)
 		.IconNames(IconNames);
 
 	return ResWidget;

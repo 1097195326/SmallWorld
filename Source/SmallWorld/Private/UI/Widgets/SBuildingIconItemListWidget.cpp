@@ -1,9 +1,9 @@
-#include "SShowBuildingWidget.h"
+#include "SBuildingIconItemListWidget.h"
 #include "DataManager.h"
 #include "SBuildingIconItem.h"
 
 
-void SShowBuildingWidget::Construct(const FArguments & InArgs)
+void SBuildingIconItemListWidget::Construct(const FArguments & InArgs)
 {
 	IconNames = InArgs._IconNames;
 
@@ -54,20 +54,20 @@ void SShowBuildingWidget::Construct(const FArguments & InArgs)
 }
 
 
-void SShowBuildingWidget::OnDragEnter(const FGeometry& MyGeometry, const FDragDropEvent& DragDropEvent)
+void SBuildingIconItemListWidget::OnDragEnter(const FGeometry& MyGeometry, const FDragDropEvent& DragDropEvent)
 {
 
 }
-void SShowBuildingWidget::OnDragLeave(const FDragDropEvent& DragDropEvent)
+void SBuildingIconItemListWidget::OnDragLeave(const FDragDropEvent& DragDropEvent)
 {
 
 }
-FReply SShowBuildingWidget::OnDragOver(const FGeometry& MyGeometry, const FDragDropEvent& DragDropEvent)
+FReply SBuildingIconItemListWidget::OnDragOver(const FGeometry& MyGeometry, const FDragDropEvent& DragDropEvent)
 {
 
 	return FReply::Handled();
 }
-FReply SShowBuildingWidget::OnDrop(const FGeometry& MyGeometry, const FDragDropEvent& DragDropEvent)
+FReply SBuildingIconItemListWidget::OnDrop(const FGeometry& MyGeometry, const FDragDropEvent& DragDropEvent)
 {
 
 	return FReply::Handled();

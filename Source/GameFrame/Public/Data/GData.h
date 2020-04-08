@@ -9,15 +9,9 @@
 class GAMEFRAME_API GData : public BaseObject
 {
 public :
-	enum Type
-	{
-		None,
-		Pawn,
-		Building,
-	};
+	
 	GData();
 	~GData();
-	inline Type GetGDataType() { return GDataType; }
 
 
 	virtual void	InitWithXML(const FXmlFile * _file);
@@ -34,7 +28,7 @@ public :
 	bool operator!=(const GData * data) { return m_ID != data->m_ID; }
 
 protected:
-	Type GDataType;
+	
 	FGuid ParentId;
 
 };

@@ -3,10 +3,10 @@
 #include "SBaseCompoundWidget.h"
 #include "SBuildingIconItem.h"
 
-class SShowBuildingWidget : public SBaseCompoundWidget
+class SBuildingIconItemListWidget : public SBaseCompoundWidget
 {
 public:
-	SLATE_BEGIN_ARGS(SShowBuildingWidget){}
+	SLATE_BEGIN_ARGS(SBuildingIconItemListWidget){}
 
 	SLATE_ARGUMENT(TArray<FString>,IconNames)
 

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "SWidget.h"
 #include "GameFramework/Actor.h"
 #include "GObject.h"
 #include "GameActor.generated.h"
@@ -21,5 +22,6 @@ public:
 	virtual void On_Tick(float DeltaSeconds) override;
 	virtual void On_Delete() override;
 
+	virtual TSharedPtr<SWidget>	CreateActorDetailWidget() { return SNullWidget::NullWidget; }
 
 };

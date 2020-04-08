@@ -3,12 +3,12 @@
 
 GData::GData()
 {
-	GDataType = None;
+	
 	ParentId.Invalidate();
 }
 GData::~GData()
 {
-	GDataType = None;
+	
 }
 void GData::Serialization(TSharedRef<TJsonWriter<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>> Writer)
 {
