@@ -29,6 +29,7 @@ public class SmallWorld : ModuleRules
             "Foliage",
             "EditLandscape",
             "XmlParser",
+            "MiniMap"
         });
 
         //PrivateDependencyModuleNames.AddRange(new string[] {  });
