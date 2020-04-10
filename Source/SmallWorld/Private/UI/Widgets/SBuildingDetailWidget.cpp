@@ -1,32 +1,16 @@
 #include "SBuildingDetailWidget.h"
 
-
-
 void SBuildingDetailWidget::Construct(const FArguments & InArgs)
 {
 	bNeedOperation = InArgs._NeedOperation;
 
+	SGameActorDetailWidget::Construct(SGameActorDetailWidget::FArguments());
 
-	ChildSlot
-		[
-			SNew(SVerticalBox)
-			+SVerticalBox::Slot()
-			.VAlign(VAlign_Bottom)
-			.HAlign(HAlign_Center)
-			.AutoHeight()
-			.Expose(TopSlot)
-			+ SVerticalBox::Slot()
-			.VAlign(VAlign_Bottom)
-			.HAlign(HAlign_Center)
-			.AutoHeight()
-			.Expose(MiddleSlot)
-			+ SVerticalBox::Slot()
-			.VAlign(VAlign_Bottom)
-			.HAlign(HAlign_Center)
-			.AutoHeight()
-			.Expose(BottomSlot)
-		];
 
+	if (InArgs._DetailWidget.IsValid())
+	{
+		MiddleSlot->AttachWidget(InArgs._DetailWidget.ToSharedRef());
+	}
 	if (bNeedOperation)
 	{
 		TSharedPtr<SHorizontalBox> OperationBox;
@@ -38,7 +22,7 @@ void SBuildingDetailWidget::Construct(const FArguments & InArgs)
 			.BorderBackgroundColor(FGameStyle::Get().GetColor("Color.4C6E6F70"))
 			.BorderImage(FCoreStyle::Get().GetBrush("GenericWhiteBox"))
 			[
-				SAssignNew(OperationBox,SHorizontalBox)
+				SAssignNew(OperationBox, SHorizontalBox)
 			]
 		);
 		OperationBox->AddSlot()
@@ -49,7 +33,7 @@ void SBuildingDetailWidget::Construct(const FArguments & InArgs)
 			[
 				SNew(SButton)
 				.ButtonStyle(&FGameStyle::Get().GetWidgetStyle<FButtonStyle>("MainView.Button.Upgrade"))
-				.OnClicked(this,&SBuildingDetailWidget::OnUpgradeButtonClicked)
+				.OnClicked(this, &SBuildingDetailWidget::OnUpgradeButtonClicked)
 			];
 		OperationBox->AddSlot()
 			.VAlign(VAlign_Center)
