@@ -20,7 +20,7 @@ class FPreviewScene;
 /**
 * Stores the transformation data for the viewport camera
 */
-struct FMiniMapViewportCameraTransform
+struct MINIMAP_API FMiniMapViewportCameraTransform
 {
 public:
 	FMiniMapViewportCameraTransform();
@@ -96,7 +96,7 @@ private:
 };
 
 
-class FMiniMapViewportClient : public FCommonViewportClient, public FViewElementDrawer
+class MINIMAP_API FMiniMapViewportClient : public FCommonViewportClient, public FViewElementDrawer
 {
 public:
 	FMiniMapViewportClient(FPreviewScene* InPreviewScene = nullptr);

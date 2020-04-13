@@ -2,7 +2,7 @@
 
 #include "Modules/ModuleInterface.h"
 
-class MiniMapModule : public IModuleInterface
+class MINIMAP_API MiniMapModule : public IModuleInterface
 {
 public:
     virtual void StartupModule() override;

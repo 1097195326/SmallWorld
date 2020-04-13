@@ -8,7 +8,7 @@
 
 class FPreviewScene;
 
-class SMiniMapViewport : public SViewport
+class MINIMAP_API SMiniMapViewport : public SViewport
 {
 public:
 	SLATE_BEGIN_ARGS(SMiniMapViewport)
