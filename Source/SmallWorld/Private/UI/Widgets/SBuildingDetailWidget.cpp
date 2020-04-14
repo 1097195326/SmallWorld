@@ -4,44 +4,12 @@ void SBuildingDetailWidget::Construct(const FArguments & InArgs)
 {
 	bNeedOperation = InArgs._NeedOperation;
 
-	SGameActorDetailWidget::Construct(SGameActorDetailWidget::FArguments());
+	SGameActorDetailWidget::Construct(SGameActorDetailWidget::FArguments()
+	.ActorName(InArgs._ActorName)
+	.ActorLevel(InArgs._ActorLevel)
+	.ActorHealth(InArgs._ActorHealth)
+	.DetailWidget(InArgs._DetailWidget));
 
-	TopSlot->AttachWidget
-	(
-		SNew(SHorizontalBox)
-		+SHorizontalBox::Slot()
-		.HAlign(HAlign_Left)
-		.VAlign(VAlign_Center)
-		.Padding(10)
-		[
-			SNew(STextBlock)
-			.TextStyle(FGameStyle::Get(), "Text_12")
-			.Text(FText::FromString(InArgs._BuildingLevel))
-		]
-		+ SHorizontalBox::Slot()
-		.HAlign(HAlign_Left)
-		.VAlign(VAlign_Center)
-		.Padding(10)
-		[
-			SNew(STextBlock)
-			.TextStyle(FGameStyle::Get(), "Text_12")
-			.Text(FText::FromString(InArgs._BuildingLevel))
-		]
-		+ SHorizontalBox::Slot()
-		.HAlign(HAlign_Left)
-		.VAlign(VAlign_Center)
-		.Padding(10)
-		[
-			SNew(STextBlock)
-			.TextStyle(FGameStyle::Get(),"Text_12")
-			.Text(FText::FromString(InArgs._BuildingLife))
-		]
-	);
-
-	if (InArgs._DetailWidget.IsValid())
-	{
-		MiddleSlot->AttachWidget(InArgs._DetailWidget.ToSharedRef());
-	}
 	if (bNeedOperation)
 	{
 		TSharedPtr<SHorizontalBox> OperationBox;

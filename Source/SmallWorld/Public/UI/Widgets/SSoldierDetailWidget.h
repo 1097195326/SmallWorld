@@ -1,10 +1,13 @@
 #pragma once
-#include "SBaseCompoundWidget.h"
 
-class SGameActorDetailWidget : public SBaseCompoundWidget
+#include "SGameActorDetailWidget.h"
+
+
+
+class SSoldierDetailWidget : public SGameActorDetailWidget
 {
 public:
-	SLATE_BEGIN_ARGS(SGameActorDetailWidget):
+	SLATE_BEGIN_ARGS(SSoldierDetailWidget):
 		_ActorName(TEXT("")),
 		_ActorLevel(TEXT("")),
 		_ActorHealth(TEXT("")),
@@ -17,14 +20,11 @@ public:
 
 	SLATE_END_ARGS()
 
-	void Construct(const FArguments & InArgs);
+		void Construct(const FArguments & InArgs);
 
 protected:
-	
-	SVerticalBox::FSlot  * TopSlot = NULL;
-	SVerticalBox::FSlot  * MiddleSlot = NULL;
-	SVerticalBox::FSlot  * BottomSlot = NULL;
-	
+
+
 
 
 };
