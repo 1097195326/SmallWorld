@@ -13,8 +13,8 @@ public class MiniMap : ModuleRules
                 "Engine",
                 "Slate",
                 "SlateCore",
-                "ApplicationCore",
-                "AppFramework",
+                //"ApplicationCore",
+                //"AppFramework",
                 "InputCore"
             });
 

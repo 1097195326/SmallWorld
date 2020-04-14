@@ -6,6 +6,37 @@ void SBuildingDetailWidget::Construct(const FArguments & InArgs)
 
 	SGameActorDetailWidget::Construct(SGameActorDetailWidget::FArguments());
 
+	TopSlot->AttachWidget
+	(
+		SNew(SHorizontalBox)
+		+SHorizontalBox::Slot()
+		.HAlign(HAlign_Left)
+		.VAlign(VAlign_Center)
+		.Padding(10)
+		[
+			SNew(STextBlock)
+			.TextStyle(FGameStyle::Get(), "Text_12")
+			.Text(FText::FromString(InArgs._BuildingLevel))
+		]
+		+ SHorizontalBox::Slot()
+		.HAlign(HAlign_Left)
+		.VAlign(VAlign_Center)
+		.Padding(10)
+		[
+			SNew(STextBlock)
+			.TextStyle(FGameStyle::Get(), "Text_12")
+			.Text(FText::FromString(InArgs._BuildingLevel))
+		]
+		+ SHorizontalBox::Slot()
+		.HAlign(HAlign_Left)
+		.VAlign(VAlign_Center)
+		.Padding(10)
+		[
+			SNew(STextBlock)
+			.TextStyle(FGameStyle::Get(),"Text_12")
+			.Text(FText::FromString(InArgs._BuildingLife))
+		]
+	);
 
 	if (InArgs._DetailWidget.IsValid())
 	{

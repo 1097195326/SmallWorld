@@ -20,16 +20,16 @@ public class SmallWorld : ModuleRules
             "Slate",
             "SlateCore",
             "UnrealEd",
-            "GCore",
-            "ProceduralMesh",
-            "SlateUI",
-            "UnrealEngineWrap",
-            "GameFrame",
             "Landscape",
             "Foliage",
             "EditLandscape",
             "XmlParser",
-            "MiniMap"
+            "MiniMap",
+            "GCore",
+            "ProceduralMesh",
+            "SlateUI",
+            "UnrealEngineWrap",
+            "GameFrame"
         });
 
         //PrivateDependencyModuleNames.AddRange(new string[] {  });
