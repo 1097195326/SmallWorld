@@ -14,4 +14,5 @@ public:
 
 	virtual void On_Init() override;
 
+	virtual TSharedPtr<SWidget>	CreateActorDetailWidget() override;
 };

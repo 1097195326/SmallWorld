@@ -11,3 +11,7 @@ void ABakeryActor::On_Init()
 {
 	
 }
+TSharedPtr<SWidget>	ABakeryActor::CreateActorDetailWidget()
+{
+	return SNullWidget::NullWidget;
+}

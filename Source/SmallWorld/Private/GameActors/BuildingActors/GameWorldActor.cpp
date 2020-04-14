@@ -15,3 +15,7 @@ void AGameWorldActor::On_Init()
 	CollisionBox->SetBoxExtent(FVector(Extent, Extent, Extent));
 
 }
+TSharedPtr<SWidget>	AGameWorldActor::CreateActorDetailWidget()
+{
+	return SNullWidget::NullWidget;
+}

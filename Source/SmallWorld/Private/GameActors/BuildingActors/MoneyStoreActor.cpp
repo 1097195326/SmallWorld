@@ -11,3 +11,7 @@ void AMoneyStoreActor::On_Init()
 {
 	
 }
+TSharedPtr<SWidget>	AMoneyStoreActor::CreateActorDetailWidget()
+{
+	return SNullWidget::NullWidget;
+}

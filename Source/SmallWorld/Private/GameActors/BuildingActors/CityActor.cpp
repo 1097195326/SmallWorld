@@ -32,3 +32,7 @@ void ACityActor::On_Delete()
 	/*delete mGeneralGoal;
 	mGeneralGoal = nullptr;*/
 }
+TSharedPtr<SWidget>	ACityActor::CreateActorDetailWidget()
+{
+	return SNullWidget::NullWidget;
+}

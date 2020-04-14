@@ -10,3 +10,7 @@ void AWallActor::On_Init()
 	
 	
 }
+TSharedPtr<SWidget>	AWallActor::CreateActorDetailWidget()
+{
+	return SNullWidget::NullWidget;
+}

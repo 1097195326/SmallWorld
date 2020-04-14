@@ -37,6 +37,8 @@ public:
 	virtual void On_Delete() override;
 	virtual void On_GameUpdate() override;
     
+	virtual TSharedPtr<SWidget>	CreateActorDetailWidget() override;
+
 private:
 	
 	UPROPERTY(VisibleDefaultsOnly)

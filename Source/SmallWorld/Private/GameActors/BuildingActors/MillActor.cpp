@@ -23,3 +23,7 @@ void AMillActor::On_Init()
 	//}
 }
 
+TSharedPtr<SWidget>	AMillActor::CreateActorDetailWidget()
+{
+	return SNullWidget::NullWidget;
+}

@@ -10,3 +10,7 @@ void ATowerActor::On_Init()
 	
 	
 }
+TSharedPtr<SWidget>	ATowerActor::CreateActorDetailWidget()
+{
+	return SNullWidget::NullWidget;
+}
