@@ -2,15 +2,25 @@
 #include "FBuildingDragDropOp.h"
 #include "UserController.h"
 
+#include "SMiniMapWidget.h"
+
 
 void SServiceDragDropWidget::Construct(const FArguments & InArgs)
 {
+	TSharedPtr<SMiniMapWidget>  TemWidget;
+
 	ChildSlot
+.VAlign(VAlign_Center)
+.HAlign(HAlign_Center)
 		[
-			SNew(SBorder)
+			SAssignNew(TemWidget,SMiniMapWidget)
+			/*SNew(SBorder)
 			.BorderBackgroundColor(FGameStyle::Get().GetColor("Color.None"))
-			.BorderImage(FCoreStyle::Get().GetBrush("GenericWhiteBox"))
+			.BorderImage(FCoreStyle::Get().GetBrush("GenericWhiteBox"))*/
 		];
+
+	TemWidget->TestSpawnAcor();
+
 }
 FReply SServiceDragDropWidget::OnMouseButtonDown(const FGeometry& MyGeometry, const FPointerEvent& MouseEvent)
 {

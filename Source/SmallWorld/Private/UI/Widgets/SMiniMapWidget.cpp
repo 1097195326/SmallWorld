@@ -1,6 +1,7 @@
 #include "SMiniMapWidget.h"
-#include "SMiniMapViewport.h"
 #include "GameStyle.h"
+
+#include "PreviewActor.h"
 
 
 void SMiniMapWidget::Construct(const FArguments& InArgs)
@@ -28,21 +29,41 @@ void SMiniMapWidget::Construct(const FArguments& InArgs)
 				.Stretch(EStretch::ScaleToFill)
 				[
 					SNew(SBox)
-					.WidthOverride(200)
-					.HeightOverride(200)
+					.WidthOverride(800)
+					.HeightOverride(800)
 					[
 						SNew(SBorder)
 						.BorderBackgroundColor(FLinearColor::Black)
 						.BorderImage(FCoreStyle::Get().GetBrush("GenericWhiteBox"))
 						[
-							SNew(SMiniMapViewport)
+							SAssignNew(PreviewViewport,SMiniMapViewport)
 						]
 					]
 					
 				]
 			]
 		];
+	PreviewViewport->ViewportClient->SetBackgroundColor(FLinearColor::Black);
 
+}
+void SMiniMapWidget::TestSpawnAcor()
+{
+	FTransform SpawnPosition(FRotator(0,0,0),FVector(0,0,0),FVector(1));
+	APreviewActor * PreviewActor = GetViewportWorld()->SpawnActorDeferred<APreviewActor>(APreviewActor::StaticClass(), SpawnPosition, nullptr, nullptr, ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn);
+	if (PreviewActor)
+	{
+		PreviewActor->SetMeshComponent(TEXT("ArmyCenter"));
+		PreviewActor->FinishSpawning(SpawnPosition);
+	}
+
+}
+UWorld * SMiniMapWidget::GetViewportWorld() const
+{
+	if (PreviewViewport.IsValid())
+	{
+		return PreviewViewport->PreviewScene.GetWorld();
+	}
+	return NULL;
 }
 FReply SMiniMapWidget::OnSwitchButtonClicked()
 {

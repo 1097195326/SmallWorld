@@ -99,6 +99,27 @@ private:
 class MINIMAP_API FMiniMapViewportClient : public FCommonViewportClient, public FViewElementDrawer
 {
 public:
+	enum EMiniMapViewportType
+	{
+		/** Top */
+		LVT_OrthoXY = 0,
+		/** Front */
+		LVT_OrthoXZ = 1,
+		/** Left */
+		LVT_OrthoYZ = 2,
+		LVT_Perspective = 3,
+		LVT_OrthoFreelook = 4,
+		/** Bottom */
+		LVT_OrthoNegativeXY = 5,
+		/** Back */
+		LVT_OrthoNegativeXZ = 6,
+		/** Right */
+		LVT_OrthoNegativeYZ = 7,
+		LVT_MAX,
+
+		LVT_None = 255,
+	}; 
+
 	FMiniMapViewportClient(FPreviewScene* InPreviewScene = nullptr);
 	virtual ~FMiniMapViewportClient();
 
@@ -108,11 +129,15 @@ public:
 	virtual UWorld* GetWorld() const override;
 	virtual void Draw(FViewport* InViewport, FCanvas* Canvas) override;
 
+	virtual bool InputKey(FViewport* InViewport, int32 ControllerId, FKey Key, EInputEvent Event, float AmountDepressed = 1.f, bool bGamepad = false) override;
+
+
 	// FUMGViewportClient
 
 	virtual void Tick(float InDeltaTime);
 
 	virtual FSceneView* CalcSceneView(FSceneViewFamily* ViewFamily);
+	virtual FSceneView* CalcSceneView(FSceneViewFamily* ViewFamily,bool  Origin);
 
 
 	/**
@@ -129,13 +154,13 @@ public:
 	/** Sets the location of the viewport's camera */
 	void SetViewLocation(const FVector& NewLocation)
 	{
-		ViewTransform.SetLocation(NewLocation);
+		GetViewTransform().SetLocation(NewLocation);
 	}
 
 	/** Sets the location of the viewport's camera */
 	void SetViewRotation(const FRotator& NewRotation)
 	{
-		ViewTransform.SetRotation(NewRotation);
+		GetViewTransform().SetRotation(NewRotation);
 	}
 
 	/**
@@ -146,15 +171,15 @@ public:
 	*/
 	void SetLookAtLocation(const FVector& LookAt, bool bRecalculateView = false)
 	{
-		ViewTransform.SetLookAt(LookAt);
+		GetViewTransform().SetLookAt(LookAt);
 
 		if (bRecalculateView)
 		{
-			FMatrix OrbitMatrix = ViewTransform.ComputeOrbitMatrix();
+			FMatrix OrbitMatrix = GetViewTransform().ComputeOrbitMatrix();
 			OrbitMatrix = OrbitMatrix.InverseFast();
 
-			ViewTransform.SetRotation(OrbitMatrix.Rotator());
-			ViewTransform.SetLocation(OrbitMatrix.GetOrigin());
+			GetViewTransform().SetRotation(OrbitMatrix.Rotator());
+			GetViewTransform().SetLocation(OrbitMatrix.GetOrigin());
 		}
 	}
 
@@ -163,31 +188,31 @@ public:
 	{
 		// A zero ortho zoom is not supported and causes NaN/div0 errors
 		check(InOrthoZoom != 0);
-		ViewTransform.SetOrthoZoom(InOrthoZoom);
+		GetViewTransform().SetOrthoZoom(InOrthoZoom);
 	}
 
 	/** @return the current viewport camera location */
 	const FVector& GetViewLocation() const
 	{
-		return ViewTransform.GetLocation();
+		return GetViewTransform().GetLocation();
 	}
 
 	/** @return the current viewport camera rotation */
 	const FRotator& GetViewRotation() const
 	{
-		return ViewTransform.GetRotation();
+		return GetViewTransform().GetRotation();
 	}
 
 	/** @return the current look at location */
 	const FVector& GetLookAtLocation() const
 	{
-		return ViewTransform.GetLookAt();
+		return GetViewTransform().GetLookAt();
 	}
 
 	/** @return the current ortho zoom amount */
 	float GetOrthoZoom() const
 	{
-		return ViewTransform.GetOrthoZoom();
+		return GetViewTransform().GetOrthoZoom();
 	}
 
 	/** @return The number of units per pixel displayed in this viewport */
@@ -197,6 +222,37 @@ public:
 	{
 		EngineShowFlags = InEngineShowFlags;
 	}
+
+	FMiniMapViewportCameraTransform& GetViewTransform()
+	{
+		return IsPerspective() ? ViewTransformPerspective : ViewTransformOrthographic;
+	}
+
+	const FMiniMapViewportCameraTransform& GetViewTransform() const
+	{
+		return IsPerspective() ? ViewTransformPerspective : ViewTransformOrthographic;
+	}
+	bool IsPerspective() const;
+
+	virtual EMiniMapViewportType GetViewportType() const;
+
+	virtual void SetViewportType(EMiniMapViewportType InViewportType);
+
+	virtual FMatrix CalcViewRotationMatrix(const FRotator& InViewRotation) const;
+
+	/** Get the near clipping plane for this viewport. */
+	float GetNearClipPlane() const;
+
+	/** Subclasses may override the near clipping plane. Set to a negative value to disable the override. */
+	void OverrideNearClipPlane(float InNearPlane);
+
+	/** Get the far clipping plane override for this viewport. */
+	float GetFarClipPlaneOverride() const;
+
+	/** Override the far clipping plane. Set to a negative value to disable the override. */
+	void OverrideFarClipPlane(const float InFarPlane);
+
+	virtual void OverridePostProcessSettings(FSceneView& View) {};
 
 protected:
 
@@ -208,7 +264,8 @@ protected:
 	FLinearColor BackgroundColor;
 
 	/** Viewport camera transform data */
-	FMiniMapViewportCameraTransform ViewTransform;
+	FMiniMapViewportCameraTransform ViewTransformPerspective;
+	FMiniMapViewportCameraTransform ViewTransformOrthographic;
 
 	FViewport* Viewport;
 
@@ -217,4 +274,25 @@ protected:
 
 	/** A set of flags that determines visibility for various scene elements. */
 	FEngineShowFlags EngineShowFlags;
+
+	EMiniMapViewportType		ViewportType;
+
+	/** near plane adjustable for each editor view, if < 0 GNearClippingPlane should be used. */
+	float NearPlane;
+
+	/** If > 0, overrides the view's far clipping plane with a plane at the specified distance. */
+	float FarPlane;
+
+	/** Viewport's current horizontal field of view (can be modified by locked cameras etc.) */
+	float ViewFOV;
+
+	/** Viewport's stored horizontal field of view (saved in ini files). */
+	float FOVAngle;
+
+	float AspectRatio;
+
+	bool bUsingOrbitCamera;
+
+	bool bUseControllingActorViewInfo;
+
 };
