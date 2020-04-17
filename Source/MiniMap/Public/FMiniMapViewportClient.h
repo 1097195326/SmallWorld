@@ -123,11 +123,12 @@ public:
 	FMiniMapViewportClient(FPreviewScene* InPreviewScene = nullptr);
 	virtual ~FMiniMapViewportClient();
 
-	using FViewElementDrawer::Draw;
-
 	// FViewportClient interface
 	virtual UWorld* GetWorld() const override;
 	virtual void Draw(FViewport* InViewport, FCanvas* Canvas) override;
+
+	//using FViewElementDrawer::Draw;
+	virtual void Draw(const FSceneView* View, FPrimitiveDrawInterface* PDI) override;
 
 	virtual bool InputKey(FViewport* InViewport, int32 ControllerId, FKey Key, EInputEvent Event, float AmountDepressed = 1.f, bool bGamepad = false) override;
 
@@ -137,7 +138,6 @@ public:
 	virtual void Tick(float InDeltaTime);
 
 	virtual FSceneView* CalcSceneView(FSceneViewFamily* ViewFamily);
-	virtual FSceneView* CalcSceneView(FSceneViewFamily* ViewFamily,bool  Origin);
 
 
 	/**

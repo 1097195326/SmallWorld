@@ -107,7 +107,7 @@ FMiniMapViewportClient::FMiniMapViewportClient(FPreviewScene* InPreviewScene)
 	ViewState.Allocate();
 	ViewInfo.ProjectionMode = ECameraProjectionMode::Orthographic;
 	BackgroundColor = FColor(55, 55, 55);
-	GetViewTransform().SetLocation(FVector(0,0,100));
+	GetViewTransform().SetLocation(FVector(0,0,150));
 	GetViewTransform().SetLookAt(FVector(0));
 }
 
@@ -177,13 +177,10 @@ void FMiniMapViewportClient::Draw(FViewport* InViewport, FCanvas* Canvas)
 	ViewFamily.EngineShowFlags.ScreenPercentage = true;
 
 	//UpdateLightingShowFlags(ViewFamily.EngineShowFlags);
-
 	//ViewFamily.ExposureSettings = ExposureSettings;
-
 	//ViewFamily.LandscapeLODOverride = LandscapeLODOverride;
 
 	FSceneView* View = CalcSceneView(&ViewFamily);
-	//FSceneView* View = CalcSceneView(&ViewFamily,true);
 
 	ViewFamily.SetScreenPercentageInterface(new FLegacyScreenPercentageDriver(
 		ViewFamily, GlobalResolutionFraction, /* AllowPostProcessSettingsScreenPercentage = */ false));
@@ -223,7 +220,10 @@ void FMiniMapViewportClient::Draw(FViewport* InViewport, FCanvas* Canvas)
 
 	Viewport = ViewportBackup;
 }
+void FMiniMapViewportClient::Draw(const FSceneView* View, FPrimitiveDrawInterface* PDI)
+{
 
+}
 FSceneInterface* FMiniMapViewportClient::GetScene() const
 {
 	UWorld* World = GetWorld();
@@ -272,7 +272,7 @@ bool FMiniMapViewportClient::IsPerspective() const
 FMiniMapViewportClient::EMiniMapViewportType FMiniMapViewportClient::GetViewportType() const
 {
 	EMiniMapViewportType EffectiveViewportType = ViewportType;
-	if (false)
+	if (bUseControllingActorViewInfo)
 	{
 		EffectiveViewportType = (ViewInfo.ProjectionMode == ECameraProjectionMode::Perspective) ? LVT_Perspective : LVT_OrthoFreelook;
 	}
@@ -549,7 +549,7 @@ FSceneView* FMiniMapViewportClient::CalcSceneView(FSceneViewFamily* ViewFamily)
 			ViewFamily->EngineShowFlags.DisableAdvancedFeatures();
 			//ESplitScreenType::Type SplitScreenConfig = GetCurrentSplitscreenConfiguration();
 			ViewFamily->ViewMode = VMI_Unlit;
-			//EngineShowFlagOverride(ESFIM_Game, ViewFamily->ViewMode, ViewFamily->EngineShowFlags, NAME_None, SplitScreenConfig != ESplitScreenType::None);
+			EngineShowFlagOverride(ESFIM_Game, ViewFamily->ViewMode, ViewFamily->EngineShowFlags, false);
 			EngineShowFlagOrthographicOverride(IsPerspective(), ViewFamily->EngineShowFlags);
 			ViewFamily->EngineShowFlags.SetAntiAliasing(true);
 			ViewFamily->EngineShowFlags.SetWireframe(false);
@@ -598,63 +598,6 @@ FSceneView* FMiniMapViewportClient::CalcSceneView(FSceneViewFamily* ViewFamily)
 
 	OverridePostProcessSettings(*View);
 	
-	View->EndFinalPostprocessSettings(ViewInitOptions);
-
-	return View;
-}
-
-FSceneView* FMiniMapViewportClient::CalcSceneView(FSceneViewFamily* ViewFamily, bool  Origin)
-{
-	FSceneViewInitOptions ViewInitOptions;
-
-	const FVector& ViewLocation = GetViewLocation();
-	const FRotator& ViewRotation = GetViewRotation();
-
-	const FIntPoint ViewportSizeXY = Viewport->GetSizeXY();
-
-	FIntRect ViewRect = FIntRect(0, 0, ViewportSizeXY.X, ViewportSizeXY.Y);
-	ViewInitOptions.SetViewRectangle(ViewRect);
-
-	ViewInitOptions.ViewOrigin = ViewLocation;
-
-	ViewInitOptions.ViewRotationMatrix = FInverseRotationMatrix(ViewRotation);
-	ViewInitOptions.ViewRotationMatrix = ViewInitOptions.ViewRotationMatrix * FMatrix(
-		FPlane(0, 0, 1, 0),
-		FPlane(1, 0, 0, 0),
-		FPlane(0, 1, 0, 0),
-		FPlane(0, 0, 0, 1));
-
-	//@TODO: Should probably be locally configurable (or just made into a FMinimalViewInfo property)
-	const EAspectRatioAxisConstraint AspectRatioAxisConstraint = GetDefault<ULocalPlayer>()->AspectRatioAxisConstraint;
-
-	FMinimalViewInfo::CalculateProjectionMatrixGivenView(ViewInfo, AspectRatioAxisConstraint, Viewport, /*inout*/ ViewInitOptions);
-
-	ViewInitOptions.ViewFamily = ViewFamily;
-	ViewInitOptions.SceneViewStateInterface = ViewState.GetReference();
-	ViewInitOptions.ViewElementDrawer = this;
-
-	ViewInitOptions.BackgroundColor = GetBackgroundColor();
-
-#if WITH_EDITOR
-	//ViewInitOptions.EditorViewScreenPercentage = GetEditorScreenPercentage();
-#endif
-
-	//ViewInitOptions.EditorViewBitflag = 0, // send the bit for this view - each actor will check it's visibility bits against this
-
-	// for ortho views to steal perspective view origin
-	//ViewInitOptions.OverrideLODViewOrigin = FVector::ZeroVector;
-	//ViewInitOptions.bUseFauxOrthoViewPos = true;
-
-	//ViewInitOptions.CursorPos = CurrentMousePos;
-
-	FSceneView* View = new FSceneView(ViewInitOptions);
-
-	ViewFamily->Views.Add(View);
-
-	View->StartFinalPostprocessSettings(ViewLocation);
-
-	//OverridePostProcessSettings(*View);
-
 	View->EndFinalPostprocessSettings(ViewInitOptions);
 
 	return View;
