@@ -123,6 +123,7 @@ public:
 	FMiniMapViewportClient(FPreviewScene* InPreviewScene = nullptr);
 	virtual ~FMiniMapViewportClient();
 
+	void SetLookAtBox(FBox InBox);
 	// FViewportClient interface
 	virtual UWorld* GetWorld() const override;
 	virtual void Draw(FViewport* InViewport, FCanvas* Canvas) override;
@@ -232,6 +233,8 @@ public:
 	{
 		return IsPerspective() ? ViewTransformPerspective : ViewTransformOrthographic;
 	}
+	virtual bool IsOrtho() const override;
+
 	bool IsPerspective() const;
 
 	virtual EMiniMapViewportType GetViewportType() const;
@@ -254,6 +257,26 @@ public:
 
 	virtual void OverridePostProcessSettings(FSceneView& View) {};
 
+
+	/**
+	* Focuses the viewport to the center of the bounding box ensuring that the entire box is in view
+	*
+	* @param BoundingBox			The box to focus
+	* @param bUpdateLinkedOrthoViewports	Whether or not to updated linked viewports when this viewport changes
+	* @param bInstant			Whether or not to focus the viewport instantly or over time
+	*/
+	void FocusViewportOnBox(const FBox& BoundingBox, bool bInstant = false);
+
+	/**
+	* Invalidates this viewport and optionally child views.
+	*
+	* @param	bInvalidateChildViews		[opt] If true (the default), invalidate views that see this viewport as their parent.
+	* @param	bInvalidateHitProxies		[opt] If true (the default), invalidates cached hit proxies too.
+	*/
+	void Invalidate(bool bInvalidateChildViews = true, bool bInvalidateHitProxies = true);
+
+	/** Toggle between orbit camera and fly camera */
+	void ToggleOrbitCamera(bool bEnableOrbitCamera);
 protected:
 
 	/** The scene used for the viewport. Owned externally */
@@ -295,4 +318,7 @@ protected:
 
 	bool bUseControllingActorViewInfo;
 
+
+	bool bIsSetLookAtBox;
+	FBox DesignLookAtBox;
 };

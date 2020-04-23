@@ -13,6 +13,10 @@
 #include "LegacyScreenPercentageDriver.h"
 #include "UnrealEngine.h"
 
+#define MIN_ORTHOZOOM				250.0					/* Limit of 2D viewport zoom in */
+#define MAX_ORTHOZOOM				MAX_FLT					/* Limit of 2D viewport zoom out */
+
+
 namespace FocusConstants
 {
 	const float TransitionTime = 0.25f;
@@ -103,6 +107,8 @@ FMiniMapViewportClient::FMiniMapViewportClient(FPreviewScene* InPreviewScene)
 	, AspectRatio(1.777777f)
 	, bUsingOrbitCamera(false)
 	, bUseControllingActorViewInfo(false)
+	, bIsSetLookAtBox(false)
+
 {
 	ViewState.Allocate();
 	ViewInfo.ProjectionMode = ECameraProjectionMode::Orthographic;
@@ -114,7 +120,11 @@ FMiniMapViewportClient::FMiniMapViewportClient(FPreviewScene* InPreviewScene)
 FMiniMapViewportClient::~FMiniMapViewportClient()
 {
 }
-
+void FMiniMapViewportClient::SetLookAtBox(FBox InBox)
+{
+	DesignLookAtBox = InBox;
+	bIsSetLookAtBox = true;
+}
 void FMiniMapViewportClient::Tick(float InDeltaTime)
 {
 	if (!GIntraFrameDebuggingGameThread)
@@ -140,6 +150,18 @@ void FMiniMapViewportClient::Draw(FViewport* InViewport, FCanvas* Canvas)
 	FViewport* ViewportBackup = Viewport;
 	Viewport = InViewport ? InViewport : Viewport;
 
+	if (bIsSetLookAtBox && Viewport && Viewport->GetSizeXY().X > 0 && Viewport->GetSizeXY().Y > 0)
+	{
+		bIsSetLookAtBox = false;
+		if (IsPerspective())
+		{
+		}
+		else
+		{
+			SetViewLocation(DesignLookAtBox.GetCenter());
+			FocusViewportOnBox(DesignLookAtBox);
+		}
+	}
 	// Determine whether we should use world time or real time based on the scene.
 	float TimeSeconds;
 	float RealTimeSeconds;
@@ -176,6 +198,23 @@ void FMiniMapViewportClient::Draw(FViewport* InViewport, FCanvas* Canvas)
 	// Force screen percentage show flag for High DPI.
 	ViewFamily.EngineShowFlags.ScreenPercentage = true;
 
+	if (IsPerspective())
+	{
+	}
+	else
+	{
+		ViewFamily.EngineShowFlags.DisableAdvancedFeatures();
+		//ESplitScreenType::Type SplitScreenConfig = GetCurrentSplitscreenConfiguration();
+		ViewFamily.ViewMode = VMI_Unlit;
+		EngineShowFlagOverride(ESFIM_Game, ViewFamily.ViewMode, ViewFamily.EngineShowFlags, false);
+		EngineShowFlagOrthographicOverride(IsPerspective(), ViewFamily.EngineShowFlags);
+		ViewFamily.EngineShowFlags.SetAntiAliasing(true);
+		ViewFamily.EngineShowFlags.SetWireframe(false);
+		ViewFamily.EngineShowFlags.SetBloom(false);
+		ViewFamily.EngineShowFlags.SetVisualizeHDR(false);
+		ViewFamily.EngineShowFlags.PostProcessing = false;
+		ViewFamily.EngineShowFlags.Lighting = false;
+	}
 	//UpdateLightingShowFlags(ViewFamily.EngineShowFlags);
 	//ViewFamily.ExposureSettings = ExposureSettings;
 	//ViewFamily.LandscapeLODOverride = LandscapeLODOverride;
@@ -268,7 +307,10 @@ bool FMiniMapViewportClient::IsPerspective() const
 {
 	return (GetViewportType() == LVT_Perspective);
 }
-
+bool FMiniMapViewportClient::IsOrtho() const
+{
+	return !IsPerspective();
+}
 FMiniMapViewportClient::EMiniMapViewportType FMiniMapViewportClient::GetViewportType() const
 {
 	EMiniMapViewportType EffectiveViewportType = ViewportType;
@@ -546,17 +588,6 @@ FSceneView* FMiniMapViewportClient::CalcSceneView(FSceneViewFamily* ViewFamily)
 				ZOffset
 			);
 
-			ViewFamily->EngineShowFlags.DisableAdvancedFeatures();
-			//ESplitScreenType::Type SplitScreenConfig = GetCurrentSplitscreenConfiguration();
-			ViewFamily->ViewMode = VMI_Unlit;
-			EngineShowFlagOverride(ESFIM_Game, ViewFamily->ViewMode, ViewFamily->EngineShowFlags, false);
-			EngineShowFlagOrthographicOverride(IsPerspective(), ViewFamily->EngineShowFlags);
-			ViewFamily->EngineShowFlags.SetAntiAliasing(true);
-			ViewFamily->EngineShowFlags.SetWireframe(false);
-			ViewFamily->EngineShowFlags.SetBloom(false);
-			ViewFamily->EngineShowFlags.SetVisualizeHDR(false);
-			ViewFamily->EngineShowFlags.PostProcessing = false;
-			ViewFamily->EngineShowFlags.Lighting = false;
 		}
 
 		if (bConstrainAspectRatio)
@@ -601,4 +632,151 @@ FSceneView* FMiniMapViewportClient::CalcSceneView(FSceneViewFamily* ViewFamily)
 	View->EndFinalPostprocessSettings(ViewInitOptions);
 
 	return View;
+}
+
+void FMiniMapViewportClient::FocusViewportOnBox(const FBox& BoundingBox, bool bInstant /* = false */)
+{
+	const FVector Position = BoundingBox.GetCenter();
+	float Radius = FMath::Max(BoundingBox.GetExtent().Size(), 10.f);
+
+	float AspectToUse = AspectRatio;
+	FIntPoint ViewportSize = Viewport->GetSizeXY();
+	if (!bUseControllingActorViewInfo && ViewportSize.X > 0 && ViewportSize.Y > 0)
+	{
+		AspectToUse = Viewport->GetDesiredAspectRatio();
+	}
+
+	const bool bEnable = false;
+	ToggleOrbitCamera(bEnable);
+
+	{
+		FMiniMapViewportCameraTransform& ViewTransform = GetViewTransform();
+
+		if (!IsOrtho())
+		{
+			/**
+			* We need to make sure we are fitting the sphere into the viewport completely, so if the height of the viewport is less
+			* than the width of the viewport, we scale the radius by the aspect ratio in order to compensate for the fact that we have
+			* less visible vertically than horizontally.
+			*/
+			if (AspectToUse > 1.0f)
+			{
+				Radius *= AspectToUse;
+			}
+
+			/**
+			* Now that we have a adjusted radius, we are taking half of the viewport's FOV,
+			* converting it to radians, and then figuring out the camera's distance from the center
+			* of the bounding sphere using some simple trig.  Once we have the distance, we back up
+			* along the camera's forward vector from the center of the sphere, and set our new view location.
+			*/
+
+			const float HalfFOVRadians = FMath::DegreesToRadians(ViewFOV / 2.0f);
+			const float DistanceFromSphere = Radius / FMath::Tan(HalfFOVRadians);
+			FVector CameraOffsetVector = ViewTransform.GetRotation().Vector() * -DistanceFromSphere;
+
+			ViewTransform.SetLookAt(Position);
+			//ViewTransform.TransitionToLocation(Position + CameraOffsetVector, EditorViewportWidget, bInstant);
+
+		}
+		else
+		{
+			// For ortho viewports just set the camera position to the center of the bounding volume.
+			//SetViewLocation( Position );
+			//ViewTransform.TransitionToLocation(Position, EditorViewportWidget, bInstant);
+
+			if (!(Viewport->KeyState(EKeys::LeftControl) || Viewport->KeyState(EKeys::RightControl)))
+			{
+				/**
+				* We also need to zoom out till the entire volume is in view.  The following block of code first finds the minimum dimension
+				* size of the viewport.  It then calculates backwards from what the view size should be (The radius of the bounding volume),
+				* to find the new OrthoZoom value for the viewport. The 15.0f is a fudge factor.
+				*/
+				float NewOrthoZoom;
+				uint32 MinAxisSize = (AspectToUse > 1.0f) ? Viewport->GetSizeXY().Y : Viewport->GetSizeXY().X;
+				float Zoom = Radius / (MinAxisSize / 2.0f);
+
+				NewOrthoZoom = Zoom * (Viewport->GetSizeXY().X*15.0f);
+				NewOrthoZoom = FMath::Clamp<float>(NewOrthoZoom, MIN_ORTHOZOOM, MAX_ORTHOZOOM);
+				ViewTransform.SetOrthoZoom(NewOrthoZoom);
+			}
+		}
+	}
+
+	// Tell the viewport to redraw itself.
+	Invalidate();
+}
+
+void FMiniMapViewportClient::Invalidate(bool bInvalidateChildViews, bool bInvalidateHitProxies)
+{
+	if (Viewport)
+	{
+		if (bInvalidateHitProxies)
+		{
+			// Invalidate hit proxies and display pixels.
+			Viewport->Invalidate();
+		}
+		else
+		{
+			// Invalidate only display pixels.
+			Viewport->InvalidateDisplay();
+		}
+
+		// If this viewport is a view parent . . .
+		/*if (bInvalidateChildViews &&
+			ViewState.GetReference()->IsViewParent())
+		{
+			GEditor->InvalidateChildViewports(ViewState.GetReference(), bInvalidateHitProxies);
+		}*/
+	}
+}
+
+void FMiniMapViewportClient::ToggleOrbitCamera(bool bEnableOrbitCamera)
+{
+	if (bUsingOrbitCamera != bEnableOrbitCamera)
+	{
+		FMiniMapViewportCameraTransform& ViewTransform = GetViewTransform();
+
+		bUsingOrbitCamera = bEnableOrbitCamera;
+
+		// Convert orbit view to regular view
+		FMatrix OrbitMatrix = ViewTransform.ComputeOrbitMatrix();
+		OrbitMatrix = OrbitMatrix.InverseFast();
+
+		if (!bUsingOrbitCamera)
+		{
+			// Ensure that the view location and rotation is up to date to ensure smooth transition in and out of orbit mode
+			ViewTransform.SetRotation(OrbitMatrix.Rotator());
+		}
+		else
+		{
+			FRotator ViewRotation = ViewTransform.GetRotation();
+
+			bool bUpsideDown = (ViewRotation.Pitch < -90.0f || ViewRotation.Pitch > 90.0f || !FMath::IsNearlyZero(ViewRotation.Roll, KINDA_SMALL_NUMBER));
+
+			// if the camera is upside down compute the rotation differently to preserve pitch
+			// otherwise the view will pop to right side up when transferring to orbit controls
+			if (bUpsideDown)
+			{
+				FMatrix OrbitViewMatrix = FTranslationMatrix(-ViewTransform.GetLocation());
+				OrbitViewMatrix *= FInverseRotationMatrix(ViewRotation);
+				OrbitViewMatrix *= FRotationMatrix(FRotator(0, 90.f, 0));
+
+				FMatrix RotMat = FTranslationMatrix(-ViewTransform.GetLookAt()) * OrbitViewMatrix;
+				FMatrix RotMatInv = RotMat.InverseFast();
+				FRotator RollVec = RotMatInv.Rotator();
+				FMatrix YawMat = RotMatInv * FInverseRotationMatrix(FRotator(0, 0, -RollVec.Roll));
+				FMatrix YawMatInv = YawMat.InverseFast();
+				FRotator YawVec = YawMat.Rotator();
+				FRotator rotYawInv = YawMatInv.Rotator();
+				ViewTransform.SetRotation(FRotator(-RollVec.Roll, YawVec.Yaw, 0));
+			}
+			else
+			{
+				ViewTransform.SetRotation(OrbitMatrix.Rotator());
+			}
+		}
+
+		ViewTransform.SetLocation(OrbitMatrix.GetOrigin());
+	}
 }

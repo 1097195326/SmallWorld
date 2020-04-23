@@ -5,15 +5,13 @@ class SGameActorDetailWidget : public SBaseCompoundWidget
 {
 public:
 	SLATE_BEGIN_ARGS(SGameActorDetailWidget):
-		_ActorName(TEXT("")),
-		_ActorLevel(TEXT("")),
-		_ActorHealth(TEXT("")),
-		_DetailWidget()
+		_TitleWidget(),
+		_DetailWidget(),
+		_OperationWidget()
 	{}
-	SLATE_ARGUMENT(FString, ActorName)
-	SLATE_ARGUMENT(FString, ActorLevel)
-	SLATE_ARGUMENT(FString, ActorHealth)
-	SLATE_ARGUMENT(TSharedPtr<SWidget>, DetailWidget)
+		SLATE_ARGUMENT(TSharedPtr<SWidget>, TitleWidget)
+		SLATE_ARGUMENT(TSharedPtr<SWidget>, DetailWidget)
+		SLATE_ARGUMENT(TSharedPtr<SWidget>, OperationWidget)
 
 	SLATE_END_ARGS()
 
