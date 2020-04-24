@@ -26,6 +26,8 @@ public:
 	virtual FReply OnDragDetected(const FGeometry& MyGeometry, const FPointerEvent& MouseEvent) override;
 
 protected:
+	FSlateBrush Brush;
+
 	FDelegateHandle  GoldDelegateHandle;
 	FDelegateHandle  StoneDelegateHandle;
 	FDelegateHandle  WoodDelegateHandle;

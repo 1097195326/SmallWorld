@@ -13,13 +13,13 @@ void SServiceDragDropWidget::Construct(const FArguments & InArgs)
 .VAlign(VAlign_Center)
 .HAlign(HAlign_Center)
 		[
-			SAssignNew(TemWidget,SMiniMapWidget)
-			/*SNew(SBorder)
+			//SAssignNew(TemWidget,SMiniMapWidget)
+			SNew(SBorder)
 			.BorderBackgroundColor(FGameStyle::Get().GetColor("Color.None"))
-			.BorderImage(FCoreStyle::Get().GetBrush("GenericWhiteBox"))*/
+			.BorderImage(FCoreStyle::Get().GetBrush("GenericWhiteBox"))
 		];
 
-	TemWidget->TestSpawnAcor();
+	//TemWidget->TestSpawnAcor();
 
 }
 FReply SServiceDragDropWidget::OnMouseButtonDown(const FGeometry& MyGeometry, const FPointerEvent& MouseEvent)
