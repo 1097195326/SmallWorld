@@ -15,10 +15,9 @@ void SBuildingIconItem::Construct(const FArguments & InArgs)
 	IconName = InArgs._IconName;
 
 	FString IconBrush = FString::Printf(TEXT("Icon.%s0"), *IconName);
-	FString IconBrushPath = FString::Printf(TEXT("/Game/UI/Texture/Icon%s0"), *IconName);
-
-	UTexture2D * IconTexture = LoadObject<UTexture2D>(nullptr, *IconBrushPath, nullptr);
 	
+	FString IconTexturePath = FString::Printf(TEXT("/Game/UI/Texture/Icon%s0"), *IconName);
+	UTexture2D * IconTexture = LoadObject<UTexture2D>(nullptr, *IconTexturePath, nullptr);
 	Brush.SetResourceObject(IconTexture);
 
 	WoodDelegateHandle = DataManager::GetInstance()->WoodDataChangedDelegate.AddSP(this, &SBuildingIconItem::OnDataChanged);
@@ -44,8 +43,8 @@ void SBuildingIconItem::Construct(const FArguments & InArgs)
 					+ SOverlay::Slot()
 					[				
 						SAssignNew(IconImage,SImage)
-						//.Image(FGameStyle::Get().GetBrush(*IconBrush))
-						.Image(&Brush)
+						.Image(FGameStyle::Get().GetBrush(*IconBrush))
+						//.Image(&Brush)
 					]
 					/*+ SOverlay::Slot()
 					[
