@@ -5,7 +5,7 @@
 #include "BehaviorTree/BehaviorTree.h"
 #include "Perception/AISenseConfig.h"
 #include "GenericTeamAgentInterface.h"
-
+#include "BaseSoldierData.h"
 #include "Projectile.h"
 #include "EnableAttackPawn.h"
 #include "SoldierInstantWeapon.h"
@@ -55,18 +55,7 @@ enum BehaviorType
 	B_Offsetpursuit = 1 << 2,
 
 };
-UENUM()
-enum SoldierType
-{
-	S_Archer,
-	S_Footman,
-	S_Griffin,
-	S_Horseman,
-	S_Knight,
-	S_Mage,
-	S_SiegeEngine,
-	S_Peasant,
-};
+
 
 UCLASS()
 class ASoldierPawn : public AGameCharacter, public EnableAttackPawn<ASoldierPawn>, public IGenericTeamAgentInterface
