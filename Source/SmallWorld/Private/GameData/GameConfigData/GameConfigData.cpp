@@ -6,7 +6,33 @@ G_REGISTER_CLASS(GameConfigData)
 const FString LocalLanguage = TEXT("zh");
 
 TArray<FString> GameConfigData::NoCenterBuilding = { TEXT("CommandCenter") };
-TArray<FString> GameConfigData::HaveCenterBuilding = { TEXT("ArmyCenter"),TEXT("Bakery"), TEXT("Farm"), TEXT("FoodStore"), TEXT("FruitFarm"), TEXT("Gate"), TEXT("House"), TEXT("Mill"), TEXT("MoneyStore"), TEXT("WoodStoneStore"), TEXT("ArmyCenter"), TEXT("Tower"), TEXT("Wall") };
+TArray<FString> GameConfigData::HaveCenterBuilding = 
+{ 
+	TEXT("ArmyCenter"),
+	TEXT("Bakery"), 
+	TEXT("Farm"),
+	TEXT("FoodStore"),
+	TEXT("FruitFarm"),
+	TEXT("Gate"), 
+	TEXT("House"),
+	TEXT("Mill"),
+	TEXT("MoneyStore"),
+	TEXT("WoodStoneStore"),
+	TEXT("ArmyCenter"),
+	TEXT("Tower"),
+	TEXT("Wall") 
+};
+TArray<FString> GameConfigData::SoldierNames = 
+{ 
+	TEXT("Archer"),
+	TEXT("Footman"), 
+	TEXT("Griffin"),
+	TEXT("Horseman"),
+	TEXT("Knight"),
+	TEXT("Mage"),
+	TEXT("Peasant"),
+	TEXT("SiegeEngine") 
+};
 
 
 void GameConfigData::InitWithXML(const FXmlFile * xmlFile)
@@ -39,7 +65,29 @@ void GameConfigData::InitWithXML(const FXmlFile * xmlFile)
 		}
 		else if (DataType.Equals(TEXT("SoldiersData")))
 		{
-
+			for (const FXmlNode * DataInfo = DataTypeInfo->GetFirstChildNode(); DataInfo != NULL; DataInfo = DataInfo->GetNextNode())
+			{
+				SoldierConfig config;
+				config.name = DataInfo->GetAttribute(TEXT("name"));
+				config.race = DataInfo->GetAttribute(TEXT("race"));
+				config.title = DataInfo->GetAttribute(TEXT("title"));
+				config.describe = DataInfo->GetAttribute(TEXT("describe"));
+				config.maxlevel = FCString::Atoi(*DataInfo->GetAttribute(TEXT("maxlevel")));
+				for (const FXmlNode * LevelInfo = DataInfo->GetFirstChildNode(); LevelInfo != NULL; LevelInfo = LevelInfo->GetNextNode())
+				{
+					SoldierLevelInfo info;
+					info.level = FCString::Atoi(*LevelInfo->GetAttribute(TEXT("level")));
+					info.health = FCString::Atoi(*LevelInfo->GetAttribute(TEXT("health")));
+					info.kills = FCString::Atoi(*LevelInfo->GetAttribute(TEXT("kills")));
+					info.phydamage = FCString::Atof(*LevelInfo->GetAttribute(TEXT("phydamage")));
+					info.magicdamage = FCString::Atof(*LevelInfo->GetAttribute(TEXT("magicdamage")));
+					info.phydef = FCString::Atof(*LevelInfo->GetAttribute(TEXT("phydef")));
+					info.magdef = FCString::Atof(*LevelInfo->GetAttribute(TEXT("magdef")));
+					info.factor = FCString::Atof(*LevelInfo->GetAttribute(TEXT("factor")));
+					config.LevelInfos.Add(info.level, info);
+				}
+				SoldierConfigMap.Add(config.name, config);
+			}
 		}
 		else if (DataType.Equals(TEXT("LanguageData")))
 		{
@@ -59,7 +107,28 @@ void GameConfigData::InitWithXML(const FXmlFile * xmlFile)
 		building.Value.title = LanguageMap[LocalLanguage][building.Value.title];
 		building.Value.describe = LanguageMap[LocalLanguage][building.Value.describe];
 	}
-	
+	for (auto & soldier : SoldierConfigMap)
+	{
+		soldier.Value.title = LanguageMap[LocalLanguage][soldier.Value.title];
+		soldier.Value.describe = LanguageMap[LocalLanguage][soldier.Value.describe];
+	}
+
+}
+const SoldierConfig & GameConfigData::GetSoldierConfig(FString name)
+{
+	return SoldierConfigMap[name];
+}
+TArray<SoldierConfig> GameConfigData::GetSoldierConfigs(const TArray<FString> & names)
+{
+	TArray<SoldierConfig> TemArray;
+	for (auto name : names)
+	{
+		if (SoldierConfigMap.Contains(name))
+		{
+			TemArray.Add(SoldierConfigMap[name]);
+		}
+	}
+	return MoveTemp(TemArray);
 }
 const BuildingConfig & GameConfigData::GetBuildingConfig(FString name)
 {
