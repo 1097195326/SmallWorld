@@ -2,27 +2,27 @@
 
 #include "DataT.h"
 
-struct BuildingLevelInfo 
+struct SBuildingLevelInfo 
 {
-	BuildingLevelInfo(){}
-	BuildingLevelInfo(int32 temLevel) { level = temLevel; }
+	SBuildingLevelInfo(){}
+	SBuildingLevelInfo(int32 temLevel) { level = temLevel; }
 	int32 level;
 	int32 upmoney;
 	int32 upstone;
 	int32 upwood;
 	float factor;
-	bool operator == (const BuildingLevelInfo & info){return level == info.level;}
-	bool operator != (const BuildingLevelInfo & info){return level != info.level;}
+	bool operator == (const SBuildingLevelInfo & info){return level == info.level;}
+	bool operator != (const SBuildingLevelInfo & info){return level != info.level;}
 };
-struct BuildingConfig
+struct SBuildingConfig
 {
 	FString name;
 	FString title;
 	FString describe;
 	int32 maxlevel;
-	TMap<int32,BuildingLevelInfo> LevelInfos;
+	TMap<int32,SBuildingLevelInfo> LevelInfos;
 };
-struct SoldierLevelInfo
+struct SSoldierLevelInfo
 {
 	int32 level;
 	int32 health;
@@ -33,14 +33,14 @@ struct SoldierLevelInfo
 	float magdef;
 	float factor;
 };
-struct SoldierConfig
+struct SSoldierConfig
 {
 	FString name;
 	FString race;
 	FString title;
 	FString describe;
 	int32 maxlevel;
-	TMap<int32, SoldierLevelInfo> LevelInfos;
+	TMap<int32, SSoldierLevelInfo> LevelInfos;
 };
 class GameConfigData : public DataT
 {
@@ -48,20 +48,21 @@ public:
 	static TArray<FString> NoCenterBuilding;
 	static TArray<FString> HaveCenterBuilding;
 	static TArray<FString> SoldierNames;
+	static FString SoldierPeasantName;
 
 	virtual void InitWithXML(const FXmlFile * _file) override;
 
 	
-	TArray<BuildingConfig> GetBuildingConfigs(const TArray<FString> &  names);
-	const BuildingConfig & GetBuildingConfig(FString name);
-	TArray<SoldierConfig> GetSoldierConfigs(const TArray<FString> &  names);
-	const SoldierConfig & GetSoldierConfig(FString name);
+	TArray<SBuildingConfig> GetBuildingConfigs(const TArray<FString> &  names);
+	const SBuildingConfig & GetBuildingConfig(FString name);
+	TArray<SSoldierConfig> GetSoldierConfigs(const TArray<FString> &  names);
+	const SSoldierConfig & GetSoldierConfig(FString name);
 
 	FString TranslateLanguage(FString key);
 private:
 
-	TMap<FString, SoldierConfig>  SoldierConfigMap;
-	TMap<FString, BuildingConfig>  BuildingConfigMap;
+	TMap<FString, SSoldierConfig>  SoldierConfigMap;
+	TMap<FString, SBuildingConfig>  BuildingConfigMap;
 	TMap<FString,TMap<FString, FString>> LanguageMap;
 };
 

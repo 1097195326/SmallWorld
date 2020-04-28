@@ -25,7 +25,7 @@ void SBuildingIconItem::Construct(const FArguments & InArgs)
 	GoldDelegateHandle = DataManager::GetInstance()->GoldDataChangedDelegate.AddSP(this, &SBuildingIconItem::OnDataChanged);
 
 
-	const BuildingConfig & BConfig = DataManager::GetInstance()->GetGameConfigData()->GetBuildingConfig(IconName);
+	const SBuildingConfig & BConfig = DataManager::GetInstance()->GetGameConfigData()->GetBuildingConfig(IconName);
 
 	ChildSlot
 		[
@@ -73,7 +73,7 @@ void SBuildingIconItem::RefreshView()
 	int32 GoldNum, WoodNum, StoneNum;
 
 	HordeData * UserHordeData = DataManager::GetInstance()->GetUserData()->GetHordeData();
-	const BuildingConfig & BConfig = DataManager::GetInstance()->GetGameConfigData()->GetBuildingConfig(IconName);
+	const SBuildingConfig & BConfig = DataManager::GetInstance()->GetGameConfigData()->GetBuildingConfig(IconName);
 
 	GoldNum = UserHordeData->GetGoldNum();
 	WoodNum = UserHordeData->GetWoodNum();

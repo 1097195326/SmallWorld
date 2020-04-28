@@ -423,7 +423,7 @@ FormationInfo SoldierGroup::GetFormationInfo(FormationType _type)
 	return std::move(info);
 }
 
-void SoldierGroup::SetGroupType(SoldierType _soldierType)
+void SoldierGroup::SetGroupType(ESoldierType _soldierType)
 {
 	switch (_soldierType)
 	{

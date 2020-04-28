@@ -49,6 +49,7 @@ public:
 	void	SetConfigDataByName(FString InName);
 
 	inline bool IsMaxLevel() { return BuildingLevel == ConfigData.maxlevel; }
+	inline const SBuildingConfig & GetConfigData() { return ConfigData; }
 	inline FString GetBuildingName() { return BuildingName; }
 	inline EBuildingType GetBuildingType() { return BuildingType; }
 protected:
@@ -60,7 +61,7 @@ public:
 	class HordeData *	BuildingBelongHorde;
 	class ABaseBuildingActor * BuildingActor;
 
-	BuildingConfig  ConfigData;
+	SBuildingConfig  ConfigData;
 	FVector			BuildingPosition;
 	FRotator		BuildingRotator;
 

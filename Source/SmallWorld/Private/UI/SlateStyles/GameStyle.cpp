@@ -84,6 +84,7 @@ TSharedRef<FSlateStyleSet> FGameStyle::Create()
 	const FVector2D Icon128x128(128.0f, 128.0f);
 	
 	// Texture
+	// 
 	Style.Set("Icon.Clear", new IMAGE_BRUSH(TEXT("Icon_Clear"), Icon128x128, Style.GetColor("Color.FFFFFFFF")));
 	Style.Set("Icon.Rotation", new IMAGE_BRUSH(TEXT("Icon_Rotation"), Icon128x128, Style.GetColor("Color.FFFFFFFF")));
 	Style.Set("Icon.Move", new IMAGE_BRUSH(TEXT("Icon_Move"), Icon128x128, Style.GetColor("Color.FFFFFFFF")));
@@ -92,7 +93,7 @@ TSharedRef<FSlateStyleSet> FGameStyle::Create()
 	Style.Set("Icon.Hero", new IMAGE_BRUSH(TEXT("Icon_Hero"), Icon128x128, Style.GetColor("Color.FFFFFFFF")));
 	Style.Set("Icon.Map", new IMAGE_BRUSH(TEXT("Icon_Map"), Icon128x128, Style.GetColor("Color.FFFFFFFF")));
 	Style.Set("Icon.Menu", new IMAGE_BRUSH(TEXT("Icon_Menu"), Icon128x128, Style.GetColor("Color.FFFFFFFF")));
-	
+	//Building Icon 
 	Style.Set("Icon.ArmyCenter0", new IMAGE_BRUSH(TEXT("IconArmyCenter0"), Icon128x128, Style.GetColor("Color.FFFFFFFF")));
 	Style.Set("Icon.ArmyCenter1", new IMAGE_BRUSH(TEXT("IconArmyCenter1"), Icon128x128, Style.GetColor("Color.FFFFFFFF")));
 	Style.Set("Icon.ArmyCenter2", new IMAGE_BRUSH(TEXT("IconArmyCenter2"), Icon128x128, Style.GetColor("Color.FFFFFFFF")));
@@ -132,6 +133,25 @@ TSharedRef<FSlateStyleSet> FGameStyle::Create()
 	Style.Set("Icon.Wall0", new IMAGE_BRUSH(TEXT("IconWall0"), Icon128x128, Style.GetColor("Color.FFFFFFFF")));
 	Style.Set("Icon.Wall1", new IMAGE_BRUSH(TEXT("IconWall1"), Icon128x128, Style.GetColor("Color.FFFFFFFF")));
 	Style.Set("Icon.Wall2", new IMAGE_BRUSH(TEXT("IconWall2"), Icon128x128, Style.GetColor("Color.FFFFFFFF")));
+	// Soldier Icon
+	UTexture2D * IconTexture = nullptr;
+	IconTexture = LoadObject<UTexture2D>(nullptr, TEXT("/Game/UI/Texture/IconArcher"), nullptr);
+	Style.Set("Icon.Archer", new FSlateImageBrush(IconTexture, Icon128x128, Style.GetColor("Color.FFFFFFFF")));
+	IconTexture = LoadObject<UTexture2D>(nullptr, TEXT("/Game/UI/Texture/IconFootman"), nullptr);
+	Style.Set("Icon.Footman", new FSlateImageBrush(IconTexture, Icon128x128, Style.GetColor("Color.FFFFFFFF")));
+	IconTexture = LoadObject<UTexture2D>(nullptr, TEXT("/Game/UI/Texture/IconGriffin"), nullptr);
+	Style.Set("Icon.Griffin", new FSlateImageBrush(IconTexture, Icon128x128, Style.GetColor("Color.FFFFFFFF")));
+	IconTexture = LoadObject<UTexture2D>(nullptr, TEXT("/Game/UI/Texture/IconHorseman"), nullptr);
+	Style.Set("Icon.Horseman", new FSlateImageBrush(IconTexture, Icon128x128, Style.GetColor("Color.FFFFFFFF")));
+	IconTexture = LoadObject<UTexture2D>(nullptr, TEXT("/Game/UI/Texture/IconKnight"), nullptr);
+	Style.Set("Icon.Knight", new FSlateImageBrush(IconTexture, Icon128x128, Style.GetColor("Color.FFFFFFFF")));
+	IconTexture = LoadObject<UTexture2D>(nullptr, TEXT("/Game/UI/Texture/IconMage"), nullptr);
+	Style.Set("Icon.Mage", new FSlateImageBrush(IconTexture, Icon128x128, Style.GetColor("Color.FFFFFFFF")));
+	IconTexture = LoadObject<UTexture2D>(nullptr, TEXT("/Game/UI/Texture/IconPeasant"), nullptr);
+	Style.Set("Icon.Peasant", new FSlateImageBrush(IconTexture, Icon128x128, Style.GetColor("Color.FFFFFFFF")));
+	IconTexture = LoadObject<UTexture2D>(nullptr, TEXT("/Game/UI/Texture/IconSiegeEngine"), nullptr);
+	Style.Set("Icon.SiegeEngine", new FSlateImageBrush(IconTexture, Icon128x128, Style.GetColor("Color.FFFFFFFF")));
+
 
 
 

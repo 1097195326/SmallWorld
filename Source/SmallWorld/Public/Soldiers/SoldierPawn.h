@@ -85,7 +85,7 @@ public:
 	FORCEINLINE void			ChangeSoldierState(SoldierState _state) { mSoldierState = _state; }
 	FORCEINLINE bool			IsInState(SoldierState _state) { return mSoldierState == _state; }
 
-	FORCEINLINE SoldierType			GetSoldierType() { return mSoldierType; }
+	FORCEINLINE ESoldierType			GetSoldierType() { return mSoldierType; }
 	FORCEINLINE	UBehaviorTree *		GetBehaviorTree() { return BehaviorTree; }
 
 	FVector							GetLocationInGroup();
@@ -116,7 +116,7 @@ protected:
 
 	SoldierAnimState		mSoldierAnimState;
 	SoldierState			mSoldierState;
-	SoldierType				mSoldierType;
+	ESoldierType				mSoldierType;
 	int32					mBehaviorType;
 	int32					mIndexInGroup;
 	SoldierGroup *			mGroup;

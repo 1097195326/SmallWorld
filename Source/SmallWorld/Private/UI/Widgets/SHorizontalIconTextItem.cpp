@@ -15,7 +15,7 @@ void SHorizontalIconTextItem::Construct(const FArguments& InArgs)
 			.VAlign(VAlign_Center)
 			[
 				SNew(SImage)
-				.Image(ImageBrush.Get())
+				.Image(ImageBrush)
 			]
 			+SHorizontalBox::Slot()
 			.HAlign(HAlign_Left)

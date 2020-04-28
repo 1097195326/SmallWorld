@@ -52,6 +52,7 @@ void BaseBuildingData::Deserialization(TSharedPtr<FJsonObject> JsonObject)
 	IsUpdating = JsonObject->GetBoolField("IsUpdating");
 	RemainingUpdateTime = JsonObject->GetIntegerField("RemainingUpdateTime");
 
+	SetConfigDataByName(BuildingName);
 }
 void BaseBuildingData::SetConfigDataByName(FString InName)
 {

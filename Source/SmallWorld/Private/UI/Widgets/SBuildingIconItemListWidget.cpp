@@ -36,7 +36,7 @@ void SBuildingIconItemListWidget::Construct(const FArguments & InArgs)
 	int temIndex = 0;
 	for (auto IconName : IconNames)
 	{
-		const BuildingConfig & BConfig = DataManager::GetInstance()->GetGameConfigData()->GetBuildingConfig(IconName);
+		const SBuildingConfig & BConfig = DataManager::GetInstance()->GetGameConfigData()->GetBuildingConfig(IconName);
 
 		int32 IconRow = temIndex / 8;
 		int32 IconColumn = temIndex % 8;

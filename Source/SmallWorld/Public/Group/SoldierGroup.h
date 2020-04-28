@@ -28,7 +28,7 @@ public:
 	virtual void			On_GameUpdate() override;
 
 	void					SetSoldierGroupManager(class SoldierGroupManager * _groupManager);
-	void					SetGroupType(SoldierType _soldierType);
+	void					SetGroupType(ESoldierType _soldierType);
 
 	bool					AddSoldierToGroup(ASoldierPawn * soldier);
 	void					RemoveSoldierFromGroup(ASoldierPawn * soldier);
