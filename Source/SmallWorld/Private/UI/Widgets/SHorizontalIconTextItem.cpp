@@ -13,13 +13,20 @@ void SHorizontalIconTextItem::Construct(const FArguments& InArgs)
 			+SHorizontalBox::Slot()
 			.HAlign(HAlign_Left)
 			.VAlign(VAlign_Center)
+			.AutoWidth()
 			[
-				SNew(SImage)
-				.Image(ImageBrush)
+				SNew(SBox)
+				.WidthOverride(InArgs._InImageWidth)
+				.HeightOverride(InArgs._InImageHeight)
+				[
+					SNew(SImage)
+					.Image(ImageBrush)
+				]
 			]
 			+SHorizontalBox::Slot()
 			.HAlign(HAlign_Left)
 			.VAlign(VAlign_Center)
+			.AutoWidth()		
 			.Padding(24,0)
 			[
 				SNew(STextBlock)

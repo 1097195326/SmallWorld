@@ -9,12 +9,12 @@ void SGameActorDetailWidget::Construct(const FArguments & InArgs)
 			SNew(SVerticalBox)
 			+SVerticalBox::Slot()
 			.VAlign(VAlign_Bottom)
-			.HAlign(HAlign_Center)
+			.HAlign(HAlign_Left)
 			.AutoHeight()
 			.Expose(TopSlot)
 			+ SVerticalBox::Slot()
 			.VAlign(VAlign_Bottom)
-			.HAlign(HAlign_Center)
+			.HAlign(HAlign_Left)
 			.AutoHeight()
 			.Expose(MiddleSlot)
 			+ SVerticalBox::Slot()
@@ -26,7 +26,7 @@ void SGameActorDetailWidget::Construct(const FArguments & InArgs)
 
 	if (InArgs._TitleWidget.IsValid())
 	{
-		MiddleSlot->AttachWidget(InArgs._TitleWidget.ToSharedRef());
+		TopSlot->AttachWidget(InArgs._TitleWidget.ToSharedRef());
 	}
 	if (InArgs._DetailWidget.IsValid())
 	{
@@ -34,6 +34,6 @@ void SGameActorDetailWidget::Construct(const FArguments & InArgs)
 	}
 	if (InArgs._OperationWidget.IsValid())
 	{
-		MiddleSlot->AttachWidget(InArgs._OperationWidget.ToSharedRef());
+		BottomSlot->AttachWidget(InArgs._OperationWidget.ToSharedRef());
 	}
 }

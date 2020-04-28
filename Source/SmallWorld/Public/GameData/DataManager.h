@@ -48,7 +48,7 @@ private:
 
 };
 
-#define TranslateL(key) \
-DataManager::GetInstance()->GetGameConfigData() != nullptr ? \
+#define TransLanguage(key) \
+(DataManager::GetInstance()->GetGameConfigData() != nullptr ? \
 DataManager::GetInstance()->GetGameConfigData()->TranslateLanguage(key) :\
-TEXT("")
+TEXT("") )

@@ -12,7 +12,9 @@ class AArmyCenterActor : public ABaseBuildingActor
 public:
 	AArmyCenterActor();
 
+	// ------------- Override GObject ------------
 	virtual void On_Init() override;
-
+	// ----------- Override GameActor ----------
 	virtual TSharedPtr<SWidget>	CreateActorDetailWidget() override;
+
 };

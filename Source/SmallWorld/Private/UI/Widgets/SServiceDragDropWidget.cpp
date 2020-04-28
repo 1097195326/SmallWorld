@@ -27,12 +27,12 @@ FReply SServiceDragDropWidget::OnMouseButtonDown(const FGeometry& MyGeometry, co
 	FVector2D ScreenPosition = MyGeometry.AbsoluteToLocal(MouseEvent.GetScreenSpacePosition()) * MyGeometry.Scale;
 	AUserController::Instance->TrySelectGameActor(ScreenPosition);
 
-	return FReply::Handled();
+	return FReply::Unhandled();
 }
 FReply SServiceDragDropWidget::OnMouseButtonUp(const FGeometry& MyGeometry, const FPointerEvent& MouseEvent)
 {
 
-	return FReply::Handled();
+	return FReply::Unhandled();
 }
 FReply SServiceDragDropWidget::OnMouseMove(const FGeometry& MyGeometry, const FPointerEvent& MouseEvent)
 {

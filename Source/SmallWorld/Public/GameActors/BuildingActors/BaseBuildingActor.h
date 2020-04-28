@@ -12,7 +12,8 @@
 #include "SmallWorldInstance.h"
 #include <vector>
 #include <list>
-#include "BaseBuildingData.h"
+#include "DataManager.h"
+
 #include "BaseBuildingActor.generated.h"
 
 using namespace std;

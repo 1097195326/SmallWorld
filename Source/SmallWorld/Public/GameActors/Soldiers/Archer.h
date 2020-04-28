@@ -15,6 +15,9 @@ public:
 
 	// -----------Override Gobject -------------
 	virtual void On_Start() override;
+	// ----------Override GameActor ---------
+	//virtual TSharedPtr<SWidget>	CreateActorDetailWidget() override;
+
 	// ----------- Override EnableAttackPawn -----------
 	
 

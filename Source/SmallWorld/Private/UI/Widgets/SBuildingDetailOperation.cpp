@@ -42,7 +42,7 @@ void SBuildingDetailOperation::Construct(const FArguments & InArgs)
 		.Padding(12)
 		[
 			SNew(SButton)
-			.ButtonStyle(&FGameStyle::Get().GetWidgetStyle<FButtonStyle>("MainView.Button.Roation"))
+			.ButtonStyle(&FGameStyle::Get().GetWidgetStyle<FButtonStyle>("MainView.Button.Rotation"))
 			.OnClicked(this, &SBuildingDetailOperation::OnRotationButtonClicked)
 		];
 	OperationBox->AddSlot()
