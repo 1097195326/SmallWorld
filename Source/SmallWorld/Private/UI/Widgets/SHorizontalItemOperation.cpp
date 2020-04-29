@@ -24,8 +24,15 @@ void SHorizontalItemOperation::Construct(const FArguments & InArgs)
 				.AutoWidth()
 				.Padding(24, 0)
 			[
-				SNew(SSlider)
-				.OnValueChanged(this,&SHorizontalItemOperation::OnValueChange)
+				SNew(SBox)
+				.WidthOverride(150)
+				.HeightOverride(40)
+				[
+					SNew(SSlider)
+					.Style(&FGameStyle::Get().GetWidgetStyle<FSliderStyle>("Slider"))
+					.Value(0)
+					.OnValueChanged(this, &SHorizontalItemOperation::OnValueChange)
+				]
 			]
 			+SHorizontalBox::Slot()
 			.VAlign(VAlign_Center)
@@ -33,9 +40,14 @@ void SHorizontalItemOperation::Construct(const FArguments & InArgs)
 				.AutoWidth()
 				.Padding(24, 0)
 			[
-				SNew(SButton)
-				.ButtonStyle(&FGameStyle::Get().GetWidgetStyle<FButtonStyle>(""))
-				.Text(FText::FromString(ButtonShowText.Get()))
+				SNew(SBox)
+				.WidthOverride(40)
+				.HeightOverride(40)
+				[
+					SNew(SButton)
+					.ButtonStyle(&FGameStyle::Get().GetWidgetStyle<FButtonStyle>("CommonButton"))
+					.Text(FText::FromString(ButtonShowText.Get()))
+				]
 			]
 
 		];

@@ -11,8 +11,8 @@ void SArmyCenterOperationDetail::Construct(const FArguments & InArgs)
 
 	TSharedPtr<SVerticalBox> ItemList;
 	ChildSlot.Padding(24,0,0,0)
-.VAlign(VAlign_Bottom)
-.HAlign(HAlign_Left)
+		.VAlign(VAlign_Bottom)
+		.HAlign(HAlign_Left)
 		[
 			SAssignNew(ItemList, SVerticalBox)
 		];
@@ -20,7 +20,7 @@ void SArmyCenterOperationDetail::Construct(const FArguments & InArgs)
 	ItemList->AddSlot()
 	.HAlign(HAlign_Left)
 	.VAlign(VAlign_Center)
-.AutoHeight()
+	.AutoHeight()
 	[
 		SNew(SHorizontalIconTextItem)
 		.InImageBrush( FGameStyle::Get().GetBrush("Icon.Peasant"))
@@ -43,12 +43,13 @@ void SArmyCenterOperationDetail::Construct(const FArguments & InArgs)
 					SNew(SHorizontalIconTextItem)
 					.InImageBrush(FGameStyle::Get().GetBrush(*IconBrush))
 				]
-				/*+ SHorizontalBox::Slot()
+				+ SHorizontalBox::Slot()
 				.VAlign(VAlign_Center)
 				.HAlign(HAlign_Left)
+				.AutoWidth()
 				[
 					SNew(SHorizontalItemOperation)
-				]*/
+				]
 			];
 	}
 

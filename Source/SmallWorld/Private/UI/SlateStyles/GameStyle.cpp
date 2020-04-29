@@ -67,16 +67,21 @@ TSharedRef<FSlateStyleSet> FGameStyle::Create()
 		.SetFont(TTF_FONT("Fonts/Roboto-Regular", 12))
 		.SetColorAndOpacity(FSlateColor(FLinearColor::White))
 		.SetShadowOffset(FVector2D::ZeroVector);
-
+	const FTextBlockStyle Text_24 = FTextBlockStyle()
+		.SetFont(TTF_FONT("Fonts/Roboto-Regular", 24))
+		.SetColorAndOpacity(FSlateColor(FLinearColor::White))
+		.SetShadowOffset(FVector2D::ZeroVector);
 	const FTextBlockStyle XRText_14_Bold = FTextBlockStyle()
 		.SetFont(TTF_FONT("Fonts/Roboto-Bold", 14))
 		.SetColorAndOpacity(FSlateColor(FLinearColor::White))
 		.SetShadowOffset(FVector2D::ZeroVector);
 
 	Style.Set("Text_12", Text_12);
+	Style.Set("Text_24", Text_24);
 	Style.Set("Text_14_Bold", XRText_14_Bold);
 
 	// IconSize
+	const FVector2D Icon1x1(1.0f, 1.0f);
 	const FVector2D Icon8x8(8.0f, 8.0f);
 	const FVector2D Icon16x16(16.0f, 16.0f);
 	const FVector2D Icon20x20(20.0f, 20.0f);
@@ -84,6 +89,8 @@ TSharedRef<FSlateStyleSet> FGameStyle::Create()
 	const FVector2D Icon128x128(128.0f, 128.0f);
 	
 	// Texture
+
+	Style.Set("White", new IMAGE_BRUSH(TEXT("White"), Icon1x1, Style.GetColor("Color.FFFFFFFF")));
 	// 
 	Style.Set("Icon.Clear", new IMAGE_BRUSH(TEXT("Icon_Clear"), Icon128x128, Style.GetColor("Color.FFFFFFFF")));
 	Style.Set("Icon.Rotation", new IMAGE_BRUSH(TEXT("Icon_Rotation"), Icon128x128, Style.GetColor("Color.FFFFFFFF")));
@@ -156,6 +163,23 @@ TSharedRef<FSlateStyleSet> FGameStyle::Create()
 
 
 	// ButtonStyle
+	Style.Set("CommonButton", FButtonStyle()
+		.SetNormal(*Style.GetBrush("White"))
+		.SetHovered(*Style.GetBrush("White"))
+		.SetPressed(*Style.GetBrush("White"))
+		.SetNormalPadding(0)
+		.SetPressedPadding(0)
+	);
+
+	Style.Set("Slider", FSliderStyle()
+		.SetNormalBarImage(FSlateColorBrush(FColor::White))
+		.SetHoveredBarImage(FSlateColorBrush(FColor::White))
+		.SetDisabledBarImage(FSlateColorBrush(FLinearColor::Gray))
+		.SetNormalThumbImage(IMAGE_BRUSH("White", FVector2D(8.0f, 14.0f), Style.GetColor("Color.FFFFFFFF")))
+		.SetHoveredThumbImage(IMAGE_BRUSH("White", FVector2D(8.0f, 14.0f), Style.GetColor("Color.FFFFFFFF")))
+		.SetDisabledThumbImage(IMAGE_BRUSH("White", FVector2D(8.0f, 14.0f), Style.GetColor("Color.FFFFFFFF")))
+		.SetBarThickness(2.0f));
+
 	Style.Set("MainView.Button.Clear", FButtonStyle()
 		.SetNormal(*Style.GetBrush("Icon.Clear"))
 		.SetHovered(*Style.GetBrush("Icon.Clear"))
@@ -212,6 +236,7 @@ TSharedRef<FSlateStyleSet> FGameStyle::Create()
 		.SetNormalPadding(0)
 		.SetPressedPadding(0)
 	);
+	
 
 	return StyleSet;
 }
