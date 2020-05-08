@@ -21,12 +21,7 @@ public:
 			ProgressCell* TemCell = new ProgressCell(tickStep,beginPos,endPos,loopTimes);
 			TemCell->RegisterHeader(_obj, _func);
 			ProgressCellsMap.insert(std::pair<string, ProgressCell*>(InKey, TemCell));
-		}
-		else
-		{
-
-		}
-
+		}else{}
 	}
 	void UnRegisterProgress(string inKey);
 

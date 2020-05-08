@@ -15,3 +15,7 @@ ProgressCell::~ProgressCell()
 {
     
 }
+void ProgressCell::Tick(float delta)
+{
+
+}
