@@ -3,7 +3,7 @@
 #include "CoreMinimal.h"
 #include "GameConfig.h"
 #include "GameConfigData.h"
-
+#include "ProgressManager.h"
 
 
 enum EBuildingType

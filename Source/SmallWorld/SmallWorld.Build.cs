@@ -29,7 +29,8 @@ public class SmallWorld : ModuleRules
             "ProceduralMesh",
             "SlateUI",
             "UnrealEngineWrap",
-            "GameFrame"
+            "GameFrame",
+            "ProgressTimer"
         });
 
         //PrivateDependencyModuleNames.AddRange(new string[] {  });
