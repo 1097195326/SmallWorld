@@ -1,6 +1,7 @@
 #pragma once
 
 #include <map>
+#include <vector>
 
 #include "ProgressCell.h"
 
@@ -18,15 +19,15 @@ public:
 		auto temIter = ProgressCellsMap.find(InKey)
 		if (temIter == ProgressCellsMap.end())
 		{
-			ProgressCell* TemCell = new ProgressCell(tickStep,beginPos,endPos,loopTimes);
-			TemCell->RegisterHeader(_obj, _func);
-			ProgressCellsMap.insert(std::pair<string, ProgressCell*>(InKey, TemCell));
+			ProgressCell* TemCell(tickStep, beginPos, endPos, loopTimes);// = new ProgressCell(tickStep, beginPos, endPos, loopTimes);
+			TemCell.RegisterHeader(_obj, _func);
+			ProgressCellsMap.insert(std::pair<string, ProgressCell>(InKey, TemCell));
 		}else{}
 	}
 	void UnRegisterProgress(string inKey);
 
 private:
-	map<string, ProgressCell*>  ProgressCellsMap;
-
+	map<string, ProgressCell>  ProgressCellsMap;
+	vector<string>  FinishedVector;
 
 };

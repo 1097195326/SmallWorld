@@ -1,5 +1,5 @@
 #include "UserViewportClient.h"
-
+#include "ProgressManager.h"
 
 UUserViewportClient * UUserViewportClient::UserViewportClientInstance = NULL;
 
@@ -17,5 +17,6 @@ void UUserViewportClient::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	ProgressManager::GetInstance()->Tick(DeltaTime);
 
 }

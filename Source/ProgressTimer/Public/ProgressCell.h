@@ -1,5 +1,6 @@
 #pragma once
 
+#include <stdio.h>
 
 #include <functional>
 #include <string>
@@ -10,7 +11,6 @@ class PROGRESSTIMER_API ProgressCell
 {
 public:
 	typedef function<void(float InProgress, bool InIsFinish,int LoopTimes)> TickCallBackFunc;
-	TickCallBackFunc TickFunc;
 
 	ProgressCell(float inTickStep, float inBeginPos, float inEndPos, int inLoopTimes);
     virtual ~ProgressCell();
@@ -28,7 +28,10 @@ protected:
 	float BeginPos;
 	float EndPos;
 	float CurrentProcess;
+	float fTimer;
 	int LoopTimes;
 	int RemainLoopTime;
+
+	TickCallBackFunc TickFunc;
 
 };

@@ -6,6 +6,7 @@ ProgressCell::ProgressCell(float inTickStep, float inBeginPos, float inEndPos, i
 	BeginPos(inBeginPos),
 	EndPos(inEndPos),
 	CurrentProcess(0.f),
+	fTimer(0.f),
 	LoopTimes(inLoopTimes),
 	RemainLoopTime(inLoopTimes)
 {
@@ -17,5 +18,14 @@ ProgressCell::~ProgressCell()
 }
 void ProgressCell::Tick(float delta)
 {
+	fTimer += delta;
+	if (fTimer >= TickStep)
+	{
+		fTimer = 0.f;
+		CurrentProcess += TickStep;
+		const bool OneloopIsFinish = CurrentProcess >= EndPos;
+		OneloopIsFinish ? --RemainLoopTime : NULL;
+		TickFunc(CurrentProcess, OneloopIsFinish, RemainLoopTime);
+	}
 
 }

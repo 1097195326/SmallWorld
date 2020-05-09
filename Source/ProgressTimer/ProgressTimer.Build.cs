@@ -29,6 +29,8 @@ public class ProgressTimer : ModuleRules
 			new string[]
 			{
 				"Core",
+                "CoreUObject",
+                "Engine",
 				// ... add other public dependencies that you statically link with here ...
 			}
 			);
@@ -37,8 +39,7 @@ public class ProgressTimer : ModuleRules
 		PrivateDependencyModuleNames.AddRange(
 			new string[]
 			{
-				"CoreUObject",
-				"Engine",
+				
 
 				// ... add private dependencies that you statically link with here ...	
 			}
