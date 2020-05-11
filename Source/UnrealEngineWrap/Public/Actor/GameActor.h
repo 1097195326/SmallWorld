@@ -25,4 +25,5 @@ public:
 	virtual TSharedPtr<SWidget>	CreateActorDetailWidget() { return SNullWidget::NullWidget; }
 	virtual void RefreshView(){}
 
+	
 };

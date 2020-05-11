@@ -20,5 +20,10 @@ public:
 	void	OnTrainArcherCallback(float InProgress, bool InIsFinish, int LoopTimes);
 	void	OnTrainFootmanCallback(float InProgress, bool InIsFinish, int LoopTimes);
 	
+protected:
+	TMap<ESoldierType, int32>	HaveSoldiers;
+	TMap<ESoldierType, int32>	OutingSoldiers;
+	TMap<ESoldierType, int32>	TrainSoldiers;
+
 
 };

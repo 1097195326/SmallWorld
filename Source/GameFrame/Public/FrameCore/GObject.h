@@ -13,14 +13,12 @@
 
 class GAMEFRAME_API GObject : public BaseObject
 {
-protected:
-	GData * ObjectData;
-	
+
+
 public:
 	GObject();
 	~GObject();
-	inline GData * GetObjectData() { return ObjectData; }
-    
+	
 	virtual void On_Init();
 	virtual void On_Start();
 	virtual void On_Tick(float delta);
@@ -28,7 +26,14 @@ public:
 	virtual void On_End();
 	virtual void On_Delete();
 public:
-
+	void	SetGameData(void * InData) { GameData = InData; }
+	template<typename T>
+	T *	GetGameData() { return dynamic_cast<T*>(GameData); }
+	void *	GetGameData() { return GameData; }
+	//inline GData * GetObjectData() { return ObjectData; }
+protected:
+	//GData * ObjectData;
+	void *  GameData;
     
 };
 

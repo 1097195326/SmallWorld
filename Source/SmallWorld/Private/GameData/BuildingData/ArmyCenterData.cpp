@@ -17,14 +17,46 @@ void ArmyCenterData::Serialization(TSharedRef<TJsonWriter<TCHAR, TCondensedJsonP
 	Writer->WriteObjectStart("ArmyCenterData");
 	BaseBuildingData::Serialization(Writer);
 
+	Writer->WriteArrayStart("HaveSoldiers");
+	for (auto TemSol : HaveSoldiers)
+	{
+		Writer->WriteObjectStart();
+		Writer->WriteValue("Key", TemSol.Key);
+		Writer->WriteValue("Value", TemSol.Value);
+		Writer->WriteObjectEnd();
+	}
+	Writer->WriteArrayEnd(); //HaveSoldiers
 
+	Writer->WriteArrayStart("TrainSoldiers");
+	for (auto TemSol : TrainSoldiers)
+	{
+		Writer->WriteObjectStart();
+		Writer->WriteValue("Key", TemSol.Key);
+		Writer->WriteValue("Value", TemSol.Value);
+		Writer->WriteObjectEnd();
+	}
+	Writer->WriteArrayEnd(); //TrainSoldiers
     
 	Writer->WriteObjectEnd();// ArmyCenterData
 }
 void ArmyCenterData::Deserialization(TSharedPtr<FJsonObject>  JsonObject)
 {
-    
-    
+	BaseBuildingData::Deserialization(JsonObject->GetObjectField("BaseBuildingData"));
+
+	TArray<TSharedPtr<FJsonValue>>  JHaveSoldiers=JsonObject->GetArrayField("HaveSoldiers");
+    for (auto jValue : JHaveSoldiers)
+    {
+		ESoldierType ekey = (ESoldierType)jValue->AsObject()->GetIntegerField("Key");
+		int32 ivalue = jValue->AsObject()->GetIntegerField("Value");
+		HaveSoldiers.Add(ekey, ivalue);
+    }
+	TArray<TSharedPtr<FJsonValue>>  JTrainSoldiers = JsonObject->GetArrayField("TrainSoldiers");
+	for (auto jValue : JTrainSoldiers)
+	{
+		ESoldierType ekey = (ESoldierType)jValue->AsObject()->GetIntegerField("Key");
+		int32 ivalue = jValue->AsObject()->GetIntegerField("Value");
+		TrainSoldiers.Add(ekey, ivalue);
+	}
 }
 bool ArmyCenterData::SpawnBuildingActor(UWorld * world, const FVector & Location, const FRotator & Rotation)
 {

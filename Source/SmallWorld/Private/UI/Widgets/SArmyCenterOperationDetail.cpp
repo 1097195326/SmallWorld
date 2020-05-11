@@ -56,3 +56,8 @@ void SArmyCenterOperationDetail::Construct(const FArguments & InArgs)
 
 
 }
+void SArmyCenterOperationDetail::RefreshView()
+{
+
+
+}

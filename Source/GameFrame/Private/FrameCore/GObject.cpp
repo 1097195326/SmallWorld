@@ -10,12 +10,13 @@
 
 GObject::GObject()
 {
-	ObjectData = nullptr;
-
+	//ObjectData = nullptr;
+	GameData = nullptr;
 }
 GObject::~GObject()
 {
-	ObjectData = nullptr;
+	//ObjectData = nullptr;
+	GameData = nullptr;
 
 }
 void GObject::On_Init(){}

@@ -10,7 +10,9 @@ public:
 
 	SLATE_END_ARGS()
 
-		void Construct(const FArguments & InArgs);
+	void Construct(const FArguments & InArgs);
+	virtual void RefreshView() override;
+
 protected:
 	class ArmyCenterData * ArmyCenter;
 

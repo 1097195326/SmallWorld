@@ -34,5 +34,5 @@ TSharedPtr<SWidget>	AArmyCenterActor::CreateActorDetailWidget()
 void AArmyCenterActor::RefreshView()
 {
 
-	DetailWidget->RefreshView();
+	DetailWidget.IsValid() ? DetailWidget->RefreshView():NULL;
 }

@@ -13,7 +13,7 @@ ABaseBuildingActor::ABaseBuildingActor()
 }
 void ABaseBuildingActor::SetBuildingData(BaseBuildingData * _data)
 {
-	ObjectData = BuildingData = _data;
+	GameData = BuildingData = _data;
     
 }
 void ABaseBuildingActor::SaveData(TSharedRef<TJsonWriter<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>> Writer)
