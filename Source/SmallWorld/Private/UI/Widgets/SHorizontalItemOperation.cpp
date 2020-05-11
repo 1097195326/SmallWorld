@@ -1,4 +1,5 @@
 #include "SHorizontalItemOperation.h"
+#include "GameStyle.h"
 
 
 void SHorizontalItemOperation::Construct(const FArguments & InArgs)

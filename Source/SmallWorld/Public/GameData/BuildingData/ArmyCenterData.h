@@ -1,6 +1,6 @@
 #pragma once
 #include "BaseBuildingData.h"
-
+#include "BaseSoldierData.h"
 
 class ArmyCenterData : public BaseBuildingData
 {
@@ -15,6 +15,10 @@ public:
 
 	virtual bool SpawnBuildingActor(UWorld * world, const FVector & Location, const FRotator & Rotation) override;
 
+	void	TrainSoldier(ESoldierType InSoldierType,int32 InNum);
     
-    
+	void	OnTrainArcherCallback(float InProgress, bool InIsFinish, int LoopTimes);
+	void	OnTrainFootmanCallback(float InProgress, bool InIsFinish, int LoopTimes);
+	
+
 };

@@ -1,4 +1,5 @@
 #include "SHordePowerWidget.h"
+#include "GameStyle.h"
 
 
 void SHordePowerWidget::Construct(const FArguments& InArgs)

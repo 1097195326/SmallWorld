@@ -5,7 +5,7 @@ ProgressCell::ProgressCell(float inTickStep, float inBeginPos, float inEndPos, i
 	:TickStep(inTickStep),
 	BeginPos(inBeginPos),
 	EndPos(inEndPos),
-	CurrentProcess(0.f),
+	CurrentProcess(inBeginPos),
 	fTimer(0.f),
 	LoopTimes(inLoopTimes),
 	RemainLoopTime(inLoopTimes)

@@ -1,4 +1,5 @@
 #include "SBuildingDetailOperation.h"
+#include "GameStyle.h"
 
 void SBuildingDetailOperation::Construct(const FArguments & InArgs)
 {

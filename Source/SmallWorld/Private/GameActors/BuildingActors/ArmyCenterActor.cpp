@@ -17,8 +17,6 @@ void AArmyCenterActor::On_Init()
 }
 TSharedPtr<SWidget>	AArmyCenterActor::CreateActorDetailWidget()
 {
-	TSharedPtr<SWidget> TitleWidget, DetailWidget, OperationWidget;
-
 	SAssignNew(TitleWidget, SGameActorDetailTitle)
 		.ActorName(BuildingData->GetConfigData().title)
 		.ActorLevel(FString::Printf(TEXT("%s%d"),*TransLanguage("Game_Level"), BuildingData->BuildingLevel))
@@ -32,5 +30,9 @@ TSharedPtr<SWidget>	AArmyCenterActor::CreateActorDetailWidget()
 		.DetailWidget(DetailWidget)
 		.OperationWidget(OperationWidget)
 		;
-	return SNullWidget::NullWidget;
+}
+void AArmyCenterActor::RefreshView()
+{
+
+	DetailWidget->RefreshView();
 }

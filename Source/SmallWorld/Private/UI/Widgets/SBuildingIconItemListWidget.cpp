@@ -1,6 +1,7 @@
 #include "SBuildingIconItemListWidget.h"
 #include "DataManager.h"
 #include "SBuildingIconItem.h"
+#include "GameStyle.h"
 
 
 void SBuildingIconItemListWidget::Construct(const FArguments & InArgs)

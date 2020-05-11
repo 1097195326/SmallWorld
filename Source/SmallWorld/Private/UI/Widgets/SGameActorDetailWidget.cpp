@@ -1,4 +1,5 @@
 #include "SGameActorDetailWidget.h"
+#include "GameStyle.h"
 
 
 

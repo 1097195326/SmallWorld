@@ -1,4 +1,5 @@
 #include "SGameActorDetailTitle.h"
+#include "GameStyle.h"
 
 
 void SGameActorDetailTitle::Construct(const FArguments & InArgs)

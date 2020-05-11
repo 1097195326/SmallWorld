@@ -1,6 +1,7 @@
 #include "SBuildingIconItem.h"
 #include "DataManager.h"
 #include "FBuildingDragDropOp.h"
+#include "GameStyle.h"
 
 
 SBuildingIconItem::~SBuildingIconItem()

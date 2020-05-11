@@ -3,6 +3,7 @@
 #include "SHorizontalIconTextItem.h"
 #include "SHorizontalItemOperation.h"
 #include "ArmyCenterData.h"
+#include "GameStyle.h"
 
 
 void SArmyCenterOperationDetail::Construct(const FArguments & InArgs)

@@ -16,5 +16,9 @@ public:
 	virtual void On_Init() override;
 	// ----------- Override GameActor ----------
 	virtual TSharedPtr<SWidget>	CreateActorDetailWidget() override;
+	virtual void RefreshView() override;
+
+protected:
+	TSharedPtr<SBaseCompoundWidget> TitleWidget, DetailWidget, OperationWidget;
 
 };
