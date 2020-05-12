@@ -21,11 +21,16 @@ void ProgressCell::Tick(float delta)
 	fTimer += delta;
 	if (fTimer >= TickStep)
 	{
-		fTimer = 0.f;
+		fTimer -= TickStep;
 		CurrentProcess += TickStep;
 		const bool OneloopIsFinish = CurrentProcess >= EndPos;
+		if (CurrentProcess >= EndPos)
+		{
+			CurrentProcess = EndPos;
+		}
 		OneloopIsFinish ? --RemainLoopTime : NULL;
-		TickFunc(CurrentProcess, OneloopIsFinish, RemainLoopTime);
+		TickFunc(CurrentProcess/EndPos, OneloopIsFinish, RemainLoopTime);
+		OneloopIsFinish ? CurrentProcess = BeginPos : NULL;
 	}
 
 }
