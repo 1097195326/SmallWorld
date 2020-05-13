@@ -17,25 +17,25 @@ void ArmyCenterData::Serialization(TSharedRef<TJsonWriter<TCHAR, TCondensedJsonP
 	Writer->WriteObjectStart("ArmyCenterData");
 	BaseBuildingData::Serialization(Writer);
 
-	Writer->WriteArrayStart("HaveSoldiers");
-	for (auto TemSol : HaveSoldiers)
-	{
-		Writer->WriteObjectStart();
-		Writer->WriteValue("Key", TemSol.Key);
-		Writer->WriteValue("Value", TemSol.Value);
-		Writer->WriteObjectEnd();
-	}
-	Writer->WriteArrayEnd(); //HaveSoldiers
+	//Writer->WriteArrayStart("HaveSoldiers");
+	//for (auto TemSol : HaveSoldiers)
+	//{
+	//	Writer->WriteObjectStart();
+	//	Writer->WriteValue("Key", TemSol.Key);
+	//	Writer->WriteValue("Value", TemSol.Value);
+	//	Writer->WriteObjectEnd();
+	//}
+	//Writer->WriteArrayEnd(); //HaveSoldiers
 
-	Writer->WriteArrayStart("TrainSoldiers");
-	for (auto TemSol : TrainSoldiers)
-	{
-		Writer->WriteObjectStart();
-		Writer->WriteValue("Key", TemSol.Key);
-		Writer->WriteValue("Value", TemSol.Value);
-		Writer->WriteObjectEnd();
-	}
-	Writer->WriteArrayEnd(); //TrainSoldiers
+	//Writer->WriteArrayStart("TrainSoldiers");
+	//for (auto TemSol : TrainSoldiers)
+	//{
+	//	Writer->WriteObjectStart();
+	//	Writer->WriteValue("Key", TemSol.Key);
+	//	Writer->WriteValue("Value", TemSol.Value);
+	//	Writer->WriteObjectEnd();
+	//}
+	//Writer->WriteArrayEnd(); //TrainSoldiers
     
 	Writer->WriteObjectEnd();// ArmyCenterData
 }
@@ -43,7 +43,7 @@ void ArmyCenterData::Deserialization(TSharedPtr<FJsonObject>  JsonObject)
 {
 	BaseBuildingData::Deserialization(JsonObject->GetObjectField("BaseBuildingData"));
 
-	TArray<TSharedPtr<FJsonValue>>  JHaveSoldiers=JsonObject->GetArrayField("HaveSoldiers");
+	/*TArray<TSharedPtr<FJsonValue>>  JHaveSoldiers=JsonObject->GetArrayField("HaveSoldiers");
     for (auto jValue : JHaveSoldiers)
     {
 		ESoldierType ekey = (ESoldierType)jValue->AsObject()->GetIntegerField("Key");
@@ -56,7 +56,7 @@ void ArmyCenterData::Deserialization(TSharedPtr<FJsonObject>  JsonObject)
 		ESoldierType ekey = (ESoldierType)jValue->AsObject()->GetIntegerField("Key");
 		int32 ivalue = jValue->AsObject()->GetIntegerField("Value");
 		TrainSoldiers.Add(ekey, ivalue);
-	}
+	}*/
 }
 bool ArmyCenterData::SpawnBuildingActor(UWorld * world, const FVector & Location, const FRotator & Rotation)
 {
@@ -100,13 +100,22 @@ void ArmyCenterData::TrainSoldier(ESoldierType InSoldierType, int32 InNum)
 		break;
 	}
 }
-void ArmyCenterData::OnTrainArcherCallback(float InProgress, bool InIsFinish, int LoopTimes)
+void ArmyCenterData::OnTrainArcherCallback(const float & InProgress, const bool & InIsFinish, const int & LoopTimes)
 {
-
-	BuildingActor->RefreshView();
+	OnTrainCallback(SoldierStorageMap[S_Archer], SoldierTrainMap[S_Archer], InProgress, InIsFinish, LoopTimes);
 }
-void ArmyCenterData::OnTrainFootmanCallback(float InProgress, bool InIsFinish, int LoopTimes)
+void ArmyCenterData::OnTrainFootmanCallback(const float & InProgress, const bool & InIsFinish, const int & LoopTimes)
 {
-
+	OnTrainCallback(SoldierStorageMap[S_Footman], SoldierTrainMap[S_Footman],InProgress,InIsFinish, LoopTimes);
+}
+void ArmyCenterData::OnTrainCallback(SoldierStorageState & StorageState, SoldierTrainState & TrainState, const float & InProgress, const bool & InIsFinish, const int & LoopTimes)
+{
+	TrainState.CurrentTrainProgress = InProgress;
+	TrainState.OneLoopIsFinish = InIsFinish;
+	TrainState.RemainLoopTimes = LoopTimes;
+	if (InIsFinish)
+	{
+		StorageState.HaveNum += 1;
+	}
 	BuildingActor->RefreshView();
 }

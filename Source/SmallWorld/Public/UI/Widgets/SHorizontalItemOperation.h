@@ -16,6 +16,7 @@ public:
 
 protected:
 	void OnValueChange(float InValue);
+	void OnTextChange(const FText& InText);
 
 	TAttribute<FText> ShowText;
 	TAttribute<FString> ButtonShowText;

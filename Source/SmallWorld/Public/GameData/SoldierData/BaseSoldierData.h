@@ -3,7 +3,7 @@
 #include "GameConfigData.h"
 
 
-enum ESoldierType
+enum ESoldierType : int32
 {
 	S_None,
 	S_Archer,

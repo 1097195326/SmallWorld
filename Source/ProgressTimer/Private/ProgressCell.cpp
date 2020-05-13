@@ -23,7 +23,7 @@ void ProgressCell::Tick(float delta)
 	{
 		fTimer -= TickStep;
 		CurrentProcess += TickStep;
-		const bool OneloopIsFinish = CurrentProcess >= EndPos;
+		bool OneloopIsFinish = CurrentProcess >= EndPos;
 		if (CurrentProcess >= EndPos)
 		{
 			CurrentProcess = EndPos;

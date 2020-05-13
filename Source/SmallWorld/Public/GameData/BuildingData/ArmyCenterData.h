@@ -2,11 +2,42 @@
 #include "BaseBuildingData.h"
 #include "BaseSoldierData.h"
 
+struct SoldierTrainState
+{
+	int32			RemainLoopTimes;
+	float			CurrentTrainProgress;
+	bool			OneLoopIsFinish;
+	SoldierTrainState()
+		: RemainLoopTimes(0)
+		, CurrentTrainProgress(0.f)
+		, OneLoopIsFinish(false)
+	{
+
+	}
+};
+struct SoldierStorageState
+{
+	ESoldierType	SoldierType;
+	int32			HaveNum;
+	int32			OutingNum;
+	int32			TrainNum;
+	
+	SoldierStorageState()
+		:SoldierType(S_None)
+		, HaveNum(0)
+		, OutingNum(0)
+		, TrainNum(0)
+	{
+
+	}
+};
+
 class ArmyCenterData : public BaseBuildingData
 {
 protected:
     
 public:
+
 	ArmyCenterData();
     ~ArmyCenterData();
     
@@ -17,13 +48,14 @@ public:
 
 	void	TrainSoldier(ESoldierType InSoldierType,int32 InNum);
     
-	void	OnTrainArcherCallback(float InProgress, bool InIsFinish, int LoopTimes);
-	void	OnTrainFootmanCallback(float InProgress, bool InIsFinish, int LoopTimes);
+	void	OnTrainArcherCallback(const float & InProgress, const bool & InIsFinish, const int & LoopTimes);
+	void	OnTrainFootmanCallback(const float & InProgress, const bool & InIsFinish, const int & LoopTimes);
 	
 protected:
-	TMap<ESoldierType, int32>	HaveSoldiers;
-	TMap<ESoldierType, int32>	OutingSoldiers;
-	TMap<ESoldierType, int32>	TrainSoldiers;
+	void	OnTrainCallback(SoldierStorageState & StorageState, SoldierTrainState & TrainState, const float & InProgress, const bool & InIsFinish, const int & LoopTimes);
+	
+	TMap<ESoldierType, SoldierStorageState>	SoldierStorageMap;
+	TMap<ESoldierType, SoldierTrainState>	SoldierTrainMap;
 
 
 };

@@ -14,7 +14,7 @@ public:
 	void	Tick(float delta);
 
 	template<typename T>
-	void RegisterProgress(string InKey,int loopTimes, float tickStep,float beginPos,float endPos, T * _obj, void(T::*_func)(float, bool, int))
+	void RegisterProgress(string InKey,int loopTimes, float tickStep,float beginPos,float endPos, T * _obj, void(T::*_func)(const float&, const bool &, const int&))
 	{
 		auto temIter = ProgressCellsMap.find(InKey);
 		if (temIter == ProgressCellsMap.end())

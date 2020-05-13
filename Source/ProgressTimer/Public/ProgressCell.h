@@ -10,13 +10,13 @@ using namespace std;
 class PROGRESSTIMER_API ProgressCell
 {
 public:
-	typedef function<void(float InProgress, bool InIsFinish,int LoopTimes)> TickCallBackFunc;
+	typedef function<void(const float & InProgress, const bool & InIsFinish, const int & LoopTimes)> TickCallBackFunc;
 
 	ProgressCell(float inTickStep, float inBeginPos, float inEndPos, int inLoopTimes);
     virtual ~ProgressCell();
     
     template<typename T>
-    void RegisterHeader(T * _obj, void(T::*_func)(float,bool,int))
+    void RegisterHeader(T * _obj, void(T::*_func)(const float&, const bool &, const int&))
     {
 		TickFunc = bind(_func, _obj, placeholders::_1, placeholders::_2, placeholders::_3);
         
