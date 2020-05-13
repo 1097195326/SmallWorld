@@ -20,6 +20,6 @@ protected:
 
 	TAttribute<FText> ShowText;
 	TAttribute<FString> ButtonShowText;
-
+	TSharedPtr<SEditableTextBox>	InputNumTextBox;
 
 };
