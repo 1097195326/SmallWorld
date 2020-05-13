@@ -42,7 +42,7 @@ void SHorizontalItemOperation::Construct(const FArguments & InArgs)
 				.AutoWidth()
 				.Padding(24, 0)
 				[
-					SNew(SEditableTextBox)
+					SAssignNew(InputNumTextBox,SEditableTextBox)
 					.HintText(FText::FromString("10"))
 					.OnTextChanged(this,&SHorizontalItemOperation::OnTextChange)
 				]
@@ -78,6 +78,7 @@ void SHorizontalItemOperation::OnTextChange(const FText& InText)
 	else if (InStr.IsNumeric())
 	{
 		int32 InputNum = FCString::Atoi(*InStr);
+		InputNumTextBox->SetText(FText::FromString(FString::Printf(TEXT("%d"), InputNum)));
 	}
 
 }
