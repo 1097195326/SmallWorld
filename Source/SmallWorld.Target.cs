@@ -8,7 +8,7 @@ public class SmallWorldTarget : TargetRules
 	public SmallWorldTarget(TargetInfo Target) : base(Target)
 	{
 		Type = TargetType.Game;
-
-		ExtraModuleNames.AddRange( new string[] { "SmallWorld" } );
+        DefaultBuildSettings = BuildSettingsVersion.V2;
+        ExtraModuleNames.AddRange( new string[] { "SmallWorld" } );
 	}
 }

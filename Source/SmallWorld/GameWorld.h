@@ -1,6 +1,6 @@
 #pragma once
 
-#include "CityActor.h"
+#include "BuildingActors/CityActor.h"
 #include "SmallWorldInstance.h"
 #include "GameWorldActor.h"
 

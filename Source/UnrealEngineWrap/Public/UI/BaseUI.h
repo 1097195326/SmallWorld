@@ -8,7 +8,7 @@
 #include "Runtime/UMG/Public/UMGStyle.h"  
 #include "Runtime/UMG/Public/Slate/SObjectWidget.h"  
 #include "Runtime/UMG/Public/IUMGModule.h"
-#include "WidgetBlueprintLibrary.h"
+#include "Blueprint/WidgetBlueprintLibrary.h"
 #include "Kismet/GameplayStatics.h"
 #include "BaseUI.generated.h"
 

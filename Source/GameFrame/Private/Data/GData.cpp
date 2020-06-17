@@ -1,4 +1,4 @@
-//#include "GCore.h"
+
 #include "GData.h"
 
 GData::GData()

@@ -1,5 +1,5 @@
 #include "GameStyle.h"
-#include "SlateGameResources.h"
+#include "Slate/SlateGameResources.h"
 
 
 TSharedPtr<ISlateStyle> FGameStyle::GameStyleInstance = nullptr;

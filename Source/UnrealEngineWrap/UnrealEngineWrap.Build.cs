@@ -6,6 +6,18 @@ public class UnrealEngineWrap : ModuleRules
     {
         PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 
+        PublicIncludePaths.AddRange(
+            new string[] {
+                "UnrealEngineWrap/Public",
+                "UnrealEngineWrap/Public/Actor",
+                "UnrealEngineWrap/Public/Controller",
+                "UnrealEngineWrap/Public/GameInterface",
+                "UnrealEngineWrap/Public/Pawn",
+                "UnrealEngineWrap/Public/Tools",
+                "UnrealEngineWrap/Public/UI",
+            }
+            );
+
         PublicDependencyModuleNames.AddRange(
             new string[] {
 

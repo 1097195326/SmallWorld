@@ -8,7 +8,7 @@ public class SmallWorldEditorTarget : TargetRules
 	public SmallWorldEditorTarget(TargetInfo Target) : base(Target)
 	{
 		Type = TargetType.Editor;
-
-		ExtraModuleNames.AddRange( new string[] { "SmallWorld" } );
+        DefaultBuildSettings = BuildSettingsVersion.V2;
+        ExtraModuleNames.AddRange( new string[] { "SmallWorld" } );
 	}
 }

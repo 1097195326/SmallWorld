@@ -1,6 +1,6 @@
 #pragma once
 #include "DataR.h"
-#include "GameConfigData.h"
+#include "GameConfigData/GameConfigData.h"
 
 
 enum ESoldierType : int32

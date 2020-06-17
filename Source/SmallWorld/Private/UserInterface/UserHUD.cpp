@@ -1,5 +1,5 @@
 #include "UserHUD.h"
-#include "ConstructorHelpers.h"
+#include "UObject/ConstructorHelpers.h"
 
 #include "UI/UIControllerManager.h"
 #include "UI/MainViewUIController.h"

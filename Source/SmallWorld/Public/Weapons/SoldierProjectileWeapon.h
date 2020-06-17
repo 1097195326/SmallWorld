@@ -2,7 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "ProjectileWeapon.h"
-#include "Projectile.h"
+#include "Projectile/Projectile.h"
 #include "SoldierProjectileWeapon.generated.h"
 
 

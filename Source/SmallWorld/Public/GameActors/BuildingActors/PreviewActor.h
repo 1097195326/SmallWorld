@@ -2,7 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "GameActor.h"
-#include "ConstructorHelpers.h"
+#include "UObject/ConstructorHelpers.h"
 #include "Components/MeshComponent.h"
 #include "BaseBuildingData.h"
 #include "PreviewActor.generated.h"

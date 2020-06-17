@@ -1,6 +1,6 @@
 #pragma once
 
-#include "SCompoundWidget.h"
+#include "Widgets/SCompoundWidget.h"
 #include "SlateCore.h"
 #include "ButtonRegister.h"
 

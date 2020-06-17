@@ -26,7 +26,7 @@
 #include "CityActor.generated.h"
 
 UCLASS()
-class ACityActor : public ABaseBuildingActor
+class SMALLWORLD_API ACityActor : public ABaseBuildingActor
 {
 	GENERATED_BODY()
 

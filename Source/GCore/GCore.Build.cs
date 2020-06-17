@@ -11,11 +11,9 @@ public class GCore : ModuleRules
 
         PublicIncludePaths.AddRange(
             new string[] {
-                //"GCore/Public",
-                //"GCore/Public/BaseCore",
-                //"GCore/Public/GameCore",
-                //"GCore/Public/Interface",
-                //"GCore/Public/UI",
+                "GCore/Public",
+                "GCore/Public/BaseCore",
+                "GCore/Public/Interface",
                 //"GCore/Public/Data",
                 //"GCore/Public/Manager",
                 //"GCore/Public/UIController",
