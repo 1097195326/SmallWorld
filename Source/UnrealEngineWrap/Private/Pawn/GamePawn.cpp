@@ -12,30 +12,25 @@
 void AGamePawn::PostInitializeComponents()
 {
 	Super::PostInitializeComponents();
-
 	On_Init();
 }
 void AGamePawn::BeginPlay()
 {
 	Super::BeginPlay();
-
 	On_Start();
 }
 void AGamePawn::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
-
 	On_Tick(DeltaSeconds);
 }
 void AGamePawn::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
 	On_End();
-
 	Super::EndPlay(EndPlayReason);
 }
 void AGamePawn::BeginDestroy()
 {
 	On_Delete();
-
 	Super::BeginDestroy();
 }

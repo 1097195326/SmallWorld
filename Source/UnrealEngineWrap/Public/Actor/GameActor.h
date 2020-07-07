@@ -15,12 +15,11 @@ class UNREALENGINEWRAP_API AGameActor : public AActor, public GObject
 public:
 	AGameActor();
 	virtual void PostInitializeComponents() override;
-	virtual void BeginDestroy() override;
+	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaSeconds) override;
+	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason);
+	virtual void BeginDestroy() override;
 
-	virtual void On_Init() override;
-	virtual void On_Tick(float DeltaSeconds) override;
-	virtual void On_Delete() override;
 
 	virtual TSharedPtr<SWidget>	CreateActorDetailWidget() { return SNullWidget::NullWidget; }
 	virtual void RefreshView(){}

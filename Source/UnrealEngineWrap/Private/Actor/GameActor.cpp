@@ -9,25 +9,23 @@ void AGameActor::PostInitializeComponents()
 	Super::PostInitializeComponents();
 	On_Init();
 }
-void AGameActor::BeginDestroy()
+void AGameActor::BeginPlay()
 {
-	On_Delete();
-	Super::BeginDestroy();
+	Super::BeginPlay();
+	On_Start();
 }
 void AGameActor::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
 	On_Tick(DeltaSeconds);
 }
-void AGameActor::On_Init()
+void AGameActor::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
-
+	On_End();
+	Super::EndPlay(EndPlayReason);
 }
-void AGameActor::On_Tick(float delta)
+void AGameActor::BeginDestroy()
 {
-
-}
-void AGameActor::On_Delete()
-{
-
+	On_Delete();
+	Super::BeginDestroy();
 }
