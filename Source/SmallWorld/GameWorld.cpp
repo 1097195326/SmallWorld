@@ -39,12 +39,12 @@ void GameWorld::BuildWorld()
 	// Build Cities
 	for (int x = 0; x < WorldSize + BoundSize * 2 ; x++)
 	{
-		if (IsInWorld(x))
+		if (IsInTileMap(x))
 		{
 			vector<ACityActor*> CityList;
 			for (int y = 0; y < WorldSize + BoundSize * 2; y++)
 			{
-				if (IsInWorld(y))
+				if (IsInTileMap(y))
 				{
 					ACityActor * CityActor = BuildCity(x, y);
 					if (CityActor)
@@ -107,7 +107,7 @@ void GameWorld::Update()
 		}
 	}
 }
-bool GameWorld::IsInWorld(int _index)
+bool GameWorld::IsInTileMap(int _index)
 {
 	return _index >= BoundSize && _index <= WorldSize;
 }

@@ -30,6 +30,6 @@ private:
 	bool							IsInitialized;
 	bool							IsPaused;
 
-	bool							IsInWorld(int _index);
+	bool							IsInTileMap(int _index);
 	ACityActor *					BuildCity(int _x, int _y);
 };
