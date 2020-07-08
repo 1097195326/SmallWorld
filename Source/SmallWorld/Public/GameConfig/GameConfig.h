@@ -6,6 +6,13 @@
 
 #define CheckNullPtr(Ptr)  {if (Ptr == nullptr)return;}
 
+namespace  TileGameConfig
+{
+	const int32 TileSize = 425;
+	const int32 ArmyCenterSize = 3;
+	const int32	TileMapSize = 21;
+	
+}
 // ------------------- Building ----------------------
 const int  BoundSize = 0;
 const int  WorldSize = 1;

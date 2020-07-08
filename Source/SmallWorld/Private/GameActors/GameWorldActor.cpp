@@ -10,7 +10,7 @@ AGameWorldActor::AGameWorldActor()
 }
 void AGameWorldActor::On_Init()
 {
-	float Extent = WorldSize * CitySize * TitleSize * 0.5;
+	float Extent = TileGameConfig::TileMapSize * TileGameConfig::TileSize * 0.5;
 
 	CollisionBox->SetBoxExtent(FVector(Extent, Extent, Extent));
 
