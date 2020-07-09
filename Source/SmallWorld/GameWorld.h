@@ -9,19 +9,20 @@
 using namespace TileGameConfig;
 
 
-struct TileStruct 
+struct TileStateStruct 
 {
 	int32 IndexX;
 	int32 IndexY;
 	int32 InstanceIndex;
 	ASoldierPawn *	SoldierPawn;
-	TileStruct():
+	TileStateStruct():
 		IndexX(-1),
 		IndexY(-1),
 		InstanceIndex(-1),
 		SoldierPawn(nullptr)
 	{}
 	bool IsHavePawn() { return SoldierPawn != nullptr; }
+
 };
 
 class GameWorld
