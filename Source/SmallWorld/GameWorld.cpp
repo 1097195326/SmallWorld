@@ -8,65 +8,44 @@ GameWorld::GameWorld()
 	IsInitialized = false;
 	IsPaused = false;
 
-
+	GameWorldActor = nullptr;
+	MapActor = nullptr;
 }
 GameWorld::~GameWorld()
 {
-	
-}
-GameWorld::GameWorld(const GameWorld & _world)
-{
-	
-}
-GameWorld & GameWorld::operator = (const GameWorld & _world)
-{
-	return *this;
+	GameWorldActor = nullptr;
+	MapActor = nullptr;
 }
 GameWorld * GameWorld::GetInstance()
 {
 	static GameWorld world;
 	return &world;
 }
-void GameWorld::BuildWorld()
+void GameWorld::BuildTileWorld()
 {
 	// Build Gameworld Actor
-	FTransform trans(FVector((WorldSize + BoundSize * 2) * CitySize * TitleSize * 0.5, (WorldSize + BoundSize * 2) * CitySize * TitleSize * 0.5, 0));
-	GameWorldActor = Cast<AGameWorldActor>(UGameplayStatics::BeginDeferredActorSpawnFromClass(SWI, AGameWorldActor::StaticClass(), trans));
+	FTransform WorldTrans(FVector(TileMapSize * TileSize * 0.5f - TileSize * 0.5f, TileMapSize * TileSize * 0.5f - TileSize * 0.5f, 0));
+	GameWorldActor = Cast<AGameWorldActor>(UGameplayStatics::BeginDeferredActorSpawnFromClass(SWI, AGameWorldActor::StaticClass(), WorldTrans));
 	if (GameWorldActor)
 	{
-		UGameplayStatics::FinishSpawningActor(GameWorldActor, trans);
+		UGameplayStatics::FinishSpawningActor(GameWorldActor, WorldTrans);
 	}
-	// Build Cities
-	for (int x = 0; x < WorldSize + BoundSize * 2 ; x++)
+	FTransform MapTrans(FVector(0,0,0));
+	MapActor = Cast<AMapActor>(UGameplayStatics::BeginDeferredActorSpawnFromClass(SWI, AMapActor::StaticClass(), MapTrans));
+	if (MapActor)
 	{
-		if (IsInTileMap(x))
+		UGameplayStatics::FinishSpawningActor(MapActor, MapTrans);
+	}
+	// Build Map
+	for (int x = 0; x < TileMapSize ; x++)
+	{
+		for (int y = 0; y < TileMapSize; y++)
 		{
-			vector<ACityActor*> CityList;
-			for (int y = 0; y < WorldSize + BoundSize * 2; y++)
-			{
-				if (IsInTileMap(y))
-				{
-					ACityActor * CityActor = BuildCity(x, y);
-					if (CityActor)
-					{
-						CityList.push_back(CityActor);
-					}
-				}
-				else
-				{
-					BuildCity(x, y);
-				}
-			}
-			CityMap.push_back(CityList);
-		}
-		else
-		{
-			for (int y = 0; y < WorldSize + BoundSize * 2; y++)
-			{
-				BuildCity(x, y);
-			}
+			TileMap[x][y] = MapActor->AddInstance(FVector(x * TileSize, y * TileSize, 0));
 		}
 	}
+	int32 EdgeCenter = TileMapSize / 2;
+
 
 	IsInitialized = true;
 }
