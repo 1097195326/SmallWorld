@@ -113,7 +113,7 @@ void AUserController::DropPriviewActor()
 		FRotator Rotator = PreviewActor->GetActorRotation();
 		DestroyPriviewActor();
 		HordeData * UserHordeData = DataManager::GetInstance()->GetUserData()->GetHordeData();
-		BaseBuildingData * BuildingData = UserHordeData->SpawnBuilding(IconName);
+		BaseBuildingData * BuildingData = UserHordeData->SpawnBuildingData(IconName);
 		if (!BuildingData->SpawnBuildingActor(GetWorld(), Location, Rotator))
 		{
 			UserHordeData->DestroyBuilding(BuildingData);

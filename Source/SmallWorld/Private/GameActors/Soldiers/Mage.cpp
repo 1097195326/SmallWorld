@@ -3,7 +3,6 @@
 
 AMage::AMage()
 {
-	mSoldierType = S_Mage;
-
+	
 
 }

@@ -1,6 +1,6 @@
 #include "GameWorld.h"
 #include "Kismet/GameplayStatics.h"
-
+#include "DataManager.h"
 
 
 GameWorld::GameWorld()
@@ -36,12 +36,13 @@ void GameWorld::BuildTileWorld()
 	{
 		UGameplayStatics::FinishSpawningActor(MapActor, MapTrans);
 	}
+
 	// Build Map
 	for (int x = 0; x < TileMapSize ; x++)
 	{
 		for (int y = 0; y < TileMapSize; y++)
 		{
-			TileMap[x][y] = MapActor->AddInstance(FVector(x * TileSize, y * TileSize, 0));
+			TileMap[x][y] = TileStateStruct(x,y,MapActor->AddInstance(FVector(x * TileSize, y * TileSize, 0)));
 		}
 	}
 	int32 EdgeCenter = TileMapSize / 2;
@@ -88,5 +89,5 @@ void GameWorld::Update()
 }
 bool GameWorld::IsInTileMap(int _index)
 {
-	return _index >= BoundSize && _index <= WorldSize;
+	return _index >= 0 && _index < TileMapSize;
 }

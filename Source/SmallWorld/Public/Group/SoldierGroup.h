@@ -1,6 +1,6 @@
 #pragma once
 #include "BaseGroup.h"
-#include "SoldierPawn.h"
+#include "BaseSoldierData.h"
 #include "GroupBaseState.h"
 
 #include "GameConfig.h"

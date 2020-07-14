@@ -45,6 +45,7 @@ private:
 	GameConfigData * mGameConfigData;
 	GameWorldData * mGameWorldData;
 	TArray<FAssetData> BuildingAssetArray;
+	TArray<ASoldierPawn*> SoldierAssetArray;
 
 };
 

@@ -2,5 +2,5 @@
 
 APeasant::APeasant()
 {
-	mSoldierType = S_Peasant;
+	
 }

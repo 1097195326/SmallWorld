@@ -1,6 +1,7 @@
 #pragma once
 #include "DataR.h"
 #include "GameConfigData/GameConfigData.h"
+#include "SoldierPawn.h"
 
 
 enum ESoldierType : int32

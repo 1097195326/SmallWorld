@@ -3,7 +3,6 @@
 
 AHorseman::AHorseman()
 {
-	mSoldierType = S_Horseman;
-
+	
 
 }

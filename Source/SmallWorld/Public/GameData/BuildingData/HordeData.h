@@ -24,7 +24,7 @@ public:
     virtual void Serialization(TSharedRef<TJsonWriter<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>> Writer) override;
     virtual void Deserialization(TSharedPtr<FJsonObject>  JsonObject) override;
 
-	BaseBuildingData *	SpawnBuilding(const FString & BuildingName);
+	BaseBuildingData *	SpawnBuildingData(const FString & BuildingName);
 	bool	DestroyBuildingById(const FGuid & InId);
 	bool	DestroyBuilding(BaseBuildingData * InBuildingData);
 	template<typename BuildingClass = BaseBuildingData>

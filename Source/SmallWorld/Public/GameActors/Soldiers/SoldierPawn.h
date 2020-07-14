@@ -5,7 +5,6 @@
 #include "BehaviorTree/BehaviorTree.h"
 #include "Perception/AISenseConfig.h"
 #include "GenericTeamAgentInterface.h"
-#include "SoldierData/BaseSoldierData.h"
 #include "Projectile/Projectile.h"
 #include "EnableAttackPawn.h"
 #include "SoldierInstantWeapon.h"
@@ -13,6 +12,7 @@
 #include "SoldierPawn.generated.h"
 
 class SoldierGroup;
+class BaseSoldierData;
 
 UENUM()
 enum class SoldierState : uint32
@@ -85,7 +85,6 @@ public:
 	FORCEINLINE void			ChangeSoldierState(SoldierState _state) { mSoldierState = _state; }
 	FORCEINLINE bool			IsInState(SoldierState _state) { return mSoldierState == _state; }
 
-	FORCEINLINE ESoldierType			GetSoldierType() { return mSoldierType; }
 	FORCEINLINE	UBehaviorTree *		GetBehaviorTree() { return BehaviorTree; }
 
 	FVector							GetLocationInGroup();
@@ -116,7 +115,6 @@ protected:
 
 	SoldierAnimState		mSoldierAnimState;
 	SoldierState			mSoldierState;
-	ESoldierType				mSoldierType;
 	int32					mBehaviorType;
 	int32					mIndexInGroup;
 	SoldierGroup *			mGroup;

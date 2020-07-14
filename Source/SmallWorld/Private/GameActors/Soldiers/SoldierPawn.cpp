@@ -2,6 +2,7 @@
 #include "SoldierPawnController.h"
 #include "SoldierGroup.h"
 #include "GameFramework/DamageType.h"
+#include "SoldierData/BaseSoldierData.h"
 
 ASoldierPawn::ASoldierPawn():
 	LastAttackTime(0.f)

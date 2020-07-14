@@ -2,6 +2,7 @@
 
 
 FString GamePath::BuildingAssetPath = TEXT("/Game/CastlePack/RenameMeshes");
+FString GamePath::SoldierAssetPath = TEXT("/Game/CastlePack/RenameMeshes");
 
 
 FString GamePath::SaveAbsolutePath()

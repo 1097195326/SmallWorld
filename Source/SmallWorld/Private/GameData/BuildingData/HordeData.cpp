@@ -37,7 +37,7 @@ void HordeData::Deserialization(TSharedPtr<FJsonObject>  JsonObject)
 		}
 	}
 }
-BaseBuildingData * HordeData::SpawnBuilding(const FString & BuildingName)
+BaseBuildingData * HordeData::SpawnBuildingData(const FString & BuildingName)
 {
 	FString DataClassName = FString::Printf(TEXT("%sData"), *BuildingName);
 	BaseBuildingData * BuildingData = (BaseBuildingData*)ReflectManager::Get()->GetClassByName(TCHAR_TO_UTF8(*DataClassName));

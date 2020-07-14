@@ -2,6 +2,5 @@
 
 AFootman::AFootman()
 {
-	mSoldierType = S_Footman;
-
+	
 }

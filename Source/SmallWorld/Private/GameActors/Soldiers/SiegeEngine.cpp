@@ -3,6 +3,6 @@
 
 ASiegeEngine::ASiegeEngine()
 {
-	mSoldierType = S_SiegeEngine;
+	
 
 }

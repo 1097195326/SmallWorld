@@ -3,8 +3,7 @@
 
 AKnight::AKnight()
 {
-	mSoldierType = S_Knight;
-
+	
 	CurrentWeapon = InstantWeapon = NewObject<USoldierInstantWeapon>();
 	InstantWeapon->SetOwner(this);
 	InstantWeapon->AddToRoot();

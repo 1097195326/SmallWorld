@@ -24,7 +24,7 @@ void SoldierGroupManager::On_GameUpdate()
 }
 void SoldierGroupManager::PushSoldierToGroup(ASoldierPawn * _soldier)
 {
-	if (!IsFull())
+	/*if (!IsFull())
 	{
 		if (mCurrentGroup == nullptr)
 		{
@@ -41,7 +41,7 @@ void SoldierGroupManager::PushSoldierToGroup(ASoldierPawn * _soldier)
 			mSoldierGroups.push_back(mCurrentGroup);
 			mCurrentGroup = nullptr;
 		}
-	}
+	}*/
 }
 void SoldierGroupManager::ClearSoldierGroups()
 {

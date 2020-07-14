@@ -14,6 +14,7 @@ class GamePath : public FPaths
 {
 public:
 	static FString BuildingAssetPath;
+	static FString SoldierAssetPath;
 
 	static FString SaveAbsolutePath();
 	static FString IOSSavePath();

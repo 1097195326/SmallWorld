@@ -3,7 +3,6 @@
 
 AGriffin::AGriffin()
 {
-	mSoldierType = S_Griffin;
-
+	
 
 }
