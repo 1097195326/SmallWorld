@@ -17,10 +17,11 @@ namespace  TileGameConfig
 }
 enum RaceEnum
 {
-	Human,
-	Orc,
-	Elf,
-	Undead,
+	Race_None,
+	Race_Human,
+	Race_Orc,
+	Race_Elf,
+	Race_Undead,
 	Num
 };
 

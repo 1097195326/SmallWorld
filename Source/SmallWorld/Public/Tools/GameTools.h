@@ -1,10 +1,11 @@
 #pragma once
 #include "CoreMinimal.h"
-
+#include "GameConfig.h"
 
 class GameTools
 {
 public:
+	static RaceEnum	GetRaceFromString(FString InRace);
 
 	static bool CheckStringIsValid(const FString& str, const FString& Reg);
 	static bool CheckPhone(const FString& str);

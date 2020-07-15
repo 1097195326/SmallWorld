@@ -34,6 +34,7 @@ public class SmallWorld : ModuleRules
                 "SmallWorld/Public/GamePath",
                 "SmallWorld/Public/Goals",
                 "SmallWorld/Public/Group",
+                "SmallWorld/Public/Tools",
                 "SmallWorld/Public/UI",
                 "SmallWorld/Public/UI/SlateStyles",
                 "SmallWorld/Public/UI/Widgets",

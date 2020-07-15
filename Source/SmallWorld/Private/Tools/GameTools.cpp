@@ -8,6 +8,15 @@
 #include "Modules/ModuleManager.h"
 
 
+RaceEnum GameTools::GetRaceFromString(FString InRace)
+{
+	RaceEnum Race = RaceEnum::Race_None;
+	if (InRace.Equals(TEXT("Human"))){ Race = Race_Human; }
+	else if (InRace.Equals(TEXT("Orc"))) { Race = Race_Orc; }
+	else if (InRace.Equals(TEXT("Elf"))) { Race = Race_Elf; }
+	else if (InRace.Equals(TEXT("Undead"))) { Race = Race_Undead; }
+	return Race;
+}
 bool GameTools::CheckStringIsValid(const FString& str, const FString& Reg)
 {
 	FRegexPattern Pattern(Reg);
