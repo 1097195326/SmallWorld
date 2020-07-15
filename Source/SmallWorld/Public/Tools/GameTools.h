@@ -2,7 +2,7 @@
 #include "CoreMinimal.h"
 
 
-class UNREALENGINEWRAP_API GameTools
+class GameTools
 {
 public:
 

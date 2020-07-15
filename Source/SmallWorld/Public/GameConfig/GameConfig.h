@@ -15,6 +15,15 @@ namespace  TileGameConfig
 	const FVector ShowLocation(0, 0, 800);
 	const FVector HideLocation(0, 0, -800);
 }
+enum RaceEnum
+{
+	Human,
+	Orc,
+	Elf,
+	Undead,
+	Num
+};
+
 // ------------------- Building ----------------------
 const int  BoundSize = 0;
 const int  WorldSize = 1;

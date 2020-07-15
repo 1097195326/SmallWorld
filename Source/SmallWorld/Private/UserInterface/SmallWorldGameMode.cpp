@@ -17,6 +17,6 @@ void ASmallWorldGameMode::StartPlay()
 {
 	Super::StartPlay();
 
-	//GameWorld::GetInstance()->BuildTileWorld();
+	GameWorld::GetInstance()->BuildTileWorld();
 
 }

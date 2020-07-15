@@ -1,7 +1,7 @@
 #pragma once
 
 #include "DataC.h"
-#include "BuildingData/HordeData.h"
+#include "HordeData.h"
 
 class UserData : public DataC
 {

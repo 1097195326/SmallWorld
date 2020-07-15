@@ -34,6 +34,11 @@ void GameWorld::BuildTileWorld()
 	MapActor = Cast<AMapActor>(UGameplayStatics::BeginDeferredActorSpawnFromClass(SWI, AMapActor::StaticClass(), MapTrans));
 	if (MapActor)
 	{
+		FAssetData GroundMeshData = DataManager::GetInstance()->GetBuildingAssetDataByIconName(TEXT("GroundTileMesh"));
+		MapActor->GroundMeshComponent->SetStaticMesh(Cast<UStaticMesh>(GroundMeshData.GetAsset()));
+		FAssetData CloudMeshData = DataManager::GetInstance()->GetBuildingAssetDataByIconName(TEXT("CloudTileMesh"));
+		MapActor->CloudMeshComponent->SetStaticMesh(Cast<UStaticMesh>(CloudMeshData.GetAsset()));
+		MapActor->ReregisterAllComponents();
 		UGameplayStatics::FinishSpawningActor(MapActor, MapTrans);
 	}
 
@@ -45,7 +50,9 @@ void GameWorld::BuildTileWorld()
 			TileMap[x][y] = TileStateStruct(x,y,MapActor->AddInstance(FVector(x * TileSize, y * TileSize, 0)));
 		}
 	}
+
 	int32 EdgeCenter = TileMapSize / 2;
+
 
 
 	IsInitialized = true;

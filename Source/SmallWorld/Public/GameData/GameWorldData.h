@@ -16,6 +16,7 @@ public:
     virtual void Serialization(TSharedRef<TJsonWriter<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>> Writer) override;
     virtual void Deserialization(TSharedPtr<FJsonObject>  JsonObject) override;
     
+	void	InitWorldData();
 	void	InitUserData(class UserData * userData);
 	// Manage HordeId
 	HordeData * CreateHordeData();

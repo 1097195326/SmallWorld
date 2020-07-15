@@ -41,6 +41,14 @@ void GameWorldData::Deserialization(TSharedPtr<FJsonObject>  JsonObject)
 	}
     
 }
+void GameWorldData::InitWorldData()
+{
+	if (HordeDataMap.Num() == 0)
+	{
+		HordeData * TemHordeData = CreateHordeData();
+
+	}
+}
 void GameWorldData::InitUserData(UserData * userData)
 {
 	HordeData * userHordeData = nullptr;
@@ -73,6 +81,7 @@ bool GameWorldData::DestroyHordeId(FGuid hordeId)
 {
 	if (HordeDataMap.Contains(hordeId))
 	{
+		delete HordeDataMap[hordeId];
 		HordeDataMap.Remove(hordeId);
 		return true;
 	}

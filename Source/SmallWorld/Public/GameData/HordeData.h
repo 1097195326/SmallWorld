@@ -19,6 +19,7 @@
 class HordeData : public DataR
 {
 public:
+	
 	~HordeData();
 
     virtual void Serialization(TSharedRef<TJsonWriter<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>> Writer) override;

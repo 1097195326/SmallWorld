@@ -36,7 +36,7 @@ void DataManager::InitData()
 }
 void DataManager::LoadData()
 {
-	UObjectLibrary * AssetLibrary = UObjectLibrary::CreateLibrary(UObject::StaticClass(), false, false);
+	UObjectLibrary * AssetLibrary = UObjectLibrary::CreateLibrary(UObject::StaticClass(), true, false);
 	AssetLibrary->LoadAssetDataFromPath(GamePath::BuildingAssetPath);
 	AssetLibrary->GetAssetDataList(BuildingAssetArray);
 	AssetLibrary->LoadBlueprintsFromPath(GamePath::SoldierAssetPath);
