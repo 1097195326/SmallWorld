@@ -1,6 +1,6 @@
 #pragma once
 #include "DataR.h"
-#include "GameConfigData/GameConfigData.h"
+#include "GameConfigData.h"
 #include "SoldierPawn.h"
 
 

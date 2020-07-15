@@ -1,8 +1,7 @@
 #pragma once
 #include "DataR.h"
 #include "CoreMinimal.h"
-#include "GameConfig.h"
-#include "GameConfigData.h"
+#include "BaseSoldierData.h"
 #include "ProgressManager.h"
 
 

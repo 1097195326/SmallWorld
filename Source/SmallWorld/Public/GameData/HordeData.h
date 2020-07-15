@@ -55,6 +55,6 @@ public:
 protected:
 	TMap<FGuid, BaseBuildingData*>		BuildingDatas;
 	//TArray<BaseBuildingData*>		BuildingDatas;
-
+	
 };
 

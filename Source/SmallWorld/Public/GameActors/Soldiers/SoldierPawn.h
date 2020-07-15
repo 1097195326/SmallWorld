@@ -9,6 +9,8 @@
 #include "EnableAttackPawn.h"
 #include "SoldierInstantWeapon.h"
 #include "SoldierProjectileWeapon.h"
+#include "GameConfig.h"
+
 #include "SoldierPawn.generated.h"
 
 class SoldierGroup;
