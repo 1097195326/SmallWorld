@@ -60,22 +60,22 @@ SoldierGroupManager * SoldierGroupManager::GetEnemyGroupManager()
 {
 	return mEnemyGroupManager;
 }
-SoldierGroup * SoldierGroupManager::CreateGroupBySoldierType(ESoldierType _type)
+SoldierGroup * SoldierGroupManager::CreateGroupBySoldierType(SoldierEnum _type)
 {
 	SoldierGroup * resultGroup = nullptr;
 	switch (_type)
 	{
-	case S_Knight:
-	case S_Footman:
+	case Soldier_Knight:
+	case Soldier_Footman:
 		resultGroup = new CloseCombatGroup();
 		break;
-	case S_Griffin:
-	case S_Horseman:
+	case Soldier_Griffin:
+	case Soldier_Horseman:
 		resultGroup = new CommandoGroup();
 		break;
-	case S_Archer:
-	case S_Mage:
-	case S_SiegeEngine:
+	case Soldier_Archer:
+	case Soldier_Mage:
+	case Soldier_SiegeEngine:
 		resultGroup = new DistantFightGroup();
 		break;
 	}

@@ -22,7 +22,7 @@ enum RaceEnum
 	Race_Orc,
 	Race_Elf,
 	Race_Undead,
-	Num
+	Race_Num
 };
 
 // ------------------- Building ----------------------

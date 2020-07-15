@@ -5,7 +5,7 @@
 
 BaseSoldierData::BaseSoldierData()
 {
-	SoldierType = S_None;
+	SoldierType = Soldier_None;
 	SoldierPawn = nullptr;
 	ArmyCenter = nullptr;
 	Level = -1;

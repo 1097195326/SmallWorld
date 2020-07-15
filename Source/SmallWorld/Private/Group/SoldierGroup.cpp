@@ -423,35 +423,35 @@ FormationInfo SoldierGroup::GetFormationInfo(FormationType _type)
 	return std::move(info);
 }
 
-void SoldierGroup::SetGroupType(ESoldierType _soldierType)
+void SoldierGroup::SetGroupType(SoldierEnum _soldierType)
 {
 	switch (_soldierType)
 	{
-	case S_Archer:
+	case Soldier_Archer:
 		mGroupType = G_ArcherGroup;
 		mGroupMaxNum = ArcherGroupMaxNum;
 		break;
-	case S_Footman:
+	case Soldier_Footman:
 		mGroupType = G_FootmanGroup;
 		mGroupMaxNum = FootmanGroupMaxNum;
 		break;
-	case S_Griffin:
+	case Soldier_Griffin:
 		mGroupType = G_GriffinGroup;
 		mGroupMaxNum = GriffinGroupMaxNum;
 		break;
-	case S_Horseman:
+	case Soldier_Horseman:
 		mGroupType = G_HorsemanGroup;
 		mGroupMaxNum = HorsemanGroupMaxNum;
 		break;
-	case S_Knight:
+	case Soldier_Knight:
 		mGroupType = G_KnightGroup;
 		mGroupMaxNum = KnightGroupMaxNum;
 		break;
-	case S_Mage:
+	case Soldier_Mage:
 		mGroupType = G_MageGroup;
 		mGroupMaxNum = MageGroupMaxNum;
 		break;
-	case S_SiegeEngine:
+	case Soldier_SiegeEngine:
 		mGroupType = G_SiegeEngineGroup;
 		mGroupMaxNum = SiegeEngineGroupMaxNum;
 		break;

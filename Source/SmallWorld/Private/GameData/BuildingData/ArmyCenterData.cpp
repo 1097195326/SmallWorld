@@ -46,14 +46,14 @@ void ArmyCenterData::Deserialization(TSharedPtr<FJsonObject>  JsonObject)
 	/*TArray<TSharedPtr<FJsonValue>>  JHaveSoldiers=JsonObject->GetArrayField("HaveSoldiers");
     for (auto jValue : JHaveSoldiers)
     {
-		ESoldierType ekey = (ESoldierType)jValue->AsObject()->GetIntegerField("Key");
+		SoldierEnum ekey = (SoldierEnum)jValue->AsObject()->GetIntegerField("Key");
 		int32 ivalue = jValue->AsObject()->GetIntegerField("Value");
 		HaveSoldiers.Add(ekey, ivalue);
     }
 	TArray<TSharedPtr<FJsonValue>>  JTrainSoldiers = JsonObject->GetArrayField("TrainSoldiers");
 	for (auto jValue : JTrainSoldiers)
 	{
-		ESoldierType ekey = (ESoldierType)jValue->AsObject()->GetIntegerField("Key");
+		SoldierEnum ekey = (SoldierEnum)jValue->AsObject()->GetIntegerField("Key");
 		int32 ivalue = jValue->AsObject()->GetIntegerField("Value");
 		TrainSoldiers.Add(ekey, ivalue);
 	}*/
@@ -71,30 +71,30 @@ bool ArmyCenterData::SpawnBuildingActor(UWorld * world, const FVector & Location
 	}
 	return false;
 }
-void ArmyCenterData::TrainSoldier(ESoldierType InSoldierType, int32 InNum)
+void ArmyCenterData::TrainSoldier(SoldierEnum InSoldierType, int32 InNum)
 {
 	FString  TemTrainKey = FString::Printf(TEXT("%s_%d"),*GetID().ToString(),InSoldierType);
 	switch (InSoldierType)
 	{
-	case S_None:
+	case Soldier_None:
 		break;
-	case S_Archer:
+	case Soldier_Archer:
 		ProgressManager::GetInstance()->RegisterProgress(TCHAR_TO_UTF8(*TemTrainKey), InNum, 1, 0, 100, this, &ArmyCenterData::OnTrainArcherCallback);
 		break;
-	case S_Footman:
+	case Soldier_Footman:
 		ProgressManager::GetInstance()->RegisterProgress(TCHAR_TO_UTF8(*TemTrainKey), InNum, 1, 0, 100, this, &ArmyCenterData::OnTrainFootmanCallback);
 		break;
-	case S_Griffin:
+	case Soldier_Griffin:
 		break;
-	case S_Horseman:
+	case Soldier_Horseman:
 		break;
-	case S_Knight:
+	case Soldier_Knight:
 		break;
-	case S_Mage:
+	case Soldier_Mage:
 		break;
-	case S_SiegeEngine:
+	case Soldier_SiegeEngine:
 		break;
-	case S_Peasant:
+	case Soldier_Peasant:
 		break;
 	default:
 		break;
@@ -102,11 +102,11 @@ void ArmyCenterData::TrainSoldier(ESoldierType InSoldierType, int32 InNum)
 }
 void ArmyCenterData::OnTrainArcherCallback(const float & InProgress, const bool & InIsFinish, const int & LoopTimes)
 {
-	OnTrainCallback(SoldierStorageMap[S_Archer], SoldierTrainMap[S_Archer], InProgress, InIsFinish, LoopTimes);
+	OnTrainCallback(SoldierStorageMap[Soldier_Archer], SoldierTrainMap[Soldier_Archer], InProgress, InIsFinish, LoopTimes);
 }
 void ArmyCenterData::OnTrainFootmanCallback(const float & InProgress, const bool & InIsFinish, const int & LoopTimes)
 {
-	OnTrainCallback(SoldierStorageMap[S_Footman], SoldierTrainMap[S_Footman],InProgress,InIsFinish, LoopTimes);
+	OnTrainCallback(SoldierStorageMap[Soldier_Footman], SoldierTrainMap[Soldier_Footman],InProgress,InIsFinish, LoopTimes);
 }
 void ArmyCenterData::OnTrainCallback(SoldierStorageState & StorageState, SoldierTrainState & TrainState, const float & InProgress, const bool & InIsFinish, const int & LoopTimes)
 {

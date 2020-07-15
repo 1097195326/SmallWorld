@@ -25,7 +25,7 @@ public:
 	SoldierGroup *			GetNearestGroupToLocation(FVector _location);
 
 protected:
-	SoldierGroup *			CreateGroupBySoldierType(ESoldierType _type);
+	SoldierGroup *			CreateGroupBySoldierType(SoldierEnum _type);
 private:
 	SoldierGroupManager *	mEnemyGroupManager;
 
