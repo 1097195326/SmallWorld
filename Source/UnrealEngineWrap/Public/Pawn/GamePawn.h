@@ -1,12 +1,12 @@
 #pragma once
 
-#include "GObject.h"
+#include "GameObjectClass.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
 #include "GamePawn.generated.h"
 
 UCLASS()
-class UNREALENGINEWRAP_API AGamePawn : public APawn , public GObject
+class UNREALENGINEWRAP_API AGamePawn : public APawn , public GameObjectClass
 {
     GENERATED_BODY()
     

@@ -6,7 +6,7 @@ class SArmyCenterOperationDetail : public SBaseCompoundWidget
 public:
 	SLATE_BEGIN_ARGS(SArmyCenterOperationDetail){}
 
-	SLATE_ARGUMENT(class ArmyCenterData * ,ArmyCenter)
+	SLATE_ARGUMENT(class ArmyCenterDataClass * ,ArmyCenter)
 
 	SLATE_END_ARGS()
 
@@ -14,6 +14,6 @@ public:
 	virtual void RefreshView() override;
 
 protected:
-	class ArmyCenterData * ArmyCenter;
+	class ArmyCenterDataClass * ArmyCenter;
 
 };

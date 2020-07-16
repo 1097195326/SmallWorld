@@ -1,6 +1,6 @@
 #pragma once
 
-#include "GObject.h"
+#include "GameObjectClass.h"
 #include "Blueprint/UserWidget.h"
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
@@ -13,7 +13,7 @@
 #include "BaseUI.generated.h"
 
 UCLASS()
-class UNREALENGINEWRAP_API UBaseUI : public UUserWidget, public GObject
+class UNREALENGINEWRAP_API UBaseUI : public UUserWidget, public GameObjectClass
 {
 	GENERATED_UCLASS_BODY()
 

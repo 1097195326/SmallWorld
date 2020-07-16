@@ -1,6 +1,6 @@
 #pragma once
 #include "BaseBuildingActor.h"
-#include "CommandCenterData.h"
+#include "CommandCenterDataClass.h"
 
 #include "CommandCenterActor.generated.h"
 

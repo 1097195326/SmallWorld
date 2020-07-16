@@ -1,6 +1,6 @@
 #include "UserController.h"
 #include "Kismet/GameplayStatics.h"
-#include "DataManager.h"
+#include "GameDataManager.h"
 #include "PreviewActor.h"
 #include "GameConfig.h"
 #include "UIControllerManager.h"
@@ -112,8 +112,8 @@ void AUserController::DropPriviewActor()
 		FVector Location = PreviewActor->GetActorLocation();
 		FRotator Rotator = PreviewActor->GetActorRotation();
 		DestroyPriviewActor();
-		HordeData * UserHordeData = DataManager::GetInstance()->GetUserData()->GetHordeData();
-		BaseBuildingData * BuildingData = UserHordeData->SpawnBuildingData(IconName);
+		HordeDataClass * UserHordeData = GameDataManager::GetInstance()->GetUserData()->GetHordeData();
+		BaseBuildingDataClass * BuildingData = UserHordeData->SpawnBuildingData(IconName);
 		if (!BuildingData->SpawnBuildingActor(GetWorld(), Location, Rotator))
 		{
 			UserHordeData->DestroyBuilding(BuildingData);

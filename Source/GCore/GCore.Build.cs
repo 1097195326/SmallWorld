@@ -17,7 +17,7 @@ public class GCore : ModuleRules
                 //"GCore/Public/Data",
                 //"GCore/Public/Manager",
                 //"GCore/Public/UIController",
-                //"GCore/Public/GameModule",
+                //"GCore/Public/GameModuleClass",
                 //"GCore/Public/IOSCore"
                 // ... add public include paths required here ...
             }
@@ -32,7 +32,7 @@ public class GCore : ModuleRules
                 //"GCore/Private/UI",
                 //"GCore/Private/Data",
                 //"GCore/Private/UIController",
-                //"GCore/Private/GameModule",
+                //"GCore/Private/GameModuleClass",
                 //"GCore/Private/IOSCore"
                 // ... add other private include paths required here ...
             }

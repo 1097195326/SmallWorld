@@ -1,5 +1,5 @@
 #include "SBuildingIconItemListWidget.h"
-#include "DataManager.h"
+#include "GameDataManager.h"
 #include "SBuildingIconItem.h"
 #include "GameStyle.h"
 
@@ -32,12 +32,12 @@ void SBuildingIconItemListWidget::Construct(const FArguments & InArgs)
 			
 		];
 
-	HordeData * UserHordeData = DataManager::GetInstance()->GetUserData()->GetHordeData();
+	HordeDataClass * UserHordeData = GameDataManager::GetInstance()->GetUserData()->GetHordeData();
 	
 	int temIndex = 0;
 	for (auto IconName : IconNames)
 	{
-		const SBuildingConfig & BConfig = DataManager::GetInstance()->GetGameConfigData()->GetBuildingConfig(IconName);
+		const SBuildingConfig & BConfig = GameDataManager::GetInstance()->GetGameConfigData()->GetBuildingConfig(IconName);
 
 		int32 IconRow = temIndex / 8;
 		int32 IconColumn = temIndex % 8;

@@ -3,7 +3,7 @@
 #include "CoreMinimal.h"
 #include "SoldierPawn.h"
 #include "GameConfig.h"
-#include "GObject.h"
+#include "GameObjectClass.h"
 #include <list>
 
 
@@ -31,7 +31,7 @@ namespace FormationSpace
 using namespace FormationSpace;
 
 
-class BaseFormation : public GObject
+class BaseFormation : public GameObjectClass
 {
 public:
 	BaseFormation();

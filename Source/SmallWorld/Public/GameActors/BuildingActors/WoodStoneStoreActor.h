@@ -1,6 +1,6 @@
 #pragma once
 #include "BaseBuildingActor.h"
-#include "WoodStoneStoreData.h"
+#include "WoodStoneStoreDataClass.h"
 
 #include "WoodStoneStoreActor.generated.h"
 

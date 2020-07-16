@@ -1,8 +1,8 @@
 #include "SArmyCenterOperationDetail.h"
-#include "DataManager.h"
+#include "GameDataManager.h"
 #include "SHorizontalIconTextItem.h"
 #include "SHorizontalItemOperation.h"
-#include "ArmyCenterData.h"
+#include "ArmyCenterDataClass.h"
 #include "GameStyle.h"
 
 
@@ -27,7 +27,7 @@ void SArmyCenterOperationDetail::Construct(const FArguments & InArgs)
 		.InImageBrush( FGameStyle::Get().GetBrush("Icon.Peasant"))
 
 	];
-	for(auto soldierName : GameConfigData::SoldierNames)
+	for(auto soldierName : GameConfigDataClass::SoldierNames)
 	{
 		FString IconBrush = FString::Printf(TEXT("Icon.%s"),*soldierName);
 		ItemList->AddSlot()

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "GObject.h"
+#include "GameObjectClass.h"
 #include "CoreMinimal.h"
 #include "UMG/Public/Components/Button.h"
 #include "Slate/Public/Widgets/Input/SButton.h"
@@ -15,7 +15,7 @@ enum ButtonAction
 };
 
 UCLASS()
-class UNREALENGINEWRAP_API UButtonScript : public UObject//, public GObject
+class UNREALENGINEWRAP_API UButtonScript : public UObject//, public GameObjectClass
 {
 	GENERATED_BODY()
 	

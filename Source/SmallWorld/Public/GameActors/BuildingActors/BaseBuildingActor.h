@@ -12,7 +12,7 @@
 #include "SmallWorldInstance.h"
 #include <vector>
 #include <list>
-#include "DataManager.h"
+#include "GameDataManager.h"
 
 #include "BaseBuildingActor.generated.h"
 
@@ -30,14 +30,14 @@ public:
 	GENERATED_BODY()
 	ABaseBuildingActor();
 
-    void SetBuildingData(BaseBuildingData * InData);
+    void SetBuildingData(BaseBuildingDataClass * InData);
     virtual void SaveData(TSharedRef<TJsonWriter<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>> Writer);
 	virtual bool SetMeshComponentByIconName(const FString & InIconName);
 	
 
 	FVector				GetInteractivePoint();
 protected:
-	BaseBuildingData * BuildingData;
+	BaseBuildingDataClass * BuildingData;
 
 public:
 	UPROPERTY(VisibleDefaultsOnly, Category = BaseBuilding)

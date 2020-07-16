@@ -18,12 +18,12 @@ public:
 	// ----------Override GameActor ---------
 	//virtual TSharedPtr<SWidget>	CreateActorDetailWidget() override;
 
-	// ----------- Override EnableAttackPawn -----------
+	// ----------- Override EnableAttackPawnClass -----------
 	
 
 	UPROPERTY(EditAnywhere)
 	FProjectileWeaponInfo	ProjectileWeaponInfo;
 
-	USoldierProjectileWeapon * ProjectileWeapon;
+	USoldierProjectileWeapon * ProjectileWeaponClass;
 
 };

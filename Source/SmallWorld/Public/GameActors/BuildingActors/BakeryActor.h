@@ -1,6 +1,6 @@
 #pragma once
 #include "BaseBuildingActor.h"
-#include "BakeryData.h"
+#include "BakeryDataClass.h"
 
 #include "BakeryActor.generated.h"
 

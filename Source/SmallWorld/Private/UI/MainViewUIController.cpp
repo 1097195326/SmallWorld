@@ -1,7 +1,7 @@
 #include "MainViewUIController.h"
 #include "SHordePowerWidget.h"
 #include "SBuildingIconItemListWidget.h"
-#include "DataManager.h"
+#include "GameDataManager.h"
 #include "SServiceDragDropWidget.h"
 
 
@@ -68,17 +68,17 @@ TSharedPtr<SWidget>	MainViewUIController::CreateBuildingButton()
 TSharedPtr<SWidget> MainViewUIController::CreateShowBuildingsWidget()
 {
 	TArray<FString>  IconNames;
-	/*if (DataManager::GetInstance()->GetUserData() != nullptr &&
-		DataManager::GetInstance()->GetUserData()->GetHordeData() != nullptr &&
-		DataManager::GetInstance()->GetUserData()->GetHordeData()->GetBuildingDatasByType(EBuildingType::B_CommandCenter).Num() > 0)
+	/*if (GameDataManager::GetInstance()->GetUserData() != nullptr &&
+		GameDataManager::GetInstance()->GetUserData()->GetHordeData() != nullptr &&
+		GameDataManager::GetInstance()->GetUserData()->GetHordeData()->GetBuildingDatasByType(EBuildingType::B_CommandCenter).Num() > 0)
 	{
-		IconNames = GameConfigData::HaveCenterBuilding;
+		IconNames = GameConfigDataClass::HaveCenterBuilding;
 	}
 	else
 	{
-		IconNames = GameConfigData::NoCenterBuilding;
+		IconNames = GameConfigDataClass::NoCenterBuilding;
 	}*/
-	IconNames = GameConfigData::HaveCenterBuilding;
+	IconNames = GameConfigDataClass::HaveCenterBuilding;
 
 	TSharedPtr<SWidget> ResWidget = SNew(SBuildingIconItemListWidget)
 		.IconNames(IconNames);

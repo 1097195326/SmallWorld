@@ -4,7 +4,7 @@
 #include "GameActor.h"
 #include "UObject/ConstructorHelpers.h"
 #include "Components/MeshComponent.h"
-#include "BaseBuildingData.h"
+#include "BaseBuildingDataClass.h"
 #include "PreviewActor.generated.h"
 
 UCLASS()

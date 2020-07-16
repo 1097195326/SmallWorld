@@ -1,5 +1,5 @@
 #include "SBuildingIconItem.h"
-#include "DataManager.h"
+#include "GameDataManager.h"
 #include "FBuildingDragDropOp.h"
 #include "GameStyle.h"
 
@@ -7,9 +7,9 @@
 SBuildingIconItem::~SBuildingIconItem()
 {
 	
-	DataManager::GetInstance()->StoneDataChangedDelegate.Remove(WoodDelegateHandle);
-	DataManager::GetInstance()->StoneDataChangedDelegate.Remove(StoneDelegateHandle);
-	DataManager::GetInstance()->WoodDataChangedDelegate.Remove(GoldDelegateHandle);
+	GameDataManager::GetInstance()->StoneDataChangedDelegate.Remove(WoodDelegateHandle);
+	GameDataManager::GetInstance()->StoneDataChangedDelegate.Remove(StoneDelegateHandle);
+	GameDataManager::GetInstance()->WoodDataChangedDelegate.Remove(GoldDelegateHandle);
 }
 void SBuildingIconItem::Construct(const FArguments & InArgs)
 {
@@ -21,12 +21,12 @@ void SBuildingIconItem::Construct(const FArguments & InArgs)
 	UTexture2D * IconTexture = LoadObject<UTexture2D>(nullptr, *IconTexturePath, nullptr);
 	Brush.SetResourceObject(IconTexture);
 
-	WoodDelegateHandle = DataManager::GetInstance()->WoodDataChangedDelegate.AddSP(this, &SBuildingIconItem::OnDataChanged);
-	StoneDelegateHandle = DataManager::GetInstance()->StoneDataChangedDelegate.AddSP(this, &SBuildingIconItem::OnDataChanged);
-	GoldDelegateHandle = DataManager::GetInstance()->GoldDataChangedDelegate.AddSP(this, &SBuildingIconItem::OnDataChanged);
+	WoodDelegateHandle = GameDataManager::GetInstance()->WoodDataChangedDelegate.AddSP(this, &SBuildingIconItem::OnDataChanged);
+	StoneDelegateHandle = GameDataManager::GetInstance()->StoneDataChangedDelegate.AddSP(this, &SBuildingIconItem::OnDataChanged);
+	GoldDelegateHandle = GameDataManager::GetInstance()->GoldDataChangedDelegate.AddSP(this, &SBuildingIconItem::OnDataChanged);
 
 
-	const SBuildingConfig & BConfig = DataManager::GetInstance()->GetGameConfigData()->GetBuildingConfig(IconName);
+	const SBuildingConfig & BConfig = GameDataManager::GetInstance()->GetGameConfigData()->GetBuildingConfig(IconName);
 
 	ChildSlot
 		[
@@ -73,8 +73,8 @@ void SBuildingIconItem::RefreshView()
 {
 	int32 GoldNum, WoodNum, StoneNum;
 
-	HordeData * UserHordeData = DataManager::GetInstance()->GetUserData()->GetHordeData();
-	const SBuildingConfig & BConfig = DataManager::GetInstance()->GetGameConfigData()->GetBuildingConfig(IconName);
+	HordeDataClass * UserHordeData = GameDataManager::GetInstance()->GetUserData()->GetHordeData();
+	const SBuildingConfig & BConfig = GameDataManager::GetInstance()->GetGameConfigData()->GetBuildingConfig(IconName);
 
 	GoldNum = UserHordeData->GetGoldNum();
 	WoodNum = UserHordeData->GetWoodNum();

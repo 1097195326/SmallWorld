@@ -1,7 +1,7 @@
 #pragma once
 
 #include "BaseBuildingActor.h"
-#include "BlockData.h"
+#include "BlockDataClass.h"
 #include "BlockActor.generated.h"
 
 class ACityActor;
@@ -20,7 +20,7 @@ public:
 
 private:
     
-	BlockData * mBlockData;
+	BlockDataClass * mBlockData;
 
 
 };

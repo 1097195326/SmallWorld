@@ -1,6 +1,6 @@
 #pragma once
 
-#include "SingleTemplate.h"
+#include "SingleTemplateClass.h"
 #include "ButtonScript.h"
 #include "CoreMinimal.h"
 #include "BaseUI.h"
@@ -8,7 +8,7 @@
 
 
 
-class UNREALENGINEWRAP_API ButtonRegister : public SingleTemplate<ButtonRegister>
+class UNREALENGINEWRAP_API ButtonRegister : public SingleTemplateClass<ButtonRegister>
 {
 private:
     // single instance

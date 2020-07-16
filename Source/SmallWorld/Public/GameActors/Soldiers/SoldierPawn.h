@@ -6,7 +6,7 @@
 #include "Perception/AISenseConfig.h"
 #include "GenericTeamAgentInterface.h"
 #include "Projectile/Projectile.h"
-#include "EnableAttackPawn.h"
+#include "EnableAttackPawnClass.h"
 #include "SoldierInstantWeapon.h"
 #include "SoldierProjectileWeapon.h"
 #include "GameConfig.h"
@@ -14,7 +14,7 @@
 #include "SoldierPawn.generated.h"
 
 class SoldierGroup;
-class BaseSoldierData;
+class BaseSoldierDataClass;
 
 UENUM()
 enum class SoldierState : uint32
@@ -60,12 +60,12 @@ enum BehaviorType
 
 
 UCLASS()
-class ASoldierPawn : public AGameCharacter, public EnableAttackPawn<ASoldierPawn>, public IGenericTeamAgentInterface
+class ASoldierPawn : public AGameCharacter, public EnableAttackPawnClass<ASoldierPawn>, public IGenericTeamAgentInterface
 {
 	GENERATED_BODY()
 public:
 	ASoldierPawn();
-	// --------- Override GObject --------------
+	// --------- Override GameObjectClass --------------
 	virtual void	On_Init() override;
 	virtual void	On_Start() override;
 	virtual void	On_Tick(float delta) override;

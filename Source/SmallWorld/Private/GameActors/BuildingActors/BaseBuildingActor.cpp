@@ -1,6 +1,6 @@
 #include "BaseBuildingActor.h"
 #include "BlockActor.h"
-//#include "DataManager.h"
+//#include "GameDataManager.h"
 
 
 ABaseBuildingActor::ABaseBuildingActor()
@@ -11,7 +11,7 @@ ABaseBuildingActor::ABaseBuildingActor()
     
 	HotPointName = TEXT("HotPoint");
 }
-void ABaseBuildingActor::SetBuildingData(BaseBuildingData * _data)
+void ABaseBuildingActor::SetBuildingData(BaseBuildingDataClass * _data)
 {
 	GameData = BuildingData = _data;
     
@@ -24,7 +24,7 @@ bool ABaseBuildingActor::SetMeshComponentByIconName(const FString & InIconName)
 {
 	bool IsOk = false;
 	FString MeshName = FString::Printf(TEXT("Mesh%s0"), *InIconName);
-	FAssetData MeshData = DataManager::GetInstance()->GetBuildingAssetDataByIconName(MeshName);
+	FAssetData MeshData = GameDataManager::GetInstance()->GetBuildingAssetDataByIconName(MeshName);
 
 	if (MeshData.AssetClass == FName(TEXT("SkeletalMesh")))
 	{

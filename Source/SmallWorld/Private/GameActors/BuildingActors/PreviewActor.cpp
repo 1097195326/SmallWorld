@@ -2,7 +2,7 @@
 #include "Engine/StaticMesh.h"
 #include "Components/StaticMeshComponent.h"
 #include "Components/SkeletalMeshComponent.h"
-#include "DataManager.h"
+#include "GameDataManager.h"
 
 APreviewActor::APreviewActor()
 {
@@ -15,7 +15,7 @@ bool APreviewActor::SetMeshComponent(const FString & InIconName)
 	IconName = InIconName;
 
 	FString MeshName = FString::Printf(TEXT("Mesh%s0"), *InIconName);
-	FAssetData MeshData = DataManager::GetInstance()->GetBuildingAssetDataByIconName(MeshName);
+	FAssetData MeshData = GameDataManager::GetInstance()->GetBuildingAssetDataByIconName(MeshName);
 
 	if (MeshData.AssetClass == FName(TEXT("SkeletalMesh")))
 	{

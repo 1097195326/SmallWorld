@@ -10,7 +10,7 @@
 
 
 #include "CoreMinimal.h"
-#include "GObject.h"
+#include "GameObjectClass.h"
 #include "Misc/CoreDelegates.h"
 #include "Engine/GameInstance.h"
 #include "GAppInstance.generated.h"
@@ -22,7 +22,7 @@ typedef enum {
 } ENetworkStatus;
 
 UCLASS()
-class UNREALENGINEWRAP_API UGAppInstance : public UGameInstance, public GObject
+class UNREALENGINEWRAP_API UGAppInstance : public UGameInstance, public GameObjectClass
 {
     GENERATED_BODY()
 protected:

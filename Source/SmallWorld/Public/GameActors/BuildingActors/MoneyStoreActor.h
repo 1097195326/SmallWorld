@@ -1,6 +1,6 @@
 #pragma once
 #include "BaseBuildingActor.h"
-#include "MoneyStoreData.h"
+#include "MoneyStoreDataClass.h"
 
 #include "MoneyStoreActor.generated.h"
 

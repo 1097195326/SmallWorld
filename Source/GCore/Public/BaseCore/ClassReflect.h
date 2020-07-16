@@ -8,15 +8,15 @@ using namespace std;
 
 typedef void * (*ReflectClass)(void);
 
-class ReflectManager
+class ClassReflectManager
 {
 private:
 	map<string, ReflectClass> m_ReflectClasses;
-	ReflectManager() {}
+	ClassReflectManager() {}
 public:
-	static ReflectManager * Get()
+	static ClassReflectManager * Get()
 	{
-		static ReflectManager _m;
+		static ClassReflectManager _m;
 		return &_m;
 	}
 	
@@ -39,7 +39,7 @@ class RegisterAction
 public:
 	RegisterAction(string _className, ReflectClass _method)
 	{
-		ReflectManager::Get()->RegisterClass(_className, _method);
+		ClassReflectManager::Get()->RegisterClass(_className, _method);
 	}
 };
 

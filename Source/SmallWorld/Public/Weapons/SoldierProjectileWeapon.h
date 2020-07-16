@@ -1,7 +1,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "ProjectileWeapon.h"
+#include "ProjectileWeaponClass.h"
 #include "Projectile/Projectile.h"
 #include "SoldierProjectileWeapon.generated.h"
 
@@ -26,7 +26,7 @@ struct FProjectileWeaponInfo
 class ASoldierPawn;
 
 UCLASS()
-class USoldierProjectileWeapon : public UObject, public ProjectileWeapon<ASoldierPawn>
+class USoldierProjectileWeapon : public UObject, public ProjectileWeaponClass<ASoldierPawn>
 {
 	GENERATED_BODY()
 

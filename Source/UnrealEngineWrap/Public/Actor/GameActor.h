@@ -3,12 +3,12 @@
 #include "CoreMinimal.h"
 #include "SBaseCompoundWidget.h"
 #include "GameFramework/Actor.h"
-#include "GObject.h"
+#include "GameObjectClass.h"
 #include "GameActor.generated.h"
 
 
 UCLASS()
-class UNREALENGINEWRAP_API AGameActor : public AActor, public GObject
+class UNREALENGINEWRAP_API AGameActor : public AActor, public GameObjectClass
 {
 	GENERATED_BODY()
 

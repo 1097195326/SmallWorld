@@ -3,7 +3,7 @@
 #include "TimerManager.h"
 
 #include "UI/SlateStyles/GameStyle.h"
-#include "DataManager.h"
+#include "GameDataManager.h"
 
 USmallWorldInstance::USmallWorldInstance()
 {
@@ -15,7 +15,7 @@ void USmallWorldInstance::On_Init()
 	m_Instance = this;
 	FGameStyle::Startup();
 
-	DataManager::GetInstance()->LoadData();
+	GameDataManager::GetInstance()->LoadData();
 
 }
 void USmallWorldInstance::On_Start()

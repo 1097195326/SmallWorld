@@ -1,11 +1,11 @@
 #pragma once
 
 
-#include "Templates/SingleTemplate.h"
+#include "Templates/SingleTemplateClass.h"
 #include "UIControllerInterface.h"
 #include "MainViewUIController.h"
 
-class UIControllerManager : public SingleTemplate<UIControllerManager>
+class UIControllerManager : public SingleTemplateClass<UIControllerManager>
 {
 public:
 	enum UIControllerIndex

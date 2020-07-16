@@ -1,35 +1,35 @@
 
-#include "BakeryData.h"
+#include "BakeryDataClass.h"
 #include "BakeryActor.h"
 
 
-G_REGISTER_CLASS(BakeryData)
+G_REGISTER_CLASS(BakeryDataClass)
 
-BakeryData::BakeryData()
+BakeryDataClass::BakeryDataClass()
 {
     BuildingType = B_Bakery;
 
 }
-BakeryData::~BakeryData()
+BakeryDataClass::~BakeryDataClass()
 {
     
 }
-void BakeryData::Serialization(TSharedRef<TJsonWriter<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>> Writer)
+void BakeryDataClass::Serialization(TSharedRef<TJsonWriter<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>> Writer)
 {
-	Writer->WriteObjectStart("BakeryData");
-	BaseBuildingData::Serialization(Writer);
+	Writer->WriteObjectStart("BakeryDataClass");
+	BaseBuildingDataClass::Serialization(Writer);
 
 
 
-	Writer->WriteObjectEnd();// BakeryData
+	Writer->WriteObjectEnd();// BakeryDataClass
     
 }
-void BakeryData::Deserialization(TSharedPtr<FJsonObject>  JsonObject)
+void BakeryDataClass::Deserialization(TSharedPtr<FJsonObject>  JsonObject)
 {
     
     
 }
-bool BakeryData::SpawnBuildingActor(UWorld * world, const FVector & Location, const FRotator & Rotation)
+bool BakeryDataClass::SpawnBuildingActor(UWorld * world, const FVector & Location, const FRotator & Rotation)
 {
 	FTransform SpawnTF(Rotation, Location);
 	BuildingActor = world->SpawnActorDeferred<ABakeryActor>(ABakeryActor::StaticClass(), SpawnTF, nullptr, nullptr

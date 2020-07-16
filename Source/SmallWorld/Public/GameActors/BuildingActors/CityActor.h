@@ -18,7 +18,7 @@
 #include "GateActor.h"
 #include "TowerActor.h"
 #include "WallActor.h"
-#include "HordeData.h"
+#include "HordeDataClass.h"
 
 //#include "TGeneralGoal.h"
 #include "SoldierGroupManager.h"

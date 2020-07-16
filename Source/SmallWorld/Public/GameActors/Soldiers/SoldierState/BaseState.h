@@ -1,8 +1,8 @@
 #pragma once
-#include "GObject.h"
+#include "GameObjectClass.h"
 
 
-class BaseState : public GObject
+class BaseState : public GameObjectClass
 {
 public:
 

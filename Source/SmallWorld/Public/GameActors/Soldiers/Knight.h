@@ -12,13 +12,13 @@ class AKnight : public ASoldierPawn
 public:
 	AKnight();
 	~AKnight();
-	// --------  Overirde GObject -------------
+	// --------  Overirde GameObjectClass -------------
 	virtual void  On_Start() override;
-	// -------- Override EnableAttackPawn ---------
+	// -------- Override EnableAttackPawnClass ---------
 	
 
 
-	USoldierInstantWeapon * InstantWeapon;
+	USoldierInstantWeapon * InstantWeaponClass;
 
 
 	UPROPERTY(EditAnywhere)

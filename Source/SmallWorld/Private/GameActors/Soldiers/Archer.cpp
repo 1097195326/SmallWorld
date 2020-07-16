@@ -3,17 +3,17 @@
 
 AArcher::AArcher()
 {
-	CurrentWeapon = ProjectileWeapon = NewObject<USoldierProjectileWeapon>();
-	ProjectileWeapon->SetOwner(this);
-	ProjectileWeapon->AddToRoot();
+	CurrentWeapon = ProjectileWeaponClass = NewObject<USoldierProjectileWeapon>();
+	ProjectileWeaponClass->SetOwner(this);
+	ProjectileWeaponClass->AddToRoot();
 }
 AArcher::~AArcher()
 {
-	ProjectileWeapon->RemoveFromRoot();
-	ProjectileWeapon = nullptr;
+	ProjectileWeaponClass->RemoveFromRoot();
+	ProjectileWeaponClass = nullptr;
 }
 void AArcher::On_Start() 
 {
-	ProjectileWeapon->InitWithWeaponInfo(ProjectileWeaponInfo);
+	ProjectileWeaponClass->InitWithWeaponInfo(ProjectileWeaponInfo);
 
 }

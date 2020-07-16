@@ -1,13 +1,13 @@
 #pragma once
 
 
-#include "GObject.h"
+#include "GameObjectClass.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "GameCharacter.generated.h"
 
 UCLASS()
-class UNREALENGINEWRAP_API AGameCharacter : public ACharacter, public GObject
+class UNREALENGINEWRAP_API AGameCharacter : public ACharacter, public GameObjectClass
 {
 	GENERATED_BODY()
 

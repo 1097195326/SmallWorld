@@ -1,6 +1,6 @@
 #pragma once
 
-#include "SingleTemplate.h"
+#include "SingleTemplateClass.h"
 #include "Misc/Paths.h"
 #include "Misc/FileHelper.h"
 #include "HAL/PlatformFilemanager.h"

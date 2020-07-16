@@ -1,5 +1,5 @@
 #include "ArmyCenterActor.h"
-#include "ArmyCenterData.h"
+#include "ArmyCenterDataClass.h"
 #include "SGameActorDetailWidget.h"
 #include "SArmyCenterOperationDetail.h"
 #include "SGameActorDetailTitle.h"
@@ -22,7 +22,7 @@ TSharedPtr<SWidget>	AArmyCenterActor::CreateActorDetailWidget()
 		.ActorLevel(FString::Printf(TEXT("%s%d"),*TransLanguage("Game_Level"), BuildingData->BuildingLevel))
 		.ActorHealth(FString::Printf(TEXT("%s%.02f"), *TransLanguage("Game_Building_Level"), BuildingData->BuildingHealth));
 	SAssignNew(DetailWidget, SArmyCenterOperationDetail)
-		.ArmyCenter((ArmyCenterData*)BuildingData);
+		.ArmyCenter((ArmyCenterDataClass*)BuildingData);
 	SAssignNew(OperationWidget, SBuildingDetailOperation);
 
 	return SNew(SGameActorDetailWidget)

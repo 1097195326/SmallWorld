@@ -1,6 +1,6 @@
 #pragma once
 #include "BaseBuildingActor.h"
-#include "MillData.h"
+#include "MillDataClass.h"
 
 #include "MillActor.generated.h"
 

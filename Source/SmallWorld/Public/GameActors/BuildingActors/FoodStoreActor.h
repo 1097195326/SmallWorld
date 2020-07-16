@@ -1,6 +1,6 @@
 #pragma once
 #include "BaseBuildingActor.h"
-#include "FoodStoreData.h"
+#include "FoodStoreDataClass.h"
 
 #include "FoodStoreActor.generated.h"
 

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "ProjectileBase.h"
+#include "BaseProjectileClass.h"
 #include "CoreMinimal.h"
 #include "Components/SphereComponent.h"
 #include "Components/StaticMeshComponent.h"
@@ -25,7 +25,7 @@ struct FProjectileInfo
 };
 
 UCLASS()
-class AProjectile : public AActor, public ProjectileBase
+class AProjectile : public AActor, public BaseProjectileClass
 {
 	GENERATED_BODY()
 

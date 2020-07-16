@@ -4,19 +4,19 @@
 AKnight::AKnight()
 {
 	
-	CurrentWeapon = InstantWeapon = NewObject<USoldierInstantWeapon>();
-	InstantWeapon->SetOwner(this);
-	InstantWeapon->AddToRoot();
+	CurrentWeapon = InstantWeaponClass = NewObject<USoldierInstantWeapon>();
+	InstantWeaponClass->SetOwner(this);
+	InstantWeaponClass->AddToRoot();
 	
 }
 AKnight::~AKnight()
 {
-	InstantWeapon->RemoveFromRoot();
-	InstantWeapon = nullptr;
+	InstantWeaponClass->RemoveFromRoot();
+	InstantWeaponClass = nullptr;
 }
 void AKnight::On_Start()
 {
 	
-	InstantWeapon->InitWithWeaponInfo(InstantWeaponInfo);
+	InstantWeaponClass->InitWithWeaponInfo(InstantWeaponInfo);
 
 }

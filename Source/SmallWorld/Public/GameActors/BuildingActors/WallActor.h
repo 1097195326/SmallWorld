@@ -1,6 +1,6 @@
 #pragma once
 #include "BaseBuildingActor.h"
-#include "WallData.h"
+#include "WallDataClass.h"
 
 #include "WallActor.generated.h"
 

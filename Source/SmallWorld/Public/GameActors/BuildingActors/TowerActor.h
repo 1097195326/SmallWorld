@@ -1,6 +1,6 @@
 #pragma once
 #include "BaseBuildingActor.h"
-#include "TowerData.h"
+#include "TowerDataClass.h"
 
 #include "TowerActor.generated.h"
 

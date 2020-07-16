@@ -1,6 +1,6 @@
 #pragma once
 #include "BaseBuildingActor.h"
-#include "GateData.h"
+#include "GateDataClass.h"
 
 #include "GateActor.generated.h"
 

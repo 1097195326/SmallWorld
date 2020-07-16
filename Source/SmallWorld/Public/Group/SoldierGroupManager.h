@@ -2,7 +2,7 @@
 #include "SoldierGroup.h"
 
 
-class SoldierGroupManager : public GObject
+class SoldierGroupManager : public GameObjectClass
 {
 public:
 	static SoldierGroupManager * GetInstance();

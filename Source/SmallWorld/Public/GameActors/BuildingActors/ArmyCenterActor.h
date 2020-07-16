@@ -1,6 +1,6 @@
 #pragma once
 #include "BaseBuildingActor.h"
-#include "ArmyCenterData.h"
+#include "ArmyCenterDataClass.h"
 
 #include "ArmyCenterActor.generated.h"
 
@@ -12,7 +12,7 @@ class AArmyCenterActor : public ABaseBuildingActor
 public:
 	AArmyCenterActor();
 
-	// ------------- Override GObject ------------
+	// ------------- Override GameObjectClass ------------
 	virtual void On_Init() override;
 	// ----------- Override GameActor ----------
 	virtual TSharedPtr<SWidget>	CreateActorDetailWidget() override;

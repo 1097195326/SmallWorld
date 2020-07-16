@@ -9,12 +9,12 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GObject.h"
+#include "GameObjectClass.h"
 #include "GameFramework/PlayerController.h"
 #include "GameController.generated.h"
 
 UCLASS()
-class UNREALENGINEWRAP_API AGameController : public APlayerController, public GObject
+class UNREALENGINEWRAP_API AGameController : public APlayerController, public GameObjectClass
 {
     GENERATED_BODY()
     

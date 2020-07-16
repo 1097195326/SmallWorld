@@ -1,6 +1,6 @@
 #include "GameWorld.h"
 #include "Kismet/GameplayStatics.h"
-#include "DataManager.h"
+#include "GameDataManager.h"
 
 
 GameWorld::GameWorld()
@@ -34,9 +34,9 @@ void GameWorld::BuildTileWorld()
 	MapActor = Cast<AMapActor>(UGameplayStatics::BeginDeferredActorSpawnFromClass(SWI, AMapActor::StaticClass(), MapTrans));
 	if (MapActor)
 	{
-		FAssetData GroundMeshData = DataManager::GetInstance()->GetBuildingAssetDataByIconName(TEXT("GroundTileMesh"));
+		FAssetData GroundMeshData = GameDataManager::GetInstance()->GetBuildingAssetDataByIconName(TEXT("GroundTileMesh"));
 		MapActor->GroundMeshComponent->SetStaticMesh(Cast<UStaticMesh>(GroundMeshData.GetAsset()));
-		FAssetData CloudMeshData = DataManager::GetInstance()->GetBuildingAssetDataByIconName(TEXT("CloudTileMesh"));
+		FAssetData CloudMeshData = GameDataManager::GetInstance()->GetBuildingAssetDataByIconName(TEXT("CloudTileMesh"));
 		MapActor->CloudMeshComponent->SetStaticMesh(Cast<UStaticMesh>(CloudMeshData.GetAsset()));
 		MapActor->ReregisterAllComponents();
 		UGameplayStatics::FinishSpawningActor(MapActor, MapTrans);

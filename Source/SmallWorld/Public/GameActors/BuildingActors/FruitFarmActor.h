@@ -1,6 +1,6 @@
 #pragma once
 #include "BaseBuildingActor.h"
-#include "FruitFarmData.h"
+#include "FruitFarmDataClass.h"
 
 #include "FruitFarmActor.generated.h"
 
