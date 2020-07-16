@@ -14,9 +14,9 @@ FString GameWorldDataFilePath = GamePath::SaveAbsolutePath() + TEXT("GameWorldDa
 
 GameDataManager::GameDataManager()
 {
-	mUserData = nullptr;
-	mGameConfigData = nullptr;
-	mGameWorldData = nullptr;
+	UserData = nullptr;
+	GameConfigData = nullptr;
+	GameWorldData = nullptr;
 
 	
 
@@ -24,14 +24,14 @@ GameDataManager::GameDataManager()
 GameDataManager::~GameDataManager()
 {
 	
-	mUserData = nullptr;
-	mGameConfigData = nullptr;
-	mGameWorldData = nullptr;
+	UserData = nullptr;
+	GameConfigData = nullptr;
+	GameWorldData = nullptr;
 }
 void GameDataManager::InitData()
 {
-	
-	mGameWorldData->InitUserData(mUserData);
+	GameWorldData->InitWorldData();
+	GameWorldData->InitUserData(UserData);
 
 }
 void GameDataManager::LoadData()
@@ -63,7 +63,7 @@ void GameDataManager::SaveData()
 	auto UserWriter = TJsonWriterFactory<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>::Create(&Content);
 
 	UserWriter->WriteObjectStart();
-	mUserData->Serialization(UserWriter);
+	UserData->Serialization(UserWriter);
 	UserWriter->WriteObjectEnd();
 	UserWriter->Close();
 	FFileHelper::SaveStringToFile(Content, *UserDataFilePath);
@@ -71,20 +71,20 @@ void GameDataManager::SaveData()
 	Content.Empty();
 	auto WorldWriter = TJsonWriterFactory<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>::Create(&Content);
 	WorldWriter->WriteObjectStart();
-	mGameWorldData->Serialization(WorldWriter);
+	GameWorldData->Serialization(WorldWriter);
 	WorldWriter->WriteObjectEnd();
 	WorldWriter->Close();
 	FFileHelper::SaveStringToFile(Content, *GameWorldDataFilePath);
 }
 void GameDataManager::ClearData()
 {
-	delete mUserData;
-	delete mGameConfigData;
-	delete mGameWorldData;
+	delete UserData;
+	delete GameConfigData;
+	delete GameWorldData;
 
-	mUserData = nullptr;
-	mGameConfigData = nullptr;
-	mGameWorldData = nullptr;
+	UserData = nullptr;
+	GameConfigData = nullptr;
+	GameWorldData = nullptr;
 }
 void GameDataManager::LoadGameConfigData()
 {
@@ -95,16 +95,16 @@ void GameDataManager::LoadGameConfigData()
 		 FString ClassName = RootNode->GetAttribute(TEXT("classname"));
 		 if (!ClassName.IsEmpty())
 		 {
-			 mGameConfigData = (GameConfigDataClass*)(ClassReflectManager::Get()->GetClassByName(TCHAR_TO_UTF8(*ClassName)));
-			 mGameConfigData->InitWithXML(&GameConfigFile);
+			 GameConfigData = (GameConfigDataClass*)(ClassReflectManager::Get()->GetClassByName(TCHAR_TO_UTF8(*ClassName)));
+			 GameConfigData->InitWithXML(&GameConfigFile);
 		 }
 	 }
 }
 bool GameDataManager::LoadUserData()
 {
-	if (mUserData == nullptr)
+	if (UserData == nullptr)
 	{
-		mUserData = new UserDataClass();
+		UserData = new UserDataClass();
 	}
 	if (FPlatformFileManager::Get().GetPlatformFile().FileExists(*UserDataFilePath))
 	{
@@ -113,7 +113,7 @@ bool GameDataManager::LoadUserData()
 		auto fileReader = TJsonReaderFactory<TCHAR>::Create(Content);
 		TSharedPtr<FJsonObject> JsonContent = MakeShareable(new FJsonObject);
 		FJsonSerializer::Deserialize(fileReader, JsonContent);
-		mUserData->Deserialization(JsonContent->GetObjectField("UserDataClass"));
+		UserData->Deserialization(JsonContent->GetObjectField("UserDataClass"));
 
 
 		return true;
@@ -122,9 +122,9 @@ bool GameDataManager::LoadUserData()
 }
 void GameDataManager::LoadGameWorldData()
 {
-	if (mGameWorldData == nullptr)
+	if (GameWorldData == nullptr)
 	{
-		mGameWorldData = new GameWorldDataClass();
+		GameWorldData = new GameWorldDataClass();
 	}
 	if (FPlatformFileManager::Get().GetPlatformFile().FileExists(*GameWorldDataFilePath))
 	{
@@ -133,7 +133,7 @@ void GameDataManager::LoadGameWorldData()
 		auto fileReader = TJsonReaderFactory<TCHAR>::Create(Content);
 		TSharedPtr<FJsonObject> JsonContent = MakeShareable(new FJsonObject);
 		FJsonSerializer::Deserialize(fileReader, JsonContent);
-		mGameWorldData->Deserialization(JsonContent->GetObjectField("GameWorldDataClass"));
+		GameWorldData->Deserialization(JsonContent->GetObjectField("GameWorldDataClass"));
 	}
 }
  FAssetData GameDataManager::GetBuildingAssetDataByIconName(FString MeshName)

@@ -23,6 +23,7 @@ public:
 	void LoadData();
 	void SaveData();
 	void ClearData();
+
 		
 	FFoodDataChangedDelegate  FoodDataChangedDelegate;
 	FGoldDataChangedDelegate  GoldDataChangedDelegate;
@@ -30,9 +31,9 @@ public:
 	FWoodStoneDataChangedDelegate  WoodDataChangedDelegate;
 	FPeopleDataChangedDelegate  PeopleDataChangedDelegate;
 
-	inline UserDataClass * GetUserData() { return mUserData; }
-	inline GameConfigDataClass * GetGameConfigData() { return mGameConfigData; }
-	inline GameWorldDataClass * GetGameWorldData() { return mGameWorldData; }
+	inline UserDataClass * GetUserData() { return UserData; }
+	inline GameConfigDataClass * GetGameConfigData() { return GameConfigData; }
+	inline GameWorldDataClass * GetGameWorldData() { return GameWorldData; }
 
 	FAssetData  GetBuildingAssetDataByIconName(FString MeshName);
 
@@ -41,9 +42,9 @@ private:
 	bool  LoadUserData();
 	void  LoadGameWorldData();
 
-	UserDataClass * mUserData;
-	GameConfigDataClass * mGameConfigData;
-	GameWorldDataClass * mGameWorldData;
+	UserDataClass * UserData;
+	GameConfigDataClass * GameConfigData;
+	GameWorldDataClass * GameWorldData;
 	TArray<FAssetData> BuildingAssetArray;
 	TArray<ASoldierPawn*> SoldierAssetArray;
 

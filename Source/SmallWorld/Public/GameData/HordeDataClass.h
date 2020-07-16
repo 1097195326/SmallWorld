@@ -19,7 +19,7 @@
 class HordeDataClass : public RuntimeDataClass
 {
 public:
-	
+	HordeDataClass(RaceEnum InRace);
 	~HordeDataClass();
 
     virtual void Serialization(TSharedRef<TJsonWriter<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>> Writer) override;
@@ -50,11 +50,12 @@ public:
 	int32 GetGoldNum();
 	int32 GetWoodNum();
 	int32 GetStoneNum();
-
+	inline RaceEnum GetRace() { return Race; }
 	
 protected:
 	TMap<FGuid, BaseBuildingDataClass*>		BuildingDatas;
 	//TArray<BaseBuildingDataClass*>		BuildingDatas;
+	RaceEnum		Race;
 	
 };
 

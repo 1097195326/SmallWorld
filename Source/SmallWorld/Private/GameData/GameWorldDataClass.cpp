@@ -45,44 +45,58 @@ void GameWorldDataClass::InitWorldData()
 {
 	if (HordeDataMap.Num() == 0)
 	{
-		HordeDataClass * TemHordeData = CreateHordeData();
-
+		for (int i = 0;i < RaceEnum::Race_Num; i++ )
+		{
+			CreateHordeData((RaceEnum)i);
+		}
 	}
 }
-void GameWorldDataClass::InitUserData(UserDataClass * userData)
+void GameWorldDataClass::InitUserData(UserDataClass * InUserData)
 {
-	HordeDataClass * userHordeData = nullptr;
-	if (HordeIdIsValid(userData->GetHordeId()))
+	if (HordeIdIsValid(InUserData->GetHordeId()))
 	{
-		userHordeData = HordeDataMap[userData->GetHordeId()];
+		InUserData->HordeData = HordeDataMap[InUserData->GetHordeId()];
 	}
-	else
-	{
-		userHordeData = CreateHordeData();
-		userData->hordeId = userHordeData->GetObjectId();
-	}
-	userData->hordeData = userHordeData;
 }
-HordeDataClass * GameWorldDataClass::CreateHordeData()
+void GameWorldDataClass::SetUserDataRace(class UserDataClass * InUserData, RaceEnum InRace)
 {
-	HordeDataClass * resData = new HordeDataClass();
+	TArray<HordeDataClass *> TemHordeArray = GetHordeDatByRace(InRace);
+	HordeDataClass * TemHordeData = TemHordeArray[0];
+	InUserData->HordeId = TemHordeData->GetObjectId();
+	InUserData->HordeData = TemHordeData;
+}
+HordeDataClass * GameWorldDataClass::CreateHordeData(RaceEnum InRace)
+{
+	HordeDataClass * resData = new HordeDataClass(InRace);
 	HordeDataMap.Add(resData->GetObjectId(), resData);
 	return resData;
 }
-HordeDataClass * GameWorldDataClass::GetHordeDataById(FGuid hordeId)
+HordeDataClass * GameWorldDataClass::GetHordeDataById(const FGuid & InHordeId)
 {
-	return HordeDataMap[hordeId];
+	return HordeDataMap[InHordeId];
 }
-bool GameWorldDataClass::HordeIdIsValid(FGuid hordeId)
+TArray<HordeDataClass*> GameWorldDataClass::GetHordeDatByRace(RaceEnum InRace)
 {
-	return hordeId.IsValid() && HordeDataMap.Contains(hordeId);
-}
-bool GameWorldDataClass::DestroyHordeId(FGuid hordeId)
-{
-	if (HordeDataMap.Contains(hordeId))
+	TArray<HordeDataClass*> TemArray;
+	for (auto TemIter : HordeDataMap)
 	{
-		delete HordeDataMap[hordeId];
-		HordeDataMap.Remove(hordeId);
+		if (TemIter.Value->GetRace() == InRace)
+		{
+			TemArray.Add(TemIter.Value);
+		}
+	}
+	return MoveTemp(TemArray);
+}
+bool GameWorldDataClass::HordeIdIsValid(const FGuid & InHordeId)
+{
+	return InHordeId.IsValid() && HordeDataMap.Contains(InHordeId);
+}
+bool GameWorldDataClass::DestroyHordeId(const FGuid & InHordeId)
+{
+	if (HordeDataMap.Contains(InHordeId))
+	{
+		delete HordeDataMap[InHordeId];
+		HordeDataMap.Remove(InHordeId);
 		return true;
 	}
 	return false;

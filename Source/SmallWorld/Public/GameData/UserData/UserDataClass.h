@@ -13,11 +13,11 @@ public:
 	virtual void Serialization(TSharedRef<TJsonWriter<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>> Writer) override;
 	virtual void Deserialization(TSharedPtr<FJsonObject>  JsonObject) override;
 
-	const FGuid &	GetHordeId() { return hordeId; }
-	 HordeDataClass * GetHordeData() { return hordeData; }
+	const FGuid &	GetHordeId() { return HordeId; }
+	 HordeDataClass * GetHordeData() { return HordeData; }
 private:
-	HordeDataClass * hordeData;
-	FGuid  hordeId;
+	HordeDataClass * HordeData;
+	FGuid  HordeId;
 
 };
 

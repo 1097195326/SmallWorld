@@ -17,13 +17,16 @@ public:
     virtual void Deserialization(TSharedPtr<FJsonObject>  JsonObject) override;
     
 	void	InitWorldData();
-	void	InitUserData(class UserDataClass * userData);
-	// Manage HordeId
-	HordeDataClass * CreateHordeData();
-	HordeDataClass *	GetHordeDataById(FGuid hordeId);
+	void	InitUserData(class UserDataClass * InUserData);
+	void	SetUserDataRace(class UserDataClass * InUserData,RaceEnum InRace);
 
-	bool	HordeIdIsValid(FGuid hordeId);
-	bool	DestroyHordeId(FGuid hordeId);
+	// Manage HordeId
+	HordeDataClass * CreateHordeData(RaceEnum InRace = Race_None);
+	HordeDataClass *	GetHordeDataById(const FGuid & InHordeId);
+	TArray<HordeDataClass*>	GetHordeDatByRace(RaceEnum InRace);
+
+	bool	HordeIdIsValid(const FGuid & InHordeId);
+	bool	DestroyHordeId(const FGuid & InHordeId);
 private:
 	TMap<FGuid,HordeDataClass *>	HordeDataMap;
 

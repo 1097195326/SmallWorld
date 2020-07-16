@@ -1,5 +1,9 @@
 #include "HordeDataClass.h"
 
+HordeDataClass::HordeDataClass(RaceEnum InRace) :Race(InRace)
+{
+
+}
 HordeDataClass::~HordeDataClass()
 {
 	for (auto data : BuildingDatas)
@@ -13,6 +17,7 @@ void HordeDataClass::Serialization(TSharedRef<TJsonWriter<TCHAR, TCondensedJsonP
 	Writer->WriteObjectStart("HordeDataClass");
 	RuntimeDataClass::Serialization(Writer);
 
+		Writer->WriteValue("Race", Race);
 		Writer->WriteObjectStart("BuildingDatas");
 		for (auto data : BuildingDatas)
 		{
@@ -24,6 +29,9 @@ void HordeDataClass::Serialization(TSharedRef<TJsonWriter<TCHAR, TCondensedJsonP
 void HordeDataClass::Deserialization(TSharedPtr<FJsonObject>  JsonObject)
 {
 	RuntimeDataClass::Deserialization(JsonObject->GetObjectField("RuntimeDataClass"));
+
+	Race = (RaceEnum)JsonObject->GetIntegerField("Race");
+
 	TSharedPtr<FJsonObject> jBuildingDatas = JsonObject->GetObjectField("BuildingDatas");
 
 	for (auto jPair : jBuildingDatas->Values)
