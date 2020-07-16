@@ -51,7 +51,8 @@ void GameWorld::BuildTileWorld()
 		}
 	}
 
-	int32 EdgeCenter = TileMapSize / 2;
+	CoordStruct  MapCenter(TileMapSize / 2, TileMapSize / 2);
+	CoordStruct  LeftPos(MapCenter.IndexX, MapCenter.IndexY - (TileMapSize / 2 - 1));
 
 
 

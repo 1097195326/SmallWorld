@@ -5,6 +5,7 @@
 #include "GameWorldActor.h"
 #include "MapActor.h"
 #include "Soldiers/SoldierPawn.h"
+#include "BaseBuildingActor.h"
 
 using namespace TileGameConfig;
 
@@ -33,6 +34,7 @@ struct TileStateStruct
 	CoordStruct Coord;
 	int32 InstanceIndex;
 	ASoldierPawn *	SoldierPawn;
+	ABaseBuildingActor * BuildingActor;
 
 	~TileStateStruct() { InstanceIndex = -1; SoldierPawn = nullptr; }
 	TileStateStruct():Coord(-1,-1),InstanceIndex(-1),SoldierPawn(nullptr){}
