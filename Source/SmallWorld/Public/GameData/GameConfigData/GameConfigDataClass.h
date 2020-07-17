@@ -19,7 +19,7 @@ struct BuildingConfigStruct
 	FString name;
 	FString title;
 	FString describe;
-	int32 maxlevel;
+	int32 MaxLevel;
 	TMap<int32,BuildingLevelInfoStruct> LevelInfos;
 };
 struct SoldierLevelInfoStruct
@@ -39,7 +39,9 @@ struct SoldierConfigStruct
 	FString race;
 	FString title;
 	FString describe;
-	int32 maxlevel;
+	int32	maxlevel;
+	int32	movepower;
+	int32   distance;
 	TMap<int32, SoldierLevelInfoStruct> LevelInfos;
 };
 class GameConfigDataClass : public TemplateDataClass

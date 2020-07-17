@@ -46,14 +46,14 @@ void ArmyCenterDataClass::Deserialization(TSharedPtr<FJsonObject>  JsonObject)
 	/*TArray<TSharedPtr<FJsonValue>>  JHaveSoldiers=JsonObject->GetArrayField("HaveSoldiers");
     for (auto jValue : JHaveSoldiers)
     {
-		SoldierEnum ekey = (SoldierEnum)jValue->AsObject()->GetIntegerField("Key");
+		SoldierTypeEnum ekey = (SoldierTypeEnum)jValue->AsObject()->GetIntegerField("Key");
 		int32 ivalue = jValue->AsObject()->GetIntegerField("Value");
 		HaveSoldiers.Add(ekey, ivalue);
     }
 	TArray<TSharedPtr<FJsonValue>>  JTrainSoldiers = JsonObject->GetArrayField("TrainSoldiers");
 	for (auto jValue : JTrainSoldiers)
 	{
-		SoldierEnum ekey = (SoldierEnum)jValue->AsObject()->GetIntegerField("Key");
+		SoldierTypeEnum ekey = (SoldierTypeEnum)jValue->AsObject()->GetIntegerField("Key");
 		int32 ivalue = jValue->AsObject()->GetIntegerField("Value");
 		TrainSoldiers.Add(ekey, ivalue);
 	}*/
@@ -71,7 +71,7 @@ bool ArmyCenterDataClass::SpawnBuildingActor(UWorld * world, const FVector & Loc
 	}
 	return false;
 }
-void ArmyCenterDataClass::TrainSoldier(SoldierEnum InSoldierType, int32 InNum)
+void ArmyCenterDataClass::TrainSoldier(SoldierTypeEnum InSoldierType, int32 InNum)
 {
 	FString  TemTrainKey = FString::Printf(TEXT("%s_%d"),*GetObjectId().ToString(),InSoldierType);
 	switch (InSoldierType)

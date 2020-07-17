@@ -60,7 +60,7 @@ SoldierGroupManager * SoldierGroupManager::GetEnemyGroupManager()
 {
 	return mEnemyGroupManager;
 }
-SoldierGroup * SoldierGroupManager::CreateGroupBySoldierType(SoldierEnum _type)
+SoldierGroup * SoldierGroupManager::CreateGroupBySoldierType(SoldierTypeEnum _type)
 {
 	SoldierGroup * resultGroup = nullptr;
 	switch (_type)

@@ -49,7 +49,7 @@ void GameConfigDataClass::InitWithXML(const FXmlFile * xmlFile)
 				config.name = DataInfo->GetAttribute(TEXT("name"));
 				config.title = DataInfo->GetAttribute(TEXT("title"));
 				config.describe = DataInfo->GetAttribute(TEXT("describe"));
-				config.maxlevel = FCString::Atoi(*DataInfo->GetAttribute(TEXT("maxlevel"))) ;
+				config.MaxLevel = FCString::Atoi(*DataInfo->GetAttribute(TEXT("maxlevel"))) ;
 				for (const FXmlNode * LevelInfo = DataInfo->GetFirstChildNode(); LevelInfo != NULL; LevelInfo = LevelInfo->GetNextNode())
 				{
 					BuildingLevelInfoStruct info;

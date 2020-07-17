@@ -18,7 +18,7 @@ void AArmyCenterActor::On_Init()
 TSharedPtr<SWidget>	AArmyCenterActor::CreateActorDetailWidget()
 {
 	SAssignNew(TitleWidget, SGameActorDetailTitle)
-		.ActorName(BuildingData->GetConfigData().title)
+		.ActorName(BuildingData->GetSoldierConfig().title)
 		.ActorLevel(FString::Printf(TEXT("%s%d"),*TransLanguage("Game_Level"), BuildingData->BuildingLevel))
 		.ActorHealth(FString::Printf(TEXT("%s%.02f"), *TransLanguage("Game_Building_Level"), BuildingData->BuildingHealth));
 	SAssignNew(DetailWidget, SArmyCenterOperationDetail)

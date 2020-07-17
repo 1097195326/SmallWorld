@@ -55,5 +55,5 @@ void BaseSoldierDataClass::Deserialization(TSharedPtr<FJsonObject> JsonObject)
 void BaseSoldierDataClass::SetSoldierConfigByName(FString InName)
 {
 	SoldierName = InName;
-	ConfigData = GameDataManager::GetInstance()->GetGameConfigData()->GetSoldierConfig(InName);
+	SoldierConfig = GameDataManager::GetInstance()->GetGameConfigData()->GetSoldierConfig(InName);
 }

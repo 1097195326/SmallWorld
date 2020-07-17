@@ -17,7 +17,7 @@ struct SoldierTrainState
 };
 struct SoldierStorageState
 {
-	SoldierEnum	SoldierType;
+	SoldierTypeEnum	SoldierType;
 	int32			HaveNum;
 	int32			OutingNum;
 	int32			TrainNum;
@@ -46,7 +46,7 @@ public:
 
 	virtual bool SpawnBuildingActor(UWorld * world, const FVector & Location, const FRotator & Rotation) override;
 
-	void	TrainSoldier(SoldierEnum InSoldierType,int32 InNum);
+	void	TrainSoldier(SoldierTypeEnum InSoldierType,int32 InNum);
     
 	void	OnTrainArcherCallback(const float & InProgress, const bool & InIsFinish, const int & LoopTimes);
 	void	OnTrainFootmanCallback(const float & InProgress, const bool & InIsFinish, const int & LoopTimes);
@@ -54,8 +54,8 @@ public:
 protected:
 	void	OnTrainCallback(SoldierStorageState & StorageState, SoldierTrainState & TrainState, const float & InProgress, const bool & InIsFinish, const int & LoopTimes);
 	
-	TMap<SoldierEnum, SoldierStorageState>	SoldierStorageMap;
-	TMap<SoldierEnum, SoldierTrainState>	SoldierTrainMap;
+	TMap<SoldierTypeEnum, SoldierStorageState>	SoldierStorageMap;
+	TMap<SoldierTypeEnum, SoldierTrainState>	SoldierTrainMap;
 
 
 };

@@ -5,7 +5,7 @@
 
 
 
-enum SoldierEnum : int32
+enum SoldierTypeEnum : int32
 {
 	Soldier_None,
 	Soldier_Archer,
@@ -35,17 +35,19 @@ public:
 
 	void SetSoldierConfigByName(FString InName);
 
-	inline bool	IsMaxLevel() { return Level == ConfigData.maxlevel; }
+	inline bool	IsMaxLevel() { return Level == SoldierConfig.maxlevel; }
 	inline FString GetSoldierName() { return SoldierName; }
-	inline const SoldierConfigStruct & GetConfigData() { return ConfigData; }
-	inline SoldierEnum GetSoldierType() { return SoldierType; }
+	inline const SoldierConfigStruct & GetSoldierConfig() { return SoldierConfig; }
+	inline SoldierTypeEnum GetSoldierType() { return SoldierType; }
+	inline int32 GetMovePower() const { return MovePower; }
+	inline int32 GetMoveDistance() const { return SoldierConfig.distance; }
 protected:
 	class ASoldierPawn *		SoldierPawn;
 	class ArmyCenterDataClass * ArmyCenter;
 
 	FString					SoldierName;
-	SoldierConfigStruct		ConfigData;
-	SoldierEnum				SoldierType;
+	SoldierConfigStruct		SoldierConfig;
+	SoldierTypeEnum			SoldierType;
 
 	float	Health;
 	int32	Level;

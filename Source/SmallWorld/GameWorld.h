@@ -43,7 +43,7 @@ struct TileStateStruct
 	TileStateStruct & operator = (const TileStateStruct & InTile) { Coord = InTile.Coord; InstanceIndex = InTile.InstanceIndex; SoldierPawn = InTile.SoldierPawn; BuildingActor = InTile.BuildingActor; return *this; }
 	TileStateStruct & operator = (TileStateStruct && InTile) { Coord = std::move(InTile.Coord); InstanceIndex = std::move(InTile.InstanceIndex); SoldierPawn = std::move(InTile.SoldierPawn); BuildingActor = std::move(InTile.BuildingActor); return *this; }
 
-	bool IsHavePawn() { return SoldierPawn != nullptr; }
+	bool IsHavePawn() const { return SoldierPawn != nullptr; }
 	void SoldierEnter(ASoldierPawn * InSoldier) { SoldierPawn = InSoldier; }
 	void SoldierExit() { SoldierPawn = nullptr; }
 
@@ -53,40 +53,34 @@ struct TileStateStruct
 };
 struct TileGroupStruct
 {
-	//TMap<CoordStruct,TileStateStruct>	TileMap;
-
-
-
+	TMap<FIntPoint,TileStateStruct>	TileGroupMap;
 
 };
 
 
-class GameWorld
+class GameWorld : public SingleTemplateClass<GameWorld>
 {
-private:
-
-	GameWorld();
-
-
-	TileStateStruct TileMap[TileMapSize][TileMapSize];
-
-	vector<vector<ACityActor *>>	CityMap;
-	AGameWorldActor *				GameWorldActor;
-	AMapActor *						MapActor;
 public:
+	GameWorld();
 	~GameWorld();
 
-	static GameWorld *				GetInstance();
-	void							BuildTileWorld();
+	int32 GetMinMovePower(const TArray<TileStateStruct> & InTileArray);
+	int32 GetMinMoveDistance(const TArray<TileStateStruct> & InTileArray);
 
-	void							ClearCityMap();
+	TArray<TileStateStruct>	GetCanArriveTileArray(const TArray<TileStateStruct> & InTileArray,const int32 & InMoveDistance);
 
-	void							Update();
+
+	void					BuildTileWorld();
+	void					Update();
 
 private:
-	bool							IsInitialized;
-	bool							IsPaused;
+	TileStateStruct			TileMap[TileMapSize][TileMapSize];
+	AGameWorldActor *		GameWorldActor;
+	AMapActor *				MapActor;
 
-	bool							IsInTileMap(int _index);
-	ACityActor *					BuildCity(int _x, int _y);
+	bool					IsInitialized;
+	bool					IsPaused;
+
+	bool					IsInTileMap(int _index);
+
 };
