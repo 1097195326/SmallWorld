@@ -3,7 +3,6 @@
 
 #define LandscapeObject ECC_GameTraceChannel3
 
-
 #define CheckNullPtr(Ptr)  {if (Ptr == nullptr)return;}
 
 namespace  TileGameConfig
@@ -14,6 +13,8 @@ namespace  TileGameConfig
 	
 	const FVector ShowLocation(0, 0, 800);
 	const FVector HideLocation(0, 0, -800);
+
+	
 }
 enum RaceEnum
 {

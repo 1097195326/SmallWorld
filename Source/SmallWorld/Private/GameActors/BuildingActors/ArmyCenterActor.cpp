@@ -4,7 +4,7 @@
 #include "SArmyCenterOperationDetail.h"
 #include "SGameActorDetailTitle.h"
 #include "SBuildingDetailOperation.h"
-
+#include "GameDataManager.h"
 
 AArmyCenterActor::AArmyCenterActor()
 {

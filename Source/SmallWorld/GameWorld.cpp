@@ -1,6 +1,8 @@
 #include "GameWorld.h"
 #include "Kismet/GameplayStatics.h"
 #include "GameDataManager.h"
+#include "SoldierPawn.h"
+#include "BaseBuildingActor.h"
 
 
 GameWorld::GameWorld()

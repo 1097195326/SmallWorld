@@ -12,16 +12,10 @@
 #include "SmallWorldInstance.h"
 #include <vector>
 #include <list>
-#include "GameDataManager.h"
-
 #include "BaseBuildingActor.generated.h"
 
 using namespace std;
-
-
-
-
-class ABlockActor;
+class BaseBuildingDataClass;
 
 UCLASS()
 class ABaseBuildingActor : public AGameActor

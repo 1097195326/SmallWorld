@@ -4,6 +4,7 @@
 #include "SoldierPawn.h"
 
 
+
 enum SoldierEnum : int32
 {
 	Soldier_None,
@@ -36,17 +37,18 @@ public:
 
 	inline bool	IsMaxLevel() { return Level == ConfigData.maxlevel; }
 	inline FString GetSoldierName() { return SoldierName; }
-	inline const SSoldierConfig & GetConfigData() { return ConfigData; }
+	inline const SoldierConfigStruct & GetConfigData() { return ConfigData; }
 	inline SoldierEnum GetSoldierType() { return SoldierType; }
 protected:
-	class ASoldierPawn * SoldierPawn;
+	class ASoldierPawn *		SoldierPawn;
 	class ArmyCenterDataClass * ArmyCenter;
 
-	FString			SoldierName;
-	SSoldierConfig  ConfigData;
-	SoldierEnum	SoldierType;
+	FString					SoldierName;
+	SoldierConfigStruct		ConfigData;
+	SoldierEnum				SoldierType;
 
 	float	Health;
 	int32	Level;
+	int32	MovePower;
 
 };

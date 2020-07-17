@@ -79,6 +79,9 @@ public:
 	virtual bool	CanAttack()override;
 	virtual void	HandleAttack() override;
 	
+	void			GetSoldierData(BaseSoldierDataClass * InSoldierData) { SoldierData = InSoldierData; }
+	BaseSoldierDataClass * GetSoldierData() { return SoldierData; }
+
 
 	void			SetGroupAndIndex(SoldierGroup * _group,int _index);
 	
@@ -104,6 +107,7 @@ public:
 		TArray<UAISenseConfig*>		SenseConfigs;
 
 protected:
+	BaseSoldierDataClass *	SoldierData;
 	FTimerHandle			DeathTimerHandle;
 	void					PendingDestory();
 	

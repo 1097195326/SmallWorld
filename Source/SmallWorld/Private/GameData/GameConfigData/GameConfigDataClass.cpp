@@ -45,14 +45,14 @@ void GameConfigDataClass::InitWithXML(const FXmlFile * xmlFile)
 		{
 			for (const FXmlNode * DataInfo = DataTypeInfo->GetFirstChildNode(); DataInfo != NULL; DataInfo = DataInfo->GetNextNode())
 			{
-				SBuildingConfig config;
+				BuildingConfigStruct config;
 				config.name = DataInfo->GetAttribute(TEXT("name"));
 				config.title = DataInfo->GetAttribute(TEXT("title"));
 				config.describe = DataInfo->GetAttribute(TEXT("describe"));
 				config.maxlevel = FCString::Atoi(*DataInfo->GetAttribute(TEXT("maxlevel"))) ;
 				for (const FXmlNode * LevelInfo = DataInfo->GetFirstChildNode(); LevelInfo != NULL; LevelInfo = LevelInfo->GetNextNode())
 				{
-					SBuildingLevelInfo info;
+					BuildingLevelInfoStruct info;
 					info.level = FCString::Atoi(*LevelInfo->GetAttribute(TEXT("level")));
 					info.upmoney = FCString::Atoi(*LevelInfo->GetAttribute(TEXT("upmoney")));
 					info.upstone = FCString::Atoi(*LevelInfo->GetAttribute(TEXT("upstone")));
@@ -67,7 +67,7 @@ void GameConfigDataClass::InitWithXML(const FXmlFile * xmlFile)
 		{
 			for (const FXmlNode * DataInfo = DataTypeInfo->GetFirstChildNode(); DataInfo != NULL; DataInfo = DataInfo->GetNextNode())
 			{
-				SSoldierConfig config;
+				SoldierConfigStruct config;
 				config.name = DataInfo->GetAttribute(TEXT("name"));
 				config.race = DataInfo->GetAttribute(TEXT("race"));
 				config.title = DataInfo->GetAttribute(TEXT("title"));
@@ -75,7 +75,7 @@ void GameConfigDataClass::InitWithXML(const FXmlFile * xmlFile)
 				config.maxlevel = FCString::Atoi(*DataInfo->GetAttribute(TEXT("maxlevel")));
 				for (const FXmlNode * LevelInfo = DataInfo->GetFirstChildNode(); LevelInfo != NULL; LevelInfo = LevelInfo->GetNextNode())
 				{
-					SSoldierLevelInfo info;
+					SoldierLevelInfoStruct info;
 					info.level = FCString::Atoi(*LevelInfo->GetAttribute(TEXT("level")));
 					info.health = FCString::Atoi(*LevelInfo->GetAttribute(TEXT("health")));
 					info.kills = FCString::Atoi(*LevelInfo->GetAttribute(TEXT("kills")));
@@ -114,13 +114,13 @@ void GameConfigDataClass::InitWithXML(const FXmlFile * xmlFile)
 	}
 
 }
-const SSoldierConfig & GameConfigDataClass::GetSoldierConfig(FString name)
+const SoldierConfigStruct & GameConfigDataClass::GetSoldierConfig(FString name)
 {
 	return SoldierConfigMap[name];
 }
-TArray<SSoldierConfig> GameConfigDataClass::GetSoldierConfigs(const TArray<FString> & names)
+TArray<SoldierConfigStruct> GameConfigDataClass::GetSoldierConfigs(const TArray<FString> & names)
 {
-	TArray<SSoldierConfig> TemArray;
+	TArray<SoldierConfigStruct> TemArray;
 	for (auto name : names)
 	{
 		if (SoldierConfigMap.Contains(name))
@@ -130,13 +130,13 @@ TArray<SSoldierConfig> GameConfigDataClass::GetSoldierConfigs(const TArray<FStri
 	}
 	return MoveTemp(TemArray);
 }
-const SBuildingConfig & GameConfigDataClass::GetBuildingConfig(FString name)
+const BuildingConfigStruct & GameConfigDataClass::GetBuildingConfig(FString name)
 {
 	return BuildingConfigMap[name];
 }
-TArray<SBuildingConfig> GameConfigDataClass::GetBuildingConfigs(const TArray<FString> & names)
+TArray<BuildingConfigStruct> GameConfigDataClass::GetBuildingConfigs(const TArray<FString> & names)
 {
-	TArray<SBuildingConfig> TemArray;
+	TArray<BuildingConfigStruct> TemArray;
 	for (auto name : names)
 	{
 		if (BuildingConfigMap.Contains(name))

@@ -2,27 +2,27 @@
 
 #include "TemplateDataClass.h"
 
-struct SBuildingLevelInfo 
+struct BuildingLevelInfoStruct 
 {
-	SBuildingLevelInfo(){}
-	SBuildingLevelInfo(int32 temLevel) { level = temLevel; }
+	BuildingLevelInfoStruct(){}
+	BuildingLevelInfoStruct(int32 temLevel) { level = temLevel; }
 	int32 level;
 	int32 upmoney;
 	int32 upstone;
 	int32 upwood;
 	float factor;
-	bool operator == (const SBuildingLevelInfo & info){return level == info.level;}
-	bool operator != (const SBuildingLevelInfo & info){return level != info.level;}
+	bool operator == (const BuildingLevelInfoStruct & info){return level == info.level;}
+	bool operator != (const BuildingLevelInfoStruct & info){return level != info.level;}
 };
-struct SBuildingConfig
+struct BuildingConfigStruct
 {
 	FString name;
 	FString title;
 	FString describe;
 	int32 maxlevel;
-	TMap<int32,SBuildingLevelInfo> LevelInfos;
+	TMap<int32,BuildingLevelInfoStruct> LevelInfos;
 };
-struct SSoldierLevelInfo
+struct SoldierLevelInfoStruct
 {
 	int32 level;
 	int32 health;
@@ -33,14 +33,14 @@ struct SSoldierLevelInfo
 	float magdef;
 	float factor;
 };
-struct SSoldierConfig
+struct SoldierConfigStruct
 {
 	FString name;
 	FString race;
 	FString title;
 	FString describe;
 	int32 maxlevel;
-	TMap<int32, SSoldierLevelInfo> LevelInfos;
+	TMap<int32, SoldierLevelInfoStruct> LevelInfos;
 };
 class GameConfigDataClass : public TemplateDataClass
 {
@@ -53,16 +53,16 @@ public:
 	virtual void InitWithXML(const FXmlFile * _file) override;
 
 	
-	TArray<SBuildingConfig> GetBuildingConfigs(const TArray<FString> &  names);
-	const SBuildingConfig & GetBuildingConfig(FString name);
-	TArray<SSoldierConfig> GetSoldierConfigs(const TArray<FString> &  names);
-	const SSoldierConfig & GetSoldierConfig(FString name);
+	TArray<BuildingConfigStruct> GetBuildingConfigs(const TArray<FString> &  names);
+	const BuildingConfigStruct & GetBuildingConfig(FString name);
+	TArray<SoldierConfigStruct> GetSoldierConfigs(const TArray<FString> &  names);
+	const SoldierConfigStruct & GetSoldierConfig(FString name);
 
 	FString TranslateLanguage(FString key);
 private:
 
-	TMap<FString, SSoldierConfig>  SoldierConfigMap;
-	TMap<FString, SBuildingConfig>  BuildingConfigMap;
+	TMap<FString, SoldierConfigStruct>  SoldierConfigMap;
+	TMap<FString, BuildingConfigStruct>  BuildingConfigMap;
 	TMap<FString,TMap<FString, FString>> LanguageMap;
 };
 

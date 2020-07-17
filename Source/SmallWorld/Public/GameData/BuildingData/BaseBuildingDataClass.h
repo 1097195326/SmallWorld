@@ -3,6 +3,7 @@
 #include "CoreMinimal.h"
 #include "BaseSoldierDataClass.h"
 #include "ProgressManager.h"
+#include "BaseBuildingActor.h"
 
 
 enum EBuildingType
@@ -48,7 +49,7 @@ public:
 	void	SetConfigDataByName(FString InName);
 
 	inline bool IsMaxLevel() { return BuildingLevel == ConfigData.maxlevel; }
-	inline const SBuildingConfig & GetConfigData() { return ConfigData; }
+	inline const BuildingConfigStruct & GetConfigData() { return ConfigData; }
 	inline FString GetBuildingName() { return BuildingName; }
 	inline EBuildingType GetBuildingType() { return BuildingType; }
 protected:
@@ -60,7 +61,7 @@ public:
 	class HordeDataClass *	BuildingBelongHorde;
 	class ABaseBuildingActor * BuildingActor;
 
-	SBuildingConfig  ConfigData;
+	BuildingConfigStruct  ConfigData;
 	FVector			BuildingPosition;
 	FRotator		BuildingRotator;
 

@@ -1,7 +1,7 @@
 #include "BaseSoldierDataClass.h"
 #include "GameDataManager.h"
-#include "SoldierPawn.h"
 #include "ArmyCenterDataClass.h"
+
 
 BaseSoldierDataClass::BaseSoldierDataClass()
 {

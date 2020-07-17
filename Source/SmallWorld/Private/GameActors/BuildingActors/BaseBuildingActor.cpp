@@ -1,6 +1,6 @@
 #include "BaseBuildingActor.h"
 #include "BlockActor.h"
-//#include "GameDataManager.h"
+#include "GameDataManager.h"
 
 
 ABaseBuildingActor::ABaseBuildingActor()

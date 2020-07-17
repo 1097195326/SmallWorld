@@ -1,7 +1,6 @@
 #include "BaseBuildingDataClass.h"
 #include "GameDataManager.h"
 #include "HordeDataClass.h"
-#include "BaseBuildingActor.h"
 
 
 BaseBuildingDataClass::BaseBuildingDataClass()

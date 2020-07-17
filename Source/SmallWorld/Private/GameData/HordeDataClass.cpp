@@ -1,4 +1,18 @@
 #include "HordeDataClass.h"
+#include "ArmyCenterDataClass.h"
+#include "BakeryDataClass.h"
+#include "CommandCenterDataClass.h"
+#include "FarmDataClass.h"
+#include "FoodStoreDataClass.h"
+#include "FruitFarmDataClass.h"
+#include "GateDataClass.h"
+#include "HouseDataClass.h"
+#include "MillDataClass.h"
+#include "MoneyStoreDataClass.h"
+#include "WoodStoneStoreDataClass.h"
+#include "TowerDataClass.h"
+#include "WallDataClass.h"
+
 
 HordeDataClass::HordeDataClass(RaceEnum InRace) :Race(InRace)
 {
