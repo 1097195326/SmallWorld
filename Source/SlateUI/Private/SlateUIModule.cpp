@@ -1,5 +1,5 @@
 ﻿#include "SlateUIModule.h"
-#include "ModuleManager.h"
+#include "Modules/ModuleManager.h"
 
 IMPLEMENT_MODULE(SlateUIModule, SlateUI);
 

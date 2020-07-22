@@ -63,9 +63,22 @@ void GameWorld::Update()
 		
 	}
 }
-bool GameWorld::IsInTileMap(int _index)
+bool GameWorld::IsInTileMap(const int32 & InIndex)
 {
-	return _index >= 0 && _index < TileMapSize;
+	return InIndex >= 0 && InIndex < TileMapSize;
+}
+bool GameWorld::IsInTileMap(const CoordStruct& InCoord)
+{
+	return IsInTileMap(InCoord.IndexX) && IsInTileMap(InCoord.IndexY);
+}
+bool GameWorld::GetTileByCoord(const CoordStruct& InCoord,TileStateStruct & OutTile)
+{
+	if (IsInTileMap(InCoord))
+	{
+		OutTile = TileMap[InCoord.IndexX][InCoord.IndexY];
+		return true;
+	}
+	return false;
 }
 int32 GameWorld::GetMinMovePower(const TArray<TileStateStruct> & InTileArray)
 {

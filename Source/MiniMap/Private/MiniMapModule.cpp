@@ -1,5 +1,5 @@
 ﻿#include "MiniMapModule.h"
-#include "ModuleManager.h"
+#include "Modules/ModuleManager.h"
 
 IMPLEMENT_MODULE(MiniMapModule, MiniMap);
 

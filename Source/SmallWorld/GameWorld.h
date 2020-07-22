@@ -8,6 +8,13 @@
 class ASoldierPawn;
 class ABaseBuildingActor;
 
+enum	DirectionEnum
+{
+	Direction_Up,
+	Direction_Down,
+	Direction_Left,
+	Direction_Right,
+};
 struct CoordStruct
 {
 	int32	IndexX;
@@ -64,8 +71,9 @@ public:
 	GameWorld();
 	~GameWorld();
 
-	int32 GetMinMovePower(const TArray<TileStateStruct> & InTileArray);
-	int32 GetMinMoveDistance(const TArray<TileStateStruct> & InTileArray);
+	bool	GetTileByCoord(const CoordStruct& InCoord,TileStateStruct & OutTile);
+	int32	GetMinMovePower(const TArray<TileStateStruct> & InTileArray);
+	int32	GetMinMoveDistance(const TArray<TileStateStruct> & InTileArray);
 
 	TArray<TileStateStruct>	GetCanArriveTileArray(const TArray<TileStateStruct> & InTileArray,const int32 & InMoveDistance);
 
@@ -81,6 +89,7 @@ private:
 	bool					IsInitialized;
 	bool					IsPaused;
 
-	bool					IsInTileMap(int _index);
+	bool					IsInTileMap(const int32 & InIndex);
+	bool					IsInTileMap(const CoordStruct & InCoord);
 
 };
