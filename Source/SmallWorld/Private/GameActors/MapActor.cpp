@@ -7,12 +7,12 @@ AMapActor::AMapActor()
 	GroundMeshComponent = CreateDefaultSubobject<UInstancedStaticMeshComponent>("GroundMeshComponent");
 	CloudMeshComponent = CreateDefaultSubobject<UInstancedStaticMeshComponent>("CloudMeshComponent");
 	FenceMeshComponent = CreateDefaultSubobject<UInstancedStaticMeshComponent>("FenceMeshComponent");
-	CityMeshComponent = CreateDefaultSubobject<UInstancedStaticMeshComponent>("CityMeshComponent");
+	CastleMeshComponent = CreateDefaultSubobject<UInstancedStaticMeshComponent>("CityMeshComponent");
 
 	GroundMeshComponent->AttachToComponent(RootComponent,FAttachmentTransformRules::KeepRelativeTransform);
 	CloudMeshComponent->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
 	FenceMeshComponent->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
-	CityMeshComponent->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
+	CastleMeshComponent->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
 
 
 }
@@ -28,11 +28,24 @@ void AMapActor::On_Delete()
 {
 
 }
-int32 AMapActor::AddInstance(const FVector& InLocation)
+int32 AMapActor::AddGroupInstance(const FVector& InLocation)
 {
-	int32 TemIndex = GroundMeshComponent->AddInstance(FTransform(InLocation));
-	CloudMeshComponent->AddInstance(FTransform(InLocation +  ShowLocation));
-	return std::move(TemIndex);
+	AddCloudInstance(InLocation);
+	return std::move(GroundMeshComponent->AddInstance(FTransform(InLocation)));
+}
+int32 AMapActor::AddCloudInstance(const FVector& InLocation)
+{
+	return 	std::move(CloudMeshComponent->AddInstance(FTransform(InLocation + ShowLocation)));
+}
+int32 AMapActor::AddCastleInstance(const FVector & InLocation, const FRotator & InRotator)
+{
+	return std::move(CastleMeshComponent->AddInstance(FTransform(InRotator,InLocation)));
+}
+FVector AMapActor::GetGroupInstanceLocation(const int32 & inIndex)
+{
+	FTransform TemTrans;
+	GroundMeshComponent->GetInstanceTransform(inIndex, TemTrans, true);
+	return TemTrans.GetLocation();
 }
 void AMapActor::SetCloudInstanceVisible(const int32 & InIndex, const bool & InIsVisible)
 {

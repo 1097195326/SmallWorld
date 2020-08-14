@@ -21,8 +21,11 @@ public:
 	virtual void On_Tick(float DeltaSeconds) override;
 	virtual void On_Delete() override;
 	//End AGameActor
-	int32	AddInstance(const FVector& InLocation);
+	int32	AddGroupInstance(const FVector& InLocation);
+	int32	AddCloudInstance(const FVector& InLocation);
+	int32	AddCastleInstance(const FVector & InLocation, const FRotator & InRotator);
 
+	FVector GetGroupInstanceLocation(const int32 & inIndex);
 	void	SetCloudInstanceVisible(const int32 & InIndex, const bool & InIsVisible);
 
 
@@ -33,6 +36,6 @@ public:
 	UPROPERTY(VisibleDefaultsOnly)
 		UInstancedStaticMeshComponent * FenceMeshComponent;
 	UPROPERTY(VisibleDefaultsOnly)
-		UInstancedStaticMeshComponent * CityMeshComponent;
+		UInstancedStaticMeshComponent * CastleMeshComponent;
 
 };

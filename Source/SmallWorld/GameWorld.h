@@ -61,7 +61,6 @@ struct TileStateStruct
 struct TileGroupStruct
 {
 	TMap<FIntPoint,TileStateStruct>	TileGroupMap;
-
 };
 
 
@@ -83,6 +82,8 @@ public:
 
 private:
 	TileStateStruct			TileMap[TileMapSize][TileMapSize];
+	TArray<TileStateStruct>			CastleArray;
+
 	AGameWorldActor *		GameWorldActor;
 	AMapActor *				MapActor;
 
