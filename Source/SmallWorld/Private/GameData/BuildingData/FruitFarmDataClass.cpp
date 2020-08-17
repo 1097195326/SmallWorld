@@ -31,12 +31,11 @@ void FruitFarmDataClass::Deserialization(TSharedPtr<FJsonObject>  JsonObject)
 
 
 }
-bool FruitFarmDataClass::SpawnBuildingActor(UWorld * world, const FVector & Location, const FRotator & Rotation)
+bool FruitFarmDataClass::SpawnBuildingActor(UWorld * world, const FTransform & SpawnTF, const int32 && InIndex)
 {
-	FTransform SpawnTF(Rotation, Location);
 	BuildingActor = world->SpawnActorDeferred<AFruitFarmActor>(AFruitFarmActor::StaticClass(), SpawnTF, nullptr, nullptr
 		, ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn);
-	FString MeshName = FString::Printf(TEXT("Mesh%s0"), *BuildingName);
+	FString MeshName = FString::Printf(TEXT("Mesh%s%d"), *BuildingName, InIndex);
 	if (BuildingActor && BuildingActor->SetMeshComponentByIconName(MeshName))
 	{
 		BuildingActor->SetBuildingData(this);

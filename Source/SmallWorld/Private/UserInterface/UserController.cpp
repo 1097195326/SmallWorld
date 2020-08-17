@@ -114,7 +114,7 @@ void AUserController::DropPriviewActor()
 		DestroyPriviewActor();
 		HordeDataClass * UserHordeData = GameDataManager::GetInstance()->GetUserData()->GetHordeData();
 		BaseBuildingDataClass * BuildingData = UserHordeData->SpawnBuildingData(IconName);
-		if (!BuildingData->SpawnBuildingActor(GetWorld(), Location, Rotator))
+		if (!BuildingData->SpawnBuildingActor(GetWorld(), FTransform(Rotator,Location)))
 		{
 			UserHordeData->DestroyBuilding(BuildingData);
 			UE_LOG(LogTemp, Log, TEXT("zhx:Warning:UUserViewportClient::DropPriviewActor:SpawnBuilding Fail"))

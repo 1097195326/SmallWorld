@@ -44,7 +44,7 @@ public:
 	virtual void Deserialization(TSharedPtr<FJsonObject>  JsonObject) override;
 
 	virtual void CalculateData(){}
-	virtual bool SpawnBuildingActor(UWorld * world, const FVector & Location, const FRotator & Rotation) { return false; };
+	virtual bool SpawnBuildingActor(UWorld * world, const FTransform & SpawnTF, const int32 && InIndex = 0) { return false; };
 
 	void	SetConfigDataByName(FString InName);
 

@@ -28,12 +28,11 @@ void WallDataClass::Deserialization(TSharedPtr<FJsonObject>  JsonObject)
     
     
 }
-bool WallDataClass::SpawnBuildingActor(UWorld * world, const FVector & Location, const FRotator & Rotation)
+bool WallDataClass::SpawnBuildingActor(UWorld * world, const FTransform & SpawnTF, const int32 && InIndex)
 {
-	FTransform SpawnTF(Rotation, Location);
 	BuildingActor = world->SpawnActorDeferred<AWallActor>(AWallActor::StaticClass(), SpawnTF, nullptr, nullptr
 		, ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn);
-	FString MeshName = FString::Printf(TEXT("Mesh%s0"), *BuildingName);
+	FString MeshName = FString::Printf(TEXT("Mesh%s%d"), *BuildingName, InIndex);
 	if (BuildingActor && BuildingActor->SetMeshComponentByIconName(MeshName))
 	{
 		BuildingActor->SetBuildingData(this);
