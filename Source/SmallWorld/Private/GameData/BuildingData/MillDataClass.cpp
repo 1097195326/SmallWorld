@@ -35,7 +35,8 @@ bool MillDataClass::SpawnBuildingActor(UWorld * world, const FVector & Location,
 	FTransform SpawnTF(Rotation, Location);
 	BuildingActor = world->SpawnActorDeferred<AMillActor>(AMillActor::StaticClass(), SpawnTF, nullptr, nullptr
 		, ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn);
-	if (BuildingActor && BuildingActor->SetMeshComponentByIconName(BuildingName))
+	FString MeshName = FString::Printf(TEXT("Mesh%s0"), *BuildingName);
+	if (BuildingActor && BuildingActor->SetMeshComponentByIconName(MeshName))
 	{
 		BuildingActor->SetBuildingData(this);
 		BuildingActor->FinishSpawning(SpawnTF);

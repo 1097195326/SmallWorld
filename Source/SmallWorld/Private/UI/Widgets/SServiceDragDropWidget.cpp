@@ -3,6 +3,7 @@
 #include "UserController.h"
 
 #include "SMiniMapWidget.h"
+#include "GameStyle.h"
 
 
 void SServiceDragDropWidget::Construct(const FArguments & InArgs)
@@ -10,8 +11,8 @@ void SServiceDragDropWidget::Construct(const FArguments & InArgs)
 	TSharedPtr<SMiniMapWidget>  TemWidget;
 
 	ChildSlot
-.VAlign(VAlign_Center)
-.HAlign(HAlign_Center)
+		.VAlign(VAlign_Center)
+		.HAlign(HAlign_Center)
 		[
 			//SAssignNew(TemWidget,SMiniMapWidget)
 			SNew(SBorder)

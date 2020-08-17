@@ -23,8 +23,8 @@ void ABaseBuildingActor::SaveData(TSharedRef<TJsonWriter<TCHAR, TCondensedJsonPr
 bool ABaseBuildingActor::SetMeshComponentByIconName(const FString & InIconName)
 {
 	bool IsOk = false;
-	FString MeshName = FString::Printf(TEXT("Mesh%s0"), *InIconName);
-	FAssetData MeshData = GameDataManager::GetInstance()->GetBuildingAssetDataByIconName(MeshName);
+	//FString MeshName = FString::Printf(TEXT("Mesh%s0"), *InIconName);
+	FAssetData MeshData = GameDataManager::GetInstance()->GetBuildingAssetDataByIconName(InIconName);
 
 	if (MeshData.AssetClass == FName(TEXT("SkeletalMesh")))
 	{
@@ -37,7 +37,6 @@ bool ABaseBuildingActor::SetMeshComponentByIconName(const FString & InIconName)
 			{
 				Component->SetSkeletalMesh(Mesh);
 				Component->RegisterComponent();
-				MeshComponent = Component;
 				IsOk = true;
 			}
 		}
@@ -53,7 +52,6 @@ bool ABaseBuildingActor::SetMeshComponentByIconName(const FString & InIconName)
 				Component->Mobility = EComponentMobility::Movable;
 				Component->SetStaticMesh(Mesh);
 				Component->RegisterComponent();
-				MeshComponent = Component;
 				IsOk = true;
 			}
 		}
@@ -62,9 +60,9 @@ bool ABaseBuildingActor::SetMeshComponentByIconName(const FString & InIconName)
 }
 FVector ABaseBuildingActor::GetInteractivePoint()
 {
-	if (MeshComponent && MeshComponent->DoesSocketExist(FName(*HotPointName)))
+	/*if (MeshComponent && MeshComponent->DoesSocketExist(FName(*HotPointName)))
 	{
 		return MeshComponent->GetSocketLocation(FName(*HotPointName));
-	}
+	}*/
 	return GetActorLocation();
 }

@@ -34,8 +34,8 @@ protected:
 	BaseBuildingDataClass * BuildingData;
 
 public:
-	UPROPERTY(VisibleDefaultsOnly, Category = BaseBuilding)
-	UMeshComponent * MeshComponent;
+	/*UPROPERTY(VisibleDefaultsOnly, Category = BaseBuilding)
+	UMeshComponent * MeshComponent;*/
 
 	UPROPERTY(EditDefaultsOnly)
 		FString		HotPointName;

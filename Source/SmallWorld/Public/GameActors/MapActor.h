@@ -23,7 +23,6 @@ public:
 	//End AGameActor
 	int32	AddGroupInstance(const FVector& InLocation);
 	int32	AddCloudInstance(const FVector& InLocation);
-	int32	AddCastleInstance(const FVector & InLocation, const FRotator & InRotator);
 
 	FVector GetGroupInstanceLocation(const int32 & inIndex);
 	void	SetCloudInstanceVisible(const int32 & InIndex, const bool & InIsVisible);
@@ -35,7 +34,5 @@ public:
 		UInstancedStaticMeshComponent * CloudMeshComponent;
 	UPROPERTY(VisibleDefaultsOnly)
 		UInstancedStaticMeshComponent * FenceMeshComponent;
-	UPROPERTY(VisibleDefaultsOnly)
-		UInstancedStaticMeshComponent * CastleMeshComponent;
 
 };

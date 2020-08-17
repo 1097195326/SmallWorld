@@ -54,11 +54,12 @@ void GameWorld::BuildTileWorld()
 	CoordStruct  RightPos(MapCenter.IndexX + (TileMapSize / 2 - 1), MapCenter.IndexY);
 	CoordStruct  LeftPos(MapCenter.IndexX - (TileMapSize / 2 - 1), MapCenter.IndexY);
 
-	CastleArray.Add(TileStateStruct(BottomPos.IndexX, BottomPos.IndexY, MapActor->AddCastleInstance(FVector(BottomPos.IndexX * TileSize, BottomPos.IndexY * TileSize, 0), (FVector(MapCenter.IndexX, MapCenter.IndexY, 0) - FVector(BottomPos.IndexX, BottomPos.IndexY, 0)).ToOrientationRotator())));
+	/*CastleArray.Add(TileStateStruct(BottomPos.IndexX, BottomPos.IndexY, MapActor->AddCastleInstance(FVector(BottomPos.IndexX * TileSize, BottomPos.IndexY * TileSize, 0), (FVector(MapCenter.IndexX, MapCenter.IndexY, 0) - FVector(BottomPos.IndexX, BottomPos.IndexY, 0)).ToOrientationRotator())));
 	CastleArray.Add(TileStateStruct(UpPos.IndexX, UpPos.IndexY, MapActor->AddCastleInstance(FVector(UpPos.IndexX * TileSize, UpPos.IndexY * TileSize, 0), (FVector(MapCenter.IndexX, MapCenter.IndexY, 0) - FVector(UpPos.IndexX, UpPos.IndexY, 0)).ToOrientationRotator())));
 	CastleArray.Add(TileStateStruct(RightPos.IndexX, RightPos.IndexY, MapActor->AddCastleInstance(FVector(RightPos.IndexX * TileSize, RightPos.IndexY * TileSize, 0), (FVector(MapCenter.IndexX, MapCenter.IndexY, 0) - FVector(RightPos.IndexX, RightPos.IndexY, 0)).ToOrientationRotator())));
 	CastleArray.Add(TileStateStruct(LeftPos.IndexX, LeftPos.IndexY, MapActor->AddCastleInstance(FVector(LeftPos.IndexX * TileSize, LeftPos.IndexY * TileSize, 0), (FVector(MapCenter.IndexX, MapCenter.IndexY, 0) - FVector(LeftPos.IndexX, LeftPos.IndexY, 0)).ToOrientationRotator())));
-	
+	*/
+
 
 	IsInitialized = true;
 }

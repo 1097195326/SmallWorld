@@ -10,6 +10,7 @@ class AUserController : public AGameController
 {
 	GENERATED_BODY()
 
+	
 public:
 	enum  EControllType
 	{
@@ -34,6 +35,7 @@ public:
 	void	DropPriviewActor();
 	void	DestroyPriviewActor();
 protected:
+
 	class APreviewActor *  PreviewActor;
 
 	EControllType		CurrentControllType;
