@@ -5,17 +5,7 @@
 
 #define CheckNullPtr(Ptr)  {if (Ptr == nullptr)return;}
 
-namespace  TileGameConfig
-{
-	const int32 TileSize = 425;
-	const int32 ArmyCenterSize = 3;
-	const int32	TileMapSize = 21;
-	
-	const FVector ShowLocation(0, 0, 800);
-	const FVector HideLocation(0, 0, -800);
 
-	
-}
 enum RaceEnum
 {
 	Race_None,

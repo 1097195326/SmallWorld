@@ -17,6 +17,7 @@ public class SmallWorld : ModuleRules
                 "SmallWorld/Public/Formation",
                 "SmallWorld/Public/GameActors",
                 "SmallWorld/Public/GameActors/BuildingActors",
+                "SmallWorld/Public/GameActors/InteractionalActors",
                 "SmallWorld/Public/GameActors/Projectile",
                 "SmallWorld/Public/GameActors/Soldiers",
                 "SmallWorld/Public/GameActors/Soldiers/SoldierState",

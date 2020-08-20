@@ -7,7 +7,6 @@
 
 #include "MapActor.generated.h"
 
-using namespace TileGameConfig;
 
 UCLASS()
 class AMapActor : public AGameActor

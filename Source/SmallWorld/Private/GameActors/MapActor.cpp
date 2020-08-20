@@ -33,7 +33,7 @@ int32 AMapActor::AddGroupInstance(const FVector& InLocation)
 }
 int32 AMapActor::AddCloudInstance(const FVector& InLocation)
 {
-	return 	std::move(CloudMeshComponent->AddInstance(FTransform(InLocation + ShowLocation)));
+	return 	std::move(CloudMeshComponent->AddInstance(FTransform(InLocation)));
 }
 FVector AMapActor::GetGroupInstanceLocation(const int32 & inIndex)
 {
@@ -47,6 +47,6 @@ void AMapActor::SetCloudInstanceVisible(const int32 & InIndex, const bool & InIs
 	CloudMeshComponent->GetInstanceTransform(InIndex, TemTrans);
 	FVector PreLocation = TemTrans.GetLocation();
 	PreLocation.Z = 0;
-	TemTrans.SetLocation(PreLocation + (InIsVisible ? ShowLocation : HideLocation));
+	TemTrans.SetLocation(PreLocation);
 	CloudMeshComponent->UpdateInstanceTransform(InIndex, TemTrans);
 }
