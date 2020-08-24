@@ -22,11 +22,13 @@ public:
 	~GameWorld();
 
 	
-	void					BuildTileWorld();
+	void					ScanWorldMap();
 	void					Update();
 
 private:
 	
+	TArray<class AGroundTileActor*>	GroundActorArray;
+	TArray<class ACastleTileActor*>	CastleActorArray;
 
 	AGameWorldActor *		GameWorldActor;
 

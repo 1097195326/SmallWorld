@@ -2,26 +2,17 @@
 
 #include "GameActor.h"
 
-#include "GroundTileActor.generated.h"
+#include "CastleTileActor.generated.h"
 
-UENUM()
-enum class TileTypeEnum : uint8
-{
-	E_None,
-	E_Used,
-	E_CanNotUse,
-	E_Num
-};
 
 UCLASS()
-class AGroundTileActor : public AGameActor
+class ACastleTileActor : public AGameActor
 {
 public:
 	GENERATED_BODY()
 
 	
-
-	AGroundTileActor();
+	ACastleTileActor();
 
 	//Begin override AGameActor
 	virtual void On_Init() override;
@@ -31,13 +22,9 @@ public:
 	void	TrackAround();
 
 	UPROPERTY(VisibleDefaultsOnly)
-		UStaticMeshComponent * GroundTileComponent ;
-	UPROPERTY(VisibleDefaultsOnly)
-		UStaticMeshComponent * CloudTileComponent;
+		UStaticMeshComponent * CastleTileComponent ;
 	UPROPERTY(VisibleDefaultsOnly)
 		UBoxComponent   * CollisionBoxComponent;
 
-	UPROPERTY(EditAnywhere)
-		TileTypeEnum  TileType;
 
 };
