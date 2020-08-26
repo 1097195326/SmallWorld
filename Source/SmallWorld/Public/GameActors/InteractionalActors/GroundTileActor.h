@@ -19,7 +19,14 @@ class AGroundTileActor : public AGameActor
 public:
 	GENERATED_BODY()
 
-	
+	enum DirectionEnum
+	{
+		Direction_Up,
+		Direction_Down,
+		Direction_Left,
+		Direction_Right,
+		Direction_Other,
+	};
 
 	AGroundTileActor();
 
@@ -27,8 +34,13 @@ public:
 	virtual void On_Init() override;
 	virtual void On_Tick(float DeltaSeconds) override;
 	virtual void On_Delete() override;
-
+	//
+	void	SetCloudVisible(bool InVisible);
 	void	TrackAround();
+	//Before Start Game ,Found Soldier In This Tile
+	void	TrackSoldier();
+	void	SetSoldier(class ASoldierPawn * InSoldier);
+	class	ASoldierPawn * GetSoldier() { return Soldier; }
 
 	UPROPERTY(VisibleDefaultsOnly)
 		UStaticMeshComponent * GroundTileComponent ;
@@ -39,5 +51,12 @@ public:
 
 	UPROPERTY(EditAnywhere)
 		TileTypeEnum  TileType;
+
+	TMap<DirectionEnum, AGameActor*>  AroundActorMap;
+
+
+protected:
+
+	class ASoldierPawn * Soldier;
 
 };

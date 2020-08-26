@@ -3,6 +3,8 @@
 #include "SoldierGroup.h"
 #include "GameFramework/DamageType.h"
 #include "BaseSoldierDataClass.h"
+#include "GroundTileActor.h"
+
 
 ASoldierPawn::ASoldierPawn():
 	LastAttackTime(0.f)
@@ -14,6 +16,7 @@ ASoldierPawn::ASoldierPawn():
 	bUseControllerRotationYaw = true;
 	
 	mGroup = nullptr;
+	GroundTile = nullptr;
 
 	//CapsuleComponent = CreateDefaultSubobject<UCapsuleComponent>(TEXT("CapsuleComponent"));
 	//
@@ -147,6 +150,10 @@ void ASoldierPawn::SetGenericTeamId(const FGenericTeamId& NewTeamID)
 	{
 		TeamID = NewTeamID;
 	}
+}
+void ASoldierPawn::SetGroundTile(class AGroundTileActor * InTile)
+{
+	GroundTile = InTile; 
 }
 
 //

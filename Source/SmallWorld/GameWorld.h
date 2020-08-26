@@ -6,14 +6,6 @@
 class ASoldierPawn;
 class ABaseBuildingActor;
 
-enum	DirectionEnum
-{
-	Direction_Up,
-	Direction_Down,
-	Direction_Left,
-	Direction_Right,
-};
-
 
 class GameWorld : public SingleTemplateClass<GameWorld>
 {
@@ -23,10 +15,12 @@ public:
 
 	
 	void					ScanWorldMap();
+	void					RefreshCloudVisible();
 	void					Update();
 
+
 private:
-	
+	TArray<class AGroundTileActor*> CurrentVisibleGroundArray;
 	TArray<class AGroundTileActor*>	GroundActorArray;
 	TArray<class ACastleTileActor*>	CastleActorArray;
 

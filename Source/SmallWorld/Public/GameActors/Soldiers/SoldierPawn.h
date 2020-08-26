@@ -103,10 +103,16 @@ public:
 	FVector							GetSpawnProjectileLoction();
 	ASoldierPawn *					GetBestEnemy(const TArray<AActor*> & SeachList);
 
+	void	SetGroundTile(class AGroundTileActor * InTile);
+	class AGroundTileActor * GetGroundTile() { return GroundTile; }
+
 	UPROPERTY(EditDefaultsOnly, Instanced, Category = AI)
 		TArray<UAISenseConfig*>		SenseConfigs;
 
+
 protected:
+	class AGroundTileActor * GroundTile;
+
 	BaseSoldierDataClass *	SoldierData;
 	FTimerHandle			DeathTimerHandle;
 	void					PendingDestory();

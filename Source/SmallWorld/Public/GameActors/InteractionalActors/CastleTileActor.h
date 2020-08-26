@@ -27,4 +27,6 @@ public:
 		UBoxComponent   * CollisionBoxComponent;
 
 
+	TArray<class AGroundTileActor*>  AroundActorArray;
+
 };

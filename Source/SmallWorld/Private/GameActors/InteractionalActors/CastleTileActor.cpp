@@ -1,4 +1,5 @@
 #include "CastleTileActor.h"
+#include "GroundTileActor.h"
 
 
 
@@ -30,5 +31,18 @@ void ACastleTileActor::On_Delete()
 }
 void ACastleTileActor::TrackAround()
 {
+	FVector ActorLocation = GetActorLocation();
+	FVector GroundExtent = CastleTileComponent->GetBodySetup()->AggGeom.CalcAABB(FTransform(FVector::ZeroVector)).GetExtent();
 
+	TArray<AActor*> OverlapActors;
+	TArray<TEnumAsByte<EObjectTypeQuery>> TrackObj = { UEngineTypes::ConvertToObjectType(ECC_Visibility) };
+	UKismetSystemLibrary::BoxOverlapActors(GetWorld(), ActorLocation, GroundExtent * 1.2f, TrackObj, AGameActor::StaticClass(), { this }, OverlapActors);
+
+	for (auto TemActor : OverlapActors)
+	{
+		if (TemActor->IsA<AGroundTileActor>())
+		{
+			AroundActorArray.Add(Cast<AGroundTileActor>(TemActor));
+		}
+	}
 }

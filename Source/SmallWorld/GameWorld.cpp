@@ -40,7 +40,14 @@ void GameWorld::ScanWorldMap()
 		TemActor->TrackAround();
 	}
 
+
 	IsInitialized = true;
+}
+void GameWorld::RefreshCloudVisible()
+{
+
+	
+
 }
 void GameWorld::Update()
 {
