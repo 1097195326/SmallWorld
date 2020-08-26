@@ -11,6 +11,13 @@ AGroundTileActor::AGroundTileActor()
 	CloudTileComponent = CreateDefaultSubobject<UStaticMeshComponent>("CloudTileComponent");
 	CollisionBoxComponent = CreateDefaultSubobject<UBoxComponent>("CollisionBoxComponent");
 
+	GroundTileComponent->SetWorldScale3D(FVector(1.176470f));
+
+	CloudTileComponent->SetWorldScale3D(FVector(1.176470f));
+	CloudTileComponent->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	CloudTileComponent->SetCollisionResponseToAllChannels(ECR_Ignore);
+	CloudTileComponent->SetCollisionObjectType(ECC_Visibility);
+
 	GroundTileComponent->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
 	CloudTileComponent->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
 	CollisionBoxComponent->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);

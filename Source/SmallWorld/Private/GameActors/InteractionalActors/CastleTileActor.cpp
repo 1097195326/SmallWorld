@@ -9,9 +9,19 @@ ACastleTileActor::ACastleTileActor()
 	RootComponent = CreateDefaultSubobject<USceneComponent>("RootComponent");
 
 	CastleTileComponent = CreateDefaultSubobject<UStaticMeshComponent>("CastleTileComponent");
+	CloudTileComponent = CreateDefaultSubobject<UInstancedStaticMeshComponent>("CloudTileComponent");
 	CollisionBoxComponent = CreateDefaultSubobject<UBoxComponent>("CollisionBoxComponent");
 
+	CastleTileComponent->SetWorldScale3D(FVector(1.212121f));
+
+	CloudTileComponent->SetWorldScale3D(FVector(1.176470f));
+	CloudTileComponent->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	CloudTileComponent->SetCollisionResponseToAllChannels(ECR_Ignore);
+	CloudTileComponent->SetCollisionObjectType(ECC_Visibility);
+
+
 	CastleTileComponent->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
+	CloudTileComponent->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
 	CollisionBoxComponent->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
 
 

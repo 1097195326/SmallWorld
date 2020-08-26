@@ -24,6 +24,8 @@ public:
 	UPROPERTY(VisibleDefaultsOnly)
 		UStaticMeshComponent * CastleTileComponent ;
 	UPROPERTY(VisibleDefaultsOnly)
+		UInstancedStaticMeshComponent * CloudTileComponent;
+	UPROPERTY(VisibleDefaultsOnly)
 		UBoxComponent   * CollisionBoxComponent;
 
 
