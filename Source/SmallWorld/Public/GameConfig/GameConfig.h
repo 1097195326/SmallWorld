@@ -5,6 +5,7 @@
 
 #define CheckNullPtr(Ptr)  {if (Ptr == nullptr)return;}
 
+const float FloatErrorTolerance = 0.0001f;
 
 enum RaceEnum
 {

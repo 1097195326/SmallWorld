@@ -12,6 +12,9 @@ AGroundTileActor::AGroundTileActor()
 	CollisionBoxComponent = CreateDefaultSubobject<UBoxComponent>("CollisionBoxComponent");
 
 	GroundTileComponent->SetWorldScale3D(FVector(1.176470f));
+	GroundTileComponent->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
+	GroundTileComponent->SetCollisionResponseToAllChannels(ECR_Block);
+	GroundTileComponent->SetCollisionObjectType(ECC_Visibility);
 
 	CloudTileComponent->SetWorldScale3D(FVector(1.176470f));
 	CloudTileComponent->SetCollisionEnabled(ECollisionEnabled::NoCollision);
@@ -43,13 +46,14 @@ void AGroundTileActor::SetCloudVisible(bool InVisible)
 }
 void AGroundTileActor::TrackAround()
 {
-	FVector ActorLocation = GetActorLocation();
-	FVector GroundExtent = GroundTileComponent->GetBodySetup()->AggGeom.CalcAABB(FTransform(FVector::ZeroVector)).GetExtent();
+	FVector ActorLocation = this->GetActorLocation();
+	FVector GroundExtent = GroundTileComponent->GetBodySetup()->AggGeom.CalcAABB(FTransform(FVector::ZeroVector)).GetSize();
 	
 	TArray<AActor*> OverlapActors;
 	TArray<TEnumAsByte<EObjectTypeQuery>> TrackObj = {UEngineTypes::ConvertToObjectType(ECC_Visibility)};
 	UKismetSystemLibrary::BoxOverlapActors(GetWorld(), ActorLocation, GroundExtent * 1.5f, TrackObj, AGameActor::StaticClass(), {this}, OverlapActors);
 	
+	AGameActor* SelfAator = this;
 	FVector ForwardVector = GetActorForwardVector();
 	FVector RightVector = GetActorRightVector();
 	for (auto TemActor : OverlapActors)
@@ -58,17 +62,19 @@ void AGroundTileActor::TrackAround()
 		{
 			float ForwardDot = FVector::DotProduct((TemActor->GetActorLocation() - ActorLocation).GetSafeNormal(), ForwardVector);
 			float RightDot = FVector::DotProduct((TemActor->GetActorLocation() - ActorLocation).GetSafeNormal(), RightVector);
-			if (FMath::IsNearlyEqual(ForwardDot, 1.f))
-			{ AroundActorMap[Direction_Up] = Cast<AGameActor>(TemActor); }
-			else if (FMath::IsNearlyEqual(ForwardDot, -1.f))
-			{ AroundActorMap[Direction_Down] = Cast<AGameActor>(TemActor); }
-			else if (FMath::IsNearlyEqual(RightDot, 1.f))
-			{ AroundActorMap[Direction_Right] = Cast<AGameActor>(TemActor); }
-			else if (FMath::IsNearlyEqual(RightDot, -1.f))
-			{ AroundActorMap[Direction_Left] = Cast<AGameActor>(TemActor); }
+			if (FMath::IsNearlyEqual(ForwardDot, 1.f, FloatErrorTolerance))
+			{ AroundActorMap.Add(Direction_Up, Cast<AGameActor>(TemActor)); }
+			else if (FMath::IsNearlyEqual(ForwardDot, -1.f, FloatErrorTolerance))
+			{ AroundActorMap.Add(Direction_Down, Cast<AGameActor>(TemActor)); }
+			else if (FMath::IsNearlyEqual(RightDot, 1.f, FloatErrorTolerance))
+			{ AroundActorMap.Add(Direction_Right, Cast<AGameActor>(TemActor)); }
+			else if (FMath::IsNearlyEqual(RightDot, -1.f, FloatErrorTolerance))
+			{ AroundActorMap.Add(Direction_Left, Cast<AGameActor>(TemActor)); }
 		}
 		else if (TemActor->IsA<ACastleTileActor>())
-		{ AroundActorMap[Direction_Other] = Cast<AGameActor>(TemActor); }
+		{
+			AroundActorMap.Add(Direction_Other, Cast<AGameActor>(TemActor));
+		}
 	}
 
 }
@@ -76,7 +82,7 @@ void AGroundTileActor::TrackSoldier()
 {
 	FVector ActorLocation = GetActorLocation();
 	FBox    ActorBox = GroundTileComponent->GetBodySetup()->AggGeom.CalcAABB(FTransform(ActorLocation));
-	FVector GroundSize = ActorBox.GetExtent();
+	FVector GroundSize = ActorBox.GetSize();
 
 	TArray<AActor*> OverlapActors;
 	TArray<TEnumAsByte<EObjectTypeQuery>> TrackObj = { UEngineTypes::ConvertToObjectType(ECC_Visibility) };

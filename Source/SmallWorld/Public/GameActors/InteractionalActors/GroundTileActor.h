@@ -21,7 +21,7 @@ public:
 
 	enum DirectionEnum
 	{
-		Direction_Up,
+		Direction_Up = 1,
 		Direction_Down,
 		Direction_Left,
 		Direction_Right,

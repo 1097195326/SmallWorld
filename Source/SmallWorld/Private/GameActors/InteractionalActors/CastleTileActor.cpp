@@ -42,7 +42,7 @@ void ACastleTileActor::On_Delete()
 void ACastleTileActor::TrackAround()
 {
 	FVector ActorLocation = GetActorLocation();
-	FVector GroundExtent = CastleTileComponent->GetBodySetup()->AggGeom.CalcAABB(FTransform(FVector::ZeroVector)).GetExtent();
+	FVector GroundExtent = CastleTileComponent->GetBodySetup()->AggGeom.CalcAABB(FTransform(FVector::ZeroVector)).GetSize();
 
 	TArray<AActor*> OverlapActors;
 	TArray<TEnumAsByte<EObjectTypeQuery>> TrackObj = { UEngineTypes::ConvertToObjectType(ECC_Visibility) };
