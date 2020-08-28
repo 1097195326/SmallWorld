@@ -61,8 +61,28 @@ TSharedRef<FSlateStyleSet> FGameStyle::Create()
 	Style.Set("Color.FF2A2B2E", FLinearColor(FColor(0XFF2A2B2E)));//black-7
 	Style.Set("Color.FF212224", FLinearColor(FColor(0XFF212224)));//black-8
 	Style.Set("Color.FF1C1D1F", FLinearColor(FColor(0XFF1C1D1F)));//black-9
+	const FLinearColor DefaultForeground(FColor(0.72f, 0.72f, 0.72f, 1.f));
+	const FLinearColor SelectionColor(0.728f, 0.364f, 0.003f);
+	const FLinearColor SelectionColor_Pressed(0.701f, 0.225f, 0.003f);
+	Style.Set("DefaultForeground", DefaultForeground);
 	
 	// FontStyle
+	// Normal Text
+	const FTextBlockStyle NormalText = FTextBlockStyle()
+		.SetFont(TTF_FONT("Fonts/Roboto-Regular", 9))
+		.SetColorAndOpacity(FSlateColor::UseForeground())
+		.SetShadowOffset(FVector2D::ZeroVector)
+		.SetShadowColorAndOpacity(FLinearColor::Black)
+		.SetHighlightColor(FLinearColor(0.02f, 0.3f, 0.0f))
+		.SetHighlightShape(BOX_BRUSH("Common/TextBlockHighlightShape", FMargin(3.f / 8.f)));
+	const FTextBlockStyle Text_8 = FTextBlockStyle()
+		.SetFont(TTF_FONT("Fonts/Roboto-Regular", 8))
+		.SetColorAndOpacity(FSlateColor(FLinearColor::White))
+		.SetShadowOffset(FVector2D::ZeroVector);
+	const FTextBlockStyle Text_9 = FTextBlockStyle()
+		.SetFont(TTF_FONT("Fonts/Roboto-Regular", 9))
+		.SetColorAndOpacity(FSlateColor(FLinearColor::White))
+		.SetShadowOffset(FVector2D::ZeroVector);
 	const FTextBlockStyle Text_12 = FTextBlockStyle()
 		.SetFont(TTF_FONT("Fonts/Roboto-Regular", 12))
 		.SetColorAndOpacity(FSlateColor(FLinearColor::White))
@@ -76,6 +96,9 @@ TSharedRef<FSlateStyleSet> FGameStyle::Create()
 		.SetColorAndOpacity(FSlateColor(FLinearColor::White))
 		.SetShadowOffset(FVector2D::ZeroVector);
 
+	Style.Set("NormalText", NormalText);
+	Style.Set("Text_8", Text_8);
+	Style.Set("Text_9", Text_9);
 	Style.Set("Text_12", Text_12);
 	Style.Set("Text_24", Text_24);
 	Style.Set("Text_14_Bold", XRText_14_Bold);
@@ -83,6 +106,8 @@ TSharedRef<FSlateStyleSet> FGameStyle::Create()
 	// IconSize
 	const FVector2D Icon1x1(1.0f, 1.0f);
 	const FVector2D Icon8x8(8.0f, 8.0f);
+	const FVector2D Icon12x12(12.0f, 12.0f);
+	const FVector2D Icon14x14(14.0f, 14.0f);
 	const FVector2D Icon16x16(16.0f, 16.0f);
 	const FVector2D Icon20x20(20.0f, 20.0f);
 	const FVector2D Icon40x40(40.0f, 40.0f);
@@ -91,6 +116,9 @@ TSharedRef<FSlateStyleSet> FGameStyle::Create()
 	// Texture
 
 	Style.Set("White", new IMAGE_BRUSH(TEXT("White"), Icon1x1, Style.GetColor("Color.FFFFFFFF")));
+	Style.Set("BorderBackground", new IMAGE_BRUSH(TEXT("BorderBackground"), FVector2D(384, 128), Style.GetColor("Color.FFFFFFFF")));
+	Style.Set("StartBackground", new IMAGE_BRUSH(TEXT("StartBackground"), Icon128x128, Style.GetColor("Color.FFFFFFFF")));
+
 	// 
 	Style.Set("Icon.Clear", new IMAGE_BRUSH(TEXT("Icon_Clear"), Icon128x128, Style.GetColor("Color.FFFFFFFF")));
 	Style.Set("Icon.Rotation", new IMAGE_BRUSH(TEXT("Icon_Rotation"), Icon128x128, Style.GetColor("Color.FFFFFFFF")));
@@ -101,67 +129,50 @@ TSharedRef<FSlateStyleSet> FGameStyle::Create()
 	Style.Set("Icon.Map", new IMAGE_BRUSH(TEXT("Icon_Map"), Icon128x128, Style.GetColor("Color.FFFFFFFF")));
 	Style.Set("Icon.Menu", new IMAGE_BRUSH(TEXT("Icon_Menu"), Icon128x128, Style.GetColor("Color.FFFFFFFF")));
 	//Building Icon 
-	Style.Set("Icon.ArmyCenter0", new IMAGE_BRUSH(TEXT("IconArmyCenter0"), Icon128x128, Style.GetColor("Color.FFFFFFFF")));
-	Style.Set("Icon.ArmyCenter1", new IMAGE_BRUSH(TEXT("IconArmyCenter1"), Icon128x128, Style.GetColor("Color.FFFFFFFF")));
-	Style.Set("Icon.ArmyCenter2", new IMAGE_BRUSH(TEXT("IconArmyCenter2"), Icon128x128, Style.GetColor("Color.FFFFFFFF")));
-	Style.Set("Icon.Bakery0", new IMAGE_BRUSH(TEXT("IconBakery0"), Icon128x128, Style.GetColor("Color.FFFFFFFF")));
-	Style.Set("Icon.Bakery1", new IMAGE_BRUSH(TEXT("IconBakery0"), Icon128x128, Style.GetColor("Color.FFFFFFFF")));
-	Style.Set("Icon.Bakery2", new IMAGE_BRUSH(TEXT("IconBakery0"), Icon128x128, Style.GetColor("Color.FFFFFFFF")));
-	Style.Set("Icon.Bakery3", new IMAGE_BRUSH(TEXT("IconBakery3"), Icon128x128, Style.GetColor("Color.FFFFFFFF")));
-	Style.Set("Icon.CommandCenter0", new IMAGE_BRUSH(TEXT("IconCommandCenter0"), Icon128x128, Style.GetColor("Color.FFFFFFFF")));
-	Style.Set("Icon.CommandCenter1", new IMAGE_BRUSH(TEXT("IconCommandCenter1"), Icon128x128, Style.GetColor("Color.FFFFFFFF")));
-	Style.Set("Icon.CommandCenter2", new IMAGE_BRUSH(TEXT("IconCommandCenter2"), Icon128x128, Style.GetColor("Color.FFFFFFFF")));
-	Style.Set("Icon.CommandCenter3", new IMAGE_BRUSH(TEXT("IconCommandCenter3"), Icon128x128, Style.GetColor("Color.FFFFFFFF")));
-	Style.Set("Icon.Farm0", new IMAGE_BRUSH(TEXT("IconFarm0"), Icon128x128, Style.GetColor("Color.FFFFFFFF")));
-	Style.Set("Icon.Farm1", new IMAGE_BRUSH(TEXT("IconFarm1"), Icon128x128, Style.GetColor("Color.FFFFFFFF")));
-	Style.Set("Icon.Farm2", new IMAGE_BRUSH(TEXT("IconFarm2"), Icon128x128, Style.GetColor("Color.FFFFFFFF")));
-	Style.Set("Icon.FoodStore0", new IMAGE_BRUSH(TEXT("IconFoodStore0"), Icon128x128, Style.GetColor("Color.FFFFFFFF")));
-	Style.Set("Icon.FoodStore1", new IMAGE_BRUSH(TEXT("IconFoodStore1"), Icon128x128, Style.GetColor("Color.FFFFFFFF")));
-	Style.Set("Icon.FoodStore2", new IMAGE_BRUSH(TEXT("IconFoodStore2"), Icon128x128, Style.GetColor("Color.FFFFFFFF")));
-	Style.Set("Icon.FruitFarm0", new IMAGE_BRUSH(TEXT("IconFruitFarm0"), Icon128x128, Style.GetColor("Color.FFFFFFFF")));
-	Style.Set("Icon.FruitFarm1", new IMAGE_BRUSH(TEXT("IconFruitFarm1"), Icon128x128, Style.GetColor("Color.FFFFFFFF")));
-	Style.Set("Icon.FruitFarm2", new IMAGE_BRUSH(TEXT("IconFruitFarm2"), Icon128x128, Style.GetColor("Color.FFFFFFFF")));
-	Style.Set("Icon.Gate0", new IMAGE_BRUSH(TEXT("IconGate0"), Icon128x128, Style.GetColor("Color.FFFFFFFF")));
-	Style.Set("Icon.Gate1", new IMAGE_BRUSH(TEXT("IconGate1"), Icon128x128, Style.GetColor("Color.FFFFFFFF")));
-	Style.Set("Icon.Gate2", new IMAGE_BRUSH(TEXT("IconGate2"), Icon128x128, Style.GetColor("Color.FFFFFFFF")));
-	Style.Set("Icon.House0", new IMAGE_BRUSH(TEXT("IconHouse0"), Icon128x128, Style.GetColor("Color.FFFFFFFF")));
-	Style.Set("Icon.House1", new IMAGE_BRUSH(TEXT("IconHouse1"), Icon128x128, Style.GetColor("Color.FFFFFFFF")));
-	Style.Set("Icon.House2", new IMAGE_BRUSH(TEXT("IconHouse2"), Icon128x128, Style.GetColor("Color.FFFFFFFF")));
-	Style.Set("Icon.Mill0", new IMAGE_BRUSH(TEXT("IconMill0"), Icon128x128, Style.GetColor("Color.FFFFFFFF")));
-	Style.Set("Icon.Mill1", new IMAGE_BRUSH(TEXT("IconMill1"), Icon128x128, Style.GetColor("Color.FFFFFFFF")));
-	Style.Set("Icon.Mill2", new IMAGE_BRUSH(TEXT("IconMill2"), Icon128x128, Style.GetColor("Color.FFFFFFFF")));
-	Style.Set("Icon.MoneyStore0", new IMAGE_BRUSH(TEXT("IconMoneyStore0"), Icon128x128, Style.GetColor("Color.FFFFFFFF")));
-	Style.Set("Icon.MoneyStore1", new IMAGE_BRUSH(TEXT("IconMoneyStore1"), Icon128x128, Style.GetColor("Color.FFFFFFFF")));
-	Style.Set("Icon.MoneyStore2", new IMAGE_BRUSH(TEXT("IconMoneyStore2"), Icon128x128, Style.GetColor("Color.FFFFFFFF")));
-	Style.Set("Icon.WoodStoneStore0", new IMAGE_BRUSH(TEXT("IconWoodStoneStore0"), Icon128x128, Style.GetColor("Color.FFFFFFFF")));
-	Style.Set("Icon.Tower0", new IMAGE_BRUSH(TEXT("IconTower0"), Icon128x128, Style.GetColor("Color.FFFFFFFF")));
-	Style.Set("Icon.Tower1", new IMAGE_BRUSH(TEXT("IconTower1"), Icon128x128, Style.GetColor("Color.FFFFFFFF")));
-	Style.Set("Icon.Tower2", new IMAGE_BRUSH(TEXT("IconTower2"), Icon128x128, Style.GetColor("Color.FFFFFFFF")));
-	Style.Set("Icon.Wall0", new IMAGE_BRUSH(TEXT("IconWall0"), Icon128x128, Style.GetColor("Color.FFFFFFFF")));
-	Style.Set("Icon.Wall1", new IMAGE_BRUSH(TEXT("IconWall1"), Icon128x128, Style.GetColor("Color.FFFFFFFF")));
-	Style.Set("Icon.Wall2", new IMAGE_BRUSH(TEXT("IconWall2"), Icon128x128, Style.GetColor("Color.FFFFFFFF")));
+	//Style.Set("Icon.ArmyCenter0", new IMAGE_BRUSH(TEXT("IconArmyCenter0"), Icon128x128, Style.GetColor("Color.FFFFFFFF")));
 	// Soldier Icon
-	UTexture2D * IconTexture = nullptr;
+	/*UTexture2D * IconTexture = nullptr;
 	IconTexture = LoadObject<UTexture2D>(nullptr, TEXT("/Game/UI/Texture/IconArcher"), nullptr);
 	Style.Set("Icon.Archer", new FSlateImageBrush(IconTexture, Icon128x128, Style.GetColor("Color.FFFFFFFF")));
-	IconTexture = LoadObject<UTexture2D>(nullptr, TEXT("/Game/UI/Texture/IconFootman"), nullptr);
-	Style.Set("Icon.Footman", new FSlateImageBrush(IconTexture, Icon128x128, Style.GetColor("Color.FFFFFFFF")));
-	IconTexture = LoadObject<UTexture2D>(nullptr, TEXT("/Game/UI/Texture/IconGriffin"), nullptr);
-	Style.Set("Icon.Griffin", new FSlateImageBrush(IconTexture, Icon128x128, Style.GetColor("Color.FFFFFFFF")));
-	IconTexture = LoadObject<UTexture2D>(nullptr, TEXT("/Game/UI/Texture/IconHorseman"), nullptr);
-	Style.Set("Icon.Horseman", new FSlateImageBrush(IconTexture, Icon128x128, Style.GetColor("Color.FFFFFFFF")));
-	IconTexture = LoadObject<UTexture2D>(nullptr, TEXT("/Game/UI/Texture/IconKnight"), nullptr);
-	Style.Set("Icon.Knight", new FSlateImageBrush(IconTexture, Icon128x128, Style.GetColor("Color.FFFFFFFF")));
-	IconTexture = LoadObject<UTexture2D>(nullptr, TEXT("/Game/UI/Texture/IconMage"), nullptr);
-	Style.Set("Icon.Mage", new FSlateImageBrush(IconTexture, Icon128x128, Style.GetColor("Color.FFFFFFFF")));
-	IconTexture = LoadObject<UTexture2D>(nullptr, TEXT("/Game/UI/Texture/IconPeasant"), nullptr);
-	Style.Set("Icon.Peasant", new FSlateImageBrush(IconTexture, Icon128x128, Style.GetColor("Color.FFFFFFFF")));
-	IconTexture = LoadObject<UTexture2D>(nullptr, TEXT("/Game/UI/Texture/IconSiegeEngine"), nullptr);
-	Style.Set("Icon.SiegeEngine", new FSlateImageBrush(IconTexture, Icon128x128, Style.GetColor("Color.FFFFFFFF")));
+	*/
 
+	// Invisible buttons, borders, etc.
+	const FButtonStyle NoBorder = FButtonStyle()
+		.SetNormal(FSlateNoResource())
+		.SetHovered(FSlateNoResource())
+		.SetPressed(FSlateNoResource())
+		.SetNormalPadding(FMargin(0.0f, 0.0f, 0.0f, 1.0f))
+		.SetPressedPadding(FMargin(0.0f, 1.0f, 0.0f, 0.0f));
 
-
-
+	// Convenient transparent/invisible elements
+	{
+		Style.Set("NoBrush", new FSlateNoResource());
+		Style.Set("NoBorder", new FSlateNoResource());
+		Style.Set("NoBorder.Normal", new FSlateNoResource());
+		Style.Set("NoBorder.Hovered", new FSlateNoResource());
+		Style.Set("NoBorder.Pressed", new FSlateNoResource());
+		Style.Set("NoBorder", NoBorder);
+	}
+	// SScrollBar defaults...
+	const FScrollBarStyle ScrollBar = FScrollBarStyle()
+		.SetVerticalTopSlotImage(IMAGE_BRUSH("Common/Scrollbar_Background_Vertical", FVector2D(8, 8)))
+		.SetVerticalBottomSlotImage(IMAGE_BRUSH("Common/Scrollbar_Background_Vertical", FVector2D(8, 8)))
+		.SetHorizontalTopSlotImage(IMAGE_BRUSH("Common/Scrollbar_Background_Horizontal", FVector2D(8, 8)))
+		.SetHorizontalBottomSlotImage(IMAGE_BRUSH("Common/Scrollbar_Background_Horizontal", FVector2D(8, 8)))
+		.SetNormalThumbImage(BOX_BRUSH("Common/Scrollbar_Thumb", FMargin(4.f / 16.f)))
+		.SetDraggedThumbImage(BOX_BRUSH("Common/Scrollbar_Thumb", FMargin(4.f / 16.f)))
+		.SetHoveredThumbImage(BOX_BRUSH("Common/Scrollbar_Thumb", FMargin(4.f / 16.f)));
+	// SEditableTextBox defaults...
+	const FEditableTextBoxStyle NormalEditableTextBoxStyle = FEditableTextBoxStyle()
+		.SetBackgroundImageNormal(BOX_BRUSH("Common/TextBox", FMargin(4.0f / 16.0f)))
+		.SetBackgroundImageHovered(BOX_BRUSH("Common/TextBox_Hovered", FMargin(4.0f / 16.0f)))
+		.SetBackgroundImageFocused(BOX_BRUSH("Common/TextBox_Hovered", FMargin(4.0f / 16.0f)))
+		.SetBackgroundImageReadOnly(BOX_BRUSH("Common/TextBox_ReadOnly", FMargin(4.0f / 16.0f)))
+		.SetScrollBarStyle(ScrollBar);
+	{
+		Style.Set("NormalEditableTextBox", NormalEditableTextBoxStyle);
+		// "NormalFont".
+	}
 	// ButtonStyle
 	Style.Set("CommonButton", FButtonStyle()
 		.SetNormal(*Style.GetBrush("White"))
@@ -237,7 +248,105 @@ TSharedRef<FSlateStyleSet> FGameStyle::Create()
 		.SetPressedPadding(0)
 	);
 	
+	// MenuBar
+	{
+		Style.Set("Menu.Background", new BOX_BRUSH("Old/Menu_Background", FMargin(8.0f / 64.0f)));
+		Style.Set("Menu.Icon", new IMAGE_BRUSH("Icons/icon_tab_toolbar_16px", Icon16x16));
+		Style.Set("Menu.Expand", new IMAGE_BRUSH("Icons/toolbar_expand_16x", Icon16x16));
+		Style.Set("Menu.SubMenuIndicator", new IMAGE_BRUSH("Common/SubmenuArrow", Icon8x8));
+		Style.Set("Menu.SToolBarComboButtonBlock.Padding", FMargin(4.0f));
+		Style.Set("Menu.SToolBarButtonBlock.Padding", FMargin(4.0f));
+		Style.Set("Menu.SToolBarCheckComboButtonBlock.Padding", FMargin(4.0f));
+		Style.Set("Menu.SToolBarButtonBlock.CheckBox.Padding", FMargin(0.0f));
+		Style.Set("Menu.SToolBarComboButtonBlock.ComboButton.Color", DefaultForeground);
 
+		Style.Set("Menu.Block.IndentedPadding", FMargin(18.0f, 2.0f, 4.0f, 4.0f));
+		Style.Set("Menu.Block.Padding", FMargin(2.0f, 2.0f, 4.0f, 4.0f));
+
+		Style.Set("Menu.Separator", new BOX_BRUSH("Old/Button", 4.0f / 32.0f));
+		Style.Set("Menu.Separator.Padding", FMargin(0.5f));
+
+		Style.Set("Menu.Label", Style.GetWidgetStyle<FTextBlockStyle>("Text_9"));
+		Style.Set("Menu.EditableText", FEditableTextBoxStyle(NormalEditableTextBoxStyle).SetFont(TTF_FONT("Fonts/Roboto-Regular", 9)));
+		Style.Set("Menu.Keybinding", Style.GetWidgetStyle<FTextBlockStyle>("Text_8"));
+
+		Style.Set("Menu.Heading", FTextBlockStyle(NormalText)
+			.SetColorAndOpacity(FLinearColor(0.4f, 0.4, 0.4f, 1.0f)));
+
+		/* Set images for various SCheckBox states associated with menu check box items... */
+		const FCheckBoxStyle BasicMenuCheckBoxStyle = FCheckBoxStyle()
+			.SetUncheckedImage(IMAGE_BRUSH("Common/SmallCheckBox", Icon14x14))
+			.SetUncheckedHoveredImage(IMAGE_BRUSH("Common/SmallCheckBox_Hovered", Icon14x14))
+			.SetUncheckedPressedImage(IMAGE_BRUSH("Common/SmallCheckBox_Hovered", Icon14x14, FLinearColor(0.5f, 0.5f, 0.5f)))
+			.SetCheckedImage(IMAGE_BRUSH("Common/SmallCheckBox_Checked", Icon14x14))
+			.SetCheckedHoveredImage(IMAGE_BRUSH("Common/SmallCheckBox_Checked_Hovered", Icon14x14))
+			.SetCheckedPressedImage(IMAGE_BRUSH("Common/SmallCheckBox_Checked_Hovered", Icon14x14, FLinearColor(0.5f, 0.5f, 0.5f)))
+			.SetUndeterminedImage(IMAGE_BRUSH("Common/CheckBox_Undetermined", Icon14x14))
+			.SetUndeterminedHoveredImage(IMAGE_BRUSH("Common/CheckBox_Undetermined_Hovered", Icon14x14))
+			.SetUndeterminedPressedImage(IMAGE_BRUSH("Common/CheckBox_Undetermined_Hovered", Icon14x14, FLinearColor(0.5f, 0.5f, 0.5f)));
+
+		/* ...and add the new style */
+		Style.Set("Menu.CheckBox", BasicMenuCheckBoxStyle);
+
+		/* Read-only checkbox that appears next to a menu item */
+		/* Set images for various SCheckBox states associated with read-only menu check box items... */
+		const FCheckBoxStyle BasicMenuCheckStyle = FCheckBoxStyle()
+			.SetUncheckedImage(IMAGE_BRUSH("Icons/Empty_14x", Icon14x14))
+			.SetUncheckedHoveredImage(IMAGE_BRUSH("Icons/Empty_14x", Icon14x14))
+			.SetUncheckedPressedImage(IMAGE_BRUSH("Common/SmallCheckBox_Hovered", Icon14x14))
+			.SetCheckedImage(IMAGE_BRUSH("Common/SmallCheck", Icon14x14))
+			.SetCheckedHoveredImage(IMAGE_BRUSH("Common/SmallCheck", Icon14x14))
+			.SetCheckedPressedImage(IMAGE_BRUSH("Common/SmallCheck", Icon14x14))
+			.SetUndeterminedImage(IMAGE_BRUSH("Icons/Empty_14x", Icon14x14))
+			.SetUndeterminedHoveredImage(FSlateNoResource())
+			.SetUndeterminedPressedImage(FSlateNoResource());
+
+		/* ...and add the new style */
+		Style.Set("Menu.Check", BasicMenuCheckStyle);
+
+		/* This radio button is actually just a check box with different images */
+		/* Set images for various Menu radio button (SCheckBox) states... */
+		const FCheckBoxStyle BasicMenuRadioButtonStyle = FCheckBoxStyle()
+			.SetUncheckedImage(IMAGE_BRUSH("Common/RadioButton_Unselected_16x", Icon16x16))
+			.SetUncheckedHoveredImage(IMAGE_BRUSH("Common/RadioButton_Unselected_16x", Icon16x16))
+			.SetUncheckedPressedImage(IMAGE_BRUSH("Common/RadioButton_Unselected_16x", Icon16x16))
+			.SetCheckedImage(IMAGE_BRUSH("Common/RadioButton_Selected_16x", Icon16x16))
+			.SetCheckedHoveredImage(IMAGE_BRUSH("Common/RadioButton_Selected_16x", Icon16x16, SelectionColor))
+			.SetCheckedPressedImage(IMAGE_BRUSH("Common/RadioButton_Unselected_16x", Icon16x16, SelectionColor_Pressed))
+			.SetUndeterminedImage(IMAGE_BRUSH("Common/RadioButton_Unselected_16x", Icon16x16))
+			.SetUndeterminedHoveredImage(IMAGE_BRUSH("Common/RadioButton_Unselected_16x", Icon16x16, SelectionColor))
+			.SetUndeterminedPressedImage(IMAGE_BRUSH("Common/RadioButton_Unselected_16x", Icon16x16, SelectionColor_Pressed));
+
+		/* ...and set new style */
+		Style.Set("Menu.RadioButton", BasicMenuRadioButtonStyle);
+
+		/* Create style for "Menu.ToggleButton" widget ... */
+		const FCheckBoxStyle MenuToggleButtonCheckBoxStyle = FCheckBoxStyle()
+			.SetCheckBoxType(ESlateCheckBoxType::ToggleButton)
+			.SetUncheckedImage(FSlateNoResource())
+			.SetUncheckedPressedImage(BOX_BRUSH("Common/RoundedSelection_16x", 4.0f / 16.0f, SelectionColor_Pressed))
+			.SetUncheckedHoveredImage(BOX_BRUSH("Common/RoundedSelection_16x", 4.0f / 16.0f, SelectionColor))
+			.SetCheckedImage(BOX_BRUSH("Common/RoundedSelection_16x", 4.0f / 16.0f, SelectionColor_Pressed))
+			.SetCheckedHoveredImage(BOX_BRUSH("Common/RoundedSelection_16x", 4.0f / 16.0f, SelectionColor_Pressed))
+			.SetCheckedPressedImage(BOX_BRUSH("Common/RoundedSelection_16x", 4.0f / 16.0f, SelectionColor));
+		/* ... and add new style */
+		Style.Set("Menu.ToggleButton", MenuToggleButtonCheckBoxStyle);
+
+		Style.Set("Menu.Button", FButtonStyle(NoBorder)
+			.SetNormal(FSlateNoResource())
+			.SetPressed(BOX_BRUSH("Common/RoundedSelection_16x", 4.0f / 16.0f, SelectionColor_Pressed))
+			.SetHovered(BOX_BRUSH("Common/RoundedSelection_16x", 4.0f / 16.0f, SelectionColor))
+			.SetNormalPadding(FMargin(0, 1))
+			.SetPressedPadding(FMargin(0, 2, 0, 0))
+		);
+
+		Style.Set("Menu.Button.Checked", new BOX_BRUSH("Common/RoundedSelection_16x", 4.0f / 16.0f, SelectionColor_Pressed));
+		Style.Set("Menu.Button.Checked_Hovered", new BOX_BRUSH("Common/RoundedSelection_16x", 4.0f / 16.0f, SelectionColor_Pressed));
+		Style.Set("Menu.Button.Checked_Pressed", new BOX_BRUSH("Common/RoundedSelection_16x", 4.0f / 16.0f, SelectionColor));
+
+		/* The style of a menu bar button when it has a sub menu open */
+		Style.Set("Menu.Button.SubMenuOpen", new BORDER_BRUSH("Common/Selection", FMargin(4.f / 16.f), FLinearColor(0.10f, 0.10f, 0.10f)));
+	}
 	return StyleSet;
 }
 

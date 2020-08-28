@@ -25,7 +25,7 @@ protected:
 	TSharedPtr<SWidget>	CreateToWorldButton();
 	TSharedPtr<SWidget>	CreateBuildingButton();
 	TSharedPtr<SWidget> CreateShowBuildingsWidget();
-
+	TSharedPtr<SWidget> CreateHordeList();
 
 
 

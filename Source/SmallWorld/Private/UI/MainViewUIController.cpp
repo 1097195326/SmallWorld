@@ -12,9 +12,7 @@ void MainViewUIController::InitControllerView()
 		[
 			SNew(SServiceDragDropWidget)
 		];
-	LeftTopSlot->AttachWidget(CreateUserView().ToSharedRef());
-	LeftBottomSlot->AttachWidget(CreateToWorldButton().ToSharedRef());
-	RightBottomSlot->AttachWidget(CreateBuildingButton().ToSharedRef());
+	LeftCenterSlot->AttachWidget(CreateHordeList().ToSharedRef());
 
 }
 void MainViewUIController::OnEnter()
@@ -84,6 +82,13 @@ TSharedPtr<SWidget> MainViewUIController::CreateShowBuildingsWidget()
 		.IconNames(IconNames);
 
 	return ResWidget;
+}
+TSharedPtr<SWidget> MainViewUIController::CreateHordeList()
+{
+	FMenuBuilder MenuBuilder(true, nullptr);
+
+
+	return SNullWidget::NullWidget;
 }
 FReply MainViewUIController::OnPowerClicked()
 {
