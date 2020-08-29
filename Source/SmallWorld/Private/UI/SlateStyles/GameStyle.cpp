@@ -74,7 +74,7 @@ TSharedRef<FSlateStyleSet> FGameStyle::Create()
 		.SetShadowOffset(FVector2D::ZeroVector)
 		.SetShadowColorAndOpacity(FLinearColor::Black)
 		.SetHighlightColor(FLinearColor(0.02f, 0.3f, 0.0f))
-		.SetHighlightShape(BOX_BRUSH("Common/TextBlockHighlightShape", FMargin(3.f / 8.f)));
+		.SetHighlightShape(BOX_BRUSH("Engine/TextBlockHighlightShape", FMargin(3.f / 8.f)));
 	const FTextBlockStyle Text_8 = FTextBlockStyle()
 		.SetFont(TTF_FONT("Fonts/Roboto-Regular", 8))
 		.SetColorAndOpacity(FSlateColor(FLinearColor::White))
@@ -155,19 +155,19 @@ TSharedRef<FSlateStyleSet> FGameStyle::Create()
 	}
 	// SScrollBar defaults...
 	const FScrollBarStyle ScrollBar = FScrollBarStyle()
-		.SetVerticalTopSlotImage(IMAGE_BRUSH("Common/Scrollbar_Background_Vertical", FVector2D(8, 8)))
-		.SetVerticalBottomSlotImage(IMAGE_BRUSH("Common/Scrollbar_Background_Vertical", FVector2D(8, 8)))
-		.SetHorizontalTopSlotImage(IMAGE_BRUSH("Common/Scrollbar_Background_Horizontal", FVector2D(8, 8)))
-		.SetHorizontalBottomSlotImage(IMAGE_BRUSH("Common/Scrollbar_Background_Horizontal", FVector2D(8, 8)))
-		.SetNormalThumbImage(BOX_BRUSH("Common/Scrollbar_Thumb", FMargin(4.f / 16.f)))
-		.SetDraggedThumbImage(BOX_BRUSH("Common/Scrollbar_Thumb", FMargin(4.f / 16.f)))
-		.SetHoveredThumbImage(BOX_BRUSH("Common/Scrollbar_Thumb", FMargin(4.f / 16.f)));
+		.SetVerticalTopSlotImage(IMAGE_BRUSH("Engine/Scrollbar_Background_Vertical", FVector2D(8, 8)))
+		.SetVerticalBottomSlotImage(IMAGE_BRUSH("Engine/Scrollbar_Background_Vertical", FVector2D(8, 8)))
+		.SetHorizontalTopSlotImage(IMAGE_BRUSH("Engine/Scrollbar_Background_Horizontal", FVector2D(8, 8)))
+		.SetHorizontalBottomSlotImage(IMAGE_BRUSH("Engine/Scrollbar_Background_Horizontal", FVector2D(8, 8)))
+		.SetNormalThumbImage(BOX_BRUSH("Engine/Scrollbar_Thumb", FMargin(4.f / 16.f)))
+		.SetDraggedThumbImage(BOX_BRUSH("Engine/Scrollbar_Thumb", FMargin(4.f / 16.f)))
+		.SetHoveredThumbImage(BOX_BRUSH("Engine/Scrollbar_Thumb", FMargin(4.f / 16.f)));
 	// SEditableTextBox defaults...
 	const FEditableTextBoxStyle NormalEditableTextBoxStyle = FEditableTextBoxStyle()
-		.SetBackgroundImageNormal(BOX_BRUSH("Common/TextBox", FMargin(4.0f / 16.0f)))
-		.SetBackgroundImageHovered(BOX_BRUSH("Common/TextBox_Hovered", FMargin(4.0f / 16.0f)))
-		.SetBackgroundImageFocused(BOX_BRUSH("Common/TextBox_Hovered", FMargin(4.0f / 16.0f)))
-		.SetBackgroundImageReadOnly(BOX_BRUSH("Common/TextBox_ReadOnly", FMargin(4.0f / 16.0f)))
+		.SetBackgroundImageNormal(BOX_BRUSH("Engine/TextBox", FMargin(4.0f / 16.0f)))
+		.SetBackgroundImageHovered(BOX_BRUSH("Engine/TextBox_Hovered", FMargin(4.0f / 16.0f)))
+		.SetBackgroundImageFocused(BOX_BRUSH("Engine/TextBox_Hovered", FMargin(4.0f / 16.0f)))
+		.SetBackgroundImageReadOnly(BOX_BRUSH("Engine/TextBox_ReadOnly", FMargin(4.0f / 16.0f)))
 		.SetScrollBarStyle(ScrollBar);
 	{
 		Style.Set("NormalEditableTextBox", NormalEditableTextBoxStyle);
@@ -250,10 +250,10 @@ TSharedRef<FSlateStyleSet> FGameStyle::Create()
 	
 	// MenuBar
 	{
-		Style.Set("Menu.Background", new BOX_BRUSH("Old/Menu_Background", FMargin(8.0f / 64.0f)));
-		Style.Set("Menu.Icon", new IMAGE_BRUSH("Icons/icon_tab_toolbar_16px", Icon16x16));
-		Style.Set("Menu.Expand", new IMAGE_BRUSH("Icons/toolbar_expand_16x", Icon16x16));
-		Style.Set("Menu.SubMenuIndicator", new IMAGE_BRUSH("Common/SubmenuArrow", Icon8x8));
+		Style.Set("Menu.Background", new BOX_BRUSH("Engine/Menu_Background", FMargin(8.0f / 64.0f)));
+		Style.Set("Menu.Icon", new IMAGE_BRUSH("Engine/icon_tab_toolbar_16px", Icon16x16));
+		Style.Set("Menu.Expand", new IMAGE_BRUSH("Engine/toolbar_expand_16x", Icon16x16));
+		Style.Set("Menu.SubMenuIndicator", new IMAGE_BRUSH("Engine/SubmenuArrow", Icon8x8));
 		Style.Set("Menu.SToolBarComboButtonBlock.Padding", FMargin(4.0f));
 		Style.Set("Menu.SToolBarButtonBlock.Padding", FMargin(4.0f));
 		Style.Set("Menu.SToolBarCheckComboButtonBlock.Padding", FMargin(4.0f));
@@ -263,7 +263,7 @@ TSharedRef<FSlateStyleSet> FGameStyle::Create()
 		Style.Set("Menu.Block.IndentedPadding", FMargin(18.0f, 2.0f, 4.0f, 4.0f));
 		Style.Set("Menu.Block.Padding", FMargin(2.0f, 2.0f, 4.0f, 4.0f));
 
-		Style.Set("Menu.Separator", new BOX_BRUSH("Old/Button", 4.0f / 32.0f));
+		Style.Set("Menu.Separator", new BOX_BRUSH("Engine/Button", 4.0f / 32.0f));
 		Style.Set("Menu.Separator.Padding", FMargin(0.5f));
 
 		Style.Set("Menu.Label", Style.GetWidgetStyle<FTextBlockStyle>("Text_9"));
@@ -275,15 +275,15 @@ TSharedRef<FSlateStyleSet> FGameStyle::Create()
 
 		/* Set images for various SCheckBox states associated with menu check box items... */
 		const FCheckBoxStyle BasicMenuCheckBoxStyle = FCheckBoxStyle()
-			.SetUncheckedImage(IMAGE_BRUSH("Common/SmallCheckBox", Icon14x14))
-			.SetUncheckedHoveredImage(IMAGE_BRUSH("Common/SmallCheckBox_Hovered", Icon14x14))
-			.SetUncheckedPressedImage(IMAGE_BRUSH("Common/SmallCheckBox_Hovered", Icon14x14, FLinearColor(0.5f, 0.5f, 0.5f)))
-			.SetCheckedImage(IMAGE_BRUSH("Common/SmallCheckBox_Checked", Icon14x14))
-			.SetCheckedHoveredImage(IMAGE_BRUSH("Common/SmallCheckBox_Checked_Hovered", Icon14x14))
-			.SetCheckedPressedImage(IMAGE_BRUSH("Common/SmallCheckBox_Checked_Hovered", Icon14x14, FLinearColor(0.5f, 0.5f, 0.5f)))
-			.SetUndeterminedImage(IMAGE_BRUSH("Common/CheckBox_Undetermined", Icon14x14))
-			.SetUndeterminedHoveredImage(IMAGE_BRUSH("Common/CheckBox_Undetermined_Hovered", Icon14x14))
-			.SetUndeterminedPressedImage(IMAGE_BRUSH("Common/CheckBox_Undetermined_Hovered", Icon14x14, FLinearColor(0.5f, 0.5f, 0.5f)));
+			.SetUncheckedImage(IMAGE_BRUSH("Engine/SmallCheckBox", Icon14x14))
+			.SetUncheckedHoveredImage(IMAGE_BRUSH("Engine/SmallCheckBox_Hovered", Icon14x14))
+			.SetUncheckedPressedImage(IMAGE_BRUSH("Engine/SmallCheckBox_Hovered", Icon14x14, FLinearColor(0.5f, 0.5f, 0.5f)))
+			.SetCheckedImage(IMAGE_BRUSH("Engine/SmallCheckBox_Checked", Icon14x14))
+			.SetCheckedHoveredImage(IMAGE_BRUSH("Engine/SmallCheckBox_Checked_Hovered", Icon14x14))
+			.SetCheckedPressedImage(IMAGE_BRUSH("Engine/SmallCheckBox_Checked_Hovered", Icon14x14, FLinearColor(0.5f, 0.5f, 0.5f)))
+			.SetUndeterminedImage(IMAGE_BRUSH("Engine/CheckBox_Undetermined", Icon14x14))
+			.SetUndeterminedHoveredImage(IMAGE_BRUSH("Engine/CheckBox_Undetermined_Hovered", Icon14x14))
+			.SetUndeterminedPressedImage(IMAGE_BRUSH("Engine/CheckBox_Undetermined_Hovered", Icon14x14, FLinearColor(0.5f, 0.5f, 0.5f)));
 
 		/* ...and add the new style */
 		Style.Set("Menu.CheckBox", BasicMenuCheckBoxStyle);
@@ -291,13 +291,13 @@ TSharedRef<FSlateStyleSet> FGameStyle::Create()
 		/* Read-only checkbox that appears next to a menu item */
 		/* Set images for various SCheckBox states associated with read-only menu check box items... */
 		const FCheckBoxStyle BasicMenuCheckStyle = FCheckBoxStyle()
-			.SetUncheckedImage(IMAGE_BRUSH("Icons/Empty_14x", Icon14x14))
-			.SetUncheckedHoveredImage(IMAGE_BRUSH("Icons/Empty_14x", Icon14x14))
-			.SetUncheckedPressedImage(IMAGE_BRUSH("Common/SmallCheckBox_Hovered", Icon14x14))
-			.SetCheckedImage(IMAGE_BRUSH("Common/SmallCheck", Icon14x14))
-			.SetCheckedHoveredImage(IMAGE_BRUSH("Common/SmallCheck", Icon14x14))
-			.SetCheckedPressedImage(IMAGE_BRUSH("Common/SmallCheck", Icon14x14))
-			.SetUndeterminedImage(IMAGE_BRUSH("Icons/Empty_14x", Icon14x14))
+			.SetUncheckedImage(IMAGE_BRUSH("Engine/Empty_14x", Icon14x14))
+			.SetUncheckedHoveredImage(IMAGE_BRUSH("Engine/Empty_14x", Icon14x14))
+			.SetUncheckedPressedImage(IMAGE_BRUSH("Engine/SmallCheckBox_Hovered", Icon14x14))
+			.SetCheckedImage(IMAGE_BRUSH("Engine/SmallCheck", Icon14x14))
+			.SetCheckedHoveredImage(IMAGE_BRUSH("Engine/SmallCheck", Icon14x14))
+			.SetCheckedPressedImage(IMAGE_BRUSH("Engine/SmallCheck", Icon14x14))
+			.SetUndeterminedImage(IMAGE_BRUSH("Engine/Empty_14x", Icon14x14))
 			.SetUndeterminedHoveredImage(FSlateNoResource())
 			.SetUndeterminedPressedImage(FSlateNoResource());
 
@@ -307,15 +307,15 @@ TSharedRef<FSlateStyleSet> FGameStyle::Create()
 		/* This radio button is actually just a check box with different images */
 		/* Set images for various Menu radio button (SCheckBox) states... */
 		const FCheckBoxStyle BasicMenuRadioButtonStyle = FCheckBoxStyle()
-			.SetUncheckedImage(IMAGE_BRUSH("Common/RadioButton_Unselected_16x", Icon16x16))
-			.SetUncheckedHoveredImage(IMAGE_BRUSH("Common/RadioButton_Unselected_16x", Icon16x16))
-			.SetUncheckedPressedImage(IMAGE_BRUSH("Common/RadioButton_Unselected_16x", Icon16x16))
-			.SetCheckedImage(IMAGE_BRUSH("Common/RadioButton_Selected_16x", Icon16x16))
-			.SetCheckedHoveredImage(IMAGE_BRUSH("Common/RadioButton_Selected_16x", Icon16x16, SelectionColor))
-			.SetCheckedPressedImage(IMAGE_BRUSH("Common/RadioButton_Unselected_16x", Icon16x16, SelectionColor_Pressed))
-			.SetUndeterminedImage(IMAGE_BRUSH("Common/RadioButton_Unselected_16x", Icon16x16))
-			.SetUndeterminedHoveredImage(IMAGE_BRUSH("Common/RadioButton_Unselected_16x", Icon16x16, SelectionColor))
-			.SetUndeterminedPressedImage(IMAGE_BRUSH("Common/RadioButton_Unselected_16x", Icon16x16, SelectionColor_Pressed));
+			.SetUncheckedImage(IMAGE_BRUSH("Engine/RadioButton_Unselected_16x", Icon16x16))
+			.SetUncheckedHoveredImage(IMAGE_BRUSH("Engine/RadioButton_Unselected_16x", Icon16x16))
+			.SetUncheckedPressedImage(IMAGE_BRUSH("Engine/RadioButton_Unselected_16x", Icon16x16))
+			.SetCheckedImage(IMAGE_BRUSH("Engine/RadioButton_Selected_16x", Icon16x16))
+			.SetCheckedHoveredImage(IMAGE_BRUSH("Engine/RadioButton_Selected_16x", Icon16x16, SelectionColor))
+			.SetCheckedPressedImage(IMAGE_BRUSH("Engine/RadioButton_Unselected_16x", Icon16x16, SelectionColor_Pressed))
+			.SetUndeterminedImage(IMAGE_BRUSH("Engine/RadioButton_Unselected_16x", Icon16x16))
+			.SetUndeterminedHoveredImage(IMAGE_BRUSH("Engine/RadioButton_Unselected_16x", Icon16x16, SelectionColor))
+			.SetUndeterminedPressedImage(IMAGE_BRUSH("Engine/RadioButton_Unselected_16x", Icon16x16, SelectionColor_Pressed));
 
 		/* ...and set new style */
 		Style.Set("Menu.RadioButton", BasicMenuRadioButtonStyle);
@@ -324,28 +324,28 @@ TSharedRef<FSlateStyleSet> FGameStyle::Create()
 		const FCheckBoxStyle MenuToggleButtonCheckBoxStyle = FCheckBoxStyle()
 			.SetCheckBoxType(ESlateCheckBoxType::ToggleButton)
 			.SetUncheckedImage(FSlateNoResource())
-			.SetUncheckedPressedImage(BOX_BRUSH("Common/RoundedSelection_16x", 4.0f / 16.0f, SelectionColor_Pressed))
-			.SetUncheckedHoveredImage(BOX_BRUSH("Common/RoundedSelection_16x", 4.0f / 16.0f, SelectionColor))
-			.SetCheckedImage(BOX_BRUSH("Common/RoundedSelection_16x", 4.0f / 16.0f, SelectionColor_Pressed))
-			.SetCheckedHoveredImage(BOX_BRUSH("Common/RoundedSelection_16x", 4.0f / 16.0f, SelectionColor_Pressed))
-			.SetCheckedPressedImage(BOX_BRUSH("Common/RoundedSelection_16x", 4.0f / 16.0f, SelectionColor));
+			.SetUncheckedPressedImage(BOX_BRUSH("Engine/RoundedSelection_16x", 4.0f / 16.0f, SelectionColor_Pressed))
+			.SetUncheckedHoveredImage(BOX_BRUSH("Engine/RoundedSelection_16x", 4.0f / 16.0f, SelectionColor))
+			.SetCheckedImage(BOX_BRUSH("Engine/RoundedSelection_16x", 4.0f / 16.0f, SelectionColor_Pressed))
+			.SetCheckedHoveredImage(BOX_BRUSH("Engine/RoundedSelection_16x", 4.0f / 16.0f, SelectionColor_Pressed))
+			.SetCheckedPressedImage(BOX_BRUSH("Engine/RoundedSelection_16x", 4.0f / 16.0f, SelectionColor));
 		/* ... and add new style */
 		Style.Set("Menu.ToggleButton", MenuToggleButtonCheckBoxStyle);
 
 		Style.Set("Menu.Button", FButtonStyle(NoBorder)
 			.SetNormal(FSlateNoResource())
-			.SetPressed(BOX_BRUSH("Common/RoundedSelection_16x", 4.0f / 16.0f, SelectionColor_Pressed))
-			.SetHovered(BOX_BRUSH("Common/RoundedSelection_16x", 4.0f / 16.0f, SelectionColor))
+			.SetPressed(BOX_BRUSH("Engine/RoundedSelection_16x", 4.0f / 16.0f, SelectionColor_Pressed))
+			.SetHovered(BOX_BRUSH("Engine/RoundedSelection_16x", 4.0f / 16.0f, SelectionColor))
 			.SetNormalPadding(FMargin(0, 1))
 			.SetPressedPadding(FMargin(0, 2, 0, 0))
 		);
 
-		Style.Set("Menu.Button.Checked", new BOX_BRUSH("Common/RoundedSelection_16x", 4.0f / 16.0f, SelectionColor_Pressed));
-		Style.Set("Menu.Button.Checked_Hovered", new BOX_BRUSH("Common/RoundedSelection_16x", 4.0f / 16.0f, SelectionColor_Pressed));
-		Style.Set("Menu.Button.Checked_Pressed", new BOX_BRUSH("Common/RoundedSelection_16x", 4.0f / 16.0f, SelectionColor));
+		Style.Set("Menu.Button.Checked", new BOX_BRUSH("Engine/RoundedSelection_16x", 4.0f / 16.0f, SelectionColor_Pressed));
+		Style.Set("Menu.Button.Checked_Hovered", new BOX_BRUSH("Engine/RoundedSelection_16x", 4.0f / 16.0f, SelectionColor_Pressed));
+		Style.Set("Menu.Button.Checked_Pressed", new BOX_BRUSH("Engine/RoundedSelection_16x", 4.0f / 16.0f, SelectionColor));
 
 		/* The style of a menu bar button when it has a sub menu open */
-		Style.Set("Menu.Button.SubMenuOpen", new BORDER_BRUSH("Common/Selection", FMargin(4.f / 16.f), FLinearColor(0.10f, 0.10f, 0.10f)));
+		Style.Set("Menu.Button.SubMenuOpen", new BORDER_BRUSH("Engine/Selection", FMargin(4.f / 16.f), FLinearColor(0.10f, 0.10f, 0.10f)));
 	}
 	return StyleSet;
 }
