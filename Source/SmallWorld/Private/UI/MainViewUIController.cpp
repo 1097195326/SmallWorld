@@ -86,9 +86,19 @@ TSharedPtr<SWidget> MainViewUIController::CreateShowBuildingsWidget()
 TSharedPtr<SWidget> MainViewUIController::CreateHordeList()
 {
 	FMenuBuilder MenuBuilder(true, nullptr);
-
-
+	MenuBuilder.SetStyle(&FGameStyle::Get(), "Menu");
+	FUIAction DeleteAction(FExecuteAction::CreateRaw(this, &MainViewUIController::SelectHorde));
+	MenuBuilder.AddMenuEntry(
+		FText::FromString(TEXT("Human")),
+		FText::GetEmpty(),
+		FSlateIcon(),
+		DeleteAction);
+	return MenuBuilder.MakeWidget();
 	return SNullWidget::NullWidget;
+}
+void MainViewUIController::SelectHorde()
+{
+
 }
 FReply MainViewUIController::OnPowerClicked()
 {

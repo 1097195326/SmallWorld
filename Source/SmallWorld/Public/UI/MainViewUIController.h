@@ -14,6 +14,7 @@ public:
 	virtual void OnExit() override;
 	virtual void SelectGameActor(AGameActor * GameActorPtr) override;
 
+	void	SelectHorde();
 
 	FReply OnPowerClicked();
 	FReply OnHeroClicked();
