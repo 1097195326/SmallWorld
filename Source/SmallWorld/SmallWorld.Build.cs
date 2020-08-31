@@ -39,11 +39,12 @@ public class SmallWorld : ModuleRules
                 "SmallWorld/Public/UI",
                 "SmallWorld/Public/UI/SlateStyles",
                 "SmallWorld/Public/UI/Widgets",
+                "SmallWorld/Public/UI/Widgets/MenuBuilder",
                 "SmallWorld/Public/UserInterface",
                 "SmallWorld/Public/Weapons",
            }
            );
-
+       
         PublicDependencyModuleNames.AddRange(new string[] {
             "Core",
             "CoreUObject",
@@ -78,7 +79,7 @@ public class SmallWorld : ModuleRules
             "RenderCore",
             "RHI",
         });
-
+       
         // Uncomment if you are using online features
         // PrivateDependencyModuleNames.Add("OnlineSubsystem");
 

@@ -13,6 +13,8 @@ USmallWorldInstance::USmallWorldInstance()
 void USmallWorldInstance::On_Init()
 {
 	m_Instance = this;
+	
+
 	FGameStyle::Startup();
 
 	GameDataManager::GetInstance()->LoadData();
