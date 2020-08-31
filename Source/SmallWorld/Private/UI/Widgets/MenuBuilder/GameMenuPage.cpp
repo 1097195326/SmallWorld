@@ -5,6 +5,7 @@
 #include "Widgets/SWeakWidget.h"
 #include "GameMenuWidgetStyle.h"
 #include "SGameMenuPageWidget.h"
+#include "GameStyle.h"
 
 FGameMenuPage::FGameMenuPage()
 {
@@ -30,24 +31,11 @@ void FGameMenuPage::ShowRootMenu()
 
 bool FGameMenuPage::InitialiseRootMenu(APlayerController* InPCOwner, const FString& InStyleName, UGameViewportClient* InGameViewport)
 {
-	return true;
-	/*if (FModuleManager::Get().IsModuleLoaded("GameMenuBuilder") == false)
-	{
-		FModuleManager::LoadModuleChecked<IGameMenuBuilderModule>("GameMenuBuilder");
-	}	
-
-	TArray<FString> SplitString;
-	InStyleName.ParseIntoArray(SplitString, TEXT("/"), true);
-	FString StylePath = InStyleName.Replace(*SplitString[SplitString.Num() - 1],TEXT(""));
-	StylePath.RemoveFromEnd("/");
-	FGameMenuBuilderStyle::Initialize(StylePath);
-
-	FString InStyleName2(TEXT("/Game/UI/Styles/PlatformerMenuStyle"));
 	bool bResult = false;
 	if (InGameViewport)
 	{
 		SAssignNew(RootMenuPageWidget, SGameMenuPageWidget)
-			.MenuStyle(&FGameMenuBuilderStyle::Get().GetWidgetStyle<FGameMenuStyle>(*InStyleName))
+			.MenuStyle(&FGameStyle::Get().GetWidgetStyle<FGameMenuStyle>(*InStyleName))
 			.Cursor(EMouseCursor::Default)
 			.PCOwner(MakeWeakObjectPtr(InPCOwner));
 
@@ -58,7 +46,7 @@ bool FGameMenuPage::InitialiseRootMenu(APlayerController* InPCOwner, const FStri
 		RootMenuPageWidget->MyGameViewport = InGameViewport;
 		bResult = true;
 	}
-	return bResult;*/
+	return bResult;
 }
 
 void FGameMenuPage::DestroyRootMenu()
