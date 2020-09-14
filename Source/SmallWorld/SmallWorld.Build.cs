@@ -56,6 +56,7 @@ public class SmallWorld : ModuleRules
             "Json",
             "Slate",
             "SlateCore",
+            "AssetRegistry",
             "UnrealEd",
             "Landscape",
             "Foliage",
