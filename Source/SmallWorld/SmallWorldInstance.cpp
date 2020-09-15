@@ -13,10 +13,47 @@
 #include "Misc/ScopedSlowTask.h"
 #include "LevelUtils.h"
 #include "AssetRegistryModule.h"
-
+#include "Internationalization/Internationalization.h"
 
 USmallWorldInstance::FOnPreSaveWorld		USmallWorldInstance::PreSaveWorld;
 USmallWorldInstance::FOnPostSaveWorld		USmallWorldInstance::PostSaveWorld;
+
+class FSaveErrorOutputDevice : public FOutputDevice
+{
+public:
+	virtual void Serialize(const TCHAR* InData, ELogVerbosity::Type Verbosity, const class FName& Category) override
+	{
+		if (Verbosity == ELogVerbosity::Error || Verbosity == ELogVerbosity::Warning)
+		{
+			EMessageSeverity::Type Severity;
+			if (Verbosity == ELogVerbosity::Error)
+			{
+				Severity = EMessageSeverity::Error;
+			}
+			else
+			{
+				Severity = EMessageSeverity::Warning;
+			}
+			ErrorMessages.Add(FTokenizedMessage::Create(Severity, FText::FromName(InData)));
+		}
+	}
+
+	virtual void Flush() override
+	{
+		if (ErrorMessages.Num() > 0)
+		{
+			FMessageLog EditorErrors("EditorErrors");
+			EditorErrors.NewPage(FText::FromString("Save Output"));
+			EditorErrors.AddMessages(ErrorMessages);
+			EditorErrors.Open();
+			ErrorMessages.Empty();
+		}
+	}
+
+private:
+	// Holds the errors for the message log.
+	TArray< TSharedRef< FTokenizedMessage > > ErrorMessages;
+};
 
 
 USmallWorldInstance::USmallWorldInstance()
@@ -166,21 +203,21 @@ bool USmallWorldInstance::SaveWorld(UWorld* World,
 
 	if (!World)
 	{
-		FinalFilename = LOCTEXT("FilenameUnavailable", "Filename Not available!").ToString();
+		//FinalFilename = LOCTEXT("FilenameUnavailable", "Filename Not available!").ToString();
 		return false;
 	}
 
 	UPackage* Package = Cast<UPackage>(World->GetOuter());
 	if (!Package)
 	{
-		FinalFilename = LOCTEXT("FilenameUnavailableInvalidOuter", "Filename Not available. Outer package invalid!").ToString();
+		//FinalFilename = LOCTEXT("FilenameUnavailableInvalidOuter", "Filename Not available. Outer package invalid!").ToString();
 		return false;
 	}
 
 	// Don't save if the world doesn't need saving.
 	if (bCheckDirty && !Package->IsDirty())
 	{
-		FinalFilename = LOCTEXT("FilenameUnavailableNotDirty", "Filename Not available. Package not dirty.").ToString();
+		//FinalFilename = LOCTEXT("FilenameUnavailableNotDirty", "Filename Not available. Package not dirty.").ToString();
 		return false;
 	}
 
@@ -317,66 +354,7 @@ bool USmallWorldInstance::SaveWorld(UWorld* World,
 
 		// Rename the package and the object, as necessary
 		UWorld* DuplicatedWorld = nullptr;
-		if (bRenamePackageToFile)
-		{
-			if (bPackageNeedsRename)
-			{
-				// If we are doing a SaveAs on a world that already exists, we need to duplicate it.
-				if (bPackageExists)
-				{
-					ObjectTools::FPackageGroupName NewPGN;
-					NewPGN.PackageName = NewPackageName;
-					NewPGN.ObjectName = NewWorldAssetName;
-
-					bool bPromptToOverwrite = false;
-					TSet<UPackage*> PackagesUserRefusedToFullyLoad;
-					DuplicatedWorld = Cast<UWorld>(ObjectTools::DuplicateSingleObject(World, NewPGN, PackagesUserRefusedToFullyLoad, bPromptToOverwrite));
-					if (DuplicatedWorld)
-					{
-						Package = DuplicatedWorld->GetOutermost();
-					}
-					else
-					{
-						// Avoid assert during rename when duplicate fails
-						if (!Package->Rename(*NewPackageName, NULL, REN_Test))
-						{
-							FMessageDialog::Open(EAppMsgType::Ok, FText::Format(NSLOCTEXT("UnrealEd", "Error_OverwriteMapCleanup", "Unable to overwrite existing package {0}."), FText::FromString(NewPackageName)));
-							return false;
-						}
-					}
-				}
-
-				if (!DuplicatedWorld)
-				{
-					// Duplicate failed or not needed. Just do a rename.
-					Package->Rename(*NewPackageName, NULL, REN_NonTransactional | REN_DontCreateRedirectors | REN_ForceNoResetLoaders);
-
-					if (bWorldNeedsRename)
-					{
-						// Unload package of existing MapBuildData to allow overwrite
-						if (World->PersistentLevel->MapBuildData && !World->PersistentLevel->MapBuildData->IsLegacyBuildData())
-						{
-							FString NewBuiltPackageName = World->GetOutermost()->GetName() + TEXT("_BuiltData");
-							UObject* ExistingObject = StaticFindObject(nullptr, 0, *NewBuiltPackageName);
-							if (ExistingObject && ExistingObject != World->PersistentLevel->MapBuildData->GetOutermost())
-							{
-								TArray<UPackage*> AllPackagesToUnload;
-								AllPackagesToUnload.Add(Cast<UPackage>(ExistingObject));
-								UPackageTools::UnloadPackages(AllPackagesToUnload);
-							}
-						}
-
-						World->Rename(*NewWorldAssetName, NULL, REN_NonTransactional | REN_DontCreateRedirectors | REN_ForceNoResetLoaders);
-					}
-
-					// We're changing the world path, add a path redirector so that soft object paths get fixed on save
-					FSoftObjectPath NewPath(World);
-					GRedirectCollector.AddAssetPathRedirection(*OldPath.GetAssetPathString(), *NewPath.GetAssetPathString());
-					bAddedAssetPathRedirection = true;
-				}
-			}
-		}
-
+		
 		// Mark package as fully loaded, this is usually set implicitly by calling IsFullyLoaded before saving, but that path can get skipped for levels
 		Package->MarkAsFullyLoaded();
 
@@ -396,7 +374,7 @@ bool USmallWorldInstance::SaveWorld(UWorld* World,
 		if (bSuccess && !bAutosaving)
 		{
 			// Also save MapBuildData packages when saving the current level
-			FEditorFileUtils::SaveMapDataPackages(DuplicatedWorld ? DuplicatedWorld : World, bCheckDirty || bPIESaving);
+			//FEditorFileUtils::SaveMapDataPackages(DuplicatedWorld ? DuplicatedWorld : World, bCheckDirty || bPIESaving);
 		}
 
 		SlowTask.EnterProgressFrame(25);
@@ -406,14 +384,6 @@ bool USmallWorldInstance::SaveWorld(UWorld* World,
 		{
 			if (bPackageNeedsRename)
 			{
-				if (DuplicatedWorld)
-				{
-					DuplicatedWorld->Rename(nullptr, GetTransientPackage(), REN_NonTransactional | REN_DontCreateRedirectors);
-					DuplicatedWorld->MarkPendingKill();
-					DuplicatedWorld->SetFlags(RF_Transient);
-					DuplicatedWorld = nullptr;
-				}
-				else
 				{
 					Package->Rename(*OriginalPackageName, NULL, REN_NonTransactional);
 
