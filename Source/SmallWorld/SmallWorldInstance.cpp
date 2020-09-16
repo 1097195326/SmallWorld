@@ -182,6 +182,181 @@ bool USmallWorldInstance::SaveMap(UWorld* InWorld, const FString& Filename)
 
 	return bLevelWasSaved;
 }
+bool USmallWorldInstance::SaveAsImplementation(UWorld* InWorld, const FString& DefaultFilename, const bool bAllowStreamingLevelRename, FString* OutSavedFilename)
+{
+	FString Filename = FPaths::GetCleanFilename(DefaultFilename);
+	if (Filename.IsEmpty())
+	{
+		const FString DefaultName = TEXT("NewMap");
+		FString PackageName;
+		// Initial location is invalid (e.g. lies outside of the project): set location to /Game/Maps instead
+		FString DefaultDirectory = FPaths::ProjectContentDir() / TEXT("Maps");
+		FPackageName::TryConvertFilenameToLongPackageName(DefaultDirectory / DefaultName, PackageName);
+		
+		FString Name;
+		FAssetToolsModule& AssetToolsModule = FModuleManager::LoadModuleChecked<FAssetToolsModule>("AssetTools");
+		AssetToolsModule.Get().CreateUniqueAssetName(PackageName, TEXT(""), PackageName, Name);
+
+		Filename = FPaths::GetCleanFilename(FPackageName::LongPackageNameToFilename(PackageName));
+	}
+
+	bool bStatus = false;
+
+	// Loop through until a valid filename is given or the user presses cancel
+	bool bFilenameIsValid = false;
+
+	FString SaveFilename;
+	while (!bFilenameIsValid)
+	{
+		SaveFilename = FString();
+		bool bSaveFileLocationSelected = false;
+
+		FString DefaultPackagePath;
+		FPackageName::TryConvertFilenameToLongPackageName(DefaultDirectory / Filename, DefaultPackagePath);
+
+		FString PackageName;
+		bSaveFileLocationSelected = OpenSaveAsDialog(
+			UWorld::StaticClass(),
+			FPackageName::GetLongPackagePath(DefaultPackagePath),
+			FPaths::GetBaseFilename(Filename),
+			PackageName);
+
+		if (bSaveFileLocationSelected)
+		{
+			SaveFilename = FPackageName::LongPackageNameToFilename(PackageName, FPackageName::GetMapPackageExtension());
+
+			FText ErrorMessage;
+			bFilenameIsValid = FEditorFileUtils::IsValidMapFilename(SaveFilename, ErrorMessage);
+
+			if (bFilenameIsValid)
+			{
+				// If there is an existing world in memory that shares this name unload it now to prepare for overwrite.
+				// Don't do this if we are using save as to overwrite the current level since it will just save naturally.
+				const FString NewPackageName = FPackageName::FilenameToLongPackageName(SaveFilename);
+				UPackage* ExistingPackage = FindPackage(nullptr, *NewPackageName);
+				if (ExistingPackage && ExistingPackage != InWorld->GetOutermost())
+				{
+					bFilenameIsValid = FEditorFileUtils::AttemptUnloadInactiveWorldPackage(ExistingPackage, ErrorMessage);
+				}
+			}
+
+			if (!bFilenameIsValid)
+			{
+				// Start the loop over, prompting for save again
+				const FText DisplayFilename = FText::FromString(IFileManager::Get().ConvertToAbsolutePathForExternalAppForRead(*SaveFilename));
+				FFormatNamedArguments Arguments;
+				Arguments.Add(TEXT("Filename"), DisplayFilename);
+				Arguments.Add(TEXT("LineTerminators"), FText::FromString(LINE_TERMINATOR LINE_TERMINATOR));
+				Arguments.Add(TEXT("ErrorMessage"), ErrorMessage);
+				const FText DisplayMessage = FText::Format(NSLOCTEXT("SaveAsImplementation", "InvalidMapName", "Failed to save map {Filename}{LineTerminators}{ErrorMessage}"), Arguments);
+				FMessageDialog::Open(EAppMsgType::Ok, DisplayMessage);
+				continue;
+			}
+
+			FEditorDirectories::Get().SetLastDirectory(ELastDirectory::LEVEL, FPaths::GetPath(SaveFilename));
+
+			// Check to see if there are streaming level associated with the P map, and if so, we'll
+			// prompt to rename those and fixup all of the named-references to levels in the maps.
+			bool bCanRenameStreamingLevels = false;
+			FString OldBaseLevelName, NewBaseLevelName;
+
+			if (bAllowStreamingLevelRename)
+			{
+				const FString OldLevelName = FPaths::GetBaseFilename(Filename);
+				const FString NewLevelName = FPaths::GetBaseFilename(SaveFilename);
+
+				// The old and new level names must have a common suffix.  We'll detect that now.
+				int32 NumSuffixChars = 0;
+				{
+					for (int32 CharsFromEndIndex = 0; ; ++CharsFromEndIndex)
+					{
+						const int32 OldLevelNameCharIndex = (OldLevelName.Len() - 1) - CharsFromEndIndex;
+						const int32 NewLevelNameCharIndex = (NewLevelName.Len() - 1) - CharsFromEndIndex;
+
+						if (OldLevelNameCharIndex <= 0 || NewLevelNameCharIndex <= 0)
+						{
+							// We've processed all characters in at least one of the strings!
+							break;
+						}
+
+						if (FChar::ToUpper(OldLevelName[OldLevelNameCharIndex]) != FChar::ToUpper(NewLevelName[NewLevelNameCharIndex]))
+						{
+							// Characters don't match.  We have the common suffix now.
+							break;
+						}
+
+						// We have another common character in the suffix!
+						++NumSuffixChars;
+					}
+
+				}
+
+
+				// We can only proceed if we found a common suffix
+				if (NumSuffixChars > 0)
+				{
+					FString CommonSuffix = NewLevelName.Right(NumSuffixChars);
+
+					OldBaseLevelName = OldLevelName.Left(OldLevelName.Len() - CommonSuffix.Len());
+					NewBaseLevelName = NewLevelName.Left(NewLevelName.Len() - CommonSuffix.Len());
+
+
+					// OK, make sure this is really the persistent level
+					if (InWorld->PersistentLevel->IsPersistentLevel())
+					{
+						// Check to see if we actually have anything to rename
+						bool bAnythingToRename = false;
+						{
+							// Check for contained streaming levels
+							for (ULevelStreaming* CurStreamingLevel : InWorld->GetStreamingLevels())
+							{
+								if (CurStreamingLevel)
+								{
+									// Update the package name
+									FString PackageNameToRename = CurStreamingLevel->GetWorldAssetPackageName();
+									if (RenameStreamingLevel(PackageNameToRename, OldBaseLevelName, NewBaseLevelName))
+									{
+										bAnythingToRename = true;
+									}
+								}
+							}
+						}
+
+						if (bAnythingToRename)
+						{
+							// OK, we can go ahead and rename levels
+							bCanRenameStreamingLevels = true;
+						}
+					}
+				}
+			}
+
+			{
+				// Save the level
+				bStatus = FEditorFileUtils::SaveMap(InWorld, SaveFilename);
+			}
+		}
+		else
+		{
+			// User canceled the save dialog, do not prompt again.
+			break;
+		}
+
+	}
+
+	// Restore autosaving to its previous state.
+	LoadingSavingSettings->bAutoSaveEnable = bOldAutoSaveState;
+
+	// Update SCC state
+	ISourceControlModule::Get().QueueStatusUpdate(InWorld->GetOutermost());
+
+	if (bStatus && OutSavedFilename)
+	{
+		*OutSavedFilename = SaveFilename;
+	}
+
+	return bStatus;
+}
 bool USmallWorldInstance::SaveWorld(UWorld* World,
 	const FString* ForceFilename,
 	const TCHAR* OverridePath,

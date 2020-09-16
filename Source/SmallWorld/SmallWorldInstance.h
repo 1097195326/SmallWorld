@@ -38,6 +38,8 @@ public:
 
 	bool SaveMap(UWorld* World, const FString& Filename);
 
+	bool SaveAsImplementation(UWorld* InWorld, const FString& DefaultFilename, const bool bAllowStreamingLevelRename, FString* OutSavedFilename);
+	
 	bool SaveWorld(UWorld* World,
 		const FString* ForceFilename,
 		const TCHAR* OverridePath,
