@@ -1,16 +1,16 @@
 #include "UserViewportClient.h"
 #include "ProgressManager.h"
 
-UUserViewportClient * UUserViewportClient::UserViewportClientInstance = NULL;
+UUserViewportClient * UUserViewportClient::Instance = NULL;
 
 void UUserViewportClient::PostInitProperties()
 {
 	Super::PostInitProperties();
-	UserViewportClientInstance = this;
+	Instance = this;
 }
 UUserViewportClient * UUserViewportClient::GetInstance()
 {
-	return UserViewportClientInstance;
+	return Instance;
 }
 
 void UUserViewportClient::Tick(float DeltaTime)

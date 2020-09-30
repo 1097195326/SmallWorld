@@ -22,17 +22,17 @@ GameWorld::~GameWorld()
 }
 void GameWorld::ScanWorldMap()
 {
-	UWorld * CurrentWorld = SWI->GetWorld();
+	UWorld * CurrentWorld = User_GameInstance->GetWorld();
 	
 	TArray<AActor*> TemActorsArray;
-	UGameplayStatics::GetAllActorsOfClass(SWI, AGroundTileActor::StaticClass(), TemActorsArray);
+	UGameplayStatics::GetAllActorsOfClass(User_GameInstance, AGroundTileActor::StaticClass(), TemActorsArray);
 	for (auto IterActor : TemActorsArray)
 	{
 		AGroundTileActor * TemActor = Cast<AGroundTileActor>(IterActor);
 		GroundActorArray.Add(TemActor);
 		TemActor->TrackAround();
 	}
-	UGameplayStatics::GetAllActorsOfClass(SWI, ACastleTileActor::StaticClass(), TemActorsArray);
+	UGameplayStatics::GetAllActorsOfClass(User_GameInstance, ACastleTileActor::StaticClass(), TemActorsArray);
 	for (auto IterActor : TemActorsArray)
 	{
 		ACastleTileActor * TemActor = Cast<ACastleTileActor>(IterActor);

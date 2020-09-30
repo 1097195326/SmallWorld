@@ -17,8 +17,7 @@ public:
 
 	static UUserViewportClient * GetInstance();
 private:
-	static UUserViewportClient * UserViewportClientInstance;
-
+	static UUserViewportClient * Instance;
 
 };
-#define  GVC  UUserViewportClient::GetInstance()
+#define  User_GameClient  UUserViewportClient::GetInstance()

@@ -3,7 +3,6 @@
 #include "GameMenuPage.h"
 #include "Widgets/DeclarativeSyntaxSupport.h"
 #include "Widgets/SWeakWidget.h"
-#include "GameMenuWidgetStyle.h"
 #include "SGameMenuPageWidget.h"
 #include "GameStyle.h"
 
@@ -29,13 +28,13 @@ void FGameMenuPage::ShowRootMenu()
 	RootMenuPageWidget->SelectItem(0);
 }
 
-bool FGameMenuPage::InitialiseRootMenu(APlayerController* InPCOwner, const FString& InStyleName, UGameViewportClient* InGameViewport)
+bool FGameMenuPage::InitialiseRootMenu(APlayerController* InPCOwner, const FGameMenuStyle & InMenuStyle, UGameViewportClient* InGameViewport)
 {
 	bool bResult = false;
 	if (InGameViewport)
 	{
 		SAssignNew(RootMenuPageWidget, SGameMenuPageWidget)
-			.MenuStyle(&FGameStyle::Get().GetWidgetStyle<FGameMenuStyle>(*InStyleName))
+			.MenuStyle(&InMenuStyle)
 			.Cursor(EMouseCursor::Default)
 			.PCOwner(MakeWeakObjectPtr(InPCOwner));
 

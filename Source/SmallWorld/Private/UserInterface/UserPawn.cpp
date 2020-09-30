@@ -27,10 +27,16 @@
 #include "SiegeEngine.h"
 #include "GroupFightState.h"
 
-
+AUserPawn * AUserPawn::Instance = nullptr;
+AUserPawn * AUserPawn::GetInstance()
+{
+	return Instance;
+}
 AUserPawn::AUserPawn(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
+	Instance = this;
+
 	bUseControllerRotationPitch = false;
 	bUseControllerRotationYaw = false;
 	bUseControllerRotationRoll = false;

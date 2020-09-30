@@ -2,13 +2,13 @@
 
 
 #include "NineGridUIController.h"
-
+#include "GameMenuPage.h"
 
 class MainViewUIController : public NineGridUIController
 {
 public:
-	TSharedPtr<SWidget>	 TestWidget();
-	
+	MainViewUIController();
+
 	virtual void InitControllerView() override; 
 	virtual void OnEnter() override;
 	virtual void OnExit() override;
@@ -16,18 +16,8 @@ public:
 
 	void	SelectHorde();
 
-	FReply OnPowerClicked();
-	FReply OnHeroClicked();
-	FReply OnMapClicked();
-	FReply OnMenuClicked();
-
 protected:
-	TSharedPtr<SWidget> CreateUserView();
-	TSharedPtr<SWidget>	CreateToWorldButton();
-	TSharedPtr<SWidget>	CreateBuildingButton();
-	TSharedPtr<SWidget> CreateShowBuildingsWidget();
-	TSharedPtr<SWidget> CreateHordeList();
-
+	TSharedPtr<FGameMenuPage>	MainMenuPage;
 
 
 };

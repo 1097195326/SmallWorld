@@ -8,6 +8,10 @@
 
 AUserController * AUserController::Instance = nullptr;
 
+AUserController * AUserController::GetInstance()
+{
+	return Instance;
+}
 void AUserController::On_Init()
 {
 	Instance = this;

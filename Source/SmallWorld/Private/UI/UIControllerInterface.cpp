@@ -8,7 +8,7 @@ void UIControllerInterface::InitControllerView()
 void UIControllerInterface::Enter()
 {
 	InitControllerView();
-	GVC->AddViewportWidgetContent(ControllerView.ToSharedRef());
+	User_GameClient->AddViewportWidgetContent(ControllerView.ToSharedRef());
 	OnEnter();
 }
 void UIControllerInterface::Exit()
@@ -16,6 +16,6 @@ void UIControllerInterface::Exit()
 	if (ControllerView.IsValid())
 	{
 		OnExit();
-		GVC->RemoveViewportWidgetContent(ControllerView.ToSharedRef());
+		User_GameClient->RemoveViewportWidgetContent(ControllerView.ToSharedRef());
 	}
 }

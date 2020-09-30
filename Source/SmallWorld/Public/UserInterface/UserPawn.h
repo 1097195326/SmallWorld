@@ -9,9 +9,13 @@ UCLASS()
 class AUserPawn : public AGamePawn
 {
 	GENERATED_BODY()
+private:
+	static AUserPawn * Instance;
 public:
 	//AUserPawn();
 	AUserPawn(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get());
+
+	static AUserPawn * GetInstance();
 
 	virtual void On_Init() override;
 	virtual void On_Start() override;
@@ -70,3 +74,4 @@ private:
 	void RightMouseButtonOnReleased();
 };
 
+#define  User_Pawn AUserPawn::GetInstance()

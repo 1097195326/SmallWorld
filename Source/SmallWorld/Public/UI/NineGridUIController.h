@@ -20,17 +20,6 @@ public:
 	SOverlay::FOverlaySlot * GetRightCenterSlot() { return RightCenterSlot; }
 	SOverlay::FOverlaySlot * GetRightBottomSlot() { return RightBottomSlot; }
 
-	/*SVerticalBox::FSlot * GetLeftTopSlot() { return LeftTopSlot; }
-	SVerticalBox::FSlot * GetLeftCenterSlot() { return LeftCenterSlot; }
-	SVerticalBox::FSlot * GeLeftBottomSlot() { return LeftBottomSlot; }
-
-	SVerticalBox::FSlot * GetMiddleTopSlot() { return MiddleTopSlot; }
-	SVerticalBox::FSlot * GetMiddleCenterSlot() { return MiddleCenterSlot; }
-	SVerticalBox::FSlot * GetMiddleBottomSlot() { return MiddleBottomSlot; }
-
-	SVerticalBox::FSlot * GetRightTopSlot() { return RightTopSlot; }
-	SVerticalBox::FSlot * GetRightCenterSlot() { return RightCenterSlot; }
-	SVerticalBox::FSlot * GetRightBottomSlot() { return RightBottomSlot; }*/
 protected:
 
 	SOverlay::FOverlaySlot * LeftTopSlot = NULL;

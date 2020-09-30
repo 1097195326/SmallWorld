@@ -19,7 +19,7 @@ public:
 		ECT_InputSomething,
 
 	};
-	static AUserController * Instance;
+	static AUserController * GetInstance();
 
 	virtual void On_Init() override;
 	virtual void On_Start() override;
@@ -43,6 +43,8 @@ protected:
 	ULandscapeInfo *	CurrentLandscapeInfo;
 
 	void LandscapePaint(ALandscape * Landscape, ULandscapeInfo * LandscapeInfo, FVector Location, float Radius, float Falloff);
-
+private:
+	static AUserController * Instance;
 };
 
+#define User_Controller AUserController::GetInstance()

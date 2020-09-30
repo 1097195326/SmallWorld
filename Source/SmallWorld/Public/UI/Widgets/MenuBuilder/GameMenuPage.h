@@ -7,6 +7,8 @@
 #include "Internationalization/Text.h"
 #include "GameFramework/PlayerController.h"
 #include "GameMenuItem.h"
+#include "GameMenuWidgetStyle.h"
+
 
 class FString;
 class SGameMenuItemWidget;
@@ -34,7 +36,7 @@ public:
 	 * @param	InGameViewport	Gameviewport on which to place the menu.
 	 * @returns true on success. (Will fail if viewport invalid)
 	 */
-	bool InitialiseRootMenu(APlayerController* InPCOwner, const FString& InStyleName, UGameViewportClient* InGameViewport);
+	bool InitialiseRootMenu(APlayerController* InPCOwner, const FGameMenuStyle & InMenuStyle, UGameViewportClient* InGameViewport);
 
 	void DestroyRootMenu();
 

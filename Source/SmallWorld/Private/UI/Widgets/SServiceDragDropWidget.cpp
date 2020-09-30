@@ -26,7 +26,7 @@ void SServiceDragDropWidget::Construct(const FArguments & InArgs)
 FReply SServiceDragDropWidget::OnMouseButtonDown(const FGeometry& MyGeometry, const FPointerEvent& MouseEvent)
 {
 	FVector2D ScreenPosition = MyGeometry.AbsoluteToLocal(MouseEvent.GetScreenSpacePosition()) * MyGeometry.Scale;
-	AUserController::Instance->TrySelectGameActor(ScreenPosition);
+	User_Controller->TrySelectGameActor(ScreenPosition);
 
 	return FReply::Unhandled();
 }
@@ -63,7 +63,7 @@ void SServiceDragDropWidget::OnDragEnter(const FGeometry& MyGeometry, const FDra
 
 		FVector2D CachedOnDropLocalMousePos = MyGeometry.AbsoluteToLocal(DragDropEvent.GetScreenSpacePosition()) * MyGeometry.Scale;
 		
-		AUserController::Instance->UpdatePriviewActor(CachedOnDropLocalMousePos, BuildingOperation->IconName);
+		User_Controller->UpdatePriviewActor(CachedOnDropLocalMousePos, BuildingOperation->IconName);
 		IsValidDrap = true;
 	}
 	if (IsValidDrap)
@@ -86,17 +86,17 @@ void SServiceDragDropWidget::OnDragLeave(const FDragDropEvent& DragDropEvent)
 	{
 
 	}
-	if (AUserController::Instance->HavePriviewActor())
+	if (User_Controller->HavePriviewActor())
 	{
-		AUserController::Instance->DestroyPriviewActor();
+		User_Controller->DestroyPriviewActor();
 	}
 }
 FReply SServiceDragDropWidget::OnDragOver(const FGeometry& MyGeometry, const FDragDropEvent& DragDropEvent)
 {
 	FVector2D CachedOnDropLocalMousePos = MyGeometry.AbsoluteToLocal(DragDropEvent.GetScreenSpacePosition()) * MyGeometry.Scale;
 
-	AUserController::Instance->UpdatePriviewActor(CachedOnDropLocalMousePos);
-	if (AUserController::Instance->HavePriviewActor())
+	User_Controller->UpdatePriviewActor(CachedOnDropLocalMousePos);
+	if (User_Controller->HavePriviewActor())
 	{
 		FReply::Handled();
 	}
@@ -109,7 +109,7 @@ FReply SServiceDragDropWidget::OnDrop(const FGeometry& MyGeometry, const FDragDr
 	bool IsValidDrap = false;
 	if (Operation.IsValid() && Operation->IsOfType<FBuildingDragDropOp>())
 	{
-		AUserController::Instance->DropPriviewActor();
+		User_Controller->DropPriviewActor();
 		
 		IsValidDrap = true;
 	}
