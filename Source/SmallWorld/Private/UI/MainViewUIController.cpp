@@ -6,7 +6,7 @@
 #include "SmallWorldInstance.h"
 #include "UserController.h"
 #include "UserViewportClient.h"
-
+#include "GameMenuWidgetStyle.h"
 
 MainViewUIController::MainViewUIController()
 {
@@ -20,7 +20,8 @@ void MainViewUIController::InitControllerView()
 			SNew(SServiceDragDropWidget)
 		];
 	
-	MainMenuPage->InitialiseRootMenu(User_Controller,FGameStyle::Get().GetWidgetStyle<FGameMenuStyle>("MainMenuStyle"), User_GameClient);
+
+	MainMenuPage->InitialiseRootMenu(User_Controller,FGameStyle::Get().GetWidgetStyle<FGameMenuStyle>("Menu_MainView"), User_GameClient);
 	MainMenuPage->AddMenuItem(FText::FromString(TEXT("Name")));
 
 

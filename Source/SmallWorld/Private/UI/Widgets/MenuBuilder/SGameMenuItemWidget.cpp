@@ -53,7 +53,7 @@ void SGameMenuItemWidget::Construct(const FArguments& InArgs)
 		.VAlign(VAlign_Center)
 		[
 			SNew(STextBlock)
-			.TextStyle(FGameStyle::Get(), "GameMenuStyle.MenuTextStyle")
+			.TextStyle(&MenuStyle->ItemTextStyle)
 			.ColorAndOpacity(this,&SGameMenuItemWidget::GetButtonTextColor)
 			.Text(Text)
 		]
@@ -72,7 +72,7 @@ void SGameMenuItemWidget::Construct(const FArguments& InArgs)
 				.OnMouseButtonDown(this,&SGameMenuItemWidget::OnLeftArrowDown)
 				[
 					SNew(STextBlock)
-					.TextStyle(FGameStyle::Get(), "GameMenuStyle.MenuTextStyle")
+					.TextStyle(&MenuStyle->ItemTextStyle)
 					.ColorAndOpacity(this,&SGameMenuItemWidget::GetButtonTextColor)
 					.Text(FText::FromString(TEXT("<")))
 				]
@@ -82,7 +82,7 @@ void SGameMenuItemWidget::Construct(const FArguments& InArgs)
 			[
 				SNew(STextBlock)
 				.Visibility(bIsMultichoice ? EVisibility:: Visible : EVisibility::Collapsed )
-				.TextStyle(FGameStyle::Get(), "GameMenuStyle.MenuTextStyle")
+				.TextStyle(&MenuStyle->ItemTextStyle)
 				.ColorAndOpacity(this,&SGameMenuItemWidget::GetButtonTextColor)
 				.Text(OptionText)
 			]
@@ -96,7 +96,7 @@ void SGameMenuItemWidget::Construct(const FArguments& InArgs)
 				.OnMouseButtonDown(this,&SGameMenuItemWidget::OnRightArrowDown)
 				[
 					SNew(STextBlock)
-					.TextStyle(FGameStyle::Get(), "GameMenuStyle.MenuTextStyle")
+					.TextStyle(&MenuStyle->ItemTextStyle)
 					.ColorAndOpacity(this,&SGameMenuItemWidget::GetButtonTextColor)
 					.Text(FText::FromString(TEXT(">")))
 				]

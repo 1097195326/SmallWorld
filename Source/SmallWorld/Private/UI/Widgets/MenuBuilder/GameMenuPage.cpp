@@ -28,7 +28,7 @@ void FGameMenuPage::ShowRootMenu()
 	RootMenuPageWidget->SelectItem(0);
 }
 
-bool FGameMenuPage::InitialiseRootMenu(APlayerController* InPCOwner, const FGameMenuStyle & InMenuStyle, UGameViewportClient* InGameViewport)
+bool FGameMenuPage::InitialiseRootMenu(APlayerController* InPCOwner, const FGameMenuStyle& InMenuStyle, UGameViewportClient* InGameViewport)
 {
 	bool bResult = false;
 	if (InGameViewport)

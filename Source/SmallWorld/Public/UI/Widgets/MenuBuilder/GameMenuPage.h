@@ -36,7 +36,7 @@ public:
 	 * @param	InGameViewport	Gameviewport on which to place the menu.
 	 * @returns true on success. (Will fail if viewport invalid)
 	 */
-	bool InitialiseRootMenu(APlayerController* InPCOwner, const FGameMenuStyle & InMenuStyle, UGameViewportClient* InGameViewport);
+	bool InitialiseRootMenu(APlayerController* InPCOwner, const FGameMenuStyle& InMenuStyle, UGameViewportClient* InGameViewport);
 
 	void DestroyRootMenu();
 

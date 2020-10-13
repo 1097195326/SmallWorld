@@ -96,6 +96,7 @@ TSharedRef<FSlateStyleSet> FGameStyle::Create()
 		.SetColorAndOpacity(FSlateColor(FLinearColor::White))
 		.SetShadowOffset(FVector2D::ZeroVector);
 
+
 	Style.Set("NormalText", NormalText);
 	Style.Set("Text_8", Text_8);
 	Style.Set("Text_9", Text_9);

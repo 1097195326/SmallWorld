@@ -171,7 +171,7 @@ void SGameMenuPageWidget::Construct(const FArguments& InArgs)
 		.Visibility(this, &SGameMenuPageWidget::GetMenuTitleVisibility)
 		[
 			SNew(STextBlock)
-			.TextStyle(FGameStyle::Get(), "GameMenuStyle.MenuHeaderTextStyle")
+			.TextStyle(&MenuStyle->TitleTextStyle)
 			.ColorAndOpacity(this, &SGameMenuPageWidget::GetTitleColor)
 			.Text(this, &SGameMenuPageWidget::GetMenuTitle)
 		]

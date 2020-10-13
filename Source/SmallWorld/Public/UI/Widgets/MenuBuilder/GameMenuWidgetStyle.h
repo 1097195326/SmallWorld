@@ -178,6 +178,16 @@ struct FGameMenuStyle : public FSlateWidgetStyle
 	UPROPERTY(EditAnywhere, Category = Color)
 	FSlateColor TextColor;
 	FGameMenuStyle& SetTextColor(const FSlateColor InTextColor) { TextColor = InTextColor; return *this; }
+
+	UPROPERTY(EditAnywhere, Category = Text)
+	FTextBlockStyle TitleTextStyle;
+	FGameMenuStyle& SetTitleTextStyle(const FTextBlockStyle InTextBlock) { TitleTextStyle = InTextBlock; return *this; }
+
+	UPROPERTY(EditAnywhere, Category = Text)
+	FTextBlockStyle ItemTextStyle;
+	FGameMenuStyle& SetItemTextStyle(const FTextBlockStyle InTextBlock) { ItemTextStyle = InTextBlock; return *this; }
+
+
 };
 
 
