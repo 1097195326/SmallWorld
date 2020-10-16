@@ -12,15 +12,14 @@ MainViewUIController::MainViewUIController()
 {
 	MainMenuPage = MakeShareable(new FGameMenuPage());
 	SubMenuPage = MakeShareable(new FGameMenuPage());
-	//MainMenuPage->MenuTitle = FText::FromString(TransLanguage("Game_Race"));
-	SubMenuPage->AddMenuItem(FText::FromString(TransLanguage("Game_Race_Human")));
-	SubMenuPage->AddMenuItem(FText::FromString(TransLanguage("Game_Race_Orc")));
-	SubMenuPage->AddMenuItem(FText::FromString(TransLanguage("Game_Race_Elf")));
-	SubMenuPage->AddMenuItem(FText::FromString(TransLanguage("Game_Race_Undead")));
-
-	MainMenuPage->AddMenuItem(FText::FromString(TransLanguage("Game_Race")), SubMenuPage);
-
+	MainMenuPage->MenuTitle = FText::FromString(TransLanguage("Game_Race"));
+	MainMenuPage->AddMenuItem(FText::FromString(TransLanguage("Game_Race_Human")));
+	MainMenuPage->AddMenuItem(FText::FromString(TransLanguage("Game_Race_Orc")));
 	MainMenuPage->AddMenuItem(FText::FromString(TransLanguage("Game_Race_Elf")));
+	MainMenuPage->AddMenuItem(FText::FromString(TransLanguage("Game_Race_Undead")));
+
+	SubMenuPage->AddMenuItem(FText::FromString(TransLanguage("Game_Race")));
+
 
 }
 void MainViewUIController::ChooseRace(TSharedPtr<FGameMenuItem> InItem, int32 InIndex)
