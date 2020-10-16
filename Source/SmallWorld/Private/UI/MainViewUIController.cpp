@@ -11,7 +11,23 @@
 MainViewUIController::MainViewUIController()
 {
 	MainMenuPage = MakeShareable(new FGameMenuPage());
-	
+	SubMenuPage = MakeShareable(new FGameMenuPage());
+	//MainMenuPage->MenuTitle = FText::FromString(TransLanguage("Game_Race"));
+	SubMenuPage->AddMenuItem(FText::FromString(TransLanguage("Game_Race_Human")));
+	SubMenuPage->AddMenuItem(FText::FromString(TransLanguage("Game_Race_Orc")));
+	SubMenuPage->AddMenuItem(FText::FromString(TransLanguage("Game_Race_Elf")));
+	SubMenuPage->AddMenuItem(FText::FromString(TransLanguage("Game_Race_Undead")));
+
+	MainMenuPage->AddMenuItem(FText::FromString(TransLanguage("Game_Race")), SubMenuPage);
+
+	MainMenuPage->AddMenuItem(FText::FromString(TransLanguage("Game_Race_Elf")));
+
+}
+void MainViewUIController::ChooseRace(TSharedPtr<FGameMenuItem> InItem, int32 InIndex)
+{
+	if (InItem.IsValid())
+	{
+	}
 }
 void MainViewUIController::InitControllerView()
 {
@@ -21,20 +37,17 @@ void MainViewUIController::InitControllerView()
 		];
 	
 
-	MainMenuPage->InitialiseRootMenu(User_Controller,FGameStyle::Get().GetWidgetStyle<FGameMenuStyle>("Menu_MainView"), User_GameClient);
-	MainMenuPage->AddMenuItem(FText::FromString(TEXT("Name")));
-
-
-	MainMenuPage->ShowRootMenu();
-
 }
 void MainViewUIController::OnEnter()
 {
+	MainMenuPage->InitialiseRootMenu(User_Controller, FGameStyle::Get().GetWidgetStyle<FGameMenuStyle>("Menu_MainView"), User_GameClient);
+	
+	MainMenuPage->ShowRootMenu();
 
 }
 void MainViewUIController::OnExit()
 {
-
+	MainMenuPage->DestroyRootMenu();
 }
 void MainViewUIController::SelectGameActor(AGameActor * GameActorPtr)
 {

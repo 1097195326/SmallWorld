@@ -27,10 +27,10 @@ void UIControllerManager::ChangeUIController(UIControllerIndex  ToIndex)
 			break;
 		}
 	}
-	if (CurrentUIController == WantToController)
+	/*if (CurrentUIController == WantToController)
 	{
 		return;
-	}
+	}*/
 	if (CurrentUIController != nullptr)
 	{
 		CurrentUIController->Exit();

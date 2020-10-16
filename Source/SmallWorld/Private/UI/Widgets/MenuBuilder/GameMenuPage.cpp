@@ -35,6 +35,7 @@ bool FGameMenuPage::InitialiseRootMenu(APlayerController* InPCOwner, const FGame
 	{
 		SAssignNew(RootMenuPageWidget, SGameMenuPageWidget)
 			.MenuStyle(&InMenuStyle)
+			.GameMenu(true)
 			.Cursor(EMouseCursor::Default)
 			.PCOwner(MakeWeakObjectPtr(InPCOwner));
 

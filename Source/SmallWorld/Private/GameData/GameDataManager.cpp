@@ -7,9 +7,9 @@
 #include "Engine/ObjectLibrary.h"
 
 
-FString GameConfigDataFilePath = GamePath::GameConfigPath() + TEXT("GameConfigDataClass.xml");
-FString UserDataFilePath = GamePath::SaveAbsolutePath() + TEXT("UserDataClass.json");
-FString GameWorldDataFilePath = GamePath::SaveAbsolutePath() + TEXT("GameWorldDataClass.json");
+FString GameConfigDataFilePath = GamePath::GameConfigPath() + TEXT("GameConfigData.xml");
+FString UserDataFilePath = GamePath::SaveAbsolutePath() + TEXT("UserData.json");
+FString GameWorldDataFilePath = GamePath::SaveAbsolutePath() + TEXT("GameWorldData.json");
 
 
 GameDataManager::GameDataManager()

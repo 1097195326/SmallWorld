@@ -83,7 +83,8 @@ public:
 	FORCEINLINE TSharedRef<FGameMenuItem> AddMenuItem(const FText& InText, UserClass* InObj, typename FGameMenuItem::FOnConfirmMenuItem::TSPMethodDelegate< UserClass >::FMethodPtr InMethod)
 	{
 		TSharedPtr<FGameMenuItem> Item = MakeShareable(new FGameMenuItem(InText));
-		Item->OnConfirmMenuItem.BindSP(InObj, InMethod);
+		//Item->OnConfirmMenuItem.BindSP(InObj, InMethod);
+		Item->OnConfirmMenuItem.BindRaw(InObj, InMethod);
 		MenuItems.Add(Item);
 		return Item.ToSharedRef();
 	}
@@ -101,7 +102,8 @@ public:
 	FORCEINLINE TSharedRef<FGameMenuItem> AddMenuItemWithOptions(const FText& Text, const TArray<FText>& OptionsList, UserClass* InObj, typename FGameMenuItem::FOnOptionChanged::TSPMethodDelegate< UserClass >::FMethodPtr InMethod)
 	{
 		TSharedPtr<FGameMenuItem> Item = MakeShareable(new FGameMenuItem(Text, OptionsList));
-		Item->OnOptionChanged.BindSP(InObj, InMethod);
+		//Item->OnOptionChanged.BindSP(InObj, InMethod);
+		Item->OnOptionChanged.BindRaw(InObj, InMethod);
 		MenuItems.Add(Item);
 		return Item.ToSharedRef();
 	}
