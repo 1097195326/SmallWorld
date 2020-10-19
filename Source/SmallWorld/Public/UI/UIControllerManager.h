@@ -4,12 +4,14 @@
 #include "Templates/SingleTemplateClass.h"
 #include "UIControllerInterface.h"
 #include "MainViewUIController.h"
+#include "LoginViewUIController.h"
 
 class UIControllerManager : public SingleTemplateClass<UIControllerManager>
 {
 public:
 	enum UIControllerIndex
 	{
+		LoginViewUIControllerIndex,
 		MainViewUIControllerIndex,
 
 	};

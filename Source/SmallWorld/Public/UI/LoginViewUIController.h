@@ -3,10 +3,10 @@
 #include "GameMenuPage.h"
 
 
-class LoginUIController : public UIControllerInterface
+class LoginViewUIController : public UIControllerInterface
 {
 public:
-	LoginUIController();
+	LoginViewUIController();
 
 	virtual void InitControllerView() override;
 	virtual void OnEnter() override;

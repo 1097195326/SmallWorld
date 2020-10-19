@@ -16,7 +16,7 @@ void AUserHUD::BeginPlay()
 {
 	Super::BeginPlay();
 
-	UIControllerManager::GetInstance()->ChangeUIController(UIControllerManager::MainViewUIControllerIndex);
+	UIControllerManager::GetInstance()->ChangeUIController(UIControllerManager::LoginViewUIControllerIndex);
 
 }
 void AUserHUD::DrawHUD()
