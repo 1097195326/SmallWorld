@@ -8,7 +8,10 @@ void UIControllerInterface::InitControllerView()
 void UIControllerInterface::Enter()
 {
 	InitControllerView();
-	User_GameClient->AddViewportWidgetContent(ControllerView.ToSharedRef());
+	if (ControllerView.IsValid())
+	{
+		User_GameClient->AddViewportWidgetContent(ControllerView.ToSharedRef());
+	}
 	OnEnter();
 }
 void UIControllerInterface::Exit()

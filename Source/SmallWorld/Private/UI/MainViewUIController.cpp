@@ -32,7 +32,10 @@ void MainViewUIController::OnExit()
 }
 void MainViewUIController::SelectGameActor(AGameActor * GameActorPtr)
 {
-	CheckNullPtr(GameActorPtr);
+	if (GameActorPtr == nullptr)
+	{
+		return;
+	}
 	MiddleBottomSlot->AttachWidget(GameActorPtr->CreateActorDetailWidget().ToSharedRef());
 	
 }

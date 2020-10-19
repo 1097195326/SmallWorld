@@ -3,7 +3,6 @@
 
 #define LandscapeObject ECC_GameTraceChannel3
 
-#define CheckNullPtr(Ptr)  {if (Ptr == nullptr)return;}
 
 const float FloatErrorTolerance = 0.0001f;
 

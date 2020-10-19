@@ -42,27 +42,34 @@ void LoginViewUIController::MenuOperation(int32 InIndex)
 	{
 		RaceMenuItem->Text = FText::FromString(TransLanguage("Game_Race_Human"));
 		MainMenuPage->RootMenuPageWidget->MenuGoBack();
+		GameDataManager::GetInstance()->GetUserData()->SetCurrentRace(Race_Human);
 		break;
 	}
 	case 2:
 	{
 		RaceMenuItem->Text = FText::FromString(TransLanguage("Game_Race_Orc"));
 		MainMenuPage->RootMenuPageWidget->MenuGoBack();
+		GameDataManager::GetInstance()->GetUserData()->SetCurrentRace(Race_Orc);
 		break;
 	}
 	case 3:
 	{
 		RaceMenuItem->Text = FText::FromString(TransLanguage("Game_Race_Elf"));
 		MainMenuPage->RootMenuPageWidget->MenuGoBack();
+		GameDataManager::GetInstance()->GetUserData()->SetCurrentRace(Race_Elf);
 		break;
 	}
 	case 4:
 	{
 		RaceMenuItem->Text = FText::FromString(TransLanguage("Game_Race_Undead"));
 		MainMenuPage->RootMenuPageWidget->MenuGoBack();
+		GameDataManager::GetInstance()->GetUserData()->SetCurrentRace(Race_Undead);
 		break;
 	}
 	case 5:
+	{
+
+	}
 		break;
 	}
 }
