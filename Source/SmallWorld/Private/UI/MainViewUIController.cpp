@@ -7,54 +7,11 @@
 #include "UserController.h"
 #include "UserViewportClient.h"
 #include "GameMenuWidgetStyle.h"
-#include "SGameMenuPageWidget.h"
 
 MainViewUIController::MainViewUIController()
 {
-	RaceMenuPage = MakeShareable(new FGameMenuPage());
-	RaceMenuPage->AddMenuItem(FText::FromString(TransLanguage("Game_Race_Human")),this,&MainViewUIController::MenuOperation,1);
-	RaceMenuPage->AddMenuItem(FText::FromString(TransLanguage("Game_Race_Orc")), this, &MainViewUIController::MenuOperation,2);
-	RaceMenuPage->AddMenuItem(FText::FromString(TransLanguage("Game_Race_Elf")), this, &MainViewUIController::MenuOperation,3);
-	RaceMenuPage->AddMenuItem(FText::FromString(TransLanguage("Game_Race_Undead")), this, &MainViewUIController::MenuOperation,4);
+	
 
-	MainMenuPage = MakeShareable(new FGameMenuPage());
-	MainMenuPage->MenuTitle = FText::FromString(TransLanguage("Game_Race"));
-	RaceMenuItem = MainMenuPage->AddMenuItem(FText::FromString(TransLanguage("Game_Race")), RaceMenuPage);
-	MainMenuPage->AddMenuItem(FText::FromString(TransLanguage("Game_Start")), this, &MainViewUIController::MenuOperation,5);
-
-
-}
-void MainViewUIController::MenuOperation(int32 InIndex)
-{
-	switch (InIndex)
-	{
-	case 1:
-	{
-		RaceMenuItem->Text = FText::FromString(TransLanguage("Game_Race_Human"));
-		MainMenuPage->RootMenuPageWidget->MenuGoBack();
-		break;
-	}	
-	case 2:
-	{
-		RaceMenuItem->Text = FText::FromString(TransLanguage("Game_Race_Orc"));
-		MainMenuPage->RootMenuPageWidget->MenuGoBack();
-		break;
-	}
-	case 3:
-	{
-		RaceMenuItem->Text = FText::FromString(TransLanguage("Game_Race_Elf"));
-		MainMenuPage->RootMenuPageWidget->MenuGoBack();
-		break;
-	}
-	case 4:
-	{
-		RaceMenuItem->Text = FText::FromString(TransLanguage("Game_Race_Undead"));
-		MainMenuPage->RootMenuPageWidget->MenuGoBack();
-		break;
-	}
-	case 5:
-		break;
-	}
 }
 void MainViewUIController::InitControllerView()
 {
@@ -67,14 +24,11 @@ void MainViewUIController::InitControllerView()
 }
 void MainViewUIController::OnEnter()
 {
-	MainMenuPage->InitialiseRootMenu(User_Controller, FGameStyle::Get().GetWidgetStyle<FGameMenuStyle>("Menu_MainView"), User_GameClient);
 	
-	MainMenuPage->ShowRootMenu();
 
 }
 void MainViewUIController::OnExit()
 {
-	MainMenuPage->DestroyRootMenu();
 }
 void MainViewUIController::SelectGameActor(AGameActor * GameActorPtr)
 {
