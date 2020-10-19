@@ -14,7 +14,7 @@ public:
 	virtual void Deserialization(TSharedPtr<FJsonObject>  JsonObject) override;
 
 	const FGuid &	GetHordeId() { return HordeId; }
-	 HordeDataClass * GetHordeData() { return HordeData; }
+	HordeDataClass * GetHordeData() { return HordeData; }
 private:
 	HordeDataClass * HordeData;
 	FGuid  HordeId;

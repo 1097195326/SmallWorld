@@ -88,6 +88,15 @@ public:
 		MenuItems.Add(Item);
 		return Item.ToSharedRef();
 	}
+	template< class UserClass, typename Var1Type >
+	FORCEINLINE TSharedRef<FGameMenuItem> AddMenuItem(const FText& InText, UserClass* InObj, typename FGameMenuItem::FOnConfirmMenuItem::template TRawMethodDelegate_OneVar< UserClass, Var1Type >::FMethodPtr InMethod, Var1Type Var1)
+	{
+		TSharedPtr<FGameMenuItem> Item = MakeShareable(new FGameMenuItem(InText));
+		//Item->OnConfirmMenuItem.BindSP(InObj, InMethod);
+		Item->OnConfirmMenuItem.BindRaw(InObj, InMethod, Var1);
+		MenuItems.Add(Item);
+		return Item.ToSharedRef();
+	}
 
 	/**
 	 * Add a menu entry with a variable number of selectable options

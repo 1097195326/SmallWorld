@@ -17,10 +17,11 @@ public:
 	void	SelectHorde();
 
 protected:
-	void  ChooseRace(TSharedPtr<FGameMenuItem> InItem, int32 InIndex);
+	void  MenuOperation(int32 InIndex);
+	TSharedPtr<FGameMenuItem>	RaceMenuItem;
+	TSharedPtr<FGameMenuPage>	RaceMenuPage;
 
 	TSharedPtr<FGameMenuPage>	MainMenuPage;
-	TSharedPtr<FGameMenuPage>	SubMenuPage;
 
 
 };

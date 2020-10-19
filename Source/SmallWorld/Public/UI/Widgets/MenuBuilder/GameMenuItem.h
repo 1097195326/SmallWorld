@@ -23,6 +23,7 @@ class FGameMenuItem : public TSharedFromThis<FGameMenuItem>
 public:
 	/** confirm menu item delegate */
 	DECLARE_DELEGATE(FOnConfirmMenuItem);
+	//DECLARE_DELEGATE_RetVal(int32,FOnConfirmMenuItem);
 
 	/** multi-choice option changed, parameters are menu item itself and new multi-choice index  */
 	DECLARE_DELEGATE_TwoParams(FOnOptionChanged, TSharedPtr<FGameMenuItem>, int32);
