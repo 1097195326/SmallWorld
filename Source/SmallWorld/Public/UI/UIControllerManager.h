@@ -5,12 +5,15 @@
 #include "UIControllerInterface.h"
 #include "MainViewUIController.h"
 #include "LoginViewUIController.h"
+#include "LoadingViewUIController.h"
+
 
 class UIControllerManager : public SingleTemplateClass<UIControllerManager>
 {
 public:
 	enum UIControllerIndex
 	{
+		LoadingViewUIControllerIndex,
 		LoginViewUIControllerIndex,
 		MainViewUIControllerIndex,
 

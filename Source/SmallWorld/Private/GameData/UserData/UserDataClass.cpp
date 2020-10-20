@@ -25,3 +25,8 @@ void UserDataClass::Deserialization(TSharedPtr<FJsonObject> JsonObject)
 	CurrentRace = (RaceEnum)JsonObject->GetIntegerField("CurrentRace");
 
 }
+void UserDataClass::SetHordeData(HordeDataClass * InHordaData)
+{
+	HordeData = InHordaData;
+	HordeId = InHordaData->GetObjectId();
+}

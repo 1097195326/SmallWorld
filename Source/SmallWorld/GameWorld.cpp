@@ -5,7 +5,7 @@
 #include "BaseBuildingActor.h"
 #include "GroundTileActor.h"
 #include "CastleTileActor.h"
-
+#include "Kismet/KismetMathLibrary.h"
 
 
 
@@ -40,8 +40,28 @@ void GameWorld::ScanWorldMap()
 		TemActor->TrackAround();
 	}
 
+}
+void GameWorld::BuildGameWorld()
+{
+	for (int32 i = 0; i < CastleActorArray.Num(); i++)
+	{
+		ACastleTileActor * CastleTileActor = CastleActorArray[i];
+		HordeDataClass * HordeData = nullptr;
+		if (i == 0)
+		{
+			RaceEnum UserRace = GameDataManager::GetInstance()->GetUserData()->GetCurrentRace();
+			HordeData = GameDataManager::GetInstance()->GetGameWorldData()->CreateHordeData(UserRace);
+			GameDataManager::GetInstance()->GetUserData()->SetHordeData(HordeData);
+		}
+		else
+		{
+			RaceEnum TemRace = (RaceEnum)UKismetMathLibrary::RandomIntegerInRange(Race_Human, Race_Undead);
+			HordeData = GameDataManager::GetInstance()->GetGameWorldData()->CreateHordeData(TemRace);
+		}
+		BaseBuildingDataClass *	 BuildingData = HordeData->SpawnBuildingData("CommandCenter");
+		BuildingData->SpawnBuildingActor(User_GameInstance->GetWorld(), CastleTileActor->GetActorTransform());
+	}
 
-	IsInitialized = true;
 }
 void GameWorld::RefreshCloudVisible()
 {

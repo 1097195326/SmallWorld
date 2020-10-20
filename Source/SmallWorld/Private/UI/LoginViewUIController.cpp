@@ -1,4 +1,5 @@
 #include "LoginViewUIController.h"
+#include "UIControllerManager.h"
 #include "GameDataManager.h"
 #include "UserController.h"
 #include "UserViewportClient.h"
@@ -16,7 +17,7 @@ LoginViewUIController::LoginViewUIController()
 	MainMenuPage = MakeShareable(new FGameMenuPage());
 	MainMenuPage->MenuTitle = FText::FromString(TransLanguage("Game_Race"));
 	RaceMenuItem = MainMenuPage->AddMenuItem(FText::FromString(TransLanguage("Game_Race")), RaceMenuPage);
-	MainMenuPage->AddMenuItem(FText::FromString(TransLanguage("Game_Start")), this, &LoginViewUIController::MenuOperation, 5);
+	MainMenuPage->AddMenuItem(FText::FromString(TransLanguage("Game_Start")), this, &LoginViewUIController::MenuOperation, 100);
 
 }
 void LoginViewUIController::InitControllerView()
@@ -66,9 +67,9 @@ void LoginViewUIController::MenuOperation(int32 InIndex)
 		GameDataManager::GetInstance()->GetUserData()->SetCurrentRace(Race_Undead);
 		break;
 	}
-	case 5:
+	case 100:
 	{
-
+		UIControllerManager::GetInstance()->ChangeUIController(UIControllerManager::MainViewUIControllerIndex);
 	}
 		break;
 	}

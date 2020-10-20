@@ -13,10 +13,10 @@ public:
 	GameWorld();
 	~GameWorld();
 
-	
-	void					ScanWorldMap();
-	void					RefreshCloudVisible();
-	void					Update();
+	void ScanWorldMap();
+	void BuildGameWorld();
+	void RefreshCloudVisible();
+	void Update();
 
 
 private:
@@ -24,10 +24,10 @@ private:
 	TArray<class AGroundTileActor*>	GroundActorArray;
 	TArray<class ACastleTileActor*>	CastleActorArray;
 
-	AGameWorldActor *		GameWorldActor;
+	AGameWorldActor * GameWorldActor;
 
-	bool					IsInitialized;
-	bool					IsPaused;
+	bool IsInitialized;
+	bool IsPaused;
 
 
 };

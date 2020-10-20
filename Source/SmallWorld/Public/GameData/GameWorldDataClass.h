@@ -18,7 +18,6 @@ public:
     
 	void	InitWorldData();
 	void	InitUserData(class UserDataClass * InUserData);
-	void	SetUserDataRace(class UserDataClass * InUserData,RaceEnum InRace);
 
 	// Manage HordeId
 	HordeDataClass * CreateHordeData(RaceEnum InRace = Race_None);

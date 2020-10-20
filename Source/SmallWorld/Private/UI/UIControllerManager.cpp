@@ -19,6 +19,9 @@ void UIControllerManager::ChangeUIController(UIControllerIndex  ToIndex)
 	{
 		switch (ToIndex)
 		{
+		case LoadingViewUIControllerIndex:
+			WantToController = new LoadingViewUIController();
+			LoadedControllers.Add(LoadingViewUIControllerIndex, WantToController);
 		case LoginViewUIControllerIndex:
 			WantToController = new LoginViewUIController();
 			LoadedControllers.Add(LoginViewUIControllerIndex, WantToController);

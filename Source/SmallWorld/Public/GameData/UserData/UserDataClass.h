@@ -15,7 +15,8 @@ public:
 
 	const FGuid &	GetHordeId() { return HordeId; }
 	HordeDataClass * GetHordeData() { return HordeData; }
-	
+	void SetHordeData(HordeDataClass * InHordaData);
+
 	void SetCurrentRace(RaceEnum InRace) { CurrentRace = InRace; }
 	RaceEnum GetCurrentRace() { return CurrentRace; }
 	

@@ -55,15 +55,8 @@ void GameWorldDataClass::InitUserData(UserDataClass * InUserData)
 {
 	if (HordeIdIsValid(InUserData->GetHordeId()))
 	{
-		InUserData->HordeData = HordeDataMap[InUserData->GetHordeId()];
+		InUserData->SetHordeData(HordeDataMap[InUserData->GetHordeId()]);
 	}
-}
-void GameWorldDataClass::SetUserDataRace(class UserDataClass * InUserData, RaceEnum InRace)
-{
-	TArray<HordeDataClass *> TemHordeArray = GetHordeDatByRace(InRace);
-	HordeDataClass * TemHordeData = TemHordeArray[0];
-	InUserData->HordeId = TemHordeData->GetObjectId();
-	InUserData->HordeData = TemHordeData;
 }
 HordeDataClass * GameWorldDataClass::CreateHordeData(RaceEnum InRace)
 {
