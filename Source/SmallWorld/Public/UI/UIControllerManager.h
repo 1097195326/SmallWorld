@@ -20,6 +20,8 @@ public:
 	};
 	UIControllerManager();
 
+	void Tick(float DeltaTime);
+
 	void		ChangeUIController(UIControllerIndex  ToIndex);
 
 	UIControllerInterface * GetUIController() { return CurrentUIController; }
@@ -32,6 +34,7 @@ protected:
 	TMap<UIControllerIndex, UIControllerInterface*>   LoadedControllers;
 	
 	UIControllerInterface *	CurrentUIController;
+	UIControllerInterface *	PendingUIController;
 };
 
 #define  GetUIControllerToType(ControllerClass) UIControllerManager::GetInstance()->GetUIController<ControllerClass>()

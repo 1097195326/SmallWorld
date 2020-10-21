@@ -154,9 +154,10 @@ public:
 	* @param	InMethod	Method to call when menu has been hidden.
 	*/
 	template< class UserClass >
-	FORCEINLINE void SetOnHiddenHandler(UserClass* InObj, typename FGameMenuPage::FOnMenuHidden::TSPMethodDelegate< UserClass >::FMethodPtr InMethod)
+	FORCEINLINE void SetOnHiddenHandler(UserClass* InObj, typename FGameMenuPage::FOnMenuHidden::TRawMethodDelegate< UserClass >::FMethodPtr InMethod)
 	{
-		OnMenuHidden.BindSP(InObj, InMethod);
+		//OnMenuHidden.BindSP(InObj, InMethod);
+		OnMenuHidden.BindRaw(InObj, InMethod);
 	}
 
 	/**

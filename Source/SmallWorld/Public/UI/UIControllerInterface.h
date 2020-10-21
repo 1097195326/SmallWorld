@@ -27,8 +27,9 @@ public:
 	virtual void	Exit() final;
 	virtual void	OnEnter(){}
 	virtual void	OnExit(){}
-	virtual void	OnUpdate(){}
+	virtual void	Tick(float DeltaTime){}
 	virtual void	SelectGameActor(AGameActor * GameActorPtr){}
+	virtual bool	CanLevel() { return true; }
 
 	virtual ~UIControllerInterface(){}
 

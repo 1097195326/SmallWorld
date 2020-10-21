@@ -5,8 +5,20 @@
 UIControllerManager::UIControllerManager()
 {
 	CurrentUIController = nullptr;
+	PendingUIController = nullptr;
 
-
+}
+void UIControllerManager::Tick(float DeltaTime)
+{
+	if (PendingUIController != nullptr && CurrentUIController->CanLevel())
+	{
+		CurrentUIController = PendingUIController;
+		PendingUIController = nullptr;
+		CurrentUIController->Enter();
+	}
+	
+	CurrentUIController->Tick(DeltaTime);
+	
 }
 void UIControllerManager::ChangeUIController(UIControllerIndex  ToIndex)
 {
@@ -42,6 +54,6 @@ void UIControllerManager::ChangeUIController(UIControllerIndex  ToIndex)
 	{
 		CurrentUIController->Exit();
 	}
-	CurrentUIController = WantToController;
-	CurrentUIController->Enter();
+	PendingUIController = WantToController;
+	
 }

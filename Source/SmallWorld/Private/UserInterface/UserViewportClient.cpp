@@ -17,7 +17,7 @@ void UUserViewportClient::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	GameManager::GetInstance()->Update(DeltaTime);
+	GameManager::GetInstance()->Tick(DeltaTime);
 
 
 }

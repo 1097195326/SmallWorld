@@ -71,7 +71,7 @@ void GameManager::RefreshCloudVisible()
 	
 
 }
-void GameManager::Update(float DeltaTime)
+void GameManager::Tick(float DeltaTime)
 {
 	if (IsInitialized)
 	{

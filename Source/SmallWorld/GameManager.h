@@ -15,7 +15,7 @@ public:
 	void ScanWorldMap();
 	void BuildGameWorld();
 	void RefreshCloudVisible();
-	void Update(float DeltaTime);
+	void Tick(float DeltaTime);
 
 
 private:
