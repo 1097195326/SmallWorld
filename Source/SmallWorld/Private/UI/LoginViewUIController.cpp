@@ -4,9 +4,18 @@
 #include "UserController.h"
 #include "UserViewportClient.h"
 #include "SGameMenuPageWidget.h"
+#include "GameManager.h"
 
 
 LoginViewUIController::LoginViewUIController()
+{
+	
+}
+void LoginViewUIController::InitControllerView()
+{
+
+}
+void LoginViewUIController::OnEnter()
 {
 	RaceMenuPage = MakeShareable(new FGameMenuPage());
 	RaceMenuPage->AddMenuItem(FText::FromString(TransLanguage("Game_Race_Human")), this, &LoginViewUIController::MenuOperation, 1);
@@ -15,17 +24,10 @@ LoginViewUIController::LoginViewUIController()
 	RaceMenuPage->AddMenuItem(FText::FromString(TransLanguage("Game_Race_Undead")), this, &LoginViewUIController::MenuOperation, 4);
 
 	MainMenuPage = MakeShareable(new FGameMenuPage());
-	MainMenuPage->MenuTitle = FText::FromString(TransLanguage("Game_Race"));
+	//MainMenuPage->MenuTitle = FText::FromString(TransLanguage("Game_Race"));
 	RaceMenuItem = MainMenuPage->AddMenuItem(FText::FromString(TransLanguage("Game_Race")), RaceMenuPage);
 	MainMenuPage->AddMenuItem(FText::FromString(TransLanguage("Game_Start")), this, &LoginViewUIController::MenuOperation, 100);
 
-}
-void LoginViewUIController::InitControllerView()
-{
-
-}
-void LoginViewUIController::OnEnter()
-{
 	MainMenuPage->InitialiseRootMenu(User_Controller, FGameStyle::Get().GetWidgetStyle<FGameMenuStyle>("Menu_MainView"), User_GameClient);
 
 	MainMenuPage->ShowRootMenu();
@@ -33,7 +35,7 @@ void LoginViewUIController::OnEnter()
 void LoginViewUIController::OnExit()
 {
 	MainMenuPage->DestroyRootMenu();
-
+	//MainMenuPage->HideMenu();
 }
 void LoginViewUIController::MenuOperation(int32 InIndex)
 {
@@ -69,6 +71,7 @@ void LoginViewUIController::MenuOperation(int32 InIndex)
 	}
 	case 100:
 	{
+		//GameManager::GetInstance()->BuildGameWorld();
 		UIControllerManager::GetInstance()->ChangeUIController(UIControllerManager::MainViewUIControllerIndex);
 	}
 		break;

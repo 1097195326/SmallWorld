@@ -2,7 +2,7 @@
 #include "UserController.h"
 #include "UserHUD.h"
 #include "UserPawn.h"
-#include "GameWorld.h"
+#include "GameManager.h"
 
 
 ASmallWorldGameMode::ASmallWorldGameMode()
@@ -17,6 +17,6 @@ void ASmallWorldGameMode::StartPlay()
 {
 	Super::StartPlay();
 
-	GameWorld::GetInstance()->ScanWorldMap();
+	GameManager::GetInstance()->ScanWorldMap();
 
 }

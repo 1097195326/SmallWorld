@@ -1,11 +1,11 @@
 #pragma once
 
 #include "GAppInstance.h"
-#include "SmallWorldInstance.generated.h"
+#include "UserGameInstance.generated.h"
 
 
 UCLASS()
-class USmallWorldInstance : public UGAppInstance
+class UUserGameInstance : public UGAppInstance
 {
 	GENERATED_BODY()
 		
@@ -15,7 +15,7 @@ private:
 	void UpdateGame();
 
 public:
-	USmallWorldInstance();
+	UUserGameInstance();
 
 	virtual void On_Init() override;
 	virtual void On_Start() override;
@@ -28,4 +28,4 @@ public:
 	virtual    void ApplicationHasEnteredForeground() override;
 };
 
-#define  User_GameInstance USmallWorldInstance::GetInstance()
+#define  User_GameInstance UUserGameInstance::GetInstance()

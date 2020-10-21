@@ -1,26 +1,28 @@
-#include "GameWorld.h"
+#include "GameManager.h"
 #include "Kismet/GameplayStatics.h"
-#include "GameDataManager.h"
+#include "UserGameInstance.h"
 #include "SoldierPawn.h"
 #include "BaseBuildingActor.h"
 #include "GroundTileActor.h"
 #include "CastleTileActor.h"
 #include "Kismet/KismetMathLibrary.h"
+#include "ProgressManager.h"
+#include "GameDataManager.h"
 
 
 
-GameWorld::GameWorld()
+GameManager::GameManager()
 {
 	IsInitialized = false;
 	IsPaused = false;
 
 	GameWorldActor = nullptr;
 }
-GameWorld::~GameWorld()
+GameManager::~GameManager()
 {
 	GameWorldActor = nullptr;
 }
-void GameWorld::ScanWorldMap()
+void GameManager::ScanWorldMap()
 {
 	UWorld * CurrentWorld = User_GameInstance->GetWorld();
 	
@@ -41,7 +43,7 @@ void GameWorld::ScanWorldMap()
 	}
 
 }
-void GameWorld::BuildGameWorld()
+void GameManager::BuildGameWorld()
 {
 	for (int32 i = 0; i < CastleActorArray.Num(); i++)
 	{
@@ -63,17 +65,19 @@ void GameWorld::BuildGameWorld()
 	}
 
 }
-void GameWorld::RefreshCloudVisible()
+void GameManager::RefreshCloudVisible()
 {
 
 	
 
 }
-void GameWorld::Update()
+void GameManager::Update(float DeltaTime)
 {
-
 	if (IsInitialized)
 	{
 		
+
+		ProgressManager::GetInstance()->Tick(DeltaTime);
+
 	}
 }

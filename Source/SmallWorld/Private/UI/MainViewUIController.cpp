@@ -3,7 +3,7 @@
 #include "SBuildingIconItemListWidget.h"
 #include "GameDataManager.h"
 #include "SServiceDragDropWidget.h"
-#include "SmallWorldInstance.h"
+#include "UserGameInstance.h"
 #include "UserController.h"
 #include "UserViewportClient.h"
 #include "GameMenuWidgetStyle.h"

@@ -9,7 +9,7 @@
 #include "Components/BoxComponent.h"
 #include "Components/MeshComponent.h"
 #include "Kismet/GameplayStatics.h"
-#include "SmallWorldInstance.h"
+#include "UserGameInstance.h"
 #include <vector>
 #include <list>
 #include "BaseBuildingActor.generated.h"

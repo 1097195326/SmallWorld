@@ -1,22 +1,21 @@
 #pragma once
 
-#include "SmallWorldInstance.h"
 #include "GameWorldActor.h"
 
 class ASoldierPawn;
 class ABaseBuildingActor;
 
 
-class GameWorld : public SingleTemplateClass<GameWorld>
+class GameManager : public SingleTemplateClass<GameManager>
 {
 public:
-	GameWorld();
-	~GameWorld();
+	GameManager();
+	~GameManager();
 
 	void ScanWorldMap();
 	void BuildGameWorld();
 	void RefreshCloudVisible();
-	void Update();
+	void Update(float DeltaTime);
 
 
 private:

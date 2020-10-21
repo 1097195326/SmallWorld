@@ -16,9 +16,9 @@ void UIControllerInterface::Enter()
 }
 void UIControllerInterface::Exit()
 {
+	OnExit();
 	if (ControllerView.IsValid())
 	{
-		OnExit();
 		User_GameClient->RemoveViewportWidgetContent(ControllerView.ToSharedRef());
 	}
 }

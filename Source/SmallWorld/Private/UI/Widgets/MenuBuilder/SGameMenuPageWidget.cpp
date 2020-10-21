@@ -317,7 +317,7 @@ bool SGameMenuPageWidget::SelectItem(int32 InSelection)
 	bool bResult = false;
 	if (InSelection != SelectedIndex)
 	{
-		SelectionChanged(0);
+		SelectionChanged(InSelection);
 		bResult = true;
 	}
 	return bResult;
