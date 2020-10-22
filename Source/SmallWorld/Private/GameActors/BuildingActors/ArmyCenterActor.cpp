@@ -1,9 +1,9 @@
 #include "ArmyCenterActor.h"
 #include "ArmyCenterDataClass.h"
-#include "SGameActorDetailWidget.h"
-#include "SArmyCenterOperationDetail.h"
-#include "SGameActorDetailTitle.h"
-#include "SBuildingDetailOperation.h"
+#include "SGameActorDetail.h"
+#include "SArmyCenterContent.h"
+#include "SGameActorTitle.h"
+#include "SGameActorOperation.h"
 #include "GameDataManager.h"
 
 AArmyCenterActor::AArmyCenterActor()
@@ -17,22 +17,22 @@ void AArmyCenterActor::On_Init()
 }
 TSharedPtr<SWidget>	AArmyCenterActor::CreateActorDetailWidget()
 {
-	SAssignNew(TitleWidget, SGameActorDetailTitle)
-		.ActorName(BuildingData->GetSoldierConfig().title)
+	SAssignNew(TitleWidget, SGameActorTitle)
+		.ActorName(BuildingData->GetBuildingConfig().title)
 		.ActorLevel(FString::Printf(TEXT("%s%d"),*TransLanguage("Game_Level"), BuildingData->BuildingLevel))
 		.ActorHealth(FString::Printf(TEXT("%s%.02f"), *TransLanguage("Game_Building_Level"), BuildingData->BuildingHealth));
-	SAssignNew(DetailWidget, SArmyCenterOperationDetail)
+	SAssignNew(ContentWidget, SArmyCenterContent)
 		.ArmyCenter((ArmyCenterDataClass*)BuildingData);
-	SAssignNew(OperationWidget, SBuildingDetailOperation);
+	SAssignNew(OperationWidget, SGameActorOperation);
 
-	return SNew(SGameActorDetailWidget)
+	return SNew(SGameActorDetail)
 		.TitleWidget(TitleWidget)
-		.DetailWidget(DetailWidget)
+		.ContentWidget(ContentWidget)
 		.OperationWidget(OperationWidget)
 		;
 }
 void AArmyCenterActor::RefreshView()
 {
 
-	DetailWidget.IsValid() ? DetailWidget->RefreshView():NULL;
+	ContentWidget.IsValid() ? ContentWidget->RefreshView():NULL;
 }

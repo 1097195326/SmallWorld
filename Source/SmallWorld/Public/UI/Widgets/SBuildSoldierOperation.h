@@ -1,10 +1,10 @@
 #pragma once
 #include "SBaseCompoundWidget.h"
 
-class SHorizontalItemOperation: public SBaseCompoundWidget
+class SBuildSoldierOperation: public SBaseCompoundWidget
 {
 public:
-	SLATE_BEGIN_ARGS(SHorizontalItemOperation){}
+	SLATE_BEGIN_ARGS(SBuildSoldierOperation){}
 
 	SLATE_ATTRIBUTE(FText,InShowText)
 	SLATE_ATTRIBUTE(FString,InButtonText)

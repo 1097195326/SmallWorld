@@ -2,7 +2,7 @@
 
 
 #include "SBaseCompoundWidget.h"
-#include "SBuildingIconItem.h"
+#include "SVGameActorIcon.h"
 
 class SServiceDragDropWidget : public SBaseCompoundWidget
 {

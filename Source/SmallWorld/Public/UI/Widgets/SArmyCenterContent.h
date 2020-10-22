@@ -1,10 +1,10 @@
 #pragma once
 #include "SBaseCompoundWidget.h"
 
-class SArmyCenterOperationDetail : public SBaseCompoundWidget
+class SArmyCenterContent : public SBaseCompoundWidget
 {
 public:
-	SLATE_BEGIN_ARGS(SArmyCenterOperationDetail){}
+	SLATE_BEGIN_ARGS(SArmyCenterContent){}
 
 	SLATE_ARGUMENT(class ArmyCenterDataClass * ,ArmyCenter)
 

@@ -1,9 +1,9 @@
-#include "SGameActorDetailWidget.h"
+#include "SGameActorDetail.h"
 #include "GameStyle.h"
 
 
 
-void SGameActorDetailWidget::Construct(const FArguments & InArgs)
+void SGameActorDetail::Construct(const FArguments & InArgs)
 {
 	ChildSlot
 		[
@@ -29,9 +29,9 @@ void SGameActorDetailWidget::Construct(const FArguments & InArgs)
 	{
 		TopSlot->AttachWidget(InArgs._TitleWidget.ToSharedRef());
 	}
-	if (InArgs._DetailWidget.IsValid())
+	if (InArgs._ContentWidget.IsValid())
 	{
-		MiddleSlot->AttachWidget(InArgs._DetailWidget.ToSharedRef());
+		MiddleSlot->AttachWidget(InArgs._ContentWidget.ToSharedRef());
 	}
 	if (InArgs._OperationWidget.IsValid())
 	{

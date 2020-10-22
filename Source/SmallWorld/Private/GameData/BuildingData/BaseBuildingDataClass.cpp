@@ -56,6 +56,6 @@ void BaseBuildingDataClass::Deserialization(TSharedPtr<FJsonObject> JsonObject)
 void BaseBuildingDataClass::SetConfigDataByName(FString InName)
 {
 	BuildingName = InName;
-	SoldierConfig = GameDataManager::GetInstance()->GetGameConfigData()->GetBuildingConfig(BuildingName);
+	BuildingConfig = GameDataManager::GetInstance()->GetGameConfigData()->GetBuildingConfig(BuildingName);
 }
 

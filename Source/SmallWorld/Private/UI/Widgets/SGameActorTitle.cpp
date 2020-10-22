@@ -1,8 +1,8 @@
-#include "SGameActorDetailTitle.h"
+#include "SGameActorTitle.h"
 #include "GameStyle.h"
 
 
-void SGameActorDetailTitle::Construct(const FArguments & InArgs)
+void SGameActorTitle::Construct(const FArguments & InArgs)
 {
 
 	ChildSlot

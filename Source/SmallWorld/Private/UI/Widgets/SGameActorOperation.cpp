@@ -1,7 +1,7 @@
-#include "SBuildingDetailOperation.h"
+#include "SGameActorOperation.h"
 #include "GameStyle.h"
 
-void SBuildingDetailOperation::Construct(const FArguments & InArgs)
+void SGameActorOperation::Construct(const FArguments & InArgs)
 {
 	TSharedPtr<SHorizontalBox> OperationBox;
 
@@ -24,7 +24,7 @@ void SBuildingDetailOperation::Construct(const FArguments & InArgs)
 		[
 			SNew(SButton)
 			.ButtonStyle(&FGameStyle::Get().GetWidgetStyle<FButtonStyle>("MainView.Button.Upgrade"))
-			.OnClicked(this, &SBuildingDetailOperation::OnUpgradeButtonClicked)
+			.OnClicked(this, &SGameActorOperation::OnUpgradeButtonClicked)
 		];
 	OperationBox->AddSlot()
 		.VAlign(VAlign_Center)
@@ -34,7 +34,7 @@ void SBuildingDetailOperation::Construct(const FArguments & InArgs)
 		[
 			SNew(SButton)
 			.ButtonStyle(&FGameStyle::Get().GetWidgetStyle<FButtonStyle>("MainView.Button.Move"))
-			.OnClicked(this, &SBuildingDetailOperation::OnMoveButtonClicked)
+			.OnClicked(this, &SGameActorOperation::OnMoveButtonClicked)
 		];
 	OperationBox->AddSlot()
 		.VAlign(VAlign_Center)
@@ -44,7 +44,7 @@ void SBuildingDetailOperation::Construct(const FArguments & InArgs)
 		[
 			SNew(SButton)
 			.ButtonStyle(&FGameStyle::Get().GetWidgetStyle<FButtonStyle>("MainView.Button.Rotation"))
-			.OnClicked(this, &SBuildingDetailOperation::OnRotationButtonClicked)
+			.OnClicked(this, &SGameActorOperation::OnRotationButtonClicked)
 		];
 	OperationBox->AddSlot()
 		.VAlign(VAlign_Center)
@@ -54,23 +54,23 @@ void SBuildingDetailOperation::Construct(const FArguments & InArgs)
 		[
 			SNew(SButton)
 			.ButtonStyle(&FGameStyle::Get().GetWidgetStyle<FButtonStyle>("MainView.Button.Clear"))
-			.OnClicked(this, &SBuildingDetailOperation::OnClearButtonClicked)
+			.OnClicked(this, &SGameActorOperation::OnClearButtonClicked)
 		];
 
 }
-FReply SBuildingDetailOperation::OnUpgradeButtonClicked()
+FReply SGameActorOperation::OnUpgradeButtonClicked()
 {
 	return FReply::Handled();
 }
-FReply SBuildingDetailOperation::OnMoveButtonClicked()
+FReply SGameActorOperation::OnMoveButtonClicked()
 {
 	return FReply::Handled();
 }
-FReply SBuildingDetailOperation::OnRotationButtonClicked()
+FReply SGameActorOperation::OnRotationButtonClicked()
 {
 	return FReply::Handled();
 }
-FReply SBuildingDetailOperation::OnClearButtonClicked()
+FReply SGameActorOperation::OnClearButtonClicked()
 {
 	return FReply::Handled();
 }

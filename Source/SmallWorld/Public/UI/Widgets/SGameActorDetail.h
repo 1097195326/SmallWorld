@@ -1,16 +1,16 @@
 #pragma once
 #include "SBaseCompoundWidget.h"
 
-class SGameActorDetailWidget : public SBaseCompoundWidget
+class SGameActorDetail : public SBaseCompoundWidget
 {
 public:
-	SLATE_BEGIN_ARGS(SGameActorDetailWidget):
+	SLATE_BEGIN_ARGS(SGameActorDetail):
 		_TitleWidget(),
-		_DetailWidget(),
+		_ContentWidget(),
 		_OperationWidget()
 	{}
 		SLATE_ARGUMENT(TSharedPtr<SWidget>, TitleWidget)
-		SLATE_ARGUMENT(TSharedPtr<SWidget>, DetailWidget)
+		SLATE_ARGUMENT(TSharedPtr<SWidget>, ContentWidget)
 		SLATE_ARGUMENT(TSharedPtr<SWidget>, OperationWidget)
 
 	SLATE_END_ARGS()

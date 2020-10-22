@@ -2,10 +2,10 @@
 #include "SBaseCompoundWidget.h"
 
 
-class SHorizontalIconTextItem : public SBaseCompoundWidget
+class SHGameActorIcon : public SBaseCompoundWidget
 {
 public:
-	SLATE_BEGIN_ARGS(SHorizontalIconTextItem):
+	SLATE_BEGIN_ARGS(SHGameActorIcon):
 		_InImageWidth(64),
 		_InImageHeight(64)
 	{}

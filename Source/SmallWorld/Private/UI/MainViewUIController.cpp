@@ -1,6 +1,6 @@
 #include "MainViewUIController.h"
 #include "SHordePowerWidget.h"
-#include "SBuildingIconItemListWidget.h"
+#include "SBuildingIconList.h"
 #include "GameDataManager.h"
 #include "SServiceDragDropWidget.h"
 #include "UserGameInstance.h"

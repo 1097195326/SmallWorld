@@ -1,12 +1,12 @@
 #pragma once
 
 #include "SBaseCompoundWidget.h"
-#include "SBuildingIconItem.h"
+#include "SVGameActorIcon.h"
 
-class SBuildingIconItemListWidget : public SBaseCompoundWidget
+class SBuildingIconList : public SBaseCompoundWidget
 {
 public:
-	SLATE_BEGIN_ARGS(SBuildingIconItemListWidget){}
+	SLATE_BEGIN_ARGS(SBuildingIconList){}
 
 	SLATE_ARGUMENT(TArray<FString>,IconNames)
 

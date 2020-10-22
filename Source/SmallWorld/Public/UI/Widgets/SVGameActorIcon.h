@@ -3,17 +3,17 @@
 #include "SBaseCompoundWidget.h"
 
 
-class SBuildingIconItem : public SBaseCompoundWidget
+class SVGameActorIcon : public SBaseCompoundWidget
 {
 public:
-	SLATE_BEGIN_ARGS(SBuildingIconItem){}
+	SLATE_BEGIN_ARGS(SVGameActorIcon){}
 
 	SLATE_ARGUMENT(FString,IconName)
 
 	SLATE_END_ARGS()
 
 	void Construct(const FArguments & InArgs);
-	~SBuildingIconItem();
+	~SVGameActorIcon();
 
 	void RefreshView();
 

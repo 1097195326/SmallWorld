@@ -1,8 +1,8 @@
-#include "SHorizontalItemOperation.h"
+#include "SBuildSoldierOperation.h"
 #include "GameStyle.h"
 #include "GameTools.h"
 
-void SHorizontalItemOperation::Construct(const FArguments & InArgs)
+void SBuildSoldierOperation::Construct(const FArguments & InArgs)
 {
 	ShowText = InArgs._InShowText;
 	ButtonShowText = InArgs._InButtonText;
@@ -33,7 +33,7 @@ void SHorizontalItemOperation::Construct(const FArguments & InArgs)
 					SNew(SSlider)
 					.Style(&FGameStyle::Get().GetWidgetStyle<FSliderStyle>("Slider"))
 					.Value(0)
-					.OnValueChanged(this, &SHorizontalItemOperation::OnValueChange)
+					.OnValueChanged(this, &SBuildSoldierOperation::OnValueChange)
 				]
 			]
 			+ SHorizontalBox::Slot()
@@ -44,7 +44,7 @@ void SHorizontalItemOperation::Construct(const FArguments & InArgs)
 				[
 					SAssignNew(InputNumTextBox,SEditableTextBox)
 					.HintText(FText::FromString("10"))
-					.OnTextChanged(this,&SHorizontalItemOperation::OnTextChange)
+					.OnTextChanged(this,&SBuildSoldierOperation::OnTextChange)
 				]
 			+SHorizontalBox::Slot()
 			.VAlign(VAlign_Center)
@@ -64,11 +64,11 @@ void SHorizontalItemOperation::Construct(const FArguments & InArgs)
 
 		];
 }
-void SHorizontalItemOperation::OnValueChange(float InValue)
+void SBuildSoldierOperation::OnValueChange(float InValue)
 {
 
 }
-void SHorizontalItemOperation::OnTextChange(const FText& InText)
+void SBuildSoldierOperation::OnTextChange(const FText& InText)
 {
 	FString InStr = InText.ToString();
 	if (GameTools::IsNumber(InStr))

@@ -1,10 +1,10 @@
-#include "SBuildingIconItemListWidget.h"
+#include "SBuildingIconList.h"
 #include "GameDataManager.h"
-#include "SBuildingIconItem.h"
+#include "SVGameActorIcon.h"
 #include "GameStyle.h"
 
 
-void SBuildingIconItemListWidget::Construct(const FArguments & InArgs)
+void SBuildingIconList::Construct(const FArguments & InArgs)
 {
 	IconNames = InArgs._IconNames;
 
@@ -46,7 +46,7 @@ void SBuildingIconItemListWidget::Construct(const FArguments & InArgs)
 		.HAlign(HAlign_Center)
 		.Padding(5)
 				[
-					SNew(SBuildingIconItem)
+					SNew(SVGameActorIcon)
 					.IconName(IconName)
 				];
 		++temIndex;
@@ -55,20 +55,20 @@ void SBuildingIconItemListWidget::Construct(const FArguments & InArgs)
 }
 
 
-void SBuildingIconItemListWidget::OnDragEnter(const FGeometry& MyGeometry, const FDragDropEvent& DragDropEvent)
+void SBuildingIconList::OnDragEnter(const FGeometry& MyGeometry, const FDragDropEvent& DragDropEvent)
 {
 
 }
-void SBuildingIconItemListWidget::OnDragLeave(const FDragDropEvent& DragDropEvent)
+void SBuildingIconList::OnDragLeave(const FDragDropEvent& DragDropEvent)
 {
 
 }
-FReply SBuildingIconItemListWidget::OnDragOver(const FGeometry& MyGeometry, const FDragDropEvent& DragDropEvent)
+FReply SBuildingIconList::OnDragOver(const FGeometry& MyGeometry, const FDragDropEvent& DragDropEvent)
 {
 
 	return FReply::Handled();
 }
-FReply SBuildingIconItemListWidget::OnDrop(const FGeometry& MyGeometry, const FDragDropEvent& DragDropEvent)
+FReply SBuildingIconList::OnDrop(const FGeometry& MyGeometry, const FDragDropEvent& DragDropEvent)
 {
 
 	return FReply::Handled();

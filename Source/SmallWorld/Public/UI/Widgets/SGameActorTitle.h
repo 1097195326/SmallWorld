@@ -4,10 +4,10 @@
 
 
 
-class SGameActorDetailTitle : public SBaseCompoundWidget
+class SGameActorTitle : public SBaseCompoundWidget
 {
 public:
-	SLATE_BEGIN_ARGS(SGameActorDetailTitle):
+	SLATE_BEGIN_ARGS(SGameActorTitle):
 		_ActorName(TEXT("")),
 		_ActorLevel(TEXT("")),
 		_ActorHealth(TEXT(""))

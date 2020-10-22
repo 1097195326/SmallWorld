@@ -1,9 +1,9 @@
-#include "SHorizontalIconTextItem.h"
+#include "SHGameActorIcon.h"
 #include "GameStyle.h"
 
 
 
-void SHorizontalIconTextItem::Construct(const FArguments& InArgs)
+void SHGameActorIcon::Construct(const FArguments& InArgs)
 {
 	ImageBrush = InArgs._InImageBrush;
 	ShowText = InArgs._InShowText;

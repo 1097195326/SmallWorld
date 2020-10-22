@@ -1,17 +1,17 @@
-#include "SBuildingIconItem.h"
+#include "SVGameActorIcon.h"
 #include "GameDataManager.h"
 #include "FBuildingDragDropOp.h"
 #include "GameStyle.h"
 
 
-SBuildingIconItem::~SBuildingIconItem()
+SVGameActorIcon::~SVGameActorIcon()
 {
 	
 	GameDataManager::GetInstance()->StoneDataChangedDelegate.Remove(WoodDelegateHandle);
 	GameDataManager::GetInstance()->StoneDataChangedDelegate.Remove(StoneDelegateHandle);
 	GameDataManager::GetInstance()->WoodDataChangedDelegate.Remove(GoldDelegateHandle);
 }
-void SBuildingIconItem::Construct(const FArguments & InArgs)
+void SVGameActorIcon::Construct(const FArguments & InArgs)
 {
 	IconName = InArgs._IconName;
 
@@ -21,9 +21,9 @@ void SBuildingIconItem::Construct(const FArguments & InArgs)
 	UTexture2D * IconTexture = LoadObject<UTexture2D>(nullptr, *IconTexturePath, nullptr);
 	Brush.SetResourceObject(IconTexture);
 
-	WoodDelegateHandle = GameDataManager::GetInstance()->WoodDataChangedDelegate.AddSP(this, &SBuildingIconItem::OnDataChanged);
-	StoneDelegateHandle = GameDataManager::GetInstance()->StoneDataChangedDelegate.AddSP(this, &SBuildingIconItem::OnDataChanged);
-	GoldDelegateHandle = GameDataManager::GetInstance()->GoldDataChangedDelegate.AddSP(this, &SBuildingIconItem::OnDataChanged);
+	WoodDelegateHandle = GameDataManager::GetInstance()->WoodDataChangedDelegate.AddSP(this, &SVGameActorIcon::OnDataChanged);
+	StoneDelegateHandle = GameDataManager::GetInstance()->StoneDataChangedDelegate.AddSP(this, &SVGameActorIcon::OnDataChanged);
+	GoldDelegateHandle = GameDataManager::GetInstance()->GoldDataChangedDelegate.AddSP(this, &SVGameActorIcon::OnDataChanged);
 
 
 	const BuildingConfigStruct & BConfig = GameDataManager::GetInstance()->GetGameConfigData()->GetBuildingConfig(IconName);
@@ -69,7 +69,7 @@ void SBuildingIconItem::Construct(const FArguments & InArgs)
 	
 	//RefreshView();
 }
-void SBuildingIconItem::RefreshView()
+void SVGameActorIcon::RefreshView()
 {
 	int32 GoldNum, WoodNum, StoneNum;
 
@@ -91,11 +91,11 @@ void SBuildingIconItem::RefreshView()
 
 	}
 }
-void SBuildingIconItem::OnDataChanged()
+void SVGameActorIcon::OnDataChanged()
 {
 	RefreshView();
 }
-FReply SBuildingIconItem::OnMouseButtonDown(const FGeometry& MyGeometry, const FPointerEvent& MouseEvent)
+FReply SVGameActorIcon::OnMouseButtonDown(const FGeometry& MyGeometry, const FPointerEvent& MouseEvent)
 {
 	if (MouseEvent.GetEffectingButton() == EKeys::LeftMouseButton)
 	{
@@ -103,7 +103,7 @@ FReply SBuildingIconItem::OnMouseButtonDown(const FGeometry& MyGeometry, const F
 	}
 	return FReply::Unhandled();
 }
-FReply SBuildingIconItem::OnTouchStarted(const FGeometry& MyGeometry, const FPointerEvent& InTouchEvent)
+FReply SVGameActorIcon::OnTouchStarted(const FGeometry& MyGeometry, const FPointerEvent& InTouchEvent)
 {
 	if (InTouchEvent.GetPointerIndex() == ETouchIndex::Touch1)
 	{
@@ -111,7 +111,7 @@ FReply SBuildingIconItem::OnTouchStarted(const FGeometry& MyGeometry, const FPoi
 	}
 	return FReply::Unhandled();
 }
-FReply SBuildingIconItem::OnDragDetected(const FGeometry& MyGeometry, const FPointerEvent& MouseEvent)
+FReply SVGameActorIcon::OnDragDetected(const FGeometry& MyGeometry, const FPointerEvent& MouseEvent)
 {
 
 	return FReply::Handled().BeginDragDrop(FBuildingDragDropOp::New(IconName));

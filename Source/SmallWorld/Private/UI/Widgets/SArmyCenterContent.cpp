@@ -1,12 +1,12 @@
-#include "SArmyCenterOperationDetail.h"
+#include "SArmyCenterContent.h"
 #include "GameDataManager.h"
-#include "SHorizontalIconTextItem.h"
-#include "SHorizontalItemOperation.h"
+#include "SHGameActorIcon.h"
+#include "SBuildSoldierOperation.h"
 #include "ArmyCenterDataClass.h"
 #include "GameStyle.h"
 
 
-void SArmyCenterOperationDetail::Construct(const FArguments & InArgs)
+void SArmyCenterContent::Construct(const FArguments & InArgs)
 {
 	ArmyCenter = InArgs._ArmyCenter;
 
@@ -23,7 +23,7 @@ void SArmyCenterOperationDetail::Construct(const FArguments & InArgs)
 	.VAlign(VAlign_Center)
 	.AutoHeight()
 	[
-		SNew(SHorizontalIconTextItem)
+		SNew(SHGameActorIcon)
 		.InImageBrush( FGameStyle::Get().GetBrush("Icon.Peasant"))
 
 	];
@@ -41,7 +41,7 @@ void SArmyCenterOperationDetail::Construct(const FArguments & InArgs)
 				.HAlign(HAlign_Left)
 				.AutoWidth()
 				[
-					SNew(SHorizontalIconTextItem)
+					SNew(SHGameActorIcon)
 					.InImageBrush(FGameStyle::Get().GetBrush(*IconBrush))
 				]
 				+ SHorizontalBox::Slot()
@@ -49,14 +49,14 @@ void SArmyCenterOperationDetail::Construct(const FArguments & InArgs)
 				.HAlign(HAlign_Left)
 				.AutoWidth()
 				[
-					SNew(SHorizontalItemOperation)
+					SNew(SBuildSoldierOperation)
 				]
 			];
 	}
 
 
 }
-void SArmyCenterOperationDetail::RefreshView()
+void SArmyCenterContent::RefreshView()
 {
 
 
