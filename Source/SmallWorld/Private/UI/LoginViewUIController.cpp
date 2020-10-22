@@ -9,6 +9,7 @@
 
 LoginViewUIController::LoginViewUIController()
 {
+	bCanSafeLevel = false;
 	
 }
 void LoginViewUIController::InitControllerView()
@@ -24,10 +25,11 @@ void LoginViewUIController::OnEnter()
 	RaceMenuPage->AddMenuItem(FText::FromString(TransLanguage("Game_Race_Undead")), this, &LoginViewUIController::MenuOperation, 4);
 
 	MainMenuPage = MakeShareable(new FGameMenuPage());
+	MainMenuPage->SetOnHiddenHandler(this, &LoginViewUIController::MainMenuStateChange, 1);
+	MainMenuPage->SetOnOpenHandler(this, &LoginViewUIController::MainMenuStateChange, 0);
 	//MainMenuPage->MenuTitle = FText::FromString(TransLanguage("Game_Race"));
 	RaceMenuItem = MainMenuPage->AddMenuItem(FText::FromString(TransLanguage("Game_Race")), RaceMenuPage);
 	MainMenuPage->AddMenuItem(FText::FromString(TransLanguage("Game_Start")), this, &LoginViewUIController::MenuOperation, 100);
-
 	MainMenuPage->InitialiseRootMenu(User_Controller, FGameStyle::Get().GetWidgetStyle<FGameMenuStyle>("Menu_MainView"), User_GameClient);
 
 	MainMenuPage->ShowRootMenu();
@@ -35,7 +37,18 @@ void LoginViewUIController::OnEnter()
 void LoginViewUIController::OnExit()
 {
 	MainMenuPage->DestroyRootMenu();
-	//MainMenuPage->HideMenu();
+}
+void LoginViewUIController::Tick(float DeltaTime)
+{
+
+}
+bool LoginViewUIController::CanSafeLevel()
+{
+	return bCanSafeLevel;
+}
+void LoginViewUIController::MainMenuStateChange(int32 InIndex)
+{
+	bCanSafeLevel = InIndex;
 }
 void LoginViewUIController::MenuOperation(int32 InIndex)
 {
@@ -71,6 +84,7 @@ void LoginViewUIController::MenuOperation(int32 InIndex)
 	}
 	case 100:
 	{
+		MainMenuPage->HideMenu();
 		//GameManager::GetInstance()->BuildGameWorld();
 		UIControllerManager::GetInstance()->ChangeUIController(UIControllerManager::MainViewUIControllerIndex);
 	}

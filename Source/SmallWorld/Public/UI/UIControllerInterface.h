@@ -29,7 +29,7 @@ public:
 	virtual void	OnExit(){}
 	virtual void	Tick(float DeltaTime){}
 	virtual void	SelectGameActor(AGameActor * GameActorPtr){}
-	virtual bool	CanLevel() { return true; }
+	virtual bool	CanSafeLevel() { return true; }
 
 	virtual ~UIControllerInterface(){}
 

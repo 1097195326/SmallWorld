@@ -153,11 +153,11 @@ public:
 	* @param	InObj		Menu page object
 	* @param	InMethod	Method to call when menu has been hidden.
 	*/
-	template< class UserClass >
-	FORCEINLINE void SetOnHiddenHandler(UserClass* InObj, typename FGameMenuPage::FOnMenuHidden::TRawMethodDelegate< UserClass >::FMethodPtr InMethod)
+	template< class UserClass, typename Var1Type >
+	FORCEINLINE void SetOnHiddenHandler(UserClass* InObj, typename FGameMenuPage::FOnMenuHidden::TRawMethodDelegate_OneVar< UserClass, Var1Type >::FMethodPtr InMethod , Var1Type Var1)
 	{
 		//OnMenuHidden.BindSP(InObj, InMethod);
-		OnMenuHidden.BindRaw(InObj, InMethod);
+		OnMenuHidden.BindRaw(InObj, InMethod,Var1);
 	}
 
 	/**
@@ -178,10 +178,10 @@ public:
 	* @param	InObj		Menu page object
 	* @param	InMethod	Method to call when menu is about to open.
 	*/
-	template< class UserClass >
-	FORCEINLINE void SetOnOpenHandler(UserClass* InObj, typename FGameMenuPage::FOnMenuHidden::TSPMethodDelegate< UserClass >::FMethodPtr InMethod)
+	template< class UserClass, typename Var1Type >
+	FORCEINLINE void SetOnOpenHandler(UserClass* InObj, typename FGameMenuPage::FOnMenuOpening::TRawMethodDelegate_OneVar< UserClass, Var1Type>::FMethodPtr InMethod, Var1Type Var1)
 	{
-		OnMenuOpening.BindSP(InObj, InMethod);
+		OnMenuOpening.BindRaw(InObj, InMethod, Var1);
 	}
 
 	/**

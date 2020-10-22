@@ -10,14 +10,29 @@ UIControllerManager::UIControllerManager()
 }
 void UIControllerManager::Tick(float DeltaTime)
 {
-	if (PendingUIController != nullptr && CurrentUIController->CanLevel())
+	if (PendingUIController != nullptr )
 	{
-		CurrentUIController = PendingUIController;
-		PendingUIController = nullptr;
-		CurrentUIController->Enter();
+		if (CurrentUIController)
+		{
+			if (CurrentUIController->CanSafeLevel())
+			{
+				CurrentUIController->Exit();
+				CurrentUIController = PendingUIController;
+				PendingUIController = nullptr;
+				CurrentUIController->Enter();
+			}
+		}
+		else
+		{
+			CurrentUIController = PendingUIController;
+			PendingUIController = nullptr;
+			CurrentUIController->Enter();
+		}
 	}
-	
-	CurrentUIController->Tick(DeltaTime);
+	if (CurrentUIController)
+	{
+		CurrentUIController->Tick(DeltaTime);
+	}
 	
 }
 void UIControllerManager::ChangeUIController(UIControllerIndex  ToIndex)
@@ -50,10 +65,10 @@ void UIControllerManager::ChangeUIController(UIControllerIndex  ToIndex)
 	{
 		return;
 	}*/
-	if (CurrentUIController != nullptr)
+	/*if (CurrentUIController != nullptr)
 	{
 		CurrentUIController->Exit();
-	}
+	}*/
 	PendingUIController = WantToController;
 	
 }

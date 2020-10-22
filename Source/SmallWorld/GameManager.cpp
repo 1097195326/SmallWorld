@@ -8,6 +8,7 @@
 #include "Kismet/KismetMathLibrary.h"
 #include "ProgressManager.h"
 #include "GameDataManager.h"
+#include "UIControllerManager.h"
 
 
 
@@ -73,11 +74,11 @@ void GameManager::RefreshCloudVisible()
 }
 void GameManager::Tick(float DeltaTime)
 {
-	if (IsInitialized)
+	//if (IsInitialized)
 	{
 		
 
 		ProgressManager::GetInstance()->Tick(DeltaTime);
-
+		UIControllerManager::GetInstance()->Tick(DeltaTime);
 	}
 }
