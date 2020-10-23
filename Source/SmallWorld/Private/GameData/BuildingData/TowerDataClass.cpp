@@ -28,7 +28,7 @@ void TowerDataClass::Deserialization(TSharedPtr<FJsonObject>  JsonObject)
     
     
 }
-bool TowerDataClass::SpawnBuildingActor(UWorld * world, const FTransform & SpawnTF, const int32 && InIndex)
+ABaseBuildingActor * TowerDataClass::SpawnBuildingActor(UWorld * world, const FTransform & SpawnTF, const int32 && InIndex)
 {
 	BuildingActor = world->SpawnActorDeferred<ATowerActor>(ATowerActor::StaticClass(), SpawnTF, nullptr, nullptr
 		, ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn);
@@ -37,8 +37,7 @@ bool TowerDataClass::SpawnBuildingActor(UWorld * world, const FTransform & Spawn
 	{
 		BuildingActor->SetBuildingData(this);
 		BuildingActor->FinishSpawning(SpawnTF);
-		return true;
 	}
-	return false;
+	return BuildingActor;
 }
 

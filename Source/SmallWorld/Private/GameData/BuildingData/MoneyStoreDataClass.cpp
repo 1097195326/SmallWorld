@@ -30,7 +30,7 @@ void MoneyStoreDataClass::Deserialization(TSharedPtr<FJsonObject>  JsonObject)
 
 	GoldNum = JsonObject->GetIntegerField("GoldNum");
 }
-bool MoneyStoreDataClass::SpawnBuildingActor(UWorld * world, const FTransform & SpawnTF, const int32 && InIndex)
+ABaseBuildingActor * MoneyStoreDataClass::SpawnBuildingActor(UWorld * world, const FTransform & SpawnTF, const int32 && InIndex)
 {
 	BuildingActor = world->SpawnActorDeferred<AMoneyStoreActor>(AMoneyStoreActor::StaticClass(), SpawnTF, nullptr, nullptr
 		, ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn);
@@ -39,9 +39,8 @@ bool MoneyStoreDataClass::SpawnBuildingActor(UWorld * world, const FTransform & 
 	{
 		BuildingActor->SetBuildingData(this);
 		BuildingActor->FinishSpawning(SpawnTF);
-		return true;
 	}
-	return false;
+	return BuildingActor;
 }
 void  MoneyStoreDataClass::ChangeGoldNum(const int32 & plusNum)
 {

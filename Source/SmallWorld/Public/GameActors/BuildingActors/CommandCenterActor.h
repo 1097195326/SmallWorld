@@ -19,7 +19,7 @@ public:
 	virtual void RefreshView() override;
 
 protected:
-	TSharedPtr<SBaseCompoundWidget> TitleWidget, DetailWidget, OperationWidget;
+	TSharedPtr<SBaseCompoundWidget> ActorWidget;
 
 
 };

@@ -31,7 +31,7 @@ void FruitFarmDataClass::Deserialization(TSharedPtr<FJsonObject>  JsonObject)
 
 
 }
-bool FruitFarmDataClass::SpawnBuildingActor(UWorld * world, const FTransform & SpawnTF, const int32 && InIndex)
+ABaseBuildingActor * FruitFarmDataClass::SpawnBuildingActor(UWorld * world, const FTransform & SpawnTF, const int32 && InIndex)
 {
 	BuildingActor = world->SpawnActorDeferred<AFruitFarmActor>(AFruitFarmActor::StaticClass(), SpawnTF, nullptr, nullptr
 		, ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn);
@@ -40,9 +40,8 @@ bool FruitFarmDataClass::SpawnBuildingActor(UWorld * world, const FTransform & S
 	{
 		BuildingActor->SetBuildingData(this);
 		BuildingActor->FinishSpawning(SpawnTF);
-		return true;
 	}
-	return false;
+	return BuildingActor;
 }
 bool FruitFarmDataClass::IsFull()
 {

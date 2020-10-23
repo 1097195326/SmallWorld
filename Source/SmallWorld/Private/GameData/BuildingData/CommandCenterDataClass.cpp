@@ -28,7 +28,7 @@ void CommandCenterDataClass::Deserialization(TSharedPtr<FJsonObject>  JsonObject
     
     
 }
-bool CommandCenterDataClass::SpawnBuildingActor(UWorld * world, const FTransform & SpawnTF, const int32 && InIndex)
+ABaseBuildingActor * CommandCenterDataClass::SpawnBuildingActor(UWorld * world, const FTransform & SpawnTF, const int32 && InIndex)
 {
 	BuildingActor = world->SpawnActorDeferred<ACommandCenterActor>(ACommandCenterActor::StaticClass(), SpawnTF, nullptr, nullptr
 		, ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn);
@@ -37,7 +37,6 @@ bool CommandCenterDataClass::SpawnBuildingActor(UWorld * world, const FTransform
 	{
 		BuildingActor->SetBuildingData(this);
 		BuildingActor->FinishSpawning(SpawnTF);
-		return true;
 	}
-	return false;
+	return BuildingActor;
 }

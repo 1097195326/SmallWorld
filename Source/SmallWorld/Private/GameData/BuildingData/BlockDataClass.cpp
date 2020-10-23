@@ -20,7 +20,7 @@ void BlockDataClass::Deserialization(TSharedPtr<FJsonObject>  JsonObject)
 
 
 }
-bool BlockDataClass::SpawnBuildingActor(UWorld * world, const FTransform & SpawnTF, const int32 && InIndex)
+ABaseBuildingActor * BlockDataClass::SpawnBuildingActor(UWorld * world, const FTransform & SpawnTF, const int32 && InIndex)
 {
 	BuildingActor = world->SpawnActorDeferred<ABlockActor>(ABlockActor::StaticClass(), SpawnTF, nullptr, nullptr
 		, ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn);
@@ -29,7 +29,6 @@ bool BlockDataClass::SpawnBuildingActor(UWorld * world, const FTransform & Spawn
 	{
 		BuildingActor->SetBuildingData(this);
 		BuildingActor->FinishSpawning(SpawnTF);
-		return true;
 	}
-	return false;
+	return BuildingActor;
 }

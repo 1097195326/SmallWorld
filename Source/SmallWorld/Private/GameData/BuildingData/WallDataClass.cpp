@@ -28,7 +28,7 @@ void WallDataClass::Deserialization(TSharedPtr<FJsonObject>  JsonObject)
     
     
 }
-bool WallDataClass::SpawnBuildingActor(UWorld * world, const FTransform & SpawnTF, const int32 && InIndex)
+ABaseBuildingActor * WallDataClass::SpawnBuildingActor(UWorld * world, const FTransform & SpawnTF, const int32 && InIndex)
 {
 	BuildingActor = world->SpawnActorDeferred<AWallActor>(AWallActor::StaticClass(), SpawnTF, nullptr, nullptr
 		, ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn);
@@ -37,7 +37,6 @@ bool WallDataClass::SpawnBuildingActor(UWorld * world, const FTransform & SpawnT
 	{
 		BuildingActor->SetBuildingData(this);
 		BuildingActor->FinishSpawning(SpawnTF);
-		return true;
 	}
-	return false;
+	return BuildingActor;
 }

@@ -29,7 +29,7 @@ void BakeryDataClass::Deserialization(TSharedPtr<FJsonObject>  JsonObject)
     
     
 }
-bool BakeryDataClass::SpawnBuildingActor(UWorld * world, const FTransform & SpawnTF, const int32 && InIndex)
+ABaseBuildingActor * BakeryDataClass::SpawnBuildingActor(UWorld * world, const FTransform & SpawnTF, const int32 && InIndex)
 {
 	BuildingActor = world->SpawnActorDeferred<ABakeryActor>(ABakeryActor::StaticClass(), SpawnTF, nullptr, nullptr
 		, ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn);
@@ -38,7 +38,6 @@ bool BakeryDataClass::SpawnBuildingActor(UWorld * world, const FTransform & Spaw
 	{
 		BuildingActor->SetBuildingData(this);
 		BuildingActor->FinishSpawning(SpawnTF);
-		return true;
 	}
-	return false;
+	return BuildingActor;
 }

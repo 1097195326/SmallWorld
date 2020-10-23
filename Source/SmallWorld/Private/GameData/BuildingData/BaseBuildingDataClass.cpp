@@ -14,7 +14,6 @@ BaseBuildingDataClass::BaseBuildingDataClass()
 	BuildingHealth = 0.f;
 	IsUpdating = false;
 	RemainingUpdateTime = 0;
-	BuildingBelongHorde = nullptr;
 	BuildingActor = nullptr;
 }
 BaseBuildingDataClass::~BaseBuildingDataClass()
@@ -52,6 +51,10 @@ void BaseBuildingDataClass::Deserialization(TSharedPtr<FJsonObject> JsonObject)
 	RemainingUpdateTime = JsonObject->GetIntegerField("RemainingUpdateTime");
 
 	SetConfigDataByName(BuildingName);
+}
+HordeDataClass * BaseBuildingDataClass::GetHordeBuildingBelongTo()
+{
+	return GameDataManager::GetInstance()->GetGameWorldData()->GetHordeDataById(GetParentId());
 }
 void BaseBuildingDataClass::SetConfigDataByName(FString InName)
 {

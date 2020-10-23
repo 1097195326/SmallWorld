@@ -12,6 +12,7 @@
 #include "UserGameInstance.h"
 #include <vector>
 #include <list>
+#include "CastleTileActor.h"
 #include "BaseBuildingActor.generated.h"
 
 using namespace std;
@@ -28,11 +29,13 @@ public:
     virtual void SaveData(TSharedRef<TJsonWriter<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>> Writer);
 	virtual bool SetMeshComponentByIconName(const FString & InIconName);
 	
+	void	SetCastleTileActor(ACastleTileActor * InActor) { CastleTileActor = InActor; }
+	ACastleTileActor * GetCastleTileActor() { return CastleTileActor; }
 
 	FVector				GetInteractivePoint();
 protected:
 	BaseBuildingDataClass * BuildingData;
-
+	ACastleTileActor *		CastleTileActor;
 public:
 	/*UPROPERTY(VisibleDefaultsOnly, Category = BaseBuilding)
 	UMeshComponent * MeshComponent;*/

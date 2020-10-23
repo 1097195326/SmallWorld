@@ -58,7 +58,7 @@ void ArmyCenterDataClass::Deserialization(TSharedPtr<FJsonObject>  JsonObject)
 		TrainSoldiers.Add(ekey, ivalue);
 	}*/
 }
-bool ArmyCenterDataClass::SpawnBuildingActor(UWorld * world, const FTransform & SpawnTF, const int32 && InIndex)
+ABaseBuildingActor * ArmyCenterDataClass::SpawnBuildingActor(UWorld * world, const FTransform & SpawnTF, const int32 && InIndex)
 {
 	BuildingActor = world->SpawnActorDeferred<AArmyCenterActor>(AArmyCenterActor::StaticClass(), SpawnTF,nullptr,nullptr
 	,ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn);
@@ -67,9 +67,8 @@ bool ArmyCenterDataClass::SpawnBuildingActor(UWorld * world, const FTransform & 
 	{
 		BuildingActor->SetBuildingData(this);
 		BuildingActor->FinishSpawning(SpawnTF);
-		return true;
 	}
-	return false;
+	return BuildingActor;
 }
 void ArmyCenterDataClass::TrainSoldier(SoldierTypeEnum InSoldierType, int32 InNum)
 {

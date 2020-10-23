@@ -29,7 +29,7 @@ void GateDataClass::Deserialization(TSharedPtr<FJsonObject>  JsonObject)
     
     
 }
-bool GateDataClass::SpawnBuildingActor(UWorld * world, const FTransform & SpawnTF, const int32 && InIndex)
+ABaseBuildingActor * GateDataClass::SpawnBuildingActor(UWorld * world, const FTransform & SpawnTF, const int32 && InIndex)
 {
 	BuildingActor = world->SpawnActorDeferred<AGateActor>(AGateActor::StaticClass(), SpawnTF, nullptr, nullptr
 		, ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn);
@@ -38,8 +38,7 @@ bool GateDataClass::SpawnBuildingActor(UWorld * world, const FTransform & SpawnT
 	{
 		BuildingActor->SetBuildingData(this);
 		BuildingActor->FinishSpawning(SpawnTF);
-		return true;
 	}
-	return false;
+	return BuildingActor;
 }
 

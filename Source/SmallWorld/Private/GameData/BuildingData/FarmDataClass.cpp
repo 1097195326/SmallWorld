@@ -31,7 +31,7 @@ void FarmDataClass::Deserialization(TSharedPtr<FJsonObject>  JsonObject)
 	CropNum = JsonObject->GetIntegerField("CropNum");
 
 }
-bool FarmDataClass::SpawnBuildingActor(UWorld * world, const FTransform & SpawnTF, const int32 && InIndex)
+ABaseBuildingActor * FarmDataClass::SpawnBuildingActor(UWorld * world, const FTransform & SpawnTF, const int32 && InIndex)
 {
 	BuildingActor = world->SpawnActorDeferred<AFarmActor>(AFarmActor::StaticClass(), SpawnTF, nullptr, nullptr
 		, ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn);
@@ -40,9 +40,8 @@ bool FarmDataClass::SpawnBuildingActor(UWorld * world, const FTransform & SpawnT
 	{
 		BuildingActor->SetBuildingData(this);
 		BuildingActor->FinishSpawning(SpawnTF);
-		return true;
 	}
-	return false;
+	return BuildingActor;
 }
 bool FarmDataClass::IsFull()
 {

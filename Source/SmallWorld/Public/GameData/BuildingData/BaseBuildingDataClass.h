@@ -44,7 +44,8 @@ public:
 	virtual void Deserialization(TSharedPtr<FJsonObject>  JsonObject) override;
 
 	virtual void CalculateData(){}
-	virtual bool SpawnBuildingActor(UWorld * world, const FTransform & SpawnTF, const int32 && InIndex = 0) { return false; };
+	virtual ABaseBuildingActor * SpawnBuildingActor(UWorld * world, const FTransform & SpawnTF, const int32 && InIndex = 0) { return nullptr; };
+	class HordeDataClass *	GetHordeBuildingBelongTo();
 
 	void	SetConfigDataByName(FString InName);
 
@@ -58,7 +59,6 @@ protected:
 	EBuildingType	BuildingType;
 public:
 	// Running Datas
-	class HordeDataClass *	BuildingBelongHorde;
 	class ABaseBuildingActor * BuildingActor;
 
 	BuildingConfigStruct  BuildingConfig;

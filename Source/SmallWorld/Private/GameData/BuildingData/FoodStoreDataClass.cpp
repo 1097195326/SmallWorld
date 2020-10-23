@@ -38,7 +38,7 @@ void FoodStoreDataClass::Deserialization(TSharedPtr<FJsonObject>  JsonObject)
 	FruitNum = JsonObject->GetIntegerField("FruitNum");
     
 }
-bool FoodStoreDataClass::SpawnBuildingActor(UWorld * world, const FTransform & SpawnTF, const int32 && InIndex)
+ABaseBuildingActor * FoodStoreDataClass::SpawnBuildingActor(UWorld * world, const FTransform & SpawnTF, const int32 && InIndex)
 {
 	BuildingActor = world->SpawnActorDeferred<AFoodStoreActor>(AFoodStoreActor::StaticClass(), SpawnTF, nullptr, nullptr
 		, ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn);
@@ -47,9 +47,8 @@ bool FoodStoreDataClass::SpawnBuildingActor(UWorld * world, const FTransform & S
 	{
 		BuildingActor->SetBuildingData(this);
 		BuildingActor->FinishSpawning(SpawnTF);
-		return true;
 	}
-	return false;
+	return BuildingActor;
 }
 void FoodStoreDataClass::ChangeFoodNum(int32 plusCrop /* = 0 */, int32 plusBreak /* = 0 */, int32 plusFruit /* = 0 */)
 {

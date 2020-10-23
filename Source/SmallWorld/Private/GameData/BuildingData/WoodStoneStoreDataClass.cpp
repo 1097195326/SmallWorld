@@ -37,7 +37,7 @@ void WoodStoneStoreDataClass::Deserialization(TSharedPtr<FJsonObject>  JsonObjec
 
     
 }
-bool WoodStoneStoreDataClass::SpawnBuildingActor(UWorld * world, const FTransform & SpawnTF, const int32 && InIndex)
+ABaseBuildingActor * WoodStoneStoreDataClass::SpawnBuildingActor(UWorld * world, const FTransform & SpawnTF, const int32 && InIndex)
 {
 	BuildingActor = world->SpawnActorDeferred<AWoodStoneStoreActor>(AWoodStoneStoreActor::StaticClass(), SpawnTF, nullptr, nullptr
 		, ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn);
@@ -46,9 +46,8 @@ bool WoodStoneStoreDataClass::SpawnBuildingActor(UWorld * world, const FTransfor
 	{
 		BuildingActor->SetBuildingData(this);
 		BuildingActor->FinishSpawning(SpawnTF);
-		return true;
 	}
-	return false;
+	return BuildingActor;
 }
 void WoodStoneStoreDataClass::ChangeWoodNum(const int32 & plusWood)
 {

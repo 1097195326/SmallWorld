@@ -32,7 +32,7 @@ void HouseDataClass::Deserialization(TSharedPtr<FJsonObject>  JsonObject)
 	PeopleNum = JsonObject->GetIntegerField("PeopleNum");
     
 }
-bool HouseDataClass::SpawnBuildingActor(UWorld * world, const FTransform & SpawnTF, const int32 && InIndex)
+ABaseBuildingActor * HouseDataClass::SpawnBuildingActor(UWorld * world, const FTransform & SpawnTF, const int32 && InIndex)
 {
 	BuildingActor = world->SpawnActorDeferred<AHouseActor>(AHouseActor::StaticClass(), SpawnTF, nullptr, nullptr
 		, ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn);
@@ -41,9 +41,8 @@ bool HouseDataClass::SpawnBuildingActor(UWorld * world, const FTransform & Spawn
 	{
 		BuildingActor->SetBuildingData(this);
 		BuildingActor->FinishSpawning(SpawnTF);
-		return true;
 	}
-	return false;
+	return BuildingActor;
 }
 void HouseDataClass::ChangePeopleNum(int32 plusNum)
 {
