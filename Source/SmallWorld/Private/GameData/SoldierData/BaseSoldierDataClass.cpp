@@ -52,6 +52,10 @@ void BaseSoldierDataClass::Deserialization(TSharedPtr<FJsonObject> JsonObject)
 
 	SetSoldierConfigByName(SoldierName);
 }
+void BaseSoldierDataClass::DestroySoldier()
+{
+
+}
 void BaseSoldierDataClass::SetCommandCenter(class CommandCenterDataClass * InCommandCenter)
 {
 	CommandCenter = InCommandCenter;

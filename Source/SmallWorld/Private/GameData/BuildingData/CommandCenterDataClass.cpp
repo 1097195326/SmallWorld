@@ -79,7 +79,17 @@ ASoldierPawn * CommandCenterDataClass::SpawnSoldier(SoldierTypeEnum InType)
 		SoldiersMap.Add(SoldierData->GetObjectId(), SoldierData);
 
 		Soldier = SoldierData->SpawnSoldierActor(SoldierName);
+		if (!Soldier)
+		{
+			DestroySoldier(SoldierData);
+		}
 
 	}
 	return Soldier;
+}
+void CommandCenterDataClass::DestroySoldier(BaseSoldierDataClass * InSoldierData)
+{
+	SoldiersMap.Remove(InSoldierData->GetObjectId());
+	InSoldierData->DestroySoldier();
+	delete InSoldierData;
 }

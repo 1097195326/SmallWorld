@@ -17,6 +17,7 @@ public:
 	virtual ABaseBuildingActor * SpawnBuildingActor(UWorld * world, const FTransform & SpawnTF, const int32 && InIndex = 0) override;
 
 	ASoldierPawn * SpawnSoldier(SoldierTypeEnum InType);
+	void DestroySoldier(BaseSoldierDataClass * InSoldierData);
 
 protected:
 

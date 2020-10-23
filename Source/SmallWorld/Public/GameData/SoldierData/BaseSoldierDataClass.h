@@ -17,8 +17,11 @@ public:
 	virtual void Deserialization(TSharedPtr<FJsonObject>  JsonObject) override;
 
 	virtual ASoldierPawn * SpawnSoldierActor(const FString & InSoldierName) { return nullptr; };
+	virtual void DestroySoldier();
+
 	class CommandCenterDataClass * GetCommandCenter();
 	void SetCommandCenter(class CommandCenterDataClass * InCommandCenter);
+
 
 	void SetSoldierConfigByName(FString InName);
 	
