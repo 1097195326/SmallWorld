@@ -40,3 +40,46 @@ ABaseBuildingActor * CommandCenterDataClass::SpawnBuildingActor(UWorld * world, 
 	}
 	return BuildingActor;
 }
+ASoldierPawn * CommandCenterDataClass::SpawnSoldier(SoldierTypeEnum InType)
+{
+	FString  SoldierName;
+	switch (InType)
+	{
+	case Soldier_None:
+		break;
+	case Soldier_Archer: SoldierName = TEXT("Archer");
+		break;
+	case Soldier_Footman:SoldierName = TEXT("Footman");
+		break;
+	case Soldier_Griffin:SoldierName = TEXT("Griffin");
+		break;
+	case Soldier_Horseman:SoldierName = TEXT("Horseman");
+		break;
+	case Soldier_Knight:SoldierName = TEXT("Knight");
+		break;
+	case Soldier_Mage:SoldierName = TEXT("Mage");
+		break;
+	case Soldier_SiegeEngine:SoldierName = TEXT("SiegeEngine");
+		break;
+	case Soldier_Peasant:SoldierName = TEXT("Peasant");
+		break;
+	case Soldier_Num:
+		break;
+	default:
+		break;
+	}
+	ASoldierPawn * Soldier = nullptr;
+	if (!SoldierName.IsEmpty())
+	{
+		FString DataClassName = FString::Printf(TEXT("%sDataClass"), *SoldierName);
+		BaseSoldierDataClass * SoldierData = (BaseSoldierDataClass*)ClassReflectManager::Get()->GetClassByName(TCHAR_TO_UTF8(*DataClassName));
+		SoldierData->SetCommandCenter(this);
+		SoldierData->SetSoldierConfigByName(SoldierName);
+		SoldierData->SetParentId(GetObjectId());
+		SoldiersMap.Add(SoldierData->GetObjectId(), SoldierData);
+
+		Soldier = SoldierData->SpawnSoldierActor(SoldierName);
+
+	}
+	return Soldier;
+}

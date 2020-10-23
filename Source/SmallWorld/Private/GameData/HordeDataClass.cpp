@@ -65,6 +65,7 @@ BaseBuildingDataClass * HordeDataClass::SpawnBuildingData(const FString & Buildi
 	BaseBuildingDataClass * BuildingData = (BaseBuildingDataClass*)ClassReflectManager::Get()->GetClassByName(TCHAR_TO_UTF8(*DataClassName));
 	BuildingData->SetConfigDataByName(BuildingName);
 	BuildingData->SetParentId(GetObjectId());
+	BuildingData->SetHordeBelongTo(this);
 	BuildingDatas.Add(BuildingData->GetObjectId(),BuildingData);
 	return BuildingData;
 }

@@ -52,9 +52,13 @@ void BaseBuildingDataClass::Deserialization(TSharedPtr<FJsonObject> JsonObject)
 
 	SetConfigDataByName(BuildingName);
 }
-HordeDataClass * BaseBuildingDataClass::GetHordeBuildingBelongTo()
+HordeDataClass * BaseBuildingDataClass::GetHordeBelongTo()
 {
-	return GameDataManager::GetInstance()->GetGameWorldData()->GetHordeDataById(GetParentId());
+	return HordeBelongTo;//GameDataManager::GetInstance()->GetGameWorldData()->GetHordeDataById(GetParentId());
+}
+void BaseBuildingDataClass::SetHordeBelongTo(HordeDataClass * InHorde)
+{
+	HordeBelongTo = InHorde;
 }
 void BaseBuildingDataClass::SetConfigDataByName(FString InName)
 {

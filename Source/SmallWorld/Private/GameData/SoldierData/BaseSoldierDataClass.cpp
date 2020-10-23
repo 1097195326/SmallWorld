@@ -1,13 +1,13 @@
 #include "BaseSoldierDataClass.h"
 #include "GameDataManager.h"
-#include "ArmyCenterDataClass.h"
-
+#include "CommandCenterDataClass.h"
+#include "HordeDataClass.h"
 
 BaseSoldierDataClass::BaseSoldierDataClass()
 {
 	SoldierType = Soldier_None;
 	SoldierPawn = nullptr;
-	ArmyCenter = nullptr;
+	CommandCenter = nullptr;
 	Level = -1;
 	Health = 0.f;
 
@@ -26,9 +26,9 @@ void BaseSoldierDataClass::Serialization(TSharedRef<TJsonWriter<TCHAR, TCondense
 	Writer->WriteObjectStart("BaseSoldierDataClass");
 	RuntimeDataClass::Serialization(Writer);
 
-	if (ArmyCenter)
+	if (CommandCenter)
 	{
-		Writer->WriteValue("ArmyCenterID", ArmyCenter->GetObjectId().ToString());
+		Writer->WriteValue("ArmyCenterID", CommandCenter->GetObjectId().ToString());
 	}
 	Writer->WriteValue("SoldierName", *SoldierName);
 	Writer->WriteValue("Health", Health);
@@ -51,6 +51,14 @@ void BaseSoldierDataClass::Deserialization(TSharedPtr<FJsonObject> JsonObject)
 	}
 
 	SetSoldierConfigByName(SoldierName);
+}
+void BaseSoldierDataClass::SetCommandCenter(class CommandCenterDataClass * InCommandCenter)
+{
+	CommandCenter = InCommandCenter;
+}
+CommandCenterDataClass * BaseSoldierDataClass::GetCommandCenter()
+{
+	return CommandCenter;
 }
 void BaseSoldierDataClass::SetSoldierConfigByName(FString InName)
 {

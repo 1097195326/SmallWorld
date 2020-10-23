@@ -5,20 +5,6 @@
 
 
 
-enum SoldierTypeEnum : int32
-{
-	Soldier_None,
-	Soldier_Archer,
-	Soldier_Footman,
-	Soldier_Griffin,
-	Soldier_Horseman,
-	Soldier_Knight,
-	Soldier_Mage,
-	Soldier_SiegeEngine,
-	Soldier_Peasant,
-	Soldier_Num
-};
-
 class BaseSoldierDataClass : public RuntimeDataClass
 {
 public:
@@ -30,11 +16,12 @@ public:
 	virtual void Serialization(TSharedRef<TJsonWriter<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>> Writer) override;
 	virtual void Deserialization(TSharedPtr<FJsonObject>  JsonObject) override;
 
-	virtual bool SpawnSoldierActor(UWorld * world, const FVector & Location, const FRotator & Rotation) { return false; };
-
+	virtual ASoldierPawn * SpawnSoldierActor(const FString & InSoldierName) { return nullptr; };
+	class CommandCenterDataClass * GetCommandCenter();
+	void SetCommandCenter(class CommandCenterDataClass * InCommandCenter);
 
 	void SetSoldierConfigByName(FString InName);
-
+	
 	inline bool	IsMaxLevel() { return Level == SoldierConfig.maxlevel; }
 	inline FString GetSoldierName() { return SoldierName; }
 	inline const SoldierConfigStruct & GetSoldierConfig() { return SoldierConfig; }
@@ -43,7 +30,7 @@ public:
 	inline int32 GetMoveDistance() const { return SoldierConfig.distance; }
 protected:
 	class ASoldierPawn *		SoldierPawn;
-	class ArmyCenterDataClass * ArmyCenter;
+	class CommandCenterDataClass * CommandCenter;
 
 	FString					SoldierName;
 	SoldierConfigStruct		SoldierConfig;

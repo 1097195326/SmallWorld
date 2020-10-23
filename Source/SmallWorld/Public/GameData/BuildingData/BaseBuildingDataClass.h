@@ -45,7 +45,9 @@ public:
 
 	virtual void CalculateData(){}
 	virtual ABaseBuildingActor * SpawnBuildingActor(UWorld * world, const FTransform & SpawnTF, const int32 && InIndex = 0) { return nullptr; };
-	class HordeDataClass *	GetHordeBuildingBelongTo();
+	
+	class HordeDataClass *	GetHordeBelongTo();
+	void SetHordeBelongTo(class HordeDataClass * InHorde);
 
 	void	SetConfigDataByName(FString InName);
 
@@ -54,6 +56,7 @@ public:
 	inline FString GetBuildingName() { return BuildingName; }
 	inline EBuildingType GetBuildingType() { return BuildingType; }
 protected:
+	class HordeDataClass *	HordeBelongTo;
 	//Config Data
 	FString			BuildingName;
 	EBuildingType	BuildingType;

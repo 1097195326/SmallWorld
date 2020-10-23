@@ -58,6 +58,19 @@ enum BehaviorType
 
 };
 
+enum SoldierTypeEnum : int32
+{
+	Soldier_None,
+	Soldier_Archer,
+	Soldier_Footman,
+	Soldier_Griffin,
+	Soldier_Horseman,
+	Soldier_Knight,
+	Soldier_Mage,
+	Soldier_SiegeEngine,
+	Soldier_Peasant,
+	Soldier_Num
+};
 
 UCLASS()
 class ASoldierPawn : public AGameCharacter, public EnableAttackPawnClass<ASoldierPawn>, public IGenericTeamAgentInterface
