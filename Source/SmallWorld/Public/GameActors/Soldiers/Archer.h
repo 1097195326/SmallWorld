@@ -19,7 +19,7 @@ public:
 	//virtual TSharedPtr<SWidget>	CreateActorDetailWidget() override;
 
 	// ----------- Override EnableAttackPawnClass -----------
-	
+
 
 	UPROPERTY(EditAnywhere)
 	FProjectileWeaponInfo	ProjectileWeaponInfo;

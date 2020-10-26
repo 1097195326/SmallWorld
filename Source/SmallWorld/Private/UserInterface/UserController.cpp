@@ -4,6 +4,8 @@
 #include "PreviewActor.h"
 #include "GameConfig.h"
 #include "UIControllerManager.h"
+#include "CastleTileActor.h"
+#include "GroundTileActor.h"
 
 
 AUserController * AUserController::Instance = nullptr;
@@ -56,17 +58,24 @@ void AUserController::On_Delete()
 
 }
 
-AGameActor * AUserController::TrySelectGameActor(FVector2D ScreenPosition)
+AActor * AUserController::TrySelectGameActor(FVector2D ScreenPosition)
 {
 	FHitResult HitResult;
 	GetHitResultAtScreenPosition(ScreenPosition,ECC_Visibility,false,HitResult);
 	if (HitResult.bBlockingHit)
 	{
 		AGameActor * GameActor = Cast<AGameActor>(HitResult.GetActor());
+		ASoldierPawn * SoldierPawn = Cast<ASoldierPawn>(HitResult.GetActor());
 		if (GameActor)
 		{
 			GetCurrentUIController->SelectGameActor(GameActor);
 			return GameActor;
+		}else if (SoldierPawn)
+		{
+			GetCurrentUIController->SelectGameActor(SoldierPawn);
+			AGroundTileActor * GroundTile = SoldierPawn->GetGroundTile();
+
+			return SoldierPawn;
 		}
 	}
 	return nullptr;

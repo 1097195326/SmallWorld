@@ -10,6 +10,7 @@
 #include "SlateCore/Public/Styling/SlateIconFinder.h"
 #include "Framework/Application/SlateApplication.h"
 #include "GameActor.h"
+#include "GameCharacter.h"
 
 
 
@@ -28,7 +29,8 @@ public:
 	virtual void	OnEnter(){}
 	virtual void	OnExit(){}
 	virtual void	Tick(float DeltaTime){}
-	virtual void	SelectGameActor(AGameActor * GameActorPtr){}
+	virtual void	SelectGameActor(AGameActor * GameActorPtr) {}
+	virtual void	SelectGameActor(AGameCharacter * GameCharacterPtr) {}
 	virtual bool	CanSafeLevel() { return true; }
 
 	virtual ~UIControllerInterface(){}

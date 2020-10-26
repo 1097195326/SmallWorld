@@ -20,6 +20,7 @@ public:
 	virtual void BeginDestroy() override;
 
 	virtual TSharedPtr<SWidget>	CreateActorDetailWidget() { return SNullWidget::NullWidget; }
+	virtual void RefreshView() {}
 
 public:
 

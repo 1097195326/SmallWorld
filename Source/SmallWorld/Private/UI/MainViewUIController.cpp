@@ -39,6 +39,15 @@ void MainViewUIController::SelectGameActor(AGameActor * GameActorPtr)
 	MiddleBottomSlot->AttachWidget(GameActorPtr->CreateActorDetailWidget().ToSharedRef());
 	
 }
+void MainViewUIController::SelectGameActor(AGameCharacter * GameCharacterPtr)
+{
+	if (GameCharacterPtr == nullptr)
+	{
+		return;
+	}
+	MiddleBottomSlot->AttachWidget(GameCharacterPtr->CreateActorDetailWidget().ToSharedRef());
+
+}
 void MainViewUIController::SelectHorde()
 {
 

@@ -113,6 +113,15 @@ void ASoldierPawn::HandleAttack()
 	//CurrentWeapon->AttackEnemy();
 
 }
+TSharedPtr<SWidget>	ASoldierPawn::CreateActorDetailWidget()
+{
+
+	return SNullWidget::NullWidget;
+}
+void ASoldierPawn::RefreshView()
+{
+	
+}
 void ASoldierPawn::SetGroupAndIndex(SoldierGroup * _group,int _index)
 {
 	mGroup = _group;

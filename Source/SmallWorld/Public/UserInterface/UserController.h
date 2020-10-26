@@ -28,7 +28,7 @@ public:
 
 	void		 ChangeControllType(EControllType ControllType);
 
-	class AGameActor * TrySelectGameActor(FVector2D ScreenPosition);
+	class AActor * TrySelectGameActor(FVector2D ScreenPosition);
 
 	bool	HavePriviewActor();
 	void	UpdatePriviewActor(FVector2D ScreenPosition, FString IconName = TEXT(""));

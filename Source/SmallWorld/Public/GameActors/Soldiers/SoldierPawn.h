@@ -92,6 +92,9 @@ public:
 	virtual bool	CanAttack()override;
 	virtual void	HandleAttack() override;
 	
+	virtual TSharedPtr<SWidget>	CreateActorDetailWidget() override;
+	virtual void RefreshView() override;
+
 	void			GetSoldierData(BaseSoldierDataClass * InSoldierData) { SoldierData = InSoldierData; }
 	BaseSoldierDataClass * GetSoldierData() { return SoldierData; }
 

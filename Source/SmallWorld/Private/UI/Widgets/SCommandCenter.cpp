@@ -50,6 +50,7 @@ FReply SCommandCenter::OnButtonClicked(int32 InIndex)
 				if (IterTile->GetSoldier() == nullptr)
 				{
 					SpLocation = IterTile->GetActorLocation();
+					GroundTile = IterTile;
 					break;
 				}
 			}
@@ -66,7 +67,8 @@ FReply SCommandCenter::OnButtonClicked(int32 InIndex)
 			if (SoldierPawn)
 			{
 				SoldierPawn->SetActorLocationAndRotation(SpLocation, CommandCenterData->BuildingActor->GetActorRotation());
-
+				GroundTile->SetSoldier(SoldierPawn);
+				SoldierPawn->SetGroundTile(GroundTile);
 			}
 		}
 		break;

@@ -12,6 +12,7 @@ public:
 	virtual void OnEnter() override;
 	virtual void OnExit() override;
 	virtual void SelectGameActor(AGameActor * GameActorPtr) override;
+	virtual void SelectGameActor(AGameCharacter * GameCharacterPtr)override;
 
 	void	SelectHorde();
 
