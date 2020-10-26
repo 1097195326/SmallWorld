@@ -52,9 +52,21 @@ void BaseSoldierDataClass::Deserialization(TSharedPtr<FJsonObject> JsonObject)
 
 	SetSoldierConfigByName(SoldierName);
 }
+ASoldierPawn * BaseSoldierDataClass::SpawnSoldierActor(const FString & InSoldierName)
+{
+	FString ClassPath = FString::Printf(TEXT("/Game/Blueprint/%s_BP_C.%s_BP_C"), *InSoldierName, *InSoldierName);
+	UClass * SoldierClass = LoadClass<ASoldierPawn>(nullptr, *ClassPath);
+	ASoldierPawn * TemSoldier = User_GameInstance->GetWorld()->SpawnActor<ASoldierPawn>(SoldierClass);
+
+	return TemSoldier;
+}
 void BaseSoldierDataClass::DestroySoldier()
 {
-
+	if (SoldierPawn)
+	{
+		SoldierPawn->Destroy();
+		SoldierPawn = nullptr;
+	}
 }
 void BaseSoldierDataClass::SetCommandCenter(class CommandCenterDataClass * InCommandCenter)
 {

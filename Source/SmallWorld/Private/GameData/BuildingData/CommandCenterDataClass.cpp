@@ -73,17 +73,19 @@ ASoldierPawn * CommandCenterDataClass::SpawnSoldier(SoldierTypeEnum InType)
 	{
 		FString DataClassName = FString::Printf(TEXT("%sDataClass"), *SoldierName);
 		BaseSoldierDataClass * SoldierData = (BaseSoldierDataClass*)ClassReflectManager::Get()->GetClassByName(TCHAR_TO_UTF8(*DataClassName));
-		SoldierData->SetCommandCenter(this);
-		SoldierData->SetSoldierConfigByName(SoldierName);
-		SoldierData->SetParentId(GetObjectId());
-		SoldiersMap.Add(SoldierData->GetObjectId(), SoldierData);
-
-		Soldier = SoldierData->SpawnSoldierActor(SoldierName);
-		if (!Soldier)
+		if (SoldierData)
 		{
-			DestroySoldier(SoldierData);
-		}
+			SoldierData->SetCommandCenter(this);
+			SoldierData->SetSoldierConfigByName(SoldierName);
+			SoldierData->SetParentId(GetObjectId());
+			SoldiersMap.Add(SoldierData->GetObjectId(), SoldierData);
 
+			Soldier = SoldierData->SpawnSoldierActor(SoldierName);
+			if (!Soldier)
+			{
+				DestroySoldier(SoldierData);
+			}
+		}
 	}
 	return Soldier;
 }

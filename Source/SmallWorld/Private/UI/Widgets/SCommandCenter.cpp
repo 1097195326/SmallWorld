@@ -3,7 +3,9 @@
 #include "SHGameActorIcon.h"
 #include "CommandCenterDataClass.h"
 #include "GameStyle.h"
-
+#include "Kismet/KismetMathLibrary.h"
+#include "GroundTileActor.h"
+#include "CastleTileActor.h"
 
 void SCommandCenter::Construct(const FArguments & InArgs)
 {
@@ -37,7 +39,36 @@ FReply SCommandCenter::OnButtonClicked(int32 InIndex)
 	{
 	case 1:
 	{
-		CommandCenterData->BuildingActor->GetCastleTileActor();
+		TArray<AGroundTileActor*>  TileArray = CommandCenterData->BuildingActor->GetCastleTileActor()->AroundActorArray;
+		int32 TileIndex = UKismetMathLibrary::RandomInteger(TileArray.Num());
+		FVector SpLocation = FVector::ZeroVector;
+		AGroundTileActor * GroundTile = TileArray[TileIndex];
+		if (GroundTile->GetSoldier())
+		{
+			for (auto IterTile : TileArray)
+			{
+				if (IterTile->GetSoldier() == nullptr)
+				{
+					SpLocation = IterTile->GetActorLocation();
+					break;
+				}
+			}
+		}
+		else
+		{
+			SpLocation = GroundTile->GetActorLocation();
+		}
+		if (SpLocation != FVector::ZeroVector)
+		{
+			SoldierTypeEnum SoldierType = (SoldierTypeEnum)UKismetMathLibrary::RandomIntegerInRange(Soldier_Archer, Soldier_SiegeEngine);
+
+			ASoldierPawn * SoldierPawn = CommandCenterData->SpawnSoldier(SoldierType);
+			if (SoldierPawn)
+			{
+				SoldierPawn->SetActorLocationAndRotation(SpLocation, CommandCenterData->BuildingActor->GetActorRotation());
+
+			}
+		}
 		break;
 	}
 	}

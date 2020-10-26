@@ -16,7 +16,7 @@ public:
 	virtual void Serialization(TSharedRef<TJsonWriter<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>> Writer) override;
 	virtual void Deserialization(TSharedPtr<FJsonObject>  JsonObject) override;
 
-	virtual ASoldierPawn * SpawnSoldierActor(const FString & InSoldierName) { return nullptr; };
+	virtual ASoldierPawn * SpawnSoldierActor(const FString & InSoldierName);
 	virtual void DestroySoldier();
 
 	class CommandCenterDataClass * GetCommandCenter();
