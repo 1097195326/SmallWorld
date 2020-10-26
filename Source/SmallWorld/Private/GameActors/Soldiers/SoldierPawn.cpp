@@ -113,6 +113,17 @@ void ASoldierPawn::HandleAttack()
 	//CurrentWeapon->AttackEnemy();
 
 }
+void ASoldierPawn::SetSelected(bool InSlelect)
+{
+	if (InSlelect)
+	{
+
+	}
+	else
+	{
+
+	}
+}
 TSharedPtr<SWidget>	ASoldierPawn::CreateActorDetailWidget()
 {
 
