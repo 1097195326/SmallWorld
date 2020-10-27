@@ -35,6 +35,8 @@ public:
 	virtual void On_Tick(float DeltaSeconds) override;
 	virtual void On_Delete() override;
 	//
+	void	SetTileSelected(bool);
+
 	void	SetCloudVisible(bool InVisible);
 	void	TrackAround();
 	//Before Start Game ,Found Soldier In This Tile
