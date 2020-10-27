@@ -48,7 +48,7 @@ bool LoginViewUIController::CanSafeLevel()
 }
 void LoginViewUIController::MainMenuStateChange(int32 InIndex)
 {
-	bCanSafeLevel = InIndex;
+	bCanSafeLevel = (bool)InIndex;
 }
 void LoginViewUIController::MenuOperation(int32 InIndex)
 {
