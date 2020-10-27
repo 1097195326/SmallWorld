@@ -117,6 +117,7 @@ void ASoldierPawn::SetSelected(bool InSlelect)
 {
 	if (InSlelect)
 	{
+		 GetWorld()->SpawnActor<AStaticMeshActor>();
 
 	}
 	else
