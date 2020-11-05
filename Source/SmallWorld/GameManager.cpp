@@ -29,11 +29,13 @@ void GameManager::ScanWorldMap()
 	
 	TArray<AActor*> TemActorsArray;
 	UGameplayStatics::GetAllActorsOfClass(User_GameInstance, AGroundTileActor::StaticClass(), TemActorsArray);
+	FString  OGIStr;
 	for (auto IterActor : TemActorsArray)
 	{
 		AGroundTileActor * TemActor = Cast<AGroundTileActor>(IterActor);
 		GroundActorArray.Add(TemActor);
 		TemActor->TrackAround();
+		OGIStr += TemActor->GetObjectId().ToString();
 	}
 	UGameplayStatics::GetAllActorsOfClass(User_GameInstance, ACastleTileActor::StaticClass(), TemActorsArray);
 	for (auto IterActor : TemActorsArray)

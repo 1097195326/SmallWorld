@@ -4,6 +4,8 @@
 
 #include "GroundTileActor.generated.h"
 
+class ASoldierPawn;
+
 UENUM()
 enum class TileTypeEnum : uint8
 {
@@ -41,8 +43,10 @@ public:
 	void	TrackAround();
 	//Before Start Game ,Found Soldier In This Tile
 	void	TrackSoldier();
-	void	SetSoldier(class ASoldierPawn * InSoldier);
-	class	ASoldierPawn * GetSoldier() { return Soldier; }
+	void	AddSoldier(ASoldierPawn * InSoldier);
+	void	RemoveSoldier(ASoldierPawn * InSoldier);
+	bool	IsContain(ASoldierPawn * InSoldier);
+	TArray<ASoldierPawn *> GetSoldiers() { return Soldiers; }
 
 	UPROPERTY(VisibleDefaultsOnly)
 		UStaticMeshComponent * GroundTileComponent ;
@@ -58,7 +62,7 @@ public:
 
 
 protected:
-
-	class ASoldierPawn * Soldier;
+	
+	TArray<ASoldierPawn *> Soldiers;
 
 };

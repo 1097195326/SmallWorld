@@ -43,11 +43,11 @@ FReply SCommandCenter::OnButtonClicked(int32 InIndex)
 		int32 TileIndex = UKismetMathLibrary::RandomInteger(TileArray.Num());
 		FVector SpLocation = FVector::ZeroVector;
 		AGroundTileActor * GroundTile = TileArray[TileIndex];
-		if (GroundTile->GetSoldier())
+		if (GroundTile->GetSoldiers().Num() > 0)
 		{
 			for (auto IterTile : TileArray)
 			{
-				if (IterTile->GetSoldier() == nullptr)
+				if (IterTile->GetSoldiers().Num() == 0)
 				{
 					SpLocation = IterTile->GetActorLocation();
 					GroundTile = IterTile;
@@ -67,7 +67,7 @@ FReply SCommandCenter::OnButtonClicked(int32 InIndex)
 			if (SoldierPawn)
 			{
 				SoldierPawn->SetActorLocationAndRotation(SpLocation, CommandCenterData->BuildingActor->GetActorRotation());
-				GroundTile->SetSoldier(SoldierPawn);
+				GroundTile->AddSoldier(SoldierPawn);
 				SoldierPawn->SetGroundTile(GroundTile);
 			}
 		}

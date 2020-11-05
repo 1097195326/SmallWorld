@@ -25,7 +25,7 @@ AGroundTileActor::AGroundTileActor()
 	CloudTileComponent->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
 	CollisionBoxComponent->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
 
-	Soldier = nullptr;
+
 }
 void AGroundTileActor::On_Init()
 {
@@ -38,7 +38,7 @@ void AGroundTileActor::On_Tick(float DeltaSeconds)
 }
 void AGroundTileActor::On_Delete()
 {
-	Soldier = nullptr;
+	Soldiers.Empty();
 }
 void AGroundTileActor::SetCloudVisible(bool InVisible)
 {
@@ -90,16 +90,23 @@ void AGroundTileActor::TrackSoldier()
 
 	for (auto TemActor : OverlapActors)
 	{
-		if (ActorBox.ExpandBy(FVector::ZeroVector,FVector(0.f,0.f,50.f)).IsInside(TemActor->GetActorLocation()))
+		if (ActorBox.ExpandBy(FVector::ZeroVector,FVector(0.f,0.f,250.f)).IsInside(TemActor->GetActorLocation()))
 		{
 			ASoldierPawn * TemSoldier = Cast<ASoldierPawn>(TemActor);
-			SetSoldier(TemSoldier);
+			AddSoldier(TemSoldier);
 			TemSoldier->SetGroundTile(this);
-			break;
 		}
 	}
 }
-void AGroundTileActor::SetSoldier(class ASoldierPawn * InSoldier)
+void AGroundTileActor::AddSoldier(ASoldierPawn * InSoldier)
 {
-	Soldier = InSoldier;
+	Soldiers.Add(InSoldier);
+}
+void AGroundTileActor::RemoveSoldier(ASoldierPawn * InSoldier)
+{
+	Soldiers.Remove(InSoldier);
+}
+bool AGroundTileActor::IsContain(ASoldierPawn * InSoldier)
+{
+	return Soldiers.Contains(InSoldier);
 }
