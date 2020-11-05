@@ -40,6 +40,7 @@ void AGroundTileActor::On_Delete()
 {
 	Soldiers.Empty();
 }
+
 void AGroundTileActor::SetCloudVisible(bool InVisible)
 {
 	CloudTileComponent->SetVisibility(InVisible);
