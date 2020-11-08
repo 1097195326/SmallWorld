@@ -28,7 +28,8 @@ AGroundTileActor::AGroundTileActor()
 	GroundTileComponent->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
 	CloudTileComponent->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
 	CollisionBoxComponent->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
-
+	
+	PrimaryActorTick.bCanEverTick = true;
 }
 void AGroundTileActor::On_Init()
 {
@@ -126,10 +127,7 @@ bool AGroundTileActor::IsContain(ASoldierPawn * InSoldier)
 }
 void AGroundTileActor::ShowFlags(bool InMoveFlag, bool InTargetFlag)
 {
-	if (HaveSoldiers())
-	{
-		return;
-	}
+	
 	if (InMoveFlag)
 	{
 		//0 : left: FVector(0, -60, 0) FRotator(0, 0, 90)
@@ -138,22 +136,40 @@ void AGroundTileActor::ShowFlags(bool InMoveFlag, bool InTargetFlag)
 		//3 : Back : FVector(-60, 0, 0) FRotator(0, 0, 0)
 
 		if (FlagActor){ FlagActor->Destroy();}
-		AMoveFlagActor * MoveActor = GetWorld()->SpawnActor<AMoveFlagActor>();
-		MoveActor->SetActorLocation(GetActorLocation());
-		if (AroundActorMap[Direction_Left])
+		UClass* FlagClass = LoadClass<AMoveFlagActor>(this, TEXT("/Game/Blueprint/MoveFlag_BP.MoveFlag_BP_C"));
+		AMoveFlagActor * MoveActor = GetWorld()->SpawnActor<AMoveFlagActor>(FlagClass);
+		MoveActor->SetActorLocation(GetActorLocation() + FVector(0,0,850));
+		if (AroundActorMap.Contains(Direction_Left))
 		{ MoveActor->MeshComponent->AddInstance(FTransform(FRotator(0, 0, 90), FVector(0, -60, 0))); }
-		if (AroundActorMap[Direction_Forward])
+		if (AroundActorMap.Contains(Direction_Forward))
 		{ MoveActor->MeshComponent->AddInstance(FTransform(FRotator(0, 0, 180), FVector(60, 0, 0))); }
-		if (AroundActorMap[Direction_Right])
+		if (AroundActorMap.Contains(Direction_Right))
 		{ MoveActor->MeshComponent->AddInstance(FTransform(FRotator(0, 0, -90), FVector(0, 60, 0))); }
-		if (AroundActorMap[Direction_Back])
+		if (AroundActorMap.Contains(Direction_Back))
 		{ MoveActor->MeshComponent->AddInstance(FTransform(FRotator(0, 0, 0), FVector(-60, 0, 0))); }
 		FlagActor= MoveActor;
-	}else if (InMoveFlag)
+	}else if (InTargetFlag && !HaveSoldiers())
 	{
 		if (FlagActor) { FlagActor->Destroy(); }
-		FlagActor = GetWorld()->SpawnActor<ATargetFlagActor>(GetActorLocation(),GetActorRotation());
+		UClass* FlagClass = LoadClass<ATargetFlagActor>(this, TEXT("/Game/Blueprint/TargetFlag_BP.TargetFlag_BP_C"));
+		FlagActor = GetWorld()->SpawnActor<ATargetFlagActor>(FlagClass,GetActorLocation(),GetActorRotation());
 		
 	}
 	
+}
+AGroundTileActor* AGroundTileActor::GetAroundTileActorByDistance(int32 InDistance, DirectionEnum InDir)
+{
+	AGroundTileActor* TemTile = this;
+	int index = 1;
+	while (index <= InDistance)
+	{
+		if (TemTile && TemTile->AroundActorMap[InDir])
+		{
+			TemTile = (AGroundTileActor*)TemTile->AroundActorMap[InDir];
+		}
+		++index;
+	}
+	if (TemTile != this){return TemTile;}
+
+	return nullptr;
 }

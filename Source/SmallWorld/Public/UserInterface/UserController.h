@@ -29,11 +29,14 @@ public:
 	void		 ChangeControllType(EControllType ControllType);
 
 	class AActor * TrySelectGameActor(FVector2D ScreenPosition);
+	void	GetGroundTileAroundSoldier(class ASoldierPawn* InSoldier, int32 InDistance, class AGroundTileActor* OutMainTile, TArray<class AGroundTileActor*>& OutTiles);
+
 
 	bool	HavePriviewActor();
 	void	UpdatePriviewActor(FVector2D ScreenPosition, FString IconName = TEXT(""));
 	void	DropPriviewActor();
 	void	DestroyPriviewActor();
+
 protected:
 
 	class APreviewActor *  PreviewActor;

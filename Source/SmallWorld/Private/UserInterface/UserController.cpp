@@ -6,7 +6,7 @@
 #include "UIControllerManager.h"
 #include "CastleTileActor.h"
 #include "GroundTileActor.h"
-
+#include "SoldierPawn.h"
 
 AUserController * AUserController::Instance = nullptr;
 
@@ -64,25 +64,52 @@ AActor * AUserController::TrySelectGameActor(FVector2D ScreenPosition)
 	GetHitResultAtScreenPosition(ScreenPosition,ECC_Visibility,false,HitResult);
 	if (HitResult.bBlockingHit)
 	{
-		AGameActor * GameActor = Cast<AGameActor>(HitResult.GetActor());
+		AGameActor* GameActor = Cast<AGameActor>(HitResult.GetActor());
+		AGroundTileActor* TileActor = Cast<AGroundTileActor>(HitResult.GetActor());
 		ASoldierPawn * SoldierPawn = Cast<ASoldierPawn>(HitResult.GetActor());
-		if (GameActor)
-		{
-			GetCurrentUIController->SelectGameActor(GameActor);
-			return GameActor;
-		}else if (SoldierPawn)
+		if (SoldierPawn)
 		{
 			GetCurrentUIController->SelectGameActor(SoldierPawn);
-			AGroundTileActor * GroundTile = SoldierPawn->GetGroundTile();
 			int32 MoveDis = SoldierPawn->GetSoldierData()->GetMoveDistance();
-			/*for ()
+			AGroundTileActor* MainTile = nullptr;
+			TArray<AGroundTileActor*>  AroundTiles;
+			GetGroundTileAroundSoldier(SoldierPawn, MoveDis, MainTile, AroundTiles);
+
+			MainTile->ShowFlags(true, false);
+			for (auto IterActor : AroundTiles)
 			{
-			}*/
+				IterActor->ShowFlags(false, true);
+			}
 
 			return SoldierPawn;
 		}
+		else if (TileActor)
+		{
+			TileActor->ShowFlags(false, true);
+			GetCurrentUIController->SelectGameActor(TileActor);
+			return TileActor;
+		}else if(GameActor)
+		{
+			GetCurrentUIController->SelectGameActor(GameActor);
+			return GameActor;
+		}
 	}
 	return nullptr;
+}
+void AUserController::GetGroundTileAroundSoldier(class ASoldierPawn* InSoldier, int32 InDistance, class AGroundTileActor* OutMainTile, TArray<class AGroundTileActor *>& OutTiles)
+{
+	OutMainTile = InSoldier->GetGroundTile();
+	for (int i = 1; i < InDistance;i++)
+	{
+		for (int32 j = AGroundTileActor::Direction_Forward; j < AGroundTileActor::Direction_Other; j++)
+		{
+			AGroundTileActor* TemTile = OutMainTile->GetAroundTileActorByDistance(i,(AGroundTileActor::DirectionEnum)j);
+			if (TemTile)
+			{
+				OutTiles.Add(TemTile);
+			}
+		}
+	}
 }
 bool AUserController::HavePriviewActor()
 {
