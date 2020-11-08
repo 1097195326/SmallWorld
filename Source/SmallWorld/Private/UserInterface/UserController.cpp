@@ -74,6 +74,10 @@ AActor * AUserController::TrySelectGameActor(FVector2D ScreenPosition)
 		{
 			GetCurrentUIController->SelectGameActor(SoldierPawn);
 			AGroundTileActor * GroundTile = SoldierPawn->GetGroundTile();
+			int32 MoveDis = SoldierPawn->GetSoldierData()->GetMoveDistance();
+			/*for ()
+			{
+			}*/
 
 			return SoldierPawn;
 		}

@@ -96,7 +96,7 @@ public:
 	virtual TSharedPtr<SWidget>	CreateActorDetailWidget() override;
 	virtual void RefreshView() override;
 
-	void			GetSoldierData(BaseSoldierDataClass * InSoldierData) { SoldierData = InSoldierData; }
+	void			SetSoldierData(BaseSoldierDataClass * InSoldierData) { SoldierData = InSoldierData; }
 	BaseSoldierDataClass * GetSoldierData() { return SoldierData; }
 
 

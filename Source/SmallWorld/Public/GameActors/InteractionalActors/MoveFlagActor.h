@@ -20,11 +20,6 @@ public:
 	virtual void On_Delete() override;
 
 	UPROPERTY(VisibleDefaultsOnly)
-		UInstancedStaticMeshComponent* ForwardMeshComponent;
-	/*UPROPERTY(VisibleDefaultsOnly)
-		UStaticMeshComponent* BackMeshComponent;
-	UPROPERTY(VisibleDefaultsOnly)
-		UStaticMeshComponent* LeftMeshComponent;
-	UPROPERTY(VisibleDefaultsOnly)
-		UStaticMeshComponent* RightMeshComponent;*/
+		UInstancedStaticMeshComponent* MeshComponent;
+	
 };

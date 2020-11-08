@@ -23,8 +23,8 @@ public:
 
 	enum DirectionEnum
 	{
-		Direction_Up = 1,
-		Direction_Down,
+		Direction_Forward = 1,
+		Direction_Back,
 		Direction_Left,
 		Direction_Right,
 		Direction_Other,
@@ -37,12 +37,13 @@ public:
 	virtual void On_Tick(float DeltaSeconds) override;
 	virtual void On_Delete() override;
 	//
-	void	SetTileSelected(bool);
+	void	ShowFlags(bool InMoveFlag,bool InTargetFlag);
 
 	void	SetCloudVisible(bool InVisible);
 	void	TrackAround();
 	//Before Start Game ,Found Soldier In This Tile
 	void	TrackSoldier();
+	bool	HaveSoldiers() { return Soldiers.Num() > 0; }
 	void	AddSoldier(ASoldierPawn * InSoldier);
 	void	RemoveSoldier(ASoldierPawn * InSoldier);
 	bool	IsContain(ASoldierPawn * InSoldier);
@@ -62,7 +63,8 @@ public:
 
 
 protected:
+	float  FlagTimer;
+	AActor* FlagActor;
+	TArray<ASoldierPawn*> Soldiers;
 	
-	TArray<ASoldierPawn *> Soldiers;
-
 };

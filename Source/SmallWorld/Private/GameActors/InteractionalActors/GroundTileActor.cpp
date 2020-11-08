@@ -2,6 +2,10 @@
 #include "Kismet/KismetSystemLibrary.h"
 #include "CastleTileActor.h"
 #include "SoldierPawn.h"
+#include "MoveFlagActor.h"
+#include "TargetFlagActor.h"
+
+
 
 AGroundTileActor::AGroundTileActor()
 {
@@ -25,16 +29,25 @@ AGroundTileActor::AGroundTileActor()
 	CloudTileComponent->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
 	CollisionBoxComponent->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
 
-
 }
 void AGroundTileActor::On_Init()
 {
-
-
+	FlagTimer = 0.f;
+	FlagActor = nullptr;
 }
+static float TimeOver = 3.f;
 void AGroundTileActor::On_Tick(float DeltaSeconds)
 {
-
+	if (FlagActor)
+	{
+		FlagTimer += DeltaSeconds;
+		if (FlagTimer >= TimeOver)
+		{
+			FlagActor->Destroy();
+			FlagActor = nullptr;
+			FlagTimer = 0.f;
+		}
+	}
 }
 void AGroundTileActor::On_Delete()
 {
@@ -64,9 +77,9 @@ void AGroundTileActor::TrackAround()
 			float ForwardDot = FVector::DotProduct((TemActor->GetActorLocation() - ActorLocation).GetSafeNormal(), ForwardVector);
 			float RightDot = FVector::DotProduct((TemActor->GetActorLocation() - ActorLocation).GetSafeNormal(), RightVector);
 			if (FMath::IsNearlyEqual(ForwardDot, 1.f, FloatErrorTolerance))
-			{ AroundActorMap.Add(Direction_Up, Cast<AGameActor>(TemActor)); }
+			{ AroundActorMap.Add(Direction_Forward, Cast<AGameActor>(TemActor)); }
 			else if (FMath::IsNearlyEqual(ForwardDot, -1.f, FloatErrorTolerance))
-			{ AroundActorMap.Add(Direction_Down, Cast<AGameActor>(TemActor)); }
+			{ AroundActorMap.Add(Direction_Back, Cast<AGameActor>(TemActor)); }
 			else if (FMath::IsNearlyEqual(RightDot, 1.f, FloatErrorTolerance))
 			{ AroundActorMap.Add(Direction_Right, Cast<AGameActor>(TemActor)); }
 			else if (FMath::IsNearlyEqual(RightDot, -1.f, FloatErrorTolerance))
@@ -110,4 +123,37 @@ void AGroundTileActor::RemoveSoldier(ASoldierPawn * InSoldier)
 bool AGroundTileActor::IsContain(ASoldierPawn * InSoldier)
 {
 	return Soldiers.Contains(InSoldier);
+}
+void AGroundTileActor::ShowFlags(bool InMoveFlag, bool InTargetFlag)
+{
+	if (HaveSoldiers())
+	{
+		return;
+	}
+	if (InMoveFlag)
+	{
+		//0 : left: FVector(0, -60, 0) FRotator(0, 0, 90)
+		//1 : Forward : FVector(60, 0, 0) FRotator(0, 0, 180)
+		//2 : Right : FVector(0, 60, 0) FRotator(0, 0, -90)
+		//3 : Back : FVector(-60, 0, 0) FRotator(0, 0, 0)
+
+		if (FlagActor){ FlagActor->Destroy();}
+		AMoveFlagActor * MoveActor = GetWorld()->SpawnActor<AMoveFlagActor>();
+		MoveActor->SetActorLocation(GetActorLocation());
+		if (AroundActorMap[Direction_Left])
+		{ MoveActor->MeshComponent->AddInstance(FTransform(FRotator(0, 0, 90), FVector(0, -60, 0))); }
+		if (AroundActorMap[Direction_Forward])
+		{ MoveActor->MeshComponent->AddInstance(FTransform(FRotator(0, 0, 180), FVector(60, 0, 0))); }
+		if (AroundActorMap[Direction_Right])
+		{ MoveActor->MeshComponent->AddInstance(FTransform(FRotator(0, 0, -90), FVector(0, 60, 0))); }
+		if (AroundActorMap[Direction_Back])
+		{ MoveActor->MeshComponent->AddInstance(FTransform(FRotator(0, 0, 0), FVector(-60, 0, 0))); }
+		FlagActor= MoveActor;
+	}else if (InMoveFlag)
+	{
+		if (FlagActor) { FlagActor->Destroy(); }
+		FlagActor = GetWorld()->SpawnActor<ATargetFlagActor>(GetActorLocation(),GetActorRotation());
+		
+	}
+	
 }
