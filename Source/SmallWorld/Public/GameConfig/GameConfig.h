@@ -1,7 +1,9 @@
 #pragma once
 
-
-#define LandscapeObject ECC_GameTraceChannel3
+#define	ProjectileTrace		ECC_GameTraceChannel1
+#define	GameActorTrace		ECC_GameTraceChannel2
+#define	LandscapeTrace		ECC_GameTraceChannel3
+#define SoldierTrace		ECC_GameTraceChannel4
 
 
 const float FloatErrorTolerance = 0.0001f;

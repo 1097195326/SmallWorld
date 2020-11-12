@@ -5,10 +5,9 @@
 #include "Components/SphereComponent.h"
 #include "Components/StaticMeshComponent.h"
 #include "GameFramework/ProjectileMovementComponent.h"
+#include "GameConfig.h"
 #include "Projectile.generated.h"
 
-#define  ProjectileObject ECC_GameTraceChannel1
-#define  ProjectileChannel ECC_GameTraceChannel2
 
 USTRUCT()
 struct FProjectileInfo

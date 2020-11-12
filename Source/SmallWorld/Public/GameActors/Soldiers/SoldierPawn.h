@@ -16,6 +16,7 @@
 class SoldierGroup;
 class BaseSoldierDataClass;
 
+
 UENUM()
 enum class SoldierState : uint32
 {

@@ -60,8 +60,13 @@ void AUserController::On_Delete()
 
 AActor * AUserController::TrySelectGameActor(FVector2D ScreenPosition)
 {
+
+	TArray<TEnumAsByte<EObjectTypeQuery>> TrackObj;
+	TrackObj.Add(UEngineTypes::ConvertToObjectType(GameActorTrace));
+	TrackObj.Add(UEngineTypes::ConvertToObjectType(SoldierTrace));
+
 	FHitResult HitResult;
-	GetHitResultAtScreenPosition(ScreenPosition,ECC_Visibility,false,HitResult);
+	GetHitResultAtScreenPosition(ScreenPosition, TrackObj,false,HitResult);
 	if (HitResult.bBlockingHit)
 	{
 		AGameActor* GameActor = Cast<AGameActor>(HitResult.GetActor());
@@ -120,7 +125,7 @@ void AUserController::UpdatePriviewActor(FVector2D ScreenPosition, FString IconN
 	FHitResult HitResult;
 
 	TArray<TEnumAsByte<EObjectTypeQuery>> TrackObj;
-	TrackObj.Add(UEngineTypes::ConvertToObjectType(LandscapeObject));
+	TrackObj.Add(UEngineTypes::ConvertToObjectType(LandscapeTrace));
 
 	GetHitResultAtScreenPosition(ScreenPosition, TrackObj, false, HitResult);
 
