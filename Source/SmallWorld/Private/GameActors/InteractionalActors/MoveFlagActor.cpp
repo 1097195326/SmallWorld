@@ -10,9 +10,6 @@ AMoveFlagActor::AMoveFlagActor()
 
 	MeshComponent = CreateDefaultSubobject<UInstancedStaticMeshComponent>("MeshComponent");
 	MeshComponent->SetWorldScale3D(FVector(2.5f));
-	MeshComponent->SetCollisionEnabled(ECollisionEnabled::NoCollision);
-	MeshComponent->SetCollisionResponseToAllChannels(ECR_Ignore);
-	MeshComponent->SetCollisionObjectType(ECC_Visibility);
 	MeshComponent->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
 
 	//0 : left: FVector(0, -60, 0) FRotator(0, 0, 90)

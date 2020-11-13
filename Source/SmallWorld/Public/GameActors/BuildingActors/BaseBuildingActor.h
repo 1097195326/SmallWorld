@@ -13,6 +13,7 @@
 #include <vector>
 #include <list>
 #include "CastleTileActor.h"
+#include "GameConfig.h"
 #include "BaseBuildingActor.generated.h"
 
 using namespace std;
@@ -36,11 +37,13 @@ public:
 protected:
 	BaseBuildingDataClass * BuildingData;
 	ACastleTileActor *		CastleTileActor;
+
 public:
 	/*UPROPERTY(VisibleDefaultsOnly, Category = BaseBuilding)
 	UMeshComponent * MeshComponent;*/
 
 	UPROPERTY(EditDefaultsOnly)
 		FString		HotPointName;
-    
+	UPROPERTY(VisibleDefaultsOnly)
+		UBoxComponent   * CollisionBoxComponent;
 };

@@ -7,6 +7,13 @@ ABaseBuildingActor::ABaseBuildingActor()
 {
 	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("RootComponent"));
 
+	CollisionBoxComponent = CreateDefaultSubobject<UBoxComponent>("CollisionBoxComponent");
+	CollisionBoxComponent->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
+	CollisionBoxComponent->SetCollisionResponseToAllChannels(ECR_Block);
+	CollisionBoxComponent->SetCollisionObjectType(GameActorTrace);
+
+	CollisionBoxComponent->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
+
 	BuildingData = nullptr;
     
 	HotPointName = TEXT("HotPoint");

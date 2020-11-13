@@ -9,6 +9,9 @@
 ASoldierPawn::ASoldierPawn():
 	LastAttackTime(0.f)
 {
+	GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
+	GetCapsuleComponent()->SetCollisionResponseToAllChannels(ECR_Block);
+	GetCapsuleComponent()->SetCollisionObjectType(SoldierTrace);
 
 	AIControllerClass = ASoldierPawnController::StaticClass();
 	AutoPossessAI = EAutoPossessAI::Spawned;

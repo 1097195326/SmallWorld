@@ -1,6 +1,7 @@
 #pragma once
 
 #include "GameActor.h"
+#include "GameConfig.h"
 
 #include "GroundTileActor.generated.h"
 
