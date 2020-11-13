@@ -5,6 +5,8 @@
 
 #include "UserController.generated.h"
 
+class ASoldierPawn;
+
 UCLASS()
 class AUserController : public AGameController
 {
@@ -38,7 +40,7 @@ public:
 	void	DestroyPriviewActor();
 
 protected:
-
+	ASoldierPawn * CurrentSelectedSoldier;
 	class APreviewActor *  PreviewActor;
 
 	EControllType		CurrentControllType;

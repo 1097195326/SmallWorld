@@ -80,74 +80,83 @@ class ASoldierPawn : public AGameCharacter, public EnableAttackPawnClass<ASoldie
 public:
 	ASoldierPawn();
 	// --------- Override GameObjectClass --------------
-	virtual void	On_Init() override;
-	virtual void	On_Start() override;
-	virtual void	On_Tick(float delta) override;
-	virtual void	On_End() override;
-	virtual void	On_Delete() override;
+	virtual void On_Init() override;
+	virtual void On_Start() override;
+	virtual void On_Tick(float delta) override;
+	virtual void On_End() override;
+	virtual void On_Delete() override;
 	// ------------ Override APawn ----------
-	virtual float	TakeDamage(float Damage, struct FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser) override;
+	virtual float TakeDamage(float Damage, struct FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser) override;
 	
 	//------- Override EanbleAttackPawn
-	virtual void	AttackEnemy() override;
-	virtual bool	CanAttack()override;
-	virtual void	HandleAttack() override;
+	virtual void AttackEnemy() override;
+	virtual bool CanAttack()override;
+	virtual void HandleAttack() override;
 	
-	void	SetSelected(bool InSlelect);
+	void SetSelected(bool InSlelect);
 	virtual TSharedPtr<SWidget>	CreateActorDetailWidget() override;
 	virtual void RefreshView() override;
 
-	void			SetSoldierData(BaseSoldierDataClass * InSoldierData) { SoldierData = InSoldierData; }
+	void SetSoldierData(BaseSoldierDataClass * InSoldierData) { SoldierData = InSoldierData; }
 	BaseSoldierDataClass * GetSoldierData() { return SoldierData; }
 
 
-	void			SetGroupAndIndex(SoldierGroup * _group,int _index);
+	void SetGroupAndIndex(SoldierGroup * _group,int _index);
 	
 	// --------- SoldierSate ------------
-	FORCEINLINE SoldierState	GetSoldierState() { return mSoldierState; }
-	FORCEINLINE void			ChangeSoldierState(SoldierState _state) { mSoldierState = _state; }
-	FORCEINLINE bool			IsInState(SoldierState _state) { return mSoldierState == _state; }
+	FORCEINLINE SoldierState GetSoldierState() { return mSoldierState; }
+	FORCEINLINE void ChangeSoldierState(SoldierState _state) { mSoldierState = _state; }
+	FORCEINLINE bool IsInState(SoldierState _state) { return mSoldierState == _state; }
 
-	FORCEINLINE	UBehaviorTree *		GetBehaviorTree() { return BehaviorTree; }
+	FORCEINLINE	UBehaviorTree * GetBehaviorTree() { return BehaviorTree; }
 
-	FVector							GetLocationInGroup();
+	FVector GetLocationInGroup();
 
-	void							ToGroupForward();
-	FORCEINLINE void				SetSoldierAnimState(SoldierAnimState _state) { mSoldierAnimState = _state; }
+	void ToGroupForward();
+	
+	FORCEINLINE void SetSoldierAnimState(SoldierAnimState _state) { mSoldierAnimState = _state; }
 	
 	UFUNCTION(BlueprintCallable)
-	SoldierAnimState				GetSoldierAnimState() { return mSoldierAnimState; }
+	SoldierAnimState GetSoldierAnimState() { return mSoldierAnimState; }
+	
+	void SetMoveLocation(const FVector & InLocation) { MoveLocation = InLocation; }
+	
+	UFUNCTION(BlueprintCallable)
+		FVector GetMoveLocation() { return MoveLocation; }
 
-	FVector							GetSpawnProjectileLoction();
-	ASoldierPawn *					GetBestEnemy(const TArray<AActor*> & SeachList);
+	FVector GetSpawnProjectileLoction();
+	ASoldierPawn * GetBestEnemy(const TArray<AActor*> & SeachList);
 
-	void	SetGroundTile(class AGroundTileActor * InTile);
+	void SetGroundTile(class AGroundTileActor * InTile);
 	class AGroundTileActor * GetGroundTile() { return GroundTile; }
 
 	UPROPERTY(EditDefaultsOnly, Instanced, Category = AI)
-		TArray<UAISenseConfig*>		SenseConfigs;
+		TArray<UAISenseConfig*> SenseConfigs;
 
 
 protected:
+	FVector MoveLocation;
 	class AGroundTileActor * GroundTile;
 
-	BaseSoldierDataClass *	SoldierData;
-	FTimerHandle			DeathTimerHandle;
-	void					PendingDestory();
+	BaseSoldierDataClass * SoldierData;
+
+	FTimerHandle DeathTimerHandle;
+
+	void PendingDestory();
 	
 	UFUNCTION(BlueprintCallable)
-		void				DeathCallBack();
+		void DeathCallBack();
 
-	void					HaveMoveToGroup();
+	void HaveMoveToGroup();
 
 	UPROPERTY(EditAnywhere)
-		UBehaviorTree *				BehaviorTree;
+		UBehaviorTree * BehaviorTree;
 
-	SoldierAnimState		mSoldierAnimState;
-	SoldierState			mSoldierState;
-	int32					mBehaviorType;
-	int32					mIndexInGroup;
-	SoldierGroup *			mGroup;
+	SoldierAnimState mSoldierAnimState;
+	SoldierState mSoldierState;
+	int32 mBehaviorType;
+	int32 mIndexInGroup;
+	SoldierGroup * mGroup;
 
 private:
 	FGenericTeamId TeamID;
@@ -156,7 +165,7 @@ public:
 	virtual FGenericTeamId GetGenericTeamId() const override { return TeamID; }
 
 private:
-	float					LastAttackTime;
+	float LastAttackTime;
 
 	
 	
