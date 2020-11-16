@@ -17,14 +17,14 @@ AGroundTileActor::AGroundTileActor()
 	GroundTileComponent->SetWorldScale3D(FVector(1.176470f));
 	CloudTileComponent->SetWorldScale3D(FVector(1.176470f));
 	
-	CollisionBoxComponent = CreateDefaultSubobject<UBoxComponent>("CollisionBoxComponent");
-	CollisionBoxComponent->SetCollisionEnabled(ECollisionEnabled::NoCollision);
-	CollisionBoxComponent->SetCollisionResponseToAllChannels(ECR_Ignore);
-	CollisionBoxComponent->SetCollisionObjectType(GameActorTrace);
+	/*CollisionBoxComponent = CreateDefaultSubobject<UBoxComponent>("CollisionBoxComponent");
+	CollisionBoxComponent->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
+	CollisionBoxComponent->SetCollisionResponseToAllChannels(ECR_Block);
+	CollisionBoxComponent->SetCollisionObjectType(GameActorTrace);*/
 
 	GroundTileComponent->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
 	CloudTileComponent->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
-	CollisionBoxComponent->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
+	//CollisionBoxComponent->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
 	
 	PrimaryActorTick.bCanEverTick = true;
 }
@@ -160,7 +160,7 @@ AGroundTileActor* AGroundTileActor::GetAroundTileActorByDistance(int32 InDistanc
 	int index = 1;
 	while (index <= InDistance)
 	{
-		if (TemTile && TemTile->AroundActorMap[InDir])
+		if (TemTile && TemTile->AroundActorMap.Contains(InDir))
 		{
 			TemTile = (AGroundTileActor*)TemTile->AroundActorMap[InDir];
 		}

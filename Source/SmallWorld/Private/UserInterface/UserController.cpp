@@ -74,7 +74,7 @@ AActor * AUserController::TrySelectGameActor(FVector2D ScreenPosition)
 		ASoldierPawn * SoldierPawn = Cast<ASoldierPawn>(HitResult.GetActor());
 		if (SoldierPawn)
 		{
-			CurrentSelectedSoldier = SoldierPawn;
+			/*CurrentSelectedSoldier = SoldierPawn;
 			GetCurrentUIController->SelectGameActor(SoldierPawn);
 			int32 MoveDis = SoldierPawn->GetSoldierData()->GetMoveDistance();
 			AGroundTileActor* MainTile = nullptr;
@@ -85,7 +85,7 @@ AActor * AUserController::TrySelectGameActor(FVector2D ScreenPosition)
 			for (auto IterActor : AroundTiles)
 			{
 				IterActor->ShowFlags(false, true);
-			}
+			}*/
 
 			return SoldierPawn;
 		}

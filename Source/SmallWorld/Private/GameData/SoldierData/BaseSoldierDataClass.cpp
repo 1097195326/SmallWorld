@@ -56,8 +56,12 @@ ASoldierPawn * BaseSoldierDataClass::SpawnSoldierActor(const FString & InSoldier
 {
 	FString ClassPath = FString::Printf(TEXT("/Game/Blueprint/%s_BP.%s_BP_C"), *InSoldierName, *InSoldierName);
 	UClass * SoldierClass = LoadClass<ASoldierPawn>(nullptr, *ClassPath);
-	ASoldierPawn * TemSoldier = User_GameInstance->GetWorld()->SpawnActor<ASoldierPawn>(SoldierClass);
+	//ASoldierPawn* TemSoldier = User_GameInstance->GetWorld()->SpawnActor<ASoldierPawn>(SoldierClass);
 
+	FActorSpawnParameters Paramerter;
+	Paramerter.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
+	ASoldierPawn* TemSoldier = User_GameInstance->GetWorld()->SpawnActor<ASoldierPawn>(SoldierClass, Paramerter);
+	TemSoldier->SetSoldierData(this);
 	return TemSoldier;
 }
 void BaseSoldierDataClass::DestroySoldier()
