@@ -60,8 +60,8 @@ void ArmyCenterDataClass::Deserialization(TSharedPtr<FJsonObject>  JsonObject)
 }
 ABaseBuildingActor * ArmyCenterDataClass::SpawnBuildingActor(UWorld * world, const FTransform & SpawnTF, const int32 && InIndex)
 {
-	FString ClassPath = FString::Printf(TEXT("/Game/Blueprint/%s_BP.%s_BP_C"), *BuildingName, *BuildingName);
-	UClass * SoldierClass = LoadClass<ASoldierPawn>(nullptr, *ClassPath);
+	/*FString ClassPath = FString::Printf(TEXT("/Game/Blueprint/%s_BP.%s_BP_C"), *BuildingName, *BuildingName);
+	UClass * SoldierClass = LoadClass<ASoldierPawn>(nullptr, *ClassPath);*/
 	BuildingActor = world->SpawnActorDeferred<AArmyCenterActor>(AArmyCenterActor::StaticClass(), SpawnTF,nullptr,nullptr
 	,ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn);
 	FString MeshName = FString::Printf(TEXT("Mesh%s%d"), *BuildingName,InIndex);
