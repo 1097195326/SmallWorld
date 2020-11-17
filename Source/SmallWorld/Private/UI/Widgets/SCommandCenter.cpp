@@ -66,7 +66,7 @@ FReply SCommandCenter::OnButtonClicked(int32 InIndex)
 			ASoldierPawn * SoldierPawn = CommandCenterData->SpawnSoldier(SoldierType);
 			if (SoldierPawn)
 			{
-				SoldierPawn->SetActorLocationAndRotation(SpLocation, CommandCenterData->BuildingActor->GetActorRotation());
+				SoldierPawn->SetActorLocationAndRotation(SpLocation + FVector(0,0,100), CommandCenterData->BuildingActor->GetActorRotation());
 				GroundTile->AddSoldier(SoldierPawn);
 				SoldierPawn->SetGroundTile(GroundTile);
 			}

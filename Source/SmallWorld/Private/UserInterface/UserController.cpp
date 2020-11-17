@@ -74,7 +74,7 @@ AActor * AUserController::TrySelectGameActor(FVector2D ScreenPosition)
 		ASoldierPawn * SoldierPawn = Cast<ASoldierPawn>(HitResult.GetActor());
 		if (SoldierPawn)
 		{
-			/*CurrentSelectedSoldier = SoldierPawn;
+			CurrentSelectedSoldier = SoldierPawn;
 			GetCurrentUIController->SelectGameActor(SoldierPawn);
 			int32 MoveDis = SoldierPawn->GetSoldierData()->GetMoveDistance();
 			AGroundTileActor* MainTile = nullptr;
@@ -85,7 +85,7 @@ AActor * AUserController::TrySelectGameActor(FVector2D ScreenPosition)
 			for (auto IterActor : AroundTiles)
 			{
 				IterActor->ShowFlags(false, true);
-			}*/
+			}
 
 			return SoldierPawn;
 		}
@@ -93,6 +93,8 @@ AActor * AUserController::TrySelectGameActor(FVector2D ScreenPosition)
 		{
 			if (CurrentSelectedSoldier)
 			{
+				TileActor->ShowFlags(true, false);
+
 				int32 MoveDis = CurrentSelectedSoldier->GetSoldierData()->GetMoveDistance();
 				AGroundTileActor* MainTile = nullptr;
 				TArray<AGroundTileActor*>  AroundTiles;
@@ -127,7 +129,7 @@ AActor * AUserController::TrySelectGameActor(FVector2D ScreenPosition)
 	}
 	return nullptr;
 }
-void AUserController::GetGroundTileAroundSoldier(class ASoldierPawn* InSoldier, int32 InDistance, class AGroundTileActor* OutMainTile, TArray<class AGroundTileActor *>& OutTiles)
+void AUserController::GetGroundTileAroundSoldier(class ASoldierPawn* InSoldier, int32 InDistance, class AGroundTileActor* & OutMainTile, TArray<class AGroundTileActor *>& OutTiles)
 {
 	OutMainTile = InSoldier->GetGroundTile();
 	for (int i = 1; i < InDistance;i++)

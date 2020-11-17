@@ -35,13 +35,13 @@ struct SoldierLevelInfoStruct
 };
 struct SoldierConfigStruct
 {
-	FString name;
-	FString race;
-	FString title;
-	FString describe;
-	int32	maxlevel;
-	int32	movepower;
-	int32   distance;
+	FString name = TEXT("");
+	FString race = TEXT("");
+	FString title = TEXT("");
+	FString describe=TEXT("");
+	int32	maxlevel = 1;
+	int32	movepower = 1;
+	int32   distance = 1;
 	TMap<int32, SoldierLevelInfoStruct> LevelInfos;
 };
 class GameConfigDataClass : public TemplateDataClass

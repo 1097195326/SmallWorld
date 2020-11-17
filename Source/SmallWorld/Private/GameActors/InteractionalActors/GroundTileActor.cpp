@@ -17,14 +17,14 @@ AGroundTileActor::AGroundTileActor()
 	GroundTileComponent->SetWorldScale3D(FVector(1.176470f));
 	CloudTileComponent->SetWorldScale3D(FVector(1.176470f));
 	
-	/*CollisionBoxComponent = CreateDefaultSubobject<UBoxComponent>("CollisionBoxComponent");
+	CollisionBoxComponent = CreateDefaultSubobject<UBoxComponent>("CollisionBoxComponent");
 	CollisionBoxComponent->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
 	CollisionBoxComponent->SetCollisionResponseToAllChannels(ECR_Block);
-	CollisionBoxComponent->SetCollisionObjectType(GameActorTrace);*/
+	CollisionBoxComponent->SetCollisionObjectType(GameActorTrace);
 
 	GroundTileComponent->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
 	CloudTileComponent->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
-	//CollisionBoxComponent->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
+	CollisionBoxComponent->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
 	
 	PrimaryActorTick.bCanEverTick = true;
 }
@@ -62,7 +62,7 @@ void AGroundTileActor::TrackAround()
 	FVector GroundExtent = GroundTileComponent->GetBodySetup()->AggGeom.CalcAABB(FTransform(FVector::ZeroVector)).GetSize();
 	
 	TArray<AActor*> OverlapActors;
-	TArray<TEnumAsByte<EObjectTypeQuery>> TrackObj = {UEngineTypes::ConvertToObjectType(ECC_Visibility)};
+	TArray<TEnumAsByte<EObjectTypeQuery>> TrackObj = {UEngineTypes::ConvertToObjectType(GameActorTrace)};
 	UKismetSystemLibrary::BoxOverlapActors(GetWorld(), ActorLocation, GroundExtent * 1.5f, TrackObj, AGameActor::StaticClass(), {this}, OverlapActors);
 	
 	AGameActor* SelfAator = this;
@@ -97,7 +97,7 @@ void AGroundTileActor::TrackSoldier()
 	FVector GroundSize = ActorBox.GetSize();
 
 	TArray<AActor*> OverlapActors;
-	TArray<TEnumAsByte<EObjectTypeQuery>> TrackObj = { UEngineTypes::ConvertToObjectType(ECC_Visibility) };
+	TArray<TEnumAsByte<EObjectTypeQuery>> TrackObj = { UEngineTypes::ConvertToObjectType(SoldierTrace) };
 	UKismetSystemLibrary::BoxOverlapActors(GetWorld(), ActorLocation, GroundSize * FVector(1.f,1.f,1.5f), TrackObj, ASoldierPawn::StaticClass(), { this }, OverlapActors);
 
 	for (auto TemActor : OverlapActors)
@@ -135,13 +135,13 @@ void AGroundTileActor::ShowFlags(bool InMoveFlag, bool InTargetFlag)
 		if (FlagActor){ FlagActor->Destroy();}
 		UClass* FlagClass = LoadClass<AMoveFlagActor>(this, TEXT("/Game/Blueprint/MoveFlag_BP.MoveFlag_BP_C"));
 		AMoveFlagActor * MoveActor = GetWorld()->SpawnActor<AMoveFlagActor>(FlagClass);
-		MoveActor->SetActorLocation(GetActorLocation() + FVector(0,0,850));
+		MoveActor->SetActorLocation(GetActorLocation());
 		if (AroundActorMap.Contains(Direction_Left))
-		{ MoveActor->MeshComponent->AddInstance(FTransform(FRotator(0, 0, 90), FVector(0, -60, 0))); }
+		{ MoveActor->MeshComponent->AddInstance(FTransform(FRotator(0, 90, 0), FVector(0, -60, 0))); }
 		if (AroundActorMap.Contains(Direction_Forward))
-		{ MoveActor->MeshComponent->AddInstance(FTransform(FRotator(0, 0, 180), FVector(60, 0, 0))); }
+		{ MoveActor->MeshComponent->AddInstance(FTransform(FRotator(0, 180, 0), FVector(60, 0, 0))); }
 		if (AroundActorMap.Contains(Direction_Right))
-		{ MoveActor->MeshComponent->AddInstance(FTransform(FRotator(0, 0, -90), FVector(0, 60, 0))); }
+		{ MoveActor->MeshComponent->AddInstance(FTransform(FRotator(0, -90, 0), FVector(0, 60, 0))); }
 		if (AroundActorMap.Contains(Direction_Back))
 		{ MoveActor->MeshComponent->AddInstance(FTransform(FRotator(0, 0, 0), FVector(-60, 0, 0))); }
 		FlagActor= MoveActor;
