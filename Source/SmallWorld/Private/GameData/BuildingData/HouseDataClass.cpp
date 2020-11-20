@@ -34,13 +34,13 @@ void HouseDataClass::Deserialization(TSharedPtr<FJsonObject>  JsonObject)
 }
 ABaseBuildingActor * HouseDataClass::SpawnBuildingActor(UWorld * world, const FTransform & SpawnTF, const int32 && InIndex)
 {
-	BuildingActor = world->SpawnActorDeferred<AHouseActor>(AHouseActor::StaticClass(), SpawnTF, nullptr, nullptr
-		, ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn);
+	FActorSpawnParameters Paramerter;
+	Paramerter.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
+	BuildingActor = world->SpawnActor<AHouseActor>(AHouseActor::StaticClass(), SpawnTF, Paramerter);
 	FString MeshName = FString::Printf(TEXT("Mesh%s%d"), *BuildingName, InIndex);
 	if (BuildingActor && BuildingActor->SetMeshComponentByIconName(MeshName))
 	{
 		BuildingActor->SetBuildingData(this);
-		BuildingActor->FinishSpawning(SpawnTF);
 	}
 	return BuildingActor;
 }

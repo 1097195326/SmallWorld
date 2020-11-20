@@ -32,13 +32,13 @@ void MoneyStoreDataClass::Deserialization(TSharedPtr<FJsonObject>  JsonObject)
 }
 ABaseBuildingActor * MoneyStoreDataClass::SpawnBuildingActor(UWorld * world, const FTransform & SpawnTF, const int32 && InIndex)
 {
-	BuildingActor = world->SpawnActorDeferred<AMoneyStoreActor>(AMoneyStoreActor::StaticClass(), SpawnTF, nullptr, nullptr
-		, ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn);
+	FActorSpawnParameters Paramerter;
+	Paramerter.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
+	BuildingActor = world->SpawnActor<AMoneyStoreActor>(AMoneyStoreActor::StaticClass(), SpawnTF, Paramerter);
 	FString MeshName = FString::Printf(TEXT("Mesh%s%d"), *BuildingName, InIndex);
 	if (BuildingActor && BuildingActor->SetMeshComponentByIconName(MeshName))
 	{
 		BuildingActor->SetBuildingData(this);
-		BuildingActor->FinishSpawning(SpawnTF);
 	}
 	return BuildingActor;
 }

@@ -62,13 +62,13 @@ ABaseBuildingActor * ArmyCenterDataClass::SpawnBuildingActor(UWorld * world, con
 {
 	/*FString ClassPath = FString::Printf(TEXT("/Game/Blueprint/%s_BP.%s_BP_C"), *BuildingName, *BuildingName);
 	UClass * SoldierClass = LoadClass<ASoldierPawn>(nullptr, *ClassPath);*/
-	BuildingActor = world->SpawnActorDeferred<AArmyCenterActor>(AArmyCenterActor::StaticClass(), SpawnTF,nullptr,nullptr
-	,ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn);
+	FActorSpawnParameters Paramerter;
+	Paramerter.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
+	BuildingActor = world->SpawnActor<AArmyCenterActor>(AArmyCenterActor::StaticClass(), SpawnTF, Paramerter);
 	FString MeshName = FString::Printf(TEXT("Mesh%s%d"), *BuildingName,InIndex);
 	if (BuildingActor && BuildingActor->SetMeshComponentByIconName(MeshName))
 	{
 		BuildingActor->SetBuildingData(this);
-		BuildingActor->FinishSpawning(SpawnTF);
 	}
 	return BuildingActor;
 }

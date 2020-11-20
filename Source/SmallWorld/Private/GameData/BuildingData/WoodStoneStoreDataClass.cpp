@@ -39,13 +39,13 @@ void WoodStoneStoreDataClass::Deserialization(TSharedPtr<FJsonObject>  JsonObjec
 }
 ABaseBuildingActor * WoodStoneStoreDataClass::SpawnBuildingActor(UWorld * world, const FTransform & SpawnTF, const int32 && InIndex)
 {
-	BuildingActor = world->SpawnActorDeferred<AWoodStoneStoreActor>(AWoodStoneStoreActor::StaticClass(), SpawnTF, nullptr, nullptr
-		, ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn);
+	FActorSpawnParameters Paramerter;
+	Paramerter.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
+	BuildingActor = world->SpawnActor<AWoodStoneStoreActor>(AWoodStoneStoreActor::StaticClass(), SpawnTF, Paramerter);
 	FString MeshName = FString::Printf(TEXT("Mesh%s%d"), *BuildingName, InIndex);
 	if (BuildingActor && BuildingActor->SetMeshComponentByIconName(MeshName))
 	{
 		BuildingActor->SetBuildingData(this);
-		BuildingActor->FinishSpawning(SpawnTF);
 	}
 	return BuildingActor;
 }

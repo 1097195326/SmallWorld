@@ -104,6 +104,7 @@ AActor * AUserController::TrySelectGameActor(FVector2D ScreenPosition)
 				else
 				{
 					// show why
+
 				}
 				CurrentSelectedSoldier = nullptr;
 			}
