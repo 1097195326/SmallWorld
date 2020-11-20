@@ -12,19 +12,19 @@ AGroundTileActor::AGroundTileActor()
 	RootComponent = CreateDefaultSubobject<USceneComponent>("RootComponent");
 
 	GroundTileComponent = CreateDefaultSubobject<UStaticMeshComponent>("GroundTileComponent");
-	CloudTileComponent = CreateDefaultSubobject<UStaticMeshComponent>("CloudTileComponent");
-
 	GroundTileComponent->SetWorldScale3D(FVector(1.176470f));
+	GroundTileComponent->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
+	GroundTileComponent->SetCollisionResponseToAllChannels(ECR_Block);
+	GroundTileComponent->SetCollisionObjectType(GameActorTrace);
+
+	CloudTileComponent = CreateDefaultSubobject<UStaticMeshComponent>("CloudTileComponent");
+	CloudTileComponent->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	CloudTileComponent->SetCollisionResponseToAllChannels(ECR_Ignore);
+	CloudTileComponent->SetCollisionObjectType(GameActorTrace);
 	CloudTileComponent->SetWorldScale3D(FVector(1.176470f));
-	
-	CollisionBoxComponent = CreateDefaultSubobject<UBoxComponent>("CollisionBoxComponent");
-	CollisionBoxComponent->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
-	CollisionBoxComponent->SetCollisionResponseToAllChannels(ECR_Block);
-	CollisionBoxComponent->SetCollisionObjectType(GameActorTrace);
 
 	GroundTileComponent->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
 	CloudTileComponent->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
-	CollisionBoxComponent->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
 	
 	PrimaryActorTick.bCanEverTick = true;
 }

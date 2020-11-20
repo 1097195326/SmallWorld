@@ -56,9 +56,7 @@ public:
 		UStaticMeshComponent * GroundTileComponent ;
 	UPROPERTY(VisibleDefaultsOnly)
 		UStaticMeshComponent * CloudTileComponent;
-	UPROPERTY(VisibleDefaultsOnly)
-		UBoxComponent   * CollisionBoxComponent;
-
+	
 	UPROPERTY(EditAnywhere)
 		TileTypeEnum  TileType;
 

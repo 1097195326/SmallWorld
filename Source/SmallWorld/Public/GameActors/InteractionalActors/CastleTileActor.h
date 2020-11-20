@@ -25,9 +25,7 @@ public:
 		UStaticMeshComponent * CastleTileComponent ;
 	UPROPERTY(VisibleDefaultsOnly)
 		UInstancedStaticMeshComponent * CloudTileComponent;
-	UPROPERTY(VisibleDefaultsOnly)
-		UBoxComponent   * CollisionBoxComponent;
-
+	
 
 	TArray<class AGroundTileActor*>  AroundActorArray;
 

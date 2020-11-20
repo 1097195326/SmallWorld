@@ -8,20 +8,19 @@ ACastleTileActor::ACastleTileActor()
 	RootComponent = CreateDefaultSubobject<USceneComponent>("RootComponent");
 
 	CastleTileComponent = CreateDefaultSubobject<UStaticMeshComponent>("CastleTileComponent");
-	CloudTileComponent = CreateDefaultSubobject<UInstancedStaticMeshComponent>("CloudTileComponent");
-
 	CastleTileComponent->SetWorldScale3D(FVector(1.212121f));
+	CastleTileComponent->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
+	CastleTileComponent->SetCollisionResponseToAllChannels(ECR_Block);
+	CastleTileComponent->SetCollisionObjectType(GameActorTrace);
+
+	CloudTileComponent = CreateDefaultSubobject<UInstancedStaticMeshComponent>("CloudTileComponent");
 	CloudTileComponent->SetWorldScale3D(FVector(1.176470f));
-
-	CollisionBoxComponent = CreateDefaultSubobject<UBoxComponent>("CollisionBoxComponent");
-	CollisionBoxComponent->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
-	CollisionBoxComponent->SetCollisionResponseToAllChannels(ECR_Block);
-	CollisionBoxComponent->SetCollisionObjectType(GameActorTrace);
-
+	CloudTileComponent->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	CloudTileComponent->SetCollisionResponseToAllChannels(ECR_Ignore);
+	CloudTileComponent->SetCollisionObjectType(GameActorTrace);
 
 	CastleTileComponent->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
 	CloudTileComponent->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
-	CollisionBoxComponent->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
 
 
 }
