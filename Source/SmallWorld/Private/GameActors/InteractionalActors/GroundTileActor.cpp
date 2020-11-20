@@ -127,10 +127,10 @@ void AGroundTileActor::ShowFlags(bool InMoveFlag, bool InTargetFlag)
 	
 	if (InMoveFlag)
 	{
-		//0 : left: FVector(0, -60, 0) FRotator(0, 0, 90)
-		//1 : Forward : FVector(60, 0, 0) FRotator(0, 0, 180)
-		//2 : Right : FVector(0, 60, 0) FRotator(0, 0, -90)
-		//3 : Back : FVector(-60, 0, 0) FRotator(0, 0, 0)
+		//0 : left:		FVector(0, -60, 0)		FRotator(0, 90, 0)
+		//1 : Forward : FVector(60, 0, 0)		FRotator(0, 180, 0)
+		//2 : Right :	FVector(0, 60, 0)		FRotator(0, -90, 0)
+		//3 : Back :	FVector(-60, 0, 0)		FRotator(0, 0, 0)
 
 		if (FlagActor){ FlagActor->Destroy();}
 		UClass* FlagClass = LoadClass<AMoveFlagActor>(this, TEXT("/Game/Blueprint/MoveFlag_BP.MoveFlag_BP_C"));

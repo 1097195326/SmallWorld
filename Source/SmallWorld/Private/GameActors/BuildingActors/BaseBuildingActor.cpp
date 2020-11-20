@@ -58,7 +58,7 @@ bool ABaseBuildingActor::SetMeshComponentByIconName(const FString & InIconName)
 			{
 				Component->Mobility = EComponentMobility::Movable;
 				Component->SetStaticMesh(Mesh);
-				Component->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+				Component->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
 				Component->SetCollisionResponseToAllChannels(ECR_Ignore);
 				Component->SetCollisionObjectType(GameActorTrace);
 

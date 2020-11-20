@@ -9,14 +9,12 @@
 ASoldierPawn::ASoldierPawn():
 	LastAttackTime(0.f)
 {
-	
-
 	AIControllerClass = ASoldierPawnController::StaticClass();
 	AutoPossessAI = EAutoPossessAI::Spawned;
 	
-	/*GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
+	GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
 	GetCapsuleComponent()->SetCollisionResponseToAllChannels(ECR_Block);
-	GetCapsuleComponent()->SetCollisionObjectType(SoldierTrace);*/
+	GetCapsuleComponent()->SetCollisionObjectType(SoldierTrace);
 
 	bUseControllerRotationYaw = true;
 	
