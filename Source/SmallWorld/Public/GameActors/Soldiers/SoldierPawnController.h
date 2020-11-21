@@ -19,6 +19,6 @@ public:
 	virtual void OnUnPossess() override;
 
 	virtual void ActorsPerceptionUpdated(const TArray<AActor*>& UpdatedActors) override;
-
+	virtual void Tick(float DeltaTime) override;
 
 };

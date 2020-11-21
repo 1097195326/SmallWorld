@@ -135,7 +135,7 @@ public:
 
 
 protected:
-	FVector MoveLocation;
+	FVector MoveLocation = FVector::ZeroVector;
 	class AGroundTileActor * GroundTile;
 
 	BaseSoldierDataClass * SoldierData;

@@ -16,97 +16,21 @@ void UBTService_SoldierUpdate::TickNode(UBehaviorTreeComponent& OwnerComp, uint8
 	//OwnerComp.GetBlackboardComponent()->SetValueAsVector(FName(TEXT("LocationInGroup")), FVector(0,0,0));
 	//UE_LOG(LogTemp, Log, TEXT("zhx -- service update"));
 
-
 	ASoldierPawnController * SoldierController = Cast<ASoldierPawnController>(OwnerComp.GetAIOwner());
 	ASoldierPawn * SoldierPawn = Cast<ASoldierPawn>(SoldierController->GetPawn());
 	if (SoldierController == nullptr || SoldierPawn == nullptr)
 	{
 		return;
 	}
-
+	FVector MoveLocation = SoldierPawn->GetMoveLocation();
 	
-	SoldierState soldierState = SoldierPawn->GetSoldierState();
-
-	switch (soldierState)
+	const FVector TargetLocation = OwnerComp.GetBlackboardComponent()->GetValueAsVector(FName(TEXT("TargetLocation")));
+	if (TargetLocation != MoveLocation)
 	{
-		case	SoldierState::S_Normal:
-		{
-
-		}break;
-		case	SoldierState::S_Idle:
-		{
-			
-			
-			
-		}break;
-		case	SoldierState::S_FightSelf:
-		{
-			if (SoldierPawn->IsHaveEnemy())
-			{
-				OwnerComp.GetBlackboardComponent()->SetValueAsObject(FName(TEXT("EnemyActor")), SoldierPawn->GetEnemy());
-					
-			}
-		}break;
-		case	SoldierState::S_FormationDefense:
-		{
-
-		}break;
-		case	SoldierState::S_FormationFight:
-		{
-
-		}break;
-		case	SoldierState::S_MoveToHome:
-		{
-
-		}break;
-		case	SoldierState::S_MoveToGroup:
-		{
-			
-				const FVector location = SoldierPawn->GetLocationInGroup();
-				const FVector targetLocation = OwnerComp.GetBlackboardComponent()->GetValueAsVector(FName(TEXT("TargetLocation")));
-				if (targetLocation != location /*|| preSoldierState != SoldierState::S_MoveToGroup*/)
-				{
-					OwnerComp.GetBlackboardComponent()->SetValueAsVector(FName(TEXT("TargetLocation")), location);
-				}
-				else
-				{
-					//preSoldierState = SoldierState::S_MoveToGroup;
-					
-				}
-		}break;
-		case	SoldierState::S_ReadyInGroup:
-		{
-
-		}break;
-		case	SoldierState::S_Dieing:
-		{
-
-		}break;
-		case	SoldierState::S_Died:
-		{
-
-		}break;
-		case	SoldierState::S_Hit:
-		{
-
-		}break;
-		case	SoldierState::S_Victory:
-		{
-
-		}break;
+		OwnerComp.GetBlackboardComponent()->SetValueAsVector(FName(TEXT("TargetLocation")), MoveLocation);
 	}
-
-	/*if (SoldierController->MoveToLocation() == FVector::ZeroVector)
-	{
-		TArray<AActor*> Points;
-		UGameplayStatics::GetAllActorsOfClass(SoldierPawn->GetWorld(), ATargetPoint::StaticClass(), Points);
-
-		for (int i = 0 ;i < Points.Num(); i++)
-		{
-			ATargetPoint * Point = Cast<ATargetPoint>(Points[i]);
-			SoldierController->SetMoveToLocation(Point->GetActorLocation());
-		}
-
-	}*/
+	
+	OwnerComp.GetBlackboardComponent()->SetValueAsObject(FName(TEXT("EnemyActor")), SoldierPawn->GetEnemy());
+	
 
 }

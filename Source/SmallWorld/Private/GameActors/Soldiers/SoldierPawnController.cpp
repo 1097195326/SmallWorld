@@ -40,8 +40,12 @@ void ASoldierPawnController::OnUnPossess()
 	}
 
 }
+void ASoldierPawnController::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
 
-void  ASoldierPawnController::ActorsPerceptionUpdated(const TArray<AActor *>& UpdatedActors)
+}
+void ASoldierPawnController::ActorsPerceptionUpdated(const TArray<AActor *>& UpdatedActors)
 {
 	ASoldierPawn * SoldierPawn = Cast<ASoldierPawn>(GetPawn());
 

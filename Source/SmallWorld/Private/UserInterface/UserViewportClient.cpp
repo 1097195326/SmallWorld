@@ -7,6 +7,7 @@ void UUserViewportClient::PostInitProperties()
 {
 	Super::PostInitProperties();
 	Instance = this;
+
 }
 UUserViewportClient * UUserViewportClient::GetInstance()
 {
