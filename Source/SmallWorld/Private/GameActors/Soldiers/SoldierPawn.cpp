@@ -50,7 +50,10 @@ void ASoldierPawn::On_Start()
 }
 void ASoldierPawn::On_Tick(float delta)
 {
-
+	if (!SoldierData->IsFullMovePower())
+	{
+		
+	}
 }
 void ASoldierPawn::On_End()
 {
