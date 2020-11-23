@@ -8,8 +8,8 @@ BaseSoldierDataClass::BaseSoldierDataClass()
 	SoldierType = Soldier_None;
 	SoldierPawn = nullptr;
 	CommandCenter = nullptr;
-	Level = -1;
-	Health = 0.f;
+	CurrentLevel = 0;
+	CurrentHealth = 100.f;
 
 }
 BaseSoldierDataClass::~BaseSoldierDataClass()
@@ -31,8 +31,8 @@ void BaseSoldierDataClass::Serialization(TSharedRef<TJsonWriter<TCHAR, TCondense
 		Writer->WriteValue("ArmyCenterID", CommandCenter->GetObjectId().ToString());
 	}
 	Writer->WriteValue("SoldierName", *SoldierName);
-	Writer->WriteValue("Health", Health);
-	Writer->WriteValue("Level", Level);
+	Writer->WriteValue("CurrentHealth", CurrentHealth);
+	Writer->WriteValue("CurrentLevel", CurrentLevel);
 
 	Writer->WriteObjectEnd();
 }
@@ -41,8 +41,8 @@ void BaseSoldierDataClass::Deserialization(TSharedPtr<FJsonObject> JsonObject)
 	RuntimeDataClass::Deserialization(JsonObject->GetObjectField("RuntimeDataClass"));
 
 	SoldierName = JsonObject->GetStringField("SoldierName");
-	Health = JsonObject->GetNumberField("Health");
-	Level = JsonObject->GetIntegerField("Level");
+	CurrentHealth = JsonObject->GetNumberField("CurrentHealth");
+	CurrentLevel = JsonObject->GetIntegerField("CurrentLevel");
 
 	FString ArmyCenterID;
 	if (JsonObject->TryGetStringField("ArmyCenterID", ArmyCenterID))

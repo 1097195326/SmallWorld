@@ -73,12 +73,19 @@ void GameConfigDataClass::InitWithXML(const FXmlFile * xmlFile)
 				config.title = DataInfo->GetAttribute(TEXT("title"));
 				config.describe = DataInfo->GetAttribute(TEXT("describe"));
 				config.maxlevel = FCString::Atoi(*DataInfo->GetAttribute(TEXT("maxlevel")));
+				config.movability = FCString::Atoi(*DataInfo->GetAttribute("movability"));
+				config.visibility = FCString::Atoi(*DataInfo->GetAttribute("visibility"));
+				config.attackrange = FCString::Atoi(*DataInfo->GetAttribute("attackrange"));
+				config.attackspeed = FCString::Atof(*DataInfo->GetAttribute("attackspeed"));
+
 				for (const FXmlNode * LevelInfo = DataInfo->GetFirstChildNode(); LevelInfo != NULL; LevelInfo = LevelInfo->GetNextNode())
 				{
 					SoldierLevelInfoStruct info;
 					info.level = FCString::Atoi(*LevelInfo->GetAttribute(TEXT("level")));
 					info.health = FCString::Atoi(*LevelInfo->GetAttribute(TEXT("health")));
 					info.kills = FCString::Atoi(*LevelInfo->GetAttribute(TEXT("kills")));
+					info.restorehealth = FCString::Atoi(*LevelInfo->GetAttribute(TEXT("restorehealth")));
+					info.restoremovability = FCString::Atoi(*LevelInfo->GetAttribute(TEXT("restoremovability")));
 					info.phydamage = FCString::Atof(*LevelInfo->GetAttribute(TEXT("phydamage")));
 					info.magicdamage = FCString::Atof(*LevelInfo->GetAttribute(TEXT("magicdamage")));
 					info.phydef = FCString::Atof(*LevelInfo->GetAttribute(TEXT("phydef")));
