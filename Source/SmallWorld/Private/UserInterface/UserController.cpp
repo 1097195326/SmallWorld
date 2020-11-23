@@ -1,6 +1,7 @@
 #include "UserController.h"
 #include "Kismet/GameplayStatics.h"
 #include "GameDataManager.h"
+#include "GameManager.h"
 #include "PreviewActor.h"
 #include "GameConfig.h"
 #include "UIControllerManager.h"
@@ -79,7 +80,7 @@ AActor * AUserController::TrySelectGameActor(FVector2D ScreenPosition)
 			int32 MoveDis = SoldierPawn->GetSoldierData()->GetMoveDistance();
 			AGroundTileActor* MainTile = nullptr;
 			TArray<AGroundTileActor*>  AroundTiles;
-			GetGroundTileAroundSoldier(SoldierPawn, MoveDis, MainTile, AroundTiles);
+			GameManager::GetGroundTileAroundSoldier(SoldierPawn, MoveDis, MainTile, AroundTiles);
 
 			MainTile->ShowFlags(true, false);
 			for (auto IterActor : AroundTiles)
@@ -96,7 +97,7 @@ AActor * AUserController::TrySelectGameActor(FVector2D ScreenPosition)
 				int32 MoveDis = CurrentSelectedSoldier->GetSoldierData()->GetMoveDistance();
 				AGroundTileActor* MainTile = nullptr;
 				TArray<AGroundTileActor*>  AroundTiles;
-				GetGroundTileAroundSoldier(CurrentSelectedSoldier, MoveDis, MainTile, AroundTiles);
+				GameManager::GetGroundTileAroundSoldier(CurrentSelectedSoldier, MoveDis, MainTile, AroundTiles);
 				if (AroundTiles.Contains(TileActor))
 				{
 					CurrentSelectedSoldier->SetMoveLocation(TileActor->GetActorLocation());
@@ -125,21 +126,6 @@ AActor * AUserController::TrySelectGameActor(FVector2D ScreenPosition)
 		CurrentSelectedSoldier = nullptr;
 	}
 	return nullptr;
-}
-void AUserController::GetGroundTileAroundSoldier(class ASoldierPawn* InSoldier, int32 InDistance, class AGroundTileActor* & OutMainTile, TArray<class AGroundTileActor *>& OutTiles)
-{
-	OutMainTile = InSoldier->GetGroundTile();
-	for (int i = 1; i <= InDistance;i++)
-	{
-		for (int32 j = AGroundTileActor::Direction_Forward; j < AGroundTileActor::Direction_Other; j++)
-		{
-			AGroundTileActor* TemTile = OutMainTile->GetAroundTileActorByDistance(i,(AGroundTileActor::DirectionEnum)j);
-			if (TemTile)
-			{
-				OutTiles.Add(TemTile);
-			}
-		}
-	}
 }
 bool AUserController::HavePriviewActor()
 {

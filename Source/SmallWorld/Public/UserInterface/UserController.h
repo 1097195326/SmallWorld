@@ -31,7 +31,6 @@ public:
 	void		 ChangeControllType(EControllType ControllType);
 
 	class AActor * TrySelectGameActor(FVector2D ScreenPosition);
-	void	GetGroundTileAroundSoldier(class ASoldierPawn* InSoldier, int32 InDistance, class AGroundTileActor* & OutMainTile, TArray<class AGroundTileActor*>& OutTiles);
 
 
 	bool	HavePriviewActor();

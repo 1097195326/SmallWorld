@@ -14,6 +14,7 @@ ASoldierPawn::ASoldierPawn():
 	
 	GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
 	GetCapsuleComponent()->SetCollisionResponseToAllChannels(ECR_Block);
+	//GetCapsuleComponent()->SetCollisionResponseToChannel(SoldierTrace, ECR_Ignore);
 	GetCapsuleComponent()->SetCollisionObjectType(SoldierTrace);
 
 	bUseControllerRotationYaw = true;

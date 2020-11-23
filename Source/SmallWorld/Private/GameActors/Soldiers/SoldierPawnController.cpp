@@ -2,7 +2,13 @@
 #include "BehaviorTree/BlackboardComponent.h"
 #include "BehaviorTree/BehaviorTreeComponent.h"
 #include "Perception/AIPerceptionComponent.h"
+#include "CastleTileActor.h"
+#include "GroundTileActor.h"
 #include "SoldierPawn.h"
+#include "GameConfig.h"
+#include "GameDataManager.h"
+#include "GameManager.h"
+
 
 ASoldierPawnController::ASoldierPawnController(const FObjectInitializer& ObjectInitializer /* = FObjectInitializer::Get() */)
 {
@@ -68,4 +74,14 @@ void ASoldierPawnController::ActorsPerceptionUpdated(const TArray<AActor *>& Upd
 		}
 		
 	}
+}
+void ASoldierPawnController::TryMoveSoldier(class ASoldierPawn * InSoldier)
+{
+	int32 MoveDis = InSoldier->GetSoldierData()->GetMoveDistance();
+	AGroundTileActor* MainTile = nullptr;
+	TArray<AGroundTileActor*>  AroundTiles;
+	GameManager::GetGroundTileAroundSoldier(InSoldier, MoveDis, MainTile, AroundTiles);
+
+
+
 }
