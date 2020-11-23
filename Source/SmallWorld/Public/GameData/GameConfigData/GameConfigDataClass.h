@@ -27,6 +27,8 @@ struct SoldierLevelInfoStruct
 	int32 level;
 	int32 health;
 	int32 kills;
+	int32 restorehealth;
+	int32 restoremovability;
 	float phydamage;
 	float magicdamage;
 	float phydef;
@@ -39,9 +41,11 @@ struct SoldierConfigStruct
 	FString race = TEXT("");
 	FString title = TEXT("");
 	FString describe=TEXT("");
-	int32	maxlevel = 1;
-	int32	movepower = 1;
-	int32   distance = 1;
+	int32 maxlevel = 1;
+	int32 movability = 1;
+	int32 visibility = 1;
+	int32 attackrange = 1;
+	float attackspeed = 1;
 	TMap<int32, SoldierLevelInfoStruct> LevelInfos;
 };
 class GameConfigDataClass : public TemplateDataClass

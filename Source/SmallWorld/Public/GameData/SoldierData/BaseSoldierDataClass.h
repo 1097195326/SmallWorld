@@ -30,7 +30,7 @@ public:
 	inline const SoldierConfigStruct & GetSoldierConfig() { return SoldierConfig; }
 	inline SoldierTypeEnum GetSoldierType() { return SoldierType; }
 	inline int32 GetMovePower() const { return MovePower; }
-	inline int32 GetMoveDistance() const { return SoldierConfig.distance; }
+	inline int32 GetMovability() const { return SoldierConfig.movability; }
 protected:
 	class ASoldierPawn *		SoldierPawn;
 	class CommandCenterDataClass * CommandCenter;
