@@ -1,9 +1,9 @@
 #pragma once
 #include "BehaviorTree/BTTaskNode.h"
-#include "BTTask_MoveToForward.generated.h"
+#include "BTTask_UpdateTargetLocation.generated.h"
 
 UCLASS()
-class UBTTask_MoveToForward : public UBTTaskNode
+class UBTTask_UpdateTargetLocation : public UBTTaskNode
 {
 	GENERATED_BODY()
 
