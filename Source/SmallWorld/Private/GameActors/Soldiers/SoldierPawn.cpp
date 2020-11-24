@@ -145,27 +145,15 @@ void ASoldierPawn::UpdateAI(float delta)
 {
 	if (!SoldierData->IsFullMovePower())
 	{
-		SoldierData->CurrentMovePower += delta;
-		if (SoldierData->CurrentMovePower > SoldierData->GetLevelInfo().restoremovability)
-		{
-			SoldierData->CurrentMovePower = SoldierData->GetLevelInfo().restoremovability;
-		}
+		SoldierData->SetCurrentMovePower(SoldierData->CurrentMovePower += delta);
 	}
 	if (!SoldierData->IsFullHealth())
 	{
-		SoldierData->CurrentHealth += delta;
-		if (SoldierData->CurrentHealth > SoldierData->GetLevelInfo().restorehealth)
-		{
-			SoldierData->CurrentHealth = SoldierData->GetLevelInfo().restorehealth;
-		}
+		SoldierData->SetCurrentMovePower(SoldierData->CurrentHealth += delta);
 	}
 	if (!SoldierData->IsFullAttackPower())
 	{
-		SoldierData->CurrentAttackPower += delta;
-		if (SoldierData->CurrentAttackPower > SoldierData->GetAttackSpeed())
-		{
-			SoldierData->CurrentAttackPower = SoldierData->GetAttackSpeed();
-		}
+		SoldierData->SetCurrentMovePower(SoldierData->CurrentAttackPower += delta);
 	}
 
 }

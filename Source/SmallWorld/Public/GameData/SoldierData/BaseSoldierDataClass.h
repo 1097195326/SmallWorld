@@ -41,6 +41,31 @@ public:
 	inline float GetCurrentHealth() const { return CurrentHealth; }
 	inline float GetCurrentAttackPower() const { return CurrentAttackPower; }
 
+	float SetCurrentMovePower(float InValue)
+	{
+		CurrentMovePower = InValue;
+		if (CurrentMovePower > GetLevelInfo().restoremovability)
+		{
+			CurrentMovePower = GetLevelInfo().restoremovability;
+		}
+	}
+	float SetCurrentHealth(float InValue)
+	{
+		CurrentHealth = InValue;
+		if (CurrentHealth > GetLevelInfo().restorehealth)
+		{
+			CurrentHealth = GetLevelInfo().restorehealth;
+		}
+	}
+	float SetCurrentAttackPower(float InValue)
+	{
+		CurrentAttackPower = InValue;
+		if (CurrentAttackPower > GetAttackSpeed())
+		{
+			CurrentAttackPower = GetAttackSpeed();
+		}
+	}
+
 	inline int32 GetMovability() const { return SoldierConfig.movability; }
 	inline int32 GetVisibility() const { return SoldierConfig.visibility; }
 	inline int32 GetAttackrange() const { return SoldierConfig.attackrange; }
