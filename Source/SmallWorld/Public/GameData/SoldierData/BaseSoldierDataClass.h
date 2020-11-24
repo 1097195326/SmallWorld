@@ -22,6 +22,7 @@ public:
 	class CommandCenterDataClass * GetCommandCenter();
 	void SetCommandCenter(class CommandCenterDataClass * InCommandCenter);
 
+	bool IsUserData();
 
 	void SetSoldierConfigByName(FString InName);
 	

@@ -84,9 +84,21 @@ bool HordeDataClass::DestroyBuilding(BaseBuildingDataClass * InBuildingData)
 	}
 	return MoveTemp(IsOk);
 }
+bool HordeDataClass::IsContains(const FGuid & InId)
+{
+	return GetBuildingDataById(InId) != nullptr;
+}
+bool HordeDataClass::IsContains(BaseBuildingDataClass * InBuildingData)
+{
+	return InBuildingData ? GetBuildingDataById(InBuildingData->GetObjectId()) != nullptr : false;
+}
 BaseBuildingDataClass * HordeDataClass::GetBuildingDataById(const FGuid & InId)
 {
-	return BuildingDatas[InId];
+	if (BuildingDatas.Contains(InId))
+	{
+		return BuildingDatas[InId];
+	}
+	return nullptr;
 }
 int32 HordeDataClass::GetGoldNum()
 {

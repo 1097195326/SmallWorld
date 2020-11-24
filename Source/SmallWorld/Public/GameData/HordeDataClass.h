@@ -26,8 +26,10 @@ public:
     virtual void Deserialization(TSharedPtr<FJsonObject>  JsonObject) override;
 
 	BaseBuildingDataClass *	SpawnBuildingData(const FString & BuildingName);
-	bool	DestroyBuildingById(const FGuid & InId);
-	bool	DestroyBuilding(BaseBuildingDataClass * InBuildingData);
+	bool DestroyBuildingById(const FGuid & InId);
+	bool DestroyBuilding(BaseBuildingDataClass * InBuildingData);
+	bool IsContains(const FGuid & InId);
+	bool IsContains(BaseBuildingDataClass * InBuildingData);
 	template<typename BuildingClass = BaseBuildingDataClass>
 	TArray<BuildingClass *> GetBuildingDatasByType(EBuildingType BuildingType)
 	{
@@ -46,6 +48,7 @@ public:
 	}
 	BaseBuildingDataClass * GetBuildingDataById(const FGuid & InId);
 
+	
 
 	int32 GetGoldNum();
 	int32 GetWoodNum();

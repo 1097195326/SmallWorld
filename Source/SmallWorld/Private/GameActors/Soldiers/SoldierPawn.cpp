@@ -50,7 +50,10 @@ void ASoldierPawn::On_Start()
 }
 void ASoldierPawn::On_Tick(float delta)
 {
-
+	if (SoldierData->IsUserData())
+	{
+		UpdateAI(delta);
+	}
 }
 void ASoldierPawn::On_End()
 {
@@ -135,6 +138,10 @@ TSharedPtr<SWidget>	ASoldierPawn::CreateActorDetailWidget()
 	return SNullWidget::NullWidget;
 }
 void ASoldierPawn::RefreshView()
+{
+	
+}
+void ASoldierPawn::UpdateAI(float delta)
 {
 	
 }

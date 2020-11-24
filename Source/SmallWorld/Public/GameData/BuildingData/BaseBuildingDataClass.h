@@ -46,6 +46,7 @@ public:
 	virtual void CalculateData(){}
 	virtual ABaseBuildingActor * SpawnBuildingActor(UWorld * world, const FTransform & SpawnTF, const int32 && InIndex = 0) { return nullptr; };
 	
+	bool IsUserData();
 	class HordeDataClass *	GetHordeBelongTo();
 	void SetHordeBelongTo(class HordeDataClass * InHorde);
 

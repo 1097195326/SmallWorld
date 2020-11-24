@@ -147,3 +147,11 @@ void GameDataManager::LoadGameWorldData()
 	}
 	return NULL;
 }
+bool GameDataManager::IsUserHordeData(HordeDataClass * InHordeData)
+{
+	return GetUserData()->GetHordeData() == InHordeData;
+}
+bool GameDataManager::IsInUserHordeData(BaseBuildingDataClass * InBuilding)
+{
+	GetUserData()->GetHordeData()->IsContains(InBuilding);
+}
