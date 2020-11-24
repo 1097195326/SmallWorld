@@ -93,9 +93,11 @@ public:
 	virtual bool CanAttack()override;
 	virtual void HandleAttack() override;
 	
-	void SetSelected(bool InSlelect);
 	virtual TSharedPtr<SWidget>	CreateActorDetailWidget() override;
 	virtual void RefreshView() override;
+
+	void UpdateAI(float delta);
+	void SetSelected(bool InSlelect);
 
 	void SetSoldierData(BaseSoldierDataClass * InSoldierData) { SoldierData = InSoldierData; }
 	BaseSoldierDataClass * GetSoldierData() { return SoldierData; }

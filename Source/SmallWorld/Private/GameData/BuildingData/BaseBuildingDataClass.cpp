@@ -65,4 +65,7 @@ void BaseBuildingDataClass::SetConfigDataByName(FString InName)
 	BuildingName = InName;
 	BuildingConfig = GameDataManager::GetInstance()->GetGameConfigData()->GetBuildingConfig(BuildingName);
 }
-
+bool BaseBuildingDataClass::IsUserData()
+{
+	return GameDataManager::GetInstance()->IsUserHordeData(HordeBelongTo);
+}

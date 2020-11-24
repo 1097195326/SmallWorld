@@ -35,6 +35,9 @@ public:
 	inline GameConfigDataClass * GetGameConfigData() { return GameConfigData; }
 	inline GameWorldDataClass * GetGameWorldData() { return GameWorldData; }
 
+	bool IsUserHordeData(HordeDataClass * InHordeData);
+	bool IsInUserHordeData(BaseBuildingDataClass * InBuilding);
+
 	FAssetData  GetBuildingAssetDataByIconName(FString MeshName);
 
 private:

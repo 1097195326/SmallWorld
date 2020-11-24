@@ -26,22 +26,27 @@ public:
 
 	void SetSoldierConfigByName(FString InName);
 	
-	inline bool	IsMaxLevel() { return Level == SoldierConfig.maxlevel; }
+	inline bool	IsMaxLevel() { return CurrentLevel == SoldierConfig.maxlevel; }
 	inline FString GetSoldierName() { return SoldierName; }
 	inline const SoldierConfigStruct & GetSoldierConfig() { return SoldierConfig; }
 	inline SoldierTypeEnum GetSoldierType() { return SoldierType; }
-	inline int32 GetMovePower() const { return MovePower; }
-	inline int32 GetMoveDistance() const { return SoldierConfig.distance; }
+	inline bool IsFullMovePower() const { return CurrentMovePower == GetMovability(); }
+	inline int32 GetCurrentMovePower() const { return CurrentMovePower; }
+	inline int32 GetMovability() const { return SoldierConfig.movability; }
+	inline int32 GetVisibility() const { return SoldierConfig.visibility; }
+	inline int32 GetAttackrange() const { return SoldierConfig.attackrange; }
+	inline float GetAttackSpeed() const { return SoldierConfig.attackspeed; }
+
 protected:
-	class ASoldierPawn *		SoldierPawn;
+	class ASoldierPawn * SoldierPawn;
 	class CommandCenterDataClass * CommandCenter;
 
-	FString					SoldierName;
-	SoldierConfigStruct		SoldierConfig;
-	SoldierTypeEnum			SoldierType;
+	FString SoldierName;
+	SoldierConfigStruct SoldierConfig;
+	SoldierTypeEnum SoldierType;
 
-	float	Health;
-	int32	Level;
-	int32	MovePower;
+	float CurrentHealth;
+	int32 CurrentLevel;
+	int32 CurrentMovePower;
 
 };

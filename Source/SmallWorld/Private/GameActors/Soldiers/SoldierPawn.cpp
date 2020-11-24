@@ -143,7 +143,11 @@ void ASoldierPawn::RefreshView()
 }
 void ASoldierPawn::UpdateAI(float delta)
 {
-	
+	if (!SoldierData->IsFullMovePower())
+	{
+
+	}
+
 }
 void ASoldierPawn::SetGroupAndIndex(SoldierGroup * _group,int _index)
 {

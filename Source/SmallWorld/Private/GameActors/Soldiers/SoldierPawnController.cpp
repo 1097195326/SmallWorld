@@ -50,6 +50,8 @@ void ASoldierPawnController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	
+
 }
 void ASoldierPawnController::ActorsPerceptionUpdated(const TArray<AActor *>& UpdatedActors)
 {
@@ -77,7 +79,7 @@ void ASoldierPawnController::ActorsPerceptionUpdated(const TArray<AActor *>& Upd
 }
 void ASoldierPawnController::TryMoveSoldier(class ASoldierPawn * InSoldier)
 {
-	int32 MoveDis = InSoldier->GetSoldierData()->GetMoveDistance();
+	int32 MoveDis = InSoldier->GetSoldierData()->GetMovability();
 	AGroundTileActor* MainTile = nullptr;
 	TArray<AGroundTileActor*>  AroundTiles;
 	GameManager::GetGroundTileAroundSoldier(InSoldier, MoveDis, MainTile, AroundTiles);
