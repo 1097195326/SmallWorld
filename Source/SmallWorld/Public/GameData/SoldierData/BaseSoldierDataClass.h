@@ -19,6 +19,7 @@ public:
 	virtual ASoldierPawn * SpawnSoldierActor(const FString & InSoldierName);
 	virtual void DestroySoldier();
 
+
 	class CommandCenterDataClass * GetCommandCenter();
 	void SetCommandCenter(class CommandCenterDataClass * InCommandCenter);
 
@@ -26,12 +27,20 @@ public:
 
 	void SetSoldierConfigByName(FString InName);
 	
-	inline bool	IsMaxLevel() { return CurrentLevel == SoldierConfig.maxlevel; }
+	inline bool	IsFullLevel() { return CurrentLevel == SoldierConfig.maxlevel; }
+	inline bool IsFullMovePower() { return CurrentMovePower == GetLevelInfo().restoremovability; }
+	inline bool IsFullHealth() { return CurrentHealth == GetLevelInfo().restorehealth; }
+	inline bool IsFullAttackPower() { return CurrentAttackPower == GetAttackSpeed(); }
+	
 	inline FString GetSoldierName() { return SoldierName; }
-	inline const SoldierConfigStruct & GetSoldierConfig() { return SoldierConfig; }
 	inline SoldierTypeEnum GetSoldierType() { return SoldierType; }
-	inline bool IsFullMovePower() const { return CurrentMovePower == GetMovability(); }
-	inline int32 GetCurrentMovePower() const { return CurrentMovePower; }
+	inline const SoldierConfigStruct & GetSoldierConfig() { return SoldierConfig; }
+	inline const SoldierLevelInfoStruct & GetLevelInfo() const { return SoldierConfig.LevelInfos[CurrentLevel]; }
+
+	inline float GetCurrentMovePower() const { return CurrentMovePower; }
+	inline float GetCurrentHealth() const { return CurrentHealth; }
+	inline float GetCurrentAttackPower() const { return CurrentAttackPower; }
+
 	inline int32 GetMovability() const { return SoldierConfig.movability; }
 	inline int32 GetVisibility() const { return SoldierConfig.visibility; }
 	inline int32 GetAttackrange() const { return SoldierConfig.attackrange; }
@@ -42,11 +51,13 @@ protected:
 	class CommandCenterDataClass * CommandCenter;
 
 	FString SoldierName;
-	SoldierConfigStruct SoldierConfig;
 	SoldierTypeEnum SoldierType;
+	SoldierConfigStruct SoldierConfig;
 
 	float CurrentHealth;
+	float CurrentMovePower;
+	float CurrentAttackPower;
+
 	int32 CurrentLevel;
-	int32 CurrentMovePower;
 
 };

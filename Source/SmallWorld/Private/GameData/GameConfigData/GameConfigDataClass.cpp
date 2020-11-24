@@ -84,8 +84,8 @@ void GameConfigDataClass::InitWithXML(const FXmlFile * xmlFile)
 					info.level = FCString::Atoi(*LevelInfo->GetAttribute(TEXT("level")));
 					info.health = FCString::Atoi(*LevelInfo->GetAttribute(TEXT("health")));
 					info.kills = FCString::Atoi(*LevelInfo->GetAttribute(TEXT("kills")));
-					info.restorehealth = FCString::Atoi(*LevelInfo->GetAttribute(TEXT("restorehealth")));
-					info.restoremovability = FCString::Atoi(*LevelInfo->GetAttribute(TEXT("restoremovability")));
+					info.restorehealth = FCString::Atof(*LevelInfo->GetAttribute(TEXT("restorehealth")));
+					info.restoremovability = FCString::Atof(*LevelInfo->GetAttribute(TEXT("restoremovability")));
 					info.phydamage = FCString::Atof(*LevelInfo->GetAttribute(TEXT("phydamage")));
 					info.magicdamage = FCString::Atof(*LevelInfo->GetAttribute(TEXT("magicdamage")));
 					info.phydef = FCString::Atof(*LevelInfo->GetAttribute(TEXT("phydef")));

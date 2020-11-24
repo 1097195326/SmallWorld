@@ -52,7 +52,7 @@ public:
 
 	void	SetConfigDataByName(FString InName);
 
-	inline bool IsMaxLevel() { return BuildingLevel == BuildingConfig.MaxLevel; }
+	inline bool IsFullLevel() { return BuildingLevel == BuildingConfig.MaxLevel; }
 	inline const BuildingConfigStruct & GetBuildingConfig() { return BuildingConfig; }
 	inline FString GetBuildingName() { return BuildingName; }
 	inline EBuildingType GetBuildingType() { return BuildingType; }

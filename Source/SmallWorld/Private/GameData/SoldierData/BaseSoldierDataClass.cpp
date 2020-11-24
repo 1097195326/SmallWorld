@@ -83,7 +83,7 @@ CommandCenterDataClass * BaseSoldierDataClass::GetCommandCenter()
 bool BaseSoldierDataClass::IsUserData()
 {
 	HordeDataClass * HordeData = CommandCenter->GetHordeBelongTo();
-	GameDataManager::GetInstance()->IsUserHordeData(HordeData);
+	return GameDataManager::GetInstance()->IsUserHordeData(HordeData);
 }
 void BaseSoldierDataClass::SetSoldierConfigByName(FString InName)
 {

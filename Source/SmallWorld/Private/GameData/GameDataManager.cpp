@@ -153,5 +153,5 @@ bool GameDataManager::IsUserHordeData(HordeDataClass * InHordeData)
 }
 bool GameDataManager::IsInUserHordeData(BaseBuildingDataClass * InBuilding)
 {
-	GetUserData()->GetHordeData()->IsContains(InBuilding);
+	return GetUserData()->GetHordeData()->IsContains(InBuilding);
 }

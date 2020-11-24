@@ -27,8 +27,8 @@ struct SoldierLevelInfoStruct
 	int32 level;
 	int32 health;
 	int32 kills;
-	int32 restorehealth;
-	int32 restoremovability;
+	float restorehealth;
+	float restoremovability;
 	float phydamage;
 	float magicdamage;
 	float phydef;

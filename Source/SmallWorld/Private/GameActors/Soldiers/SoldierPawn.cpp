@@ -145,7 +145,7 @@ void ASoldierPawn::UpdateAI(float delta)
 {
 	if (!SoldierData->IsFullMovePower())
 	{
-
+		SoldierData->CurrentHealth;
 	}
 
 }
