@@ -30,6 +30,11 @@ void BaseSoldierDataClass::Serialization(TSharedRef<TJsonWriter<TCHAR, TCondense
 	{
 		Writer->WriteValue("ArmyCenterID", CommandCenter->GetObjectId().ToString());
 	}
+	if (SoldierPawn)
+	{
+		Writer->WriteValue("SoldierLocation", SoldierPawn->GetActorLocation().ToString());
+		Writer->WriteValue("SoldierRotation", SoldierPawn->GetActorRotation().ToString());
+	}
 	Writer->WriteValue("SoldierName", *SoldierName);
 	Writer->WriteValue("CurrentHealth", CurrentHealth);
 	Writer->WriteValue("CurrentLevel", CurrentLevel);
@@ -47,10 +52,20 @@ void BaseSoldierDataClass::Deserialization(TSharedPtr<FJsonObject> JsonObject)
 	FString ArmyCenterID;
 	if (JsonObject->TryGetStringField("ArmyCenterID", ArmyCenterID))
 	{
-
+		FGuid::Parse(ArmyCenterID, CommandCenterId);
 	}
-
+	FString SoldierLocation, SoldierRotation;
+	JsonObject->TryGetStringField("SoldierLocation", SoldierLocation);
+	JsonObject->TryGetStringField("SoldierRotation", SoldierRotation);
+	
+	//------
 	SetSoldierConfigByName(SoldierName);
+
+	FVector TemLocation; TemLocation.InitFromString(SoldierLocation);
+	FRotator TemRotator; TemRotator.InitFromString(SoldierRotation);
+	ASoldierPawn * TemSoldier = SpawnSoldierActor(SoldierName);
+	TemSoldier->SetActorTransform(FTransform(TemRotator, TemLocation));
+
 }
 ASoldierPawn * BaseSoldierDataClass::SpawnSoldierActor(const FString & InSoldierName)
 {

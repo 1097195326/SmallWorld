@@ -18,7 +18,9 @@ ASoldierPawn::ASoldierPawn():
 	GetCapsuleComponent()->SetCollisionObjectType(SoldierTrace);
 
 	bUseControllerRotationYaw = true;
-	
+	PrimaryActorTick.bCanEverTick = true;
+
+
 	mGroup = nullptr;
 	OriginGroundTile = nullptr;
 	TargetGroundTile = nullptr;

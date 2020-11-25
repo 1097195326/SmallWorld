@@ -75,6 +75,7 @@ protected:
 	class ASoldierPawn * SoldierPawn;
 	class CommandCenterDataClass * CommandCenter;
 
+	FGuid   CommandCenterId;
 	FString SoldierName;
 	SoldierTypeEnum SoldierType;
 	SoldierConfigStruct SoldierConfig;
