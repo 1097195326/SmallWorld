@@ -62,10 +62,11 @@ public:
 
 	TMap<DirectionEnum, AGameActor*>  AroundActorMap;
 
-
+	void IncreaseVisibilityCounter() { VisibilityCounter += 1; }
+	void DecreaseVisibilityCounter() { VisibilityCounter += 1; }
 protected:
-	float  FlagTimer;
-	AActor* FlagActor;
+	float FlagTimer;
+	AActor * FlagActor;
 	TArray<ASoldierPawn*> Soldiers;
-	
+	int32 VisibilityCounter;
 };

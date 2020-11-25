@@ -83,9 +83,9 @@ void ASoldierPawnController::TryMoveSoldier(class ASoldierPawn * InSoldier)
 	if (InSoldier == nullptr) { return; }
 	
 	int32 MoveDis = InSoldier->GetSoldierData()->GetMovability();
-	AGroundTileActor* MainTile = nullptr;
+	AGroundTileActor* MainTile = InSoldier->GetOriginGroundTile();
 	TArray<AGroundTileActor*>  AroundTiles;
-	GameManager::GetGroundTileAroundSoldier(InSoldier, MoveDis, MainTile, AroundTiles);
+	GameManager::GetGroundTileAroundSoldier(MainTile, MoveDis, AroundTiles);
 	if (AroundTiles.Num() > 0)
 	{
 		int32 TileIndex = UKismetMathLibrary::RandomInteger(AroundTiles.Num());

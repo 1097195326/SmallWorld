@@ -27,6 +27,8 @@ AGroundTileActor::AGroundTileActor()
 	CloudTileComponent->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
 	
 	PrimaryActorTick.bCanEverTick = true;
+
+	VisibilityCounter = 0;
 }
 void AGroundTileActor::On_Init()
 {
@@ -45,6 +47,13 @@ void AGroundTileActor::On_Tick(float DeltaSeconds)
 			FlagActor = nullptr;
 			FlagTimer = 0.f;
 		}
+	}
+	if (CloudTileComponent->GetVisibleFlag() && VisibilityCounter == 0)
+	{
+		CloudTileComponent->SetVisibility(false);
+	}else if (!CloudTileComponent->GetVisibleFlag() && VisibilityCounter > 0)
+	{
+		CloudTileComponent->SetVisibility(true);
 	}
 }
 void AGroundTileActor::On_Delete()

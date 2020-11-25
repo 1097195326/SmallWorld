@@ -17,7 +17,7 @@ public:
 	void RefreshCloudVisible();
 	void Tick(float DeltaTime);
 
-	static void GetGroundTileAroundSoldier(class ASoldierPawn* InSoldier, int32 InDistance, class AGroundTileActor* & OutMainTile, TArray<class AGroundTileActor*>& OutTiles);
+	static void GetGroundTileAroundSoldier(class AGroundTileActor* InMainTile, int32 InDistance, TArray<class AGroundTileActor*>& OutTiles);
 
 private:
 	TArray<class AGroundTileActor*> CurrentVisibleGroundArray;

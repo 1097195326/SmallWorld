@@ -4,7 +4,7 @@
 #include "GameFramework/DamageType.h"
 #include "BaseSoldierDataClass.h"
 #include "GroundTileActor.h"
-
+#include "GameManager.h"
 
 ASoldierPawn::ASoldierPawn():
 	LastAttackTime(0.f)
@@ -216,6 +216,21 @@ void ASoldierPawn::SetTargetGroundTile(class AGroundTileActor * InTile)
 }
 void ASoldierPawn::MoveToTargetEnd()
 {
+	int32 VisibleDis = SoldierData->GetVisibility();
+	TArray<AGroundTileActor*>  AroundTiles;
+	GameManager::GetGroundTileAroundSoldier(OriginGroundTile, VisibleDis, AroundTiles);
+	AroundTiles.Add(OriginGroundTile);
+	for (auto IterTile : AroundTiles)
+	{
+		IterTile->DecreaseVisibilityCounter();
+	}
+	AroundTiles.Empty();
+	GameManager::GetGroundTileAroundSoldier(TargetGroundTile, VisibleDis, AroundTiles);
+	AroundTiles.Add(TargetGroundTile);
+	for (auto IterTile : AroundTiles)
+	{
+		IterTile->IncreaseVisibilityCounter();
+	}
 
 }
 //

@@ -89,14 +89,14 @@ void GameManager::Tick(float DeltaTime)
 	}
 }
 
-void GameManager::GetGroundTileAroundSoldier(class ASoldierPawn* InSoldier, int32 InDistance, class AGroundTileActor* & OutMainTile, TArray<class AGroundTileActor *>& OutTiles)
+void GameManager::GetGroundTileAroundSoldier(class AGroundTileActor* InMainTile, int32 InDistance, TArray<class AGroundTileActor*>& OutTiles)
 {
-	OutMainTile = InSoldier->GetOriginGroundTile();
+	if (InMainTile == nullptr) { return; }
 	for (int i = 1; i <= InDistance; i++)
 	{
 		for (int32 j = AGroundTileActor::Direction_Forward; j < AGroundTileActor::Direction_Other; j++)
 		{
-			AGroundTileActor* TemTile = OutMainTile->GetAroundTileActorByDistance(i, (AGroundTileActor::DirectionEnum)j);
+			AGroundTileActor* TemTile = InMainTile->GetAroundTileActorByDistance(i, (AGroundTileActor::DirectionEnum)j);
 			if (TemTile)
 			{
 				OutTiles.Add(TemTile);
