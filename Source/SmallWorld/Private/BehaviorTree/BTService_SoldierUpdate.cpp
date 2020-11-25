@@ -6,7 +6,7 @@
 
 UBTService_SoldierUpdate::UBTService_SoldierUpdate()
 {
-	preSoldierState = SoldierState::S_Normal;
+	preSoldierState = SoldierState::S_Idle;
 
 }
 void UBTService_SoldierUpdate::TickNode(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, float DeltaSeconds)

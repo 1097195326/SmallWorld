@@ -21,17 +21,11 @@ UENUM()
 enum class SoldierState : uint32
 {
 	//state
-	S_Normal = 0, 
 	S_Idle,
-	S_FightSelf,
-	S_FormationDefense,
-	S_FormationFight,
-	S_MoveToHome,
-	S_MoveToGroup,
-	S_ReadyInGroup,
+	S_Fight,
+	S_MoveToTarget,
 	S_Dieing,
 	S_Died,
-	S_Hit,
 	S_Victory,
 };
 UENUM()
@@ -129,8 +123,11 @@ public:
 	FVector GetSpawnProjectileLoction();
 	ASoldierPawn * GetBestEnemy(const TArray<AActor*> & SeachList);
 
-	void SetGroundTile(class AGroundTileActor * InTile);
-	class AGroundTileActor * GetGroundTile() { return GroundTile; }
+	void MoveToTargetEnd();
+	void SetOriginGroundTile(class AGroundTileActor * InTile);
+	void SetTargetGroundTile(class AGroundTileActor * InTile);
+	class AGroundTileActor * GetOriginGroundTile() { return OriginGroundTile; }
+	class AGroundTileActor * GetTargetGroundTile() { return TargetGroundTile; }
 
 	UPROPERTY(EditDefaultsOnly, Instanced, Category = AI)
 		TArray<UAISenseConfig*> SenseConfigs;
@@ -138,7 +135,8 @@ public:
 
 protected:
 	FVector MoveLocation = FVector::ZeroVector;
-	class AGroundTileActor * GroundTile;
+	class AGroundTileActor * OriginGroundTile;
+	class AGroundTileActor * TargetGroundTile;
 
 	BaseSoldierDataClass * SoldierData;
 

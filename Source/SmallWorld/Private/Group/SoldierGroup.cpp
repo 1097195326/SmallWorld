@@ -190,29 +190,29 @@ void SoldierGroup::ChangeSoldierState(ASoldierPawn * _soldier)
 	{
 	case  I_AutoFightIndex:
 	{
-		_soldier->ChangeSoldierState(SoldierState::S_FightSelf);
+		_soldier->ChangeSoldierState(SoldierState::S_Fight);
 		break;
 	}
 	case I_FightIndex:
 	{
 		if (mCurrrentFormation)
 		{
-			_soldier->ChangeSoldierState(SoldierState::S_FormationFight);
+			_soldier->ChangeSoldierState(SoldierState::S_Fight);
 		}
 		else
 		{
-			_soldier->ChangeSoldierState(SoldierState::S_FightSelf);
+			_soldier->ChangeSoldierState(SoldierState::S_Fight);
 		}
 		break;
 	}
 	case  I_ReadyIndex:
 	{
-		_soldier->ChangeSoldierState(SoldierState::S_FormationDefense);
+		_soldier->ChangeSoldierState(SoldierState::S_Fight);
 		break;
 	}
 	case I_WaitingIndex:
 	{
-		_soldier->ChangeSoldierState(SoldierState::S_MoveToGroup);
+		_soldier->ChangeSoldierState(SoldierState::S_Fight);
 		break;
 	}
 	}

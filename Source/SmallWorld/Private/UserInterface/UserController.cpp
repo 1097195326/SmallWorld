@@ -100,6 +100,7 @@ AActor * AUserController::TrySelectGameActor(FVector2D ScreenPosition)
 				GameManager::GetGroundTileAroundSoldier(CurrentSelectedSoldier, MoveDis, MainTile, AroundTiles);
 				if (AroundTiles.Contains(TileActor))
 				{
+					CurrentSelectedSoldier->SetTargetGroundTile(TileActor);
 					CurrentSelectedSoldier->SetMoveLocation(TileActor->GetActorLocation());
 				}
 				else

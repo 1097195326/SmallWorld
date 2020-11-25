@@ -20,7 +20,8 @@ ASoldierPawn::ASoldierPawn():
 	bUseControllerRotationYaw = true;
 	
 	mGroup = nullptr;
-	GroundTile = nullptr;
+	OriginGroundTile = nullptr;
+	TargetGroundTile = nullptr;
 
 	//CapsuleComponent = CreateDefaultSubobject<UCapsuleComponent>(TEXT("CapsuleComponent"));
 	//
@@ -143,17 +144,27 @@ void ASoldierPawn::RefreshView()
 }
 void ASoldierPawn::UpdateAI(float delta)
 {
-	if (!SoldierData->IsFullMovePower())
+	if (SoldierData->IsFullMovePower())
+	{
+		ASoldierPawnController * TemController = Cast<ASoldierPawnController>(Controller);
+		TemController->TryMoveSoldier(this);
+	}else
 	{
 		SoldierData->SetCurrentMovePower(SoldierData->CurrentMovePower += delta);
 	}
-	if (!SoldierData->IsFullHealth())
+	if (SoldierData->IsFullHealth())
 	{
-		SoldierData->SetCurrentMovePower(SoldierData->CurrentHealth += delta);
+
+	}else
+	{
+		SoldierData->SetCurrentHealth(SoldierData->CurrentHealth += delta);
 	}
-	if (!SoldierData->IsFullAttackPower())
+	if (SoldierData->IsFullAttackPower())
 	{
-		SoldierData->SetCurrentMovePower(SoldierData->CurrentAttackPower += delta);
+
+	}else
+	{
+		SoldierData->SetCurrentAttackPower(SoldierData->CurrentAttackPower += delta);
 	}
 
 }
@@ -195,11 +206,18 @@ void ASoldierPawn::SetGenericTeamId(const FGenericTeamId& NewTeamID)
 		TeamID = NewTeamID;
 	}
 }
-void ASoldierPawn::SetGroundTile(class AGroundTileActor * InTile)
+void ASoldierPawn::SetOriginGroundTile(class AGroundTileActor * InTile)
 {
-	GroundTile = InTile; 
+	OriginGroundTile = InTile;
 }
+void ASoldierPawn::SetTargetGroundTile(class AGroundTileActor * InTile)
+{
+	TargetGroundTile = InTile;
+}
+void ASoldierPawn::MoveToTargetEnd()
+{
 
+}
 //
 //FVector ASoldierPawn::Seek(FVector TargetLocation)
 //{

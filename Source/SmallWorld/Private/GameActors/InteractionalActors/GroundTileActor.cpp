@@ -106,7 +106,7 @@ void AGroundTileActor::TrackSoldier()
 		{
 			ASoldierPawn * TemSoldier = Cast<ASoldierPawn>(TemActor);
 			AddSoldier(TemSoldier);
-			TemSoldier->SetGroundTile(this);
+			TemSoldier->SetOriginGroundTile(this);
 		}
 	}
 }

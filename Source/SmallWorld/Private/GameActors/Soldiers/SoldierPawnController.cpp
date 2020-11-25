@@ -2,6 +2,7 @@
 #include "BehaviorTree/BlackboardComponent.h"
 #include "BehaviorTree/BehaviorTreeComponent.h"
 #include "Perception/AIPerceptionComponent.h"
+#include "Kismet/KismetMathLibrary.h"
 #include "CastleTileActor.h"
 #include "GroundTileActor.h"
 #include "SoldierPawn.h"
@@ -72,18 +73,26 @@ void ASoldierPawnController::ActorsPerceptionUpdated(const TArray<AActor *>& Upd
 		if (bestEnemy)
 		{
 			SoldierPawn->SetEnemy(bestEnemy);
-			SoldierPawn->ChangeSoldierState(SoldierState::S_FightSelf);
+			SoldierPawn->ChangeSoldierState(SoldierState::S_Fight);
 		}
 		
 	}
 }
 void ASoldierPawnController::TryMoveSoldier(class ASoldierPawn * InSoldier)
 {
+	if (InSoldier == nullptr) { return; }
+	
 	int32 MoveDis = InSoldier->GetSoldierData()->GetMovability();
 	AGroundTileActor* MainTile = nullptr;
 	TArray<AGroundTileActor*>  AroundTiles;
 	GameManager::GetGroundTileAroundSoldier(InSoldier, MoveDis, MainTile, AroundTiles);
-
+	if (AroundTiles.Num() > 0)
+	{
+		int32 TileIndex = UKismetMathLibrary::RandomInteger(AroundTiles.Num());
+		AGroundTileActor * TileActor = AroundTiles[TileIndex];
+		InSoldier->SetTargetGroundTile(TileActor);
+		InSoldier->SetMoveLocation(TileActor->GetActorLocation());
+	}
 
 
 }
