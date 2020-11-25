@@ -18,7 +18,12 @@ void CommandCenterDataClass::Serialization(TSharedRef<TJsonWriter<TCHAR, TConden
 	Writer->WriteObjectStart("CommandCenterDataClass");
 	BaseBuildingDataClass::Serialization(Writer);
 
-
+		Writer->WriteObjectStart("SoldiersData");
+		for (auto data : SoldiersMap)
+		{
+			data.Value->Serialization(Writer);
+		}
+		Writer->WriteObjectEnd();//SoldiersData
 
 	Writer->WriteObjectEnd();// CommandCenterDataClass
     
