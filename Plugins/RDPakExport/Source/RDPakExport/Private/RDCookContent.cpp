@@ -1,7 +1,7 @@
 #include "RDCookContent.h"
 #include "RDRunCmd.h"
 
-#define CookProject "{\"FileVersion\":3,\"EngineAssociation\":\"4.22\"}"
+#define CookProject TEXT("{\"FileVersion\":3,\"EngineAssociation\":\"4.22\"}")
 
 CCookContent::CCookContent(const TArray<FString>& InFilesCook)
 {

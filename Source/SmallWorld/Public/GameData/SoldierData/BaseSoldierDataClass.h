@@ -48,6 +48,7 @@ public:
 		{
 			CurrentMovePower = GetLevelInfo().restoremovability;
 		}
+		return CurrentMovePower;
 	}
 	float SetCurrentHealth(float InValue)
 	{
@@ -56,6 +57,7 @@ public:
 		{
 			CurrentHealth = GetLevelInfo().restorehealth;
 		}
+		return CurrentHealth;
 	}
 	float SetCurrentAttackPower(float InValue)
 	{
@@ -64,6 +66,7 @@ public:
 		{
 			CurrentAttackPower = GetAttackSpeed();
 		}
+		return CurrentAttackPower;
 	}
 
 	inline int32 GetMovability() const { return SoldierConfig.movability; }
