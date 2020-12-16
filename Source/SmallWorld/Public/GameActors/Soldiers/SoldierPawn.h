@@ -121,7 +121,7 @@ public:
 		FVector GetMoveLocation() { return MoveLocation; }
 
 	FVector GetSpawnProjectileLoction();
-	ASoldierPawn * GetBestEnemy(const TArray<AActor*> & SeachList);
+	ASoldierPawn * GetBestEnemy(const TArray<ASoldierPawn*> & SeachList);
 
 	void MoveToTargetEnd();
 	void SetOriginGroundTile(class AGroundTileActor * InTile);

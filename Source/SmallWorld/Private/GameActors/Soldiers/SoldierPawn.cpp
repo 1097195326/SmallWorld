@@ -53,7 +53,7 @@ void ASoldierPawn::On_Start()
 }
 void ASoldierPawn::On_Tick(float delta)
 {
-	if (SoldierData->IsUserData())
+	if (!SoldierData->IsUserData())
 	{
 		UpdateAI(delta);
 	}
@@ -195,10 +195,28 @@ FVector ASoldierPawn::GetSpawnProjectileLoction()
 
 	return GetActorLocation();
 }
-ASoldierPawn * ASoldierPawn::GetBestEnemy(const TArray<AActor *> & SeachList)
+ASoldierPawn * ASoldierPawn::GetBestEnemy(const TArray<ASoldierPawn *> & SeachList)
 {
-
-
+	if (SeachList.Num() > 0)
+	{
+		FVector SoldierPosition = GetOriginGroundTile()->GetActorLocation();
+		ASoldierPawn * TemSoldier = nullptr;
+		for (auto IterSoldier : SeachList)
+		{
+			if (TemSoldier == nullptr)
+			{
+				TemSoldier = IterSoldier;
+				continue;
+			}
+			FVector IterSoldierLocation = IterSoldier->GetOriginGroundTile()->GetActorLocation();
+			FVector TemSoldierLocation = TemSoldier->GetOriginGroundTile()->GetActorLocation();
+			if (FVector::DistSquared(IterSoldierLocation, SoldierPosition) < FVector::DistSquared(TemSoldierLocation, SoldierPosition))
+			{
+				TemSoldier = IterSoldier;
+			}
+		}
+		return TemSoldier;
+	}
 	return nullptr;
 }
 void ASoldierPawn::SetGenericTeamId(const FGenericTeamId& NewTeamID)
@@ -218,21 +236,33 @@ void ASoldierPawn::SetTargetGroundTile(class AGroundTileActor * InTile)
 }
 void ASoldierPawn::MoveToTargetEnd()
 {
-	int32 VisibleDis = SoldierData->GetVisibility();
-	TArray<AGroundTileActor*>  AroundTiles;
-	GameManager::GetGroundTileAroundSoldier(OriginGroundTile, VisibleDis, AroundTiles);
-	AroundTiles.Add(OriginGroundTile);
-	for (auto IterTile : AroundTiles)
+	if (SoldierData->IsUserData())
 	{
-		IterTile->DecreaseVisibilityCounter();
+		int32 VisibleDis = SoldierData->GetVisibility();
+		TArray<AGroundTileActor*>  AroundTiles;
+		if (OriginGroundTile)
+		{
+			GameManager::GetGroundTileAroundSoldier(OriginGroundTile, VisibleDis, AroundTiles);
+			AroundTiles.Add(OriginGroundTile);
+			for (auto IterTile : AroundTiles)
+			{
+				IterTile->DecreaseVisibilityCounter();
+			}
+		}
+
+		AroundTiles.Empty();
+		if (TargetGroundTile)
+		{
+			GameManager::GetGroundTileAroundSoldier(TargetGroundTile, VisibleDis, AroundTiles);
+			AroundTiles.Add(TargetGroundTile);
+			for (auto IterTile : AroundTiles)
+			{
+				IterTile->IncreaseVisibilityCounter();
+			}
+		}
 	}
-	AroundTiles.Empty();
-	GameManager::GetGroundTileAroundSoldier(TargetGroundTile, VisibleDis, AroundTiles);
-	AroundTiles.Add(TargetGroundTile);
-	for (auto IterTile : AroundTiles)
-	{
-		IterTile->IncreaseVisibilityCounter();
-	}
+	OriginGroundTile = TargetGroundTile;
+	TargetGroundTile = nullptr;
 
 }
 //

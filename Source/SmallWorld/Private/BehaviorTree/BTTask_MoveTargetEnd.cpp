@@ -8,10 +8,8 @@ EBTNodeResult::Type UBTTask_MoveTargetEnd::ExecuteTask(UBehaviorTreeComponent& O
 	ASoldierPawnController * SoldierController = Cast<ASoldierPawnController>(OwnerComp.GetAIOwner());
 	ASoldierPawn * SoldierPawn = Cast<ASoldierPawn>(SoldierController->GetPawn());
 	
-	if (SoldierPawn->GetSoldierData()->IsUserData())
-	{
-		SoldierPawn->MoveToTargetEnd();
-	}
+	SoldierPawn->MoveToTargetEnd();
+	
 	
 	return EBTNodeResult::Succeeded;
 }

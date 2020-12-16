@@ -25,6 +25,9 @@ GameManager::~GameManager()
 }
 void GameManager::ScanWorldMap()
 {
+	GroundActorArray.Empty();
+	CastleActorArray.Empty();
+
 	UWorld * CurrentWorld = User_GameInstance->GetWorld();
 	
 	TArray<AActor*> TemActorsArray;
@@ -68,6 +71,8 @@ void GameManager::BuildGameWorld()
 		if (BuildingActor)
 		{
 			BuildingActor->SetCastleTileActor(CastleTileActor);
+			CastleTileActor->SetBuildingActor(BuildingActor);
+			CastleTileActor->SignAround();
 		}
 	}
 

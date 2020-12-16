@@ -1,7 +1,7 @@
 #include "CastleTileActor.h"
 #include "GroundTileActor.h"
-
-
+#include "BaseBuildingActor.h"
+#include "BaseBuildingDataClass.h"
 
 ACastleTileActor::ACastleTileActor()
 {
@@ -53,4 +53,19 @@ void ACastleTileActor::TrackAround()
 			AroundActorArray.Add(Cast<AGroundTileActor>(TemActor));
 		}
 	}
+}
+void ACastleTileActor::SignAround()
+{
+	if (BuildingActor && BuildingActor->GetBuildingData()->IsUserData())
+	{
+		for (auto IterTile : AroundActorArray)
+		{
+			IterTile->IncreaseVisibilityCounter();
+		}
+	}
+	
+}
+void ACastleTileActor::SetBuildingActor(class ABaseBuildingActor * InActor)
+{
+	BuildingActor = InActor;
 }

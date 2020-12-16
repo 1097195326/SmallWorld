@@ -39,7 +39,7 @@ FReply SCommandCenter::OnButtonClicked(int32 InIndex)
 	{
 	case 1:
 	{
-		TArray<AGroundTileActor*>  TileArray = CommandCenterData->BuildingActor->GetCastleTileActor()->AroundActorArray;
+		TArray<AGroundTileActor*>  TileArray = CommandCenterData->BuildingActor->GetCastleTileActor()->GetAroundActors();
 		int32 TileIndex = UKismetMathLibrary::RandomInteger(TileArray.Num());
 		FVector SpLocation = FVector::ZeroVector;
 		AGroundTileActor * GroundTile = TileArray[TileIndex];

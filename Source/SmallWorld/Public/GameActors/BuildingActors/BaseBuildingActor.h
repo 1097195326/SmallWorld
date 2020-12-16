@@ -27,13 +27,16 @@ public:
 	ABaseBuildingActor();
 
     void SetBuildingData(BaseBuildingDataClass * InData);
-    virtual void SaveData(TSharedRef<TJsonWriter<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>> Writer);
+	BaseBuildingDataClass * GetBuildingData() { return BuildingData; }
+	
+	virtual void SaveData(TSharedRef<TJsonWriter<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>> Writer);
 	virtual bool SetMeshComponentByIconName(const FString & InIconName);
 	
 	void	SetCastleTileActor(ACastleTileActor * InActor) { CastleTileActor = InActor; }
 	ACastleTileActor * GetCastleTileActor() { return CastleTileActor; }
 
 	FVector				GetInteractivePoint();
+
 protected:
 	BaseBuildingDataClass * BuildingData;
 	ACastleTileActor *		CastleTileActor;
