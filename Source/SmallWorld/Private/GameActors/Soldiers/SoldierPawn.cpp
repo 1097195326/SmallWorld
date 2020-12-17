@@ -53,6 +53,19 @@ void ASoldierPawn::On_Start()
 }
 void ASoldierPawn::On_Tick(float delta)
 {
+
+	if (!SoldierData->IsFullMovePower())
+	{
+		SoldierData->SetCurrentMovePower(SoldierData->CurrentMovePower += delta);
+	}
+	if (!SoldierData->IsFullHealth())
+	{
+		SoldierData->SetCurrentHealth(SoldierData->CurrentHealth += delta);
+	}
+	if (!SoldierData->IsFullAttackPower())
+	{
+		SoldierData->SetCurrentAttackPower(SoldierData->CurrentAttackPower += delta);
+	}
 	if (!SoldierData->IsUserData())
 	{
 		UpdateAI(delta);
@@ -150,23 +163,14 @@ void ASoldierPawn::UpdateAI(float delta)
 	{
 		ASoldierPawnController * TemController = Cast<ASoldierPawnController>(Controller);
 		TemController->TryMoveSoldier(this);
-	}else
-	{
-		SoldierData->SetCurrentMovePower(SoldierData->CurrentMovePower += delta);
 	}
 	if (SoldierData->IsFullHealth())
 	{
 
-	}else
-	{
-		SoldierData->SetCurrentHealth(SoldierData->CurrentHealth += delta);
 	}
 	if (SoldierData->IsFullAttackPower())
 	{
 
-	}else
-	{
-		SoldierData->SetCurrentAttackPower(SoldierData->CurrentAttackPower += delta);
 	}
 
 }

@@ -28,8 +28,11 @@ EBTNodeResult::Type UBTTask_SearchEnemy::ExecuteTask(UBehaviorTreeComponent& Own
 		}
 	}
 	ASoldierPawn * BestEnemy = SoldierPawn->GetBestEnemy(SoldiersArray);
+	if (BestEnemy == nullptr)
+	{
+		return EBTNodeResult::Failed;
+	}
 	OwnerComp.GetBlackboardComponent()->SetValueAsObject(FName(TEXT("EnemyActor")), BestEnemy);
-
 
 	return EBTNodeResult::Succeeded;
 }
