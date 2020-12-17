@@ -76,7 +76,7 @@ void GameConfigDataClass::InitWithXML(const FXmlFile * xmlFile)
 				config.MoveRange = FCString::Atoi(*DataInfo->GetAttribute("MoveRange"));
 				config.VisibleRange = FCString::Atoi(*DataInfo->GetAttribute("VisibleRange"));
 				config.AttackRange = FCString::Atoi(*DataInfo->GetAttribute("AttackRange"));
-				config.AttackSpeed = FCString::Atof(*DataInfo->GetAttribute("AttackSpeed"));
+				config.AttackInterval = FCString::Atof(*DataInfo->GetAttribute("AttackInterval"));
 
 				for (const FXmlNode * LevelInfo = DataInfo->GetFirstChildNode(); LevelInfo != NULL; LevelInfo = LevelInfo->GetNextNode())
 				{
@@ -85,8 +85,10 @@ void GameConfigDataClass::InitWithXML(const FXmlFile * xmlFile)
 					info.NeedExperience = FCString::Atoi(*LevelInfo->GetAttribute(TEXT("NeedExperience")));
 					info.ProvideExperience = FCString::Atoi(*LevelInfo->GetAttribute(TEXT("ProvideExperience")));
 					info.Health = FCString::Atoi(*LevelInfo->GetAttribute(TEXT("Health")));
+					info.HealthReturnInterval = FCString::Atoi(*LevelInfo->GetAttribute(TEXT("HealthReturnInterval")));
 					info.HealthReturnSpeed = FCString::Atoi(*LevelInfo->GetAttribute(TEXT("HealthReturnSpeed")));
 					info.Movability = FCString::Atoi(*LevelInfo->GetAttribute(TEXT("Movability")));
+					info.MovabilityReturnInterval = FCString::Atoi(*LevelInfo->GetAttribute(TEXT("MovabilityReturnInterval")));
 					info.MovabilityReturnSpeed = FCString::Atoi(*LevelInfo->GetAttribute(TEXT("MovabilityReturnSpeed")));
 					info.PhyDamage = FCString::Atof(*LevelInfo->GetAttribute(TEXT("PhyDamage")));
 					info.MagicDamage = FCString::Atof(*LevelInfo->GetAttribute(TEXT("MagicDamage")));

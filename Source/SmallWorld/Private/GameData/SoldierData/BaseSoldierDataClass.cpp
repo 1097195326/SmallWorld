@@ -105,3 +105,45 @@ void BaseSoldierDataClass::SetSoldierConfigByName(FString InName)
 	SoldierName = InName;
 	SoldierConfig = GameDataManager::GetInstance()->GetGameConfigData()->GetSoldierConfig(InName);
 }
+void BaseSoldierDataClass::SetCurrentMovability(float InValue)
+{
+	CurrentMovability = InValue;
+	if (CurrentMovability > GetLevelInfo().Movability)
+	{
+		CurrentMovability = GetLevelInfo().Movability;
+	}
+}
+void BaseSoldierDataClass::SetCurrentHealth(float InValue)
+{
+	CurrentHealth = InValue;
+	if (CurrentHealth > GetLevelInfo().Health)
+	{
+		CurrentHealth = GetLevelInfo().Health;
+	}
+}
+void BaseSoldierDataClass::ReturnMovability(float InTime)
+{
+	CurrentReturnMovabilityInterval += InTime;
+	if (CurrentReturnMovabilityInterval > GetLevelInfo().MovabilityReturnInterval)
+	{
+		CurrentReturnMovabilityInterval -= GetLevelInfo().MovabilityReturnInterval;
+		SetCurrentMovability(CurrentMovability + GetLevelInfo().MovabilityReturnSpeed);
+	}
+}
+void BaseSoldierDataClass::ReturnHealth(float InTime)
+{
+	CurrentReturnHealthInterval += InTime;
+	if (CurrentReturnHealthInterval > GetLevelInfo().HealthReturnInterval)
+	{
+		CurrentReturnHealthInterval -= GetLevelInfo().HealthReturnInterval;
+		SetCurrentHealth(CurrentHealth + GetLevelInfo().HealthReturnSpeed);
+	}
+}
+void BaseSoldierDataClass::ReturnAttackPower(float InTime)
+{
+	CurrentAttackInterval += InTime;
+	if (CurrentAttackInterval > SoldierConfig.AttackInterval)
+	{
+		CurrentAttackInterval = SoldierConfig.AttackInterval;
+	}
+}

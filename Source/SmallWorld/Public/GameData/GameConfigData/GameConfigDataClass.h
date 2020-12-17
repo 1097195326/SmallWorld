@@ -28,8 +28,10 @@ struct SoldierLevelInfoStruct
 	int32 NeedExperience;
 	int32 ProvideExperience;
 	int32 Health;
+	int32 HealthReturnInterval;
 	int32 HealthReturnSpeed;
 	int32 Movability;
+	int32 MovabilityReturnInterval;
 	int32 MovabilityReturnSpeed;
 
 	float PhyDamage;
@@ -48,7 +50,7 @@ struct SoldierConfigStruct
 	int32 MoveRange = 1;
 	int32 VisibleRange = 1;
 	int32 AttackRange = 1;
-	float AttackSpeed = 1;
+	float AttackInterval = 1;
 	TMap<int32, SoldierLevelInfoStruct> LevelInfos;
 };
 class GameConfigDataClass : public TemplateDataClass

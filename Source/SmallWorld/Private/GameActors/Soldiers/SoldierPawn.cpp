@@ -55,17 +55,17 @@ void ASoldierPawn::On_Tick(float delta)
 {
 	if (IsAlive())
 	{
-		if (!SoldierData->IsFullMovePower())
+		if (!SoldierData->IsFullMovability())
 		{
-			SoldierData->SetCurrentMovePower(SoldierData->CurrentMovePower += delta);
+			SoldierData->ReturnMovability(delta);
 		}
 		if (!SoldierData->IsFullHealth())
 		{
-			SoldierData->SetCurrentHealth(SoldierData->CurrentHealth += delta);
+			SoldierData->ReturnHealth(delta);
 		}
 		if (!SoldierData->IsFullAttackPower())
 		{
-			SoldierData->SetCurrentAttackPower(SoldierData->CurrentAttackPower += delta);
+			SoldierData->ReturnAttackPower(delta);
 		}
 		if (!SoldierData->IsUserData())
 		{
@@ -161,7 +161,7 @@ void ASoldierPawn::RefreshView()
 }
 void ASoldierPawn::UpdateAI(float delta)
 {
-	if (SoldierData->IsFullMovePower())
+	if (SoldierData->IsFullMovability())
 	{
 		ASoldierPawnController * TemController = Cast<ASoldierPawnController>(Controller);
 		TemController->TryMoveSoldier(this);
