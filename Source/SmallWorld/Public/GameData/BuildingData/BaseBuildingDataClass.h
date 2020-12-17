@@ -54,6 +54,8 @@ public:
 
 	inline bool IsFullLevel() { return BuildingLevel == BuildingConfig.MaxLevel; }
 	inline const BuildingConfigStruct & GetBuildingConfig() { return BuildingConfig; }
+	inline const BuildingLevelInfoStruct & GetLevelInfo() { return BuildingConfig.LevelInfos[BuildingLevel]; }
+
 	inline FString GetBuildingName() { return BuildingName; }
 	inline EBuildingType GetBuildingType() { return BuildingType; }
 protected:

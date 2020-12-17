@@ -1,6 +1,9 @@
 
 #include "CommandCenterDataClass.h"
 #include "CommandCenterActor.h"
+#include "Kismet/KismetMathLibrary.h"
+#include "GroundTileActor.h"
+#include "CastleTileActor.h"
 
 
 G_REGISTER_CLASS(CommandCenterDataClass)
@@ -44,6 +47,42 @@ ABaseBuildingActor * CommandCenterDataClass::SpawnBuildingActor(UWorld * world, 
 		BuildingActor->SetBuildingData(this);
 	}
 	return BuildingActor;
+}
+void CommandCenterDataClass::TrySpawnSoldier()
+{
+	TArray<AGroundTileActor*>  TileArray = BuildingActor->GetCastleTileActor()->GetAroundActors();
+	int32 TileIndex = UKismetMathLibrary::RandomInteger(TileArray.Num());
+	FVector SpLocation = FVector::ZeroVector;
+	AGroundTileActor * GroundTile = TileArray[TileIndex];
+	if (GroundTile->GetSoldiers().Num() > 0)
+	{
+		for (auto IterTile : TileArray)
+		{
+			if (IterTile->GetSoldiers().Num() == 0)
+			{
+				SpLocation = IterTile->GetActorLocation();
+				GroundTile = IterTile;
+				break;
+			}
+		}
+	}
+	else
+	{
+		SpLocation = GroundTile->GetActorLocation();
+	}
+	if (SpLocation != FVector::ZeroVector)
+	{
+		SoldierTypeEnum SoldierType = (SoldierTypeEnum)UKismetMathLibrary::RandomIntegerInRange(Soldier_Archer, Soldier_SiegeEngine);
+
+		ASoldierPawn * SoldierPawn = SpawnSoldier(SoldierType);
+		if (SoldierPawn)
+		{
+			SoldierPawn->SetActorLocationAndRotation(SpLocation + FVector(0, 0, 100), BuildingActor->GetActorRotation());
+			GroundTile->AddSoldier(SoldierPawn);
+			SoldierPawn->SetOriginGroundTile(GroundTile);
+			SoldierPawn->SetMoveLocation(SpLocation);
+		}
+	}
 }
 ASoldierPawn * CommandCenterDataClass::SpawnSoldier(SoldierTypeEnum InType)
 {

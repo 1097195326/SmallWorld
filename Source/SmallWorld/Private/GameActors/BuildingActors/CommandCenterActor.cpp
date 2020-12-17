@@ -14,7 +14,14 @@ void ACommandCenterActor::On_Init()
 }
 void ACommandCenterActor::On_Tick(float DeltaSeconds)
 {
-
+	CurrentUpdateInterval += DeltaSeconds;
+	const int32 UpdateInterval = BuildingData->GetLevelInfo().UpdateInterval;
+	if (CurrentUpdateInterval > UpdateInterval)
+	{
+		CurrentUpdateInterval -= UpdateInterval;
+		CommandCenterDataClass * CommandCenterData = (CommandCenterDataClass*)BuildingData;
+		CommandCenterData->TrySpawnSoldier();
+	}
 
 }
 TSharedPtr<SWidget>	ACommandCenterActor::CreateActorDetailWidget()

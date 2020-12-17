@@ -14,6 +14,7 @@ ABaseBuildingActor::ABaseBuildingActor()
 
 	CollisionBoxComponent->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
 
+	CurrentUpdateInterval = 0;
 	BuildingData = nullptr;
     
 	HotPointName = TEXT("HotPoint");
