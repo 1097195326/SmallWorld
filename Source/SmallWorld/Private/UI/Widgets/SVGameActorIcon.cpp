@@ -62,7 +62,7 @@ void SVGameActorIcon::Construct(const FArguments & InArgs)
 			[
 				SAssignNew(IconText,STextBlock)
 				.TextStyle(&FGameStyle::Get().GetWidgetStyle<FTextBlockStyle>("Text_12"))
-				.Text(FText::FromString(BConfig.title))
+				.Text(FText::FromString(BConfig.Title))
 			]
 		];
 
@@ -80,9 +80,9 @@ void SVGameActorIcon::RefreshView()
 	WoodNum = UserHordeData->GetWoodNum();
 	StoneNum = UserHordeData->GetStoneNum();
 
-	if (GoldNum >= BConfig.LevelInfos[0].upmoney &&
-		WoodNum >= BConfig.LevelInfos[0].upwood  &&
-		StoneNum >= BConfig.LevelInfos[0].upstone)
+	if (GoldNum >= BConfig.LevelInfos[0].UpMoney &&
+		WoodNum >= BConfig.LevelInfos[0].UpWood  &&
+		StoneNum >= BConfig.LevelInfos[0].UpStone)
 	{
 
 	}

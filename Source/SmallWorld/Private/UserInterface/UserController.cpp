@@ -77,7 +77,7 @@ AActor * AUserController::TrySelectGameActor(FVector2D ScreenPosition)
 		{
 			CurrentSelectedSoldier = SoldierPawn;
 			GetCurrentUIController->SelectGameActor(SoldierPawn);
-			int32 MoveDis = SoldierPawn->GetSoldierData()->GetMovability();
+			int32 MoveDis = SoldierPawn->GetSoldierData()->GetMoveRange();
 			AGroundTileActor* MainTile = SoldierPawn->GetOriginGroundTile();
 			TArray<AGroundTileActor*>  AroundTiles;
 			GameManager::GetGroundTileAroundSoldier(MainTile, MoveDis, AroundTiles);
@@ -94,7 +94,7 @@ AActor * AUserController::TrySelectGameActor(FVector2D ScreenPosition)
 		{
 			if (CurrentSelectedSoldier)
 			{
-				int32 MoveDis = CurrentSelectedSoldier->GetSoldierData()->GetMovability();
+				int32 MoveDis = CurrentSelectedSoldier->GetSoldierData()->GetMoveRange();
 				AGroundTileActor* MainTile = CurrentSelectedSoldier->GetOriginGroundTile();
 				TArray<AGroundTileActor*>  AroundTiles;
 				GameManager::GetGroundTileAroundSoldier(MainTile, MoveDis, AroundTiles);

@@ -14,7 +14,7 @@ EBTNodeResult::Type UBTTask_SearchEnemy::ExecuteTask(UBehaviorTreeComponent& Own
 	{
 		return EBTNodeResult::Failed;
 	}
-	int32 MoveDis = SoldierPawn->GetSoldierData()->GetMovability();
+	int32 MoveDis = SoldierPawn->GetSoldierData()->GetMoveRange();
 	AGroundTileActor* MainTile = SoldierPawn->GetOriginGroundTile();
 	TArray<AGroundTileActor*>  AroundTiles;
 	GameManager::GetGroundTileAroundSoldier(MainTile, MoveDis, AroundTiles);

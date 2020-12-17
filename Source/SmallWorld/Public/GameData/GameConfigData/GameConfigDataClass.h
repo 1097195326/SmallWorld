@@ -5,47 +5,50 @@
 struct BuildingLevelInfoStruct 
 {
 	BuildingLevelInfoStruct(){}
-	BuildingLevelInfoStruct(int32 temLevel) { level = temLevel; }
-	int32 level;
-	int32 upmoney;
-	int32 upstone;
-	int32 upwood;
-	float factor;
-	bool operator == (const BuildingLevelInfoStruct & info){return level == info.level;}
-	bool operator != (const BuildingLevelInfoStruct & info){return level != info.level;}
+	BuildingLevelInfoStruct(int32 temLevel) { Level = temLevel; }
+	int32 Level;
+	int32 UpMoney;
+	int32 UpStone;
+	int32 UpWood;
+	float Factor;
+	bool operator == (const BuildingLevelInfoStruct & info){return Level == info.Level;}
+	bool operator != (const BuildingLevelInfoStruct & info){return Level != info.Level;}
 };
 struct BuildingConfigStruct
 {
-	FString name;
-	FString title;
-	FString describe;
+	FString Name;
+	FString Title;
+	FString Describe;
 	int32 MaxLevel;
 	TMap<int32,BuildingLevelInfoStruct> LevelInfos;
 };
 struct SoldierLevelInfoStruct
 {
-	int32 level;
-	int32 health;
-	int32 kills;
-	float restorehealth;
-	float restoremovability;
-	float phydamage;
-	float magicdamage;
-	float phydef;
-	float magdef;
-	float factor;
+	int32 Level;
+	int32 NeedExperience;
+	int32 ProvideExperience;
+	int32 Health;
+	int32 HealthReturnSpeed;
+	int32 Movability;
+	int32 MovabilityReturnSpeed;
+
+	float PhyDamage;
+	float MagicDamage;
+	float PhyDef;
+	float MagDef;
+	float Factor;
 };
 struct SoldierConfigStruct
 {
-	FString name = TEXT("");
-	FString race = TEXT("");
-	FString title = TEXT("");
-	FString describe=TEXT("");
-	int32 maxlevel = 1;
-	int32 movability = 1;
-	int32 visibility = 1;
-	int32 attackrange = 1;
-	float attackspeed = 1;
+	FString Name = TEXT("");
+	FString Race = TEXT("");
+	FString Title = TEXT("");
+	FString Describe =TEXT("");
+	int32 MaxLevel = 1;
+	int32 MoveRange = 1;
+	int32 VisibleRange = 1;
+	int32 AttackRange = 1;
+	float AttackSpeed = 1;
 	TMap<int32, SoldierLevelInfoStruct> LevelInfos;
 };
 class GameConfigDataClass : public TemplateDataClass

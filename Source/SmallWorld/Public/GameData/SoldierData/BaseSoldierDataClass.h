@@ -27,9 +27,9 @@ public:
 
 	void SetSoldierConfigByName(FString InName);
 	
-	inline bool	IsFullLevel() { return CurrentLevel == SoldierConfig.maxlevel; }
-	inline bool IsFullMovePower() { return CurrentMovePower == GetLevelInfo().restoremovability; }
-	inline bool IsFullHealth() { return CurrentHealth == GetLevelInfo().restorehealth; }
+	inline bool	IsFullLevel() { return CurrentLevel == SoldierConfig.MaxLevel; }
+	inline bool IsFullMovePower() { return CurrentMovePower == GetLevelInfo().Movability; }
+	inline bool IsFullHealth() { return CurrentHealth == GetLevelInfo().Health; }
 	inline bool IsFullAttackPower() { return CurrentAttackPower == GetAttackSpeed(); }
 	
 	inline FString GetSoldierName() { return SoldierName; }
@@ -44,18 +44,18 @@ public:
 	float SetCurrentMovePower(float InValue)
 	{
 		CurrentMovePower = InValue;
-		if (CurrentMovePower > GetLevelInfo().restoremovability)
+		if (CurrentMovePower > GetLevelInfo().Movability)
 		{
-			CurrentMovePower = GetLevelInfo().restoremovability;
+			CurrentMovePower = GetLevelInfo().Movability;
 		}
 		return CurrentMovePower;
 	}
 	float SetCurrentHealth(float InValue)
 	{
 		CurrentHealth = InValue;
-		if (CurrentHealth > GetLevelInfo().restorehealth)
+		if (CurrentHealth > GetLevelInfo().Health)
 		{
-			CurrentHealth = GetLevelInfo().restorehealth;
+			CurrentHealth = GetLevelInfo().Health;
 		}
 		return CurrentHealth;
 	}
@@ -69,10 +69,10 @@ public:
 		return CurrentAttackPower;
 	}
 
-	inline int32 GetMovability() const { return SoldierConfig.movability; }
-	inline int32 GetVisibility() const { return SoldierConfig.visibility; }
-	inline int32 GetAttackrange() const { return SoldierConfig.attackrange; }
-	inline float GetAttackSpeed() const { return SoldierConfig.attackspeed; }
+	inline int32 GetMoveRange() const { return SoldierConfig.MoveRange; }
+	inline int32 GetVisibleRange() const { return SoldierConfig.VisibleRange; }
+	inline int32 GetAttackRange() const { return SoldierConfig.AttackRange; }
+	inline float GetAttackSpeed() const { return SoldierConfig.AttackSpeed; }
 
 protected:
 	class ASoldierPawn * SoldierPawn;

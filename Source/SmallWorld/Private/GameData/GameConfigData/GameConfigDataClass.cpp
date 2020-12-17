@@ -40,27 +40,27 @@ void GameConfigDataClass::InitWithXML(const FXmlFile * xmlFile)
 	const FXmlNode * RootNode = xmlFile->GetRootNode();
 	for (const FXmlNode * DataTypeInfo = RootNode->GetFirstChildNode(); DataTypeInfo != NULL; DataTypeInfo = DataTypeInfo->GetNextNode())
 	{
-		FString DataType = DataTypeInfo->GetAttribute(TEXT("type"));
+		FString DataType = DataTypeInfo->GetAttribute(TEXT("Type"));
 		if (DataType.Equals(TEXT("BuildingsData")))
 		{
 			for (const FXmlNode * DataInfo = DataTypeInfo->GetFirstChildNode(); DataInfo != NULL; DataInfo = DataInfo->GetNextNode())
 			{
 				BuildingConfigStruct config;
-				config.name = DataInfo->GetAttribute(TEXT("name"));
-				config.title = DataInfo->GetAttribute(TEXT("title"));
-				config.describe = DataInfo->GetAttribute(TEXT("describe"));
-				config.MaxLevel = FCString::Atoi(*DataInfo->GetAttribute(TEXT("maxlevel"))) ;
+				config.Name = DataInfo->GetAttribute(TEXT("Name"));
+				config.Title = DataInfo->GetAttribute(TEXT("Title"));
+				config.Describe = DataInfo->GetAttribute(TEXT("Describe"));
+				config.MaxLevel = FCString::Atoi(*DataInfo->GetAttribute(TEXT("MaxLevel"))) ;
 				for (const FXmlNode * LevelInfo = DataInfo->GetFirstChildNode(); LevelInfo != NULL; LevelInfo = LevelInfo->GetNextNode())
 				{
 					BuildingLevelInfoStruct info;
-					info.level = FCString::Atoi(*LevelInfo->GetAttribute(TEXT("level")));
-					info.upmoney = FCString::Atoi(*LevelInfo->GetAttribute(TEXT("upmoney")));
-					info.upstone = FCString::Atoi(*LevelInfo->GetAttribute(TEXT("upstone")));
-					info.upwood = FCString::Atoi(*LevelInfo->GetAttribute(TEXT("upwood")));
-					info.factor = FCString::Atof(*LevelInfo->GetAttribute(TEXT("factor")));
-					config.LevelInfos.Add(info.level,info);
+					info.Level = FCString::Atoi(*LevelInfo->GetAttribute(TEXT("Level")));
+					info.UpMoney = FCString::Atoi(*LevelInfo->GetAttribute(TEXT("UpMoney")));
+					info.UpStone = FCString::Atoi(*LevelInfo->GetAttribute(TEXT("UpStone")));
+					info.UpWood = FCString::Atoi(*LevelInfo->GetAttribute(TEXT("UpWood")));
+					info.Factor = FCString::Atof(*LevelInfo->GetAttribute(TEXT("Factor")));
+					config.LevelInfos.Add(info.Level,info);
 				}
-				BuildingConfigMap.Add(config.name, config);
+				BuildingConfigMap.Add(config.Name, config);
 			}
 		}
 		else if (DataType.Equals(TEXT("SoldiersData")))
@@ -68,32 +68,34 @@ void GameConfigDataClass::InitWithXML(const FXmlFile * xmlFile)
 			for (const FXmlNode * DataInfo = DataTypeInfo->GetFirstChildNode(); DataInfo != NULL; DataInfo = DataInfo->GetNextNode())
 			{
 				SoldierConfigStruct config;
-				config.name = DataInfo->GetAttribute(TEXT("name"));
-				config.race = DataInfo->GetAttribute(TEXT("race"));
-				config.title = DataInfo->GetAttribute(TEXT("title"));
-				config.describe = DataInfo->GetAttribute(TEXT("describe"));
-				config.maxlevel = FCString::Atoi(*DataInfo->GetAttribute(TEXT("maxlevel")));
-				config.movability = FCString::Atoi(*DataInfo->GetAttribute("movability"));
-				config.visibility = FCString::Atoi(*DataInfo->GetAttribute("visibility"));
-				config.attackrange = FCString::Atoi(*DataInfo->GetAttribute("attackrange"));
-				config.attackspeed = FCString::Atof(*DataInfo->GetAttribute("attackspeed"));
+				config.Name = DataInfo->GetAttribute(TEXT("Name"));
+				config.Race = DataInfo->GetAttribute(TEXT("Race"));
+				config.Title = DataInfo->GetAttribute(TEXT("Title"));
+				config.Describe = DataInfo->GetAttribute(TEXT("Describe"));
+				config.MaxLevel = FCString::Atoi(*DataInfo->GetAttribute(TEXT("MaxLevel")));
+				config.MoveRange = FCString::Atoi(*DataInfo->GetAttribute("MoveRange"));
+				config.VisibleRange = FCString::Atoi(*DataInfo->GetAttribute("VisibleRange"));
+				config.AttackRange = FCString::Atoi(*DataInfo->GetAttribute("AttackRange"));
+				config.AttackSpeed = FCString::Atof(*DataInfo->GetAttribute("AttackSpeed"));
 
 				for (const FXmlNode * LevelInfo = DataInfo->GetFirstChildNode(); LevelInfo != NULL; LevelInfo = LevelInfo->GetNextNode())
 				{
 					SoldierLevelInfoStruct info;
-					info.level = FCString::Atoi(*LevelInfo->GetAttribute(TEXT("level")));
-					info.health = FCString::Atoi(*LevelInfo->GetAttribute(TEXT("health")));
-					info.kills = FCString::Atoi(*LevelInfo->GetAttribute(TEXT("kills")));
-					info.restorehealth = FCString::Atof(*LevelInfo->GetAttribute(TEXT("restorehealth")));
-					info.restoremovability = FCString::Atof(*LevelInfo->GetAttribute(TEXT("restoremovability")));
-					info.phydamage = FCString::Atof(*LevelInfo->GetAttribute(TEXT("phydamage")));
-					info.magicdamage = FCString::Atof(*LevelInfo->GetAttribute(TEXT("magicdamage")));
-					info.phydef = FCString::Atof(*LevelInfo->GetAttribute(TEXT("phydef")));
-					info.magdef = FCString::Atof(*LevelInfo->GetAttribute(TEXT("magdef")));
-					info.factor = FCString::Atof(*LevelInfo->GetAttribute(TEXT("factor")));
-					config.LevelInfos.Add(info.level, info);
+					info.Level = FCString::Atoi(*LevelInfo->GetAttribute(TEXT("Level")));
+					info.NeedExperience = FCString::Atoi(*LevelInfo->GetAttribute(TEXT("NeedExperience")));
+					info.ProvideExperience = FCString::Atoi(*LevelInfo->GetAttribute(TEXT("ProvideExperience")));
+					info.Health = FCString::Atoi(*LevelInfo->GetAttribute(TEXT("Health")));
+					info.HealthReturnSpeed = FCString::Atoi(*LevelInfo->GetAttribute(TEXT("HealthReturnSpeed")));
+					info.Movability = FCString::Atoi(*LevelInfo->GetAttribute(TEXT("Movability")));
+					info.MovabilityReturnSpeed = FCString::Atoi(*LevelInfo->GetAttribute(TEXT("MovabilityReturnSpeed")));
+					info.PhyDamage = FCString::Atof(*LevelInfo->GetAttribute(TEXT("PhyDamage")));
+					info.MagicDamage = FCString::Atof(*LevelInfo->GetAttribute(TEXT("MagicDamage")));
+					info.PhyDef = FCString::Atof(*LevelInfo->GetAttribute(TEXT("PhyDef")));
+					info.MagDef = FCString::Atof(*LevelInfo->GetAttribute(TEXT("MagDef")));
+					info.Factor = FCString::Atof(*LevelInfo->GetAttribute(TEXT("Factor")));
+					config.LevelInfos.Add(info.Level, info);
 				}
-				SoldierConfigMap.Add(config.name, config);
+				SoldierConfigMap.Add(config.Name, config);
 			}
 		}
 		else if (DataType.Equals(TEXT("LanguageData")))
@@ -111,13 +113,13 @@ void GameConfigDataClass::InitWithXML(const FXmlFile * xmlFile)
 	}
 	for (auto & building : BuildingConfigMap)
 	{
-		building.Value.title = LanguageMap[LocalLanguage][building.Value.title];
-		building.Value.describe = LanguageMap[LocalLanguage][building.Value.describe];
+		building.Value.Title = LanguageMap[LocalLanguage][building.Value.Title];
+		building.Value.Describe = LanguageMap[LocalLanguage][building.Value.Describe];
 	}
 	for (auto & soldier : SoldierConfigMap)
 	{
-		soldier.Value.title = LanguageMap[LocalLanguage][soldier.Value.title];
-		soldier.Value.describe = LanguageMap[LocalLanguage][soldier.Value.describe];
+		soldier.Value.Title = LanguageMap[LocalLanguage][soldier.Value.Title];
+		soldier.Value.Describe = LanguageMap[LocalLanguage][soldier.Value.Describe];
 	}
 
 }

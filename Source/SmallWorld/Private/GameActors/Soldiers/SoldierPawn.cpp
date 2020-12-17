@@ -53,22 +53,24 @@ void ASoldierPawn::On_Start()
 }
 void ASoldierPawn::On_Tick(float delta)
 {
-
-	if (!SoldierData->IsFullMovePower())
+	if (IsAlive())
 	{
-		SoldierData->SetCurrentMovePower(SoldierData->CurrentMovePower += delta);
-	}
-	if (!SoldierData->IsFullHealth())
-	{
-		SoldierData->SetCurrentHealth(SoldierData->CurrentHealth += delta);
-	}
-	if (!SoldierData->IsFullAttackPower())
-	{
-		SoldierData->SetCurrentAttackPower(SoldierData->CurrentAttackPower += delta);
-	}
-	if (!SoldierData->IsUserData())
-	{
-		UpdateAI(delta);
+		if (!SoldierData->IsFullMovePower())
+		{
+			SoldierData->SetCurrentMovePower(SoldierData->CurrentMovePower += delta);
+		}
+		if (!SoldierData->IsFullHealth())
+		{
+			SoldierData->SetCurrentHealth(SoldierData->CurrentHealth += delta);
+		}
+		if (!SoldierData->IsFullAttackPower())
+		{
+			SoldierData->SetCurrentAttackPower(SoldierData->CurrentAttackPower += delta);
+		}
+		if (!SoldierData->IsUserData())
+		{
+			UpdateAI(delta);
+		}
 	}
 }
 void ASoldierPawn::On_End()
@@ -242,7 +244,7 @@ void ASoldierPawn::MoveToTargetEnd()
 {
 	if (SoldierData->IsUserData())
 	{
-		int32 VisibleDis = SoldierData->GetVisibility();
+		int32 VisibleDis = SoldierData->GetVisibleRange();
 		TArray<AGroundTileActor*>  AroundTiles;
 		if (OriginGroundTile)
 		{

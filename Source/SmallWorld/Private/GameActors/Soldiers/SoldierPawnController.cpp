@@ -82,7 +82,7 @@ void ASoldierPawnController::TryMoveSoldier(class ASoldierPawn * InSoldier)
 {
 	if (InSoldier == nullptr) { return; }
 	
-	int32 MoveDis = InSoldier->GetSoldierData()->GetMovability();
+	int32 MoveDis = InSoldier->GetSoldierData()->GetMoveRange();
 	AGroundTileActor* MainTile = InSoldier->GetOriginGroundTile();
 	TArray<AGroundTileActor*>  AroundTiles;
 	GameManager::GetGroundTileAroundSoldier(MainTile, MoveDis, AroundTiles);
