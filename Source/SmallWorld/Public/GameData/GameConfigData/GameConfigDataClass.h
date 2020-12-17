@@ -7,6 +7,7 @@ struct BuildingLevelInfoStruct
 	BuildingLevelInfoStruct(){}
 	BuildingLevelInfoStruct(int32 temLevel) { Level = temLevel; }
 	int32 Level;
+	int32 UpdateInterval;
 	int32 UpMoney;
 	int32 UpStone;
 	int32 UpWood;
@@ -33,6 +34,7 @@ struct SoldierLevelInfoStruct
 	int32 Movability;
 	int32 MovabilityReturnInterval;
 	int32 MovabilityReturnSpeed;
+	int32 MoveConsume;
 
 	float PhyDamage;
 	float MagicDamage;

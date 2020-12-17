@@ -12,6 +12,11 @@ void ACommandCenterActor::On_Init()
 {
 	
 }
+void ACommandCenterActor::On_Tick(float DeltaSeconds)
+{
+
+
+}
 TSharedPtr<SWidget>	ACommandCenterActor::CreateActorDetailWidget()
 {
 	SAssignNew(ActorWidget, SCommandCenter)

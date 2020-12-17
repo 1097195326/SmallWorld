@@ -14,6 +14,7 @@ public:
 	ACommandCenterActor();
 
 	virtual void On_Init() override;
+	virtual void On_Tick(float DeltaSeconds);
 
 	virtual bool SetMeshComponentByIconName(const FString& InIconName) override;
 

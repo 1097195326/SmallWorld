@@ -54,6 +54,7 @@ void GameConfigDataClass::InitWithXML(const FXmlFile * xmlFile)
 				{
 					BuildingLevelInfoStruct info;
 					info.Level = FCString::Atoi(*LevelInfo->GetAttribute(TEXT("Level")));
+					info.UpdateInterval = FCString::Atoi(*LevelInfo->GetAttribute(TEXT("UpdateInterval")));
 					info.UpMoney = FCString::Atoi(*LevelInfo->GetAttribute(TEXT("UpMoney")));
 					info.UpStone = FCString::Atoi(*LevelInfo->GetAttribute(TEXT("UpStone")));
 					info.UpWood = FCString::Atoi(*LevelInfo->GetAttribute(TEXT("UpWood")));
@@ -90,6 +91,7 @@ void GameConfigDataClass::InitWithXML(const FXmlFile * xmlFile)
 					info.Movability = FCString::Atoi(*LevelInfo->GetAttribute(TEXT("Movability")));
 					info.MovabilityReturnInterval = FCString::Atoi(*LevelInfo->GetAttribute(TEXT("MovabilityReturnInterval")));
 					info.MovabilityReturnSpeed = FCString::Atoi(*LevelInfo->GetAttribute(TEXT("MovabilityReturnSpeed")));
+					info.MoveConsume = FCString::Atoi(*LevelInfo->GetAttribute(TEXT("MoveConsume")));
 					info.PhyDamage = FCString::Atof(*LevelInfo->GetAttribute(TEXT("PhyDamage")));
 					info.MagicDamage = FCString::Atof(*LevelInfo->GetAttribute(TEXT("MagicDamage")));
 					info.PhyDef = FCString::Atof(*LevelInfo->GetAttribute(TEXT("PhyDef")));
