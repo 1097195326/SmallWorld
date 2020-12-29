@@ -2,6 +2,9 @@
 #include "GameDataManager.h"
 #include "CommandCenterDataClass.h"
 #include "HordeDataClass.h"
+#include "GroundTileActor.h"
+
+
 
 BaseSoldierDataClass::BaseSoldierDataClass()
 {
@@ -32,7 +35,7 @@ void BaseSoldierDataClass::Serialization(TSharedRef<TJsonWriter<TCHAR, TCondense
 	}
 	if (SoldierPawn)
 	{
-		Writer->WriteValue("SoldierLocation", SoldierPawn->GetActorLocation().ToString());
+		Writer->WriteValue("SoldierLocation", SoldierPawn->GetOriginGroundTile()->GetActorLocation().ToString());
 		Writer->WriteValue("SoldierRotation", SoldierPawn->GetActorRotation().ToString());
 	}
 	Writer->WriteValue("SoldierName", *SoldierName);
