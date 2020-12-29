@@ -32,7 +32,7 @@ void HouseDataClass::Deserialization(TSharedPtr<FJsonObject>  JsonObject)
 	PeopleNum = JsonObject->GetIntegerField("PeopleNum");
     
 }
-ABaseBuildingActor * HouseDataClass::SpawnBuildingActor(UWorld * world, const FTransform & SpawnTF, const int32 && InIndex)
+ABaseBuildingActor * HouseDataClass::SpawnBuildingActor(UWorld * world, const FTransform & SpawnTF, const int32 & InIndex)
 {
 	FActorSpawnParameters Paramerter;
 	Paramerter.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;

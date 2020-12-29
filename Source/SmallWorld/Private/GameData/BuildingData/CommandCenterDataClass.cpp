@@ -33,10 +33,23 @@ void CommandCenterDataClass::Serialization(TSharedRef<TJsonWriter<TCHAR, TConden
 }
 void CommandCenterDataClass::Deserialization(TSharedPtr<FJsonObject>  JsonObject)
 {
-    
-    
+	BaseBuildingDataClass::Deserialization(JsonObject->GetObjectField("BaseBuildingDataClass"));
+
+	TSharedPtr<FJsonObject> jSoldierData = JsonObject->GetObjectField("SoldiersData");
+
+	for (auto jPair : jSoldierData->Values)
+	{
+		FString DataClass = jPair.Key;
+		BaseSoldierDataClass * SoldierData = (BaseSoldierDataClass*)(ClassReflectManager::Get()->GetClassByName(TCHAR_TO_UTF8(*DataClass)));
+		if (SoldierData)
+		{
+			SoldierData->Deserialization(jPair.Value->AsObject());
+			SoldiersMap.Add(SoldierData->GetObjectId(), SoldierData);
+		}
+	}
+
 }
-ABaseBuildingActor * CommandCenterDataClass::SpawnBuildingActor(UWorld * world, const FTransform & SpawnTF, const int32 && InIndex)
+ABaseBuildingActor * CommandCenterDataClass::SpawnBuildingActor(UWorld * world, const FTransform & SpawnTF, const int32 & InIndex)
 {
 	FActorSpawnParameters Paramerter;
 	Paramerter.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;

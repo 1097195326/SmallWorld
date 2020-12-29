@@ -67,7 +67,7 @@ void GameManager::BuildGameWorld()
 			HordeData = GameDataManager::GetInstance()->GetGameWorldData()->CreateHordeData(TemRace);
 		}
 		BaseBuildingDataClass *	 BuildingData = HordeData->SpawnBuildingData("CommandCenter");
-		ABaseBuildingActor * BuildingActor = BuildingData->SpawnBuildingActor(User_GameInstance->GetWorld(), CastleTileActor->GetActorTransform());
+		ABaseBuildingActor * BuildingActor = BuildingData->SpawnBuildingActor(User_GameInstance->GetWorld(), CastleTileActor->GetActorTransform(),0);
 		if (BuildingActor)
 		{
 			BuildingActor->SetCastleTileActor(CastleTileActor);

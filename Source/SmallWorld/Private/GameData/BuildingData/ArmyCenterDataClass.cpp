@@ -58,7 +58,7 @@ void ArmyCenterDataClass::Deserialization(TSharedPtr<FJsonObject>  JsonObject)
 		TrainSoldiers.Add(ekey, ivalue);
 	}*/
 }
-ABaseBuildingActor * ArmyCenterDataClass::SpawnBuildingActor(UWorld * world, const FTransform & SpawnTF, const int32 && InIndex)
+ABaseBuildingActor * ArmyCenterDataClass::SpawnBuildingActor(UWorld * world, const FTransform & SpawnTF, const int32 & InIndex)
 {
 	/*FString ClassPath = FString::Printf(TEXT("/Game/Blueprint/%s_BP.%s_BP_C"), *BuildingName, *BuildingName);
 	UClass * SoldierClass = LoadClass<ASoldierPawn>(nullptr, *ClassPath);*/

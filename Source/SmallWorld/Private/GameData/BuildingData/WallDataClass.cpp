@@ -28,7 +28,7 @@ void WallDataClass::Deserialization(TSharedPtr<FJsonObject>  JsonObject)
     
     
 }
-ABaseBuildingActor * WallDataClass::SpawnBuildingActor(UWorld * world, const FTransform & SpawnTF, const int32 && InIndex)
+ABaseBuildingActor * WallDataClass::SpawnBuildingActor(UWorld * world, const FTransform & SpawnTF, const int32 & InIndex)
 {
 	FActorSpawnParameters Paramerter;
 	Paramerter.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;

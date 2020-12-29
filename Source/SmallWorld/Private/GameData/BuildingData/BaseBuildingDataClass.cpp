@@ -7,8 +7,6 @@ BaseBuildingDataClass::BaseBuildingDataClass()
 {
 
 	BuildingType = B_None;
-	BuildingPosition = FVector::ZeroVector;
-	BuildingRotator = FRotator::ZeroRotator;
 
 	BuildingLevel = 0;
 	BuildingHealth = 0.f;
@@ -29,8 +27,7 @@ void BaseBuildingDataClass::Serialization(TSharedRef<TJsonWriter<TCHAR, TCondens
 	RuntimeDataClass::Serialization(Writer);
 
 	Writer->WriteValue("BuildingName", *BuildingName);
-	Writer->WriteValue("BuildingPosition", BuildingPosition.ToString());
-	Writer->WriteValue("BuildingRotator", BuildingRotator.ToString());
+	Writer->WriteValue("BuildingTransform", BuildingTransform.ToString());
 	Writer->WriteValue("BuildingHealth", BuildingHealth);
 	Writer->WriteValue("BuildingLevel", BuildingLevel);
 	Writer->WriteValue("IsUpdating", IsUpdating);
@@ -43,14 +40,15 @@ void BaseBuildingDataClass::Deserialization(TSharedPtr<FJsonObject> JsonObject)
 	RuntimeDataClass::Deserialization(JsonObject->GetObjectField("RuntimeDataClass"));
 
 	BuildingName = JsonObject->GetStringField("BuildingName");
-	BuildingPosition.InitFromString(JsonObject->GetStringField("BuildingPosition"));
-	BuildingRotator.InitFromString(JsonObject->GetStringField("BuildingRotator"));
+	BuildingTransform.InitFromString(JsonObject->GetStringField("BuildingTransform"));
 	BuildingHealth = JsonObject->GetNumberField("BuildingHealth");
 	BuildingLevel = JsonObject->GetIntegerField("BuildingLevel");
 	IsUpdating = JsonObject->GetBoolField("IsUpdating");
 	RemainingUpdateTime = JsonObject->GetIntegerField("RemainingUpdateTime");
 
 	SetConfigDataByName(BuildingName);
+
+	SpawnBuildingActor(GEngine->GetWorld(), BuildingTransform, BuildingLevel);
 }
 HordeDataClass * BaseBuildingDataClass::GetHordeBelongTo()
 {

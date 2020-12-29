@@ -29,7 +29,7 @@ void BakeryDataClass::Deserialization(TSharedPtr<FJsonObject>  JsonObject)
     
     
 }
-ABaseBuildingActor * BakeryDataClass::SpawnBuildingActor(UWorld * world, const FTransform & SpawnTF, const int32 && InIndex)
+ABaseBuildingActor * BakeryDataClass::SpawnBuildingActor(UWorld * world, const FTransform & SpawnTF, const int32 & InIndex)
 {
 	FActorSpawnParameters Paramerter;
 	Paramerter.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;

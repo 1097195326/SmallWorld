@@ -44,13 +44,13 @@ public:
 	virtual void Deserialization(TSharedPtr<FJsonObject>  JsonObject) override;
 
 	virtual void CalculateData(){}
-	virtual ABaseBuildingActor * SpawnBuildingActor(UWorld * world, const FTransform & SpawnTF, const int32 && InIndex = 0) { return nullptr; };
+	virtual ABaseBuildingActor * SpawnBuildingActor(UWorld * world, const FTransform & SpawnTF, const int32 & InIndex) { return nullptr; };
 	
 	bool IsUserData();
-	class HordeDataClass *	GetHordeBelongTo();
+	class HordeDataClass * GetHordeBelongTo();
 	void SetHordeBelongTo(class HordeDataClass * InHorde);
 
-	void	SetConfigDataByName(FString InName);
+	void SetConfigDataByName(FString InName);
 
 	inline bool IsFullLevel() { return BuildingLevel == BuildingConfig.MaxLevel; }
 	inline const BuildingConfigStruct & GetBuildingConfig() { return BuildingConfig; }
@@ -59,25 +59,26 @@ public:
 	inline FString GetBuildingName() { return BuildingName; }
 	inline EBuildingType GetBuildingType() { return BuildingType; }
 protected:
-	class HordeDataClass *	HordeBelongTo;
+	class HordeDataClass * HordeBelongTo;
 	//Config Data
-	FString			BuildingName;
-	EBuildingType	BuildingType;
+	FString BuildingName;
+	EBuildingType BuildingType;
 public:
 	// Running Datas
 	class ABaseBuildingActor * BuildingActor;
 
-	BuildingConfigStruct  BuildingConfig;
-	FVector			BuildingPosition;
-	FRotator		BuildingRotator;
+	BuildingConfigStruct BuildingConfig;
+	FTransform BuildingTransform;
+	FVector BuildingPosition;
+	FRotator BuildingRotator;
 
-	int32			MaxHealth;
-	int32			MaxUpdateTime;
+	int32 MaxHealth;
+	int32 MaxUpdateTime;
 
-	float	    BuildingHealth;
-	int32		BuildingLevel;
+	float BuildingHealth;
+	int32 BuildingLevel;
 
-	bool		IsUpdating;
-	int32		RemainingUpdateTime; // second
+	bool IsUpdating;
+	int32 RemainingUpdateTime; // second
 
 };

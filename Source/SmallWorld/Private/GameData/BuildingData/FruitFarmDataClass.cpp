@@ -31,7 +31,7 @@ void FruitFarmDataClass::Deserialization(TSharedPtr<FJsonObject>  JsonObject)
 
 
 }
-ABaseBuildingActor * FruitFarmDataClass::SpawnBuildingActor(UWorld * world, const FTransform & SpawnTF, const int32 && InIndex)
+ABaseBuildingActor * FruitFarmDataClass::SpawnBuildingActor(UWorld * world, const FTransform & SpawnTF, const int32 & InIndex)
 {
 	FActorSpawnParameters Paramerter;
 	Paramerter.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;

@@ -38,7 +38,7 @@ void FoodStoreDataClass::Deserialization(TSharedPtr<FJsonObject>  JsonObject)
 	FruitNum = JsonObject->GetIntegerField("FruitNum");
     
 }
-ABaseBuildingActor * FoodStoreDataClass::SpawnBuildingActor(UWorld * world, const FTransform & SpawnTF, const int32 && InIndex)
+ABaseBuildingActor * FoodStoreDataClass::SpawnBuildingActor(UWorld * world, const FTransform & SpawnTF, const int32 & InIndex)
 {
 	FActorSpawnParameters Paramerter;
 	Paramerter.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;

@@ -31,7 +31,7 @@ void FarmDataClass::Deserialization(TSharedPtr<FJsonObject>  JsonObject)
 	CropNum = JsonObject->GetIntegerField("CropNum");
 
 }
-ABaseBuildingActor * FarmDataClass::SpawnBuildingActor(UWorld * world, const FTransform & SpawnTF, const int32 && InIndex)
+ABaseBuildingActor * FarmDataClass::SpawnBuildingActor(UWorld * world, const FTransform & SpawnTF, const int32 & InIndex)
 {
 	FActorSpawnParameters Paramerter;
 	Paramerter.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;

@@ -37,7 +37,7 @@ void WoodStoneStoreDataClass::Deserialization(TSharedPtr<FJsonObject>  JsonObjec
 
     
 }
-ABaseBuildingActor * WoodStoneStoreDataClass::SpawnBuildingActor(UWorld * world, const FTransform & SpawnTF, const int32 && InIndex)
+ABaseBuildingActor * WoodStoneStoreDataClass::SpawnBuildingActor(UWorld * world, const FTransform & SpawnTF, const int32 & InIndex)
 {
 	FActorSpawnParameters Paramerter;
 	Paramerter.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;

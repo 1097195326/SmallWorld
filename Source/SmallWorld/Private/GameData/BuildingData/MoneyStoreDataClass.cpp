@@ -30,7 +30,7 @@ void MoneyStoreDataClass::Deserialization(TSharedPtr<FJsonObject>  JsonObject)
 
 	GoldNum = JsonObject->GetIntegerField("GoldNum");
 }
-ABaseBuildingActor * MoneyStoreDataClass::SpawnBuildingActor(UWorld * world, const FTransform & SpawnTF, const int32 && InIndex)
+ABaseBuildingActor * MoneyStoreDataClass::SpawnBuildingActor(UWorld * world, const FTransform & SpawnTF, const int32 & InIndex)
 {
 	FActorSpawnParameters Paramerter;
 	Paramerter.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
