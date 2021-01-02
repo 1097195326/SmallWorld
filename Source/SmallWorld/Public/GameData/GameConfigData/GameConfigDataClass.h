@@ -54,6 +54,8 @@ struct SoldierConfigStruct
 	int32 AttackRange = 1;
 	float AttackInterval = 1;
 	TMap<int32, SoldierLevelInfoStruct> LevelInfos;
+
+	bool IsValid() { return !Name.IsEmpty(); }
 };
 class GameConfigDataClass : public TemplateDataClass
 {

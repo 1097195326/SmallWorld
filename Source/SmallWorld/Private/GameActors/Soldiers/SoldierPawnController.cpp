@@ -91,7 +91,7 @@ void ASoldierPawnController::TryMoveSoldier(class ASoldierPawn * InSoldier)
 		int32 TileIndex = UKismetMathLibrary::RandomInteger(AroundTiles.Num());
 		AGroundTileActor * TileActor = AroundTiles[TileIndex];
 		InSoldier->SetTargetGroundTile(TileActor);
-		InSoldier->SetMoveLocation(TileActor->GetActorLocation());
+		//InSoldier->SetMoveLocation(TileActor->GetActorLocation());
 	}
 
 

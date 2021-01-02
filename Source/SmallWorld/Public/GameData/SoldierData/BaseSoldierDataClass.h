@@ -19,7 +19,6 @@ public:
 	virtual ASoldierPawn * SpawnSoldierActor(const FString & InSoldierName);
 	virtual void DestroySoldier();
 
-
 	class CommandCenterDataClass * GetCommandCenter();
 	void SetCommandCenter(class CommandCenterDataClass * InCommandCenter);
 
@@ -27,25 +26,29 @@ public:
 
 	void SetSoldierConfigByName(FString InName);
 	
-	inline bool	IsFullLevel() { return CurrentLevel == SoldierConfig.MaxLevel; }
-	inline bool IsFullMovability() { return CurrentMovability == GetLevelInfo().Movability; }
-	inline bool IsFullHealth() { return CurrentHealth == GetLevelInfo().Health; }
-	inline bool IsFullAttackPower() { return CurrentAttackInterval == GetAttackInterval(); }
-	
+	void InitDataWithConfig();
+
 	inline FString GetSoldierName() { return SoldierName; }
 	inline SoldierTypeEnum GetSoldierType() { return SoldierType; }
 	inline const SoldierConfigStruct & GetSoldierConfig() { return SoldierConfig; }
 	inline const SoldierLevelInfoStruct & GetLevelInfo() const { return SoldierConfig.LevelInfos[CurrentLevel]; }
 
-	inline float GetCurrentMovability() const { return CurrentMovability; }
+	inline bool	IsFullLevel() { return CurrentLevel == SoldierConfig.MaxLevel; }
+
+	inline bool IsFullHealth() { return CurrentHealth == GetLevelInfo().Health; }
+	inline bool IsAlive() { return CurrentHealth > 0.f; }
+	void TakeDamage(float InDamage);
 	inline float GetCurrentHealth() const { return CurrentHealth; }
-	inline float GetCurrentAttackInterval() const { return CurrentAttackInterval; }
-
-	void SetCurrentMovability(float InValue);
 	void SetCurrentHealth(float InValue);
-
-	void ReturnMovability(float InTime);
 	void ReturnHealth(float InTime);
+
+	inline bool IsFullMovability() { return CurrentMovability == GetLevelInfo().Movability; }
+	void SetCurrentMovability(float InValue);
+	inline float GetCurrentMovability() const { return CurrentMovability; }
+	void ReturnMovability(float InTime);
+
+	inline bool IsFullAttackPower() { return CurrentAttackInterval == GetAttackInterval(); }
+	inline float GetCurrentAttackInterval() const { return CurrentAttackInterval; }
 	void ReturnAttackPower(float InTime);
 
 	inline int32 GetMoveRange() const { return SoldierConfig.MoveRange; }

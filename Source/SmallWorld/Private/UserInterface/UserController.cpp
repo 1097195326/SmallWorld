@@ -79,15 +79,18 @@ AActor * AUserController::TrySelectGameActor(FVector2D ScreenPosition)
 			GetCurrentUIController->SelectGameActor(SoldierPawn);
 			int32 MoveDis = SoldierPawn->GetSoldierData()->GetMoveRange();
 			AGroundTileActor* MainTile = SoldierPawn->GetOriginGroundTile();
-			TArray<AGroundTileActor*>  AroundTiles;
-			GameManager::GetGroundTileAroundSoldier(MainTile, MoveDis, AroundTiles);
-
-			MainTile->ShowFlags(true, false);
-			for (auto IterActor : AroundTiles)
+			if (MainTile)
 			{
-				IterActor->ShowFlags(false, true);
-			}
+				TArray<AGroundTileActor*>  AroundTiles;
+				GameManager::GetGroundTileAroundSoldier(MainTile, MoveDis, AroundTiles);
 
+				MainTile->ShowFlags(true, false);
+				for (auto IterActor : AroundTiles)
+				{
+					IterActor->ShowFlags(false, true);
+				}
+
+			}
 			return SoldierPawn;
 		}
 		else if (TileActor)
@@ -101,7 +104,7 @@ AActor * AUserController::TrySelectGameActor(FVector2D ScreenPosition)
 				if (AroundTiles.Contains(TileActor))
 				{
 					CurrentSelectedSoldier->SetTargetGroundTile(TileActor);
-					CurrentSelectedSoldier->SetMoveLocation(TileActor->GetActorLocation());
+					//CurrentSelectedSoldier->SetMoveLocation(TileActor->GetActorLocation());
 				}
 				else
 				{

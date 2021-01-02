@@ -48,13 +48,13 @@ void AGroundTileActor::On_Tick(float DeltaSeconds)
 			FlagTimer = 0.f;
 		}
 	}
-	if (CloudTileComponent->GetVisibleFlag() && VisibilityCounter == 0)
-	{
-		CloudTileComponent->SetVisibility(false);
-	}else if (!CloudTileComponent->GetVisibleFlag() && VisibilityCounter > 0)
+	/*if (!CloudTileComponent->GetVisibleFlag() && VisibilityCounter == 0)
 	{
 		CloudTileComponent->SetVisibility(true);
-	}
+	}else if (CloudTileComponent->GetVisibleFlag() && VisibilityCounter > 0)
+	{
+		CloudTileComponent->SetVisibility(false);
+	}*/
 }
 void AGroundTileActor::On_Delete()
 {

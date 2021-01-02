@@ -93,7 +93,7 @@ void CommandCenterDataClass::TrySpawnSoldier()
 			SoldierPawn->SetActorLocationAndRotation(SpLocation + FVector(0, 0, 100), BuildingActor->GetActorRotation());
 			GroundTile->AddSoldier(SoldierPawn);
 			SoldierPawn->SetOriginGroundTile(GroundTile);
-			SoldierPawn->SetMoveLocation(SpLocation);
+			//SoldierPawn->SetMoveLocation(SpLocation);
 		}
 	}
 }
@@ -134,6 +134,7 @@ ASoldierPawn * CommandCenterDataClass::SpawnSoldier(SoldierTypeEnum InType)
 		{
 			SoldierData->SetCommandCenter(this);
 			SoldierData->SetSoldierConfigByName(SoldierName);
+			SoldierData->InitDataWithConfig();
 			SoldierData->SetParentId(GetObjectId());
 			SoldiersMap.Add(SoldierData->GetObjectId(), SoldierData);
 

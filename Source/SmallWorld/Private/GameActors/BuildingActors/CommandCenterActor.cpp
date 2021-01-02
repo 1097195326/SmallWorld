@@ -6,6 +6,7 @@
 ACommandCenterActor::ACommandCenterActor()
 {
 	
+	PrimaryActorTick.bCanEverTick = true;
 
 }
 void ACommandCenterActor::On_Init()

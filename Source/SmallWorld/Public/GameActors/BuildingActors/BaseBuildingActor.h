@@ -40,7 +40,7 @@ public:
 protected:
 	BaseBuildingDataClass * BuildingData;
 	ACastleTileActor *		CastleTileActor;
-	int32 CurrentUpdateInterval;
+	float CurrentUpdateInterval;
 public:
 	/*UPROPERTY(VisibleDefaultsOnly, Category = BaseBuilding)
 	UMeshComponent * MeshComponent;*/

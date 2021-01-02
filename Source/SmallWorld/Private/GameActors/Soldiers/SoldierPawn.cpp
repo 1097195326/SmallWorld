@@ -53,7 +53,7 @@ void ASoldierPawn::On_Start()
 }
 void ASoldierPawn::On_Tick(float delta)
 {
-	if (IsAlive())
+	if (SoldierData->IsAlive())
 	{
 		if (!SoldierData->IsFullMovability())
 		{
@@ -88,8 +88,8 @@ float ASoldierPawn::TakeDamage(float Damage, struct FDamageEvent const& DamageEv
 	{
 		float damage = Super::TakeDamage(Damage, DamageEvent, EventInstigator, DamageCauser);
 
-		SetHealth(Health - damage);
-		if (!IsAlive())
+		SoldierData->TakeDamage(damage);
+		if (!SoldierData->IsAlive())
 		{
 			ASoldierPawnController * MyController = Cast<ASoldierPawnController>(Controller);
 			if (MyController)
@@ -103,7 +103,6 @@ float ASoldierPawn::TakeDamage(float Damage, struct FDamageEvent const& DamageEv
 			}
 			mSoldierState = SoldierState::S_Dieing;
 			mSoldierAnimState = Anim_Death;
-			Health = 0.f;
 		}
 		return damage;
 	}
@@ -267,9 +266,11 @@ void ASoldierPawn::MoveToTargetEnd()
 			}
 		}
 	}
-	OriginGroundTile = TargetGroundTile;
-	TargetGroundTile = nullptr;
-
+	if (TargetGroundTile)
+	{
+		OriginGroundTile = TargetGroundTile;
+		TargetGroundTile = nullptr;
+	}
 }
 //
 //FVector ASoldierPawn::Seek(FVector TargetLocation)

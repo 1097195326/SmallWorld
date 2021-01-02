@@ -108,6 +108,15 @@ void BaseSoldierDataClass::SetSoldierConfigByName(FString InName)
 	SoldierName = InName;
 	SoldierConfig = GameDataManager::GetInstance()->GetGameConfigData()->GetSoldierConfig(InName);
 }
+void BaseSoldierDataClass::InitDataWithConfig()
+{
+	if (SoldierConfig.IsValid())
+	{
+		CurrentLevel = 0;
+		CurrentHealth = SoldierConfig.LevelInfos[0].Health;
+
+	}
+}
 void BaseSoldierDataClass::SetCurrentMovability(float InValue)
 {
 	CurrentMovability = InValue;
@@ -116,12 +125,19 @@ void BaseSoldierDataClass::SetCurrentMovability(float InValue)
 		CurrentMovability = GetLevelInfo().Movability;
 	}
 }
+void BaseSoldierDataClass::TakeDamage(float InDamage)
+{
+	SetCurrentHealth(CurrentHealth - InDamage);
+}
 void BaseSoldierDataClass::SetCurrentHealth(float InValue)
 {
 	CurrentHealth = InValue;
 	if (CurrentHealth > GetLevelInfo().Health)
 	{
 		CurrentHealth = GetLevelInfo().Health;
+	}else if (CurrentHealth < 0.f)
+	{
+		CurrentHealth = 0.f;
 	}
 }
 void BaseSoldierDataClass::ReturnMovability(float InTime)

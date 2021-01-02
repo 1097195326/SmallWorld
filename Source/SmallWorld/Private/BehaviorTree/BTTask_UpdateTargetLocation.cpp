@@ -2,6 +2,7 @@
 #include "BehaviorTree/BlackboardComponent.h"
 #include "SoldierPawnController.h"
 #include "SoldierPawn.h"
+#include "GroundTileActor.h"
 
 EBTNodeResult::Type UBTTask_UpdateTargetLocation::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
 {
@@ -11,13 +12,17 @@ EBTNodeResult::Type UBTTask_UpdateTargetLocation::ExecuteTask(UBehaviorTreeCompo
 	{
 		return EBTNodeResult::Failed;
 	}
-	FVector MoveLocation = SoldierPawn->GetMoveLocation();
-	const FVector TargetLocation = OwnerComp.GetBlackboardComponent()->GetValueAsVector(FName(TEXT("TargetLocation")));
-	if (TargetLocation == MoveLocation)
+	AGroundTileActor * TargetGroundActor = SoldierPawn->GetTargetGroundTile();
+	if (TargetGroundActor)
 	{
-		return EBTNodeResult::Failed;
+		FVector MoveLocation = TargetGroundActor->GetActorLocation();
+		const FVector TargetLocation = OwnerComp.GetBlackboardComponent()->GetValueAsVector(FName(TEXT("TargetLocation")));
+		if (TargetLocation == MoveLocation)
+		{
+			return EBTNodeResult::Failed;
+		}
+		OwnerComp.GetBlackboardComponent()->SetValueAsVector(FName(TEXT("TargetLocation")), MoveLocation);
+		return EBTNodeResult::Succeeded;
 	}
-	OwnerComp.GetBlackboardComponent()->SetValueAsVector(FName(TEXT("TargetLocation")), MoveLocation);
-
-	return EBTNodeResult::Succeeded;
+	return EBTNodeResult::Failed;
 }
