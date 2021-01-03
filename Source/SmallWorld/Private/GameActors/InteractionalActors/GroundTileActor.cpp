@@ -48,6 +48,14 @@ void AGroundTileActor::On_Tick(float DeltaSeconds)
 			FlagTimer = 0.f;
 		}
 	}
+	if (Soldiers.Num() > 0 && !CloudTileComponent->GetVisibleFlag())
+	{
+		CloudTileComponent->SetVisibility(true);
+	}
+	else if (CloudTileComponent->GetVisibleFlag())
+	{
+		CloudTileComponent->SetVisibility(false);
+	}
 	/*if (!CloudTileComponent->GetVisibleFlag() && VisibilityCounter == 0)
 	{
 		CloudTileComponent->SetVisibility(true);
@@ -121,7 +129,7 @@ void AGroundTileActor::TrackSoldier()
 }
 void AGroundTileActor::AddSoldier(ASoldierPawn * InSoldier)
 {
-	Soldiers.Add(InSoldier);
+	Soldiers.AddUnique(InSoldier);
 }
 void AGroundTileActor::RemoveSoldier(ASoldierPawn * InSoldier)
 {
