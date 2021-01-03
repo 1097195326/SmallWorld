@@ -50,7 +50,7 @@ public:
 	bool	IsContain(ASoldierPawn * InSoldier);
 	TArray<ASoldierPawn *> GetSoldiers() { return Soldiers; }
 
-	AGroundTileActor* GetAroundTileActorByDistance(int32 InDistance ,DirectionEnum InDir);
+	AGroundTileActor* GetAroundTileActorByDistance(int32 InDistance ,DirectionEnum InDir, bool InContainSoldier);
 
 	UPROPERTY(VisibleDefaultsOnly)
 		UStaticMeshComponent * GroundTileComponent ;

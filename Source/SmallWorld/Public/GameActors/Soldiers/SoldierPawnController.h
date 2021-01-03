@@ -21,7 +21,7 @@ public:
 	virtual void ActorsPerceptionUpdated(const TArray<AActor*>& UpdatedActors) override;
 	virtual void Tick(float DeltaTime) override;
 
-	void TryMoveSoldier(class ASoldierPawn * InSoldier);
+	bool TryMoveSoldier(class ASoldierPawn * InSoldier);
 
 
 };

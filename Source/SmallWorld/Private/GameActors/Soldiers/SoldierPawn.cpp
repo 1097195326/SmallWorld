@@ -163,7 +163,10 @@ void ASoldierPawn::UpdateAI(float delta)
 	if (SoldierData->IsFullMovability())
 	{
 		ASoldierPawnController * TemController = Cast<ASoldierPawnController>(Controller);
-		TemController->TryMoveSoldier(this);
+		if (TemController->TryMoveSoldier(this))
+		{
+			SoldierData->ConsumeMovability();
+		}
 	}
 	if (SoldierData->IsFullHealth())
 	{
@@ -247,7 +250,7 @@ void ASoldierPawn::MoveToTargetEnd()
 		TArray<AGroundTileActor*>  AroundTiles;
 		if (OriginGroundTile)
 		{
-			GameManager::GetGroundTileAroundSoldier(OriginGroundTile, VisibleDis, AroundTiles);
+			GameManager::GetGroundTileAroundSoldier(OriginGroundTile, VisibleDis, AroundTiles,true);
 			AroundTiles.Add(OriginGroundTile);
 			for (auto IterTile : AroundTiles)
 			{
@@ -258,7 +261,7 @@ void ASoldierPawn::MoveToTargetEnd()
 		AroundTiles.Empty();
 		if (TargetGroundTile)
 		{
-			GameManager::GetGroundTileAroundSoldier(TargetGroundTile, VisibleDis, AroundTiles);
+			GameManager::GetGroundTileAroundSoldier(TargetGroundTile, VisibleDis, AroundTiles,true);
 			AroundTiles.Add(TargetGroundTile);
 			for (auto IterTile : AroundTiles)
 			{
@@ -268,6 +271,8 @@ void ASoldierPawn::MoveToTargetEnd()
 	}
 	if (TargetGroundTile)
 	{
+		OriginGroundTile->RemoveSoldier(this);
+		TargetGroundTile->AddSoldier(this);
 		OriginGroundTile = TargetGroundTile;
 		TargetGroundTile = nullptr;
 	}

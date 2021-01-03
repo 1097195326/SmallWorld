@@ -163,7 +163,7 @@ void AGroundTileActor::ShowFlags(bool InMoveFlag, bool InTargetFlag)
 	}
 	
 }
-AGroundTileActor* AGroundTileActor::GetAroundTileActorByDistance(int32 InDistance, DirectionEnum InDir)
+AGroundTileActor* AGroundTileActor::GetAroundTileActorByDistance(int32 InDistance, DirectionEnum InDir, bool InContainSoldier)
 {
 	AGroundTileActor* TemTile = this;
 	int index = 1;
@@ -172,10 +172,20 @@ AGroundTileActor* AGroundTileActor::GetAroundTileActorByDistance(int32 InDistanc
 		if (TemTile && TemTile->AroundActorMap.Contains(InDir))
 		{
 			TemTile = (AGroundTileActor*)TemTile->AroundActorMap[InDir];
+			if (TemTile->HaveSoldiers())
+			{
+				if (!InContainSoldier)
+				{
+					TemTile = nullptr;
+				}
+			}
 		}
 		++index;
 	}
-	if (TemTile != this){return TemTile;}
+	if (TemTile != this)
+	{
+		return TemTile;
+	}
 
 	return nullptr;
 }

@@ -123,7 +123,24 @@ void BaseSoldierDataClass::SetCurrentMovability(float InValue)
 	if (CurrentMovability > GetLevelInfo().Movability)
 	{
 		CurrentMovability = GetLevelInfo().Movability;
+	}else if (CurrentMovability < 0)
+	{
+		CurrentMovability = 0.f;
 	}
+
+}
+void BaseSoldierDataClass::ReturnMovability(float InTime)
+{
+	CurrentReturnMovabilityInterval += InTime;
+	if (CurrentReturnMovabilityInterval > GetLevelInfo().MovabilityReturnInterval)
+	{
+		CurrentReturnMovabilityInterval -= GetLevelInfo().MovabilityReturnInterval;
+		SetCurrentMovability(CurrentMovability + GetLevelInfo().MovabilityReturnSpeed);
+	}
+}
+void BaseSoldierDataClass::ConsumeMovability()
+{
+	SetCurrentMovability(CurrentMovability - GetLevelInfo().MoveConsume);
 }
 void BaseSoldierDataClass::TakeDamage(float InDamage)
 {
@@ -138,15 +155,6 @@ void BaseSoldierDataClass::SetCurrentHealth(float InValue)
 	}else if (CurrentHealth < 0.f)
 	{
 		CurrentHealth = 0.f;
-	}
-}
-void BaseSoldierDataClass::ReturnMovability(float InTime)
-{
-	CurrentReturnMovabilityInterval += InTime;
-	if (CurrentReturnMovabilityInterval > GetLevelInfo().MovabilityReturnInterval)
-	{
-		CurrentReturnMovabilityInterval -= GetLevelInfo().MovabilityReturnInterval;
-		SetCurrentMovability(CurrentMovability + GetLevelInfo().MovabilityReturnSpeed);
 	}
 }
 void BaseSoldierDataClass::ReturnHealth(float InTime)

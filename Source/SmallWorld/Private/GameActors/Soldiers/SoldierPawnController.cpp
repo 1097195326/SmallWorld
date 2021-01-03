@@ -78,9 +78,9 @@ void ASoldierPawnController::ActorsPerceptionUpdated(const TArray<AActor *>& Upd
 		
 	}
 }
-void ASoldierPawnController::TryMoveSoldier(class ASoldierPawn * InSoldier)
+bool ASoldierPawnController::TryMoveSoldier(class ASoldierPawn * InSoldier)
 {
-	if (InSoldier == nullptr) { return; }
+	if (InSoldier == nullptr) { return false; }
 	
 	int32 MoveDis = InSoldier->GetSoldierData()->GetMoveRange();
 	AGroundTileActor* MainTile = InSoldier->GetOriginGroundTile();
@@ -92,7 +92,7 @@ void ASoldierPawnController::TryMoveSoldier(class ASoldierPawn * InSoldier)
 		AGroundTileActor * TileActor = AroundTiles[TileIndex];
 		InSoldier->SetTargetGroundTile(TileActor);
 		//InSoldier->SetMoveLocation(TileActor->GetActorLocation());
+		return true;
 	}
-
-
+	return false;
 }

@@ -46,6 +46,7 @@ public:
 	void SetCurrentMovability(float InValue);
 	inline float GetCurrentMovability() const { return CurrentMovability; }
 	void ReturnMovability(float InTime);
+	void ConsumeMovability();
 
 	inline bool IsFullAttackPower() { return CurrentAttackInterval == GetAttackInterval(); }
 	inline float GetCurrentAttackInterval() const { return CurrentAttackInterval; }
