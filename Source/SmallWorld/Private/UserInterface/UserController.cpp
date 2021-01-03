@@ -104,6 +104,8 @@ AActor * AUserController::TrySelectGameActor(FVector2D ScreenPosition)
 				if (AroundTiles.Contains(TileActor))
 				{
 					CurrentSelectedSoldier->SetTargetGroundTile(TileActor);
+					CurrentSelectedSoldier->GetOriginGroundTile()->SetBusy(true);
+					CurrentSelectedSoldier->GetTargetGroundTile()->SetBusy(true);
 					//CurrentSelectedSoldier->SetMoveLocation(TileActor->GetActorLocation());
 				}
 				else

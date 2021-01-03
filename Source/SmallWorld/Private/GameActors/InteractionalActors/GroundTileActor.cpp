@@ -172,7 +172,10 @@ AGroundTileActor* AGroundTileActor::GetAroundTileActorByDistance(int32 InDistanc
 		if (TemTile && TemTile->AroundActorMap.Contains(InDir))
 		{
 			TemTile = (AGroundTileActor*)TemTile->AroundActorMap[InDir];
-			if (TemTile->HaveSoldiers())
+			if (TemTile->IsBusy())
+			{
+				TemTile = nullptr;
+			}else if (TemTile->HaveSoldiers())
 			{
 				if (!InContainSoldier)
 				{

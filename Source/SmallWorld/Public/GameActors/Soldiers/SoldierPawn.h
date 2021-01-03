@@ -125,8 +125,8 @@ public:
 
 	void MoveToTargetEnd();
 	void SetOriginGroundTile(class AGroundTileActor * InTile);
-	void SetTargetGroundTile(class AGroundTileActor * InTile);
 	class AGroundTileActor * GetOriginGroundTile() { return OriginGroundTile; }
+	void SetTargetGroundTile(class AGroundTileActor * InTile);
 	class AGroundTileActor * GetTargetGroundTile() { return TargetGroundTile; }
 
 	UPROPERTY(EditDefaultsOnly, Instanced, Category = AI)

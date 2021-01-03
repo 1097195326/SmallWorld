@@ -37,6 +37,9 @@ public:
 	virtual void On_Init() override;
 	virtual void On_Tick(float DeltaSeconds) override;
 	virtual void On_Delete() override;
+
+	void SetBusy(bool InBusy) { bIsBusy = InBusy; }
+	bool IsBusy() { return bIsBusy; }
 	//
 	void	ShowFlags(bool InMoveFlag,bool InTargetFlag);
 
@@ -65,6 +68,7 @@ public:
 	void IncreaseVisibilityCounter() { VisibilityCounter += 1; }
 	void DecreaseVisibilityCounter() { VisibilityCounter -= 1; VisibilityCounter < 0 ? VisibilityCounter = 0 : NULL; }
 protected:
+	bool bIsBusy;
 	float FlagTimer;
 	AActor * FlagActor;
 	TArray<ASoldierPawn*> Soldiers;
