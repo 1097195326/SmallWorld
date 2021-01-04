@@ -52,7 +52,7 @@ void AGroundTileActor::On_Tick(float DeltaSeconds)
 	{
 		CloudTileComponent->SetVisibility(true);
 	}
-	else if (CloudTileComponent->GetVisibleFlag())
+	else if (Soldiers.Num() == 0 && CloudTileComponent->GetVisibleFlag())
 	{
 		CloudTileComponent->SetVisibility(false);
 	}
