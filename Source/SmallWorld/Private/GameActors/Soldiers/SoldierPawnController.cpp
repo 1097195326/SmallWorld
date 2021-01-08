@@ -78,23 +78,3 @@ void ASoldierPawnController::ActorsPerceptionUpdated(const TArray<AActor *>& Upd
 		
 	}
 }
-bool ASoldierPawnController::TryMoveSoldier(class ASoldierPawn * InSoldier)
-{
-	if (InSoldier == nullptr) { return false; }
-	
-	int32 MoveDis = InSoldier->GetSoldierData()->GetMoveRange();
-	AGroundTileActor* MainTile = InSoldier->GetOriginGroundTile();
-	TArray<AGroundTileActor*>  AroundTiles;
-	GameManager::GetGroundTileAroundSoldier(MainTile, MoveDis, AroundTiles);
-	if (AroundTiles.Num() > 0)
-	{
-		int32 TileIndex = UKismetMathLibrary::RandomInteger(AroundTiles.Num());
-		AGroundTileActor * TileActor = AroundTiles[TileIndex];
-		InSoldier->SetTargetGroundTile(TileActor);
-		InSoldier->GetOriginGroundTile()->SetBusy(true);
-		InSoldier->GetTargetGroundTile()->SetBusy(true);
-		//InSoldier->SetMoveLocation(TileActor->GetActorLocation());
-		return true;
-	}
-	return false;
-}

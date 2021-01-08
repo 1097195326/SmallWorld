@@ -11,4 +11,6 @@ class AFootman : public ASoldierPawn
 public:
 	AFootman();
 
+	virtual bool TryMoveSoldier() override;
+
 };

@@ -15,7 +15,8 @@ public:
 	// --------  Overirde GameObjectClass -------------
 	virtual void  On_Start() override;
 	// -------- Override EnableAttackPawnClass ---------
-	
+	virtual bool TryMoveSoldier() override;
+
 
 
 	USoldierInstantWeapon * InstantWeaponClass;

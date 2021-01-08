@@ -11,6 +11,7 @@ class AMage : public ASoldierPawn
 
 public:
 	AMage();
+	virtual bool TryMoveSoldier() override;
 
 
 };

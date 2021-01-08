@@ -11,5 +11,6 @@ class APeasant : public ASoldierPawn
 
 public:
 	APeasant();
+	virtual bool TryMoveSoldier() override;
 
 };

@@ -90,8 +90,11 @@ public:
 	virtual TSharedPtr<SWidget>	CreateActorDetailWidget() override;
 	virtual void RefreshView() override;
 
+
+	virtual bool TryMoveSoldier();
 	void UpdateAI(float delta);
 	void SetSelected(bool InSlelect);
+	bool IsEnemy(ASoldierPawn * InSoldier);
 
 	void SetSoldierData(BaseSoldierDataClass * InSoldierData) { SoldierData = InSoldierData; }
 	BaseSoldierDataClass * GetSoldierData() { return SoldierData; }

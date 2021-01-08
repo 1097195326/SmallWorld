@@ -5,6 +5,7 @@
 #include "BaseSoldierDataClass.h"
 #include "GroundTileActor.h"
 #include "GameManager.h"
+#include "Kismet/KismetMathLibrary.h"
 
 ASoldierPawn::ASoldierPawn():
 	LastAttackTime(0.f)
@@ -149,6 +150,13 @@ void ASoldierPawn::SetSelected(bool InSlelect)
 
 	}
 }
+bool ASoldierPawn::IsEnemy(ASoldierPawn * InSoldier)
+{
+	HordeDataClass * InHordeData = InSoldier->GetSoldierData()->GetHordeData();
+	HordeDataClass * SelfHordeData = GetSoldierData()->GetHordeData();
+
+	return InHordeData != SelfHordeData;
+}
 TSharedPtr<SWidget>	ASoldierPawn::CreateActorDetailWidget()
 {
 
@@ -163,7 +171,7 @@ void ASoldierPawn::UpdateAI(float delta)
 	if (SoldierData->IsFullMovability())
 	{
 		ASoldierPawnController * TemController = Cast<ASoldierPawnController>(Controller);
-		if (TemController->TryMoveSoldier(this))
+		if (TryMoveSoldier())
 		{
 			SoldierData->ConsumeMovability();
 		}
@@ -177,6 +185,23 @@ void ASoldierPawn::UpdateAI(float delta)
 
 	}
 
+}
+bool ASoldierPawn::TryMoveSoldier()
+{
+	int32 MoveDis = GetSoldierData()->GetMoveRange();
+	AGroundTileActor* MainTile = GetOriginGroundTile();
+	TArray<AGroundTileActor*>  AroundTiles;
+	GameManager::GetGroundTileAroundSoldier(MainTile, MoveDis, AroundTiles);
+	if (AroundTiles.Num() > 0)
+	{
+		int32 TileIndex = UKismetMathLibrary::RandomInteger(AroundTiles.Num());
+		AGroundTileActor * TileActor = AroundTiles[TileIndex];
+		TargetGroundTile = TileActor;
+		OriginGroundTile->SetBusy(true);
+		TargetGroundTile->SetBusy(true);
+		return true;
+	}
+	return false;
 }
 void ASoldierPawn::SetGroupAndIndex(SoldierGroup * _group,int _index)
 {

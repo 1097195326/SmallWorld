@@ -23,6 +23,7 @@ public:
 	void SetCommandCenter(class CommandCenterDataClass * InCommandCenter);
 
 	bool IsUserData();
+	class HordeDataClass * GetHordeData();
 
 	void SetSoldierConfigByName(FString InName);
 	

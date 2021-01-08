@@ -19,6 +19,7 @@ public:
 	//virtual TSharedPtr<SWidget>	CreateActorDetailWidget() override;
 
 	// ----------- Override EnableAttackPawnClass -----------
+	virtual bool TryMoveSoldier() override;
 
 
 	UPROPERTY(EditAnywhere)

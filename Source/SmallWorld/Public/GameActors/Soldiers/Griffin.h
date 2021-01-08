@@ -11,5 +11,6 @@ class AGriffin : public ASoldierPawn
 
 public:
 	AGriffin();
+	virtual bool TryMoveSoldier() override;
 
 };

@@ -11,6 +11,7 @@ class ASiegeEngine : public ASoldierPawn
 
 public:
 	ASiegeEngine();
+	virtual bool TryMoveSoldier() override;
 
 
 };

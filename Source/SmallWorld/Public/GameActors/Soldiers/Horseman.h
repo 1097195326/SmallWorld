@@ -10,6 +10,7 @@ class AHorseman : public ASoldierPawn
 
 public:
 	AHorseman();
+	virtual bool TryMoveSoldier() override;
 
 
 };
