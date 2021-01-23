@@ -3,6 +3,12 @@
 G_REGISTER_CLASS(PeasantDataClass)
 
 
+PeasantDataClass::PeasantDataClass()
+{
+	SoldierType = Soldier_Peasant;
+	MoveType = Move_Walk;
+
+}
 void PeasantDataClass::Serialization(TSharedRef<TJsonWriter<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>> Writer)
 {
 	Writer->WriteObjectStart("PeasantDataClass");

@@ -41,19 +41,22 @@ public:
 	void SetBusy(bool InBusy) { bIsBusy = InBusy; }
 	bool IsBusy() { return bIsBusy; }
 	//
-	void	ShowFlags(bool InMoveFlag,bool InTargetFlag);
+	void ShowFlags(bool InMoveFlag,bool InTargetFlag);
 
-	void	SetCloudVisible(bool InVisible);
-	void	TrackAround();
+	void SetCloudVisible(bool InVisible);
+	void TrackAround();
 	//Before Start Game ,Found Soldier In This Tile
-	void	TrackSoldier();
-	bool	HaveSoldiers() { return Soldiers.Num() > 0; }
-	void	AddSoldier(ASoldierPawn * InSoldier);
-	void	RemoveSoldier(ASoldierPawn * InSoldier);
-	bool	IsContain(ASoldierPawn * InSoldier);
+	void TrackSoldier();
+	bool IsHaveSoldier() { return Soldiers.Num() > 0; }
+	bool IsHaveFlySoldier();
+	void AddSoldier(ASoldierPawn * InSoldier);
+	void RemoveSoldier(ASoldierPawn * InSoldier);
+	bool IsContain(ASoldierPawn * InSoldier);
 	TArray<ASoldierPawn *> GetSoldiers() { return Soldiers; }
 
-	AGroundTileActor* GetAroundTileActorByDistance(int32 InDistance ,DirectionEnum InDir, bool InContainSoldier);
+	AGroundTileActor* GetAroundTileActorByDistance(int32 InDistance, DirectionEnum InDir, bool InContainSoldier);
+	AGroundTileActor* GetHaveSoldierAroundTileActorByDistance(int32 InDistance, DirectionEnum InDir, bool InContainSoldier);
+	class ACastleTileActor * GetCastleTileActorByDistance(int32 InDistance, DirectionEnum InDir, bool InContainSoldier);
 
 	UPROPERTY(VisibleDefaultsOnly)
 		UStaticMeshComponent * GroundTileComponent ;

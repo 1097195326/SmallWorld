@@ -3,6 +3,12 @@
 G_REGISTER_CLASS(KnightDataClass)
 
 
+KnightDataClass::KnightDataClass()
+{
+	SoldierType = Soldier_Knight;
+	MoveType = Move_Walk;
+
+}
 void KnightDataClass::Serialization(TSharedRef<TJsonWriter<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>> Writer)
 {
 	Writer->WriteObjectStart("KnightDataClass");

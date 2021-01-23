@@ -3,6 +3,12 @@
 G_REGISTER_CLASS(SiegeEngineDataClass)
 
 
+SiegeEngineDataClass::SiegeEngineDataClass()
+{
+	SoldierType = Soldier_SiegeEngine;
+	MoveType = Move_Walk;
+
+}
 void SiegeEngineDataClass::Serialization(TSharedRef<TJsonWriter<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>> Writer)
 {
 	Writer->WriteObjectStart("SiegeEngineDataClass");

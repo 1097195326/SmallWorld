@@ -104,8 +104,29 @@ void GameManager::GetGroundTileAroundSoldier(class AGroundTileActor* InMainTile,
 			AGroundTileActor* TemTile = InMainTile->GetAroundTileActorByDistance(i, (AGroundTileActor::DirectionEnum)j,InContainSoldier);
 			if (TemTile)
 			{
-				OutTiles.Add(TemTile);
+				OutTiles.AddUnique(TemTile);
 			}
 		}
 	}
+}
+void GameManager::GetGroundTilesHaveSoldier(const TArray<AGroundTileActor*> & InTiles, int32 InDistance, TArray<class AGroundTileActor*>& OutTiles)
+{
+	for (AGroundTileActor * IterTile : InTiles)
+	{
+		for (int i = 1; i <= InDistance; i++)
+		{
+			for (int32 j = AGroundTileActor::Direction_Forward; j < AGroundTileActor::Direction_Other; j++)
+			{
+				AGroundTileActor* TemTile = IterTile->GetAroundTileActorByDistance(i, (AGroundTileActor::DirectionEnum)j, true);
+				if (TemTile && TemTile->IsHaveSoldier())
+				{
+					OutTiles.AddUnique(IterTile);
+				}
+			}
+		}
+	}
+}
+void GameManager::GetGroundTileFarOtherSoldier(const TArray<AGroundTileActor*> & InTiles, int32 InDistance, TArray<class AGroundTileActor*>& OutTiles, bool InIsEnemy)
+{
+
 }

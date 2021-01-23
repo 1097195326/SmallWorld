@@ -2,7 +2,13 @@
 
 G_REGISTER_CLASS(ArcherDataClass)
 
+ArcherDataClass::ArcherDataClass()
+{
+	SoldierType = Soldier_Archer;
+	MoveType = Move_Walk;
 
+
+}
 void ArcherDataClass::Serialization(TSharedRef<TJsonWriter<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>> Writer)
 {
 	Writer->WriteObjectStart("ArcherDataClass");

@@ -3,6 +3,12 @@
 G_REGISTER_CLASS(GriffinDataClass)
 
 
+GriffinDataClass::GriffinDataClass()
+{
+	SoldierType = Soldier_Griffin;
+	MoveType = Move_Fly;
+
+}
 void GriffinDataClass::Serialization(TSharedRef<TJsonWriter<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>> Writer)
 {
 	Writer->WriteObjectStart("GriffinDataClass");

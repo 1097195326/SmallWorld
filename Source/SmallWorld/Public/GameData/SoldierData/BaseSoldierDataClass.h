@@ -31,6 +31,7 @@ public:
 
 	inline FString GetSoldierName() { return SoldierName; }
 	inline SoldierTypeEnum GetSoldierType() { return SoldierType; }
+	inline MoveTypeEnum GetMoveType() { return MoveType; }
 	inline const SoldierConfigStruct & GetSoldierConfig() { return SoldierConfig; }
 	inline const SoldierLevelInfoStruct & GetLevelInfo() const { return SoldierConfig.LevelInfos[CurrentLevel]; }
 
@@ -64,7 +65,8 @@ protected:
 
 	FGuid   CommandCenterId;
 	FString SoldierName;
-	SoldierTypeEnum SoldierType;
+	SoldierTypeEnum SoldierType; 
+	MoveTypeEnum MoveType;
 	SoldierConfigStruct SoldierConfig;
 
 	float CurrentHealth;

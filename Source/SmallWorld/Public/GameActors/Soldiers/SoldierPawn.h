@@ -66,6 +66,12 @@ enum SoldierTypeEnum : int32
 	Soldier_Peasant,
 	Soldier_Num
 };
+enum MoveTypeEnum : int8
+{
+	Move_None,
+	Move_Walk,
+	Move_Fly
+};
 
 UCLASS()
 class ASoldierPawn : public AGameCharacter, public EnableAttackPawnClass<ASoldierPawn>, public IGenericTeamAgentInterface

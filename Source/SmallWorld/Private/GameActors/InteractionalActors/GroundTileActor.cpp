@@ -4,7 +4,7 @@
 #include "SoldierPawn.h"
 #include "MoveFlagActor.h"
 #include "TargetFlagActor.h"
-
+#include "BaseSoldierDataClass.h"
 
 
 AGroundTileActor::AGroundTileActor()
@@ -135,6 +135,17 @@ void AGroundTileActor::RemoveSoldier(ASoldierPawn * InSoldier)
 {
 	Soldiers.Remove(InSoldier);
 }
+bool AGroundTileActor::IsHaveFlySoldier()
+{
+	for (auto IterSoldier : Soldiers)
+	{
+		if (IterSoldier->GetSoldierData()->GetMoveType() == Move_Fly)
+		{
+			return true;
+		}
+	}
+	return false;
+}
 bool AGroundTileActor::IsContain(ASoldierPawn * InSoldier)
 {
 	return Soldiers.Contains(InSoldier);
@@ -162,7 +173,7 @@ void AGroundTileActor::ShowFlags(bool InMoveFlag, bool InTargetFlag)
 		if (AroundActorMap.Contains(Direction_Back))
 		{ MoveActor->MeshComponent->AddInstance(FTransform(FRotator(0, 0, 0), FVector(-60, 0, 0))); }
 		FlagActor= MoveActor;
-	}else if (InTargetFlag && !HaveSoldiers())
+	}else if (InTargetFlag && !IsHaveSoldier())
 	{
 		if (FlagActor) { FlagActor->Destroy(); }
 		UClass* FlagClass = LoadClass<ATargetFlagActor>(this, TEXT("/Game/Blueprint/TargetFlag_BP.TargetFlag_BP_C"));
@@ -183,14 +194,14 @@ AGroundTileActor* AGroundTileActor::GetAroundTileActorByDistance(int32 InDistanc
 			if (TemTile->IsBusy())
 			{
 				TemTile = nullptr;
-			}else if (TemTile->HaveSoldiers())
+			}else if (TemTile->IsHaveSoldier())
 			{
 				if (!InContainSoldier)
 				{
 					TemTile = nullptr;
 				}
 			}
-		}
+		}else{break;}
 		++index;
 	}
 	if (TemTile != this)
@@ -199,4 +210,53 @@ AGroundTileActor* AGroundTileActor::GetAroundTileActorByDistance(int32 InDistanc
 	}
 
 	return nullptr;
+}
+AGroundTileActor* AGroundTileActor::GetHaveSoldierAroundTileActorByDistance(int32 InDistance, DirectionEnum InDir, bool InContainSoldier)
+{
+	AGroundTileActor* TemTile = this;
+	int index = 1;
+	while (index <= InDistance)
+	{
+		if (TemTile && TemTile->AroundActorMap.Contains(InDir))
+		{
+			TemTile = (AGroundTileActor*)TemTile->AroundActorMap[InDir];
+		}else { break; }
+		++index;
+	}
+	if (TemTile && TemTile != this && TemTile->IsHaveSoldier())
+	{
+		return TemTile;
+	}
+	return nullptr;
+}
+ACastleTileActor* AGroundTileActor::GetCastleTileActorByDistance(int32 InDistance, DirectionEnum InDir, bool InContainSoldier)
+{
+	AGroundTileActor* TemTile = this;
+	ACastleTileActor * ResCastle = nullptr;
+	int index = 1;
+	while (index <= InDistance)
+	{
+		if (TemTile && TemTile->AroundActorMap.Contains(Direction_Other))
+		{
+			ResCastle = (ACastleTileActor*)TemTile->AroundActorMap[Direction_Other];
+			break;
+		}
+		if (TemTile && TemTile->AroundActorMap.Contains(InDir))
+		{
+			TemTile = (AGroundTileActor*)TemTile->AroundActorMap[InDir];
+			if (TemTile->IsBusy())
+			{
+				TemTile = nullptr;
+			}
+			else if (TemTile->IsHaveSoldier())
+			{
+				if (!InContainSoldier)
+				{
+					TemTile = nullptr;
+				}
+			}
+		}else { break; }
+		++index;
+	}
+	return ResCastle;
 }

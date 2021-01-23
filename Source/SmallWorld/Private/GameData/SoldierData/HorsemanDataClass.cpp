@@ -3,6 +3,12 @@
 G_REGISTER_CLASS(HorsemanDataClass)
 
 
+HorsemanDataClass::HorsemanDataClass()
+{
+	SoldierType = Soldier_Horseman;
+	MoveType = Move_Walk;
+
+}
 void HorsemanDataClass::Serialization(TSharedRef<TJsonWriter<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>> Writer)
 {
 	Writer->WriteObjectStart("HorsemanDataClass");

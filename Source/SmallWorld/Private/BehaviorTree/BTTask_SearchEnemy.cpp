@@ -22,7 +22,7 @@ EBTNodeResult::Type UBTTask_SearchEnemy::ExecuteTask(UBehaviorTreeComponent& Own
 	TArray<ASoldierPawn*> SoldiersArray;
 	for (AGroundTileActor* IterActor : AroundTiles)
 	{
-		if (IterActor->HaveSoldiers())
+		if (IterActor->IsHaveSoldier())
 		{
 			SoldiersArray.Append(IterActor->GetSoldiers());
 		}

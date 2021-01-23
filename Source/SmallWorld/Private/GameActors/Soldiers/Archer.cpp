@@ -28,6 +28,10 @@ bool AArcher::TryMoveSoldier()
 	GameManager::GetGroundTileAroundSoldier(MainTile, MoveDis, AroundTiles);
 	if (AroundTiles.Num() > 0)
 	{
+		for (auto IterTile : AroundTiles)
+		{
+
+		}
 		int32 TileIndex = UKismetMathLibrary::RandomInteger(AroundTiles.Num());
 		AGroundTileActor * TileActor = AroundTiles[TileIndex];
 		TargetGroundTile = TileActor;

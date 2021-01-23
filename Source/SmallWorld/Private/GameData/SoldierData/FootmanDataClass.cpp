@@ -2,7 +2,12 @@
 
 G_REGISTER_CLASS(FootmanDataClass)
 
+FootmanDataClass::FootmanDataClass()
+{
+	SoldierType = Soldier_Footman;
+	MoveType = Move_Walk;
 
+}
 void FootmanDataClass::Serialization(TSharedRef<TJsonWriter<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>> Writer)
 {
 	Writer->WriteObjectStart("FootmanDataClass");
