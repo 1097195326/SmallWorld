@@ -109,10 +109,13 @@ void GameManager::GetGroundTileAroundSoldier(class AGroundTileActor* InMainTile,
 		}
 	}
 }
-void GameManager::GetGroundTilesHaveSoldier(const TArray<AGroundTileActor*> & InTiles, int32 InDistance, TArray<class AGroundTileActor*>& OutTiles)
+TArray<TileMapStruct>  GameManager::GetGroundTilesHaveSoldier(const TArray<AGroundTileActor*> & InTiles, int32 InDistance, ASoldierPawn * InSoldier, bool InIsEnemy)
 {
+	TArray<TileMapStruct>  ArrayTileMap;
 	for (AGroundTileActor * IterTile : InTiles)
 	{
+		TileMapStruct  TileMap;
+		TileMap.MainTile = IterTile;
 		for (int i = 1; i <= InDistance; i++)
 		{
 			for (int32 j = AGroundTileActor::Direction_Forward; j < AGroundTileActor::Direction_Other; j++)
@@ -120,13 +123,85 @@ void GameManager::GetGroundTilesHaveSoldier(const TArray<AGroundTileActor*> & In
 				AGroundTileActor* TemTile = IterTile->GetAroundTileActorByDistance(i, (AGroundTileActor::DirectionEnum)j, true);
 				if (TemTile && TemTile->IsHaveSoldier())
 				{
-					OutTiles.AddUnique(IterTile);
+					ASoldierPawn * OnTileSoldier = TemTile->GetSoldiers()[0];
+					if ((InIsEnemy && OnTileSoldier->IsEnemy(InSoldier)) ||
+						(!InIsEnemy && !OnTileSoldier->IsEnemy(InSoldier))
+						)
+					{
+						TileMap.AroundTile.AddUnique(TemTile);
+					}
 				}
 			}
 		}
+		if (TileMap.AroundTile.Num() > 0)
+		{
+			ArrayTileMap.Add(TileMap);
+		}
 	}
+	return ArrayTileMap;
 }
-void GameManager::GetGroundTileFarOtherSoldier(const TArray<AGroundTileActor*> & InTiles, int32 InDistance, TArray<class AGroundTileActor*>& OutTiles, bool InIsEnemy)
+AGroundTileActor * GameManager::GetGroundTileWithSoldiersNum(const TArray<TileMapStruct> & InArrayTileMap, bool InMore /* = true */)
 {
-
+	AGroundTileActor * ResTile = nullptr;
+	const TileMapStruct * PreTileMap = nullptr;
+	for (const TileMapStruct & IterMap : InArrayTileMap)
+	{
+		if (PreTileMap == nullptr)
+		{
+			PreTileMap = &IterMap;
+		}
+		if (InMore)
+		{
+			if (IterMap.AroundTile.Num() > PreTileMap->AroundTile.Num())
+			{
+				PreTileMap = &IterMap;
+			}
+		}
+		else
+		{
+			if (IterMap.AroundTile.Num() < PreTileMap->AroundTile.Num())
+			{
+				PreTileMap = &IterMap;
+			}
+		}
+	}
+	if (PreTileMap != nullptr)
+	{
+		ResTile = PreTileMap->MainTile;
+	}
+	return ResTile;
+}
+AGroundTileActor * GameManager::GetGroundTileWithDistance(AGroundTileActor* InMainTile, const TArray<AGroundTileActor *> & InTiles, bool InFar /* = true */)
+{
+	AGroundTileActor * ResTile = nullptr;
+	int32 IDistance = 0;
+	for (AGroundTileActor * IterTile : InTiles)
+	{
+		FIntVector VDistance = (FIntVector)IterTile->GetActorLocation() - (FIntVector)InMainTile->GetActorLocation();
+		int32 IterDistance = VDistance.X + VDistance.Y;
+		if (IDistance == 0)
+		{
+			IDistance = IterDistance;
+			ResTile = IterTile;
+			continue;
+		}
+		if (InFar)
+		{
+			if (IterDistance > IDistance)
+			{
+				IDistance = IterDistance;
+				ResTile = IterTile;
+			}
+		}
+		else
+		{
+			if (IterDistance < IDistance)
+			{
+				IDistance = IterDistance;
+				ResTile = IterTile;
+			}
+		}
+		
+	}
+	return ResTile;
 }
