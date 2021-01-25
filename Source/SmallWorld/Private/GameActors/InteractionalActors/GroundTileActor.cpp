@@ -211,7 +211,7 @@ AGroundTileActor* AGroundTileActor::GetAroundTileActorByDistance(int32 InDistanc
 
 	return nullptr;
 }
-AGroundTileActor* AGroundTileActor::GetHaveSoldierAroundTileActorByDistance(int32 InDistance, DirectionEnum InDir, bool InContainSoldier)
+AGroundTileActor* AGroundTileActor::GetHaveSoldierAroundTileActorByDistance(int32 InDistance, DirectionEnum InDir)
 {
 	AGroundTileActor* TemTile = this;
 	int index = 1;

@@ -121,6 +121,7 @@ TArray<TileMapStruct>  GameManager::GetGroundTilesHaveSoldier(const TArray<AGrou
 			for (int32 j = AGroundTileActor::Direction_Forward; j < AGroundTileActor::Direction_Other; j++)
 			{
 				AGroundTileActor* TemTile = IterTile->GetAroundTileActorByDistance(i, (AGroundTileActor::DirectionEnum)j, true);
+				//AGroundTileActor* TemTile = IterTile->GetHaveSoldierAroundTileActorByDistance(i, (AGroundTileActor::DirectionEnum)j, true);
 				if (TemTile && TemTile->IsHaveSoldier())
 				{
 					ASoldierPawn * OnTileSoldier = TemTile->GetSoldiers()[0];

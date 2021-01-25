@@ -55,7 +55,7 @@ public:
 	TArray<ASoldierPawn *> GetSoldiers() { return Soldiers; }
 
 	AGroundTileActor* GetAroundTileActorByDistance(int32 InDistance, DirectionEnum InDir, bool InContainSoldier);
-	AGroundTileActor* GetHaveSoldierAroundTileActorByDistance(int32 InDistance, DirectionEnum InDir, bool InContainSoldier);
+	AGroundTileActor* GetHaveSoldierAroundTileActorByDistance(int32 InDistance, DirectionEnum InDir);
 	class ACastleTileActor * GetCastleTileActorByDistance(int32 InDistance, DirectionEnum InDir, bool InContainSoldier);
 
 	UPROPERTY(VisibleDefaultsOnly)
