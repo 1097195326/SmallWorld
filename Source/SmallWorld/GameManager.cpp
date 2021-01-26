@@ -109,7 +109,27 @@ void GameManager::GetGroundTileAroundSoldier(class AGroundTileActor* InMainTile,
 		}
 	}
 }
-TArray<TileMapStruct>  GameManager::GetGroundTilesHaveSoldier(const TArray<AGroundTileActor*> & InTiles, int32 InDistance, ASoldierPawn * InSoldier, bool InIsEnemy)
+void GameManager::GetGroundTilesWithCondition(const TArray<AGroundTileActor *> & InTiles, TArray<class AGroundTileActor *>& OutTiles, ASoldierPawn * InSoldier,bool InContainFriend, bool InContainEnemy,bool InContainNoSoldier)
+{
+	for (AGroundTileActor * IterTile : InTiles)
+	{
+		if (IterTile->IsHaveSoldier())
+		{
+			ASoldierPawn * OnTileSoldier = IterTile->GetSoldiers()[0];
+			if (InContainFriend && !OnTileSoldier->IsEnemy(InSoldier) && !IterTile->IsHaveFlySoldier())
+			{
+				OutTiles.AddUnique(IterTile);
+			}else if (InContainEnemy && OnTileSoldier->IsEnemy(InSoldier))
+			{
+				OutTiles.AddUnique(IterTile);
+			}
+		}else if (InContainNoSoldier)
+		{
+			OutTiles.AddUnique(IterTile);
+		}
+	}
+}
+TArray<TileMapStruct>  GameManager::GetGroundTilesNearSoldiers(const TArray<AGroundTileActor*> & InTiles, int32 InDistance, ASoldierPawn * InSoldier, bool InIsEnemy)
 {
 	TArray<TileMapStruct>  ArrayTileMap;
 	for (AGroundTileActor * IterTile : InTiles)

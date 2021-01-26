@@ -11,8 +11,10 @@ UENUM()
 enum class TileTypeEnum : uint8
 {
 	E_None,
-	E_Used,
-	E_CanNotUse,
+	E_Water,
+	E_Lava,
+	E_Wood,
+	E_GoldOre,
 	E_Num
 };
 
