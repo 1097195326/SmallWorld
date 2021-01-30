@@ -13,7 +13,6 @@ public class UnrealEngineWrap : ModuleRules
                 "UnrealEngineWrap/Public/Controller",
                 "UnrealEngineWrap/Public/GameInterface",
                 "UnrealEngineWrap/Public/Pawn",
-                "UnrealEngineWrap/Public/Tools",
                 "UnrealEngineWrap/Public/UI",
             }
             );
