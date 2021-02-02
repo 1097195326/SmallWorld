@@ -1,8 +1,8 @@
 #include "Archer.h"
 #include "GameManager.h"
-#include "Kismet/KismetMathLibrary.h"
 #include "BaseSoldierDataClass.h"
 #include "GroundTileActor.h"
+#include "CommandCenterDataClass.h"
 
 AArcher::AArcher()
 {
@@ -22,12 +22,15 @@ void AArcher::On_Start()
 }
 bool AArcher::TryMoveSoldier()
 {
+	FVector CastleActorLocation = GetSoldierData()->GetCommandCenter()->GetBuildingActor()->GetCastleTileActor()->GetActorLocation();
 	int32 MoveDis = GetSoldierData()->GetMoveRange();
 	int32 VisibilityDis = GetSoldierData()->GetVisibleRange();
 	AGroundTileActor* MainTile = GetOriginGroundTile();
 	TArray<AGroundTileActor*>  AroundTiles;
+	TArray<AGroundTileActor*>  FarCastleAroundTiles;
 	GameManager::GetGroundTileAroundSoldier(MainTile, MoveDis, AroundTiles);
-	TArray<TileMapStruct> ArrayTileMap = GameManager::GetGroundTilesNearSoldiers(AroundTiles, VisibilityDis, this, false);
+	GameManager::GetGroundTilesFarCastle((FIntVector)CastleActorLocation,MainTile,AroundTiles,FarCastleAroundTiles);
+	TArray<TileMapStruct> ArrayTileMap = GameManager::GetGroundTilesNearSoldiers(FarCastleAroundTiles, VisibilityDis, this, false);
 	AGroundTileActor * FindTile = GameManager::GetGroundTileWithSoldiersNum(ArrayTileMap);
 	
 	AGroundTileActor * ToggleTile = nullptr;

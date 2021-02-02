@@ -24,7 +24,8 @@ public:
 	void Tick(float DeltaTime);
 
 	static void GetGroundTileAroundSoldier(AGroundTileActor* InMainTile, int32 InDistance, TArray<class AGroundTileActor*>& OutTiles, bool InContainSoldier = false);
-	static void GetGroundTilesWithCondition(const TArray<AGroundTileActor*> & InTiles, TArray<class AGroundTileActor*>& OutTiles, ASoldierPawn * InSoldier,bool InContainFriend, bool InContainEnemy,bool InContainNoSoldier);
+	static void GetGroundTilesWithCondition(const TArray<AGroundTileActor*> & InTiles, TArray<class AGroundTileActor*>& OutTiles, ASoldierPawn * InSoldier, bool InContainFriend, bool InContainEnemy, bool InContainNoSoldier);
+	static void GetGroundTilesFarCastle(FIntVector CastleLocation, AGroundTileActor* InMainTile, const TArray<AGroundTileActor*> & InTiles, TArray<class AGroundTileActor*>& OutTiles);
 	static TArray<TileMapStruct> GetGroundTilesNearSoldiers(const TArray<AGroundTileActor*> & InTiles, int32 InDistance, ASoldierPawn * InSoldier, bool InIsEnemy = true);
 	static AGroundTileActor * GetGroundTileWithSoldiersNum(const TArray<TileMapStruct> & InArrayTileMap, bool InMore = true);
 	static AGroundTileActor * GetGroundTileWithDistance(AGroundTileActor* InMainTile, const TArray<AGroundTileActor*> & InTiles, bool InFar = true);

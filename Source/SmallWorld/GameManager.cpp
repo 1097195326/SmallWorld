@@ -1,4 +1,5 @@
 #include "GameManager.h"
+#include "Kismet/KismetMathLibrary.h"
 #include "Kismet/GameplayStatics.h"
 #include "UserGameInstance.h"
 #include "SoldierPawn.h"
@@ -192,13 +193,28 @@ AGroundTileActor * GameManager::GetGroundTileWithSoldiersNum(const TArray<TileMa
 	}
 	return ResTile;
 }
-AGroundTileActor * GameManager::GetGroundTileWithDistance(AGroundTileActor* InMainTile, const TArray<AGroundTileActor *> & InTiles, bool InFar /* = true */)
+void GameManager::GetGroundTilesFarCastle(FIntVector CastleLocation, AGroundTileActor* InMainTile, const TArray<AGroundTileActor *> & InTiles, TArray<class AGroundTileActor *>& OutTiles)
 {
-	AGroundTileActor * ResTile = nullptr;
-	int32 IDistance = 0;
+	FIntVector MainTileLocation = (FIntVector)InMainTile->GetActorLocation();
+	FIntVector MainTileFromCastle = MainTileLocation - CastleLocation;
 	for (AGroundTileActor * IterTile : InTiles)
 	{
-		FIntVector VDistance = (FIntVector)IterTile->GetActorLocation() - (FIntVector)InMainTile->GetActorLocation();
+		FIntVector VDistance = (FIntVector)IterTile->GetActorLocation() - CastleLocation;
+		if ((FMath::Abs(VDistance.X) + FMath::Abs(VDistance.Y)) > (FMath::Abs(MainTileFromCastle.X) + FMath::Abs(MainTileFromCastle.Y)))
+		{
+			OutTiles.Add(IterTile);
+		}
+	}
+}
+AGroundTileActor * GameManager::GetGroundTileWithDistance(AGroundTileActor* InMainTile, const TArray<AGroundTileActor *> & InTiles, bool InFar /* = true */)
+{
+	FIntVector MainTileLocation = (FIntVector)InMainTile->GetActorLocation();
+	AGroundTileActor * ResTile = nullptr;
+	int32 IDistance = 0;
+	TArray<AGroundTileActor*> EqualDistanceTiles;
+	for (AGroundTileActor * IterTile : InTiles)
+	{
+		FIntVector VDistance = (FIntVector)IterTile->GetActorLocation() - MainTileLocation;
 		int32 IterDistance = VDistance.X + VDistance.Y;
 		if (IDistance == 0)
 		{
@@ -206,23 +222,39 @@ AGroundTileActor * GameManager::GetGroundTileWithDistance(AGroundTileActor* InMa
 			ResTile = IterTile;
 			continue;
 		}
-		if (InFar)
+		if (IDistance == IterDistance)
 		{
-			if (IterDistance > IDistance)
-			{
-				IDistance = IterDistance;
-				ResTile = IterTile;
-			}
+			EqualDistanceTiles.Add(IterTile);
 		}
 		else
 		{
-			if (IterDistance < IDistance)
+			if (InFar)
 			{
-				IDistance = IterDistance;
-				ResTile = IterTile;
+				if (IterDistance > IDistance)
+				{
+					IDistance = IterDistance;
+					ResTile = IterTile;
+					EqualDistanceTiles.Empty();
+					EqualDistanceTiles.Add(IterTile);
+				}
+			}
+			else
+			{
+				if (IterDistance < IDistance)
+				{
+					IDistance = IterDistance;
+					ResTile = IterTile;
+					EqualDistanceTiles.Empty();
+					EqualDistanceTiles.Add(IterTile);
+				}
 			}
 		}
-		
+	}
+	int32 NumEqualDis = EqualDistanceTiles.Num();
+	if (NumEqualDis > 1)
+	{
+		int32 RandIndex = UKismetMathLibrary::RandomInteger(NumEqualDis);
+		ResTile = EqualDistanceTiles[RandIndex];
 	}
 	return ResTile;
 }

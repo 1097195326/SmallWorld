@@ -3,6 +3,7 @@
 #include "Kismet/KismetMathLibrary.h"
 #include "BaseSoldierDataClass.h"
 #include "GroundTileActor.h"
+#include "CommandCenterDataClass.h"
 
 AKnight::AKnight()
 {
@@ -25,12 +26,15 @@ void AKnight::On_Start()
 }
 bool AKnight::TryMoveSoldier()
 {
+	FVector CastleActorLocation = GetSoldierData()->GetCommandCenter()->GetBuildingActor()->GetCastleTileActor()->GetActorLocation();
 	int32 MoveDis = GetSoldierData()->GetMoveRange();
 	int32 VisibilityDis = GetSoldierData()->GetVisibleRange();
 	AGroundTileActor* MainTile = GetOriginGroundTile();
 	TArray<AGroundTileActor*>  AroundTiles;
+	TArray<AGroundTileActor*>  FarCastleAroundTiles;
 	GameManager::GetGroundTileAroundSoldier(MainTile, MoveDis, AroundTiles);
-	TArray<TileMapStruct> ArrayTileMap = GameManager::GetGroundTilesNearSoldiers(AroundTiles, VisibilityDis, this, true);
+	GameManager::GetGroundTilesFarCastle((FIntVector)CastleActorLocation, MainTile, AroundTiles, FarCastleAroundTiles);
+	TArray<TileMapStruct> ArrayTileMap = GameManager::GetGroundTilesNearSoldiers(FarCastleAroundTiles, VisibilityDis, this, true);
 	AGroundTileActor * FindTile = GameManager::GetGroundTileWithSoldiersNum(ArrayTileMap, false);
 
 	AGroundTileActor * ToggleTile = nullptr;

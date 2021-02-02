@@ -6,14 +6,19 @@
 
 
 
-BaseSoldierDataClass::BaseSoldierDataClass()
+BaseSoldierDataClass::BaseSoldierDataClass():
+	SoldierType(Soldier_None),
+	SoldierPawn(nullptr),
+	CommandCenter(nullptr),
+	CurrentLevel(0),
+	CurrentHealth(100.f),
+	CurrentReturnHealthInterval(0.f),
+	CurrentMovability(0.f),
+	CurrentReturnMovabilityInterval(0.f),
+	CurrentAttackInterval(0.f)
 {
-	SoldierType = Soldier_None;
-	SoldierPawn = nullptr;
-	CommandCenter = nullptr;
-	CurrentLevel = 0;
-	CurrentHealth = 100.f;
 
+	
 }
 BaseSoldierDataClass::~BaseSoldierDataClass()
 {

@@ -70,6 +70,7 @@ public:
 
 	TMap<DirectionEnum, AGameActor*>  AroundActorMap;
 
+	bool IsVisible() { return VisibilityCounter > 0; }
 	void IncreaseVisibilityCounter() { VisibilityCounter += 1; }
 	void DecreaseVisibilityCounter() { VisibilityCounter -= 1; VisibilityCounter < 0 ? VisibilityCounter = 0 : NULL; }
 protected:
