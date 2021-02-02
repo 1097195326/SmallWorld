@@ -76,8 +76,6 @@ void GameConfigDataClass::InitWithXML(const FXmlFile * xmlFile)
 				config.MaxLevel = FCString::Atoi(*DataInfo->GetAttribute(TEXT("MaxLevel")));
 				config.MoveRange = FCString::Atoi(*DataInfo->GetAttribute("MoveRange"));
 				config.VisibleRange = FCString::Atoi(*DataInfo->GetAttribute("VisibleRange"));
-				config.AttackRange = FCString::Atoi(*DataInfo->GetAttribute("AttackRange"));
-				config.AttackInterval = FCString::Atof(*DataInfo->GetAttribute("AttackInterval"));
 
 				for (const FXmlNode * LevelInfo = DataInfo->GetFirstChildNode(); LevelInfo != NULL; LevelInfo = LevelInfo->GetNextNode())
 				{

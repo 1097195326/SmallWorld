@@ -14,20 +14,22 @@ EBTNodeResult::Type UBTTask_SearchEnemy::ExecuteTask(UBehaviorTreeComponent& Own
 	{
 		return EBTNodeResult::Failed;
 	}
-	int32 MoveDis = SoldierPawn->GetSoldierData()->GetMoveRange();
+	int32 MoveDis = SoldierPawn->GetCurrentWeapon()->GetAttackRange();
 	AGroundTileActor* MainTile = SoldierPawn->GetOriginGroundTile();
 	TArray<AGroundTileActor*>  AroundTiles;
+	TArray<AGroundTileActor*>  EnemyTiles;
 	GameManager::GetGroundTileAroundSoldier(MainTile, MoveDis, AroundTiles,true);
+	GameManager::GetGroundTilesWithCondition(AroundTiles, EnemyTiles, SoldierPawn, false, true, false);
 
-	TArray<ASoldierPawn*> SoldiersArray;
-	for (AGroundTileActor* IterActor : AroundTiles)
+	TArray<ASoldierPawn*> EnemyArray;
+	for (AGroundTileActor* IterActor : EnemyTiles)
 	{
 		if (IterActor->IsHaveSoldier())
 		{
-			SoldiersArray.Append(IterActor->GetSoldiers());
+			EnemyArray.Append(IterActor->GetSoldiers());
 		}
 	}
-	ASoldierPawn * BestEnemy = SoldierPawn->GetBestEnemy(SoldiersArray);
+	ASoldierPawn * BestEnemy = SoldierPawn->GetBestEnemy(EnemyArray);
 	if (BestEnemy == nullptr)
 	{
 		return EBTNodeResult::Failed;

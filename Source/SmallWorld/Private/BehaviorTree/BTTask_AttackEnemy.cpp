@@ -2,6 +2,7 @@
 #include "SoldierPawnController.h"
 #include "SoldierPawn.h"
 #include "TimerManager.h"
+#include "BaseSoldierDataClass.h"
 
 
 UBTTask_AttackEnemy::UBTTask_AttackEnemy()
@@ -48,7 +49,7 @@ void UBTTask_AttackEnemy::OnTaskFinished(UBehaviorTreeComponent& OwnerComp, uint
 }
 void UBTTask_AttackEnemy::AttackFunc()
 {
-	if (SoldierPawn->IsAlive())
+	if (SoldierPawn->GetSoldierData()->IsAlive())
 	{
 		
 	}
@@ -57,7 +58,7 @@ void UBTTask_AttackEnemy::AttackFunc()
 }
 void UBTTask_AttackEnemy::AttackPointFunc()
 {
-	if (SoldierPawn->IsAlive())
+	if (SoldierPawn->GetSoldierData()->IsAlive())
 	{
 		SoldierPawn->AttackEnemy();
 	}

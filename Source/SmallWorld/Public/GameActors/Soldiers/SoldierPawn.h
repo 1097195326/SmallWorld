@@ -89,10 +89,12 @@ public:
 	virtual float TakeDamage(float Damage, struct FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser) override;
 	
 	//------- Override EanbleAttackPawn
+	virtual bool IsAlive() override;
 	virtual void AttackEnemy() override;
 	virtual bool CanAttack()override;
 	virtual void HandleAttack() override;
 	
+	//-------- Override GameCharacter ----------
 	virtual TSharedPtr<SWidget>	CreateActorDetailWidget() override;
 	virtual void RefreshView() override;
 

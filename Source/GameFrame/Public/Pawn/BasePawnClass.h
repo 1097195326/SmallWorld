@@ -7,30 +7,24 @@ class GAMEFRAME_API BasePawnClass : public BaseObjectClass
 public:
 	BasePawnClass();
 
-	virtual float		CalculateDamage(const float & damage);
+	virtual float CalculateDamage(const float & damage) { return 0.f; }
 
-	bool				IsAlive();
-	void				SetHealth(float && health);
-	inline float		GetHealth() { return Health; };
+	virtual bool IsAlive() { return true; }
 
-	inline void			SetFieldOfView(float temFieldOfView) { FieldOfView = std::move(temFieldOfView); }
-	inline float		GetFieldOfView() { return FieldOfView; }
-	inline void			SetFieldOfBody(float temFieldOfBody) { FieldOfBody = std::move(temFieldOfBody); }
-	inline float		GetFieldOfBody() { return FieldOfBody; }
-	inline void			SetFieldOfAttack(float temFieldOfAttack) { FieldOfAttack = std::move(temFieldOfAttack); }
-	inline float		GetFieldOfAttack() { return FieldOfAttack; }
-	inline void			SetMaxForce(float temMaxForce) { MaxForce = std::move(temMaxForce); }
-	inline float		GetMaxForce() { return MaxForce; }
-	inline void			SetMass(float temMass) { Mass = std::move(temMass); };
-	inline float		GetMass() { return Mass; }
+	virtual void SetHealth(float && health){}
+	virtual void SetFieldOfView(float temFieldOfView) {}
+	virtual void SetFieldOfBody(float temFieldOfBody) {}
+	virtual void SetFieldOfAttack(float temFieldOfAttack) {}
+	virtual void SetMaxForce(float temMaxForce) {}
+	virtual void SetMass(float temMass) {};
+
+	virtual float GetHealth() { return 0.f; }
+	virtual float GetFieldOfView() { return 0.f; }
+	virtual float GetFieldOfBody() { return 0.f;}
+	virtual float GetFieldOfAttack() { return 0.f; }
+	virtual float GetMaxForce() { return 0.f; }
+	virtual float GetMass() { return 0.f;}
 
 protected:
-	float				Health;
-
-	float				FieldOfView;
-	float				FieldOfBody;
-	float				FieldOfAttack;
-	float				MaxForce;
-	float				Mass;
 
 };

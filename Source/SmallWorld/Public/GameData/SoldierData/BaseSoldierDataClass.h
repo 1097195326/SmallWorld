@@ -50,15 +50,9 @@ public:
 	void ReturnMovability(float InTime);
 	void ConsumeMovability();
 
-	inline bool IsFullAttackPower() { return CurrentAttackInterval == GetAttackInterval(); }
-	inline float GetCurrentAttackInterval() const { return CurrentAttackInterval; }
-	void ReturnAttackPower(float InTime);
-
 	inline int32 GetMoveRange() const { return SoldierConfig.MoveRange; }
 	inline int32 GetVisibleRange() const { return SoldierConfig.VisibleRange; }
-	inline int32 GetAttackRange() const { return SoldierConfig.AttackRange; }
-	inline float GetAttackInterval() const { return SoldierConfig.AttackInterval; }
-
+	
 protected:
 	class ASoldierPawn * SoldierPawn;
 	class CommandCenterDataClass * CommandCenter;

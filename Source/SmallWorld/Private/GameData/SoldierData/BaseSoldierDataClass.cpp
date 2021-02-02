@@ -7,15 +7,15 @@
 
 
 BaseSoldierDataClass::BaseSoldierDataClass():
-	SoldierType(Soldier_None),
 	SoldierPawn(nullptr),
 	CommandCenter(nullptr),
-	CurrentLevel(0),
+	SoldierType(Soldier_None),
 	CurrentHealth(100.f),
 	CurrentReturnHealthInterval(0.f),
 	CurrentMovability(0.f),
 	CurrentReturnMovabilityInterval(0.f),
-	CurrentAttackInterval(0.f)
+	CurrentAttackInterval(0.f),
+	CurrentLevel(0)
 {
 
 	
@@ -117,6 +117,7 @@ void BaseSoldierDataClass::SetSoldierConfigByName(FString InName)
 {
 	SoldierName = InName;
 	SoldierConfig = GameDataManager::GetInstance()->GetGameConfigData()->GetSoldierConfig(InName);
+
 }
 void BaseSoldierDataClass::InitDataWithConfig()
 {
@@ -174,13 +175,5 @@ void BaseSoldierDataClass::ReturnHealth(float InTime)
 	{
 		CurrentReturnHealthInterval -= GetLevelInfo().HealthReturnInterval;
 		SetCurrentHealth(CurrentHealth + GetLevelInfo().HealthReturnSpeed);
-	}
-}
-void BaseSoldierDataClass::ReturnAttackPower(float InTime)
-{
-	CurrentAttackInterval += InTime;
-	if (CurrentAttackInterval > SoldierConfig.AttackInterval)
-	{
-		CurrentAttackInterval = SoldierConfig.AttackInterval;
 	}
 }

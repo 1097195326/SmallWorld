@@ -12,7 +12,8 @@ public:
 		Owner(nullptr),
 		StartRange(0.f),
 		AttackRange(0.f),
-		AttackInterval(0.f)
+		AttackInterval(0.f),
+		CurrentAttackInterval(0.f)
 	{
 		
 	}
@@ -35,24 +36,36 @@ public:
 	{
 		return Cast<T*>(Owner);
 	}
+
+	inline bool IsFullAttackPower() { return CurrentAttackInterval == AttackInterval; }
+	void ReturnAttackPower(float InTime)
+	{
+		CurrentAttackInterval += InTime;
+		if (CurrentAttackInterval > AttackInterval)
+		{
+			CurrentAttackInterval = AttackInterval;
+		}
+	}
+
+	inline void SetStartRange(float temStartRange) { StartRange = std::move(temStartRange); }
+	inline void SetAttackRange(float temAttackRange) { AttackRange = std::move(temAttackRange); }
+	inline void SetAttackInterval(float temAttackInterval) { AttackInterval = std::move(temAttackInterval); }
+	inline void SetAttackPonit(float temAttackPoint) { AttackPoint = std::move(temAttackPoint); }
 	
-	inline void				SetStartRange(float temStartRange) { StartRange = std::move(temStartRange); }
-	inline float			GetStartRange() { return StartRange; }
-	inline void				SetAttackRange(float temAttackRange) { AttackRange = std::move(temAttackRange); }
-	inline float			GetAttackRange() { return AttackRange; }
-	inline void				SetAttackInterval(float temAttackInterval) { AttackInterval = std::move(temAttackInterval); }
-	inline float			GetAttackInterval() { return AttackInterval; }
-	inline void				SetAttackPonit(float temAttackPoint) { AttackPoint = std::move(temAttackPoint); }
-	inline float			GetAttackPonit() { return AttackPoint; }
+	inline float GetStartRange() { return StartRange; }
+	inline float GetAttackRange() { return AttackRange; }
+	inline float GetAttackInterval() { return AttackInterval; }
+	inline float GetAttackPonit() { return AttackPoint; }
+	inline float GetCurrentAttackInterval() const { return CurrentAttackInterval; }
 
 protected:
 
-	PawnClass *			Owner;
+	PawnClass * Owner;
 
-	float				StartRange;
-	float				AttackRange;
+	float StartRange;
+	float AttackRange;
 
-	float				AttackInterval;
-	float				AttackPoint;
-
+	float AttackInterval;
+	float AttackPoint;
+	float CurrentAttackInterval;
 };

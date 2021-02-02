@@ -64,9 +64,9 @@ void ASoldierPawn::On_Tick(float delta)
 		{
 			SoldierData->ReturnHealth(delta);
 		}
-		if (!SoldierData->IsFullAttackPower())
+		if (!GetCurrentWeapon()->IsFullAttackPower())
 		{
-			SoldierData->ReturnAttackPower(delta);
+			GetCurrentWeapon()->ReturnAttackPower(delta);
 		}
 		if (!SoldierData->IsUserData())
 		{
@@ -128,6 +128,10 @@ bool ASoldierPawn::CanAttack()
 	}
 	return false;
 }
+bool ASoldierPawn::IsAlive()
+{
+	return SoldierData->IsAlive();
+}
 void ASoldierPawn::AttackEnemy()
 {
 	CurrentWeapon->AttackEnemy();
@@ -180,7 +184,7 @@ void ASoldierPawn::UpdateAI(float delta)
 	{
 
 	}
-	if (SoldierData->IsFullAttackPower())
+	if (GetCurrentWeapon()->IsFullAttackPower())
 	{
 
 	}
