@@ -12,7 +12,6 @@ AGroundTileActor::AGroundTileActor()
 	RootComponent = CreateDefaultSubobject<USceneComponent>("RootComponent");
 
 	GroundTileComponent = CreateDefaultSubobject<UStaticMeshComponent>("GroundTileComponent");
-	GroundTileComponent->SetWorldScale3D(FVector(1.176470f));
 	GroundTileComponent->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
 	GroundTileComponent->SetCollisionResponseToAllChannels(ECR_Block);
 	GroundTileComponent->SetCollisionObjectType(GameActorTrace);
