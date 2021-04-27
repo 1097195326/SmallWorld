@@ -13,6 +13,7 @@ class UNREALENGINEWRAP_API AGameActor : public AActor, public GameObjectClass
 	GENERATED_BODY()
 
 public:
+	
 	AGameActor();
 	virtual void PostInitializeComponents() override;
 	virtual void BeginPlay() override;
@@ -24,5 +25,5 @@ public:
 	virtual TSharedPtr<SWidget>	CreateActorDetailWidget() { return SNullWidget::NullWidget; }
 	virtual void RefreshView(){}
 
-	
+
 };

@@ -67,11 +67,11 @@ void CommandCenterDataClass::TrySpawnSoldier()
 	int32 TileIndex = UKismetMathLibrary::RandomInteger(TileArray.Num());
 	FVector SpLocation = FVector::ZeroVector;
 	AGroundTileActor * GroundTile = TileArray[TileIndex];
-	if (GroundTile->IsBusy() || GroundTile->GetSoldiers().Num() > 0)
+	if (GroundTile->IsBusy() || GroundTile->GetGameActors().Num() > 0)
 	{
 		for (auto IterTile : TileArray)
 		{
-			if (!IterTile->IsBusy() && IterTile->GetSoldiers().Num() == 0)
+			if (!IterTile->IsBusy() && IterTile->GetGameActors().Num() == 0)
 			{
 				SpLocation = IterTile->GetActorLocation();
 				GroundTile = IterTile;
@@ -91,7 +91,7 @@ void CommandCenterDataClass::TrySpawnSoldier()
 		if (SoldierPawn)
 		{
 			SoldierPawn->SetActorLocationAndRotation(SpLocation + FVector(0, 0, 100), BuildingActor->GetActorRotation());
-			GroundTile->AddSoldier(SoldierPawn);
+			GroundTile->AddGameActor(SoldierPawn);
 			SoldierPawn->SetOriginGroundTile(GroundTile);
 			//SoldierPawn->SetMoveLocation(SpLocation);
 		}

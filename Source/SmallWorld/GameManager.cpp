@@ -100,7 +100,7 @@ void GameManager::GetGroundTileAroundSoldier(class AGroundTileActor* InMainTile,
 	if (InMainTile == nullptr) { return; }
 	for (int i = 1; i <= InDistance; i++)
 	{
-		for (int32 j = AGroundTileActor::Direction_Forward; j < AGroundTileActor::Direction_Other; j++)
+		for (int32 j = AGroundTileActor::Direction_Forward; j < AGroundTileActor::Direction_Num; j++)
 		{
 			AGroundTileActor* TemTile = InMainTile->GetAroundTileActorByDistance(i, (AGroundTileActor::DirectionEnum)j,InContainSoldier);
 			if (TemTile)
@@ -112,11 +112,11 @@ void GameManager::GetGroundTileAroundSoldier(class AGroundTileActor* InMainTile,
 }
 void GameManager::GetGroundTilesWithCondition(const TArray<AGroundTileActor *> & InTiles, TArray<class AGroundTileActor *>& OutTiles, ASoldierPawn * InSoldier,bool InContainFriend, bool InContainEnemy,bool InContainNoSoldier)
 {
-	for (AGroundTileActor * IterTile : InTiles)
+	/*for (AGroundTileActor * IterTile : InTiles)
 	{
-		if (IterTile->IsHaveSoldier())
+		if (IterTile->IsHaveGameActor())
 		{
-			ASoldierPawn * OnTileSoldier = IterTile->GetSoldiers()[0];
+			ASoldierPawn * OnTileSoldier = IterTile->GetGameActors()[0];
 			if (InContainFriend && !OnTileSoldier->IsEnemy(InSoldier) && !IterTile->IsHaveFlySoldier())
 			{
 				OutTiles.AddUnique(IterTile);
@@ -128,38 +128,38 @@ void GameManager::GetGroundTilesWithCondition(const TArray<AGroundTileActor *> &
 		{
 			OutTiles.AddUnique(IterTile);
 		}
-	}
+	}*/
 }
 TArray<TileMapStruct>  GameManager::GetGroundTilesNearSoldiers(const TArray<AGroundTileActor*> & InTiles, int32 InDistance, ASoldierPawn * InSoldier, bool InIsEnemy)
 {
 	TArray<TileMapStruct>  ArrayTileMap;
-	for (AGroundTileActor * IterTile : InTiles)
-	{
-		TileMapStruct  TileMap;
-		TileMap.MainTile = IterTile;
-		for (int i = 1; i <= InDistance; i++)
-		{
-			for (int32 j = AGroundTileActor::Direction_Forward; j < AGroundTileActor::Direction_Other; j++)
-			{
-				AGroundTileActor* TemTile = IterTile->GetAroundTileActorByDistance(i, (AGroundTileActor::DirectionEnum)j, true);
-				//AGroundTileActor* TemTile = IterTile->GetHaveSoldierAroundTileActorByDistance(i, (AGroundTileActor::DirectionEnum)j, true);
-				if (TemTile && TemTile->IsHaveSoldier())
-				{
-					ASoldierPawn * OnTileSoldier = TemTile->GetSoldiers()[0];
-					if ((InIsEnemy && OnTileSoldier->IsEnemy(InSoldier)) ||
-						(!InIsEnemy && !OnTileSoldier->IsEnemy(InSoldier))
-						)
-					{
-						TileMap.AroundTile.AddUnique(TemTile);
-					}
-				}
-			}
-		}
-		if (TileMap.AroundTile.Num() > 0)
-		{
-			ArrayTileMap.Add(TileMap);
-		}
-	}
+	//for (AGroundTileActor * IterTile : InTiles)
+	//{
+	//	TileMapStruct  TileMap;
+	//	TileMap.MainTile = IterTile;
+	//	for (int i = 1; i <= InDistance; i++)
+	//	{
+	//		for (int32 j = AGroundTileActor::Direction_Forward; j < AGroundTileActor::Direction_Num; j++)
+	//		{
+	//			AGroundTileActor* TemTile = IterTile->GetAroundTileActorByDistance(i, (AGroundTileActor::DirectionEnum)j, true);
+	//			//AGroundTileActor* TemTile = IterTile->GetHaveSoldierAroundTileActorByDistance(i, (AGroundTileActor::DirectionEnum)j, true);
+	//			if (TemTile && TemTile->IsHaveGameActor())
+	//			{
+	//				ASoldierPawn * OnTileSoldier = TemTile->GetGameActors()[0];
+	//				if ((InIsEnemy && OnTileSoldier->IsEnemy(InSoldier)) ||
+	//					(!InIsEnemy && !OnTileSoldier->IsEnemy(InSoldier))
+	//					)
+	//				{
+	//					TileMap.AroundTile.AddUnique(TemTile);
+	//				}
+	//			}
+	//		}
+	//	}
+	//	if (TileMap.AroundTile.Num() > 0)
+	//	{
+	//		ArrayTileMap.Add(TileMap);
+	//	}
+	//}
 	return ArrayTileMap;
 }
 AGroundTileActor * GameManager::GetGroundTileWithSoldiersNum(const TArray<TileMapStruct> & InArrayTileMap, bool InMore /* = true */)

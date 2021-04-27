@@ -10,12 +10,21 @@ class ASoldierPawn;
 UENUM()
 enum class TileTypeEnum : uint8
 {
-	E_None,
-	E_Water,
-	E_Lava,
-	E_Wood,
-	E_GoldOre,
-	E_Num
+	TileType_None,
+	TileType_Water,
+	TileType_Lava,
+	TileType_Land,
+	TileType_Num
+};
+UENUM()
+enum class TileSignEnum : uint32
+{
+	TileSign_None,
+	TileSign_Way = 1,
+	TileSign_Block = 1 << 1,
+	TileSign_Target = 1 << 2,
+	TileSign_Castle = 1 << 3,
+
 };
 
 UCLASS()
@@ -30,7 +39,7 @@ public:
 		Direction_Back,
 		Direction_Left,
 		Direction_Right,
-		Direction_Other,
+		Direction_Num
 	};
 
 	AGroundTileActor();
@@ -49,34 +58,45 @@ public:
 	void TrackAround();
 	//Before Start Game ,Found Soldier In This Tile
 	void TrackSoldier();
-	bool IsHaveSoldier() { return Soldiers.Num() > 0; }
 	bool IsHaveFlySoldier();
-	void AddSoldier(ASoldierPawn * InSoldier);
-	void RemoveSoldier(ASoldierPawn * InSoldier);
-	bool IsContain(ASoldierPawn * InSoldier);
-	TArray<ASoldierPawn *> GetSoldiers() { return Soldiers; }
+
+	bool IsHaveGameActor() { return GameActors.Num() > 0; }
+	void AddGameActor(AActor * InActor);
+	void RemoveGameActor(AActor * InActor);
+	bool IsContainGameActor(AActor * InActor);
+	TArray<AActor *> GetGameActors() { return GameActors; }
 
 	AGroundTileActor* GetAroundTileActorByDistance(int32 InDistance, DirectionEnum InDir, bool InContainSoldier);
 	AGroundTileActor* GetHaveSoldierAroundTileActorByDistance(int32 InDistance, DirectionEnum InDir);
 	class ACastleTileActor * GetCastleTileActorByDistance(int32 InDistance, DirectionEnum InDir, bool InContainSoldier);
 
-	UPROPERTY(VisibleDefaultsOnly)
-		UStaticMeshComponent * GroundTileComponent ;
-	UPROPERTY(VisibleDefaultsOnly)
-		UStaticMeshComponent * CloudTileComponent;
-	
-	UPROPERTY(EditAnywhere)
-		TileTypeEnum  TileType;
-
-	TMap<DirectionEnum, AGameActor*>  AroundActorMap;
-
 	bool IsVisible() { return VisibilityCounter > 0; }
 	void IncreaseVisibilityCounter() { VisibilityCounter += 1; }
 	void DecreaseVisibilityCounter() { VisibilityCounter -= 1; VisibilityCounter < 0 ? VisibilityCounter = 0 : NULL; }
+
+	int32 GetSignXIndex() { return TileSignXIndex; }
+	int32 GetSignYIndex() { return TileSignYIndex; }
+
+	TMap<DirectionEnum, AGameActor*>  AroundActorMap;
+
 protected:
 	bool bIsBusy;
 	float FlagTimer;
 	AActor * FlagActor;
-	TArray<ASoldierPawn*> Soldiers;
+	TArray<AActor*> GameActors;
 	int32 VisibilityCounter;
+
+	UPROPERTY(VisibleDefaultsOnly)
+		UStaticMeshComponent * GroundTileComponent;
+	UPROPERTY(VisibleDefaultsOnly)
+		UStaticMeshComponent * CloudTileComponent;
+
+	UPROPERTY(EditAnywhere , Category = "Setting")
+		TileTypeEnum  TileType;
+	UPROPERTY(EditAnywhere, Category = "Setting")
+		TileSignEnum  TileSign;
+	UPROPERTY(EditAnywhere, Category = "Setting")
+		int32 TileSignXIndex;
+	UPROPERTY(EditAnywhere, Category = "Setting")
+		int32 TileSignYIndex;
 };

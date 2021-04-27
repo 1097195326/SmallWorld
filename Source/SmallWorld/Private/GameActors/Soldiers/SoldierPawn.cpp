@@ -18,6 +18,7 @@ ASoldierPawn::ASoldierPawn():
 	GetCapsuleComponent()->SetCollisionResponseToChannel(SoldierTrace, ECR_Ignore);
 	GetCapsuleComponent()->SetCollisionObjectType(SoldierTrace);
 
+	
 	bUseControllerRotationYaw = true;
 	PrimaryActorTick.bCanEverTick = true;
 
@@ -300,8 +301,8 @@ void ASoldierPawn::MoveToTargetEnd()
 	}
 	if (TargetGroundTile)
 	{
-		OriginGroundTile->RemoveSoldier(this);
-		TargetGroundTile->AddSoldier(this);
+		OriginGroundTile->RemoveGameActor(this);
+		TargetGroundTile->AddGameActor(this);
 		OriginGroundTile->SetBusy(false);
 		TargetGroundTile->SetBusy(false);
 		OriginGroundTile = TargetGroundTile;

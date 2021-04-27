@@ -20,12 +20,17 @@ AGroundTileActor::AGroundTileActor()
 	CloudTileComponent->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	CloudTileComponent->SetCollisionResponseToAllChannels(ECR_Ignore);
 	CloudTileComponent->SetCollisionObjectType(GameActorTrace);
-	CloudTileComponent->SetWorldScale3D(FVector(1.176470f));
+	//CloudTileComponent->SetWorldScale3D(FVector(1.176470f));
 
 	GroundTileComponent->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
 	CloudTileComponent->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
 	
 	PrimaryActorTick.bCanEverTick = true;
+
+	TileType = TileTypeEnum::TileType_Land;
+	TileSign = TileSignEnum::TileSign_Way;
+	TileSignXIndex = -1;
+	TileSignYIndex = -1;
 
 	VisibilityCounter = 0;
 }
@@ -47,11 +52,11 @@ void AGroundTileActor::On_Tick(float DeltaSeconds)
 			FlagTimer = 0.f;
 		}
 	}
-	if (Soldiers.Num() > 0 && !CloudTileComponent->GetVisibleFlag())
+	if (GameActors.Num() > 0 && !CloudTileComponent->GetVisibleFlag())
 	{
 		CloudTileComponent->SetVisibility(true);
 	}
-	else if (Soldiers.Num() == 0 && CloudTileComponent->GetVisibleFlag())
+	else if (GameActors.Num() == 0 && CloudTileComponent->GetVisibleFlag())
 	{
 		CloudTileComponent->SetVisibility(false);
 	}
@@ -65,7 +70,7 @@ void AGroundTileActor::On_Tick(float DeltaSeconds)
 }
 void AGroundTileActor::On_Delete()
 {
-	Soldiers.Empty();
+	GameActors.Empty();
 }
 
 void AGroundTileActor::SetCloudVisible(bool InVisible)
@@ -99,10 +104,6 @@ void AGroundTileActor::TrackAround()
 			else if (FMath::IsNearlyEqual(RightDot, -1.f, FloatErrorTolerance))
 			{ AroundActorMap.Add(Direction_Left, Cast<AGameActor>(TemActor)); }
 		}
-		else if (TemActor->IsA<ACastleTileActor>())
-		{
-			AroundActorMap.Add(Direction_Other, Cast<AGameActor>(TemActor));
-		}
 	}
 
 }
@@ -121,33 +122,34 @@ void AGroundTileActor::TrackSoldier()
 		if (ActorBox.ExpandBy(FVector::ZeroVector,FVector(0.f,0.f,250.f)).IsInside(TemActor->GetActorLocation()))
 		{
 			ASoldierPawn * TemSoldier = Cast<ASoldierPawn>(TemActor);
-			AddSoldier(TemSoldier);
+			AddGameActor(TemSoldier);
 			TemSoldier->SetOriginGroundTile(this);
 		}
 	}
 }
-void AGroundTileActor::AddSoldier(ASoldierPawn * InSoldier)
+void AGroundTileActor::AddGameActor(AActor * InActor)
 {
-	Soldiers.AddUnique(InSoldier);
+	GameActors.AddUnique(InActor);
 }
-void AGroundTileActor::RemoveSoldier(ASoldierPawn * InSoldier)
+void AGroundTileActor::RemoveGameActor(AActor * InActor)
 {
-	Soldiers.Remove(InSoldier);
+	GameActors.Remove(InActor);
 }
 bool AGroundTileActor::IsHaveFlySoldier()
 {
-	for (auto IterSoldier : Soldiers)
+	for (auto IterActor : GameActors)
 	{
-		if (IterSoldier->GetSoldierData()->GetMoveType() == Move_Fly)
+		ASoldierPawn * Soldier = Cast<ASoldierPawn>(IterActor);
+		if (Soldier && Soldier->GetSoldierData()->GetMoveType() == Move_Fly)
 		{
 			return true;
 		}
 	}
 	return false;
 }
-bool AGroundTileActor::IsContain(ASoldierPawn * InSoldier)
+bool AGroundTileActor::IsContainGameActor(AActor * InActor)
 {
-	return Soldiers.Contains(InSoldier);
+	return GameActors.Contains(InActor);
 }
 void AGroundTileActor::ShowFlags(bool InMoveFlag, bool InTargetFlag)
 {
@@ -172,7 +174,7 @@ void AGroundTileActor::ShowFlags(bool InMoveFlag, bool InTargetFlag)
 		if (AroundActorMap.Contains(Direction_Back))
 		{ MoveActor->MeshComponent->AddInstance(FTransform(FRotator(0, 0, 0), FVector(-60, 0, 0))); }
 		FlagActor= MoveActor;
-	}else if (InTargetFlag && !IsHaveSoldier())
+	}else if (InTargetFlag && !IsHaveGameActor())
 	{
 		if (FlagActor) { FlagActor->Destroy(); }
 		UClass* FlagClass = LoadClass<ATargetFlagActor>(this, TEXT("/Game/Blueprint/TargetFlag_BP.TargetFlag_BP_C"));
@@ -193,7 +195,7 @@ AGroundTileActor* AGroundTileActor::GetAroundTileActorByDistance(int32 InDistanc
 			if (TemTile->IsBusy())
 			{
 				TemTile = nullptr;
-			}else if (TemTile->IsHaveSoldier())
+			}else if (TemTile->IsHaveGameActor())
 			{
 				if (!InContainSoldier)
 				{
@@ -222,7 +224,7 @@ AGroundTileActor* AGroundTileActor::GetHaveSoldierAroundTileActorByDistance(int3
 		}else { break; }
 		++index;
 	}
-	if (TemTile && TemTile != this && TemTile->IsHaveSoldier())
+	if (TemTile && TemTile != this && TemTile->IsHaveGameActor())
 	{
 		return TemTile;
 	}
@@ -233,7 +235,7 @@ ACastleTileActor* AGroundTileActor::GetCastleTileActorByDistance(int32 InDistanc
 	AGroundTileActor* TemTile = this;
 	ACastleTileActor * ResCastle = nullptr;
 	int index = 1;
-	while (index <= InDistance)
+	/*while (index <= InDistance)
 	{
 		if (TemTile && TemTile->AroundActorMap.Contains(Direction_Other))
 		{
@@ -247,7 +249,7 @@ ACastleTileActor* AGroundTileActor::GetCastleTileActorByDistance(int32 InDistanc
 			{
 				TemTile = nullptr;
 			}
-			else if (TemTile->IsHaveSoldier())
+			else if (TemTile->IsHaveGameActor())
 			{
 				if (!InContainSoldier)
 				{
@@ -256,6 +258,6 @@ ACastleTileActor* AGroundTileActor::GetCastleTileActorByDistance(int32 InDistanc
 			}
 		}else { break; }
 		++index;
-	}
+	}*/
 	return ResCastle;
 }

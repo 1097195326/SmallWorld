@@ -22,13 +22,13 @@ EBTNodeResult::Type UBTTask_SearchEnemy::ExecuteTask(UBehaviorTreeComponent& Own
 	GameManager::GetGroundTilesWithCondition(AroundTiles, EnemyTiles, SoldierPawn, false, true, false);
 
 	TArray<ASoldierPawn*> EnemyArray;
-	for (AGroundTileActor* IterActor : EnemyTiles)
+	/*for (AGroundTileActor* IterActor : EnemyTiles)
 	{
-		if (IterActor->IsHaveSoldier())
+		if (IterActor->IsHaveGameActor())
 		{
-			EnemyArray.Append(IterActor->GetSoldiers());
+			EnemyArray.Append(IterActor->GetGameActors());
 		}
-	}
+	}*/
 	ASoldierPawn * BestEnemy = SoldierPawn->GetBestEnemy(EnemyArray);
 	if (BestEnemy == nullptr)
 	{
