@@ -29,8 +29,7 @@ AGroundTileActor::AGroundTileActor()
 
 	TileType = TileTypeEnum::TileType_Land;
 	TileSign = TileSignEnum::TileSign_Way;
-	TileSignXIndex = -1;
-	TileSignYIndex = -1;
+	TileSignIndex = -1;
 
 	VisibilityCounter = 0;
 }
