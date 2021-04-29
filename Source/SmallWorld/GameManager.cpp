@@ -33,22 +33,54 @@ void GameManager::ScanWorldMap()
 	
 	TArray<AActor*> TemActorsArray;
 	UGameplayStatics::GetAllActorsOfClass(User_GameInstance, AGroundTileActor::StaticClass(), TemActorsArray);
-	FString  OGIStr;
 	for (auto IterActor : TemActorsArray)
 	{
 		AGroundTileActor * TemActor = Cast<AGroundTileActor>(IterActor);
-		GroundActorArray.Add(TemActor);
+		int32 SignX = TemActor->GetSignXIndex();
+		int32 SignY = TemActor->GetSignYIndex();
+		if (GroundActorArray.Contains(SignY))
+		{
+			TMap<int32, AGroundTileActor*> * FindMap = GroundActorArray.Find(SignY);
+			FindMap->Add(SignX, TemActor);
+		}
+		else
+		{
+			TMap<int32, AGroundTileActor*> & AddMap = GroundActorArray.Add(SignY, TMap<int32, AGroundTileActor*>());
+			AddMap.Add(SignX, TemActor);
+		}
 		TemActor->TrackAround();
-		OGIStr += TemActor->GetObjectId().ToString();
 	}
-	UGameplayStatics::GetAllActorsOfClass(User_GameInstance, ACastleTileActor::StaticClass(), TemActorsArray);
+
+	GroundActorArray.KeySort([](int32 A, int32 B) {return A < B; });
+	for (auto IterArray : GroundActorArray)
+	{
+		UE_LOG(LogTemp, Log, TEXT("zhx for ground actor-------------------------- :num:%d"), IterArray.Value.Num());
+		IterArray.Value.KeySort([](int32 A, int32 B) {return A < B; });
+		for (auto IterActor : IterArray.Value)
+		{
+			UE_LOG(LogTemp, Log, TEXT("zhx for ground actor : y = %d,x = %d"), IterActor.Value->GetSignYIndex(), IterActor.Value->GetSignXIndex());
+		}
+	}
+
+	UGameplayStatics::GetAllActorsOfClass(User_GameInstance, ATargetPoint::StaticClass(), TemActorsArray);
+	for (AActor * IterActor : TemActorsArray)
+	{
+		if (IterActor->Tags.Contains(FName(TEXT("Player"))))
+		{
+			PlayerTargetPoint = Cast<ATargetPoint>(IterActor);
+		}else if (IterActor->Tags.Contains(FName(TEXT("Enemy"))))
+		{
+			EnemyTargetPoint = Cast<ATargetPoint>(IterActor);
+		}
+	}
+
+	/*UGameplayStatics::GetAllActorsOfClass(User_GameInstance, ACastleTileActor::StaticClass(), TemActorsArray);
 	for (auto IterActor : TemActorsArray)
 	{
 		ACastleTileActor * TemActor = Cast<ACastleTileActor>(IterActor);
 		CastleActorArray.Add(TemActor);
 		TemActor->TrackAround();
-	}
-
+	}*/
 }
 void GameManager::BuildGameWorld()
 {

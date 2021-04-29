@@ -74,7 +74,8 @@ public:
 	void IncreaseVisibilityCounter() { VisibilityCounter += 1; }
 	void DecreaseVisibilityCounter() { VisibilityCounter -= 1; VisibilityCounter < 0 ? VisibilityCounter = 0 : NULL; }
 
-	int32 GetSignIndex() { return TileSignIndex; }
+	int32 GetSignXIndex() { return TileSignXIndex; }
+	int32 GetSignYIndex() { return TileSignYIndex; }
 
 	TMap<DirectionEnum, AGameActor*>  AroundActorMap;
 
@@ -95,5 +96,7 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "Setting")
 		TileSignEnum  TileSign;
 	UPROPERTY(EditAnywhere, Category = "Setting")
-		int32 TileSignIndex;
+		int32 TileSignXIndex;
+	UPROPERTY(EditAnywhere, Category = "Setting")
+		int32 TileSignYIndex;
 };

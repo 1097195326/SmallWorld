@@ -30,8 +30,10 @@ public:
 	static AGroundTileActor * GetGroundTileWithSoldiersNum(const TArray<TileMapStruct> & InArrayTileMap, bool InMore = true);
 	static AGroundTileActor * GetGroundTileWithDistance(AGroundTileActor* InMainTile, const TArray<AGroundTileActor*> & InTiles, bool InFar = true);
 
+	ATargetPoint * PlayerTargetPoint;
+	ATargetPoint * EnemyTargetPoint;
 private:
-	TArray<class AGroundTileActor*>	GroundActorArray;
+	TMap<int32 ,TMap<int32,class AGroundTileActor*>>	GroundActorArray;
 	TArray<class AGroundTileActor*> CurrentVisibleGroundArray;
 	TArray<class ACastleTileActor*>	CastleActorArray;
 
