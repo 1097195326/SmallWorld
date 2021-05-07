@@ -32,6 +32,7 @@ public:
 
     static UGAppInstance * GetInstance();
     
+    virtual void Init() override;
     virtual void PostInitProperties() override;
     virtual void BeginDestroy() override;
 	virtual void OnStart() override;
