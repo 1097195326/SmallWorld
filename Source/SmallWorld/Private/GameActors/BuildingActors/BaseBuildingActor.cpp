@@ -29,46 +29,56 @@ void ABaseBuildingActor::SaveData(TSharedRef<TJsonWriter<TCHAR, TCondensedJsonPr
 {
 	BuildingData->Serialization(Writer);
 }
-bool ABaseBuildingActor::SetMeshComponentByIconName(const FString & InIconName)
+bool ABaseBuildingActor::SetMeshComponentByIconName(const FString & InName)
 {
 	bool IsOk = false;
+	//StaticMesh_CommandCenter_0
 	//FString MeshName = FString::Printf(TEXT("Mesh%s0"), *InIconName);
-	FAssetData MeshData = GameDataManager::GetInstance()->GetBuildingAssetDataByIconName(InIconName);
-
-	if (MeshData.AssetClass == FName(TEXT("SkeletalMesh")))
+	//FAssetData MeshData = GameDataManager::GetInstance()->GetBuildingAssetDataByIconName(InName);
+	const FResourceTableRow * ResourceRow = GameDataManager::GetInstance()->GetGameConfigData()->GetResourceTableRowByName(InName);
+	UObject * ResourceObject = ResourceRow->ResourcePath.LoadSynchronous();
+	if (ResourceObject)
 	{
-		USkeletalMesh * Mesh = Cast<USkeletalMesh>(MeshData.GetAsset());
-		if (Mesh)
+		if (ResourceObject->IsA<USkeletalMesh>())
 		{
-			USkeletalMeshComponent* Component = NewObject<USkeletalMeshComponent>(this);
-			//Component->Mobility = EComponentMobility::Movable;
-			if (Component->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform))
+			USkeletalMesh * Mesh = Cast<USkeletalMesh>(ResourceObject);
+			if (Mesh)
 			{
-				Component->SetSkeletalMesh(Mesh);
-				Component->RegisterComponent();
-				IsOk = true;
+				USkeletalMeshComponent* Component = NewObject<USkeletalMeshComponent>(this);
+				//Component->Mobility = EComponentMobility::Movable;
+				if (Component->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform))
+				{
+					Component->SetSkeletalMesh(Mesh);
+					Component->SetRelativeRotation(ResourceRow->RelativeRotation);
+					Component->SetRelativeScale3D(ResourceRow->RelativeScale);
+					Component->RegisterComponent();
+					IsOk = true;
+				}
+			}
+		}
+		else if (ResourceObject->IsA<UStaticMesh>())
+		{
+			UStaticMesh * Mesh = Cast<UStaticMesh>(ResourceObject);
+			if (Mesh)
+			{
+				UStaticMeshComponent* Component = NewObject<UStaticMeshComponent>(this);
+				if (Component->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform))
+				{
+					Component->Mobility = EComponentMobility::Movable;
+					Component->SetStaticMesh(Mesh);
+					Component->SetRelativeRotation(ResourceRow->RelativeRotation);
+					Component->SetRelativeScale3D(ResourceRow->RelativeScale);
+					Component->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
+					Component->SetCollisionResponseToAllChannels(ECR_Ignore);
+					Component->SetCollisionObjectType(GameActorTrace);
+
+					Component->RegisterComponent();
+					IsOk = true;
+				}
 			}
 		}
 	}
-	else if (MeshData.AssetClass == FName(TEXT("StaticMesh")))
-	{
-		UStaticMesh * Mesh = Cast<UStaticMesh>(MeshData.GetAsset());
-		if (Mesh)
-		{
-			UStaticMeshComponent* Component = NewObject<UStaticMeshComponent>(this);
-			if (Component->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform))
-			{
-				Component->Mobility = EComponentMobility::Movable;
-				Component->SetStaticMesh(Mesh);
-				Component->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
-				Component->SetCollisionResponseToAllChannels(ECR_Ignore);
-				Component->SetCollisionObjectType(GameActorTrace);
-
-				Component->RegisterComponent();
-				IsOk = true;
-			}
-		}
-	}
+	
 	return IsOk;
 }
 FVector ABaseBuildingActor::GetInteractivePoint()

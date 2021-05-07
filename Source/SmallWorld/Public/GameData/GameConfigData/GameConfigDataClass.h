@@ -1,6 +1,7 @@
 #pragma once
 
 #include "TemplateDataClass.h"
+#include "GameDataTable.h"
 
 struct BuildingLevelInfoStruct 
 {
@@ -65,9 +66,12 @@ public:
 	static TArray<FString> SoldierNames;
 	static FString SoldierPeasantName;
 
+	void ClearData();
+	void LoadGameDataTable();
 	virtual void InitWithXML(const FXmlFile * _file) override;
 
-	
+	const FResourceTableRow * GetResourceTableRowByName(FString InName);
+
 	TArray<BuildingConfigStruct> GetBuildingConfigs(const TArray<FString> &  names);
 	const BuildingConfigStruct & GetBuildingConfig(FString name);
 	TArray<SoldierConfigStruct> GetSoldierConfigs(const TArray<FString> &  names);
@@ -75,6 +79,7 @@ public:
 
 	FString TranslateLanguage(FString key);
 private:
+	UDataTable * ResourceTable;
 
 	TMap<FString, SoldierConfigStruct>  SoldierConfigMap;
 	TMap<FString, BuildingConfigStruct>  BuildingConfigMap;

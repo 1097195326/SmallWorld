@@ -33,8 +33,19 @@ TArray<FString> GameConfigDataClass::SoldierNames =
 	TEXT("Mage"),
 	TEXT("SiegeEngine") 
 };
-
-
+void GameConfigDataClass::ClearData()
+{
+	if (ResourceTable)
+	{
+		ResourceTable->RemoveFromRoot();
+		ResourceTable = nullptr;
+	}
+}
+void GameConfigDataClass::LoadGameDataTable()
+{
+	 ResourceTable = LoadObject<UDataTable>(nullptr, TEXT("/Game/Configs/ResourceTable.ResourceTable"));
+	 ResourceTable->AddToRoot();
+}
 void GameConfigDataClass::InitWithXML(const FXmlFile * xmlFile)
 {
 	const FXmlNode * RootNode = xmlFile->GetRootNode();
@@ -124,6 +135,14 @@ void GameConfigDataClass::InitWithXML(const FXmlFile * xmlFile)
 		soldier.Value.Describe = LanguageMap[LocalLanguage][soldier.Value.Describe];
 	}
 
+}
+const FResourceTableRow * GameConfigDataClass::GetResourceTableRowByName(FString InName)
+{
+	if (ResourceTable)
+	{
+		return ResourceTable->FindRow<FResourceTableRow>(FName(InName), TEXT(""));
+	}
+	return nullptr;
 }
 const SoldierConfigStruct & GameConfigDataClass::GetSoldierConfig(FString name)
 {

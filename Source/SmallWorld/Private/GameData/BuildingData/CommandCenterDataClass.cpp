@@ -54,7 +54,7 @@ ABaseBuildingActor * CommandCenterDataClass::SpawnBuildingActor(UWorld * world, 
 	FActorSpawnParameters Paramerter;
 	Paramerter.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
 	BuildingActor = world->SpawnActor<ACommandCenterActor>(ACommandCenterActor::StaticClass(), SpawnTF, Paramerter);
-	FString MeshName = FString::Printf(TEXT("Mesh%s%d"), *BuildingName, InIndex);
+	FString MeshName = FString::Printf(TEXT("StaticMesh_%s_%d"), *BuildingName, InIndex);
 	if (BuildingActor && BuildingActor->SetMeshComponentByIconName(MeshName))
 	{
 		BuildingActor->SetBuildingData(this);

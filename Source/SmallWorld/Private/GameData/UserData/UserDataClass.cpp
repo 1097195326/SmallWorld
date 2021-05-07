@@ -5,7 +5,7 @@ UserDataClass::UserDataClass()
 {
 	HordeId.Invalidate();
 	HordeData = nullptr;
-	CurrentRace = Race_None;
+	CurrentRace = Race_Human;
 }
 void UserDataClass::Serialization(TSharedRef<TJsonWriter<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>> Writer)
 {

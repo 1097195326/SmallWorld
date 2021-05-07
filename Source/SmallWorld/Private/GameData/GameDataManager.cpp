@@ -97,6 +97,7 @@ void GameDataManager::LoadGameConfigData()
 		 {
 			 GameConfigData = (GameConfigDataClass*)(ClassReflectManager::Get()->GetClassByName(TCHAR_TO_UTF8(*ClassName)));
 			 GameConfigData->InitWithXML(&GameConfigFile);
+			 GameConfigData->LoadGameDataTable();
 		 }
 	 }
 }

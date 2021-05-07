@@ -27,7 +27,6 @@ GameManager::~GameManager()
 void GameManager::ScanWorldMap()
 {
 	GroundActorArray.Empty();
-	CastleActorArray.Empty();
 
 	UWorld * CurrentWorld = User_GameInstance->GetWorld();
 	
@@ -74,41 +73,29 @@ void GameManager::ScanWorldMap()
 		}
 	}
 
-	/*UGameplayStatics::GetAllActorsOfClass(User_GameInstance, ACastleTileActor::StaticClass(), TemActorsArray);
-	for (auto IterActor : TemActorsArray)
-	{
-		ACastleTileActor * TemActor = Cast<ACastleTileActor>(IterActor);
-		CastleActorArray.Add(TemActor);
-		TemActor->TrackAround();
-	}*/
 }
 void GameManager::BuildGameWorld()
 {
-	for (int32 i = 0; i < CastleActorArray.Num(); i++)
+	HordeDataClass * HordeData = nullptr;
+	FTransform  SpawnTransform;
+	if (PlayerTargetPoint)
 	{
-		ACastleTileActor * CastleTileActor = CastleActorArray[i];
-		HordeDataClass * HordeData = nullptr;
-		if (i == 0)
-		{
-			RaceEnum UserRace = GameDataManager::GetInstance()->GetUserData()->GetCurrentRace();
-			HordeData = GameDataManager::GetInstance()->GetGameWorldData()->CreateHordeData(UserRace);
-			GameDataManager::GetInstance()->GetUserData()->SetHordeData(HordeData);
-		}
-		else
-		{
-			RaceEnum TemRace = (RaceEnum)UKismetMathLibrary::RandomIntegerInRange(Race_Human, Race_Undead);
-			HordeData = GameDataManager::GetInstance()->GetGameWorldData()->CreateHordeData(TemRace);
-		}
+		SpawnTransform = PlayerTargetPoint->GetActorTransform();
+		RaceEnum UserRace = GameDataManager::GetInstance()->GetUserData()->GetCurrentRace();
+		HordeData = GameDataManager::GetInstance()->GetGameWorldData()->CreateHordeData(UserRace);
+		GameDataManager::GetInstance()->GetUserData()->SetHordeData(HordeData);
 		BaseBuildingDataClass *	 BuildingData = HordeData->SpawnBuildingData("CommandCenter");
-		ABaseBuildingActor * BuildingActor = BuildingData->SpawnBuildingActor(User_GameInstance->GetWorld(), CastleTileActor->GetActorTransform(),0);
-		if (BuildingActor)
-		{
-			BuildingActor->SetCastleTileActor(CastleTileActor);
-			CastleTileActor->SetBuildingActor(BuildingActor);
-			CastleTileActor->SignAround();
-		}
+		ABaseBuildingActor * BuildingActor = BuildingData->SpawnBuildingActor(User_GameInstance->GetWorld(), SpawnTransform, 0);
 	}
-
+	if (EnemyTargetPoint)
+	{
+		SpawnTransform = EnemyTargetPoint->GetActorTransform();
+		RaceEnum TemRace = Race_Orc;// (RaceEnum)UKismetMathLibrary::RandomIntegerInRange(Race_Human, Race_Undead);
+		HordeData = GameDataManager::GetInstance()->GetGameWorldData()->CreateHordeData(TemRace);
+		BaseBuildingDataClass *	 BuildingData = HordeData->SpawnBuildingData("CommandCenter");
+		ABaseBuildingActor * BuildingActor = BuildingData->SpawnBuildingActor(User_GameInstance->GetWorld(), SpawnTransform, 0);
+	}
+	
 }
 void GameManager::RefreshCloudVisible()
 {
