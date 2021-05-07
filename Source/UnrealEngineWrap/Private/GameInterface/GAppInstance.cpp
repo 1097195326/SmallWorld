@@ -17,13 +17,6 @@ UGAppInstance * UGAppInstance::GetInstance()
 {
     return m_Instance;
 }
-void UGAppInstance::Init()
-{
-    Super::Init();
-    
-	On_Init();
-}
-
 void UGAppInstance::PostInitProperties()
 {
     Super::PostInitProperties();
@@ -31,8 +24,8 @@ void UGAppInstance::PostInitProperties()
     
     FCoreDelegates::ApplicationWillEnterBackgroundDelegate.AddUObject(this, &UGAppInstance::ApplicationWillEnterBackground_Hander);
     FCoreDelegates::ApplicationHasEnteredForegroundDelegate.AddUObject(this, &UGAppInstance::ApplicationHasEnteredForeground_Hander);
+	On_Init();
 
-	On_Start();
 }
 void UGAppInstance::BeginDestroy()
 {
@@ -43,10 +36,18 @@ void UGAppInstance::BeginDestroy()
     
 	Super::BeginDestroy();
 }
+void UGAppInstance::OnStart()
+{
+	UE_LOG(LogTemp, Log, TEXT("zhx : --- UGAppInstance::OnStart"));
+
+	On_Start();
+
+}
 void UGAppInstance::Shutdown()
 {
     UE_LOG(LogTemp,Log,TEXT("zhx : --- UGAppInstance::Shutdown"));
-    
+	On_End();
+
     Super::Shutdown();
 }
 void UGAppInstance::ApplicationWillEnterBackground_Hander()
