@@ -10,6 +10,7 @@
 #include "ProgressManager.h"
 #include "GameDataManager.h"
 #include "UIControllerManager.h"
+#include "UI/SlateStyles/GameStyle.h"
 
 
 
@@ -23,6 +24,18 @@ GameManager::GameManager()
 GameManager::~GameManager()
 {
 	GameWorldActor = nullptr;
+}
+void GameManager::StartGame()
+{
+	FGameStyle::Startup();
+	GameDataManager::GetInstance()->LoadData();
+
+
+}
+void GameManager::EndGame()
+{
+	GameDataManager::GetInstance()->ClearData();
+
 }
 void GameManager::ScanWorldMap()
 {
@@ -53,12 +66,12 @@ void GameManager::ScanWorldMap()
 	GroundActorArray.KeySort([](int32 A, int32 B) {return A < B; });
 	for (auto IterArray : GroundActorArray)
 	{
-		UE_LOG(LogTemp, Log, TEXT("zhx for ground actor-------------------------- :num:%d"), IterArray.Value.Num());
+		//UE_LOG(LogTemp, Log, TEXT("zhx for ground actor-------------------------- :num:%d"), IterArray.Value.Num());
 		IterArray.Value.KeySort([](int32 A, int32 B) {return A < B; });
-		for (auto IterActor : IterArray.Value)
+		/*for (auto IterActor : IterArray.Value)
 		{
 			UE_LOG(LogTemp, Log, TEXT("zhx for ground actor : y = %d,x = %d"), IterActor.Value->GetSignYIndex(), IterActor.Value->GetSignXIndex());
-		}
+		}*/
 	}
 
 	UGameplayStatics::GetAllActorsOfClass(User_GameInstance, ATargetPoint::StaticClass(), TemActorsArray);

@@ -8,11 +8,7 @@ GameWorldDataClass::GameWorldDataClass()
 }
 GameWorldDataClass::~GameWorldDataClass()
 {
-    for (auto hordeData : HordeDataMap)
-    {
-		delete hordeData.Value;
-    }
-	HordeDataMap.Empty();
+    
 }
 void GameWorldDataClass::Serialization(TSharedRef<TJsonWriter<TCHAR, TCondensedJsonPrintPolicy<TCHAR>>> Writer)
 {
@@ -57,6 +53,14 @@ void GameWorldDataClass::InitUserData(UserDataClass * InUserData)
 	{
 		InUserData->SetHordeData(HordeDataMap[InUserData->GetHordeId()]);
 	}
+}
+void GameWorldDataClass::ClearData()
+{
+	for (auto hordeData : HordeDataMap)
+	{
+		delete hordeData.Value;
+	}
+	HordeDataMap.Empty();
 }
 HordeDataClass * GameWorldDataClass::CreateHordeData(RaceEnum InRace)
 {

@@ -78,9 +78,17 @@ void GameDataManager::SaveData()
 }
 void GameDataManager::ClearData()
 {
-	delete UserData;
-	delete GameConfigData;
-	delete GameWorldData;
+	if (GameWorldData)
+	{
+		GameWorldData->ClearData();
+		delete GameWorldData;
+	}
+	if (GameConfigData)
+	{
+		GameConfigData->ClearData();
+		delete GameConfigData;
+	}
+	if (UserData) { delete UserData; }
 
 	UserData = nullptr;
 	GameConfigData = nullptr;
@@ -97,7 +105,7 @@ void GameDataManager::LoadGameConfigData()
 		 {
 			 GameConfigData = (GameConfigDataClass*)(ClassReflectManager::Get()->GetClassByName(TCHAR_TO_UTF8(*ClassName)));
 			 GameConfigData->InitWithXML(&GameConfigFile);
-			 GameConfigData->LoadGameDataTable();
+			 GameConfigData->LoadGameDataTables();
 		 }
 	 }
 }

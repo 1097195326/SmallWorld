@@ -41,7 +41,7 @@ void GameConfigDataClass::ClearData()
 		ResourceTable = nullptr;
 	}
 }
-void GameConfigDataClass::LoadGameDataTable()
+void GameConfigDataClass::LoadGameDataTables()
 {
 	 ResourceTable = LoadObject<UDataTable>(nullptr, TEXT("/Game/Configs/ResourceTable.ResourceTable"));
 	 ResourceTable->AddToRoot();

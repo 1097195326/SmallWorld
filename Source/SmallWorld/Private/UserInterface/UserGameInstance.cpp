@@ -2,8 +2,6 @@
 #include "GameManager.h"
 #include "TimerManager.h"
 
-#include "UI/SlateStyles/GameStyle.h"
-#include "GameDataManager.h"
 
 
 UUserGameInstance::UUserGameInstance()
@@ -15,15 +13,17 @@ void UUserGameInstance::On_Init()
 	m_Instance = this;
 	
 
-	FGameStyle::Startup();
-
-	GameDataManager::GetInstance()->LoadData();
-
 }
 void UUserGameInstance::On_Start()
 {
+	GameManager::GetInstance()->StartGame();
+	
 	//GetTimerManager().SetTimer(GameUpdateHandle, this, &UUserGameInstance::UpdateGame, 0.1f, true);
 
+}
+void UUserGameInstance::On_End()
+{
+	GameManager::GetInstance()->EndGame();
 }
 void UUserGameInstance::On_Delete()
 {

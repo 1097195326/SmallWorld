@@ -67,7 +67,7 @@ public:
 	static FString SoldierPeasantName;
 
 	void ClearData();
-	void LoadGameDataTable();
+	void LoadGameDataTables();
 	virtual void InitWithXML(const FXmlFile * _file) override;
 
 	const FResourceTableRow * GetResourceTableRowByName(FString InName);

@@ -18,6 +18,9 @@ public:
 	GameManager();
 	~GameManager();
 
+	void StartGame();
+	void EndGame();
+
 	void ScanWorldMap();
 	void BuildGameWorld();
 	void RefreshCloudVisible();
