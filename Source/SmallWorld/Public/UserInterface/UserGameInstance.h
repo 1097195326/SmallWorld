@@ -1,11 +1,11 @@
 #pragma once
 
-#include "GAppInstance.h"
+#include "WrapGameInstance.h"
 #include "UserGameInstance.generated.h"
 
 
 UCLASS()
-class UUserGameInstance : public UGAppInstance
+class UUserGameInstance : public UWrapGameInstance
 {
 	GENERATED_BODY()
 		

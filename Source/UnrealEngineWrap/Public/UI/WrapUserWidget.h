@@ -10,16 +10,16 @@
 #include "Runtime/UMG/Public/IUMGModule.h"
 #include "Blueprint/WidgetBlueprintLibrary.h"
 #include "Kismet/GameplayStatics.h"
-#include "BaseUI.generated.h"
+#include "WrapUserWidget.generated.h"
 
 UCLASS()
-class UNREALENGINEWRAP_API UBaseUI : public UUserWidget, public GameObjectClass
+class UNREALENGINEWRAP_API UWrapUserWidget : public UUserWidget, public GameObjectClass
 {
 	GENERATED_UCLASS_BODY()
 
 public:
 
-	virtual bool Initialize() override;
+	virtual void NativeOnInitialized() override;
 	virtual void NativeConstruct() override;
 	virtual void NativeTick(const FGeometry& MyGeometry, float InDeltaTime) override;
 	virtual void NativeDestruct() override;
@@ -28,7 +28,7 @@ public:
 	virtual void NativeOnFocusLost(const FFocusEvent& InFocusEvent) override;*/
 
 public:
-	void SetParentUI(UBaseUI * _ui);
+	void SetParentUI(UWrapUserWidget * _ui);
 	virtual void On_Init() override;
 	virtual void On_Tick(float delta) override;
 	virtual void On_Delete() override;
@@ -36,6 +36,6 @@ public:
 	/*virtual void On_FocusReceived();
 	virtual void On_FocusLost();*/
 protected:
-	UBaseUI * m_ParentUI;
+	UWrapUserWidget * m_ParentUI;
 
 };

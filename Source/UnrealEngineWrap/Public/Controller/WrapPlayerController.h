@@ -11,10 +11,10 @@
 #include "CoreMinimal.h"
 #include "GameObjectClass.h"
 #include "GameFramework/PlayerController.h"
-#include "GameController.generated.h"
+#include "WrapPlayerController.generated.h"
 
 UCLASS()
-class UNREALENGINEWRAP_API AGameController : public APlayerController, public GameObjectClass
+class UNREALENGINEWRAP_API AWrapPlayerController : public APlayerController, public GameObjectClass
 {
     GENERATED_BODY()
     

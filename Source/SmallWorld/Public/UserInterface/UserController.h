@@ -1,5 +1,5 @@
 #pragma once
-#include "GameController.h"
+#include "WrapPlayerController.h"
 #include "EditLandscapeHandle.h"
 
 
@@ -8,7 +8,7 @@
 class ASoldierPawn;
 
 UCLASS()
-class AUserController : public AGameController
+class AUserController : public AWrapPlayerController
 {
 	GENERATED_BODY()
 

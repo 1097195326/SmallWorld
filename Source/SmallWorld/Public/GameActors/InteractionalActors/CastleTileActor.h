@@ -1,12 +1,12 @@
 #pragma once
 
-#include "GameActor.h"
+#include "WrapActor.h"
 
 #include "CastleTileActor.generated.h"
 
 
 UCLASS()
-class ACastleTileActor : public AGameActor
+class ACastleTileActor : public AWrapActor
 {
 public:
 	GENERATED_BODY()
@@ -14,7 +14,7 @@ public:
 	
 	ACastleTileActor();
 
-	//Begin override AGameActor
+	//Begin override AWrapActor
 	virtual void On_Init() override;
 	virtual void On_Tick(float DeltaSeconds) override;
 	virtual void On_Delete() override;

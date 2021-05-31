@@ -1,6 +1,6 @@
 #pragma once
 
-#include "GameActor.h"
+#include "WrapActor.h"
 #include "GameConfig.h"
 
 #include "GroundTileActor.generated.h"
@@ -28,7 +28,7 @@ enum class TileSignEnum : uint32
 };
 
 UCLASS()
-class AGroundTileActor : public AGameActor
+class AGroundTileActor : public AWrapActor
 {
 public:
 	GENERATED_BODY()
@@ -44,7 +44,7 @@ public:
 
 	AGroundTileActor();
 
-	//Begin override AGameActor
+	//Begin override AWrapActor
 	virtual void On_Init() override;
 	virtual void On_Tick(float DeltaSeconds) override;
 	virtual void On_Delete() override;
@@ -77,7 +77,7 @@ public:
 	int32 GetSignXIndex() { return TileSignXIndex; }
 	int32 GetSignYIndex() { return TileSignYIndex; }
 
-	TMap<DirectionEnum, AGameActor*>  AroundActorMap;
+	TMap<DirectionEnum, AWrapActor*>  AroundActorMap;
 
 protected:
 	bool bIsBusy;

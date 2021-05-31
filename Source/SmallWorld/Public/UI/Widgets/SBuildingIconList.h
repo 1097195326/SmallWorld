@@ -1,9 +1,9 @@
 #pragma once
 
-#include "SBaseCompoundWidget.h"
+#include "SWrapCompoundWidget.h"
 #include "SVGameActorIcon.h"
 
-class SBuildingIconList : public SBaseCompoundWidget
+class SBuildingIconList : public SWrapCompoundWidget
 {
 public:
 	SLATE_BEGIN_ARGS(SBuildingIconList){}

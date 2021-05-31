@@ -1,6 +1,6 @@
 #pragma once
 
-#include "GameCharacter.h"
+#include "WrapCharacter.h"
 #include "Kismet/GameplayStatics.h"
 #include "BehaviorTree/BehaviorTree.h"
 #include "Perception/AISenseConfig.h"
@@ -74,7 +74,7 @@ enum MoveTypeEnum : int8
 };
 
 UCLASS()
-class ASoldierPawn : public AGameCharacter, public EnableAttackPawnClass<ASoldierPawn>, public IGenericTeamAgentInterface
+class ASoldierPawn : public AWrapCharacter, public EnableAttackPawnClass<ASoldierPawn>, public IGenericTeamAgentInterface
 {
 	GENERATED_BODY()
 public:

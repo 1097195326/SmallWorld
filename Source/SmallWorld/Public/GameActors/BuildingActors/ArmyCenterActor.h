@@ -19,6 +19,6 @@ public:
 	virtual void RefreshView() override;
 
 protected:
-	TSharedPtr<SBaseCompoundWidget> TitleWidget, ContentWidget, OperationWidget;
+	TSharedPtr<SWrapCompoundWidget> TitleWidget, ContentWidget, OperationWidget;
 
 };

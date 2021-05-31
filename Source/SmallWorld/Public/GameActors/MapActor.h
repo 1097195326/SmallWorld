@@ -2,24 +2,24 @@
 
 //#include "GameConfig.h"
 //
-//#include "GameActor.h"
+//#include "WrapActor.h"
 //#include "Components/InstancedStaticMeshComponent.h"
 //
 //#include "MapActor.generated.h"
 //
 //
 //UCLASS()
-//class AMapActor : public AGameActor
+//class AMapActor : public AWrapActor
 //{
 //	GENERATED_BODY()
 //public:
 //	AMapActor();
 //
-//	//Begin override AGameActor
+//	//Begin override AWrapActor
 //	virtual void On_Init() override;
 //	virtual void On_Tick(float DeltaSeconds) override;
 //	virtual void On_Delete() override;
-//	//End AGameActor
+//	//End AWrapActor
 //	int32	AddGroupInstance(const FVector& InLocation);
 //	int32	AddCloudInstance(const FVector& InLocation);
 //

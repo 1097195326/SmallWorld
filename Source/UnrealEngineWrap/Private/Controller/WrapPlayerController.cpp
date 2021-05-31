@@ -7,28 +7,28 @@
 //
 
 //#include "GCore.h"
-#include "GameController.h"
+#include "WrapPlayerController.h"
 
 
-void AGameController::PostInitializeComponents()
+void AWrapPlayerController::PostInitializeComponents()
 {
     Super::PostInitializeComponents();
 
     On_Init();
 }
-void AGameController::BeginPlay()
+void AWrapPlayerController::BeginPlay()
 {
     Super::BeginPlay();
 
     On_Start();
 }
-void AGameController::Tick(float DeltaSeconds)
+void AWrapPlayerController::Tick(float DeltaSeconds)
 {
     Super::Tick(DeltaSeconds);
 
     On_Tick(DeltaSeconds);
 }
-void AGameController::EndPlay(const EEndPlayReason::Type EndPlayReason)
+void AWrapPlayerController::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
     Super::EndPlay(EndPlayReason);
 

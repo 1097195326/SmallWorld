@@ -1,10 +1,10 @@
 #pragma once
 
 
-#include "SBaseCompoundWidget.h"
+#include "SWrapCompoundWidget.h"
 #include "SVGameActorIcon.h"
 
-class SServiceDragDropWidget : public SBaseCompoundWidget
+class SServiceDragDropWidget : public SWrapCompoundWidget
 {
 public:
 	SLATE_BEGIN_ARGS(SServiceDragDropWidget) {}

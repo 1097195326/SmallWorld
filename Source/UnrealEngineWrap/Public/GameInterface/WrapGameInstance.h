@@ -13,7 +13,7 @@
 #include "GameObjectClass.h"
 #include "Misc/CoreDelegates.h"
 #include "Engine/GameInstance.h"
-#include "GAppInstance.generated.h"
+#include "WrapGameInstance.generated.h"
 
 typedef enum {
 	ENotReachable = 0,
@@ -22,15 +22,15 @@ typedef enum {
 } ENetworkStatus;
 
 UCLASS()
-class UNREALENGINEWRAP_API UGAppInstance : public UGameInstance, public GameObjectClass
+class UNREALENGINEWRAP_API UWrapGameInstance : public UGameInstance, public GameObjectClass
 {
     GENERATED_BODY()
 protected:
-    static UGAppInstance *  m_Instance;
+    static UWrapGameInstance *  m_Instance;
 public:
     
 
-    static UGAppInstance * GetInstance();
+    static UWrapGameInstance * GetInstance();
     
     virtual void Init() override;
     virtual void PostInitProperties() override;

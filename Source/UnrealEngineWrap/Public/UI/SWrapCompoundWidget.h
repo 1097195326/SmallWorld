@@ -5,7 +5,7 @@
 #include "ButtonRegister.h"
 
 
-class SBaseCompoundWidget : public SCompoundWidget
+class SWrapCompoundWidget : public SCompoundWidget
 {
 public:
 	virtual void RefreshView(){}

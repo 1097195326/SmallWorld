@@ -1,14 +1,14 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameActor.h"
+#include "WrapActor.h"
 #include "UObject/ConstructorHelpers.h"
 #include "Components/MeshComponent.h"
 #include "BaseBuildingDataClass.h"
 #include "PreviewActor.generated.h"
 
 UCLASS()
-class APreviewActor : public AGameActor
+class APreviewActor : public AWrapActor
 {
 public:
 	GENERATED_BODY()

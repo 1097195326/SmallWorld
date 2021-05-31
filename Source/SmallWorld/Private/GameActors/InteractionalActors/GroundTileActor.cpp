@@ -84,9 +84,9 @@ void AGroundTileActor::TrackAround()
 	
 	TArray<AActor*> OverlapActors;
 	TArray<TEnumAsByte<EObjectTypeQuery>> TrackObj = {UEngineTypes::ConvertToObjectType(GameActorTrace)};
-	UKismetSystemLibrary::BoxOverlapActors(GetWorld(), ActorLocation, GroundExtent * 1.5f, TrackObj, AGameActor::StaticClass(), {this}, OverlapActors);
+	UKismetSystemLibrary::BoxOverlapActors(GetWorld(), ActorLocation, GroundExtent * 1.5f, TrackObj, AWrapActor::StaticClass(), {this}, OverlapActors);
 	
-	AGameActor* SelfAator = this;
+	AWrapActor* SelfAator = this;
 	FVector ForwardVector = GetActorForwardVector();
 	FVector RightVector = GetActorRightVector();
 	for (auto TemActor : OverlapActors)
@@ -96,13 +96,13 @@ void AGroundTileActor::TrackAround()
 			float ForwardDot = FVector::DotProduct((TemActor->GetActorLocation() - ActorLocation).GetSafeNormal(), ForwardVector);
 			float RightDot = FVector::DotProduct((TemActor->GetActorLocation() - ActorLocation).GetSafeNormal(), RightVector);
 			if (FMath::IsNearlyEqual(ForwardDot, 1.f, FloatErrorTolerance))
-			{ AroundActorMap.Add(Direction_Forward, Cast<AGameActor>(TemActor)); }
+			{ AroundActorMap.Add(Direction_Forward, Cast<AWrapActor>(TemActor)); }
 			else if (FMath::IsNearlyEqual(ForwardDot, -1.f, FloatErrorTolerance))
-			{ AroundActorMap.Add(Direction_Back, Cast<AGameActor>(TemActor)); }
+			{ AroundActorMap.Add(Direction_Back, Cast<AWrapActor>(TemActor)); }
 			else if (FMath::IsNearlyEqual(RightDot, 1.f, FloatErrorTolerance))
-			{ AroundActorMap.Add(Direction_Right, Cast<AGameActor>(TemActor)); }
+			{ AroundActorMap.Add(Direction_Right, Cast<AWrapActor>(TemActor)); }
 			else if (FMath::IsNearlyEqual(RightDot, -1.f, FloatErrorTolerance))
-			{ AroundActorMap.Add(Direction_Left, Cast<AGameActor>(TemActor)); }
+			{ AroundActorMap.Add(Direction_Left, Cast<AWrapActor>(TemActor)); }
 		}
 	}
 

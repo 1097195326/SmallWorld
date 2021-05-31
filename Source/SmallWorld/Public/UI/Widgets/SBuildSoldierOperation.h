@@ -1,7 +1,7 @@
 #pragma once
-#include "SBaseCompoundWidget.h"
+#include "SWrapCompoundWidget.h"
 
-class SBuildSoldierOperation: public SBaseCompoundWidget
+class SBuildSoldierOperation: public SWrapCompoundWidget
 {
 public:
 	SLATE_BEGIN_ARGS(SBuildSoldierOperation){}

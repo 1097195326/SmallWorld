@@ -1,12 +1,12 @@
 #pragma once
 
 
-#include "GameActor.h"
+#include "WrapActor.h"
 #include "GameWorldActor.generated.h"
 
 
 UCLASS()
-class AGameWorldActor : public AGameActor
+class AGameWorldActor : public AWrapActor
 {
 	GENERATED_BODY()
 

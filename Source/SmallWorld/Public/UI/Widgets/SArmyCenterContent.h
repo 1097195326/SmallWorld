@@ -1,7 +1,7 @@
 #pragma once
-#include "SBaseCompoundWidget.h"
+#include "SWrapCompoundWidget.h"
 
-class SArmyCenterContent : public SBaseCompoundWidget
+class SArmyCenterContent : public SWrapCompoundWidget
 {
 public:
 	SLATE_BEGIN_ARGS(SArmyCenterContent){}

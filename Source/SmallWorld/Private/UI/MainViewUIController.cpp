@@ -30,7 +30,7 @@ void MainViewUIController::OnEnter()
 void MainViewUIController::OnExit()
 {
 }
-void MainViewUIController::SelectGameActor(AGameActor * GameActorPtr)
+void MainViewUIController::SelectGameActor(AWrapActor * GameActorPtr)
 {
 	if (GameActorPtr == nullptr)
 	{
@@ -39,7 +39,7 @@ void MainViewUIController::SelectGameActor(AGameActor * GameActorPtr)
 	MiddleBottomSlot->AttachWidget(GameActorPtr->CreateActorDetailWidget().ToSharedRef());
 	
 }
-void MainViewUIController::SelectGameActor(AGameCharacter * GameCharacterPtr)
+void MainViewUIController::SelectGameActor(AWrapCharacter * GameCharacterPtr)
 {
 	if (GameCharacterPtr == nullptr)
 	{

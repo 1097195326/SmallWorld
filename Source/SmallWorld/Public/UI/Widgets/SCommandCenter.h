@@ -1,8 +1,8 @@
 #pragma once
 
-#include "SBaseCompoundWidget.h"
+#include "SWrapCompoundWidget.h"
 
-class SCommandCenter : public SBaseCompoundWidget
+class SCommandCenter : public SWrapCompoundWidget
 {
 public:
 	SLATE_BEGIN_ARGS(SCommandCenter) {}

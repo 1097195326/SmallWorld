@@ -44,7 +44,7 @@ void ACastleTileActor::TrackAround()
 
 	TArray<AActor*> OverlapActors;
 	TArray<TEnumAsByte<EObjectTypeQuery>> TrackObj = { UEngineTypes::ConvertToObjectType(GameActorTrace) };
-	UKismetSystemLibrary::BoxOverlapActors(GetWorld(), ActorLocation, GroundExtent * 1.2f, TrackObj, AGameActor::StaticClass(), { this }, OverlapActors);
+	UKismetSystemLibrary::BoxOverlapActors(GetWorld(), ActorLocation, GroundExtent * 1.2f, TrackObj, AWrapActor::StaticClass(), { this }, OverlapActors);
 
 	for (auto TemActor : OverlapActors)
 	{

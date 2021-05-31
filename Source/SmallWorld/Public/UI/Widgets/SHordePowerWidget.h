@@ -1,9 +1,9 @@
 #pragma once
 
-#include "SBaseCompoundWidget.h"
+#include "SWrapCompoundWidget.h"
 
 
-class SHordePowerWidget : public SBaseCompoundWidget
+class SHordePowerWidget : public SWrapCompoundWidget
 {
 public:
 	SLATE_BEGIN_ARGS(SHordePowerWidget){}

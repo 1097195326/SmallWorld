@@ -7,29 +7,29 @@
 //
 
 //#include "GCore.h"
-#include "GamePawn.h"
+#include "WrapPawn.h"
 
-void AGamePawn::PostInitializeComponents()
+void AWrapPawn::PostInitializeComponents()
 {
 	Super::PostInitializeComponents();
 	On_Init();
 }
-void AGamePawn::BeginPlay()
+void AWrapPawn::BeginPlay()
 {
 	Super::BeginPlay();
 	On_Start();
 }
-void AGamePawn::Tick(float DeltaSeconds)
+void AWrapPawn::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
 	On_Tick(DeltaSeconds);
 }
-void AGamePawn::EndPlay(const EEndPlayReason::Type EndPlayReason)
+void AWrapPawn::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
 	On_End();
 	Super::EndPlay(EndPlayReason);
 }
-void AGamePawn::BeginDestroy()
+void AWrapPawn::BeginDestroy()
 {
 	On_Delete();
 	Super::BeginDestroy();

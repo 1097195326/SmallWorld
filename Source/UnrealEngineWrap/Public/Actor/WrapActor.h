@@ -1,20 +1,20 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "SBaseCompoundWidget.h"
+#include "SWrapCompoundWidget.h"
 #include "GameFramework/Actor.h"
 #include "GameObjectClass.h"
-#include "GameActor.generated.h"
+#include "WrapActor.generated.h"
 
 
 UCLASS()
-class UNREALENGINEWRAP_API AGameActor : public AActor, public GameObjectClass
+class UNREALENGINEWRAP_API AWrapActor : public AActor, public GameObjectClass
 {
 	GENERATED_BODY()
 
 public:
 	
-	AGameActor();
+	AWrapActor();
 	virtual void PostInitializeComponents() override;
 	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaSeconds) override;

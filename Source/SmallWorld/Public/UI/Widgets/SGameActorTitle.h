@@ -1,10 +1,10 @@
 #pragma once
 
-#include "SBaseCompoundWidget.h"
+#include "SWrapCompoundWidget.h"
 
 
 
-class SGameActorTitle : public SBaseCompoundWidget
+class SGameActorTitle : public SWrapCompoundWidget
 {
 public:
 	SLATE_BEGIN_ARGS(SGameActorTitle):

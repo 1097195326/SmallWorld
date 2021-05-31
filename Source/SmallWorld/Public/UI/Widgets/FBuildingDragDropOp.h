@@ -1,6 +1,6 @@
 #pragma once
 
-#include "SBaseCompoundWidget.h"
+#include "SWrapCompoundWidget.h"
 #include "Input/DragAndDrop.h"
 
 

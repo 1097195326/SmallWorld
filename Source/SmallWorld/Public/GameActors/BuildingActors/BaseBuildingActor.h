@@ -1,7 +1,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameActor.h"
+#include "WrapActor.h"
 #include "UObject/ConstructorHelpers.h"
 #include "Engine/StaticMesh.h"
 #include "Components/StaticMeshComponent.h"
@@ -20,7 +20,7 @@ using namespace std;
 class BaseBuildingDataClass;
 
 UCLASS()
-class ABaseBuildingActor : public AGameActor
+class ABaseBuildingActor : public AWrapActor
 {
 public:
 	GENERATED_BODY()

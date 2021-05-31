@@ -70,7 +70,7 @@ AActor * AUserController::TrySelectGameActor(FVector2D ScreenPosition)
 	GetHitResultAtScreenPosition(ScreenPosition, TrackObj,false,HitResult);
 	if (HitResult.bBlockingHit)
 	{
-		AGameActor* GameActor = Cast<AGameActor>(HitResult.GetActor());
+		AWrapActor* GameActor = Cast<AWrapActor>(HitResult.GetActor());
 		AGroundTileActor* TileActor = Cast<AGroundTileActor>(HitResult.GetActor());
 		ASoldierPawn * SoldierPawn = Cast<ASoldierPawn>(HitResult.GetActor());
 		if (SoldierPawn)

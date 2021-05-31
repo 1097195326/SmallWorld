@@ -1,7 +1,7 @@
 #pragma once
 #include "BaseBuildingActor.h"
 #include "CommandCenterDataClass.h"
-#include "SBaseCompoundWidget.h"
+#include "SWrapCompoundWidget.h"
 
 #include "CommandCenterActor.generated.h"
 
@@ -22,7 +22,7 @@ public:
 	virtual void RefreshView() override;
 
 protected:
-	TSharedPtr<SBaseCompoundWidget> ActorWidget;
+	TSharedPtr<SWrapCompoundWidget> ActorWidget;
 
 
 };

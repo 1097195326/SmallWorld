@@ -1,12 +1,12 @@
 #pragma once
-#include "GamePawn.h"
+#include "WrapPawn.h"
 #include "Camera/CameraComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "GameFramework/FloatingPawnMovement.h"
 #include "UserPawn.generated.h"
 
 UCLASS()
-class AUserPawn : public AGamePawn
+class AUserPawn : public AWrapPawn
 {
 	GENERATED_BODY()
 private:

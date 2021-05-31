@@ -1,12 +1,12 @@
 #pragma once
 
-#include "GameActor.h"
+#include "WrapActor.h"
 
 #include "TargetFlagActor.generated.h"
 
 
 UCLASS()
-class ATargetFlagActor : public AGameActor
+class ATargetFlagActor : public AWrapActor
 {
 public:
 	GENERATED_BODY()
@@ -14,7 +14,7 @@ public:
 
 		ATargetFlagActor();
 
-	//Begin override AGameActor
+	//Begin override AWrapActor
 	virtual void On_Init() override;
 	virtual void On_Tick(float DeltaSeconds) override;
 	virtual void On_Delete() override;

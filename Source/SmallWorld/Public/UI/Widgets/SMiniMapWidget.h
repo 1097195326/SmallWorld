@@ -1,9 +1,9 @@
 #pragma once
-#include "SBaseCompoundWidget.h"
+#include "SWrapCompoundWidget.h"
 #include "SMiniMapViewport.h"
 
 
-class SMiniMapWidget : public SBaseCompoundWidget
+class SMiniMapWidget : public SWrapCompoundWidget
 {
 public:
 	SLATE_BEGIN_ARGS(SMiniMapWidget){}
