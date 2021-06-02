@@ -279,7 +279,7 @@ int32 SoldierGroup::GetGroupIndex()
 }
 FormationInfo SoldierGroup::GetFormationInfo(FormationType _type)
 {
-	FormationInfo info;
+	FormationInfo info{};
 	switch (mGroupType)
 	{
 	case G_ArcherGroup:
