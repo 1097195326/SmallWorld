@@ -19,6 +19,6 @@ void ASmallWorldGameMode::StartPlay()
 
 	UE_LOG(LogTemp, Log, TEXT("zhx:ASmallWorldGameMode::StartPlay"));
 
-	GameManager::GetInstance()->ScanWorldMap();
+	//GameManager::GetInstance()->ScanWorldMap();
 
 }

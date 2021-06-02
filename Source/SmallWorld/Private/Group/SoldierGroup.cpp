@@ -420,7 +420,7 @@ FormationInfo SoldierGroup::GetFormationInfo(FormationType _type)
 	default:
 		break;
 	}
-	return std::move(info);
+	return info;
 }
 
 void SoldierGroup::SetGroupType(SoldierTypeEnum _soldierType)

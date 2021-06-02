@@ -19,8 +19,8 @@ void AUserController::On_Init()
 {
 	Instance = this;
 
-	CurrentLandscapeInfo = nullptr;
-	CurrentLandscape = nullptr;
+	/*CurrentLandscapeInfo = nullptr;
+	CurrentLandscape = nullptr;*/
 	CurrentControllType = ECT_None;
 
 	FInputModeGameAndUI InputMode;
@@ -34,7 +34,7 @@ void AUserController::On_Init()
 }
 void AUserController::On_Start()
 {
-	CurrentLandscapeInfo = nullptr;
+	//CurrentLandscapeInfo = nullptr;
 
 	TArray<AActor*> AllLandscape;
 	/*UGameplayStatics::GetAllActorsOfClass(this, ALandscape::StaticClass(), AllLandscape);
@@ -202,26 +202,26 @@ void AUserController::ChangeControllType(EControllType ControllType)
 {
 	CurrentControllType = ControllType;
 }
-void AUserController::LandscapePaint(ALandscape * Landscape, ULandscapeInfo * LandscapeInfo, FVector Location, float Radius, float Falloff)
-{
-	if (Landscape && LandscapeInfo)
-	{
-		ULandscapeLayerInfoObject * LayerInfo = LandscapeInfo->GetLayerInfoByName("auto");
-
-		FCLandscapeToolTarget  ToolTarget;
-		ToolTarget.LandscapeInfo = LandscapeInfo;
-		ToolTarget.LayerInfo = LayerInfo;
-		ToolTarget.TargetType = ECLandscapeToolTargetType::Weightmap;
-
-		FVector LandscapePos = Landscape->LandscapeActorToWorld().InverseTransformPosition(Location);
-
-		TArray<FCLandscapeToolInteractorPosition> InteractorPositions;
-		InteractorPositions.Empty(1);
-		InteractorPositions.Emplace(FVector2D(LandscapePos), false);
-
-		FCLandscapeBrushCircle_Smooth * Brush = new FCLandscapeBrushCircle_Smooth(LandscapeInfo, 500.f, 0.5f);
-		FCLandscapeToolStrokePaint * StrokePaint = new FCLandscapeToolStrokePaint(ToolTarget);
-
-		StrokePaint->Apply(Brush, InteractorPositions);
-	}
-}
+//void AUserController::LandscapePaint(ALandscape * Landscape, ULandscapeInfo * LandscapeInfo, FVector Location, float Radius, float Falloff)
+//{
+//	if (Landscape && LandscapeInfo)
+//	{
+//		ULandscapeLayerInfoObject * LayerInfo = LandscapeInfo->GetLayerInfoByName("auto");
+//
+//		FCLandscapeToolTarget  ToolTarget;
+//		ToolTarget.LandscapeInfo = LandscapeInfo;
+//		ToolTarget.LayerInfo = LayerInfo;
+//		ToolTarget.TargetType = ECLandscapeToolTargetType::Weightmap;
+//
+//		FVector LandscapePos = Landscape->LandscapeActorToWorld().InverseTransformPosition(Location);
+//
+//		TArray<FCLandscapeToolInteractorPosition> InteractorPositions;
+//		InteractorPositions.Empty(1);
+//		InteractorPositions.Emplace(FVector2D(LandscapePos), false);
+//
+//		FCLandscapeBrushCircle_Smooth * Brush = new FCLandscapeBrushCircle_Smooth(LandscapeInfo, 500.f, 0.5f);
+//		FCLandscapeToolStrokePaint * StrokePaint = new FCLandscapeToolStrokePaint(ToolTarget);
+//
+//		StrokePaint->Apply(Brush, InteractorPositions);
+//	}
+//}

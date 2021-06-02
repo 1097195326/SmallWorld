@@ -35,16 +35,17 @@ public:
 		void Attack();
 
 	FTimerHandle hendle;
-	void	SpawnSoldier();
+	void SpawnSoldier();
 private:
-	void	MoveLeftAndRight(float dle);
-	void	MoveUpAndDown(float dle);
-
-	void	TouchPress(ETouchIndex::Type touchIndex, FVector location);
-	void	TouchMove(ETouchIndex::Type touchIndex, FVector location);
-	void	TouchRelease(ETouchIndex::Type touchIndex, FVector location);
-
-	void	GetPressedFinger(int &num);
+	void InitializeDefaultPawnInputBindings();
+	void MoveLeftAndRight(float dle);
+	void MoveUpAndDown(float dle);
+		 
+	void TouchPress(ETouchIndex::Type touchIndex, FVector location);
+	void TouchMove(ETouchIndex::Type touchIndex, FVector location);
+	void TouchRelease(ETouchIndex::Type touchIndex, FVector location);
+		 
+	void GetPressedFinger(int &num);
 private:
 	class	AUserController * mController;
 	

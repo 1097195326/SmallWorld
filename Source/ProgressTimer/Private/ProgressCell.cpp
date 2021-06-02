@@ -28,9 +28,9 @@ void ProgressCell::Tick(float delta)
 		{
 			CurrentProcess = EndPos;
 		}
-		OneloopIsFinish ? --RemainLoopTime : NULL;
+		if (OneloopIsFinish) {--RemainLoopTime;} 
 		TickFunc(CurrentProcess/EndPos, OneloopIsFinish, RemainLoopTime);
-		OneloopIsFinish ? CurrentProcess = BeginPos : NULL;
+		if (OneloopIsFinish) { CurrentProcess = BeginPos; }
 	}
 
 }

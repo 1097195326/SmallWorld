@@ -2,7 +2,6 @@
 #include "UserController.h"
 #include "Kismet/GameplayStatics.h"
 #include "GameFramework/PlayerInput.h"
-#include "EditLandscapeHandle.h"
 
 // test exec
 #include "SoldierPawnController.h"
@@ -78,7 +77,7 @@ void AUserPawn::On_Delete()
 
 }
 
-void InitializeDefaultPawnInputBindings()
+void AUserPawn::InitializeDefaultPawnInputBindings()
 {
 	static bool bBindingsAdded = false;
 	if (!bBindingsAdded)

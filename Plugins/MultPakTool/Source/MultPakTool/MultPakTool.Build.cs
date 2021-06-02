@@ -38,8 +38,8 @@ public class MultPakTool : ModuleRules
 			{
 				"Projects",
 				"InputCore",
-				"UnrealEd",
-				"LevelEditor",
+                "UnrealEd",
+                "LevelEditor",
 				"CoreUObject",
 				"Engine",
 				"Slate",

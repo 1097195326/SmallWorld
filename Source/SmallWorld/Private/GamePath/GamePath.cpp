@@ -37,7 +37,8 @@ FString GamePath::ProjectPath(const TCHAR * appPath)
 #if PLATFORM_WINDOWS
 	return AppendPath;
 #elif PLATFORM_ANDROID
-	//Rp = FPaths::ConvertRelativePathToFull(FPaths::ProjectPersistentDownloadDir(), AppendPath);
+	AppendPath = FPaths::ConvertRelativePathToFull(FPaths::ProjectPersistentDownloadDir(), AppendPath);
+	return AppendPath;
 #else
 	FString iosAbsPath = pf.ConvertToAbsolutePathForExternalAppForWrite(*AppendPath);
 	return ExtractIOSDir(*iosAbsPath);

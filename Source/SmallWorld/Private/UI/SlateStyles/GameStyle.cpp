@@ -61,7 +61,7 @@ TSharedRef<FSlateStyleSet> FGameStyle::Create()
 	Style.Set("Color.FF2A2B2E", FLinearColor(FColor(0XFF2A2B2E)));//black-7
 	Style.Set("Color.FF212224", FLinearColor(FColor(0XFF212224)));//black-8
 	Style.Set("Color.FF1C1D1F", FLinearColor(FColor(0XFF1C1D1F)));//black-9
-	const FLinearColor DefaultForeground(FColor(0.72f, 0.72f, 0.72f, 1.f));
+	const FLinearColor DefaultForeground(0.72f, 0.72f, 0.72f, 1.f);
 	const FLinearColor SelectionColor(0.728f, 0.364f, 0.003f);
 	const FLinearColor SelectionColor_Pressed(0.701f, 0.225f, 0.003f);
 	Style.Set("DefaultForeground", DefaultForeground);

@@ -1,6 +1,5 @@
 #pragma once
 #include "WrapPlayerController.h"
-#include "EditLandscapeHandle.h"
 
 
 #include "UserController.generated.h"
@@ -43,10 +42,10 @@ protected:
 	class APreviewActor *  PreviewActor;
 
 	EControllType		CurrentControllType;
-	ALandscape *		CurrentLandscape;
+	/*ALandscape *		CurrentLandscape;
 	ULandscapeInfo *	CurrentLandscapeInfo;
-
 	void LandscapePaint(ALandscape * Landscape, ULandscapeInfo * LandscapeInfo, FVector Location, float Radius, float Falloff);
+*/
 private:
 	static AUserController * Instance;
 };

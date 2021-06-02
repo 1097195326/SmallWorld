@@ -33,6 +33,6 @@ TSharedPtr<SWidget>	AArmyCenterActor::CreateActorDetailWidget()
 }
 void AArmyCenterActor::RefreshView()
 {
+	if (ContentWidget.IsValid()) { ContentWidget->RefreshView(); }
 
-	ContentWidget.IsValid() ? ContentWidget->RefreshView():NULL;
 }

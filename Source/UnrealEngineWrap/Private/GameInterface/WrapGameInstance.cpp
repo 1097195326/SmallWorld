@@ -22,7 +22,6 @@ void UWrapGameInstance::Init()
     Super::Init();
 	UE_LOG(LogTemp, Log, TEXT("zhx : ---UWrapGameInstance::Init"));
 
-	On_Init();
 }
 
 void UWrapGameInstance::PostInitProperties()
@@ -30,6 +29,8 @@ void UWrapGameInstance::PostInitProperties()
     Super::PostInitProperties();
     UE_LOG(LogTemp, Log, TEXT("zhx : ---UWrapGameInstance::PostInitProperties"));
     
+	On_Init();
+
     FCoreDelegates::ApplicationWillEnterBackgroundDelegate.AddUObject(this, &UWrapGameInstance::ApplicationWillEnterBackground_Hander);
     FCoreDelegates::ApplicationHasEnteredForegroundDelegate.AddUObject(this, &UWrapGameInstance::ApplicationHasEnteredForeground_Hander);
 

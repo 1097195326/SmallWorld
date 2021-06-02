@@ -34,7 +34,7 @@ TSharedPtr<SWidget>	ACommandCenterActor::CreateActorDetailWidget()
 }
 void ACommandCenterActor::RefreshView()
 {
-	ActorWidget.IsValid() ? ActorWidget->RefreshView() : NULL;
+	if (ActorWidget.IsValid()) { ActorWidget->RefreshView(); }
 
 }
 //bool ACommandCenterActor::SetMeshComponentByIconName(const FString& InIconName)
