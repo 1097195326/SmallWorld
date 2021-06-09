@@ -314,7 +314,7 @@ FVector GameManager::GetForwardVector()
 {
 	if (PlayerTargetPoint && EnemyTargetPoint)
 	{
-		static FVector ForwardVector = EnemyTargetPoint->GetActorLocation() - PlayerTargetPoint->GetActorLocation();
+		static FVector ForwardVector = (EnemyTargetPoint->GetActorLocation() - PlayerTargetPoint->GetActorLocation()).GetSafeNormal();
 		return ForwardVector;
 	}
 	return FVector::ZeroVector;

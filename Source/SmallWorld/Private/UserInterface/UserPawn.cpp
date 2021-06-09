@@ -111,12 +111,11 @@ void AUserPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	InitializeDefaultPawnInputBindings();
 
 	PlayerInputComponent->BindAxis("DefaultPawn_MoveForward", this, &AUserPawn::MoveForward);
-	PlayerInputComponent->BindAxis("DefaultPawn_MoveRight", this, &AUserPawn::MoveRight);
-	PlayerInputComponent->BindAxis("DefaultPawn_MoveUp", this, &AUserPawn::MoveUp_World);
-
-	PlayerInputComponent->BindAxis("DefaultPawn_Turn", this, &AUserPawn::AddControllerYawInput);
+	//PlayerInputComponent->BindAxis("DefaultPawn_MoveRight", this, &AUserPawn::MoveRight);
+	//PlayerInputComponent->BindAxis("DefaultPawn_MoveUp", this, &AUserPawn::MoveUp_World);
+	//PlayerInputComponent->BindAxis("DefaultPawn_Turn", this, &AUserPawn::AddControllerYawInput);
+	//PlayerInputComponent->BindAxis("DefaultPawn_LookUp", this, &AUserPawn::AddControllerPitchInput);
 	PlayerInputComponent->BindAxis("DefaultPawn_TurnRate", this, &AUserPawn::TurnAtRate);
-	PlayerInputComponent->BindAxis("DefaultPawn_LookUp", this, &AUserPawn::AddControllerPitchInput);
 	PlayerInputComponent->BindAxis("DefaultPawn_LookUpRate", this, &AUserPawn::LookUpAtRate);
 
 	PlayerInputComponent->BindAction("LeftMouse", IE_Pressed, this, &AUserPawn::LeftMouseButtonOnPressed);
@@ -184,13 +183,14 @@ void AUserPawn::MoveForward(float Val)
 {
 	if (Val != 0.f)
 	{
-		if (Controller)
-		{
-			FRotator const ControlSpaceRot = Controller->GetControlRotation();
-
-			// transform to world space and add it
-			AddMovementInput(FRotationMatrix(ControlSpaceRot).GetScaledAxis(EAxis::X), Val * BaseMoveRate);
-		}
+		static FVector ForwardVector = GameManager::GetInstance()->GetForwardVector();
+		AddMovementInput(ForwardVector, Val * BaseMoveRate);
+		//if (Controller)
+		//{
+		//	// transform to world space and add it
+		//	FRotator const ControlSpaceRot = Controller->GetControlRotation();
+		//	AddMovementInput(FRotationMatrix(ControlSpaceRot).GetScaledAxis(EAxis::X), Val * BaseMoveRate);
+		//}
 	}
 }
 
