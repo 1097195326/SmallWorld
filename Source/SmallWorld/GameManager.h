@@ -35,6 +35,7 @@ public:
 
 	ATargetPoint * PlayerTargetPoint;
 	ATargetPoint * EnemyTargetPoint;
+	ATargetPoint * CameraTargetPoint;
 private:
 	TMap<int32 ,TMap<int32,class AGroundTileActor*>>	GroundActorArray;
 	TArray<class AGroundTileActor*> CurrentVisibleGroundArray;

@@ -83,6 +83,9 @@ void GameManager::ScanWorldMap()
 		}else if (IterActor->Tags.Contains(FName(TEXT("Enemy"))))
 		{
 			EnemyTargetPoint = Cast<ATargetPoint>(IterActor);
+		}else if (IterActor->Tags.Contains(FName(TEXT("Camera"))))
+		{
+			CameraTargetPoint = Cast<ATargetPoint>(IterActor);
 		}
 	}
 
