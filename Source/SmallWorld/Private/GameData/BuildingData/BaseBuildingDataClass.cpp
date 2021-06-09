@@ -16,7 +16,7 @@ BaseBuildingDataClass::BaseBuildingDataClass()
 }
 BaseBuildingDataClass::~BaseBuildingDataClass()
 {
-	BuildingActor->BeginDestroy();
+	BuildingActor->Destroy();
 	BuildingActor = nullptr;
 
 }

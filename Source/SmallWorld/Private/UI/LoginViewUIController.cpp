@@ -85,7 +85,7 @@ void LoginViewUIController::MenuOperation(int32 InIndex)
 	case 100:
 	{
 		MainMenuPage->HideMenu();
-		GameManager::GetInstance()->BuildGameWorld();
+		//GameManager::GetInstance()->BuildGameWorld();
 		UIControllerManager::GetInstance()->ChangeUIController(UIControllerManager::MainViewUIControllerIndex);
 	}
 		break;

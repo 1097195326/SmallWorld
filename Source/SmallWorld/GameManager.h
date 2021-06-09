@@ -33,6 +33,8 @@ public:
 	static AGroundTileActor * GetGroundTileWithSoldiersNum(const TArray<TileMapStruct> & InArrayTileMap, bool InMore = true);
 	static AGroundTileActor * GetGroundTileWithDistance(AGroundTileActor* InMainTile, const TArray<AGroundTileActor*> & InTiles, bool InFar = true);
 
+	FVector GetForwardVector();
+
 	ATargetPoint * PlayerTargetPoint;
 	ATargetPoint * EnemyTargetPoint;
 	ATargetPoint * CameraTargetPoint;

@@ -11,7 +11,8 @@
 #include "GameDataManager.h"
 #include "UIControllerManager.h"
 #include "UI/SlateStyles/GameStyle.h"
-
+#include "UserPawn.h"
+#include "UserController.h"
 
 
 GameManager::GameManager()
@@ -20,6 +21,11 @@ GameManager::GameManager()
 	IsPaused = false;
 
 	GameWorldActor = nullptr;
+
+	PlayerTargetPoint = nullptr;
+	EnemyTargetPoint = nullptr;
+	CameraTargetPoint = nullptr;
+
 }
 GameManager::~GameManager()
 {
@@ -30,12 +36,14 @@ void GameManager::StartGame()
 	FGameStyle::Startup();
 	GameDataManager::GetInstance()->LoadData();
 
+	UIControllerManager::GetInstance()->ChangeUIController(UIControllerManager::LoginViewUIControllerIndex);
 
 }
 void GameManager::EndGame()
 {
 	GameDataManager::GetInstance()->ClearData();
 
+	IsInitialized = false;
 }
 void GameManager::ScanWorldMap()
 {
@@ -89,6 +97,7 @@ void GameManager::ScanWorldMap()
 		}
 	}
 
+
 }
 void GameManager::BuildGameWorld()
 {
@@ -111,7 +120,15 @@ void GameManager::BuildGameWorld()
 		BaseBuildingDataClass *	 BuildingData = HordeData->SpawnBuildingData("CommandCenter");
 		ABaseBuildingActor * BuildingActor = BuildingData->SpawnBuildingActor(User_GameInstance->GetWorld(), SpawnTransform, 0);
 	}
+	if (CameraTargetPoint)
+	{
+		const FTransform CameraTransform = CameraTargetPoint->GetActorTransform();
+		AUserPawn::GetInstance()->SetActorLocation(CameraTransform.GetLocation());
+		AUserController::GetInstance()->SetControlRotation(CameraTransform.GetRotation().Rotator());
+
+	}
 	
+	IsInitialized = true;
 }
 void GameManager::RefreshCloudVisible()
 {
@@ -121,7 +138,7 @@ void GameManager::RefreshCloudVisible()
 }
 void GameManager::Tick(float DeltaTime)
 {
-	//if (IsInitialized)
+	if (IsInitialized)
 	{
 		
 
@@ -292,4 +309,13 @@ AGroundTileActor * GameManager::GetGroundTileWithDistance(AGroundTileActor* InMa
 		ResTile = EqualDistanceTiles[RandIndex];
 	}
 	return ResTile;
+}
+FVector GameManager::GetForwardVector()
+{
+	if (PlayerTargetPoint && EnemyTargetPoint)
+	{
+		static FVector ForwardVector = EnemyTargetPoint->GetActorLocation() - PlayerTargetPoint->GetActorLocation();
+		return ForwardVector;
+	}
+	return FVector::ZeroVector;
 }

@@ -12,7 +12,6 @@ class AUserPawn : public AWrapPawn
 private:
 	static AUserPawn * Instance;
 public:
-	//AUserPawn();
 	AUserPawn(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get());
 
 	static AUserPawn * GetInstance();
@@ -25,17 +24,6 @@ public:
 	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
 	virtual UPawnMovementComponent* GetMovementComponent() const override;
 
-	UFUNCTION(Exec)
-		void CreateGroup();
-	UFUNCTION(Exec)
-		void Fire();
-	UFUNCTION(Exec)
-		void Prepare();
-	UFUNCTION(Exec)
-		void Attack();
-
-	FTimerHandle hendle;
-	void SpawnSoldier();
 private:
 	void InitializeDefaultPawnInputBindings();
 	void MoveLeftAndRight(float dle);
@@ -47,18 +35,14 @@ private:
 		 
 	void GetPressedFinger(int &num);
 private:
-	class	AUserController * mController;
+	class AUserController * mController;
 	
 	UPROPERTY(VisibleAnywhere)
-	USpringArmComponent *	armComponent;
+	USpringArmComponent * armComponent;
 	UPROPERTY(VisibleAnywhere)
-	UCameraComponent *		cameraComponent;
+	UCameraComponent * cameraComponent;
 	UPROPERTY(VisibleAnywhere)
-		UFloatingPawnMovement * PawnMovement;
-
-	// test 
-	class SoldierGroupManager * RedGroupManager;
-	class SoldierGroupManager * BlueGroupManager;
+	UFloatingPawnMovement * PawnMovement;
 
 	UFUNCTION(BlueprintCallable, Category = "Pawn")
 		virtual void MoveForward(float Val);

@@ -2,29 +2,8 @@
 #include "UserController.h"
 #include "Kismet/GameplayStatics.h"
 #include "GameFramework/PlayerInput.h"
+#include "GameManager.h"
 
-// test exec
-#include "SoldierPawnController.h"
-#include "SoldierPawn.h"
-#include "SoldierGroup.h"
-#include "RectFormation.h"
-#include "ConeFormation.h"
-#include "CircleFormation.h"
-#include "Engine/TargetPoint.h"
-#include "Projectile.h"
-#include "SoldierGroupManager.h"
-
-
-
-// test soldier
-#include "Archer.h"
-#include "Footman.h"
-#include "Griffin.h"
-#include "Horseman.h"
-#include "Knight.h"
-#include "Mage.h"
-#include "SiegeEngine.h"
-#include "GroupFightState.h"
 
 AUserPawn * AUserPawn::Instance = nullptr;
 AUserPawn * AUserPawn::GetInstance()
@@ -129,7 +108,7 @@ void AUserPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	check(PlayerInputComponent);
 
-		InitializeDefaultPawnInputBindings();
+	InitializeDefaultPawnInputBindings();
 
 	PlayerInputComponent->BindAxis("DefaultPawn_MoveForward", this, &AUserPawn::MoveForward);
 	PlayerInputComponent->BindAxis("DefaultPawn_MoveRight", this, &AUserPawn::MoveRight);
@@ -293,128 +272,28 @@ void AUserPawn::MoveUpAndDown(float dle)
 {
 	AddMovementInput(GetActorForwardVector(), dle);
 }
-static int RedIndex = 0;
-
-void AUserPawn::Prepare()
-{
-	TArray<AActor*> Points;
-	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ATargetPoint::StaticClass(), Points);
-
-	FVector RedLocation = Points[0]->GetActorLocation();
-	FVector BlueLocation = Points[1]->GetActorLocation();
-
-	RedGroupManager = new SoldierGroupManager();
-	BlueGroupManager = new SoldierGroupManager();
-
-	RedGroupManager->SetOriginAndForward(RedLocation, (BlueLocation - RedLocation).GetSafeNormal());
-	BlueGroupManager->SetOriginAndForward(BlueLocation, (RedLocation - BlueLocation).GetSafeNormal());
-	
-	FTransform  RedTran(RedLocation);
-	FTransform  BlueTran(BlueLocation);
-
-	RedIndex = 0;
-	GetWorld()->GetTimerManager().SetTimer(hendle, this, &AUserPawn::SpawnSoldier, 1.f, true);
-
-}
-void AUserPawn::SpawnSoldier()
-{
-	TArray<AActor*> Points;
-	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ATargetPoint::StaticClass(), Points);
-
-	FVector RedLocation = Points[0]->GetActorLocation();
-	FVector BlueLocation = Points[1]->GetActorLocation();
-	
-	RedLocation.Z = 0.f;
-	BlueLocation.Z = 150.f;
-
-	FTransform  RedTran(RedLocation);
-	FTransform  BlueTran(BlueLocation);
-
-	static int TeamIndex = 1;
-
-
-	while(RedIndex < 1/*KnightGroupMaxNum*/)
-	{
-		RedIndex++;
-
-		UClass * soldierClass = LoadClass<ASoldierPawn>(this, TEXT("/Game/Soldiers/Knight_BP.Knight_BP_C"));
-		ASoldierPawn * RedSoldierPawn = Cast<ASoldierPawn>(UGameplayStatics::BeginDeferredActorSpawnFromClass(this, soldierClass, RedTran, ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn));
-		if (RedSoldierPawn)
-		{
-			RedSoldierPawn->SetGenericTeamId(FGenericTeamId(TeamIndex++));
-
-			RedGroupManager->PushSoldierToGroup(RedSoldierPawn);
-
-			UGameplayStatics::FinishSpawningActor(RedSoldierPawn, RedTran);
-		}
-		ASoldierPawn * BlueSoldierPawn = Cast<ASoldierPawn>(UGameplayStatics::BeginDeferredActorSpawnFromClass(this, soldierClass, RedTran, ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn));
-		if (BlueSoldierPawn)
-		{
-			BlueSoldierPawn->SetGenericTeamId(FGenericTeamId(TeamIndex++));
-
-			BlueGroupManager->PushSoldierToGroup(BlueSoldierPawn);
-
-			UGameplayStatics::FinishSpawningActor(BlueSoldierPawn, BlueTran);
-		}
-		/*RedSoldierPawn->SetEnemy(BlueSoldierPawn);
-		BlueSoldierPawn->SetEnemy(RedSoldierPawn);
-		Cast<AAIController>(RedSoldierPawn->GetController())->MoveToActor(BlueSoldierPawn);
-		Cast<AAIController>(BlueSoldierPawn->GetController())->MoveToActor(RedSoldierPawn);*/
-		return;
-	}
-	GetWorld()->GetTimerManager().ClearTimer(hendle);
-}
-void AUserPawn::Attack()
-{
-	BlueGroupManager->GetCurrentGroup()->ChangeGrouyStateByIndex(I_AutoFightIndex);
-	RedGroupManager->GetCurrentGroup()->ChangeGrouyStateByIndex(I_AutoFightIndex);
-	/*TArray<AActor*> Points;
-	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ASoldierPawn::StaticClass(), Points);
-	for (int i = 0; i< Points.Num() ;i ++)
-	{
-		Points[i]->Destroy();
-	}
-	GEngine->ForceGarbageCollection(true);*/
-}
-void AUserPawn::CreateGroup()
-{
-	TArray<AActor*> soldiers;
-	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ASoldierPawn::StaticClass(), soldiers);
-	SoldierGroup * group = new SoldierGroup();
-
-	for (int i = 0; i < soldiers.Num(); i++)
-	{
-		ASoldierPawn * Soldier = Cast<ASoldierPawn>(soldiers[i]);
-		group->AddSoldierToGroup(Soldier);
-	}
-	group->ChangeFormationByIndex(SquareRectFormationType);
-
-}
-void AUserPawn::Fire()
-{
-
-	TArray<AActor*> Points;
-	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ATargetPoint::StaticClass(), Points);
-
-	FVector FireLocation = Points[0]->GetActorLocation();
-	FVector TargetLocation = Points[1]->GetActorLocation();
-
-	FTransform transform(FireLocation);
-	UClass * ProjectileClass = LoadClass<AActor>(this, TEXT("/Game/Projectile/Projectile_BP.Projectile_BP_C"));
-	 
-	AProjectile * projectile =Cast<AProjectile>(UGameplayStatics::BeginDeferredActorSpawnFromClass(this, ProjectileClass, transform));
-	if (projectile != nullptr)
-	{
-		float Gravity = projectile->MoveComponent->GetGravityZ();
-
-		FVector2D HorizontalDistance = FVector2D(TargetLocation.X - FireLocation.X, TargetLocation.Y - FireLocation.Y);
-		FVector2D HorizontalVelocity = FVector2D(TargetLocation.X - FireLocation.X, TargetLocation.Y - FireLocation.Y).GetSafeNormal() * 500;
-		float AllTime = HorizontalDistance.Size() / 500.f;
-		float VelocityZ = - (Gravity * AllTime * AllTime * 0.5f - TargetLocation.Z + FireLocation.Z)/AllTime;
-		projectile->SetVelocity(FVector(HorizontalVelocity.X, HorizontalVelocity.Y, VelocityZ));
-
-		UGameplayStatics::FinishSpawningActor(projectile, transform);
-	}
-
-
-}
+//void AUserPawn::Fire()
+//{
+//	TArray<AActor*> Points;
+//	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ATargetPoint::StaticClass(), Points);
+//
+//	FVector FireLocation = Points[0]->GetActorLocation();
+//	FVector TargetLocation = Points[1]->GetActorLocation();
+//
+//	FTransform transform(FireLocation);
+//	UClass * ProjectileClass = LoadClass<AActor>(this, TEXT("/Game/Projectile/Projectile_BP.Projectile_BP_C"));
+//	 
+//	AProjectile * projectile =Cast<AProjectile>(UGameplayStatics::BeginDeferredActorSpawnFromClass(this, ProjectileClass, transform));
+//	if (projectile != nullptr)
+//	{
+//		float Gravity = projectile->MoveComponent->GetGravityZ();
+//
+//		FVector2D HorizontalDistance = FVector2D(TargetLocation.X - FireLocation.X, TargetLocation.Y - FireLocation.Y);
+//		FVector2D HorizontalVelocity = FVector2D(TargetLocation.X - FireLocation.X, TargetLocation.Y - FireLocation.Y).GetSafeNormal() * 500;
+//		float AllTime = HorizontalDistance.Size() / 500.f;
+//		float VelocityZ = - (Gravity * AllTime * AllTime * 0.5f - TargetLocation.Z + FireLocation.Z)/AllTime;
+//		projectile->SetVelocity(FVector(HorizontalVelocity.X, HorizontalVelocity.Y, VelocityZ));
+//
+//		UGameplayStatics::FinishSpawningActor(projectile, transform);
+//	}
+//}

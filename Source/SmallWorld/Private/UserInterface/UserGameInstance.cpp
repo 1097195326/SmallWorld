@@ -16,14 +16,14 @@ void UUserGameInstance::On_Init()
 }
 void UUserGameInstance::On_Start()
 {
-	//GameManager::GetInstance()->StartGame();
+	GameManager::GetInstance()->StartGame();
 	
 	//GetTimerManager().SetTimer(GameUpdateHandle, this, &UUserGameInstance::UpdateGame, 0.1f, true);
 
 }
 void UUserGameInstance::On_End()
 {
-	//GameManager::GetInstance()->EndGame();
+	GameManager::GetInstance()->EndGame();
 }
 void UUserGameInstance::On_Delete()
 {
