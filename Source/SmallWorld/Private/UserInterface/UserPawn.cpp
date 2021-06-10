@@ -214,7 +214,7 @@ void AUserPawn::TurnAtRate(float Rate)
 
 void AUserPawn::LookUpAtRate(float Rate)
 {
-	UE_LOG(LogTemp, Log, TEXT("zhx: AUserPawn::LookUpAtRate:%s"), *Controller->GetControlRotation().ToString());
+	UE_LOG(LogTemp, Log, TEXT("zhx: AUserPawn::LookUpAtRate:%f,%s"),Rate, *Controller->GetControlRotation().ToString());
 	if (Rate != 0.f)
 	{
 		FRotator ControlRotation = Controller->GetControlRotation();
