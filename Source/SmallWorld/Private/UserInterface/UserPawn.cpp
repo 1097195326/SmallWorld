@@ -111,12 +111,12 @@ void AUserPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	InitializeDefaultPawnInputBindings();
 
 	PlayerInputComponent->BindAxis("DefaultPawn_MoveForward", this, &AUserPawn::MoveForward);
+	PlayerInputComponent->BindAxis("DefaultPawn_Turn", this, &AUserPawn::TurnAtRate);
+	PlayerInputComponent->BindAxis("DefaultPawn_LookUp", this, &AUserPawn::LookUpAtRate);
 	//PlayerInputComponent->BindAxis("DefaultPawn_MoveRight", this, &AUserPawn::MoveRight);
 	//PlayerInputComponent->BindAxis("DefaultPawn_MoveUp", this, &AUserPawn::MoveUp_World);
-	//PlayerInputComponent->BindAxis("DefaultPawn_Turn", this, &AUserPawn::AddControllerYawInput);
-	//PlayerInputComponent->BindAxis("DefaultPawn_LookUp", this, &AUserPawn::AddControllerPitchInput);
-	PlayerInputComponent->BindAxis("DefaultPawn_TurnRate", this, &AUserPawn::TurnAtRate);
-	PlayerInputComponent->BindAxis("DefaultPawn_LookUpRate", this, &AUserPawn::LookUpAtRate);
+	//PlayerInputComponent->BindAxis("DefaultPawn_TurnRate", this, &AUserPawn::TurnAtRate);
+	//PlayerInputComponent->BindAxis("DefaultPawn_LookUpRate", this, &AUserPawn::LookUpAtRate);
 
 	PlayerInputComponent->BindAction("LeftMouse", IE_Pressed, this, &AUserPawn::LeftMouseButtonOnPressed);
 	PlayerInputComponent->BindAction("RightMouse", IE_Released, this, &AUserPawn::RightMouseButtonOnReleased);
@@ -204,14 +204,26 @@ void AUserPawn::MoveUp_World(float Val)
 
 void AUserPawn::TurnAtRate(float Rate)
 {
-	// calculate delta for this frame from the rate information
-	AddControllerYawInput(Rate * BaseTurnRate * GetWorld()->GetDeltaSeconds() * 1);
+	//UE_LOG(LogTemp, Log, TEXT("zhx: AUserPawn::TurnAtRate:%f"), GetActorRotation().Yaw);
+	if (Rate != 0.f)
+	{
+		// calculate delta for this frame from the rate information
+		AddControllerYawInput(Rate * BaseTurnRate * GetWorld()->GetDeltaSeconds() * 1);
+	}
 }
 
 void AUserPawn::LookUpAtRate(float Rate)
 {
-	// calculate delta for this frame from the rate information
-	AddControllerPitchInput(Rate * BaseLookUpRate * GetWorld()->GetDeltaSeconds() * 1);
+	UE_LOG(LogTemp, Log, TEXT("zhx: AUserPawn::LookUpAtRate:%s"), *Controller->GetControlRotation().ToString());
+	if (Rate != 0.f)
+	{
+		FRotator ControlRotation = Controller->GetControlRotation();
+		if (Rate > 0.f || ControlRotation.Pitch + Rate <= 315.f)
+		{
+			// calculate delta for this frame from the rate information
+			AddControllerPitchInput(Rate * BaseLookUpRate * GetWorld()->GetDeltaSeconds() * 1);
+		}
+	}
 }
 
 //void AUserPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
