@@ -72,6 +72,11 @@ void AGroundTileActor::On_Delete()
 {
 	GameActors.Empty();
 }
+TSharedPtr<SWidget> AGroundTileActor::CreateActorDetailWidget()
+{
+
+	return SNullWidget::NullWidget;
+}
 
 void AGroundTileActor::SetCloudVisible(bool InVisible)
 {

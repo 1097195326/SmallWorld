@@ -48,6 +48,7 @@ public:
 	virtual void On_Init() override;
 	virtual void On_Tick(float DeltaSeconds) override;
 	virtual void On_Delete() override;
+	virtual TSharedPtr<SWidget> CreateActorDetailWidget() override;
 
 	void SetBusy(bool InBusy) { bIsBusy = InBusy; }
 	bool IsBusy() { return bIsBusy; }

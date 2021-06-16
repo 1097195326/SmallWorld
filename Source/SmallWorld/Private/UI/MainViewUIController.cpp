@@ -34,6 +34,7 @@ void MainViewUIController::SelectGameActor(AWrapActor * GameActorPtr)
 {
 	if (GameActorPtr == nullptr)
 	{
+		MiddleBottomSlot->DetachWidget();
 		return;
 	}
 	MiddleBottomSlot->AttachWidget(GameActorPtr->CreateActorDetailWidget().ToSharedRef());
